@@ -1,2 +1,5 @@
 export * from './button'
 export * from './label'
+export * from './imageGallery'
+export * from './tooltip'
+export * from './title'

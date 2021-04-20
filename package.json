@@ -18,7 +18,7 @@
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -s ./ -p 6006",
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
@@ -54,6 +54,7 @@
     "@storybook/addon-viewport": "^6.2.8",
     "@storybook/addons": "^6.2.8",
     "@storybook/react": "^6.2.8",
+    "@svgr/webpack": "^5.5.0",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "babel-loader": "^8.2.2",
@@ -63,6 +64,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
+    "rollup-plugin-inline-svg": "^2.0.0",
     "rollup-plugin-rebase": "^3.6.4",
     "rollup-plugin-styles": "^3.14.1",
     "sass-lint": "^1.13.1",
