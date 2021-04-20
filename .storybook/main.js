@@ -1,23 +1,27 @@
 const path = require('path');
 
 module.exports = {
-  stories: ['../src/stories/**/*.stories.(ts|tsx|js|jsx|mdx)'],
+  webpackFinal: async (config, { configType }) => {
+    config.module.rules.push({
+      test: /\.scss$/,
+      use: [
+        'style-loader',
+        'css-loader',
+        'sass-loader',
+      ],
+      include: path.resolve(__dirname, '../'),
+    });
+    return config;
+  },
+  stories: ['../stories/**/*.stories.@(ts|tsx|js|jsx)'],
   addons: [
-    '@storybook/addon-actions',
     '@storybook/addon-links',
-    {
-      name: '@storybook/preset-create-react-app',
-      options: {
-        tsDocgenLoaderOptions: {
-          tsconfigPath: path.resolve(__dirname, '../tsconfig.json')
-        }
-      }
-    },
-    {
-      name: '@storybook/addon-docs',
-      options: {
-        configureJSX: true
-      }
-    }
-  ]
+    '@storybook/addon-essentials',
+    '@storybook/addon-a11y',
+    '@storybook/addon-viewport',
+  ],
+  // https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration
+  typescript: {
+    check: true, // type-check stories during Storybook build
+  }
 };
