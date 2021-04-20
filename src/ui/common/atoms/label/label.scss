@@ -1,0 +1,10 @@
+@import '../../../styles/index';
+
+.oc-form-label  {
+  @include font-size-breakpoint(md);
+  line-height: 14px;
+  margin-bottom: 0;
+  &__required {
+    color: $danger;
+  }
+}

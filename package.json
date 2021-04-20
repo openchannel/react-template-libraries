@@ -1,73 +1,80 @@
 {
-  "name": "openchannel-template-react",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@storybook/addon-actions": "^5.3.21",
-    "@storybook/addon-docs": "^5.3.21",
-    "@storybook/addon-links": "^5.3.21",
-    "@storybook/addons": "^5.3.21",
-    "@storybook/preset-create-react-app": "^1.5.2",
-    "@storybook/react": "^5.3.21",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.9.1",
-    "@types/node": "^12.20.7",
-    "@types/react": "^16.14.5",
-    "@types/react-dom": "^16.9.12",
-    "axios": "^0.21.1",
-    "chart.js": "^3.1.0",
-    "eslint": "^7.24.0",
-    "eslint-config-prettier": "^8.2.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "husky": "^6.0.0",
-    "lint-staged": "^10.5.4",
-    "prettier": "^2.2.1",
-    "react": "^17.0.2",
-    "react-bootstrap": "^1.5.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "typescript": "^3.7.7"
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "docz": "^2.3.1",
-    "docz-plugin-storybook": "^0.5.2"
+  "peerDependencies": {
+    "bootstrap": "^4.6.0",
+    "react": ">=16",
+    "react-bootstrap": "^1.5.2"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "tsdx lint"
     }
   },
-  "lint-staged": {
-    "*.{jx,ts,tsx}": [
-      "eslint --quiet --fix"
-    ],
-    "*.{json,ms,html}": [
-      "prettier --write"
-    ]
+  "name": "react-template-libraries",
+  "author": "vladimir.fedorchenko",
+  "module": "dist/react-template-libraries.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/react-template-libraries.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/react-template-libraries.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@size-limit/preset-small-lib": "^4.10.2",
+    "@storybook/addon-a11y": "^6.2.8",
+    "@storybook/addon-essentials": "^6.2.8",
+    "@storybook/addon-info": "^5.3.21",
+    "@storybook/addon-links": "^6.2.8",
+    "@storybook/addon-viewport": "^6.2.8",
+    "@storybook/addons": "^6.2.8",
+    "@storybook/react": "^6.2.8",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.4",
+    "husky": "^6.0.0",
+    "node-sass": "^5.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-is": "^17.0.2",
+    "rollup-plugin-rebase": "^3.6.4",
+    "rollup-plugin-styles": "^3.14.1",
+    "sass-lint": "^1.13.1",
+    "sass-loader": "^10.1.1",
+    "size-limit": "^4.10.2",
+    "style-loader": "^2.0.0",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.2.0",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "react-bootstrap": "^1.5.2"
   }
 }
