@@ -39,6 +39,7 @@ module.exports = {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
   },
   overrides: [
     {
