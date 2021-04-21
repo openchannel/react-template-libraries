@@ -37,6 +37,7 @@ export const Progress = ButtonComponent.bind({});
 Progress.args = {
 	text: 'Submit',
 	type: 'primary',
+	process: true,
 };
 
 export const ProgressSecondary = ButtonComponent.bind({});
@@ -44,4 +45,5 @@ export const ProgressSecondary = ButtonComponent.bind({});
 ProgressSecondary.args = {
 	text: 'Submit',
 	type: 'secondary',
+	process: true,
 };

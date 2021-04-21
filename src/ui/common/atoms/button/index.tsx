@@ -25,6 +25,11 @@ export interface ButtonProps {
 	customClass?: string;
 	text: React.ReactNode;
 	style?: React.CSSProperties;
+	/**
+	 * Checks if the button should be disabled
+	 * @default false
+	 */
+	process?: boolean
 }
 
 
@@ -34,6 +39,7 @@ export const Button: React.FC<ButtonProps> = props => {
 		text,
 		type = 'primary',
 		customClass = '',
+		process = false,
 		...p
 	} = props
 
@@ -45,7 +51,13 @@ export const Button: React.FC<ButtonProps> = props => {
 			className={`oc-button ${variantClass} ${customClass}`}
 			{...p}
 		>
-			<span className="oc-button__text">{text}</span>
+			{process ? (
+				<div className="oc-button__spinner">
+					<div className="spinner-border la-ball-spin" style={{ width: '2.5rem', height: '2.5rem' }} role="status" />
+				</div>
+			) : (
+				<span className="oc-button__text">{text}</span>
+			)}
 		</button>
 	);
 };
