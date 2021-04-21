@@ -14,6 +14,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
+    "test-coverage": "tsdx test --passWithNoTests --coverage",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
@@ -55,14 +56,18 @@
     "@storybook/addons": "^6.2.8",
     "@storybook/react": "^6.2.8",
     "@svgr/webpack": "^5.5.0",
+    "@types/enzyme": "^3.10.8",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.4",
+    "enzyme": "^3.11.0",
     "eslint-plugin-jest": "^24.3.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^6.0.0",
+    "identity-obj-proxy": "^3.0.0",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -81,5 +86,11 @@
   "dependencies": {
     "bootstrap": "^4.6.0",
     "react-bootstrap": "^1.5.2"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/fileTransformer.js"
+    }
   }
 }
