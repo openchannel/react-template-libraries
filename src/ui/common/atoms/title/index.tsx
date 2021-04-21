@@ -1,8 +1,6 @@
 import * as React from 'react';
 
 
-// FIXME update ts config imports/aliases
-// @ts-ignore
 import InfoSvgIcon from '../../../../assets/img/info.svg';
 import { Tooltip } from '../tooltip';
 import './styles.scss';
@@ -36,7 +34,7 @@ export interface TitleProps {
 	 * Style which can be added to the title
 	 * Supposed to be the style object
 	 */
-	customStyle?: any;
+	customStyle?: React.CSSProperties;
 }
 
 
