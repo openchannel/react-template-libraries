@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { Rating, RatingProps } from '../../../src/ui/common';
+import { Rating, RatingProps } from '../../../src/ui/market';
 
 
 export default {

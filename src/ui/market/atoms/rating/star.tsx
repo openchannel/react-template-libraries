@@ -8,12 +8,12 @@ const getStarProps = (rating: number) => {
 		},
 		halfFilled: {
 			className: 'oc-rating-multi__star_half-color',
-				style: { width: `${rating % 1 * 100}%` },
+			style: { width: `${rating % 1 * 100}%` },
 		},
 	}
 };
 
-interface StarProps {
+export interface StarProps {
 	index: number;
 	rating: number;
 }

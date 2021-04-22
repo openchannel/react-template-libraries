@@ -14,17 +14,17 @@ export interface RatingProps {
 	 * Type of Rating to show. Can be 'single-star' or 'multi-star'.
 	 * @default single-star
 	 * */
-	type: typeof RatingVariants[keyof typeof RatingVariants];
+	type?: typeof RatingVariants[keyof typeof RatingVariants];
 	/**
 	 * Rating number
 	 * @default 0
 	 * */
-	rating?: number;
+	rating: number;
 	/**
 	 * Count of the reviews
 	 * @default 0
 	 * */
-	reviewCount?: number;
+	reviewCount: number;
 	/**
 	 * Text that can be added near the review count
 	 * @default
