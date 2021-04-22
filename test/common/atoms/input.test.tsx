@@ -2,24 +2,25 @@ import * as React from 'react';
 import enzyme, { shallow, ShallowWrapper } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
-import { Button, ButtonProps } from '../../../src/ui/common';
+import { Input, InputProps } from '../../../src/ui/common';
 
 enzyme.configure({ adapter: new Adapter() });
 
-const defaultButtonProps: ButtonProps = {
-  htmlType: 'button',
-  text: 'Test button',
-  type: 'primary',
+const defaultInputProps: InputProps = {
+  text: 'Test input',
+  required: false,
+  inputType: 'text',
   disabled: false,
+  placeholder: 'default value',
 };
 
-const setUp = (props: ButtonProps) => shallow(<Button {...props} />);
+const setUp = (props: InputProps) => shallow(<Input {...props} />);
 
-describe('Button (common button)', () => {
+describe('Default text input', () => {
   let component: ShallowWrapper;
 
   beforeEach(() => {
-    component = setUp(defaultButtonProps);
+    component = setUp(defaultInputProps);
   });
 
   it('should create', () => {
@@ -27,15 +28,13 @@ describe('Button (common button)', () => {
   });
 
   it('should contain text value', () => {
-    expect(component.text()).toEqual('Test button');
+    expect(component.prop('placeholder')).toEqual('default value');
   });
 
-  it('should contain style variant value and exist', async () => {
-    component.setProps({ type: 'secondary' });
+  it('should contain required prop and be true', async () => {
+    component.setProps({ required: true });
 
-    const classExist = component.hasClass('oc-button_secondary');
-
-    expect(classExist).toBeTruthy();
+    expect(component.prop('required')).toBeTruthy();
   });
 
   it('button should be disabled', async () => {
