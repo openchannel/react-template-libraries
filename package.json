@@ -89,6 +89,7 @@
     "react-bootstrap": "^1.5.2"
   },
   "jest": {
+    "setupFilesAfterEnv": ["./test/setupTests.js"],
     "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy",
       "\\.svg": "<rootDir>/test/svgrMock.js",
