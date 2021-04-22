@@ -31,10 +31,10 @@ WithoutDescriptionTitle.args = {
 	required: true,
 };
 
-// export const CustomIconTitle = TitleComponent.bind({});
-// CustomIconTitle.args = {
-// 	title: 'Options',
-// 	required: true,
-// 	infoTitleIconCsv: './assets/img/delete.svg',
-// 	description: 'Description description description description'
-// };
+export const CustomIconTitle = TitleComponent.bind({});
+CustomIconTitle.args = {
+	title: 'Options',
+	required: true,
+	infoTitleIconCsv: './src/assets/img/delete.svg',
+	description: 'Description description description description'
+};

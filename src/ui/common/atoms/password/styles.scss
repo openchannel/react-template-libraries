@@ -1,10 +1,18 @@
-@import '../../../styles/index';
+@import '../../../styles/mixins.scss';
+@import '../../../styles/theme.scss';
 
-.oc-input-component {
-  @include font-size-breakpoint(md);
-  line-height: 14px;
-  margin-bottom: 0;
-  &__required {
-    color: $danger;
+.oc-password {
+  &__input {
+    @include form-control($info, $primary, $body-color);
   }
+}
+.toggle_password {
+  float: right;
+  margin-top: -37px;
+  margin-right: 16px;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  height: 16px;
+  width: 16px;
 }
