@@ -106,7 +106,6 @@ a {
   }
 }
 
-
 h1,
 h2,
 h3,
@@ -202,14 +201,12 @@ h6 {
 /* oc-file-upload */
 
 .file-container__upload-item-progress {
-
   .progress {
     background-color: $info;
     height: 4px;
   }
 
   &[type='primary'] {
-
     .progress {
       background-color: #e9ecef;
       height: 4px;
@@ -219,7 +216,7 @@ h6 {
 
 /* end */
 
-.company-logo{
+.company-logo {
   height: 27px;
 }
 
@@ -228,32 +225,43 @@ h6 {
 }
 
 /** End buttons **/
-.divider{
+.divider {
   border-top: 1px solid $info;
 }
 
 /** form inputs validation style **/
-oc-input, oc-password, oc-select, oc-video-url, oc-color, oc-rich-text-editor, oc-textarea {
-    &.ng-invalid {
-      input.ng-touched, select.ng-touched , textarea.ng-touched {
+oc-input,
+oc-password,
+oc-select,
+oc-video-url,
+oc-color,
+oc-rich-text-editor,
+oc-textarea {
+  &.ng-invalid {
+    input.ng-touched,
+    select.ng-touched,
+    textarea.ng-touched {
+      border-color: $danger;
+    }
+    .custom-editor.ng-touched {
+      .tox-tinymce {
         border-color: $danger;
       }
-      .custom-editor.ng-touched {
-        .tox-tinymce {
-          border-color: $danger;
-        }
+    }
+  }
+  &.ng-invalid {
+    &.ng-touched {
+      input,
+      select,
+      button.ng-invalid,
+      textarea {
+        border-color: $danger;
       }
     }
-    &.ng-invalid {
-      &.ng-touched {
-        input, select, button.ng-invalid , textarea {
-          border-color: $danger;
-        }
-      }
-    }
+  }
 }
 
-.toggle_password{
+.toggle_password {
   float: right;
   margin-top: -31px;
   margin-right: 16px;
@@ -264,16 +272,16 @@ oc-input, oc-password, oc-select, oc-video-url, oc-color, oc-rich-text-editor, o
   height: 16px;
   width: 16px;
 }
-.toggle_password.fa-eye-slash{
+.toggle_password.fa-eye-slash {
   background: url(../../assets/img/password-show.svg) center center no-repeat;
 }
 /** input password **/
 /** input radio **/
 
-.custom-radio .custom-control-input ~ .custom-control-label{
+.custom-radio .custom-control-input ~ .custom-control-label {
   font-size: 14px;
   line-height: 28px;
-  padding-left:4px;
+  padding-left: 4px;
   margin: auto;
 }
 
@@ -286,56 +294,56 @@ oc-input, oc-password, oc-select, oc-video-url, oc-color, oc-rich-text-editor, o
   background-image: url(../../assets/img/radio.svg);
 }
 .custom-control-input:checked ~ .custom-control-label::before {
-    color: $light;
-    border-color: $primary;
-    background-color: $light;
+  color: $light;
+  border-color: $primary;
+  background-color: $light;
 }
 /** input radio **/
 
-.menu-edit{
+.menu-edit {
   background: url(../../assets/img/edit_icon.svg) no-repeat 15px;
 }
-.menu-edit:hover{
+.menu-edit:hover {
   background: url(../../assets/img/edit_icon_h.svg) no-repeat 15px;
 }
-.menu-delete{
+.menu-delete {
   background: url(../../assets/img/delete.svg) no-repeat 15px;
 }
-.menu-delete:hover{
+.menu-delete:hover {
   background: url(../../assets/img/delete_h.svg) no-repeat 15px;
 }
 
-.menu-suspend{
+.menu-suspend {
   background: url(../../assets/img/suspend_icon.svg) no-repeat 15px;
 }
-.menu-suspend:hover{
+.menu-suspend:hover {
   background: url(../../assets/img/suspend_icon_h.svg) no-repeat 15px;
 }
-.menu-unsuspend{
+.menu-unsuspend {
   background: url(../../assets/img/suspend_icon.svg) no-repeat 15px;
 }
-.menu-unsuspend:hover{
+.menu-unsuspend:hover {
   background: url(../../assets/img/suspend_icon_h.svg) no-repeat 15px;
 }
 
-.menu-publish{
+.menu-publish {
   background: url(../../assets/img/submit_icon.svg) no-repeat 15px;
 }
-.menu-publish:hover{
+.menu-publish:hover {
   background: url(../../assets/img/submit_icon_h.svg) no-repeat 15px;
 }
 
-.menu-submit{
+.menu-submit {
   background: url(../../assets/img/submit_icon.svg) no-repeat 15px;
 }
-.menu-submit:hover{
+.menu-submit:hover {
   background: url(../../assets/img/submit_icon_h.svg) no-repeat 15px;
 }
 
-.menu-preview{
+.menu-preview {
   background: url(../../assets/img/view.svg) no-repeat 15px;
 }
-.menu-preview:hover{
+.menu-preview:hover {
   background: url(../../assets/img/view.svg) no-repeat 15px;
 }
 
@@ -355,7 +363,7 @@ a.link {
     text-decoration: none;
   }
   &:focus {
-    outline:none
+    outline: none;
   }
 }
 
@@ -379,8 +387,9 @@ a.link {
     &:last-child {
       border-bottom: 0;
     }
-    &.active, &:active {
-      background-color: rgba($info, .2);
+    &.active,
+    &:active {
+      background-color: rgba($info, 0.2);
       color: $body-color;
     }
   }
@@ -414,7 +423,7 @@ a.link {
               .tox-tbtn--enabled {
                 background: none;
                 svg {
-                  fill: $primary
+                  fill: $primary;
                 }
                 &:hover {
                   background: #f4f4f4;
@@ -438,7 +447,7 @@ a.link {
               .tox-tbtn--enabled {
                 background: none;
                 svg {
-                  fill: $primary
+                  fill: $primary;
                 }
                 &:hover {
                   background: #f4f4f4;
@@ -475,7 +484,6 @@ a.link {
 }
 // end of the Tiny Editor style customization
 
-
 // oc-select
 
 oc-select {
@@ -491,12 +499,12 @@ oc-select {
         color: $body-color;
         background-color: $light;
       }
-      &:active{
+      &:active {
         color: $primary;
         background-color: $light;
         border-color: unset;
       }
-      &:focus{
+      &:focus {
         outline: none;
         background-color: $light;
       }
@@ -525,14 +533,14 @@ oc-select {
 
   .arrow {
     &:before {
-    width: 0;
-    height: 0;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
-    border-top: 6px solid $info;
-    left: -1px;
-    top: -0.8px;
-  }
+      width: 0;
+      height: 0;
+      border-right: 4px solid transparent;
+      border-left: 4px solid transparent;
+      border-top: 6px solid $info;
+      left: -1px;
+      top: -0.8px;
+    }
 
     &:after {
       content: '';
