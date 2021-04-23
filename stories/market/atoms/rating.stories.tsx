@@ -5,7 +5,7 @@ import { Rating, RatingProps } from '../../../src/ui/market';
 
 
 export default {
-	title: 'Rating [BEM]',
+	title: 'Market/Atoms/Rating [BEM]',
 	component: Rating,
 } as Meta;
 
