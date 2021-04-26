@@ -8,38 +8,65 @@ import './styles.scss';
 
 type ModalButtonVariants = Exclude<ButtonVariants, 'none'>;
 
-
 export interface ConfirmationModalProps extends Omit<ModalProps, 'children'> {
-	onCancel?: (event: React.SyntheticEvent) => void;
-	onSubmit?: (event: React.SyntheticEvent) => void;
 	/**
-	 * Checks if the button should be disabled
+	 * A callback fired when the rejectButton is clicked.
+	 */
+	onCancel?: (event: React.SyntheticEvent) => void;
+
+	/**
+	 * A callback fired when the confirmButton is clicked.
+	 */
+	onSubmit?: (event: React.SyntheticEvent) => void;
+
+	/**
+	 * The content of the modal title
 	 */
 	modalTitle: string;
+
+	/**
+	 * The content of the modal
+	 */
 	modalText: string;
 
 	/**
+	 * Button content
+	 *
 	 * @default Ok
 	 */
 	confirmButtonText?: string;
+
 	/**
+	 * The variant of the confirm button.
+	 *
 	 * @default 'primary'
 	 */
 	confirmButtonType?: ModalButtonVariants;
+
 	/**
+	 * Hide element when not needed
+	 *
 	 * @default false
 	 */
 	confirmButtonHide?: boolean;
 
 	/**
+	 *
+	 *
 	 * @default No, cancel
 	 */
 	rejectButtonText?: string;
+
 	/**
+	 * The variant of the confirm button.
+	 *
 	 * @default 'secondary'
 	 */
 	rejectButtonType?: ModalButtonVariants;
+
 	/**
+	 * Hide element when not needed
+	 *
 	 * @default false
 	 */
 	rejectButtonHide?: boolean;
