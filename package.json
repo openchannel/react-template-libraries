@@ -21,7 +21,8 @@
     "size": "size-limit",
     "analyze": "size-limit --why",
     "storybook": "start-storybook -s ./ -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "cypress": "cypress open"
   },
   "peerDependencies": {
     "bootstrap": "^4.6.0",
@@ -85,11 +86,19 @@
     "typescript": "^4.2.4"
   },
   "dependencies": {
+    "@types/enzyme": "^3.10.8",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "bootstrap": "^4.6.0",
+    "cypress": "^7.2.0",
+    "enzyme": "^3.11.0",
+    "eslint-plugin-cypress": "^2.11.2",
+    "identity-obj-proxy": "^3.0.0",
     "react-bootstrap": "^1.5.2"
   },
   "jest": {
-    "setupFilesAfterEnv": ["./test/setupTests.js"],
+    "setupFilesAfterEnv": [
+      "./test/setupTests.js"
+    ],
     "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy",
       "\\.svg": "<rootDir>/test/svgrMock.js",

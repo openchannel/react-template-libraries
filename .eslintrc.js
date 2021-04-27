@@ -12,12 +12,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: [
-    '@typescript-eslint',
-    'jest',
-    'react',
-    'jsx-a11y',
-  ],
+  plugins: ['@typescript-eslint', 'jest', 'react', 'jsx-a11y', 'cypress'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
