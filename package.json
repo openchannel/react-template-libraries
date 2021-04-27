@@ -14,7 +14,8 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
-    "test-coverage": "tsdx test --passWithNoTests --coverage",
+    "test:watch": "tsdx test --passWithNoTests --watch",
+    "test:coverage": "tsdx test --passWithNoTests --coverage",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
@@ -57,6 +58,7 @@
     "@storybook/addon-viewport": "^6.2.8",
     "@storybook/addons": "^6.2.8",
     "@storybook/react": "^6.2.8",
+    "@svgr/rollup": "^5.5.0",
     "@svgr/webpack": "^5.5.0",
     "@types/enzyme": "^3.10.8",
     "@types/react": "^17.0.3",
@@ -74,7 +76,6 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
-    "rollup-plugin-inline-svg": "^2.0.0",
     "rollup-plugin-rebase": "^3.6.4",
     "rollup-plugin-styles": "^3.14.1",
     "sass-lint": "^1.13.1",
@@ -94,9 +95,11 @@
     "react-bootstrap": "^1.5.2"
   },
   "jest": {
+    "setupFilesAfterEnv": ["./test/setupTests.js"],
     "moduleNameMapper": {
       "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/fileTransformer.js"
+      "\\.svg": "<rootDir>/test/svgrMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/fileTransformer.js"
     }
   }
 }

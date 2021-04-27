@@ -3,3 +3,4 @@ build
 coverage
 tsdx.config.js
 test/fileTransformer.js
+test/setupTests.js

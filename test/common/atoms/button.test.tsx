@@ -1,10 +1,7 @@
 import * as React from 'react';
-import enzyme, { shallow, ShallowWrapper } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import { shallow, ShallowWrapper } from 'enzyme';
 
 import { Button, ButtonProps } from '../../../src/ui/common';
-
-enzyme.configure({ adapter: new Adapter() });
 
 const defaultButtonProps: ButtonProps = {
   htmlType: 'button',

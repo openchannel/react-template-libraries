@@ -23,13 +23,12 @@ export const Tooltip: React.FC<TooltipProps> = props => {
 		position = 'right',
 	} = props
 
+	const uniqId = React.useRef(String(Math.random()))
+
 	return (
 		<OverlayTrigger
 			placement={position}
-			overlay={
-				// FIXME: remove random id
-				<BootstrapTooltip id={String(Math.random())}>{tooltip}</BootstrapTooltip>
-			}
+			overlay={<BootstrapTooltip id={uniqId.current}>{tooltip}</BootstrapTooltip>}
 		>
 			{children}
 		</OverlayTrigger>
