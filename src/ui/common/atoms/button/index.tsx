@@ -3,7 +3,7 @@ import * as React from 'react';
 import './button.scss';
 
 
-type ButtonVariants = 'primary' | 'secondary' | 'link' | 'danger' | 'none';
+export type ButtonVariants = 'primary' | 'secondary' | 'link' | 'danger' | 'none';
 
 
 export interface ButtonProps {
@@ -16,7 +16,7 @@ export interface ButtonProps {
 	 * Checks if the button should be disabled
 	 * @default button
 	 */
-	htmlType: 'submit' | 'reset' | 'button';
+	htmlType?: 'submit' | 'reset' | 'button';
 	/**
 	 * Checks if the button should be disabled
 	 * @default primary
