@@ -21,9 +21,7 @@
     "size": "size-limit",
     "analyze": "size-limit --why",
     "storybook": "start-storybook -s ./ -p 6006",
-    "build-storybook": "build-storybook",
-    "test:watch": "tsdx test --passWithNoTests --watch",
-    "test:coverage": "tsdx test --passWithNoTests --coverage"
+    "build-storybook": "build-storybook"
   },
   "peerDependencies": {
     "bootstrap": "^4.6.0",
