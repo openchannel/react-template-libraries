@@ -1,0 +1,18 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/theme.scss';
+
+.oc-password {
+  &__input {
+    @include form-control($info, $primary, $body-color);
+  }
+}
+.toggle_password {
+  float: right;
+  margin-top: -37px;
+  margin-right: 16px;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  height: 16px;
+  width: 16px;
+}

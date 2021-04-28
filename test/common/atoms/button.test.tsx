@@ -14,40 +14,40 @@ const defaultButtonProps: Partial<ButtonProps> = {
 const setUp = (props: Partial<ButtonProps>) => shallow(<Button {...props} />);
 
 describe('Button (common button)', () => {
-	let component: ShallowWrapper;
+  let component: ShallowWrapper;
 
-	beforeEach(() => {
-		component = setUp(defaultButtonProps);
-	});
+  beforeEach(() => {
+    component = setUp(defaultButtonProps);
+  });
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-	it('should contain text value', () => {
-		expect(component.text()).toEqual('Test button');
-	});
+  it('should contain text value', () => {
+    expect(component.text()).toEqual('Test button');
+  });
 
-	it('should contain style variant value and exist', async () => {
-		component.setProps({ type: 'secondary' });
+  it('should contain style variant value and exist', async () => {
+    component.setProps({ type: 'secondary' });
 
-		const classExist = component.hasClass('oc-button_secondary')
+    const classExist = component.hasClass('oc-button_secondary');
 
-		expect(classExist).toBeTruthy();
-	});
+    expect(classExist).toBeTruthy();
+  });
 
-	it('button should be disabled', async () => {
-		component.setProps({ disabled: true });
+  it('button should be disabled', async () => {
+    component.setProps({ disabled: true });
 
-		expect(component.prop('disabled')).toBeTruthy();
-	});
+    expect(component.prop('disabled')).toBeTruthy();
+  });
 
-	it('should click', async () => {
-		const onButtonClickMock = jest.fn();
+  it('should click', async () => {
+    const onButtonClickMock = jest.fn();
 
-		component.setProps({ onClick: onButtonClickMock });
-		component.simulate('click');
+    component.setProps({ onClick: onButtonClickMock });
+    component.simulate('click');
 
-		expect(onButtonClickMock).toHaveBeenCalledTimes(1);
-	});
+    expect(onButtonClickMock).toHaveBeenCalledTimes(1);
+  });
 });
