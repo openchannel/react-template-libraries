@@ -5,7 +5,7 @@ import './button.scss';
 
 export type ButtonVariants = 'primary' | 'secondary' | 'link' | 'danger' | 'none';
 
-interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
+export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
 	/**
 	 * Checks if the button should be disabled
 	 */
