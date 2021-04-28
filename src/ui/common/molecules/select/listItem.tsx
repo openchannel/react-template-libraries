@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Button } from '../../atoms';
 
 
-interface SelectListItemProps {
+export interface SelectListItemProps {
 	name: string;
 	children: React.ReactNode;
 }

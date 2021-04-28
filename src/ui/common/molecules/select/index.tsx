@@ -5,10 +5,11 @@ import { SelectCallback } from 'react-bootstrap/helpers';
 import { Toggle } from './toggle';
 import { ListItem } from './listItem';
 import { ListWrapper } from './listWrapper';
+import { transformToValidOptions } from './utils';
 import './styles.scss';
 
 
-type Option = { [T in string]: string };
+export type Option = { [T in string]: string };
 
 export type SelectedValue = string | Option;
 
@@ -30,7 +31,7 @@ export interface SelectProps {
 	 *
 	 * @default false
 	 */
-	disabled: boolean;
+	disabled?: boolean;
 
 	/**
 	 * Selected item
@@ -42,19 +43,6 @@ export interface SelectProps {
 	 */
 	onSelectionChange: (eventKey: string | Option, e: React.SyntheticEvent<unknown>) => void
 }
-
-
-const transformToValidOptions = (array: Array<Option|string>, key = 'key') => {
-	return array.reduce((acc, item) => {
-		if (typeof item === 'object') {
-			acc.push(item)
-		} else {
-			acc.push({ [key]: item })
-		}
-		return acc
-	}, [] as Option[])
-}
-
 
 export const Select: React.FC<Partial<SelectProps>> = (props) => {
 	const {

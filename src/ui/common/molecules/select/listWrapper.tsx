@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 
-interface ListWrapperProps {
+export interface ListWrapperProps {
 	style?: React.CSSProperties,
 	className: string;
 	children: React.ReactNode;
