@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
+import { SelectCallback } from 'react-bootstrap/helpers';
 
 import { Toggle } from './toggle';
 import { ListItem } from './listItem';
@@ -7,84 +8,93 @@ import { ListWrapper } from './listWrapper';
 import './styles.scss';
 
 
-type ArrayElement<ArrayType extends readonly unknown[]> =
-	ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+type Option = { [T in string]: string };
+
+export type SelectedValue = string | Option;
 
 export interface SelectProps {
 	/**
-	 * Array of the select items
+	 * Array of the select items. Example: [{ key: 'value' }], ['value']
+	 * @default []
 	 */
-	selectValArr: Array<ArrayElement<[ {[P in string]: string } | string ]>>;
+	selectValArr: Option[] | string[];
 
 	/**
-	 * Set object field name using as label
+	 * Set object field name using as label. The value must match the key in the array object.
+	 * @default ''
 	 */
 	labelField?: string;
 
 	/**
 	 * Disable select for user input
+	 *
+	 * @default false
 	 */
 	disabled: boolean;
 
 	/**
-	 * Add string of public classes to the existed
+	 * Selected item
 	 */
-	class?: string;
+	value: SelectedValue;
 
-	value: string;
+	/**
+	 * A callback fired when a menu item is selected.
+	 */
+	onSelectionChange: (eventKey: string | Option, e: React.SyntheticEvent<unknown>) => void
+}
 
-	onChange: (event: React.SyntheticEvent) => void;
 
-	onSelectionChange: (eventKey: (string | null), e: React.SyntheticEvent<unknown>) => void
+const transformToValidOptions = (array: Array<Option|string>, key = 'key') => {
+	return array.reduce((acc, item) => {
+		if (typeof item === 'object') {
+			acc.push(item)
+		} else {
+			acc.push({ [key]: item })
+		}
+		return acc
+	}, [] as Option[])
 }
 
 
 export const Select: React.FC<Partial<SelectProps>> = (props) => {
 	const {
-		selectValArr = [{'some': 'some'}],
-		labelField = 'some',
+		selectValArr = [],
+		labelField = '',
 		disabled = false,
-		// class = '',
 		value = '',
-		// onChange,
-		onSelectionChange,
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+		onSelectionChange = () => {},
 	} = props
+
+	const options = React.useMemo(() => transformToValidOptions(selectValArr, labelField), [selectValArr, labelField])
+
+	const onSelect = React.useCallback((eventKey: string, event: React.SyntheticEvent) => {
+		const value = labelField ? { [labelField]: eventKey } : eventKey
+
+		onSelectionChange(value, event)
+	}, [onSelectionChange, labelField]) as SelectCallback
 
 	return (
 		<Dropdown className="select-component">
 			<Dropdown.Toggle as={Toggle} disabled={disabled}>
-				{labelField && typeof value === 'object' ? value[labelField] : value}
+				{typeof value === 'object' ? value[labelField] : value}
 			</Dropdown.Toggle>
 
 			<Dropdown.Menu as={ListWrapper}>
 				{
-					labelField && typeof value === 'object' ? (
-						selectValArr.map((item) => {
-							return (
-								<Dropdown.Item
-									key={item[labelField]}
-									name={item[labelField]}
-									as={ListItem}
-									onSelect={onSelectionChange}
-								>
-									{item[labelField]}
-								</Dropdown.Item>
-							)
-						})
-					) : (
-						selectValArr.map((item) => {
-							return (
-								<Dropdown.Item
-									key={item}
-									name={item}
-									as={ListItem}
-									onSelect={onSelectionChange}
-								>
-									{item}
-								</Dropdown.Item>
-							)
-						})
-					)
+					options.map((item) => {
+						return (
+							<Dropdown.Item
+								key={item[labelField]}
+								name={String(item[labelField])}
+								eventKey={String(item[labelField])}
+								as={ListItem}
+								onSelect={onSelect}
+							>
+								{item[labelField]}
+							</Dropdown.Item>
+						)
+					})
 				}
 			</Dropdown.Menu>
 		</Dropdown>
