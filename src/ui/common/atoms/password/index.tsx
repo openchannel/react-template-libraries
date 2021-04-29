@@ -22,8 +22,6 @@ export interface PasswordProps extends React.InputHTMLAttributes<HTMLInputElemen
   placeholder?: string;
   /**
    * Input value
-   *
-   * @default ''
    */
   value: string;
   onChange: (e: React.SyntheticEvent) => void;
