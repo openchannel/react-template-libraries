@@ -1,35 +1,19 @@
 import * as React from 'react';
-import PasswordHide from '../../../../assets/img/password-hide.svg';
-import PasswordShow from '../../../../assets/img/password-show.svg';
+
 import './styles.scss';
+
 
 export interface PasswordProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
-   * Input value. Use text
-   */
-  text?: string;
-  /**
    * Marks the input as required
+   *
+   * @default false
    */
   required?: boolean;
   /**
-   * Type of the input. Can be 'text', 'email', 'password'
-   */
-  inputType?: 'text' | 'password';
-  /**
-   * Autocomplete
-   */
-  autocomplete?: boolean;
-  /**
-   * Set auto focus to true or false
-   */
-  autoFocus?: boolean;
-  /**
-   * List of classes which can be attached to the current list
-   */
-  customClass?: string;
-  /**
    * Set disabled state for input
+   *
+   * @default false
    */
   disabled?: boolean;
   /**
@@ -38,40 +22,24 @@ export interface PasswordProps extends React.InputHTMLAttributes<HTMLInputElemen
   placeholder?: string;
   /**
    * Input value
+   *
+   * @default ''
    */
-  value?: string;
-  onClick?: React.MouseEventHandler;
-  /**
-   * Style which can be added to the title
-   * Supposed to be the style object
-   */
-  customStyle?: any;
+  value: string;
+  onChange: (e: React.SyntheticEvent) => void;
 }
 
 export const Password: React.FC<PasswordProps> = (props) => {
-  const { text, customClass, inputType, placeholder, ...p } = props;
-  const [showPassword, setShowPassword] = React.useState(false);
-  const togglePassword = () => {
-    setShowPassword(!showPassword);
-  };
+  const [isPassword, toggle] = React.useReducer(is => !is, false);
+
   return (
     <div className="oc-password">
       <input
-        type={showPassword === true ? 'text' : 'password'}
-        className={`oc-password__input ${customClass}`}
-        {...p}
-        placeholder={placeholder}
+        {...props}
+        type={isPassword ? 'text' : 'password'}
+        className="oc-password__input"
       />
-      {showPassword === true && (
-        <span className="toggle_password" onClick={togglePassword}>
-          <PasswordHide />
-        </span>
-      )}
-      {showPassword === false && (
-        <span className="toggle_password" onClick={togglePassword}>
-          <PasswordShow />
-        </span>
-      )}
+      <span onClick={toggle} className={`toggle_password ${isPassword ? 'fa-eye-slash': '' }`} />
     </div>
   );
 };

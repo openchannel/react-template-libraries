@@ -13,5 +13,5 @@ const PasswordComponent: Story<PasswordProps> = (args) => <Password {...args} />
 export const PasswordInput = PasswordComponent.bind({});
 PasswordInput.args = {
   required: false,
-  inputType: 'password',
+  placeholder: 'Enter password',
 };
