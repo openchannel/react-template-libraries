@@ -21,6 +21,7 @@
     "size": "size-limit",
     "analyze": "size-limit --why",
     "storybook": "start-storybook -s ./ -p 6006",
+    "serve-storybook": "npm run build-storybook && npx http-server storybook-static -s ./",
     "build-storybook": "build-storybook",
     "cypress": "cypress open"
   },
@@ -40,11 +41,11 @@
   "size-limit": [
     {
       "path": "dist/react-template-libraries.cjs.production.min.js",
-      "limit": "10 KB"
+      "limit": "1000 KB"
     },
     {
       "path": "dist/react-template-libraries.esm.js",
-      "limit": "10 KB"
+      "limit": "1000 KB"
     }
   ],
   "devDependencies": {
