@@ -5,53 +5,92 @@
 
 @font-face {
   font-family: 'Rubik-Black';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-Black.ttf') format('truetype');
+  src: url('../../assets/fonts/Rubik-Black.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
+
 @font-face {
   font-family: 'Rubik-Black-Italic';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-BlackItalic.ttf') format('truetype');
+  src: url('../../assets/fonts/Rubik-BlackItalic.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-BlackItalic.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
 }
+
 @font-face {
   font-family: 'Rubik-Bold';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-Bold.ttf') format('truetype');
+  src: url('../../assets/fonts/Rubik-Bold.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
-@font-face {
-  font-family: 'Rubik-Bold-Italic';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-BoldItalic.ttf') format('truetype');
-}
+
 @font-face {
   font-family: 'Rubik-Italic';
+  src: url('../../assets/fonts/Rubik-Italic.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-Italic.woff') format('woff');
   font-weight: normal;
-  src: url('../../assets/fonts/Rubik-Italic.ttf') format('truetype');
+  font-style: italic;
+  font-display: swap;
 }
-@font-face {
-  font-family: 'Rubik-Light';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-Light.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Rubik-Light-Italic';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-LightItalic.ttf') format('truetype');
-}
+
 @font-face {
   font-family: 'Rubik-Medium';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-Medium.ttf') format('truetype');
+  src: url('../../assets/fonts/Rubik-Medium.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
+
 @font-face {
-  font-family: 'Rubik-Medium-Italic';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-MediumItalic.ttf') format('truetype');
+  font-family: 'Rubik-Light';
+  src: url('../../assets/fonts/Rubik-Light.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
+
+@font-face {
+  font-family: 'Rubik-Light-Italic';
+  src: url('../../assets/fonts/Rubik-LightItalic.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rubik-Bold-Italic';
+  src: url('../../assets/fonts/Rubik-BoldItalic.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-BoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
 @font-face {
   font-family: 'Rubik-Regular';
+  src: url('../../assets/fonts/Rubik-Regular.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-Regular.woff') format('woff');
   font-weight: normal;
-  src: url('../../assets/fonts/Rubik-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rubik-Medium-Italic';
+  src: url('../../assets/fonts/Rubik-MediumItalic.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
 }
 
 .font-light {
@@ -234,23 +273,23 @@ h6 {
 
 /** form inputs validation style **/
 oc-input, oc-password, oc-select, oc-video-url, oc-color, oc-rich-text-editor, oc-textarea {
-    &.ng-invalid {
-      input.ng-touched, select.ng-touched , textarea.ng-touched {
+  &.ng-invalid {
+    input.ng-touched, select.ng-touched , textarea.ng-touched {
+      border-color: $danger;
+    }
+    .custom-editor.ng-touched {
+      .tox-tinymce {
         border-color: $danger;
       }
-      .custom-editor.ng-touched {
-        .tox-tinymce {
-          border-color: $danger;
-        }
+    }
+  }
+  &.ng-invalid {
+    &.ng-touched {
+      input, select, button.ng-invalid , textarea {
+        border-color: $danger;
       }
     }
-    &.ng-invalid {
-      &.ng-touched {
-        input, select, button.ng-invalid , textarea {
-          border-color: $danger;
-        }
-      }
-    }
+  }
 }
 
 .toggle_password{
@@ -286,9 +325,9 @@ oc-input, oc-password, oc-select, oc-video-url, oc-color, oc-rich-text-editor, o
   background-image: url(../../assets/img/radio.svg);
 }
 .custom-control-input:checked ~ .custom-control-label::before {
-    color: $light;
-    border-color: $primary;
-    background-color: $light;
+  color: $light;
+  border-color: $primary;
+  background-color: $light;
 }
 /** input radio **/
 
@@ -391,6 +430,23 @@ a.link {
   .dropdown-menu {
     max-height: 229px;
     width: 100%;
+    .dropdown-item {
+      padding: 16px;
+      border-bottom: 1px;
+      &:hover {
+        color: $body-color;
+        background-color: $light;
+      }
+      &:active{
+        color: $primary;
+        background-color: $light;
+        border-color: unset;
+      }
+      &:focus{
+        outline: none;
+        background-color: $light;
+      }
+    }
   }
 }
 
@@ -478,10 +534,10 @@ a.link {
 
 // oc-select
 
-oc-select {
-  & .btn:focus {
-    border-color: $primary !important;
-  }
+//oc-select {
+//  & .btn:focus {
+//    border-color: $primary !important;
+//  }
 
   .dropdown-menu {
     .dropdown-item {
@@ -502,7 +558,7 @@ oc-select {
       }
     }
   }
-}
+//}
 
 .svg-primary {
   path {
@@ -525,14 +581,14 @@ oc-select {
 
   .arrow {
     &:before {
-    width: 0;
-    height: 0;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
-    border-top: 6px solid $info;
-    left: -1px;
-    top: -0.8px;
-  }
+      width: 0;
+      height: 0;
+      border-right: 4px solid transparent;
+      border-left: 4px solid transparent;
+      border-top: 6px solid $info;
+      left: -1px;
+      top: -0.8px;
+    }
 
     &:after {
       content: '';
@@ -581,5 +637,12 @@ oc-select {
         color: $white;
       }
     }
+  }
+}
+
+.tags__button-add {
+  & .oc-button {
+    min-height: 46px;
+    line-height: 19px;
   }
 }

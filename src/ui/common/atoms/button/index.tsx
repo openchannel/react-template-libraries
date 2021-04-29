@@ -3,10 +3,9 @@ import * as React from 'react';
 import './button.scss';
 
 
-type ButtonVariants = 'primary' | 'secondary' | 'link' | 'danger' | 'none';
+export type ButtonVariants = 'primary' | 'secondary' | 'link' | 'danger' | 'none';
 
-
-export interface ButtonProps {
+export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
 	/**
 	 * Checks if the button should be disabled
 	 */
@@ -16,7 +15,7 @@ export interface ButtonProps {
 	 * Checks if the button should be disabled
 	 * @default button
 	 */
-	htmlType: 'submit' | 'reset' | 'button';
+	htmlType?: 'submit' | 'reset' | 'button';
 	/**
 	 * Checks if the button should be disabled
 	 * @default primary
@@ -29,35 +28,42 @@ export interface ButtonProps {
 	 * Checks if the button should be disabled
 	 * @default false
 	 */
-	process?: boolean
+	process?: boolean;
+
+	children: React.ReactNode;
 }
 
 
-export const Button: React.FC<ButtonProps> = props => {
-	const {
-		htmlType = 'button',
-		text,
-		type = 'primary',
-		customClass = '',
-		process = false,
-		...p
-	} = props
+export const Button = React.forwardRef(
+	(props: Partial<ButtonProps>, ref: React.ForwardedRef<HTMLButtonElement>) => {
+		const {
+			htmlType = 'button',
+			text,
+			type = 'primary',
+			customClass = '',
+			process = false,
+			children,
+			...p
+		} = props
 
-	const variantClass = type !== 'none' ? `oc-button_${type}` : ''
+		const variantClass = type !== 'none' ? `oc-button_${type}` : ''
 
-	return (
-		<button
-			type={htmlType}
-			className={`oc-button ${variantClass} ${customClass}`}
-			{...p}
-		>
-			{process ? (
-				<div className="oc-button__spinner">
-					<div className="spinner-border la-ball-spin" style={{ width: '2.5rem', height: '2.5rem' }} role="status" />
-				</div>
-			) : (
-				<span className="oc-button__text">{text}</span>
-			)}
-		</button>
-	);
-};
+		return (
+			<button
+				ref={ref}
+				type={htmlType}
+				className={`oc-button ${variantClass} ${customClass}`}
+				{...p}
+			>
+				{process && (
+					<div className="oc-button__spinner">
+						<div className="spinner-border la-ball-spin" style={{ width: '2.5rem', height: '2.5rem' }} role="status" />
+					</div>
+				)}
+				{Boolean(children) && children}
+				{!children && !process && (
+					<span className="oc-button__text">{text}</span>
+				)}
+			</button>
+		);
+	});

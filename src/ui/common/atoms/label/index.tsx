@@ -7,7 +7,7 @@ export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> 
 	/**
 	 * Label value. Use text or children prop
 	 */
-	text?: React.ReactNode;
+	text: React.ReactNode;
 	/**
 	 * Marks the label as required
 	 */
@@ -15,11 +15,11 @@ export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> 
 	/**
 	 * Label value. Use text or children prop
 	 */
-	children?: React.ReactNode;
+	children: React.ReactNode;
 }
 
 
-export const Label: React.FC<LabelProps> = props => {
+export const Label: React.FC<Partial<LabelProps>> = props => {
 	const {
 		text,
 		children,
