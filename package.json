@@ -20,9 +20,10 @@
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "storybook": "start-storybook -s ./ -p 6006",
-    "serve-storybook": "npm run build-storybook && npx http-server storybook-static -s ./",
-    "build-storybook": "build-storybook",
+    "copy-img-assets": "cp -r src/assets/img/ storybook-static/static/media/",
+    "storybook": "start-storybook -s src/assets/ -p 6006",
+    "build-storybook": "build-storybook && npm run copy-img-assets",
+    "serve-storybook": "npm run build-storybook && npx http-server storybook-static",
     "cypress": "cypress open"
   },
   "peerDependencies": {
