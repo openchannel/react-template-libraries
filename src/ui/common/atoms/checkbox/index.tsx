@@ -18,18 +18,6 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
    */
   type?: 'radio' | 'checkbox';
   /**
-   * Autocomplete
-   */
-  autocomplete?: boolean;
-  /**
-   * Set auto focus to true or false
-   */
-  autoFocus?: boolean;
-  /**
-   * List of classes which can be attached to the current list
-   */
-  customClass?: string;
-  /**
    * Set disabled state for input
    */
   disabled?: boolean;
@@ -46,18 +34,18 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
    * Style which can be added to the title
    * Supposed to be the style object
    */
-  customStyle?: any;
+  customStyle?: React.CSSProperties;
 }
 
 export const Checkbox: React.FC<CheckboxProps> = (props) => {
-  const { labelText, customClass, required, ...p } = props;
+  const { labelText, required, ...p } = props;
 
   return (
     <label className="form-checkbox">
       <input
         type="checkbox"
         name="checkbox"
-        className={`form-checkbox__input form-checkbox__input_hidden ${customClass}`}
+        className={`form-checkbox__input form-checkbox__input_hidden`}
         {...p}
         id="checkbox"
       />
