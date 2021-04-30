@@ -1,3 +1,4 @@
+//commit e098faba5e30e329fb877f8ccfbdfa23e1d861b5 Author: Vitaliy Samofal Date: 16.03.21, 16:45
 import * as React from 'react';
 
 import './button.scss';
