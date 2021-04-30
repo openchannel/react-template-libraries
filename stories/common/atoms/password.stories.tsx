@@ -14,4 +14,5 @@ export const PasswordInput = PasswordComponent.bind({});
 PasswordInput.args = {
   required: false,
   inputType: 'password',
+  placeholder: 'Enter password',
 };

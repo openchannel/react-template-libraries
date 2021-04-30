@@ -31,7 +31,7 @@
     align-items: center;
 
     .file-container__upload-images {
-      height: 64px;
+      height: 50px;
       width: 64px;
     }
 
@@ -105,11 +105,12 @@
   &__upload-item {
     display: flex;
     flex-wrap: wrap;
-
+    width: 100%;
     &-type {
       position: relative;
-      padding-right: 0;
-      padding-left: 15px;
+      width: 32px;
+      height: 40px;
+      align-self: flex-start;
       @include media-breakpoint-md {
         flex: 0 0 auto;
         width: auto;
@@ -118,8 +119,6 @@
 
       img {
         &.app-icon {
-          width: 32px;
-          height: 40px;
           object-fit: cover;
         }
       }
@@ -169,13 +168,25 @@
       }
     }
 
-    &-progressbar {
+    progress {
       width: 100%;
-      margin: 0.5rem 1rem 1rem;
+      height: 8px;
+    }
+    .dzu-previewButton {
+      height: 18px;
+      width: 18px;
+      display: flex;
+      position: relative;
+      left: 98%;
+      bottom: 130%;
+      cursor: pointer;
+      z-index: 10;
     }
   }
 }
-
+.dzu-previewStatusContainer {
+  width: 100%;
+}
 .cropper {
   &__header {
     padding: 1.5rem;

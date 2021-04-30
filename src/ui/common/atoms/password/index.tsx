@@ -62,12 +62,12 @@ export const Password: React.FC<PasswordProps> = (props) => {
         {...p}
         placeholder={placeholder}
       />
-      {showPassword === true && (
+      {showPassword === false && (
         <span className="toggle_password" onClick={togglePassword}>
           <PasswordHide />
         </span>
       )}
-      {showPassword === false && (
+      {showPassword === true && (
         <span className="toggle_password" onClick={togglePassword}>
           <PasswordShow />
         </span>
