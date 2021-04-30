@@ -20,8 +20,10 @@
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "storybook": "start-storybook -s ./ -p 6006",
-    "build-storybook": "build-storybook",
+    "copy-img-assets": "cp -r src/assets/img/ storybook-static/static/media/",
+    "storybook": "start-storybook -s src/assets/ -p 6006",
+    "build-storybook": "build-storybook && npm run copy-img-assets",
+    "serve-storybook": "npm run build-storybook && npx http-server storybook-static",
     "cypress": "cypress open"
   },
   "peerDependencies": {
@@ -40,11 +42,11 @@
   "size-limit": [
     {
       "path": "dist/react-template-libraries.cjs.production.min.js",
-      "limit": "10 KB"
+      "limit": "1000 KB"
     },
     {
       "path": "dist/react-template-libraries.esm.js",
-      "limit": "10 KB"
+      "limit": "1000 KB"
     }
   ],
   "devDependencies": {
@@ -66,7 +68,9 @@
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.4",
+    "cypress": "^7.2.0",
     "enzyme": "^3.11.0",
+    "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-jest": "^24.3.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^6.0.0",
@@ -83,18 +87,12 @@
     "style-loader": "^2.0.0",
     "tsdx": "^0.14.1",
     "tslib": "^2.2.0",
-    "typescript": "^4.2.4"
+    "typescript": "^4.2.4",
+    "url-loader": "^4.1.1"
   },
   "dependencies": {
-    "@types/enzyme": "^3.10.8",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "bootstrap": "^4.6.0",
-    "cypress": "^7.2.0",
-    "enzyme": "^3.11.0",
-    "eslint-plugin-cypress": "^2.11.2",
-    "identity-obj-proxy": "^3.0.0",
-    "react-bootstrap": "^1.5.2",
-    "react-dropzone": "^11.3.2"
+    "react-bootstrap": "^1.5.2"
   },
   "jest": {
     "setupFilesAfterEnv": [

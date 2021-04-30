@@ -3,14 +3,15 @@ import { shallow, ShallowWrapper } from 'enzyme';
 
 import { Button, ButtonProps } from '../../../src/ui/common';
 
-const defaultButtonProps: ButtonProps = {
-  htmlType: 'button',
-  text: 'Test button',
-  type: 'primary',
-  disabled: false,
+
+const defaultButtonProps: Partial<ButtonProps> = {
+	htmlType: 'button',
+	text: 'Test button',
+	type: 'primary',
+	disabled: false,
 };
 
-const setUp = (props: ButtonProps) => shallow(<Button {...props} />);
+const setUp = (props: Partial<ButtonProps>) => shallow(<Button {...props} />);
 
 describe('Button (common button)', () => {
   let component: ShallowWrapper;
