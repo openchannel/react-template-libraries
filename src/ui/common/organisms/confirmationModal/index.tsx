@@ -1,3 +1,4 @@
+//commit 48ea5cbd79e7ab31781a2417c39a1059f9c22739 Author: Vitaliy Samofal Date: 29.03.21, 12:05
 import * as React from 'react';
 
 import { Content } from './content';
@@ -31,42 +32,36 @@ export interface ConfirmationModalProps extends Omit<ModalProps, 'children'> {
 
 	/**
 	 * Button content
-	 *
 	 * @default Ok
 	 */
 	confirmButtonText?: string;
 
 	/**
 	 * The variant of the confirm button.
-	 *
 	 * @default 'primary'
 	 */
 	confirmButtonType?: ModalButtonVariants;
 
 	/**
 	 * Hide element when not needed
-	 *
 	 * @default false
 	 */
 	confirmButtonHide?: boolean;
 
 	/**
-	 *
-	 *
+	 * Button content
 	 * @default No, cancel
 	 */
 	rejectButtonText?: string;
 
 	/**
 	 * The variant of the confirm button.
-	 *
 	 * @default 'secondary'
 	 */
 	rejectButtonType?: ModalButtonVariants;
 
 	/**
 	 * Hide element when not needed
-	 *
 	 * @default false
 	 */
 	rejectButtonHide?: boolean;
