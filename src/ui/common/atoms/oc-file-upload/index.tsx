@@ -3,6 +3,7 @@ import UploadIcon from '../../../../assets/img/upload_icon.svg';
 import CloseIcon from '../../../../assets/img/close-icon.svg';
 import DefaultFileIcon from '../../../../assets/img/file_icon.svg';
 import StandardAppIcon from '../../../../assets/img/standard-app-icon.svg';
+import SuspendIcon from '../../../../assets/img/suspend_icon.svg';
 import './styles.scss';
 import Dropzone, { IDropzoneProps, ILayoutProps } from 'react-dropzone-uploader';
 
@@ -72,7 +73,7 @@ export const OcFileUpload: React.FC<any> = () => {
         )}
 
         {props.fileWithMeta.meta.status === 'uploading' && props.canCancel && (
-          <CloseIcon className="dzu-previewButton" onClick={props.fileWithMeta.cancel} />
+          <SuspendIcon className="dzu-previewButton" onClick={props.fileWithMeta.cancel} />
         )}
         {props.meta.status !== 'preparing' &&
           props.meta.status !== 'getting_upload_params' &&
