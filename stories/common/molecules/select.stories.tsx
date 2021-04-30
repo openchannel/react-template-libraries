@@ -21,6 +21,7 @@ const SelectComponent: Story<SelectProps> = (args) => {
 export const SimpleSelect = SelectComponent.bind({});
 SimpleSelect.args = {
 	selectValArr: ['Assembly', 'Communication'],
+	placeholder: 'Select',
 };
 
 export const ObjectSelect = SelectComponent.bind({});
