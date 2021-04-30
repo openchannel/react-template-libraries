@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Dropdown } from 'react-bootstrap';
 import { shallow, ShallowWrapper } from 'enzyme';
+import { Dropdown } from 'react-bootstrap';
 
 import { Select, SelectProps } from '../../../../src/ui/common';
 
@@ -32,30 +32,6 @@ describe('Select (common)', () => {
 		const toggle = component.find(Dropdown.Toggle);
 
 		expect(toggle.text()).toContain('value_1');
-	});
-
-	it('should be disabled', () => {
-		component.setProps({ disabled: true });
-
-		const toggle = component.find(Dropdown.Toggle);
-
-		expect(toggle.prop('disabled')).toBe(true);
-	});
-
-	it('should render without value', () => {
-		component.setProps({ value: undefined });
-
-		const toggle = component.find(Dropdown.Toggle);
-
-		expect(toggle.text()).toContain('');
-	});
-
-	it('should render placeholder', () => {
-		component.setProps({ placeholder: 'Select something' });
-
-		const toggle = component.find(Dropdown.Toggle);
-
-		expect(toggle.text()).toContain('Select something');
 	});
 
 	it('should render toggle with selected value from passed value as object', () => {
