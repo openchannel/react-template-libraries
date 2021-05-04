@@ -5,7 +5,7 @@ import { DropdownVariants } from './index';
 
 export interface ListWrapperProps {
 	alignRight?: boolean;
-	type: DropdownVariants;
+	variant: DropdownVariants;
 	style?: React.CSSProperties;
 	className: string;
 	children: React.ReactNode;
@@ -18,7 +18,7 @@ export interface ListWrapperProps {
 export const ListWrapper = React.forwardRef(
 	(props: ListWrapperProps, ref: React.Ref<HTMLDivElement>) => {
 		const {
-			type,
+			variant,
 			style,
 			className,
 			children,
@@ -28,14 +28,14 @@ export const ListWrapper = React.forwardRef(
 			'data-popper-reference-hidden': dataPopperReferenceHidden,
 		} = props
 
-		const classByType = type === 'inline' ? 'dropdown-label__dropdown' : 'dropdown-button__menu'
+		const classByVariant = variant === 'inline' ? 'dropdown-label__dropdown' : 'dropdown-button__menu'
 
 		return (
 			<div
 				style={style}
 				ref={ref}
 				aria-labelledby="dropdownMenu"
-				className={`${classByType} ${className}`}
+				className={`${classByVariant} ${className}`}
 				x-placement={xPlacement}
 				data-popper-escaped={dataPopperEscaped}
 				data-popper-placement={dataPopperPlacement}

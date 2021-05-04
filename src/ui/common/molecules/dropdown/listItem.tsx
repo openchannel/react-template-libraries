@@ -4,7 +4,7 @@ import { DropdownVariants } from './index';
 
 
 interface ListItemProps {
-	type: DropdownVariants,
+	variant: DropdownVariants,
 	className?: string;
 	children: React.ReactNode,
 }
@@ -12,20 +12,20 @@ interface ListItemProps {
 export const ListItem = React.forwardRef(
 	(props: ListItemProps, ref: React.Ref<HTMLButtonElement>) => {
 		const {
-			type,
+			variant,
 			children,
 			className,
 			...p
 		} = props
 
-		const classByType = type === 'inline' ? 'dropdown-label__dropdown-item' : ''
+		const classByVariant = variant === 'inline' ? 'dropdown-label__dropdown-item' : ''
 
 		return (
 			<button
 				{...p}
 				ref={ref}
 				type="button"
-				className={`${classByType} ${className}`}
+				className={`${classByVariant} ${className}`}
 			>
 				{children}
 			</button>

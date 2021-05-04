@@ -21,10 +21,10 @@ type Option = {
 
 export interface DropdownProps {
 	/**
-	 * Dropdown type. Can be 'block' or 'inline'.
+	 * Dropdown variant. Can be 'block' or 'inline'.
 	 * @default inline
 	 */
-	type?: DropdownVariants;
+	variant?: DropdownVariants;
 	/**
 	 * Array of the options. Example: [ { label: 'label', value: 'value' } ]
 	 * @default []
@@ -54,7 +54,7 @@ export interface DropdownProps {
 
 export const Dropdown: React.FC<DropdownProps> = (props) => {
 	const {
-		type = INLINE_VARIANT,
+		variant = INLINE_VARIANT,
 		title,
 		options = [],
 		selected,
@@ -64,7 +64,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
 	} = props
 
 	React.useLayoutEffect(() => {
-		if (type === INLINE_VARIANT) {
+		if (variant === INLINE_VARIANT) {
 			import('./inlineStyles.scss')
 		} else {
 			import('./blockStyles.scss')
@@ -77,16 +77,16 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
 		onSelect(value, event)
 	}, [onSelect, options]) as SelectCallback
 
-	const mainClassByType = type === INLINE_VARIANT ? 'dropdown-label' : 'dropdown-button'
-	const listProps = type === INLINE_VARIANT ? { alignRight: true } : {}
+	const mainClassByType = variant === INLINE_VARIANT ? 'dropdown-label' : 'dropdown-button'
+	const listProps = variant === INLINE_VARIANT ? { alignRight: true } : {}
 	const styleProps = minDropdownWidth ? { minWidth: minDropdownWidth } : {}
 
 	return (
 		<BootstrapDropdown className={mainClassByType} style={styleProps}>
-			<BootstrapDropdown.Toggle as={Toggle} type={type}>
+			<BootstrapDropdown.Toggle as={Toggle} variant={variant}>
 				{children || `${title} ${selected && selected.label}`}
 			</BootstrapDropdown.Toggle>
-			<BootstrapDropdown.Menu as={ListWrapper} type={type} style={styleProps} {...listProps}>
+			<BootstrapDropdown.Menu as={ListWrapper} variant={variant} style={styleProps} {...listProps}>
 				{
 					options.map((item) => {
 						return (
@@ -95,7 +95,7 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
 								eventKey={item.label}
 								as={ListItem}
 								onSelect={onSelectItem}
-								type={type}
+								variant={variant}
 							>
 								{item.label}
 							</BootstrapDropdown.Item>
