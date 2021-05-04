@@ -58,7 +58,7 @@ const BlockDropdownComponent: Story<DropdownProps> = (args) => {
 
 export const BlockDropdown = BlockDropdownComponent.bind({});
 BlockDropdown.args = {
-	type: 'block',
+	variant: 'block',
 	minDropdownWidth: 247,
 	options: [
 		{
