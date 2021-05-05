@@ -77,12 +77,12 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
 		onSelect(value, event)
 	}, [onSelect, options]) as SelectCallback
 
-	const mainClassByType = variant === INLINE_VARIANT ? 'dropdown-label' : 'dropdown-button'
+	const mainClassByVariant = variant === INLINE_VARIANT ? 'dropdown-label' : 'dropdown-button'
 	const listProps = variant === INLINE_VARIANT ? { alignRight: true } : {}
 	const styleProps = minDropdownWidth ? { minWidth: minDropdownWidth } : {}
 
 	return (
-		<BootstrapDropdown className={mainClassByType} style={styleProps}>
+		<BootstrapDropdown className={mainClassByVariant} style={styleProps}>
 			<BootstrapDropdown.Toggle as={Toggle} variant={variant}>
 				{children || `${title} ${selected && selected.label}`}
 			</BootstrapDropdown.Toggle>
