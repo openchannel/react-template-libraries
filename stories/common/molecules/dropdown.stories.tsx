@@ -39,6 +39,7 @@ SimpleDropdown.args = {
 		}
 	],
 };
+SimpleDropdown.storyName = 'Inline dropdown';
 
 
 const BlockDropdownComponent: Story<DropdownProps> = (args) => {
@@ -75,3 +76,4 @@ BlockDropdown.args = {
 		}
 	],
 };
+BlockDropdown.storyName = 'Button dropdown';
