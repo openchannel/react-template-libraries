@@ -1,7 +1,5 @@
 import * as React from 'react';
 
-import './styles.scss';
-
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
    * Input value. Use text
@@ -53,7 +51,7 @@ export const Input: React.FC<InputProps> = (props) => {
   return (
     <input
       type={inputType}
-      className={`oc-input-component ${customClass}`}
+      className={`oc-input-component form-control ${customClass}`}
       {...p}
       placeholder={placeholder}
     />
