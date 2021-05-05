@@ -3,7 +3,7 @@ import * as React from 'react';
 import { DropdownVariants } from './index';
 
 
-interface ListItemProps {
+export interface ListItemProps {
 	variant: DropdownVariants,
 	className?: string;
 	children: React.ReactNode,
