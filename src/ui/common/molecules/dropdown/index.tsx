@@ -35,7 +35,7 @@ export interface DropdownProps {
 	 */
 	title?: string;
 	/**
-	 *
+	 * Minimal dropdown width. Works only for 'block' variant.
 	 */
 	minDropdownWidth?: number;
 	/**
