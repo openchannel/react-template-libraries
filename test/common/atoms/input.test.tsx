@@ -2,7 +2,7 @@ import * as React from 'react';
 import enzyme, { shallow, ShallowWrapper } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
-import { Input, InputProps } from '../../../src/ui/common';
+import { OcInputComponent, InputProps } from '../../../src/ui/common';
 
 enzyme.configure({ adapter: new Adapter() });
 
@@ -14,7 +14,7 @@ const defaultInputProps: InputProps = {
   placeholder: 'default value',
 };
 
-const setUp = (props: InputProps) => shallow(<Input {...props} />);
+const setUp = (props: InputProps) => shallow(<OcInputComponent {...props} />);
 
 describe('Default text input', () => {
   let component: ShallowWrapper;

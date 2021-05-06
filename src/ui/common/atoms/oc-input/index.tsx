@@ -1,6 +1,5 @@
+//commit d44982a23598e68832a23e5617c07e6d717e855e Author: Julia Date: 04.12.20, 13:13
 import * as React from 'react';
-
-import './styles.scss';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
@@ -47,13 +46,13 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   customStyle?: any;
 }
 
-export const Input: React.FC<InputProps> = (props) => {
+export const OcInputComponent: React.FC<InputProps> = (props) => {
   const { text, customClass, inputType, placeholder, ...p } = props;
 
   return (
     <input
       type={inputType}
-      className={`oc-input-component ${customClass}`}
+      className={`form-control ${customClass}`}
       {...p}
       placeholder={placeholder}
     />
