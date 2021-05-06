@@ -14,7 +14,7 @@ export type Option = { [T in string]: string };
 
 export type SelectedValue = string | Option;
 
-export interface SelectProps {
+export interface OcSelectComponentProps {
 	/**
 	 * Placeholder
 	 */
@@ -48,7 +48,7 @@ export interface SelectProps {
 	onSelectionChange: (eventKey: string | Option, e: React.SyntheticEvent<unknown>) => void
 }
 
-export const Select: React.FC<Partial<SelectProps>> = (props) => {
+export const OcSelectComponent: React.FC<Partial<OcSelectComponentProps>> = (props) => {
 	const {
 		selectValArr = [],
 		labelField = '',

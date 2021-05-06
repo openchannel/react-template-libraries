@@ -2,12 +2,12 @@ import * as React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { Select, SelectProps } from '../../../../src/ui/common';
+import { OcSelectComponent, OcSelectComponentProps } from '../../../../src/ui/common';
 
 
-const setUp = (props: SelectProps) => shallow(<Select {...props} />);
+const setUp = (props: OcSelectComponentProps) => shallow(<OcSelectComponent {...props} />);
 
-describe('Select (common)', () => {
+describe('OcSelectComponent', () => {
 	let component: ShallowWrapper;
 
 	const onSelectionChangeMock = jest.fn();
