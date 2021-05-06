@@ -1,5 +1,5 @@
 import * as React from 'react';
-import enzyme, { /*mount,*/ shallow, ShallowWrapper } from 'enzyme';
+import enzyme, { shallow, ShallowWrapper } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 import { OcDropboxComponent, DropboxProps } from '../../../src/ui/common';
