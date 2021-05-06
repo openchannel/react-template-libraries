@@ -14,10 +14,6 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
    */
   required?: boolean;
   /**
-   * Type of the input. Can be 'text', 'email', 'password'
-   */
-  type?: 'radio' | 'checkbox';
-  /**
    * Set disabled state for input
    */
   disabled?: boolean;
@@ -34,10 +30,10 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
    * Style which can be added to the title
    * Supposed to be the style object
    */
-  customStyle?: React.CSSProperties;
+  style?: React.CSSProperties;
 }
 
-export const Checkbox: React.FC<CheckboxProps> = (props) => {
+export const OcCheckboxComponent: React.FC<CheckboxProps> = (props) => {
   const { labelText, required, ...p } = props;
 
   return (
