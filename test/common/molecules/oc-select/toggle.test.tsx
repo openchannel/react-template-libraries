@@ -7,7 +7,7 @@ import { Toggle } from '../../../../src/ui/common/molecules/oc-select/toggle';
 
 const setUp = (props: DropdownToggleProps) => shallow(<Toggle {...props} />);
 
-describe('OcSelectComponent - toggle component', () => {
+describe('OcSelect - toggle component', () => {
 	const component: ShallowWrapper = setUp({
 		onClick: jest.fn(),
 		className: 'some-class-name',

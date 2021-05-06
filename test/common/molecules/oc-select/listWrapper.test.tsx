@@ -5,7 +5,7 @@ import { ListItem } from '../../../../src/ui/common/molecules/oc-select/listItem
 import { ListWrapper } from '../../../../src/ui/common/molecules/oc-select/listWrapper';
 
 
-describe('OcSelectComponent - list wrapper component', () => {
+describe('OcSelect - list wrapper component', () => {
 	const component: ShallowWrapper = shallow(
 		<ListWrapper
 			style={{ position: 'absolute' }}

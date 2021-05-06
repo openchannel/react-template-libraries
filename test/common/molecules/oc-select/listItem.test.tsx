@@ -6,7 +6,7 @@ import { ListItem, SelectListItemProps } from '../../../../src/ui/common/molecul
 
 const setUp = (props: SelectListItemProps) => shallow(<ListItem {...props} />);
 
-describe('OcSelectComponent - list item component', () => {
+describe('OcSelect - list item component', () => {
 	const component: ShallowWrapper = setUp({
 		name: 'item_1',
 		children: 'value',
