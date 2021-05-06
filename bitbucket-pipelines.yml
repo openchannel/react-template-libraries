@@ -6,15 +6,12 @@ definitions:
   services:
     docker:
       memory: 2048
-  steps:          
+  steps:
     - step: &build-app
         name: "Build"
         image: node:14.15.4-alpine3.12
         script:
           - npm install
-          - npm run oc-ng-common-service-pack
-          - npm run build-prod oc-ng-common-component && npm run oc-ng-common-component-pack
-          - npm run docs:json
           - npm run build-storybook
         artifacts:
           - storybook-static/**
@@ -40,15 +37,15 @@ pipelines:
     Deploy to dev1:
       - step: *build-app
       - step:
-          <<: *deploy-app 
+          <<: *deploy-app
           deployment: dev1
     Deploy to stage1:
       - step: *build-app
       - step:
-          <<: *deploy-app 
+          <<: *deploy-app
           deployment: stage1
     Deploy to us1:
       - step: *build-app
       - step:
-          <<: *deploy-app 
+          <<: *deploy-app
           deployment: us1
