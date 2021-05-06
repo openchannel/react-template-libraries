@@ -46,13 +46,13 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   customStyle?: any;
 }
 
-export const Input: React.FC<InputProps> = (props) => {
+export const OcInputComponent: React.FC<InputProps> = (props) => {
   const { text, customClass, inputType, placeholder, ...p } = props;
 
   return (
     <input
       type={inputType}
-      className={`oc-input-component form-control ${customClass}`}
+      className={`form-control ${customClass}`}
       {...p}
       placeholder={placeholder}
     />
