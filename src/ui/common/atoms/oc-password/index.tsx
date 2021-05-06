@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import './styles.scss';
 
-
 export interface PasswordProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
    * Marks the input as required
@@ -27,17 +26,13 @@ export interface PasswordProps extends React.InputHTMLAttributes<HTMLInputElemen
   onChange: (e: React.SyntheticEvent) => void;
 }
 
-export const Password: React.FC<PasswordProps> = (props) => {
-  const [isPassword, toggle] = React.useReducer(is => !is, false);
+export const OcPasswordComponent: React.FC<PasswordProps> = (props) => {
+  const [isPassword, toggle] = React.useReducer((is) => !is, false);
 
   return (
     <div className="oc-password">
-      <input
-        {...props}
-        type={isPassword ? 'text' : 'password'}
-        className="oc-password__input"
-      />
-      <span onClick={toggle} className={`toggle_password ${isPassword ? 'fa-eye-slash': '' }`} />
+      <input {...props} type={isPassword ? 'text' : 'password'} className="oc-password__input" />
+      <span onClick={toggle} className={`toggle_password ${isPassword ? 'fa-eye-slash' : ''}`} />
     </div>
   );
 };

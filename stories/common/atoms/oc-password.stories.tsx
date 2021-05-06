@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { Password, PasswordProps } from '../../../src/ui/common';
+import { OcPasswordComponent, PasswordProps } from '../../../src/ui/common';
 
 export default {
   title: 'Password [BEM]',
-  component: Password,
+  component: OcPasswordComponent,
 } as Meta;
 
-const PasswordComponent: Story<PasswordProps> = (args) => <Password {...args} />;
+const PasswordComponent: Story<PasswordProps> = (args) => <OcPasswordComponent {...args} />;
 
 export const PasswordInput = PasswordComponent.bind({});
 PasswordInput.args = {
