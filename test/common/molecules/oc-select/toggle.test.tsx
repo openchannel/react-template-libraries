@@ -2,12 +2,12 @@ import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { DropdownToggleProps } from 'react-bootstrap/DropdownToggle';
 
-import { Toggle } from '../../../../src/ui/common/molecules/select/toggle';
+import { Toggle } from '../../../../src/ui/common/molecules/oc-select/toggle';
 
 
 const setUp = (props: DropdownToggleProps) => shallow(<Toggle {...props} />);
 
-describe('Select - toggle component (common select)', () => {
+describe('OcSelectComponent - toggle component', () => {
 	const component: ShallowWrapper = setUp({
 		onClick: jest.fn(),
 		className: 'some-class-name',

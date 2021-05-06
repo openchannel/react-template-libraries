@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { ListItem } from '../../../../src/ui/common/molecules/select/listItem';
-import { ListWrapper } from '../../../../src/ui/common/molecules/select/listWrapper';
+import { ListItem } from '../../../../src/ui/common/molecules/oc-select/listItem';
+import { ListWrapper } from '../../../../src/ui/common/molecules/oc-select/listWrapper';
 
 
-describe('Select - list wrapper component (common select)', () => {
+describe('OcSelectComponent - list wrapper component', () => {
 	const component: ShallowWrapper = shallow(
 		<ListWrapper
 			style={{ position: 'absolute' }}

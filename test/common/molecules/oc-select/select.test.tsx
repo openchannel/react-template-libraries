@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { shallow, ShallowWrapper } from 'enzyme';
 import { Dropdown } from 'react-bootstrap';
+import { shallow, ShallowWrapper } from 'enzyme';
 
-import { Select, SelectProps } from '../../../../src/ui/common';
+import { OcSelectComponent, OcSelectComponentProps } from '../../../../src/ui/common';
 
 
-const setUp = (props: SelectProps) => shallow(<Select {...props} />);
+const setUp = (props: OcSelectComponentProps) => shallow(<OcSelectComponent {...props} />);
 
-describe('Select (common)', () => {
+describe('OcSelectComponent', () => {
 	let component: ShallowWrapper;
 
 	const onSelectionChangeMock = jest.fn();
@@ -32,6 +32,30 @@ describe('Select (common)', () => {
 		const toggle = component.find(Dropdown.Toggle);
 
 		expect(toggle.text()).toContain('value_1');
+	});
+
+	it('should be disabled', () => {
+		component.setProps({ disabled: true });
+
+		const toggle = component.find(Dropdown.Toggle);
+
+		expect(toggle.prop('disabled')).toBe(true);
+	});
+
+	it('should render without value', () => {
+		component.setProps({ value: undefined });
+
+		const toggle = component.find(Dropdown.Toggle);
+
+		expect(toggle.text()).toContain('');
+	});
+
+	it('should render placeholder', () => {
+		component.setProps({ placeholder: 'Select something' });
+
+		const toggle = component.find(Dropdown.Toggle);
+
+		expect(toggle.text()).toContain('Select something');
 	});
 
 	it('should render toggle with selected value from passed value as object', () => {
