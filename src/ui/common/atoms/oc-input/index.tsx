@@ -34,7 +34,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
    * Input value
    */
   value?: string;
-  onClick?: React.MouseEventHandler;
+  onChange?: React.ChangeEventHandler;
   /**
    * Style which can be added to the title
    * Supposed to be the style object
