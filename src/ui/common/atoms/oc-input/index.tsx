@@ -3,10 +3,6 @@ import * as React from 'react';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
-   * Input value. Use text
-   */
-  text?: string;
-  /**
    * Marks the input as required
    */
   required?: boolean;
@@ -43,18 +39,17 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
    * Style which can be added to the title
    * Supposed to be the style object
    */
-  customStyle?: any;
+  style?: React.CSSProperties;
 }
 
 export const OcInputComponent: React.FC<InputProps> = (props) => {
-  const { text, customClass, inputType, placeholder, ...p } = props;
+  const { customClass, inputType, ...p } = props;
 
   return (
     <input
       type={inputType}
       className={`form-control ${customClass}`}
       {...p}
-      placeholder={placeholder}
     />
   );
 };
