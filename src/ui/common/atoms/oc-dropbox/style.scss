@@ -1,35 +1,94 @@
-@import '../../../styles/index.scss';
+@import 'src/ui/styles/index.scss';
 
 .oc-dropbox {
-  position: relative;
-  &__control {
+  .oc-dropbox__control {
     @include form-control($info, $primary, $body-color);
-    box-shadow: none !important;
+
+    padding: 0 16px;
+    box-shadow: none;
+    cursor: text;
+    transition: none;
+
+    &:hover {
+      border-color: $info;
+    }
   }
-  &__value-container {
-    top: -30% !important;
-    left: -10px !important;
+
+  .oc-dropbox__control.oc-dropbox__control--is-focused {
+    border-color: $primary;
   }
-  &__indicators {
-    display: none !important;
+
+  .oc-dropbox__value-container {
+    padding: 0;
   }
-  &__placeholder {
-    color: #333;
-    opacity: 0.5;
-    font-size: 14px;
+
+  .oc-dropbox__indicator-separator {
+    display: none;
   }
-  &__menu-list {
-    border-radius: 4px;
-    margin-top: 1rem;
-    overflow-y: auto;
-    padding: 0 !important;
-    &::-webkit-scrollbar {
+
+  .oc-dropbox__dropdown-indicator {
+    &:after {
+      content: url(../../../../assets/img/select-down.svg);
+      position: absolute;
+      right: 2rem;
+      top: 1rem;
+      border: none;
+      display: inline-block;
+      margin-left: 0.255em;
+      vertical-align: 0.255em;
+    }
+
+    & > svg {
       display: none;
     }
   }
-  &__option {
-    @include font-size-breakpoint(md);
-    border-bottom: 1px solid $info;
-    padding: 2rem !important;
+
+  .oc-dropbox__control.oc-dropbox__control--menu-is-open {
+    .oc-dropbox__dropdown-indicator {
+      &:after {
+        content: url(../../../../assets/img/select-up.svg);
+      }
+    }
+  }
+
+  .oc-dropbox__placeholder {
+    color: $body-color;
+    opacity: 0.5;
+    font-size: 14px;
+  }
+
+  .oc-dropbox__menu {
+    margin-top: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: none;
+  }
+
+  .oc-dropbox__menu-list {
+    max-height: 229px;
+    padding: 0;
+  }
+
+  .oc-dropbox__option {
+    padding: 16px;
+    border-bottom: 1px;
+    color: $body-color;
+    background-color: transparent;
+    cursor: pointer;
+
+    &:hover {
+      color: $body-color;
+      background-color: $light;
+    }
+
+    &:active{
+      color: $primary;
+      background-color: $light;
+      border-color: unset;
+    }
+
+    &:focus{
+      outline: none;
+      background-color: $light;
+    }
   }
 }

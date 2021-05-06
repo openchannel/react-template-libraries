@@ -42,7 +42,6 @@ export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
       onChange={(value) => handleChange(value)}
       disabled={disabled}
       value={selectedValue}
-      maxMenuHeight={228}
       isSearchable
       noOptionsMessage={() => null}
     />
