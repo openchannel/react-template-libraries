@@ -2,19 +2,19 @@ import * as React from 'react';
 import enzyme, { mount, shallow, ShallowWrapper } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
-import { Password, PasswordProps } from '../../../src/ui/common';
+import { OcPasswordComponent, PasswordProps } from '../../../src/ui/common';
 
 enzyme.configure({ adapter: new Adapter() });
 
 const defaultPasswordProps: PasswordProps = {
-  text: 'Test password',
+  value: 'Test password',
   required: false,
-  inputType: 'password',
   disabled: false,
   placeholder: 'default value',
+  onChange: (e) => e,
 };
 
-const setUp = (props: PasswordProps) => shallow(<Password {...props} />);
+const setUp = (props: PasswordProps) => shallow(<OcPasswordComponent {...props} />);
 
 describe('Default password input', () => {
   let component: ShallowWrapper;
@@ -32,7 +32,7 @@ describe('Default password input', () => {
   });
 
   it('should type some text and assess it', async () => {
-    const wrapper = mount(<Password />);
+    const wrapper = mount(<OcPasswordComponent {...defaultPasswordProps} />);
     const input = wrapper.find('input');
     input.simulate('change', { target: { value: 'Hello' } });
     expect(input.contains('Hello'));

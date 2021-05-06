@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { ListItem, SelectListItemProps } from '../../../../src/ui/common/molecules/select/listItem';
+import { ListItem, SelectListItemProps } from '../../../../src/ui/common/molecules/oc-select/listItem';
 
 
 const setUp = (props: SelectListItemProps) => shallow(<ListItem {...props} />);
 
-describe('Select - list item component (common select)', () => {
+describe('OcSelect - list item component', () => {
 	const component: ShallowWrapper = setUp({
 		name: 'item_1',
 		children: 'value',

@@ -1,3 +1,4 @@
+//commit 97ffbca1eb0dab597b763664b1c78414ac62e6be Author: Vitaliy Samofal Date: 05.02.21, 14:38
 import * as React from 'react';
 // import FormCheck from 'react-bootstrap/FormCheck';
 
@@ -12,22 +13,6 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
    * Marks the input as required
    */
   required?: boolean;
-  /**
-   * Type of the input. Can be 'text', 'email', 'password'
-   */
-  type?: 'radio' | 'checkbox';
-  /**
-   * Autocomplete
-   */
-  autocomplete?: boolean;
-  /**
-   * Set auto focus to true or false
-   */
-  autoFocus?: boolean;
-  /**
-   * List of classes which can be attached to the current list
-   */
-  customClass?: string;
   /**
    * Set disabled state for input
    */
@@ -45,18 +30,18 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
    * Style which can be added to the title
    * Supposed to be the style object
    */
-  customStyle?: any;
+  style?: React.CSSProperties;
 }
 
-export const Checkbox: React.FC<CheckboxProps> = (props) => {
-  const { labelText, customClass, required, ...p } = props;
+export const OcCheckboxComponent: React.FC<CheckboxProps> = (props) => {
+  const { labelText, required, ...p } = props;
 
   return (
     <label className="form-checkbox">
       <input
         type="checkbox"
         name="checkbox"
-        className={`form-checkbox__input form-checkbox__input_hidden ${customClass}`}
+        className={`form-checkbox__input form-checkbox__input_hidden`}
         {...p}
         id="checkbox"
       />

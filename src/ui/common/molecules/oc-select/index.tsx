@@ -1,3 +1,4 @@
+//commit 18542372da1cf82ca1fd7d04cc8bde9e78656242 Author: Alex Tkachenko Date: 12.04.21, 12:41
 import * as React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { SelectCallback } from 'react-bootstrap/helpers';
@@ -13,7 +14,12 @@ export type Option = { [T in string]: string };
 
 export type SelectedValue = string | Option;
 
-export interface SelectProps {
+export interface OcSelectProps {
+	/**
+	 * Placeholder
+	 */
+	placeholder?: string;
+
 	/**
 	 * Array of the select items. Example: [{ key: 'value' }], ['value']
 	 * @default []
@@ -22,13 +28,11 @@ export interface SelectProps {
 
 	/**
 	 * Set object field name using as label. The value must match the key in the array object.
-	 * @default ''
 	 */
 	labelField?: string;
 
 	/**
 	 * Disable select for user input
-	 *
 	 * @default false
 	 */
 	disabled?: boolean;
@@ -44,12 +48,13 @@ export interface SelectProps {
 	onSelectionChange: (eventKey: string | Option, e: React.SyntheticEvent<unknown>) => void
 }
 
-export const Select: React.FC<Partial<SelectProps>> = (props) => {
+export const OcSelect: React.FC<Partial<OcSelectProps>> = (props) => {
 	const {
 		selectValArr = [],
 		labelField = '',
 		disabled = false,
 		value = '',
+		placeholder = '',
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		onSelectionChange = () => {},
 	} = props
@@ -62,10 +67,12 @@ export const Select: React.FC<Partial<SelectProps>> = (props) => {
 		onSelectionChange(value, event)
 	}, [onSelectionChange, labelField]) as SelectCallback
 
+	const toggleValue = value ? (typeof value === 'object' ? value[labelField] : value) : placeholder
+
 	return (
 		<Dropdown className="select-component">
 			<Dropdown.Toggle as={Toggle} disabled={disabled}>
-				{typeof value === 'object' ? value[labelField] : value}
+				{toggleValue}
 			</Dropdown.Toggle>
 
 			<Dropdown.Menu as={ListWrapper}>
