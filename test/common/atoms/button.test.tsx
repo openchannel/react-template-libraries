@@ -36,6 +36,14 @@ describe('Button (common button)', () => {
     expect(classExist).toBeTruthy();
   });
 
+  it('should not contain any variants', async () => {
+    component.setProps({ type: 'none' });
+
+    const classExist = component.hasClass('oc-button');
+
+    expect(classExist).toBeTruthy();
+  });
+
   it('button should be disabled', async () => {
     component.setProps({ disabled: true });
 
@@ -49,5 +57,17 @@ describe('Button (common button)', () => {
     component.simulate('click');
 
     expect(onButtonClickMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render with custom children', async () => {
+    component.setProps({ children: React.createElement('span', null, 'custom children') });
+
+    expect(component.contains(<span>custom children</span>)).toBeTruthy();
+  });
+
+  it('should render with process', async () => {
+    component.setProps({ process: true });
+
+    expect(component.find('.oc-button__spinner')).toBeTruthy();
   });
 });

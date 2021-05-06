@@ -5,53 +5,92 @@
 
 @font-face {
   font-family: 'Rubik-Black';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-Black.ttf') format('truetype');
+  src: url('../../assets/fonts/Rubik-Black.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
 }
+
 @font-face {
   font-family: 'Rubik-Black-Italic';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-BlackItalic.ttf') format('truetype');
+  src: url('../../assets/fonts/Rubik-BlackItalic.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-BlackItalic.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
 }
+
 @font-face {
   font-family: 'Rubik-Bold';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-Bold.ttf') format('truetype');
+  src: url('../../assets/fonts/Rubik-Bold.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }
-@font-face {
-  font-family: 'Rubik-Bold-Italic';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-BoldItalic.ttf') format('truetype');
-}
+
 @font-face {
   font-family: 'Rubik-Italic';
+  src: url('../../assets/fonts/Rubik-Italic.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-Italic.woff') format('woff');
   font-weight: normal;
-  src: url('../../assets/fonts/Rubik-Italic.ttf') format('truetype');
+  font-style: italic;
+  font-display: swap;
 }
-@font-face {
-  font-family: 'Rubik-Light';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-Light.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'Rubik-Light-Italic';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-LightItalic.ttf') format('truetype');
-}
+
 @font-face {
   font-family: 'Rubik-Medium';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-Medium.ttf') format('truetype');
+  src: url('../../assets/fonts/Rubik-Medium.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
 }
+
 @font-face {
-  font-family: 'Rubik-Medium-Italic';
-  font-weight: normal;
-  src: url('../../assets/fonts/Rubik-MediumItalic.ttf') format('truetype');
+  font-family: 'Rubik-Light';
+  src: url('../../assets/fonts/Rubik-Light.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
+
+@font-face {
+  font-family: 'Rubik-Light-Italic';
+  src: url('../../assets/fonts/Rubik-LightItalic.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rubik-Bold-Italic';
+  src: url('../../assets/fonts/Rubik-BoldItalic.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-BoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
 @font-face {
   font-family: 'Rubik-Regular';
+  src: url('../../assets/fonts/Rubik-Regular.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-Regular.woff') format('woff');
   font-weight: normal;
-  src: url('../../assets/fonts/Rubik-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rubik-Medium-Italic';
+  src: url('../../assets/fonts/Rubik-MediumItalic.woff2') format('woff2'),
+  url('../../assets/fonts/Rubik-MediumItalic.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
 }
 
 .font-light {
@@ -105,6 +144,7 @@ a {
     font-size: inherit;
   }
 }
+
 
 h1,
 h2,
@@ -201,12 +241,14 @@ h6 {
 /* oc-file-upload */
 
 .file-container__upload-item-progress {
+
   .progress {
     background-color: $info;
     height: 4px;
   }
 
   &[type='primary'] {
+
     .progress {
       background-color: #e9ecef;
       height: 4px;
@@ -216,7 +258,7 @@ h6 {
 
 /* end */
 
-.company-logo {
+.company-logo{
   height: 27px;
 }
 
@@ -225,22 +267,14 @@ h6 {
 }
 
 /** End buttons **/
-.divider {
+.divider{
   border-top: 1px solid $info;
 }
 
 /** form inputs validation style **/
-oc-input,
-oc-password,
-oc-select,
-oc-video-url,
-oc-color,
-oc-rich-text-editor,
-oc-textarea {
+oc-input, oc-password, oc-select, oc-video-url, oc-color, oc-rich-text-editor, oc-textarea {
   &.ng-invalid {
-    input.ng-touched,
-    select.ng-touched,
-    textarea.ng-touched {
+    input.ng-touched, select.ng-touched , textarea.ng-touched {
       border-color: $danger;
     }
     .custom-editor.ng-touched {
@@ -251,17 +285,14 @@ oc-textarea {
   }
   &.ng-invalid {
     &.ng-touched {
-      input,
-      select,
-      button.ng-invalid,
-      textarea {
+      input, select, button.ng-invalid , textarea {
         border-color: $danger;
       }
     }
   }
 }
 
-.toggle_password {
+.toggle_password{
   float: right;
   margin-top: -31px;
   margin-right: 16px;
@@ -272,16 +303,16 @@ oc-textarea {
   height: 16px;
   width: 16px;
 }
-.toggle_password.fa-eye-slash {
+.toggle_password.fa-eye-slash{
   background: url(../../assets/img/password-show.svg) center center no-repeat;
 }
 /** input password **/
 /** input radio **/
 
-.custom-radio .custom-control-input ~ .custom-control-label {
+.custom-radio .custom-control-input ~ .custom-control-label{
   font-size: 14px;
   line-height: 28px;
-  padding-left: 4px;
+  padding-left:4px;
   margin: auto;
 }
 
@@ -300,50 +331,50 @@ oc-textarea {
 }
 /** input radio **/
 
-.menu-edit {
+.menu-edit{
   background: url(../../assets/img/edit_icon.svg) no-repeat 15px;
 }
-.menu-edit:hover {
+.menu-edit:hover{
   background: url(../../assets/img/edit_icon_h.svg) no-repeat 15px;
 }
-.menu-delete {
+.menu-delete{
   background: url(../../assets/img/delete.svg) no-repeat 15px;
 }
-.menu-delete:hover {
+.menu-delete:hover{
   background: url(../../assets/img/delete_h.svg) no-repeat 15px;
 }
 
-.menu-suspend {
+.menu-suspend{
   background: url(../../assets/img/suspend_icon.svg) no-repeat 15px;
 }
-.menu-suspend:hover {
+.menu-suspend:hover{
   background: url(../../assets/img/suspend_icon_h.svg) no-repeat 15px;
 }
-.menu-unsuspend {
+.menu-unsuspend{
   background: url(../../assets/img/suspend_icon.svg) no-repeat 15px;
 }
-.menu-unsuspend:hover {
+.menu-unsuspend:hover{
   background: url(../../assets/img/suspend_icon_h.svg) no-repeat 15px;
 }
 
-.menu-publish {
+.menu-publish{
   background: url(../../assets/img/submit_icon.svg) no-repeat 15px;
 }
-.menu-publish:hover {
+.menu-publish:hover{
   background: url(../../assets/img/submit_icon_h.svg) no-repeat 15px;
 }
 
-.menu-submit {
+.menu-submit{
   background: url(../../assets/img/submit_icon.svg) no-repeat 15px;
 }
-.menu-submit:hover {
+.menu-submit:hover{
   background: url(../../assets/img/submit_icon_h.svg) no-repeat 15px;
 }
 
-.menu-preview {
+.menu-preview{
   background: url(../../assets/img/view.svg) no-repeat 15px;
 }
-.menu-preview:hover {
+.menu-preview:hover{
   background: url(../../assets/img/view.svg) no-repeat 15px;
 }
 
@@ -363,7 +394,7 @@ a.link {
     text-decoration: none;
   }
   &:focus {
-    outline: none;
+    outline:none
   }
 }
 
@@ -387,9 +418,8 @@ a.link {
     &:last-child {
       border-bottom: 0;
     }
-    &.active,
-    &:active {
-      background-color: rgba($info, 0.2);
+    &.active, &:active {
+      background-color: rgba($info, .2);
       color: $body-color;
     }
   }
@@ -400,6 +430,23 @@ a.link {
   .dropdown-menu {
     max-height: 229px;
     width: 100%;
+    .dropdown-item {
+      padding: 16px;
+      border-bottom: 1px;
+      &:hover {
+        color: $body-color;
+        background-color: $light;
+      }
+      &:active{
+        color: $primary;
+        background-color: $light;
+        border-color: unset;
+      }
+      &:focus{
+        outline: none;
+        background-color: $light;
+      }
+    }
   }
 }
 
@@ -423,7 +470,7 @@ a.link {
               .tox-tbtn--enabled {
                 background: none;
                 svg {
-                  fill: $primary;
+                  fill: $primary
                 }
                 &:hover {
                   background: #f4f4f4;
@@ -447,7 +494,7 @@ a.link {
               .tox-tbtn--enabled {
                 background: none;
                 svg {
-                  fill: $primary;
+                  fill: $primary
                 }
                 &:hover {
                   background: #f4f4f4;
@@ -484,9 +531,10 @@ a.link {
 }
 // end of the Tiny Editor style customization
 
+
 // oc-select
 
-oc-select {
+.oc-select {
   & .btn:focus {
     border-color: $primary !important;
   }
@@ -499,12 +547,12 @@ oc-select {
         color: $body-color;
         background-color: $light;
       }
-      &:active {
+      &:active{
         color: $primary;
         background-color: $light;
         border-color: unset;
       }
-      &:focus {
+      &:focus{
         outline: none;
         background-color: $light;
       }
@@ -589,5 +637,12 @@ oc-select {
         color: $white;
       }
     }
+  }
+}
+
+.tags__button-add {
+  & .oc-button {
+    min-height: 46px;
+    line-height: 19px;
   }
 }

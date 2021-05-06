@@ -12,7 +12,7 @@ export default {
 const ImageGalleryComponent: Story<ImageGalleryProps> = (args) => <ImageGallery {...args} />;
 
 const imageItem: GalleryItem = {
-	image: './src/assets/img/get-started.svg',
+	image: './img/get-started.svg',
 	title: 'Test App Image',
 	description: 'Improve and extend your experience right from your own UI'
 };
