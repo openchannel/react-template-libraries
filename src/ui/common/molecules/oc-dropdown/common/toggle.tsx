@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { DropdownToggleProps } from 'react-bootstrap/DropdownToggle';
 
-import { DropdownVariants } from './index';
+import { DropdownVariants } from '../base-dropdown';
 
 
 export interface ToggleProps extends DropdownToggleProps {
