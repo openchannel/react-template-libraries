@@ -1,5 +1,5 @@
 import * as React from 'react';
-import enzyme, { shallow, ShallowWrapper } from 'enzyme';
+import enzyme, { mount, shallow, ShallowWrapper } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 import { OcDropboxComponent, DropboxProps } from '../../../src/ui/common';
@@ -27,6 +27,7 @@ const defaultDropboxProps: DropboxProps = {
   isSearchable: true,
   clearFormAfterSelect: false,
   style: {},
+  selectedValue: { label: 'first', value: 'first' },
 };
 
 const setUp = (props: DropboxProps) => shallow(<OcDropboxComponent {...props} />);
@@ -44,5 +45,13 @@ describe('OcDropboxComponent', () => {
 
   it('should contain placeholder', () => {
     expect(component.prop('placeholder')).toEqual('Default placeholder');
+  });
+
+  it('should contain 3 options and be clicked', () => {
+    const wrapper = mount(<OcDropboxComponent {...defaultDropboxProps} />);
+    wrapper.find('svg').simulate('mouseDown', {
+      button: 0,
+    });
+    expect(wrapper.find('.oc-dropbox__option').length).toEqual(6);
   });
 });

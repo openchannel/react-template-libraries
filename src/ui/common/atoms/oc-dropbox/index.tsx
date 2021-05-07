@@ -25,21 +25,23 @@ export interface DropboxProps extends SelectProps<MyOption> {
    * Inline styles to add to component
    */
   style: React.CSSProperties;
+  /**
+   * Selected Value
+   */
+  selectedValue: MyOption;
+  /**
+   * onChange handler
+   */
 }
 
 export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
-  const { placeholder, items, disabled } = props;
-  const [selectedValue, setSelectedValue] = React.useState<MyOption | null | undefined>(null);
-  const handleChange = (option?: MyOption | null | undefined) => {
-    setSelectedValue(option);
-  };
+  const { placeholder, items, disabled, selectedValue } = props;
   return (
     <Select
       className="oc-dropbox"
       classNamePrefix="oc-dropbox"
       placeholder={placeholder}
       options={items}
-      onChange={(value) => handleChange(value)}
       disabled={disabled}
       value={selectedValue}
       isSearchable
