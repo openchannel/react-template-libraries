@@ -32,7 +32,6 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
           placeholder={placeholder}
           value={colorValue}
           onChange={(e) => {
-            console.log(e.target.value);
             setColorValue(e.target.value);
           }}
           className="color-adjust__input form-control"
@@ -72,7 +71,6 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
             className="color-adjust__picker-input"
             color={colorValue}
             onChange={(color) => {
-              console.log(color);
               setColorValue(color.hex);
             }}
           />
