@@ -7,7 +7,6 @@ import { OcInputComponent, InputProps } from '../../../src/ui/common';
 enzyme.configure({ adapter: new Adapter() });
 
 const defaultInputProps: InputProps = {
-  text: 'Test input',
   required: false,
   inputType: 'text',
   disabled: false,

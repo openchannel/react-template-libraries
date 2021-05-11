@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { isIE } from 'react-device-detect';
+import { ChromePicker } from 'react-color';
 import './style.scss';
 export interface ColorProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
@@ -10,25 +12,14 @@ export interface ColorProps extends React.InputHTMLAttributes<HTMLInputElement> 
    */
   disabled: boolean;
   /**
-   * Input value
-   */
-  value: string;
-  /**
-   * Color value
-   */
-  colorValue: string;
-  /**
-   * onChange handler to display color of input
-   */
-  colorChange: Function;
-  /**
    * custom inline styles
    */
   style: React.CSSProperties;
 }
 
 export const OcColorComponent: React.FC<ColorProps> = (props) => {
-  const { disabled, placeholder, colorChange, colorValue } = props;
+  const { disabled, placeholder } = props;
+  const [colorValue, setColorValue] = React.useState('');
   return (
     <div className="color-adjust">
       <div className="color-adjust__demonstration">
@@ -40,7 +31,10 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
           disabled={disabled}
           placeholder={placeholder}
           value={colorValue}
-          onChange={() => colorChange()}
+          onChange={(e) => {
+            console.log(e.target.value);
+            setColorValue(e.target.value);
+          }}
           className="color-adjust__input form-control"
         />
       </div>
@@ -64,7 +58,25 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
             ></path>
           </svg>
         </span>
-        <input className="color-adjust__picker-input" value={colorValue} />
+        {!isIE ? (
+          <input
+            type="color"
+            className="color-adjust__picker-input"
+            value={colorValue}
+            onChange={(e) => {
+              setColorValue(e.target.value);
+            }}
+          />
+        ) : (
+          <ChromePicker
+            className="color-adjust__picker-input"
+            color={colorValue}
+            onChange={(color) => {
+              console.log(color);
+              setColorValue(color.hex);
+            }}
+          />
+        )}
       </div>
     </div>
   );
