@@ -12,13 +12,13 @@ const VideoComponent: Story<VideoProps> = (args) => <Video {...args} />;
 
 export const YoutubeVideo = VideoComponent.bind({});
 YoutubeVideo.args = {
-  videoUrl: 'https://www.youtube.com/embed/DGQwd1_dpuc',
+  videoUrl: 'https://www.youtube.com/watch?v=00F1PQH-MQ8&ab_channel=SickickMusic',
 };
 export const VimeoVideo = VideoComponent.bind({});
 VimeoVideo.args = {
-  videoUrl: 'https://player.vimeo.com/video/509986292',
+  videoUrl: 'https://vimeo.com/520392165',
 };
 export const DailymotionVideo = VideoComponent.bind({});
 DailymotionVideo.args = {
-  videoUrl: 'https://www.dailymotion.com/embed/video/x80rpmf',
+  videoUrl: 'https://www.dailymotion.com/video/x80czoq',
 };
