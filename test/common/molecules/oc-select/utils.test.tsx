@@ -1,8 +1,8 @@
-import { Option } from '../../../../src/ui/common/molecules/select';
-import { transformToValidOptions } from '../../../../src/ui/common/molecules/select/utils';
+import { Option } from '../../../../src/ui/common/molecules/oc-select';
+import { transformToValidOptions } from '../../../../src/ui/common/molecules/oc-select/utils';
 
 
-describe('Select (utilities)', () => {
+describe('OcSelect (utilities)', () => {
 	const defaultArrayOfStrings: string[] = [ 'option 1', 'option 2' ];
 	const defaultArrayOfObjects: Option[] = [ { value: 'option 1' }, { value: 'option 2' } ];
 
