@@ -2,7 +2,7 @@ import * as React from 'react';
 import enzyme, { shallow, ShallowWrapper } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
-import { Checkbox, CheckboxProps } from '../../../src/ui/common';
+import { OcCheckboxComponent, CheckboxProps } from '../../../src/ui/common';
 
 enzyme.configure({ adapter: new Adapter() });
 
@@ -13,7 +13,7 @@ const defaultCheckboxProps: CheckboxProps = {
   disabled: false,
 };
 
-const setUp = (props: CheckboxProps) => shallow(<Checkbox {...props} />);
+const setUp = (props: CheckboxProps) => shallow(<OcCheckboxComponent {...props} />);
 
 describe('Required Checkbox', () => {
   let component: ShallowWrapper;

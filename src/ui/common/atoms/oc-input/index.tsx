@@ -1,12 +1,7 @@
+//commit d44982a23598e68832a23e5617c07e6d717e855e Author: Julia Date: 04.12.20, 13:13
 import * as React from 'react';
 
-import './styles.scss';
-
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  /**
-   * Input value. Use text
-   */
-  text?: string;
   /**
    * Marks the input as required
    */
@@ -39,23 +34,22 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
    * Input value
    */
   value?: string;
-  onClick?: React.MouseEventHandler;
+  onChange?: React.ChangeEventHandler;
   /**
    * Style which can be added to the title
    * Supposed to be the style object
    */
-  customStyle?: any;
+  style?: React.CSSProperties;
 }
 
-export const Input: React.FC<InputProps> = (props) => {
-  const { text, customClass, inputType, placeholder, ...p } = props;
+export const OcInputComponent: React.FC<InputProps> = (props) => {
+  const { customClass, inputType, ...p } = props;
 
   return (
     <input
       type={inputType}
-      className={`oc-input-component ${customClass}`}
+      className={`form-control ${customClass}`}
       {...p}
-      placeholder={placeholder}
     />
   );
 };
