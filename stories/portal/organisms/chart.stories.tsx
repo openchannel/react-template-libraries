@@ -1,8 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
+import { ChartOptionsChange } from '../../../src/ui/portal';
 
 import { Chart, ChartProps, ChartLayoutTypeModel } from '../../../src/ui/portal';
 
@@ -21,15 +19,7 @@ const day = {
 		'Feb 07', 'Feb 08', 'Feb 09', 'Feb 10', 'Feb 11']
 };
 
-export default {
-	title: 'Portal/Organisms/Chart',
-	component: Chart,
-} as Meta;
-
-const Component: Story<ChartProps> = (args) => <Chart {...args} />;
-
-export const Monthly = Component.bind({});
-Monthly.args = {
+const defaultProps = {
 	chartData: {
 		layout: ChartLayoutTypeModel.standard,
 		data: month,
@@ -63,18 +53,48 @@ Monthly.args = {
 	count: month.labelsY.reduce((a, b) => a + b, 0),
 	countText: 'Total',
 	downloadUrl: './img/upload_icon.svg',
-	// isBackgroundColor: true,
 	enablePoints: true,
 	minDropdownWidth: '247px',
-	random: true
-};
-Monthly.storyName = 'Monthly chart';
+}
 
 
-// export const Daily = Component.bind({});
-// Daily.args = {
-// 	type: 'multi-star',
-// 	rating: 3.4,
-// 	reviewCount: 17,
-// };
-// Daily.storyName = 'Daily chart';
+export default {
+	title: 'Portal/Organisms/Chart',
+	component: Chart,
+} as Meta;
+
+const Component: Story<ChartProps> = (args) => {
+	const [chartData, setChartData] = React.useState(defaultProps.chartData);
+	const [count, setCount] = React.useState(args.count);
+	const [countText, setCountText] = React.useState(args.countText);
+
+	const changeChartOptions = ({ period, field }: ChartOptionsChange) => {
+		const newChartDat = { ...chartData };
+
+		if (period.id === 'day') {
+			newChartDat.data = day;
+		} else {
+			newChartDat.data = month;
+		}
+
+		newChartDat.fields = chartData.fields.map((item) => ({ ...item, active: field.id === item.id }));
+		newChartDat.periods = chartData.periods.map((item) => ({ ...item, active: period.id === item.id }));
+
+		setChartData(newChartDat);
+		setCount(newChartDat.data.labelsY.reduce((a, b) => a + b, 0));
+		setCountText(`Total ${field.id}`);
+	}
+
+	return (
+		<Chart
+			{...args}
+			chartData={chartData}
+			count={count}
+			countText={countText}
+			changeChartOptions={changeChartOptions}
+		/>
+	)
+}
+
+export const Default = Component.bind({});
+Default.args = defaultProps;
