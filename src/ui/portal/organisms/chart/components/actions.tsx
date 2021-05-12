@@ -1,25 +1,14 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import * as React from 'react';
-import { MinDropdownWidth } from '../../../../common/molecules';
 
 import { Radio } from './radio';
-import { Dropdown } from '../../../../common/molecules';
-import TabularIcon from '../../../../../assets/img/icon-tabular.svg';
+import { ActionsProps } from '../types';
+import { OcDropdownButton } from '../../../../common/molecules';
+import { TABULAR_DATA_TYPE, GRAPH_DATA_TYPE, defaultChartStatisticParameter } from '../utils';
 import GraphIcon from '../../../../../assets/img/icon-graph.svg';
-import SelectDownIcon from '../../../../../assets/img/select-down.svg';
 import SelectUpIcon from '../../../../../assets/img/select-up.svg';
-import { TABULAR_DATA_TYPE, GRAPH_DATA_TYPE, ChartStatisticModel, DataType } from '../index';
+import TabularIcon from '../../../../../assets/img/icon-tabular.svg';
+import SelectDownIcon from '../../../../../assets/img/select-down.svg';
 
-
-export interface ActionsProps {
-	chartData: ChartStatisticModel;
-	activeDataType: DataType;
-	onChangeDataType: React.Dispatch<string>;
-	changeChartOptions: () => void;
-	minDropdownWidth?: MinDropdownWidth;
-}
 
 export const Actions: React.FC<ActionsProps> = (props) => {
 	const {
@@ -33,20 +22,22 @@ export const Actions: React.FC<ActionsProps> = (props) => {
 		minDropdownWidth,
 	} = props;
 
-	const [selectedPeriod, setActivePeriod] = React.useState(periods.find(({ active }) => active) || {});
-	const [selectedChartType, setChartType] = React.useState(fields.find(({ active }) => active) || {});
+	const selectedPeriod = React.useMemo(() => periods.find(({ active }) => active) || defaultChartStatisticParameter, [periods])
+	const selectedChartType = React.useMemo(() => fields.find(({ active }) => active) || defaultChartStatisticParameter, [fields])
 
 	const onChangePeriod = React.useCallback((e) => {
 		const period = periods.find(({ id }) => id === e.target.id);
 
-		setActivePeriod(period)
+		if (!period) {
+			return
+		}
+
 		changeChartOptions({ period, field: selectedChartType });
-	}, [selectedChartType, periods])
+	}, [changeChartOptions, selectedChartType, periods])
 
 	const onSelectChartType = React.useCallback((value) => {
-		setChartType(value);
 		changeChartOptions({ field: value, period: selectedPeriod });
-	}, [selectedPeriod, fields])
+	}, [changeChartOptions, selectedPeriod])
 
 	const onClickDataType = React.useCallback((e) => {
 		onChangeDataType(e.currentTarget.dataset.name);
@@ -56,9 +47,9 @@ export const Actions: React.FC<ActionsProps> = (props) => {
 		<div className="chart__options-container">
 			<div className="chart__period-container">
 				{
-					periods.map((obj) => (
+					periods.map((obj, k) => (
 						<Radio
-							key={obj.id}
+							key={k}
 							id={obj.id}
 							label={obj.label}
 							checked={selectedPeriod.id === obj.id}
@@ -84,8 +75,7 @@ export const Actions: React.FC<ActionsProps> = (props) => {
 						<GraphIcon />
 					</div>
 				</div>
-				<Dropdown
-					variant="block"
+				<OcDropdownButton
 					options={fields}
 					onSelect={onSelectChartType}
 					selected={selectedChartType}
@@ -100,7 +90,7 @@ export const Actions: React.FC<ActionsProps> = (props) => {
 							{selectedChartType.label}
 						</label>
 					</div>
-				</Dropdown>
+				</OcDropdownButton>
 			</div>
 		</div>
 	)

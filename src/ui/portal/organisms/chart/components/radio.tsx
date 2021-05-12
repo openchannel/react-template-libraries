@@ -1,12 +1,7 @@
 import * as React from 'react';
 
+import { RadioProps } from '../types';
 
-export interface RadioProps {
-	id: string;
-	label: string;
-	checked: boolean;
-	onChange: (e: React.SyntheticEvent) => void;
-}
 
 export const Radio: React.FC<RadioProps> = React.memo((props) => {
 	const {

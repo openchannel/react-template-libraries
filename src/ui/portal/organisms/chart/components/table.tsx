@@ -1,8 +1,8 @@
 import * as React from 'react';
 
+import { TableProps } from '../types';
 import { useChartReducer } from '../hooks';
 import DefaultSortIcon from '../../../../../assets/img/dropdown.svg';
-import { ChartStatisticModel } from '../index';
 
 
 const LabelIcon = ({ sortIcon = '', ...props }) => {
@@ -12,18 +12,9 @@ const LabelIcon = ({ sortIcon = '', ...props }) => {
 	return <img {...props} src={sortIcon} alt="Sort arrow" />
 }
 
-interface TableProps {
-	chartData: ChartStatisticModel;
-	sortIcon?: string;
-}
 
 export const Table: React.FC<TableProps> = (props) => {
-	const {
-		chartData,
-		sortIcon,
-	} = props;
-
-	const headerLabel = 'label';
+	const { chartData, sortIcon } = props;
 
 	const {
 		state: {
@@ -38,12 +29,14 @@ export const Table: React.FC<TableProps> = (props) => {
 		setTableData(chartData);
 	}, [chartData])
 
+	const tabularLabelsHeader = React.useMemo(() => {
+		return (chartData.periods.find(({ active }) => active) || {}).tabularLabel
+	}, [chartData.periods])
+
 	const onSortData = React.useCallback((e) => {
 		const key: 'label' | 'value' = e.currentTarget.dataset.sortkey;
 		sortTableData({ key });
-	}, [tableData])
-
-	console.log('chartData', chartData)
+	}, [])
 
 	return (
 		<div className="chart__data-container-tabular">
@@ -57,7 +50,7 @@ export const Table: React.FC<TableProps> = (props) => {
 								onClick={onSortData}
 								className="chart__table-view-heading"
 							>
-								{headerLabel}
+								{tabularLabelsHeader}
 								<div className="chart__table-view-heading-sort-icon">
 									<LabelIcon
 										sortIcon={sortIcon}
