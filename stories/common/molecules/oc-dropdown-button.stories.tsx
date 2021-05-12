@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
 import { OcDropdownButton, OcDropdownButtonProps } from '../../../src/ui/common';
-
+import './oc-dropdown-button.stories.scss';
 
 export default {
 	title: 'Common/Molecules/Dropdown Button',
@@ -18,8 +18,11 @@ const DropdownComponent: Story<OcDropdownButtonProps> = (args) => {
 
 	return (
 		<OcDropdownButton {...args} onSelect={setSelected} selected={selected}>
-			<div style={{ width: '100%', border: '1px solid #c9d5ea', borderRadius: 4 }}>
-				selected value {selected.label}
+			<div className="stories-dropdown-button__dropdown">
+				{/* eslint-disable-next-line jsx-a11y/label-has-for */}
+				<label className="stories-dropdown-button__dropdown-label">
+					{selected.label}
+				</label>
 			</div>
 		</OcDropdownButton>
 	)
@@ -27,6 +30,7 @@ const DropdownComponent: Story<OcDropdownButtonProps> = (args) => {
 
 export const Dropdown = DropdownComponent.bind({});
 Dropdown.args = {
+	className: 'stories-dropdown-button',
 	minDropdownWidth: 247,
 	options: [
 		{
