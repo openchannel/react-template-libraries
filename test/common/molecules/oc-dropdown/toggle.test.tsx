@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { Toggle, ToggleProps } from '../../../../src/ui/common/molecules/dropdown/toggle';
+import { Toggle, ToggleProps } from '../../../../src/ui/common/molecules/oc-dropdown/common/toggle';
 
 
 const setUp = (props: ToggleProps) => shallow(<Toggle {...props} />);
 
-describe('Dropdown - toggle component (common dropdown)', () => {
+describe('OcDropdown - toggle component (common dropdown)', () => {
 	const component: ShallowWrapper = setUp({
 		variant: 'inline',
 		onClick: jest.fn(),
