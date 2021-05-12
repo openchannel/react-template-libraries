@@ -534,10 +534,10 @@ a.link {
 
 // oc-select
 
-//oc-select {
-//  & .btn:focus {
-//    border-color: $primary !important;
-//  }
+.oc-select {
+  & .btn:focus {
+    border-color: $primary !important;
+  }
 
   .dropdown-menu {
     .dropdown-item {
@@ -558,7 +558,7 @@ a.link {
       }
     }
   }
-//}
+}
 
 .svg-primary {
   path {

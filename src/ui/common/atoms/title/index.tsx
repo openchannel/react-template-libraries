@@ -1,8 +1,10 @@
+//commit 254f853e9fb58ee5a2c16bbdf5b0d487588737a7 Author: Julia Date: 04.03.21, 15:57
 import * as React from 'react';
 
 import { Tooltip } from '../tooltip';
 import InfoSvgIcon from '../../../../assets/img/info.svg';
 import './styles.scss';
+
 
 export interface TitleProps {
   /**
