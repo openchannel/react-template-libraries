@@ -21,7 +21,7 @@ const Layout = ({ input, previews, dropzoneProps, files, extra: { maxFiles } }: 
   );
 };
 
-export const OcFileUpload: React.FC<any> = () => {
+export const OcFileUpload: React.FC<any> = ({ maxFiles, minSizeBytes, maxSizeBytes, accept }) => {
   // add type defs to function props to get TS support inside function bodies,
   // and not just where functions are passed as props into Dropzone
   const getUploadParams: IDropzoneProps['getUploadParams'] = () => ({
@@ -50,9 +50,9 @@ export const OcFileUpload: React.FC<any> = () => {
   );
   const PreviewContent = (props: any) => (
     <div className="file-container__upload-item">
-      {props.fileWithMeta.meta.previewUrl &&
+      {props.fileWithMeta.meta &&
         (props.fileWithMeta.meta.status === 'done' ? <StandardAppIcon /> : <DefaultFileIcon />)}
-      {props.fileWithMeta.meta.previewUrl && (
+      {props.fileWithMeta.meta && (
         <div className="file-container__upload-item-type">
           <a className="file-container__upload-item-name">{props.fileWithMeta.meta.name}</a>
           <div className="file-container__upload-item-status">{props.fileWithMeta.meta.status}</div>
@@ -104,6 +104,10 @@ export const OcFileUpload: React.FC<any> = () => {
       classNames={classNames}
       inputContent={InputContent}
       PreviewComponent={PreviewContent}
+      maxFiles={maxFiles}
+      minSizeBytes={minSizeBytes}
+      maxSizeBytes={maxSizeBytes}
+      accept={accept}
       inputWithFilesContent={() => (
         <a className="file-container__placeholder-browse"> Browse File</a>
       )}

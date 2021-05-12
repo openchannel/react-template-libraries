@@ -11,5 +11,11 @@ export default {
 } as Meta;
 
 const UploadComponent: Story<any> = (args) => <OcFileUpload {...args} />;
+
 export const SinglePrivateFile = UploadComponent.bind({});
-SinglePrivateFile.args = {};
+SinglePrivateFile.args = {
+  maxFiles: 1,
+};
+
+export const MultipleFiles = UploadComponent.bind({});
+MultipleFiles.args = {};
