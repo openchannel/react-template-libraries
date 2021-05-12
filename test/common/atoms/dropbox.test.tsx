@@ -8,26 +8,15 @@ enzyme.configure({ adapter: new Adapter() });
 
 const defaultDropboxProps: DropboxProps = {
   placeholder: 'Default placeholder',
-  items: [
-    {
-      label: 'first',
-      value: 'first',
-    },
-    {
-      label: 'second',
-      value: 'second',
-    },
-    {
-      label: 'third',
-      value: 'third',
-    },
-  ],
+  items: ['first', 'second', 'third'],
   className: 'oc-dropbox',
   classNamePrefix: 'oc-dropbox',
   isSearchable: true,
   clearFormAfterSelect: false,
   style: {},
-  selectedValue: { label: 'first', value: 'first' },
+  value: 'first',
+  onDropboxChange: () => {},
+  disabled: false,
 };
 
 const setUp = (props: DropboxProps) => shallow(<OcDropboxComponent {...props} />);

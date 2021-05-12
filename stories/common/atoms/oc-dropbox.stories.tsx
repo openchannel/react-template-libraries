@@ -1,101 +1,36 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcDropboxComponent, DropboxProps } from '../../../src/ui/common';
+import { OcDropboxComponent, DropboxProps, DropboxValue } from '../../../src/ui/common';
 
 export default {
   title: 'Dropbox search [BEM]',
   component: OcDropboxComponent,
+  disabled: false,
 } as Meta;
 
-const DropboxComponent: Story<DropboxProps> = (args) => <OcDropboxComponent {...args} />;
+const DropboxComponent: Story<DropboxProps> = (args) => {
+  const [selectedItem, setSelectedItem] = React.useState<DropboxValue>(args.value);
+  return (
+    <OcDropboxComponent {...args} selectedItem={selectedItem} onDropboxChange={setSelectedItem} />
+  );
+};
 
 export const DefaultDropbox = DropboxComponent.bind({});
 DefaultDropbox.args = {
   placeholder: 'Default placeholder',
-  items: [
-    {
-      label: 'first',
-      value: 'first',
-    },
-    {
-      label: 'second',
-      value: 'second',
-    },
-    {
-      label: 'third',
-      value: 'third',
-    },
-  ],
+  items: ['first', 'second', 'third'],
+  disabled: false,
 };
 export const ScrollDropbox = DropboxComponent.bind({});
 ScrollDropbox.args = {
   placeholder: 'Default placeholder',
-  items: [
-    {
-      label: '1',
-      value: '1',
-    },
-    {
-      label: '2',
-      value: '2',
-    },
-    {
-      label: '3',
-      value: '3',
-    },
-    {
-      label: '4',
-      value: '4',
-    },
-    {
-      label: '5',
-      value: '5',
-    },
-    {
-      label: '6',
-      value: '6',
-    },
-    {
-      label: '7',
-      value: '7',
-    },
-    {
-      label: '8',
-      value: '8',
-    },
-    {
-      label: '9',
-      value: '9',
-    },
-    {
-      label: '10',
-      value: '10',
-    },
-    {
-      label: '11',
-      value: '11',
-    },
-    {
-      label: '12',
-      value: '12',
-    },
-    {
-      label: '13',
-      value: '13',
-    },
-    {
-      label: '14',
-      value: '14',
-    },
-    {
-      label: '15',
-      value: '15',
-    },
-  ],
+  items: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15'],
+  disabled: false,
 };
 export const EmptyDropbox = DropboxComponent.bind({});
 EmptyDropbox.args = {
   placeholder: '',
   items: [],
+  disabled: false,
 };

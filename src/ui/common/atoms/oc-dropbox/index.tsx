@@ -1,12 +1,15 @@
 import * as React from 'react';
 import Select, { OptionTypeBase, Props as SelectProps } from 'react-select';
+import { transformToValidOptions } from './utils';
 
 import './style.scss';
 
-interface MyOption extends OptionTypeBase {
+export interface MyOption extends OptionTypeBase {
   label: string;
   value: string;
 }
+
+export type DropboxValue = string;
 
 export interface DropboxProps extends SelectProps<MyOption> {
   /**
@@ -16,7 +19,7 @@ export interface DropboxProps extends SelectProps<MyOption> {
   /**
    * Items (optional) - items for selecting
    */
-  items: Array<MyOption>;
+  items: Array<string>;
   /**
    * clearFormAfterSelect - clear input text form, when the user chooses an item. Default: false.
    */
@@ -26,24 +29,31 @@ export interface DropboxProps extends SelectProps<MyOption> {
    */
   style: React.CSSProperties;
   /**
-   * Selected Value
+   * Set disabled state for input
    */
-  selectedValue: MyOption;
+  disabled: boolean;
+  /**
+   * Selected item
+   */
+  value: MyOption;
   /**
    * onChange handler
    */
+  onDropboxChange: (item: DropboxValue) => void;
 }
 
 export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
-  const { placeholder, items, disabled, selectedValue } = props;
+  const { placeholder, items, disabled, selectedItem, onDropboxChange } = props;
+  const options = React.useMemo(() => transformToValidOptions(items), [items]);
   return (
     <Select
       className="oc-dropbox"
       classNamePrefix="oc-dropbox"
       placeholder={placeholder}
-      options={items}
+      options={options}
       disabled={disabled}
-      value={selectedValue}
+      value={selectedItem}
+      onChange={(item) => onDropboxChange(item)}
       isSearchable
       noOptionsMessage={() => null}
     />
