@@ -19,7 +19,7 @@ export type MinDropdownWidth = number | string;
 
 type Option = {
 	label: string,
-	value: string,
+	[key: string]: any,
 };
 
 export interface BaseDropdownProps {
