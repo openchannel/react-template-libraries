@@ -1,3 +1,4 @@
+//commit 7c65d4c5751759f5ca8ea2a97520a1af5a5b71c6 Author: Alex Tkachenko Date: 23.02.21, 12:21
 import * as React from 'react';
 import './styles.scss';
 

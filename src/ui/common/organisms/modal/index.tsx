@@ -9,14 +9,12 @@ type ExtendedModalSizeVariants = BootstrapModalProps['size'] | 'md';
 export interface ModalProps {
 	/**
 	 * Render a large, extra large or small modal. When not provided, the modal is rendered with medium (default) size.
-	 *
 	 * @default 'md'
 	 */
 	size?: ExtendedModalSizeVariants;
 
 	/**
 	 * When true The modal will show itself.
-	 *
 	 * @default false
 	 */
 	isOpened: boolean;

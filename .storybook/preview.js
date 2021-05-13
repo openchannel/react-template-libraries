@@ -1,6 +1,5 @@
 import { MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import '../src/ui/styles/styles.scss';
 
 export const parameters = {

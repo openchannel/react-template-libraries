@@ -16,6 +16,7 @@
     "test": "tsdx test --passWithNoTests",
     "test:watch": "tsdx test --passWithNoTests --watch",
     "test:coverage": "tsdx test --passWithNoTests --coverage",
+    "test:coverage:watch": "tsdx test --passWithNoTests --coverage --watch",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
@@ -61,9 +62,12 @@
     "@storybook/react": "^6.2.8",
     "@svgr/rollup": "^5.5.0",
     "@svgr/webpack": "^5.5.0",
+    "@types/chart.js": "^2.9.32",
     "@types/enzyme": "^3.10.8",
+    "@types/lodash": "^4.14.168",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
+    "@types/react-select": "^4.0.15",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "babel-loader": "^8.2.2",
@@ -91,7 +95,11 @@
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
-    "react-bootstrap": "^1.5.2"
+    "chart.js": "^2.9.3",
+    "lodash": "^4.17.21",
+    "react-bootstrap": "^1.5.2",
+    "react-dropzone-uploader": "^2.11.0",
+    "react-select": "^4.3.1"
   },
   "jest": {
     "setupFilesAfterEnv": [
