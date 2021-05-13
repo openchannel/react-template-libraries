@@ -3,14 +3,12 @@ import merge from 'lodash/merge';
 import { Chart } from 'chart.js';
 
 import { mergeChartParams } from '../utils';
-import { CanvasProps, ChartStatisticModel } from '../types';
+import { CanvasProps, ChartStatisticDataModel } from '../types';
 
 
-export const Canvas: React.FC<CanvasProps & { chartData: ChartStatisticModel }> = (props) => {
+export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> = (props) => {
 	const {
-		chartData: {
-			data,
-		},
+		data,
 		isBackgroundPainted,
 		enablePoints,
 	} = props;

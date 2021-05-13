@@ -12,10 +12,8 @@ import SelectDownIcon from '../../../../../assets/img/select-down.svg';
 
 export const Actions: React.FC<ActionsProps> = (props) => {
 	const {
-		chartData: {
-			periods,
-			fields,
-		},
+		periods,
+		fields,
 		activeDataType,
 		onChangeDataType,
 		changeChartOptions,
@@ -63,14 +61,14 @@ export const Actions: React.FC<ActionsProps> = (props) => {
 					<div
 						data-name={TABULAR_DATA_TYPE}
 						onClick={onClickDataType}
-						className={`chart__swap-type-button chart__graph-button ${activeDataType === TABULAR_DATA_TYPE ? 'chart__swap-type-button_active' : ''}`}
+						className={`chart__swap-type-button chart__tabular-button ${activeDataType === TABULAR_DATA_TYPE ? 'chart__swap-type-button_active' : ''}`}
 					>
 						<TabularIcon />
 					</div>
 					<div
 						data-name={GRAPH_DATA_TYPE}
 						onClick={onClickDataType}
-						className={`chart__swap-type-button chart__tabular-button ${activeDataType === GRAPH_DATA_TYPE ? 'chart__swap-type-button_active' : ''}`}
+						className={`chart__swap-type-button chart__graph-button ${activeDataType === GRAPH_DATA_TYPE ? 'chart__swap-type-button_active' : ''}`}
 					>
 						<GraphIcon />
 					</div>

@@ -85,12 +85,13 @@ export interface ChartReducer {
 }
 
 export interface ChartAction {
-	type: typeof SET_TABLE_DATA | typeof UPDATE_SORT;
+	type: typeof SET_TABLE_DATA | typeof UPDATE_SORT | string;
 	payload: any;
 }
 
 export interface ActionsProps {
-	chartData: ChartStatisticModel;
+	fields: ChartStatisticFiledModel[];
+	periods: ChartStatisticPeriodModel[];
 	activeDataType: DataType;
 	onChangeDataType: React.Dispatch<DataType>;
 	changeChartOptions: ChangeChartOptions;
