@@ -1,0 +1,114 @@
+{
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --passWithNoTests",
+    "test:watch": "tsdx test --passWithNoTests --watch",
+    "test:coverage": "tsdx test --passWithNoTests --coverage",
+    "test:coverage:watch": "tsdx test --passWithNoTests --coverage --watch",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "copy-img-assets": "cp -r src/assets/img/ storybook-static/",
+    "storybook": "start-storybook -s src/assets/ -p 6006",
+    "build-storybook": "build-storybook && npm run copy-img-assets",
+    "serve-storybook": "npm run build-storybook && npx http-server storybook-static",
+    "cypress": "cypress open"
+  },
+  "peerDependencies": {
+    "bootstrap": "^4.6.0",
+    "react": ">=16",
+    "react-bootstrap": "^1.5.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "name": "react-template-libraries",
+  "author": "vladimir.fedorchenko",
+  "module": "dist/react-template-libraries.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/react-template-libraries.cjs.production.min.js",
+      "limit": "1000 KB"
+    },
+    {
+      "path": "dist/react-template-libraries.esm.js",
+      "limit": "1000 KB"
+    }
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@size-limit/preset-small-lib": "^4.10.2",
+    "@storybook/addon-a11y": "^6.2.8",
+    "@storybook/addon-essentials": "^6.2.8",
+    "@storybook/addon-info": "^5.3.21",
+    "@storybook/addon-links": "^6.2.8",
+    "@storybook/addon-viewport": "^6.2.8",
+    "@storybook/addons": "^6.2.8",
+    "@storybook/react": "^6.2.8",
+    "@svgr/rollup": "^5.5.0",
+    "@svgr/webpack": "^5.5.0",
+    "@types/chart.js": "^2.9.32",
+    "@types/enzyme": "^3.10.8",
+    "@types/lodash": "^4.14.168",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "@types/react-select": "^4.0.15",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.4",
+    "cypress": "^7.2.0",
+    "enzyme": "^3.11.0",
+    "eslint-plugin-cypress": "^2.11.2",
+    "eslint-plugin-jest": "^24.3.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^6.0.0",
+    "identity-obj-proxy": "^3.0.0",
+    "node-sass": "^5.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-is": "^17.0.2",
+    "rollup-plugin-styles": "^3.14.1",
+    "sass-lint": "^1.13.1",
+    "sass-loader": "^10.1.1",
+    "size-limit": "^4.10.2",
+    "style-loader": "^2.0.0",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.2.0",
+    "typescript": "^4.2.4",
+    "url-loader": "^4.1.1"
+  },
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "chart.js": "^2.9.3",
+    "lodash": "^4.17.21",
+    "react-bootstrap": "^1.5.2",
+    "react-dropzone-uploader": "^2.11.0",
+    "react-select": "^4.3.1"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./test/setupTests.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+      "\\.svg": "<rootDir>/test/svgrMock.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/fileTransformer.js"
+    }
+  }
+}
