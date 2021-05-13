@@ -5,7 +5,7 @@ import { OcSelect, OcSelectProps, SelectedValue } from '../../../src/ui/common';
 
 
 export default {
-	title: 'Common/Molecules/Select',
+	title: 'Select',
 	component: OcSelect,
 } as Meta;
 

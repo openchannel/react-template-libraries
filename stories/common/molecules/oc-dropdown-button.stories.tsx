@@ -5,7 +5,7 @@ import { OcDropdownButton, OcDropdownButtonProps } from '../../../src/ui/common'
 import './oc-dropdown-button.stories.scss';
 
 export default {
-	title: 'Common/Molecules/Dropdown Button',
+	title: 'Dropdown Button',
 	component: OcDropdownButton,
 } as Meta;
 
