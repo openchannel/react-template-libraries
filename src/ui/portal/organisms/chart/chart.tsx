@@ -30,14 +30,15 @@ export const Chart: React.FC<ChartProps> = (props) => {
 			<Actions
 				activeDataType={activeDataType}
 				onChangeDataType={setActiveDataType}
-				chartData={chartData}
+				periods={chartData.periods}
+				fields={chartData.fields}
 				changeChartOptions={changeChartOptions}
 				minDropdownWidth={minDropdownWidth}
 			/>
 			<div className="chart__data-container">
 				{activeDataType === GRAPH_DATA_TYPE && (
 					<Canvas
-						chartData={chartData}
+						data={chartData.data}
 						isBackgroundPainted={isBackgroundPainted}
 						enablePoints={enablePoints}
 					/>
