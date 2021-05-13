@@ -59,7 +59,7 @@ const defaultProps = {
 
 
 export default {
-	title: 'Portal/Organisms/Chart',
+	title: 'Chart',
 	component: Chart,
 } as Meta;
 

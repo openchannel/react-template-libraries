@@ -5,7 +5,7 @@ import { Title, TitleProps } from '../../../src/ui/common';
 
 
 export default {
-	title: 'Common/Atoms/Title [BEM]',
+	title: 'Title',
 	component: Title,
 } as Meta;
 
