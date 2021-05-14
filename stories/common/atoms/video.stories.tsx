@@ -10,9 +10,17 @@ export default {
 
 const VideoComponent: Story<VideoProps> = (args) => <Video {...args} />;
 
-export const YoutubeVideo = VideoComponent.bind({});
-YoutubeVideo.args = {
-  videoUrl: 'https://www.youtube.com/watch?v=00F1PQH-MQ8&ab_channel=SickickMusic',
+export const YoutubeWatchVideo = VideoComponent.bind({});
+YoutubeWatchVideo.args = {
+  videoUrl: 'https://www.youtube.com/watch?v=9ao4FEaDGhQ',
+};
+export const YoutubeEmbedVideo = VideoComponent.bind({});
+YoutubeEmbedVideo.args = {
+  videoUrl: 'https://www.youtube.com/embed/fs2iHMrxYNQ',
+};
+export const YoutubeShortVideo = VideoComponent.bind({});
+YoutubeShortVideo.args = {
+  videoUrl: 'https://youtu.be/9ao4FEaDGhQ',
 };
 export const VimeoVideo = VideoComponent.bind({});
 VimeoVideo.args = {
