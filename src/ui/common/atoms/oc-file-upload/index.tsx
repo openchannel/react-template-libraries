@@ -3,7 +3,6 @@ import UploadIcon from '../../../../assets/img/upload_icon.svg';
 import CloseIcon from '../../../../assets/img/close-icon.svg';
 import DefaultFileIcon from '../../../../assets/img/file_icon.svg';
 import StandardAppIcon from '../../../../assets/img/standard-app-icon.svg';
-import SuspendIcon from '../../../../assets/img/suspend_icon.svg';
 import './styles.scss';
 import Dropzone, { IDropzoneProps, ILayoutProps } from 'react-dropzone-uploader';
 
@@ -51,11 +50,17 @@ export const OcFileUpload: React.FC<any> = ({ maxFiles, minSizeBytes, maxSizeByt
   const PreviewContent = (props: any) => (
     <div className="file-container__upload-item">
       {props.fileWithMeta.meta &&
-        (props.fileWithMeta.meta.status === 'done' ? <StandardAppIcon /> : <DefaultFileIcon />)}
+        (props.fileWithMeta.meta.status === 'done' ? (
+          <StandardAppIcon className="app-icon" />
+        ) : (
+          <DefaultFileIcon className="app-icon" />
+        ))}
       {props.fileWithMeta.meta && (
         <div className="file-container__upload-item-type">
           <a className="file-container__upload-item-name">{props.fileWithMeta.meta.name}</a>
-          <div className="file-container__upload-item-status">{props.fileWithMeta.meta.status}</div>
+          <div className="file-container__upload-item-status">
+            {props.fileWithMeta.meta.status !== 'done' ? 'Uploading' : 'Complete'}
+          </div>
         </div>
       )}
 
@@ -73,19 +78,13 @@ export const OcFileUpload: React.FC<any> = ({ maxFiles, minSizeBytes, maxSizeByt
         )}
 
         {props.fileWithMeta.meta.status === 'uploading' && props.canCancel && (
-          <SuspendIcon className="dzu-previewButton" onClick={props.fileWithMeta.cancel} />
+          <CloseIcon className="dzu-previewButton" onClick={props.fileWithMeta.cancel} />
         )}
         {props.meta.status !== 'preparing' &&
           props.meta.status !== 'getting_upload_params' &&
           props.meta.status !== 'uploading' &&
           props.canRemove && (
             <CloseIcon className="dzu-previewButton" onClick={props.fileWithMeta.remove} />
-          )}
-        {['error_upload_params', 'exception_upload', 'error_upload', 'aborted', 'ready'].includes(
-          props.meta.status,
-        ) &&
-          props.canRestart && (
-            <CloseIcon className="dzu-previewButton" onClick={props.fileWithMeta.restart} />
           )}
       </div>
     </div>

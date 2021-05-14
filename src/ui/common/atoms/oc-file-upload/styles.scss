@@ -106,7 +106,14 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-
+    .app-icon {
+      object-fit: cover;
+      width: 40px !important;
+      height: 44px !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     &-status {
       font-size: 12px;
       color: $secondary;
@@ -123,12 +130,6 @@
         flex: 0 0 auto;
         width: auto;
         max-width: 100%;
-      }
-
-      img {
-        &.app-icon {
-          object-fit: cover;
-        }
       }
     }
 
