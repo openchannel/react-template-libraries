@@ -5,7 +5,7 @@ import { Button, ButtonProps } from '../../../src/ui/common';
 
 
 export default {
-	title: 'Buttons [BEM]',
+	title: 'Buttons',
 	component: Button,
 } as Meta;
 

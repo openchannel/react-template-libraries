@@ -12,12 +12,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: [
-    '@typescript-eslint',
-    'jest',
-    'react',
-    'jsx-a11y',
-  ],
+  plugins: ['@typescript-eslint', 'jest', 'react', 'jsx-a11y', 'cypress'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
@@ -28,7 +23,7 @@ module.exports = {
     'plugin:jsx-a11y/strict',
   ],
   rules: {
-    'react-hooks/exhaustive-deps': 'error',
+    'react-hooks/exhaustive-deps': 'off',
     'no-var': 'error',
     'brace-style': 'error',
     'prefer-template': 'error',

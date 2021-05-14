@@ -16,9 +16,31 @@ module.exports = {
     fileLoaderRule.exclude = /\.svg$/;
 
     config.module.rules.push({
+      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+      issuer: {
+        test: /\.scss$/
+      },
+      loader: 'url-loader'
+    });
+
+    config.module.rules.push({
       test: /\.svg$/,
       enforce: 'pre',
+      issuer: {
+        test: /\.tsx?$/
+      },
       loader: require.resolve('@svgr/webpack'),
+      options: {
+        svgoConfig: {
+          plugins: [
+            {
+              prefixIds: {
+                prefixClassNames: false,
+              },
+            },
+          ],
+        },
+      }
     });
 
     return config;
