@@ -1,26 +1,27 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { Select, SelectProps, SelectedValue } from '../../../src/ui/common';
+import { OcSelect, OcSelectProps, SelectedValue } from '../../../src/ui/common';
 
 
 export default {
-	title: 'Common/Molecules/Select',
-	component: Select,
+	title: 'Select',
+	component: OcSelect,
 } as Meta;
 
 
-const SelectComponent: Story<SelectProps> = (args) => {
+const SelectComponent: Story<OcSelectProps> = (args) => {
 	const [selected, setSelected] = React.useState<SelectedValue>(args.value)
 
 	return (
-		<Select {...args} onSelectionChange={setSelected} value={selected} />
+		<OcSelect {...args} onSelectionChange={setSelected} value={selected} />
 	)
 };
 
 export const SimpleSelect = SelectComponent.bind({});
 SimpleSelect.args = {
 	selectValArr: ['Assembly', 'Communication'],
+	placeholder: 'Select',
 };
 
 export const ObjectSelect = SelectComponent.bind({});
