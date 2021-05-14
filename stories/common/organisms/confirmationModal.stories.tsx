@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { useModalState } from '../../../src/lib';
 
-import { ConfirmationModal, ConfirmationModalProps } from '../../../src/ui/common';
+import { Button, ConfirmationModal, ConfirmationModalProps } from '../../../src/ui/common';
 
 
 export default {
-	title: 'Common/Organisms/Confirmation modal [BEM]',
+	title: 'Confirmation modal',
 	component: ConfirmationModal,
 } as Meta;
 
@@ -16,7 +16,7 @@ const ModalComponent: Story<ConfirmationModalProps> = (args, { name }) => {
 
 	return (
 		<div>
-			<button type="button" onClick={openModal}>Open {name} modal</button>
+			<Button style={{ width: 300 }} onClick={openModal}>Open {name} modal</Button>
 			<ConfirmationModal
 				{...args}
 				isOpened={isOpened}

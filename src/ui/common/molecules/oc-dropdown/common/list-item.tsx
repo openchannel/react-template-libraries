@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { DropdownVariants } from './index';
+import { DropdownVariants } from '../base-dropdown';
 
 
 export interface ListItemProps {

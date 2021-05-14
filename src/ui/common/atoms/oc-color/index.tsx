@@ -1,7 +1,4 @@
 import * as React from 'react';
-// import colorString from 'color-string';
-// import assert from 'assert';
-// import colorRegex from 'colors-regex';
 import Color from 'color';
 import './style.scss';
 export interface ColorProps extends React.InputHTMLAttributes<HTMLInputElement> {

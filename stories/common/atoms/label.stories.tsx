@@ -5,7 +5,7 @@ import { Label, LabelProps } from '../../../src/ui/common';
 
 
 export default {
-	title: 'Common/Atoms/Label [BEM]',
+	title: 'Label',
 	component: Label,
 } as Meta;
 

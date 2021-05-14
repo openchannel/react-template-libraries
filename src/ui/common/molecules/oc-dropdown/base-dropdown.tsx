@@ -4,9 +4,10 @@ import * as React from 'react';
 import BootstrapDropdown from 'react-bootstrap/Dropdown';
 import { SelectCallback } from 'react-bootstrap/helpers';
 
-import { Toggle } from './toggle';
-import { ListItem } from './listItem';
-import { ListWrapper } from './listWrapper';
+import { Toggle } from './common/toggle';
+import { ListItem } from './common/list-item';
+import { ListWrapper } from './common/list-wrapper';
+import { ToggleIndicator, ToggleIndicatorProps } from './common/toggle-indicator';
 
 
 const INLINE_VARIANT = 'inline';
@@ -14,12 +15,14 @@ const BLOCK_VARIANT = 'block';
 
 export type DropdownVariants = typeof INLINE_VARIANT | typeof BLOCK_VARIANT;
 
+export type MinDropdownWidth = number | string;
+
 type Option = {
 	label: string,
-	value: string,
+	[key: string]: any,
 };
 
-export interface DropdownProps {
+export interface BaseDropdownProps {
 	/**
 	 * Dropdown variant. Can be 'block' or 'inline'.
 	 * @default inline
@@ -35,9 +38,9 @@ export interface DropdownProps {
 	 */
 	title?: string;
 	/**
-	 * Minimal dropdown width. Works only for 'block' variant.
+	 * Minimal dropdown width in px or 'auto'.
 	 */
-	minDropdownWidth?: number;
+	minDropdownWidth?: MinDropdownWidth;
 	/**
 	 * Selected item. { label: 'label', value: 'value' }
 	 */
@@ -50,9 +53,13 @@ export interface DropdownProps {
 	 * Custom template to display inside a toggle component
 	 */
 	children?: React.ReactNode;
+	/**
+	 * Additional class to be assigned to the root element
+	 */
+	className?: string;
 }
 
-export const Dropdown: React.FC<DropdownProps> = (props) => {
+export const BaseDropdown: React.FC<BaseDropdownProps & ToggleIndicatorProps> = (props) => {
 	const {
 		variant = INLINE_VARIANT,
 		title,
@@ -61,15 +68,12 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
 		onSelect,
 		minDropdownWidth,
 		children,
+		className = '',
+		defaultPlaceholderIcon,
+		activePlaceholderIcon,
 	} = props
 
-	React.useLayoutEffect(() => {
-		if (variant === INLINE_VARIANT) {
-			import('./inlineStyles.scss')
-		} else {
-			import('./blockStyles.scss')
-		}
-	}, [])
+	const [isOpened, setIsOpened] = React.useState(false);
 
 	const onSelectItem = React.useCallback((eventKey: string, event: React.SyntheticEvent) => {
 		const value = options.find(item => item.label === eventKey)
@@ -77,14 +81,30 @@ export const Dropdown: React.FC<DropdownProps> = (props) => {
 		onSelect(value, event)
 	}, [onSelect, options]) as SelectCallback
 
-	const mainClassByVariant = variant === INLINE_VARIANT ? 'dropdown-label' : 'dropdown-button'
+	const onToggleCallback = React.useCallback((isOpen: boolean) => {
+		setIsOpened(isOpen)
+	}, [])
+
+	const rootClassName = variant === INLINE_VARIANT ? `dropdown-label ${className}` : `dropdown-button ${className}`
 	const listProps = variant === INLINE_VARIANT ? { alignRight: true } : {}
 	const styleProps = minDropdownWidth ? { minWidth: minDropdownWidth } : {}
 
 	return (
-		<BootstrapDropdown className={mainClassByVariant} style={styleProps}>
-			<BootstrapDropdown.Toggle as={Toggle} variant={variant}>
+		<BootstrapDropdown
+			className={rootClassName}
+			style={styleProps}
+			onToggle={onToggleCallback}
+		>
+			<BootstrapDropdown.Toggle
+				as={Toggle}
+				variant={variant}
+			>
 				{children || `${title} ${selected && selected.label}`}
+				<ToggleIndicator
+					isOpened={isOpened}
+					defaultPlaceholderIcon={defaultPlaceholderIcon}
+					activePlaceholderIcon={activePlaceholderIcon}
+				/>
 			</BootstrapDropdown.Toggle>
 			<BootstrapDropdown.Menu as={ListWrapper} variant={variant} style={styleProps} {...listProps}>
 				{
