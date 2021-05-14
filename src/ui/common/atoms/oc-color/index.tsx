@@ -1,6 +1,8 @@
 import * as React from 'react';
-import { isIE } from 'react-device-detect';
-import { ChromePicker } from 'react-color';
+// import colorString from 'color-string';
+// import assert from 'assert';
+// import colorRegex from 'colors-regex';
+import Color from 'color';
 import './style.scss';
 export interface ColorProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
@@ -20,6 +22,11 @@ export interface ColorProps extends React.InputHTMLAttributes<HTMLInputElement> 
 export const OcColorComponent: React.FC<ColorProps> = (props) => {
   const { disabled, placeholder } = props;
   const [colorValue, setColorValue] = React.useState('');
+  const [color, setColor] = React.useState('');
+  const contains = (target: string, pattern: RegExp): boolean => {
+    return target.match(pattern) !== null;
+  };
+  const colorRegEx = /(?:#|0x)(?:[a-f0-9]{3}|[a-f0-9]{6})\b|(?:rgb|hsl)a?\([^\)]*\)/gi;
   return (
     <div className="color-adjust">
       <div className="color-adjust__demonstration">
@@ -32,7 +39,9 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
           placeholder={placeholder}
           value={colorValue}
           onChange={(e) => {
-            setColorValue(e.target.value);
+            contains(e.target.value, colorRegEx)
+              ? (setColorValue(e.target.value), setColor(Color(e.target.value)?.hex()))
+              : setColorValue(e.target.value);
           }}
           className="color-adjust__input form-control"
         />
@@ -57,24 +66,15 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
             ></path>
           </svg>
         </span>
-        {!isIE ? (
-          <input
-            type="color"
-            className="color-adjust__picker-input"
-            value={colorValue}
-            onChange={(e) => {
-              setColorValue(e.target.value);
-            }}
-          />
-        ) : (
-          <ChromePicker
-            className="color-adjust__picker-input"
-            color={colorValue}
-            onChange={(color) => {
-              setColorValue(color.hex);
-            }}
-          />
-        )}
+        <input
+          type="color"
+          className="color-adjust__picker-input"
+          value={color}
+          onChange={(e) => {
+            setColorValue(e.target.value);
+            setColor(e.target.value);
+          }}
+        />
       </div>
     </div>
   );
