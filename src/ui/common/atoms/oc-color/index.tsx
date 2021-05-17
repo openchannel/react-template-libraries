@@ -12,14 +12,6 @@ export interface ColorProps extends React.InputHTMLAttributes<HTMLInputElement> 
    */
   disabled?: boolean;
   /**
-   * Value of input type "color"
-   */
-  inputColorValue: string;
-  /**
-   * setter function to set value of input type "color"
-   */
-  setInputColorValue: Function;
-  /**
    * Value of input type "text"
    */
   inputTextColor: string;
@@ -29,20 +21,16 @@ export interface ColorProps extends React.InputHTMLAttributes<HTMLInputElement> 
   setInputTextColor: Function;
 }
 
-export const OcColorComponent: React.FC<ColorProps> = (props) => {
-  const {
-    disabled,
-    placeholder,
-    inputColorValue,
-    setInputColorValue,
-    inputTextColor,
-    setInputTextColor,
-  } = props;
+const contains = (target: string, pattern: RegExp): boolean => {
+  return target.match(pattern) !== null;
+};
+const colorRegEx = /(?:#|0x)(?:[a-f0-9]{3}|[a-f0-9]{6})\b|(?:rgb|hsl)a?\([^\)]*\)/gi;
 
-  const contains = (target: string, pattern: RegExp): boolean => {
-    return target.match(pattern) !== null;
-  };
-  const colorRegEx = /(?:#|0x)(?:[a-f0-9]{3}|[a-f0-9]{6})\b|(?:rgb|hsl)a?\([^\)]*\)/gi;
+export const OcColorComponent: React.FC<ColorProps> = (props) => {
+  const [inputColorValue, setInputColorValue] = React.useState('');
+
+  const { disabled, placeholder, inputTextColor, setInputTextColor } = props;
+
   return (
     <div className="color-adjust">
       <div className="color-adjust__demonstration">

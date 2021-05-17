@@ -9,13 +9,10 @@ export default {
 } as Meta;
 
 const ColorComponent: Story<ColorProps> = (args) => {
-  const [inputColorValue, setInputColorValue] = React.useState('');
   const [inputTextColor, setInputTextColor] = React.useState('');
   return (
     <OcColorComponent
       {...args}
-      inputColorValue={inputColorValue}
-      setInputColorValue={setInputColorValue}
       inputTextColor={inputTextColor}
       setInputTextColor={setInputTextColor}
     />

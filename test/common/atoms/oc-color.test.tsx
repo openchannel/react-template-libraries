@@ -10,6 +10,8 @@ const defaultColorProps: ColorProps = {
   placeholder: 'Enter color value here',
   disabled: false,
   style: {},
+  inputTextColor: '',
+  setInputTextColor: (color: any) => color,
 };
 
 const setUp = (props: ColorProps) => shallow(<OcColorComponent {...props} />);
@@ -33,7 +35,7 @@ describe('Basic Color Input', () => {
   it('should click on colorpicker', () => {
     const mockCallback = jest.fn();
     const wrapper = mount(<OcColorComponent {...defaultColorProps} onClick={mockCallback} />);
-    wrapper.find('.color-adjust__picker-input').simulate('change', { target: { value: '#AAA' } });
-    expect(wrapper.find('.color-adjust__picker-input').props().value).toEqual('#AAA');
+    wrapper.find('.color-adjust__input').simulate('change', { target: { value: '#AAA' } });
+    expect(wrapper.find('.color-adjust__input').props().value).toEqual('#AAA');
   });
 });
