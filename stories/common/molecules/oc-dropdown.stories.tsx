@@ -5,7 +5,7 @@ import { OcDropdown, OcDropdownProps } from '../../../src/ui/common';
 
 
 export default {
-	title: 'Common/Molecules/Dropdown',
+	title: 'Dropdown',
 	component: OcDropdown,
 } as Meta;
 

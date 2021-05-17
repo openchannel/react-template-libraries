@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 
-interface BaseToggleIndicatorProps {
+export interface BaseToggleIndicatorProps {
 	isOpened: boolean;
 	defaultPlaceholderIcon?: JSX.Element;
 	activePlaceholderIcon?: JSX.Element;

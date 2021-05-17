@@ -30,6 +30,17 @@ module.exports = {
         test: /\.tsx?$/
       },
       loader: require.resolve('@svgr/webpack'),
+      options: {
+        svgoConfig: {
+          plugins: [
+            {
+              prefixIds: {
+                prefixClassNames: false,
+              },
+            },
+          ],
+        },
+      }
     });
 
     return config;
