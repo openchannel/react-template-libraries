@@ -14,11 +14,11 @@ export interface ColorProps extends React.InputHTMLAttributes<HTMLInputElement> 
   /**
    * Value of input type "text"
    */
-  inputTextColor: string;
+  colorValue: string;
   /**
    * setter function to set value of input type "text"
    */
-  setInputTextColor: Function;
+  onValueChange: Function;
 }
 
 const contains = (target: string, pattern: RegExp): boolean => {
@@ -29,7 +29,7 @@ const colorRegEx = /(?:#|0x)(?:[a-f0-9]{3}|[a-f0-9]{6})\b|(?:rgb|hsl)a?\([^\)]*\
 export const OcColorComponent: React.FC<ColorProps> = (props) => {
   const [inputColorValue, setInputColorValue] = React.useState('');
 
-  const { disabled, placeholder, inputTextColor, setInputTextColor } = props;
+  const { disabled, placeholder, colorValue, onValueChange } = props;
 
   return (
     <div className="color-adjust">
@@ -44,8 +44,7 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
           value={inputColorValue}
           onChange={(e) => {
             contains(e.target.value, colorRegEx)
-              ? (setInputColorValue(e.target.value),
-                setInputTextColor(Color(e.target.value)?.hex()))
+              ? (setInputColorValue(e.target.value), onValueChange(Color(e.target.value)?.hex()))
               : setInputColorValue(e.target.value);
           }}
           className="color-adjust__input form-control"
@@ -74,10 +73,10 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
         <input
           type="color"
           className="color-adjust__picker-input"
-          value={inputTextColor}
+          value={colorValue}
           onChange={(e) => {
             setInputColorValue(e.target.value);
-            setInputTextColor(e.target.value);
+            onValueChange(e.target.value);
           }}
         />
       </div>
