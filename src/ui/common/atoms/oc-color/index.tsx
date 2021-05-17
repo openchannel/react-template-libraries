@@ -28,8 +28,24 @@ const colorRegEx = /(?:#|0x)(?:[a-f0-9]{3}|[a-f0-9]{6})\b|(?:rgb|hsl)a?\([^\)]*\
 
 export const OcColorComponent: React.FC<ColorProps> = (props) => {
   const [inputColorValue, setInputColorValue] = React.useState('');
-
   const { disabled, placeholder, colorValue, onValueChange } = props;
+
+  const handleColorChange = React.useCallback(
+    (e: { target: HTMLInputElement }) => {
+      setInputColorValue(e.target.value);
+      onValueChange(e.target.value);
+    },
+    [colorValue, inputColorValue],
+  );
+
+  const handleTextChange = React.useCallback(
+    (e: { target: HTMLInputElement }) => {
+      contains(e.target.value, colorRegEx)
+        ? (setInputColorValue(e.target.value), onValueChange(Color(e.target.value)?.hex()))
+        : setInputColorValue(e.target.value);
+    },
+    [colorValue, inputColorValue],
+  );
 
   return (
     <div className="color-adjust">
@@ -42,11 +58,7 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
           disabled={disabled}
           placeholder={placeholder}
           value={inputColorValue}
-          onChange={(e) => {
-            contains(e.target.value, colorRegEx)
-              ? (setInputColorValue(e.target.value), onValueChange(Color(e.target.value)?.hex()))
-              : setInputColorValue(e.target.value);
-          }}
+          onChange={handleTextChange}
           className="color-adjust__input form-control"
         />
       </div>
@@ -74,10 +86,7 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
           type="color"
           className="color-adjust__picker-input"
           value={colorValue}
-          onChange={(e) => {
-            setInputColorValue(e.target.value);
-            onValueChange(e.target.value);
-          }}
+          onChange={handleColorChange}
         />
       </div>
     </div>
