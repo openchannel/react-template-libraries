@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
-// import arrow from '../../../src/assets/img/logo-company.png';
-import { IDropzoneProps } from 'react-dropzone-uploader';
 
 import { OcFileUpload } from '../../../src/ui/common';
 

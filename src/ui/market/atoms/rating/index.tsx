@@ -2,6 +2,7 @@
 import * as React from 'react';
 
 import { Star } from './star';
+import StarIcon from '../../../../assets/img/star.svg';
 import './styles.scss';
 
 
@@ -36,6 +37,10 @@ export interface RatingProps {
 	 * @default font-m font-med
 	 * */
 	labelClass?: string;
+	/**
+	 * The class will be assigned to the root element. Children elements do not change.
+	 */
+	className?: string;
 }
 
 export const Rating: React.FC<RatingProps> = (props) => {
@@ -45,23 +50,25 @@ export const Rating: React.FC<RatingProps> = (props) => {
 		label = '',
 		type = RatingVariants.SINGLE_STAR_TYPE,
 		labelClass = 'font-m font-med',
+		className,
 	} = props
 
 	const [stars] = React.useState(Array.from({ length: 5 }, (_, k) => k))
 
 	if (type === RatingVariants.SINGLE_STAR_TYPE) {
 		return (
-			<div className="oc-rating-single">
+			<div className={className || 'oc-rating-single'}>
+				<StarIcon className="oc-rating-single__rating-star" style={{ width: 18, height: 18 }} />
 				<span className={`oc-rating-single__label ${labelClass}`}>
-					{rating} ({reviewCount}{label ? ` ${label}` : ''})
+					{Number(rating).toFixed(1)} ({reviewCount}{label ? ` ${label}` : ''})
 				</span>
 			</div>
 		)
 	}
 
 	return (
-		<div className="oc-rating-multi">
-			{stars.map((number) => <Star key={number} index={number} rating={rating} />)}
+		<div className={className || 'oc-rating-multi'}>
+			{stars.map((number) => <Star key={number} index={number} rating={Number(Number(rating).toFixed(1))} />)}
 		</div>
 	);
 };

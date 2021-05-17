@@ -5,7 +5,7 @@ import { Content, ContentProps } from '../../../src/ui/common/organisms/confirma
 
 
 export default {
-	title: 'Common/Organisms/Confirmation modal content [BEM]',
+	title: 'Confirmation modal content',
 	component: Content,
 } as Meta;
 
