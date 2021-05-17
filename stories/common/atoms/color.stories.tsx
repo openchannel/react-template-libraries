@@ -4,12 +4,22 @@ import { Story, Meta } from '@storybook/react';
 import { OcColorComponent, ColorProps } from '../../../src/ui/common';
 
 export default {
-  title: 'Common/Atoms/Color',
+  title: 'Color [BEM]',
   component: OcColorComponent,
 } as Meta;
 
 const ColorComponent: Story<ColorProps> = (args) => {
-  return <OcColorComponent {...args} />;
+  const [inputColorValue, setInputColorValue] = React.useState('');
+  const [inputTextColor, setInputTextColor] = React.useState('');
+  return (
+    <OcColorComponent
+      {...args}
+      inputColorValue={inputColorValue}
+      setInputColorValue={setInputColorValue}
+      inputTextColor={inputTextColor}
+      setInputTextColor={setInputTextColor}
+    />
+  );
 };
 
 export const BasicColorComponent = ColorComponent.bind({});

@@ -1,25 +1,44 @@
 import * as React from 'react';
 import Color from 'color';
 import './style.scss';
+
 export interface ColorProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**
-   * Placeholder text for input
+   * Placeholder text for input(optional)
    */
-  placeholder: string;
+  placeholder?: string;
   /**
-   * Set disabled state for input color picker
+   * Set disabled state for input color picker(optional)
    */
-  disabled: boolean;
+  disabled?: boolean;
   /**
-   * custom inline styles
+   * Value of input type "color"
    */
-  style: React.CSSProperties;
+  inputColorValue: string;
+  /**
+   * setter function to set value of input type "color"
+   */
+  setInputColorValue: Function;
+  /**
+   * Value of input type "text"
+   */
+  inputTextColor: string;
+  /**
+   * setter function to set value of input type "text"
+   */
+  setInputTextColor: Function;
 }
 
 export const OcColorComponent: React.FC<ColorProps> = (props) => {
-  const { disabled, placeholder } = props;
-  const [colorValue, setColorValue] = React.useState('');
-  const [color, setColor] = React.useState('');
+  const {
+    disabled,
+    placeholder,
+    inputColorValue,
+    setInputColorValue,
+    inputTextColor,
+    setInputTextColor,
+  } = props;
+
   const contains = (target: string, pattern: RegExp): boolean => {
     return target.match(pattern) !== null;
   };
@@ -29,16 +48,17 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
       <div className="color-adjust__demonstration">
         <span
           className="color-adjust__display form-control"
-          style={{ backgroundColor: colorValue }}
+          style={{ backgroundColor: inputColorValue }}
         ></span>
         <input
           disabled={disabled}
           placeholder={placeholder}
-          value={colorValue}
+          value={inputColorValue}
           onChange={(e) => {
             contains(e.target.value, colorRegEx)
-              ? (setColorValue(e.target.value), setColor(Color(e.target.value)?.hex()))
-              : setColorValue(e.target.value);
+              ? (setInputColorValue(e.target.value),
+                setInputTextColor(Color(e.target.value)?.hex()))
+              : setInputColorValue(e.target.value);
           }}
           className="color-adjust__input form-control"
         />
@@ -66,10 +86,10 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
         <input
           type="color"
           className="color-adjust__picker-input"
-          value={color}
+          value={inputTextColor}
           onChange={(e) => {
-            setColorValue(e.target.value);
-            setColor(e.target.value);
+            setInputColorValue(e.target.value);
+            setInputTextColor(e.target.value);
           }}
         />
       </div>
