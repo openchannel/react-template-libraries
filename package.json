@@ -100,7 +100,9 @@
     "react-player": "^2.9.0",
     "chart.js": "^2.9.3",
     "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "react-bootstrap": "^1.5.2",
+    "react-datetime": "^3.0.4",
     "react-dropzone-uploader": "^2.11.0",
     "react-select": "^4.3.1"
   },
