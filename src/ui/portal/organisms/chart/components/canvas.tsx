@@ -1,8 +1,9 @@
 import * as React from 'react';
-import merge from 'lodash/merge';
 import { Chart } from 'chart.js';
+import merge from 'lodash/merge';
+import assign from 'lodash/assign';
 
-import { mergeChartParams } from '../utils';
+import { defaultChartParams } from '../utils';
 import { CanvasProps, ChartStatisticDataModel } from '../types';
 
 
@@ -22,13 +23,13 @@ export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> =
 		return () => {
 			destroyChart();
 		}
-	}, [])
+	}, []);
 
 	React.useEffect(() => {
 		updateChart();
-	}, [data])
+	}, [data]);
 
-	const renderChart = () => {
+	const getChartGradient = React.useCallback(() => {
 		if (!chartRef.current) return;
 
 		const context = chartRef.current.getContext('2d');
@@ -41,28 +42,39 @@ export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> =
 		gradientFill.addColorStop(0, '#e7eef7');
 		gradientFill.addColorStop(1, 'rgba(240, 247, 255, 0.25)');
 
+		return gradientFill;
+	}, [chartRef.current]);
+
+	const renderChart = () => {
+		if (!chartRef.current) return;
+
+		const computedOptions = merge({}, defaultChartParams.options, {
+			elements: {
+				point: {
+					radius: enablePoints ? 2 : 0,
+					hoverRadius: enablePoints ? 4 : 0,
+				},
+			},
+		});
+
+		const computedData = merge({}, defaultChartParams.data, {
+			labels: data.labelsX,
+			datasets: [
+				{
+					data: data.labelsY,
+					backgroundColor: isBackgroundPainted ? getChartGradient() : 'transparent',
+				},
+			],
+		});
+
 		setChart(
 			new Chart(
 				chartRef.current,
-				mergeChartParams({
-					data: {
-						labels: data.labelsX ? data.labelsX : [],
-						datasets: [
-							{
-								data: data.labelsY ? data.labelsY : [],
-								backgroundColor: isBackgroundPainted ? gradientFill : 'transparent',
-							},
-						],
-					},
-					options: {
-						elements: {
-							point: {
-								radius: enablePoints ? 2 : 0,
-								hoverRadius: enablePoints ? 4 : 0,
-							},
-						},
-					},
-				}),
+				{
+					type: defaultChartParams.type,
+					data: computedData,
+					options: computedOptions,
+				},
 			)
 		);
 	};
@@ -70,12 +82,15 @@ export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> =
 	const updateChart = () => {
 		if (!chart) return;
 
-		merge(
-			chart.data,
+		assign(
+			chart.config.data,
 			{
 				labels: data.labelsX ? data.labelsX : [],
 				datasets: [
 					{
+						// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+						// @ts-ignore
+						...chart.config.data.datasets[0],
 						data: data.labelsY ? data.labelsY : [],
 					},
 				],
@@ -83,7 +98,7 @@ export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> =
 		);
 
 		chart.update();
-	}
+	};
 
 	const destroyChart = () => {
 		if (chart) {

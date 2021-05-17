@@ -1,5 +1,4 @@
-import _merge from 'lodash/merge';
-import { ChartTooltipOptions, ChartConfiguration, NestedTickOptions } from 'chart.js';
+import { ChartTooltipOptions, NestedTickOptions } from 'chart.js';
 
 
 export const TABULAR_DATA_TYPE = 'tabular';
@@ -9,11 +8,6 @@ export const defaultChartStatisticParameter = {
 	label: '',
 	active: true,
 	id: Math.random().toString(36).substr(2, 9),
-}
-
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const mergeChartParams = (newParams: ChartConfiguration, params = defaultChartParams) => {
-	return _merge(params, newParams);
 }
 
 export const defaultChartParams = {
