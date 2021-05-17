@@ -1,50 +1,47 @@
 import * as React from 'react';
-import Select, { OptionTypeBase, Props as SelectProps } from 'react-select';
+import Select, { Props as SelectProps } from 'react-select';
 import { transformToValidOptions } from './utils';
 
 import './style.scss';
 
-export interface MyOption extends OptionTypeBase {
-  label: string;
-  value: string;
+export interface MyOption {
+  label: string | null;
+  value: string | null;
 }
 
-export type DropboxValue = string;
+export type DropboxValue = string | null;
 
 export interface DropboxProps extends SelectProps<MyOption> {
   /**
    * Placeholder (optional) - show text inside dropbox
    */
-  placeholder: string;
+  placeholder?: string;
   /**
-   * Items (optional) - items for selecting
+   * Items - items for selecting
    */
-  items: Array<string>;
+  items: Array<DropboxValue>;
   /**
-   * clearFormAfterSelect - clear input text form, when the user chooses an item. Default: false.
+   * Set disabled state for input (optional)
    */
-  clearFormAfterSelect: boolean;
-  /**
-   * Inline styles to add to component
-   */
-  style: React.CSSProperties;
-  /**
-   * Set disabled state for input
-   */
-  disabled: boolean;
+  disabled?: boolean;
   /**
    * Selected item
    */
-  value: MyOption;
+  selectedItem: DropboxValue;
   /**
-   * onChange handler
+   * onChange function
    */
-  onDropboxChange: (item: DropboxValue) => void;
+  selectItem: (item: DropboxValue) => DropboxValue;
 }
 
 export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
-  const { placeholder, items, disabled, selectedItem, onDropboxChange } = props;
+  const { placeholder, items, disabled, selectedItem, selectItem } = props;
   const options = React.useMemo(() => transformToValidOptions(items), [items]);
+
+  const handleSelect = React.useCallback((item: MyOption | null) => {
+    selectItem(item ? item.value : null);
+  }, []);
+
   return (
     <Select
       className="oc-dropbox"
@@ -52,8 +49,8 @@ export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
       placeholder={placeholder}
       options={options}
       disabled={disabled}
-      value={selectedItem}
-      onChange={(item) => onDropboxChange(item)}
+      value={selectItem !== null ? { label: selectedItem, value: selectedItem } : null}
+      onChange={handleSelect}
       isSearchable
       noOptionsMessage={() => null}
     />
