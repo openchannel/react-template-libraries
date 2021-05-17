@@ -20,10 +20,11 @@ export const Chart: React.FC<ChartProps> = (props) => {
 		minDropdownWidth = 'auto',
 		isBackgroundPainted = true,
 		enablePoints = false,
+		activeDataType: initialActiveDataType = GRAPH_DATA_TYPE,
 		sortIcon = '',
 	} = props;
 
-	const [activeDataType, setActiveDataType] = React.useState<DataType>(TABULAR_DATA_TYPE);
+	const [activeDataType, setActiveDataType] = React.useState<DataType>(initialActiveDataType);
 
 	return (
 		<div className="chart">

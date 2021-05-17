@@ -113,5 +113,11 @@ export const defaultChartParams = {
 				},
 			],
 		},
+		// problem and solution - https://github.com/chartjs/Chart.js/issues/622#issuecomment-341648856
+		layout: {
+			padding: {
+				right: 40,
+			},
+		},
 	},
 }

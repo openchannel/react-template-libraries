@@ -46,12 +46,24 @@ export interface ChartStatisticParameterModel {
 }
 
 export interface BaseChartProps {
+	/**
+	 * Main model for building chart with buttons and dropdown
+	 */
 	chartData: ChartStatisticModel;
 	changeChartOptions: ChangeChartOptions;
 	/**
+	 * Min width for the dropdown
 	 * @default auto
 	 */
 	minDropdownWidth?: MinDropdownWidth;
+	/**
+	 * Set active data view type from the start. Default: graph;
+	 * @default graph
+	 */
+	activeDataType?: DataType;
+	/**
+	 * Path to the custom icon for the 'sort' button
+	 */
 	sortIcon?: string;
 }
 
@@ -71,6 +83,9 @@ export interface CanvasProps {
 export interface TotalInfoProps {
 	count: number;
 	countText: string;
+	/**
+	 * Url of the Chart count image
+	 */
 	downloadUrl: string;
 }
 
