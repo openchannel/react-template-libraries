@@ -1,4 +1,4 @@
-import { AppModel } from './types';
+import { ParsePrice } from './types';
 
 
 const isoCurrencyCodes = new Map([
@@ -8,12 +8,12 @@ const isoCurrencyCodes = new Map([
 	[ 'GBP', '£' ],
 ]);
 
-export const parsePrice = ({ type, currency, price, billingPeriod }: AppModel): string => {
+export const parsePrice = ({ type, currency, price, billingPeriod }: ParsePrice): string => {
 	if (type === 'free') {
 		return 'Free';
 	}
 
-	const parsedCurrency = currency ? isoCurrencyCodes.has(currency) ? isoCurrencyCodes.get(currency) : '$' : '';
+	const parsedCurrency = (currency && isoCurrencyCodes.has(currency)) ? isoCurrencyCodes.get(currency) : '';
 	let parsedPrice = `${parsedCurrency}${price / 100}`;
 
 	if (billingPeriod) {

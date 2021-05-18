@@ -160,3 +160,10 @@ export interface OcAppShortInfoProps {
 	clickByApp: (app: FullAppData) => void;
 	customDropdown?: JSX.Element;
 }
+
+export interface ParsePrice {
+	type?: string;
+	price: number;
+	currency?: string;
+	billingPeriod?: string | 'daily' | 'weekly' | 'monthly' | 'annually';
+}
