@@ -22,13 +22,12 @@ const OcDatetimePicker: React.FC<TimepickerProps> = (props) => {
   const valueMoment = moment(value);
   let hourValue = valueMoment.hours();
   let minuteValue = valueMoment.minutes();
+
   const modifyDate = (
     action: 'add' | 'subtract',
     quantity: number,
     measure: 'hours' | 'minutes',
   ) => {
-    console.log(value);
-
     return action === 'add'
       ? setDate(valueMoment.add(quantity, measure))
       : setDate(valueMoment.subtract(quantity, measure));
@@ -45,8 +44,12 @@ const OcDatetimePicker: React.FC<TimepickerProps> = (props) => {
             />
             <input
               type="text"
-              value={hourValue}
-              // onChange={(e) => modifyDate('subtract', parseInt(e.target.value), 'hours')}
+              value={hourValue.toString()}
+              minLength={0}
+              maxLength={2}
+              min=""
+              max="60"
+              onChange={(e) => setDate(valueMoment.hours(parseInt(e.target.value)))}
             />
             <ArrowRightAnalog
               className="date-picker__time-calendar-icon"
@@ -63,8 +66,14 @@ const OcDatetimePicker: React.FC<TimepickerProps> = (props) => {
             />
             <input
               type="text"
-              value={minuteValue}
-              onChange={(e) => modifyDate('subtract', parseInt(e.target.value), 'minutes')}
+              minLength={0}
+              maxLength={2}
+              min=""
+              max="60"
+              value={minuteValue.toString()}
+              onChange={(e) => {
+                setDate(valueMoment.minutes(parseInt(e.target.value)));
+              }}
             />
             <ArrowRightAnalog
               className="date-picker__time-calendar-icon"

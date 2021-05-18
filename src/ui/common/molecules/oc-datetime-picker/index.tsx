@@ -34,17 +34,20 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
     </div>
   );
   return (
-    <>
-      <Datetime
-        dateFormat="DD/MM/YYYY HH:MM"
-        inputProps={{ disabled: disabled }}
-        value={date}
-        onChange={setDate}
-        initialViewMode="days"
-        timeFormat={false}
-        renderInput={inputWithIcon}
-      />
-      {type === 'datetime' && <OcTimepicker value={date} setDate={setDate} />}
-    </>
+    console.log(date),
+    (
+      <>
+        <Datetime
+          dateFormat="DD/MM/YYYY HH:mm"
+          inputProps={{ disabled: disabled }}
+          value={date}
+          onChange={setDate}
+          initialViewMode="days"
+          timeFormat={false}
+          renderInput={inputWithIcon}
+        />
+        {type === 'datetime' && <OcTimepicker value={date} setDate={setDate} />}
+      </>
+    )
   );
 };
