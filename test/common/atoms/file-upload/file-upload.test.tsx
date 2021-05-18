@@ -1,11 +1,13 @@
+//@ts-nocheck
 import * as React from 'react';
 import enzyme, { mount, shallow, ShallowWrapper } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { OcFileUpload } from '../../../src/ui/common';
+import { OcFileUpload } from '../../../../src/ui/common';
 
 enzyme.configure({ adapter: new Adapter() });
 
-const setUp = () => shallow(<OcFileUpload />);
+const setUp = () =>
+  shallow(<OcFileUpload maxFiles={1} minSizeBytes={0} maxSizeBytes={5000} accept="*" />);
 
 describe('Default file uploader', () => {
   let component: ShallowWrapper;
