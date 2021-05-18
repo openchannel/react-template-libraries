@@ -22,13 +22,3 @@ export const parsePrice = ({ type, currency, price, billingPeriod }: ParsePrice)
 
 	return parsedPrice;
 };
-
-export const truncateText = (string) => {
-	// truncate the text and append the ellipsis
-	const text = string.split(' ');
-
-	while (text.length > 0 && this.el.scrollHeight > this.el.clientHeight) {
-		text.pop();
-		this.el.innerText = `${text.join(' ')}…`;
-	}
-}
