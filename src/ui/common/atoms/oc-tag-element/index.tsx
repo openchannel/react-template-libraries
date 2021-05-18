@@ -29,11 +29,11 @@ export const OcTagElement: React.FC<OcTagElementProps> = React.memo((props) => {
 		onIconClick,
 	} = props;
 
-	const onClick = React.useCallback(() => {
+	const onClick = () => {
 		if (!onIconClick) return;
 
 		onIconClick(title);
-	}, [onIconClick, title]);
+	};
 
 	return (
 		<button className="tag-element">
