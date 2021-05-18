@@ -29,7 +29,10 @@ const colorRegEx = /(?:#|0x)(?:[a-f0-9]{3}|[a-f0-9]{6})\b|(?:rgb|hsl)a?\([^\)]*\
 export const OcColorComponent: React.FC<ColorProps> = (props) => {
   const [inputColorValue, setInputColorValue] = React.useState('');
   const { disabled, placeholder, colorValue, onValueChange } = props;
-
+  let colorInput: any = React.createRef();
+  const dummyClick = () => {
+    colorInput.current.click();
+  };
   const handleColorChange = React.useCallback(
     (e: { target: HTMLInputElement }) => {
       setInputColorValue(e.target.value);
@@ -63,7 +66,7 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
         />
       </div>
       <div className="color-adjust__picker form-control">
-        <span className="color-adjust__picker-icon">
+        <span className="color-adjust__picker-icon" onClick={dummyClick}>
           <svg
             fill="currentColor"
             aria-hidden="true"
@@ -81,13 +84,15 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
               className=""
             ></path>
           </svg>
+          <input
+            type="color"
+            tabIndex={-1}
+            className="color-adjust__picker-input"
+            value={colorValue}
+            onChange={handleColorChange}
+            ref={colorInput}
+          />
         </span>
-        <input
-          type="color"
-          className="color-adjust__picker-input"
-          value={colorValue}
-          onChange={handleColorChange}
-        />
       </div>
     </div>
   );
