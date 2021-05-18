@@ -19,13 +19,15 @@ export const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
 	} = props;
 
 	const {
-		icon,
 		name,
 		model,
 		rating,
 		reviewCount,
-		summary,
-		description,
+		customData: {
+			icon,
+			summary,
+			description,
+		},
 	} = app;
 
 	const onNameClick = () => {
