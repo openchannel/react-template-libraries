@@ -1,49 +1,56 @@
 import * as React from 'react';
-import Select, { OptionTypeBase, Props as SelectProps } from 'react-select';
+import Select, { Props as SelectProps } from 'react-select';
+import { transformToValidOptions } from './utils';
 
 import './style.scss';
 
-interface MyOption extends OptionTypeBase {
-  label: string;
-  value: string;
+export interface MyOption {
+  label: string | null;
+  value: string | null;
 }
+
+export type DropboxValue = string | null;
 
 export interface DropboxProps extends SelectProps<MyOption> {
   /**
    * Placeholder (optional) - show text inside dropbox
    */
-  placeholder: string;
+  placeholder?: string;
   /**
-   * Items (optional) - items for selecting
+   * Items - items for selecting
    */
-  items: Array<MyOption>;
+  items: Array<DropboxValue>;
   /**
-   * clearFormAfterSelect - clear input text form, when the user chooses an item. Default: false.
+   * Set disabled state for input (optional)
    */
-  clearFormAfterSelect: boolean;
+  disabled?: boolean;
   /**
-   * Inline styles to add to component
+   * Selected item
    */
-  style: React.CSSProperties;
+  selectedItem: DropboxValue;
   /**
-   * Selected Value
+   * onChange function
    */
-  selectedValue: MyOption;
-  /**
-   * onChange handler
-   */
+  selectItem: (item: DropboxValue) => DropboxValue;
 }
 
 export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
-  const { placeholder, items, disabled, selectedValue } = props;
+  const { placeholder, items, disabled, selectedItem, selectItem } = props;
+  const options = React.useMemo(() => transformToValidOptions(items), [items]);
+
+  const handleSelect = React.useCallback((item: MyOption | null) => {
+    selectItem(item ? item.value : null);
+  }, []);
+
   return (
     <Select
       className="oc-dropbox"
       classNamePrefix="oc-dropbox"
       placeholder={placeholder}
-      options={items}
+      options={options}
       disabled={disabled}
-      value={selectedValue}
+      value={selectItem !== null ? { label: selectedItem, value: selectedItem } : null}
+      onChange={handleSelect}
       isSearchable
       noOptionsMessage={() => null}
     />

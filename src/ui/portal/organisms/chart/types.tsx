@@ -5,7 +5,7 @@ import { TABULAR_DATA_TYPE, GRAPH_DATA_TYPE } from './utils';
 import { MinDropdownWidth } from '../../../common/molecules/oc-dropdown';
 
 
-export type DataType = typeof TABULAR_DATA_TYPE | typeof GRAPH_DATA_TYPE;
+export type DataType = string | typeof TABULAR_DATA_TYPE | typeof GRAPH_DATA_TYPE;
 
 export type ChangeChartOptions = ({ field, period }: ChartOptionsChange) => void;
 
@@ -60,7 +60,7 @@ export interface BaseChartProps {
 	 * Set active data view type from the start. Default: graph;
 	 * @default graph
 	 */
-	activeDataType?: DataType;
+	activeDataType?: string | typeof TABULAR_DATA_TYPE | typeof GRAPH_DATA_TYPE;
 	/**
 	 * Path to the custom icon for the 'sort' button
 	 */
