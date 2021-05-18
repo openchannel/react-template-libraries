@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Dropzone, { IDropzoneProps } from 'react-dropzone-uploader';
-import Layout from './Layout';
-import InputContent from './InputContent';
-import PreviewContent from './PreviewContent';
+import { Layout } from './layout';
+import { InputContent } from './input-content';
+import { PreviewContent } from './preview-content';
 import { classNames, getUploadParams } from './utils';
 
 import './styles.scss';

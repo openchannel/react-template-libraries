@@ -6,7 +6,7 @@ import { getUploadParams } from './utils';
 import { IFileWithMeta, IMeta, IPreviewProps } from 'react-dropzone-uploader';
 import './styles.scss';
 
-const PreviewContent = (props: IPreviewProps) => {
+export const PreviewContent = (props: IPreviewProps) => {
   const { fileWithMeta }: { fileWithMeta: IFileWithMeta } = props;
   const { meta }: { meta: IMeta } = props;
   const { canCancel, canRemove }: { canCancel: boolean; canRemove: boolean } = props;

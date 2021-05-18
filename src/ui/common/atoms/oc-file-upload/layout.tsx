@@ -3,7 +3,13 @@ import UploadIcon from '../../../../assets/img/upload_icon.svg';
 import './styles.scss';
 import { ILayoutProps } from 'react-dropzone-uploader';
 
-const Layout = ({ input, previews, dropzoneProps, files, extra: { maxFiles } }: ILayoutProps) => {
+export const Layout = ({
+  input,
+  previews,
+  dropzoneProps,
+  files,
+  extra: { maxFiles },
+}: ILayoutProps) => {
   return (
     <div>
       <div {...dropzoneProps}>
@@ -15,5 +21,3 @@ const Layout = ({ input, previews, dropzoneProps, files, extra: { maxFiles } }: 
     </div>
   );
 };
-
-export default Layout;

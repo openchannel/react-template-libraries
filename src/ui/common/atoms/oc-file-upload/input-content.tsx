@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './styles.scss';
 
-const InputContent = () => (
+export const InputContent = () => (
   <div className="file-container__placeholder">
     <p className="file-container__placeholder-text">
       Drag & drop file or
@@ -9,5 +9,3 @@ const InputContent = () => (
     </p>
   </div>
 );
-
-export default InputContent;
