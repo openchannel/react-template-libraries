@@ -15,7 +15,7 @@ export const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
 	const {
 		app,
 		clickByApp,
-		dropdown,
+		customDropdown,
 	} = props;
 
 	const {
@@ -53,7 +53,7 @@ export const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
 						{/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex,jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
 						<p className="info-card__content-name" /*ellipsis*/ tabIndex={0} onClick={onNameClick}>{name}</p>
 						<div className="info-card__dropdown info-card__dropdown_mobile">
-							{dropdown}
+							{customDropdown}
 						</div>
 					</div>
 					<div className="info-card__content-data">
@@ -75,7 +75,7 @@ export const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
 				</div>
 			</div>
 			<div className="info-card__dropdown info-card__dropdown_desktop">
-				{dropdown}
+				{customDropdown}
 			</div>
 		</div>
 	)

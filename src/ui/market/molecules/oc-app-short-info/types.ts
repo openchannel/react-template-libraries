@@ -1,6 +1,3 @@
-import * as React from 'react';
-
-
 export interface AppModel {
 	type: string;
 	price: number;
@@ -161,5 +158,5 @@ export interface FullAppData extends AppVersion {
 export interface OcAppShortInfoProps {
 	app: FullAppData;
 	clickByApp: (app: FullAppData) => void;
-	dropdown?: React.ElementType;
+	customDropdown?: JSX.Element;
 }
