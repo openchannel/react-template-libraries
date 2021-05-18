@@ -37,6 +37,8 @@ module.exports = {
               prefixIds: {
                 prefixClassNames: false,
               },
+              removeDimensions: false,
+              removeViewBox: false,
             },
           ],
         },
