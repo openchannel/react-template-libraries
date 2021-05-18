@@ -29,10 +29,11 @@ const colorRegEx = /(?:#|0x)(?:[a-f0-9]{3}|[a-f0-9]{6})\b|(?:rgb|hsl)a?\([^\)]*\
 export const OcColorComponent: React.FC<ColorProps> = (props) => {
   const [inputColorValue, setInputColorValue] = React.useState('');
   const { disabled, placeholder, colorValue, onValueChange } = props;
-  let colorInput: any = React.createRef();
-  const dummyClick = () => {
-    colorInput.current.click();
-  };
+  let colorInput: React.RefObject<HTMLInputElement> = React.createRef();
+  const dummyClick = React.useCallback(() => {
+    colorInput.current!.click();
+  }, [colorInput]);
+
   const handleColorChange = React.useCallback(
     (e: { target: HTMLInputElement }) => {
       setInputColorValue(e.target.value);
