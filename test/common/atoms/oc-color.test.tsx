@@ -10,8 +10,8 @@ const defaultColorProps: ColorProps = {
   placeholder: 'Enter color value here',
   disabled: false,
   style: {},
-  inputTextColor: '',
-  setInputTextColor: (color: any) => color,
+  colorValue: '',
+  onValueChange: (color: any) => color,
 };
 
 const setUp = (props: ColorProps) => shallow(<OcColorComponent {...props} />);
