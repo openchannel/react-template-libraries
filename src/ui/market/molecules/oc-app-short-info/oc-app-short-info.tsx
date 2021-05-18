@@ -11,6 +11,12 @@ import './styles.scss';
 
 const defaultAppIcon = isStorybook() ? './img/standard-app-icon.svg' : '../../../../assets/img/standard-app-icon.svg';
 
+const textEllipsis = {
+	'white-space': 'nowrap',
+	overflow: 'hidden',
+	textOverflow: 'ellipsis',
+};
+
 export const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
 	const {
 		app,
@@ -51,7 +57,7 @@ export const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
 				<div className="info-card__content">
 					<div className="info-card__content-wrapper">
 						{/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex,jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
-						<p className="info-card__content-name" /*ellipsis*/ tabIndex={0} onClick={onNameClick}>{name}</p>
+						<p className="info-card__content-name" style={textEllipsis} tabIndex={0} onClick={onNameClick}>{name}</p>
 						<div className="info-card__dropdown info-card__dropdown_mobile">
 							{customDropdown}
 						</div>
@@ -65,11 +71,7 @@ export const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
 							className="info-card__content-rating"
 						/>
 					</div>
-					<p
-						className="info-card__content-summary"
-						title={appDescription}
-						// ellipsis
-					>
+					<p className="info-card__content-summary" title={appDescription} style={textEllipsis}>
 						{appDescription}
 					</p>
 				</div>
