@@ -27,7 +27,7 @@ export interface DropboxProps extends SelectProps<GroupTypeBase<OptionsType<Opti
   /**
    * onChange function
    */
-  selectItem: (item: DropboxValue) => DropboxValue;
+  selectItem: (item: DropboxValue) => void;
 }
 
 export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
@@ -38,7 +38,7 @@ export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
     (item: OptionTypeBase | null) => {
       selectItem(item ? item.value : null);
     },
-    [selectedItem],
+    [selectItem],
   );
 
   return (
