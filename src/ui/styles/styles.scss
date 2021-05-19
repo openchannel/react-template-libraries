@@ -427,6 +427,31 @@ a.link {
 
 // Special dropdown menu for the Text search component
 .oc-dropbox {
+
+  /* React styles */
+  .oc-dropbox__menu {
+    max-height: 229px;
+    width: 100%;
+    .oc-dropbox__option {
+      padding: 16px;
+      border-bottom: 1px;
+      &:hover {
+        color: $body-color;
+        background-color: $light;
+      }
+      &:active{
+        color: $primary;
+        background-color: $light;
+        border-color: unset;
+      }
+      &:focus{
+        outline: none;
+        background-color: $light;
+      }
+    }
+  }
+
+  /* Angular styles */
   .dropdown-menu {
     max-height: 229px;
     width: 100%;
