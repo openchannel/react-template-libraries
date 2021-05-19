@@ -1,17 +1,13 @@
 import * as React from 'react';
 import Select, { Props as SelectProps } from 'react-select';
+import { GroupTypeBase, OptionsType, OptionTypeBase } from 'react-select';
 import { transformToValidOptions } from './utils';
 
 import './style.scss';
 
-export interface MyOption {
-  label: string | null;
-  value: string | null;
-}
+export type DropboxValue = string;
 
-export type DropboxValue = string | null;
-
-export interface DropboxProps extends SelectProps<MyOption> {
+export interface DropboxProps extends SelectProps<GroupTypeBase<OptionsType<OptionTypeBase>>> {
   /**
    * Placeholder (optional) - show text inside dropbox
    */
@@ -36,11 +32,14 @@ export interface DropboxProps extends SelectProps<MyOption> {
 
 export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
   const { placeholder, items, disabled, selectedItem, selectItem } = props;
-  const options = React.useMemo(() => transformToValidOptions(items), [items]);
+  const options = transformToValidOptions(items);
 
-  const handleSelect = React.useCallback((item: MyOption | null) => {
-    selectItem(item ? item.value : null);
-  }, []);
+  const handleSelect = React.useCallback(
+    (item: OptionTypeBase | null) => {
+      selectItem(item ? item.value : null);
+    },
+    [selectedItem],
+  );
 
   return (
     <Select
@@ -49,7 +48,7 @@ export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
       placeholder={placeholder}
       options={options}
       disabled={disabled}
-      value={selectItem !== null ? { label: selectedItem, value: selectedItem } : null}
+      value={selectedItem === null || '' ? null : { label: selectedItem, value: selectedItem }}
       onChange={handleSelect}
       isSearchable
       noOptionsMessage={() => null}

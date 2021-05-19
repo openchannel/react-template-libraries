@@ -36,6 +36,7 @@
       display: inline-block;
       margin-left: 0.255em;
       vertical-align: 0.255em;
+      cursor: pointer;
     }
 
     & > svg {
@@ -47,6 +48,7 @@
     .oc-dropbox__dropdown-indicator {
       &:after {
         content: url(../../../../assets/img/select-up.svg);
+        cursor: pointer;
       }
     }
   }
@@ -80,13 +82,13 @@
       background-color: $light;
     }
 
-    &:active{
+    &:active {
       color: $primary;
       background-color: $light;
       border-color: unset;
     }
 
-    &:focus{
+    &:focus {
       outline: none;
       background-color: $light;
     }
