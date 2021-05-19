@@ -1,9 +1,14 @@
 import * as React from 'react';
-import Select, { Props as SelectProps } from 'react-select';
-import { GroupTypeBase, OptionsType, OptionTypeBase } from 'react-select';
-import { transformToValidOptions } from './utils';
+import Select, {
+  Props as SelectProps,
+  GroupTypeBase,
+  OptionsType,
+  OptionTypeBase
+} from 'react-select';
 
+import { transformToValidOptions } from './utils';
 import './style.scss';
+
 
 export type DropboxValue = string;
 
@@ -28,10 +33,15 @@ export interface DropboxProps extends SelectProps<GroupTypeBase<OptionsType<Opti
    * onChange function
    */
   selectItem: (item: DropboxValue) => void;
+  /**
+   * Additional class to be assigned to the root element
+   */
+  className?: string;
 }
 
 export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
-  const { placeholder, items, disabled, selectedItem, selectItem } = props;
+  const { placeholder, items, disabled, selectedItem, selectItem, className = '' } = props;
+
   const options = transformToValidOptions(items);
 
   const handleSelect = React.useCallback(
@@ -43,7 +53,7 @@ export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
 
   return (
     <Select
-      className="oc-dropbox"
+      className={`oc-dropbox ${className}`}
       classNamePrefix="oc-dropbox"
       placeholder={placeholder}
       options={options}
