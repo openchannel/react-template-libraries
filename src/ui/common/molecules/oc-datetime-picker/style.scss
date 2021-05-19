@@ -1,11 +1,4 @@
-/*!
- * https://github.com/arqex/react-datetime
- */
-* {
-  font-family: 'Rubik Regular', sans-serif;
-  font-size: 16px;
-  font-weight: normal;
-}
+@import 'src/ui/styles/index';
 .rdt {
   position: relative;
 }
@@ -13,6 +6,7 @@
   display: none;
   position: absolute;
   min-width: 250px;
+  height: auto;
   padding: 4px;
   margin-top: 1px;
   z-index: 99999 !important;
@@ -22,6 +16,7 @@
 }
 .rdtOpen .rdtPicker {
   display: block;
+  font-size: 14px;
 }
 .rdtStatic .rdtPicker {
   box-shadow: none;
@@ -40,9 +35,11 @@
 .rdtPicker th {
   text-align: center;
   height: 28px;
+  font-size: 16px;
 }
 .rdtPicker td {
   cursor: pointer;
+  font-size: 12px;
 }
 .rdtPicker td.rdtDay:hover,
 .rdtPicker td.rdtHour:hover,
@@ -95,20 +92,34 @@
   cursor: not-allowed;
 }
 .rdtPicker th {
-  border-bottom: 1px solid #f9f9f9;
 }
 .rdtPicker .dow {
-  width: 14.2857%;
-  border-bottom: none;
-  cursor: default;
+  cursor: pointer;
+  width: 33px;
+  height: 32px;
+  text-align: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #f9f9f9;
+  color: #727272;
 }
 .rdtPicker th.rdtSwitch {
   width: 100px;
+  font-family: 'Rubik Regular', sans-serif;
+  font-size: 12px;
+}
+.rdtDays > table > thead > tr {
+  height: 40px;
+}
+.dow {
+  cursor: pointer;
+  width: 33px;
+  height: 32px;
+  text-align: center;
+  padding: 5px 0;
 }
 .rdtPicker th.rdtNext,
 .rdtPicker th.rdtPrev {
   font-size: 21px;
-  vertical-align: top;
 }
 
 .rdtPrev span,

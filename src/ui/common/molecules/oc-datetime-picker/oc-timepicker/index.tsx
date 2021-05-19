@@ -10,7 +10,7 @@ export interface TimepickerProps {
   /**
    * Date of datepicker
    */
-  value: string | Moment;
+  value: string;
   /**
    * Set Date of datepicker
    */
@@ -45,11 +45,9 @@ const OcDatetimePicker: React.FC<TimepickerProps> = (props) => {
             <input
               type="text"
               value={hourValue.toString()}
-              minLength={0}
               maxLength={2}
-              min=""
               max="60"
-              onChange={(e) => setDate(valueMoment.hours(parseInt(e.target.value)))}
+              onChange={(e) => setDate(valueMoment.hours(parseInt(e.target.value || '0')))}
             />
             <ArrowRightAnalog
               className="date-picker__time-calendar-icon"
@@ -66,13 +64,11 @@ const OcDatetimePicker: React.FC<TimepickerProps> = (props) => {
             />
             <input
               type="text"
-              minLength={0}
               maxLength={2}
-              min=""
               max="60"
               value={minuteValue.toString()}
               onChange={(e) => {
-                setDate(valueMoment.minutes(parseInt(e.target.value)));
+                setDate(valueMoment.minutes(parseInt(e.target.value || '0')));
               }}
             />
             <ArrowRightAnalog
