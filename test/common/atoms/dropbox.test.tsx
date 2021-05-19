@@ -2,7 +2,7 @@ import * as React from 'react';
 import enzyme, { mount, shallow, ShallowWrapper } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
-import { OcDropboxComponent, DropboxProps } from '../../../src/ui/common';
+import { OcDropboxComponent, DropboxProps, DropboxValue } from '../../../src/ui/common';
 
 enzyme.configure({ adapter: new Adapter() });
 
@@ -12,11 +12,9 @@ const defaultDropboxProps: DropboxProps = {
   className: 'oc-dropbox',
   classNamePrefix: 'oc-dropbox',
   isSearchable: true,
-  clearFormAfterSelect: false,
-  style: {},
-  value: 'first',
-  onDropboxChange: () => {},
   disabled: false,
+  selectedItem: 'first',
+  selectItem: (item: DropboxValue): DropboxValue => item,
 };
 
 const setUp = (props: DropboxProps) => shallow(<OcDropboxComponent {...props} />);

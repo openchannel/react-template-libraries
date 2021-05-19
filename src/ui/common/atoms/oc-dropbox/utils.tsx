@@ -1,5 +1,5 @@
-import { MyOption } from './index';
+import { MyOption, DropboxValue } from './index';
 
-export const transformToValidOptions = (array: Array<string>): MyOption[] => {
-  return array.map((item) => ({ label: item, value: item }));
+export const transformToValidOptions = (array: Array<DropboxValue> | null): MyOption[] => {
+  return array!.map((item) => ({ label: item, value: item }));
 };
