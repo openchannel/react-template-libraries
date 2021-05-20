@@ -18,12 +18,16 @@ describe('OcDatetimePicker', () => {
   });
 
   it('should have date', () => {
-    component.setProps({ date: moment() });
-    expect(component.prop('value')).toEqual(moment());
+    const dummyDate = moment();
+    component.setProps({ date: dummyDate });
+    expect(component.prop('value')).toEqual(dummyDate);
   });
 
   it('should set correct type and make timepicker visible', () => {
-    component.setProps({ type: 'datetime' });
+    const wrapper = mount(
+      <OcDatetimePicker date={moment()} setDate={() => {}} disabled={false} type="date" />,
+    );
+    wrapper.setProps({ type: 'datetime' });
 
     const timepicker = component.find(OcTimePicker);
 
@@ -31,7 +35,10 @@ describe('OcDatetimePicker', () => {
   });
 
   it('should imitate disabled state', () => {
-    component.setProps({ disabled: true });
-    expect(component.find('input').prop('disabled')).toBe(true);
+    const wrapper = mount(
+      <OcDatetimePicker date={moment()} setDate={() => {}} disabled={false} type="date" />,
+    );
+    wrapper.setProps({ disabled: true });
+    expect(wrapper.find('input').prop('disabled')).toBe(true);
   });
 });
