@@ -58,7 +58,7 @@ export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
       placeholder={placeholder}
       options={options}
       disabled={disabled}
-      value={selectedItem === null || '' ? null : { label: selectedItem, value: selectedItem }}
+      value={!selectedItem ? null : { label: selectedItem, value: selectedItem }}
       onChange={handleSelect}
       isSearchable
       noOptionsMessage={() => null}
