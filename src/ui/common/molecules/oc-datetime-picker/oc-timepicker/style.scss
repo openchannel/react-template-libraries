@@ -120,10 +120,11 @@
   }
 
   &__time-view {
+    display: none;
     background: #fff;
-    width: 100%;
-    z-index: 1;
-    padding: 0 16px 16px;
+    width: 250px;
+    z-index: 999;
+    padding: 0 10px 10px;
 
     .date-picker__time {
       font-size: 36px;

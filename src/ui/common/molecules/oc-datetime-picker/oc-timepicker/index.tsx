@@ -15,25 +15,27 @@ export interface TimepickerProps {
    * Set Date of datepicker
    */
   setDate: (value: string | Moment) => void;
+  /**
+   * Inline styles passed to component
+   */
+  style?: React.CSSProperties;
 }
 
-const OcDatetimePicker: React.FC<TimepickerProps> = (props) => {
-  const { value, setDate } = props;
+export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
+  const { value, setDate, style } = props;
   const valueMoment = moment(value);
   let hourValue = valueMoment.hours();
   let minuteValue = valueMoment.minutes();
-
-  const modifyDate = (
-    action: 'add' | 'subtract',
-    quantity: number,
-    measure: 'hours' | 'minutes',
-  ) => {
-    return action === 'add'
-      ? setDate(valueMoment.add(quantity, measure))
-      : setDate(valueMoment.subtract(quantity, measure));
-  };
+  const modifyDate = React.useCallback(
+    (action: 'add' | 'subtract', quantity: number, measure: 'hours' | 'minutes') => {
+      return action === 'add'
+        ? setDate(valueMoment.add(quantity, measure))
+        : setDate(valueMoment.subtract(quantity, measure));
+    },
+    [setDate],
+  );
   return (
-    <div className="date-picker__time-view">
+    <div className="date-picker__time-view" style={style}>
       <div className="date-picker__time">
         <div className="date-picker__time-hours">
           <div className="date-picker__time-header">Hours</div>
@@ -81,5 +83,3 @@ const OcDatetimePicker: React.FC<TimepickerProps> = (props) => {
     </div>
   );
 };
-
-export default OcDatetimePicker;
