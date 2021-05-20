@@ -3,7 +3,9 @@ import Select, {
   Props as SelectProps,
   GroupTypeBase,
   OptionsType,
-  OptionTypeBase
+  OptionTypeBase,
+  InputActionMeta,
+  KeyboardEventHandler
 } from 'react-select';
 
 import { transformToValidOptions } from './utils';
@@ -37,10 +39,26 @@ export interface DropboxProps extends SelectProps<GroupTypeBase<OptionsType<Opti
    * Additional class to be assigned to the root element
    */
   className?: string;
+  /** The value of the search input */
+  inputValue?: string | undefined;
+  /** Handle change events on the input */
+  onInputChange?:  ((newValue: string, actionMeta: InputActionMeta) => void) | undefined;
+  /** Handle key down events on the select */
+  onKeyDown?: KeyboardEventHandler | undefined;
 }
 
 export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
-  const { placeholder, items, disabled, selectedItem, selectItem, className = '' } = props;
+  const {
+    items,
+    selectedItem,
+    selectItem,
+    className = '',
+    placeholder,
+    disabled,
+    inputValue,
+    onInputChange,
+    onKeyDown,
+  } = props;
 
   const options = transformToValidOptions(items);
 
@@ -60,8 +78,11 @@ export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
       disabled={disabled}
       value={!selectedItem ? null : { label: selectedItem, value: selectedItem }}
       onChange={handleSelect}
-      isSearchable
+      inputValue={inputValue}
+      onInputChange={onInputChange}
+      onKeyDown={onKeyDown}
       noOptionsMessage={() => null}
+      isSearchable
     />
   );
 };
