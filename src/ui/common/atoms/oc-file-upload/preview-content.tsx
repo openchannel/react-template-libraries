@@ -40,7 +40,7 @@ export const PreviewContent = (props: IPreviewProps) => {
         )}
 
         {fileWithMeta.meta.status === 'uploading' && canCancel && (
-          <CloseIcon className="dzu-previewButton" onClick={fileWithMeta.cancel} />
+          <CloseIcon className="dzu-previewButton" onClick={fileWithMeta.remove} />
         )}
         {meta.status !== 'preparing' &&
           meta.status !== 'getting_upload_params' &&

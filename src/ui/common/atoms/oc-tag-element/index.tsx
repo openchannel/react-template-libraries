@@ -41,7 +41,11 @@ export const OcTagElement: React.FC<OcTagElementProps> = React.memo((props) => {
 			{Boolean(onIconClick) && (
 				<OverlayTrigger
 					placement="top"
-					overlay={<Tooltip id={`tooltip-${title}`} className="tag-element__tooltip">Remove</Tooltip>}
+					overlay={
+						<Tooltip id={`tooltip-${title}`} className="tag-element__tooltip-portal">
+							Remove
+						</Tooltip>
+					}
 				>
 					<span
 						tabIndex={0}

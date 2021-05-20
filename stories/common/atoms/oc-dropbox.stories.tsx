@@ -10,7 +10,7 @@ export default {
 } as Meta;
 
 const DropboxComponent: Story<DropboxProps> = (args) => {
-  const [selectedItem, setSelectedItem] = React.useState<DropboxValue>('');
+  const [selectedItem, setSelectedItem] = React.useState<DropboxValue>(null);
   return <OcDropboxComponent {...args} selectedItem={selectedItem} selectItem={setSelectedItem} />;
 };
 
