@@ -4,7 +4,8 @@ import orderBy from 'lodash/orderBy';
 import difference from 'lodash/difference';
 
 import { OcTagsProps } from './types';
-import { normalizeTags, useCreatableState } from './utils';
+import { normalizeTags } from './utils';
+import { useTagDropboxState } from './hooks';
 import { Button, OcDropboxComponent, OcTagElement } from '../../../common';
 import './styles.scss';
 
@@ -35,7 +36,7 @@ export const OcTags: React.FC<OcTagsProps> = (props) => {
 		resetInputValue,
 		onInputChange,
 		onKeyDown,
-	} = useCreatableState({ createTag: onSelectTag });
+	} = useTagDropboxState({ createTag: onSelectTag });
 
 	const onAddTag = React.useCallback(() => {
 		setNormalizedValues([ ...value, inputValue ]);

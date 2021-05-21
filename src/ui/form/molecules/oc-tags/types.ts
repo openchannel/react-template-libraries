@@ -29,7 +29,7 @@ export interface OcTagsProps {
 
 export type NormalizeTags = (array: string[], type: 'string' | 'boolean' | 'number') => OcTagsValue;
 
-export type UseCreatableState = (
+export type UseTagDropboxState = (
 	{ createTag }: { createTag: (s: string) => void }
 ) => {
 	inputValue: string;

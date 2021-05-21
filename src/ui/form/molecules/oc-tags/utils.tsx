@@ -1,7 +1,6 @@
 import uniq from 'lodash/uniq';
-import { useCallback, useState } from 'react';
 
-import { NormalizeTags, UseCreatableState } from './types';
+import { NormalizeTags } from './types';
 
 
 export const normalizeTags: NormalizeTags = (array, type) => {
@@ -20,40 +19,4 @@ export const normalizeTags: NormalizeTags = (array, type) => {
 			default: return item.trim();
 		}
 	}));
-}
-
-export const useCreatableState: UseCreatableState = ({ createTag }) => {
-	const [inputValue, setInputValue] = useState('');
-
-	const onInputChange = useCallback((inputValue, { action }) => {
-		if (action === 'menu-close' || action === 'input-blur') {
-			return;
-		}
-		setInputValue(inputValue);
-	}, []);
-
-	const resetInputValue = useCallback(() => {
-		setInputValue('');
-	}, []);
-
-	const onKeyDown = useCallback((event) => {
-		if (!inputValue) return;
-
-		switch (event.key) {
-			case 'Enter':
-			case 'Tab':
-				createTag(inputValue);
-				resetInputValue();
-				// call blur to blur and close menu
-				event.target.blur();
-				event.preventDefault();
-		}
-	}, [inputValue, createTag]);
-
-	return {
-		inputValue,
-		resetInputValue,
-		onInputChange,
-		onKeyDown,
-	};
 }
