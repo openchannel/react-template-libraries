@@ -35,19 +35,31 @@ export const OcTagElement: React.FC<OcTagElementProps> = React.memo((props) => {
 		onIconClick(title);
 	};
 
+	const onKeyDown = (event: React.KeyboardEvent) => {
+		if (!onIconClick) return;
+
+		if (event.key === 'Enter') {
+			onIconClick(title);
+		}
+	};
+
 	return (
 		<button className="tag-element">
 			<div className="tag-element__text oc-text-wrap oc-text-truncate tag-label">{title}</div>
 			{Boolean(onIconClick) && (
 				<OverlayTrigger
 					placement="top"
-					overlay={<Tooltip id={`tooltip-${title}`} className="tag-element__tooltip">Remove</Tooltip>}
+					overlay={
+						<Tooltip id={`tooltip-${title}`} className="tag-element__tooltip-portal">
+							Remove
+						</Tooltip>
+					}
 				>
 					<span
 						tabIndex={0}
 						className="tag-element__close-icon"
 						onClick={onClick}
-						onKeyDown={onClick}
+						onKeyDown={onKeyDown}
 					>
 						{
 							deleteTagImgUrl

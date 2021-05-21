@@ -427,6 +427,31 @@ a.link {
 
 // Special dropdown menu for the Text search component
 .oc-dropbox {
+
+  /* React styles */
+  .oc-dropbox__menu {
+    max-height: 229px;
+    width: 100%;
+    .oc-dropbox__option {
+      padding: 16px;
+      border-bottom: 1px;
+      &:hover {
+        color: $body-color;
+        background-color: $light;
+      }
+      &:active{
+        color: $primary;
+        background-color: $light;
+        border-color: unset;
+      }
+      &:focus{
+        outline: none;
+        background-color: $light;
+      }
+    }
+  }
+
+  /* Angular styles */
   .dropdown-menu {
     max-height: 229px;
     width: 100%;
@@ -579,6 +604,43 @@ a.link {
 .tag-element__tooltip {
   top: -12px !important;
 
+  .arrow {
+    &:before {
+      width: 0;
+      height: 0;
+      border-right: 4px solid transparent;
+      border-left: 4px solid transparent;
+      border-top: 6px solid $info;
+      left: -1px;
+      top: -0.8px;
+    }
+
+    &:after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 3px solid transparent;
+      border-right: 3px solid transparent;
+      border-top: 4.5px solid $white;
+      position: absolute;
+      left: 0;
+      top: -0.9px;
+    }
+  }
+
+  .tooltip-inner {
+    background-color: $white;
+    color: $body-color;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 4px;
+    border: solid 1px $info;
+    padding: 3px 10px;
+  }
+}
+
+/* React styles */
+.tag-element__tooltip-portal {
   .arrow {
     &:before {
       width: 0;
