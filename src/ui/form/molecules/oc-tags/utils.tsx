@@ -1,11 +1,11 @@
+import uniq from 'lodash/uniq';
 import { useCallback, useState } from 'react';
-import { OcTagsValue } from './types';
 
 import { NormalizeTags, UseCreatableState } from './types';
 
 
 export const normalizeTags: NormalizeTags = (array, type) => {
-	return array.map(item => {
+	return uniq(array.map(item => {
 		switch (type) {
 			case 'number': {
 				return isNaN(Number(item)) ? item : Number(item);
@@ -19,7 +19,7 @@ export const normalizeTags: NormalizeTags = (array, type) => {
 			}
 			default: return item.trim();
 		}
-	});
+	}));
 }
 
 export const useCreatableState: UseCreatableState = ({ createTag }) => {
@@ -44,6 +44,8 @@ export const useCreatableState: UseCreatableState = ({ createTag }) => {
 			case 'Tab':
 				createTag(inputValue);
 				resetInputValue();
+				// call blur to blur and close menu
+				event.target.blur();
 				event.preventDefault();
 		}
 	}, [inputValue, createTag]);

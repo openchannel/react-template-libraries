@@ -27,15 +27,13 @@ export interface OcTagsProps {
 	onChange: (v: OcTagsValue) => void;
 }
 
-export interface NormalizeTags {
-	(array: string[], type: 'string' | 'boolean' | 'number'): OcTagsValue;
-}
+export type NormalizeTags = (array: string[], type: 'string' | 'boolean' | 'number') => OcTagsValue;
 
-export interface UseCreatableState {
-	({ createTag }: { createTag: (s: string) => void } ): {
-		inputValue: string;
-		resetInputValue: () => void;
-		onInputChange: (inputValue: any, { action }: any) => void;
-		onKeyDown: (event: any) => void;
-	}
+export type UseCreatableState = (
+	{ createTag }: { createTag: (s: string) => void }
+) => {
+	inputValue: string;
+	resetInputValue: () => void;
+	onInputChange: (inputValue: any, { action }: any) => void;
+	onKeyDown: (event: any) => void;
 }
