@@ -29,9 +29,12 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
   const { type, disabled, date, setDate } = props;
   const [timeVisible, setTimeVisible] = React.useState(false);
   moment.updateLocale('en', {
-    weekdays: 'M_T_W_T_F_S_S'.split('_'),
-    weekdaysShort: 'M_T_W_T_F_S_S'.split('_'),
-    weekdaysMin: 'M_T_W_T_F_S_S'.split('_'),
+    weekdays: 'S_M_T_W_T_F_S'.split('_'),
+    weekdaysShort: 'S_M_T_W_T_F_S'.split('_'),
+    weekdaysMin: 'S_M_T_W_T_F_S'.split('_'),
+    week: {
+      dow: 1,
+    },
   });
   const renderWithTime = (mode: string, renderDefault: Function) => {
     if (mode === 'date') return renderDefault();
@@ -51,7 +54,7 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
   return (
     <Datetime
       locale="en"
-      dateFormat="DD/MM/YYYY HH:mm"
+      dateFormat={type === 'datetime' ? 'DD/MM/YYYY HH:mm' : 'DD/MM/YYYY'}
       inputProps={{ disabled: disabled }}
       value={date}
       onChange={setDate}
