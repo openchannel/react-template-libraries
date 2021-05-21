@@ -4,8 +4,7 @@ import Select, {
   GroupTypeBase,
   OptionsType,
   OptionTypeBase,
-  InputActionMeta,
-  KeyboardEventHandler
+  InputActionMeta
 } from 'react-select';
 
 import { transformToValidOptions } from './utils';
@@ -44,7 +43,7 @@ export interface DropboxProps extends SelectProps<GroupTypeBase<OptionsType<Opti
   /** Handle change events on the input */
   onInputChange?:  ((newValue: string, actionMeta: InputActionMeta) => void) | undefined;
   /** Handle key down events on the select */
-  onKeyDown?: KeyboardEventHandler | undefined;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLElement>) => void;
 }
 
 export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
