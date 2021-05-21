@@ -39,6 +39,8 @@ export const OcTags: React.FC<OcTagsProps> = (props) => {
 	} = useTagDropboxState({ createTag: onSelectTag });
 
 	const onAddTag = React.useCallback(() => {
+		if (!inputValue) return;
+
 		setNormalizedValues([ ...value, inputValue ]);
 		resetInputValue();
 	}, [setNormalizedValues, value, inputValue]);
