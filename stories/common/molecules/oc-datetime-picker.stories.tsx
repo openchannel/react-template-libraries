@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
-import moment from 'moment';
 import { OcDatetimePicker, DatepickerProps } from '../../../src/ui/common';
-import { Moment } from 'moment';
+import moment, { Moment } from 'moment';
 
 export default {
   title: 'Date component [BEM]',
@@ -12,7 +11,12 @@ export default {
 
 const DateComponent: Story<DatepickerProps> = (args) => {
   const [date, setDate] = React.useState<string | Moment>(moment());
-  return <OcDatetimePicker {...args} date={date} setDate={setDate} />;
+  const wr = (f) => {
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', f);
+    setDate(f);
+  };
+  console.log(date);
+  return <OcDatetimePicker {...args} value={date} onChange={wr} />;
 };
 
 export const DisabledDate = DateComponent.bind({});
@@ -23,11 +27,9 @@ export const DefaultDate = DateComponent.bind({});
 DefaultDate.args = {
   type: 'date',
   disabled: false,
-  date: moment(),
 };
 export const DefaultDateTime = DateComponent.bind({});
 DefaultDateTime.args = {
   type: 'datetime',
   disabled: false,
-  date: moment(),
 };

@@ -10,6 +10,6 @@ export const InputWithIcon = (
 ) => (
   <div className="inputWithIcon">
     <input {...props} className="date-input" />
-    <CalendarIcon className="calendarIcon" onClick={!props.disabled ? () => {} : props.onClick} />
+    <CalendarIcon className="calendarIcon" onClick={props.disabled ? undefined : props.onClick} />
   </div>
 );
