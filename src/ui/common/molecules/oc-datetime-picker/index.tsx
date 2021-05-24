@@ -34,7 +34,6 @@ moment.updateLocale('en', {
 
 export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
   const { type, disabled, value, onChange } = props;
-  console.log('OC DateTime Picker', value);
 
   const [timeVisible, setTimeVisible] = React.useState(false);
 
@@ -44,14 +43,12 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
   const renderWithTime = React.useCallback(
     (mode: string, renderDefault: Function) => {
       if (mode === 'date') return renderDefault();
-      console.log('In Render With Time component!!!!!!!!!!!!!!!!!!!!!!!', renderDefault());
-
       return (
         <>
           {renderDefault()}
           {type === 'datetime' && (
             <OcTimePicker
-              value={value.toString()}
+              value={value}
               onChange={onChange}
               style={{ display: timeVisible ? 'block' : 'none' }}
             />

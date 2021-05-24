@@ -11,12 +11,8 @@ export default {
 
 const DateComponent: Story<DatepickerProps> = (args) => {
   const [date, setDate] = React.useState<string | Moment>(moment());
-  const wr = (f) => {
-    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', f);
-    setDate(f);
-  };
-  console.log(date);
-  return <OcDatetimePicker {...args} value={date} onChange={wr} />;
+
+  return <OcDatetimePicker {...args} value={date} onChange={setDate} />;
 };
 
 export const DisabledDate = DateComponent.bind({});

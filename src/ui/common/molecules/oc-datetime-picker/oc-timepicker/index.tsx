@@ -8,7 +8,7 @@ export interface TimepickerProps {
   /**
    * Date of datepicker
    */
-  value: string;
+  value: string | Moment;
   /**
    * Set Date of datepicker
    */
@@ -22,11 +22,9 @@ export interface TimepickerProps {
 export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
   const { value, onChange, style } = props;
   const [valueMoment, setValueMoment] = React.useState(moment(value));
-  console.log('OC Time Picker', value);
 
   React.useEffect(() => {
     setValueMoment(moment(value));
-    console.log('OC TimePicker USE EFFECT', value);
   }, [value]);
 
   const modifyDate = (
@@ -37,7 +35,7 @@ export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
     return action === 'add'
       ? (setValueMoment(valueMoment.add(quantity, measure)), onChange(valueMoment))
       : onChange(valueMoment.subtract(quantity, measure));
-  }; //REFARCTOR THIS
+  };
   const addHour = React.useCallback(() => modifyDate('add', 1, 'hours'), [modifyDate]);
   const addMinute = React.useCallback(() => modifyDate('add', 1, 'minutes'), [modifyDate]);
   const decHour = React.useCallback(() => modifyDate('subtract', 1, 'hours'), [modifyDate]);
