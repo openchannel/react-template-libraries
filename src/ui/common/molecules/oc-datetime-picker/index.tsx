@@ -22,6 +22,10 @@ export interface DatepickerProps extends DatetimepickerProps {
    * Set Date of datepicker
    */
   onChange: (value: string | Moment) => void;
+  /**
+   * Custom date format to pass into component
+   */
+  settings: string;
 }
 moment.updateLocale('en', {
   weekdays: 'S_M_T_W_T_F_S'.split('_'),
@@ -31,14 +35,19 @@ moment.updateLocale('en', {
     dow: 1,
   },
 });
+const parseFormat = require('moment-parseformat');
 
 export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
-  const { type, disabled, value, onChange } = props;
+  const { type, disabled, value, onChange, settings } = props;
 
   const [timeVisible, setTimeVisible] = React.useState(false);
 
-  const handleOpen = () => setTimeVisible(true);
-  const handleClose = () => setTimeVisible(false);
+  const handleOpen = React.useCallback(() => setTimeVisible(true), [setTimeVisible]);
+  const handleClose = React.useCallback(() => setTimeVisible(false), [setTimeVisible]);
+
+  const returnDateFormat = React.useCallback((): string => {
+    return settings ? parseFormat(settings) : 'DD/MM/YYYY';
+  }, [settings]);
 
   const renderWithTime = React.useCallback(
     (mode: string, renderDefault: Function) => {
@@ -58,10 +67,11 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
     },
     [type, timeVisible, onChange, value],
   );
+
   return (
     <Datetime
       locale="en"
-      dateFormat={type === 'datetime' ? 'DD/MM/YYYY HH:mm' : 'DD/MM/YYYY'}
+      dateFormat={type === 'date' ? returnDateFormat() || 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm'}
       inputProps={{ disabled: disabled }}
       value={value}
       onChange={onChange}

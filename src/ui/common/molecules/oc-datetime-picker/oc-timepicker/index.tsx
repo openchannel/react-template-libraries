@@ -36,10 +36,12 @@ export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
       ? (setValueMoment(valueMoment.add(quantity, measure)), onChange(valueMoment))
       : onChange(valueMoment.subtract(quantity, measure));
   };
+
   const addHour = React.useCallback(() => modifyDate('add', 1, 'hours'), [modifyDate]);
   const addMinute = React.useCallback(() => modifyDate('add', 1, 'minutes'), [modifyDate]);
   const decHour = React.useCallback(() => modifyDate('subtract', 1, 'hours'), [modifyDate]);
   const decMinute = React.useCallback(() => modifyDate('subtract', 1, 'minutes'), [modifyDate]);
+
   return (
     <div className="date-picker__time-view" style={style}>
       <div className="date-picker__time">
