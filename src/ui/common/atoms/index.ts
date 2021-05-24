@@ -11,3 +11,4 @@ export * from './oc-color';
 export * from './oc-file-upload'
 export * from './oc-dropbox'
 export * from './oc-tag-element'
+export * from './oc-error'
