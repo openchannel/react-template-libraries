@@ -52,7 +52,7 @@ export const OcMultiSelectList: React.FC<OcMultiSelectListProps> = (props) => {
 		<div className="multiselect">
 			<OcDropboxComponent
 				className="multiselect__dropbox"
-				placeholder={`Select ${label}`}
+				placeholder={label ? `Select ${label}` : ''}
 				items={options}
 				selectItem={onSelectItem}
 				selectedItem=""

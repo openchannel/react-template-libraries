@@ -17,17 +17,21 @@ describe('OcTagElement', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should click on icon and fire title', () => {
+	it('should click/keyDown on icon and fire title', () => {
 		const onIconClickMock = jest.fn();
 
 		component.setProps({
 			onIconClick: onIconClickMock,
 		});
 
+		const closeIconWrapper = component.find('span.tag-element__close-icon');
+
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		component.find('span.tag-element__close-icon').props().onClick();
+		closeIconWrapper.props().onClick();
+		expect(onIconClickMock).toHaveBeenCalledWith('my-tag');
 
+		closeIconWrapper.simulate('keydown', { key: 'Enter' });
 		expect(onIconClickMock).toHaveBeenCalledWith('my-tag');
 	});
 
