@@ -5,25 +5,32 @@ import './style.scss';
 
 export const OcRichTextEditorComponent = (props: any) => {
   const editorRef: any = React.useRef();
+  const { placeholderText, initialContent } = props;
+
   return (
     <div className="rich-editor">
       <Editor
-        onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue="<p>This is the initial content of the editor.</p>"
+        onInit={(e, editor) => ((editorRef.current = editor), console.log(e))}
+        initialValue=""
         init={{
-          height: 500,
+          suffix: '.min',
           menubar: false,
-          plugins: [
-            'advlist autolink lists link image charmap print preview anchor',
-            'searchreplace visualblocks code fullscreen',
-            'insertdatetime media table paste code help wordcount',
-          ],
           toolbar:
-            'undo redo | formatselect | ' +
-            'bold italic backcolor | alignleft aligncenter ' +
-            'alignright alignjustify | bullist numlist outdent indent | ' +
-            'removeformat | help',
-          content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
+            ' bold italic underline strikethrough subscript superscript fontselect fontsizeselect |' +
+            'alignleft aligncenter alignright alignjustify | numlist bullist | outdent indent | link unlink | undo redo',
+          plugins: 'lists link',
+          placeholder: placeholderText,
+          max_height: 150,
+          content_style: 'body { font-family: Arial; }',
+          // content_css: 'src/ui/styles/styles.scss',
+          mobile: {
+            toolbar_mode: 'sliding',
+            max_height: 300,
+            height: 220,
+            toolbar:
+              'bold italic underline strikethrough | undo redo | fontselect fontsizeselect | numlist bullist | ' +
+              ' alignleft aligncenter alignright alignjustify | outdent indent | subscript superscript | link unlink |',
+          },
         }}
       />
     </div>
