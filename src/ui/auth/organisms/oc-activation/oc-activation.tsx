@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Button, Label, OcInputComponent } from '../../../../ui/common';
+import { Button, OcError, Label, OcInputComponent } from '../../../../ui/common';
 import { OcActivationProps } from './types';
 import './styles.scss';
 
@@ -15,6 +15,7 @@ export const OcActivation: React.FC<OcActivationProps> = (props) => {
 		signupUrl,
 		process,
 		inputProps,
+		inputError,
 	} = props;
 
 	return (
@@ -43,6 +44,7 @@ export const OcActivation: React.FC<OcActivationProps> = (props) => {
 							required
 							{...inputProps}
 						/>
+						{inputError && <OcError message={String(inputError)} />}
 					</div>
 					<Button
 						htmlType="submit"

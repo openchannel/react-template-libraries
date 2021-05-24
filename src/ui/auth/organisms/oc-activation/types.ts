@@ -21,4 +21,6 @@ export interface OcActivationProps {
 	 * Additional input props.
 	 */
 	inputProps?: InputProps;
+
+	inputError?: string | boolean;
 }

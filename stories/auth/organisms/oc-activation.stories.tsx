@@ -2,6 +2,7 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
+import { errorMessages } from '../../../src/lib/validation';
 import { OcActivation, OcActivationProps } from '../../../src/ui/auth';
 
 
@@ -10,16 +11,37 @@ export default {
 	component: OcActivation,
 } as Meta;
 
-const Component: Story<OcActivationProps> = (args: OcActivationProps) => (
+export const Default: Story<OcActivationProps> = () => (
 	<BrowserRouter>
-		<OcActivation {...args} />
+		<OcActivation
+			companyLogoUrl="./img/logo-company.png"
+			resendActivationUrl="/"
+			signupUrl="/"
+			inputProps={{
+				id: 'input',
+			}}
+		/>
 	</BrowserRouter>
 );
 
-export const Default = Component.bind({});
-Default.args = {
-	companyLogoUrl: './img/logo-company.png',
-	inputProps: {
-		id: 'input',
-	}
-};
+export const Filled: Story<OcActivationProps> = () => {
+	const [value, setValue] = React.useState('');
+	const [blurred, setBlurred] = React.useState(false);
+
+	return (
+		<BrowserRouter>
+			<OcActivation
+				companyLogoUrl="./img/logo-company.png"
+				resendActivationUrl="/"
+				signupUrl="/"
+				inputProps={{
+					id: 'input',
+					value,
+					onChange: (e) => setValue(e.target.value),
+					onBlur: () => setBlurred(true),
+				}}
+				inputError={blurred && !value && errorMessages.required()}
+			/>
+		</BrowserRouter>
+	);
+}
