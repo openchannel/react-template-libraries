@@ -11,7 +11,7 @@ export const OcRichTextEditorComponent = (props: any) => {
     <div className="rich-editor">
       <Editor
         onInit={(e, editor) => ((editorRef.current = editor), console.log(e))}
-        initialValue=""
+        initialValue={initialContent}
         init={{
           suffix: '.min',
           menubar: false,

@@ -1,26 +1,11 @@
 @import '../../../styles/index';
 
-// .rich-editor {
-//   width: 100%;
-//   max-height: 300px;
-// }
-// .tox-tinymce {
-//   border-radius: 4px;
-//   border-color: #c9d5ea;
-// }
-// .tox-statusbar {
-//   display: none !important;
-// }
-
-// .tox-tbtn--select {
-//   width: 92px !important;
-// }
-.rich-editor__custom {
+.rich-editor {
   .tox-tinymce {
-    border-radius: 4px !important;
-    border-color: $info !important;
+    border-radius: 4px;
+    border-color: $info;
     &:focus-within {
-      border-color: $primary !important;
+      border-color: $primary;
     }
     .tox-editor-container {
       .tox-editor-header {
@@ -28,23 +13,23 @@
           .tox-toolbar__primary {
             .tox-toolbar__group {
               .tox-tbtn--enabled {
-                background: none !important;
+                background: none;
                 svg {
                   fill: $primary;
                 }
                 &:hover {
-                  background: #f4f4f4 !important;
+                  background: #f4f4f4;
                 }
               }
               .tox-tbtn {
                 &:hover {
-                  background: #f4f4f4 !important;
+                  background: #f4f4f4;
                 }
                 svg {
-                  fill: mix($black, $info, 38%) !important;
+                  fill: mix($black, $info, 38%);
                 }
                 &__select-label {
-                  color: mix($black, $info, 38%) !important;
+                  color: mix($black, $info, 38%);
                 }
               }
             }
@@ -52,40 +37,40 @@
           .tox-toolbar__overflow {
             .tox-toolbar__group {
               .tox-tbtn--enabled {
-                background: none !important;
+                background: none;
                 svg {
                   fill: $primary;
                 }
                 &:hover {
-                  background: #f4f4f4 !important;
+                  background: #f4f4f4;
                 }
               }
               .tox-tbtn {
                 &:hover {
-                  background: #f4f4f4 !important;
+                  background: #f4f4f4;
                 }
                 svg {
-                  fill: mix($black, $info, 38%) !important;
+                  fill: mix($black, $info, 38%);
                 }
                 &__select-label {
-                  color: mix($black, $info, 38%) !important;
+                  color: mix($black, $info, 38%);
                 }
               }
             }
           }
         }
         .tox-tbtn--select {
-          width: 92px !important;
+          width: 92px;
         }
       }
     }
     .tox-statusbar {
-      opacity: 0 !important;
+      opacity: 0;
     }
   }
   &_focus {
     .tox-tinymce {
-      border-color: $primary !important;
+      border-color: $primary;
     }
   }
 }

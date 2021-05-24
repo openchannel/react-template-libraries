@@ -11,4 +11,7 @@ export default {
 const Component: Story<any> = (args) => <OcRichTextEditorComponent {...args} />;
 
 export const DefaultEditor = Component.bind({});
-DefaultEditor.args = {};
+DefaultEditor.args = {
+  initialContent: '',
+  placeholderText: 'Default value',
+};
