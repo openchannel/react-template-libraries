@@ -5,15 +5,15 @@ import './styles.scss';
 
 
 export const OcError: React.FC<OcErrorProps> = (props) => {
-	const { error } = props;
+	const { message } = props;
 
-	if (!error) {
+	if (!message) {
 		return null;
 	}
 
 	return (
 		<div className="error">
-			<span className="error__feedback">{error}</span>
+			<span className="error__feedback">{message}</span>
 		</div>
 	)
 }
