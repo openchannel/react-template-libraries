@@ -13,14 +13,10 @@ export interface TimepickerProps {
    * Set Date of datepicker
    */
   onChange: (value: string | Moment) => void;
-  /**
-   * Inline styles passed to component
-   */
-  style?: React.CSSProperties;
 }
 
 export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
-  const { value, onChange, style } = props;
+  const { value, onChange } = props;
   const [valueMoment, setValueMoment] = React.useState(moment(value));
 
   React.useEffect(() => {
@@ -43,7 +39,7 @@ export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
   const decMinute = React.useCallback(() => modifyDate('subtract', 1, 'minutes'), [modifyDate]);
 
   return (
-    <div className="date-picker__time-view" style={style}>
+    <div className="date-picker__time-view" style={{ display: 'block' }}>
       <div className="date-picker__time">
         <div className="date-picker__time-hours">
           <div className="date-picker__time-header">Hours</div>
@@ -54,7 +50,10 @@ export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
               value={valueMoment.hours()}
               maxLength={2}
               max="60"
-              onChange={(e) => onChange(valueMoment.hours(parseInt(e.target.value || '0')))}
+              onChange={React.useCallback(
+                (e) => onChange(valueMoment.hours(parseInt(e.target.value || '0'))),
+                [onChange],
+              )}
             />
             <ArrowRightAnalog className="date-picker__time-calendar-icon" onClick={addHour} />
           </div>
@@ -68,9 +67,12 @@ export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
               maxLength={2}
               max="60"
               value={valueMoment.minutes()}
-              onChange={(e) => {
-                onChange(valueMoment.minutes(parseInt(e.target.value || '0')));
-              }}
+              onChange={React.useCallback(
+                (e) => {
+                  onChange(valueMoment.minutes(parseInt(e.target.value || '0')));
+                },
+                [onChange],
+              )}
             />
             <ArrowRightAnalog className="date-picker__time-calendar-icon" onClick={addMinute} />
           </div>

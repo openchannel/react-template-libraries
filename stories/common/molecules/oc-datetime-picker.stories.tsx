@@ -23,9 +23,11 @@ export const DefaultDate = DateComponent.bind({});
 DefaultDate.args = {
   type: 'date',
   disabled: false,
+  settings: '',
 };
 export const DefaultDateTime = DateComponent.bind({});
 DefaultDateTime.args = {
   type: 'datetime',
   disabled: false,
+  settings: '',
 };
