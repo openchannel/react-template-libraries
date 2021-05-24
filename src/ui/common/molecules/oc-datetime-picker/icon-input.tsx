@@ -9,7 +9,7 @@ export const InputWithIcon = (
     React.SVGAttributes<SVGElement>,
 ) => (
   <div className="inputWithIcon">
-    <input {...props} className="date-input" contentEditable={false} />
+    <input {...props} className="date-input" contentEditable={false} onChange={undefined} />
     <CalendarIcon className="calendarIcon" onClick={props.disabled ? undefined : props.onClick} />
   </div>
 );
