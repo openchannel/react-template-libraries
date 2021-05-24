@@ -18,7 +18,7 @@ describe('OcError', () => {
 	});
 
 	it('should render error', () => {
-		component.setProps({ error: 'input should be not empty' });
+		component.setProps({ message: 'input should be not empty' });
 		expect(component).toBeTruthy();
 	});
 });
