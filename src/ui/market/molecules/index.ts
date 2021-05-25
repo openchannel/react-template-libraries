@@ -1,1 +1,1 @@
-export * from './oc-app-short-info'
+export * from './oc-app-short-info';
