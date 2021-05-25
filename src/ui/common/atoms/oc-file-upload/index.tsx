@@ -5,7 +5,7 @@ import { InputContent } from './input-content';
 import { PreviewContent } from './preview-content';
 import { classNames, getUploadParams } from './utils';
 
-import './styles.scss';
+import './style.scss';
 
 export const OcFileUpload: React.FC<IDropzoneProps> = ({
   maxFiles,

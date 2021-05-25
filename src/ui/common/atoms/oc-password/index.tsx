@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import './styles.scss';
+import './style.scss';
 
 export interface PasswordProps extends React.InputHTMLAttributes<HTMLInputElement> {
   /**

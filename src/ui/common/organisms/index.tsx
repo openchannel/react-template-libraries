@@ -1,2 +1,2 @@
-export * from './modal'
-export * from './confirmationModal'
+export * from './modal';
+export * from './oc-confirmation-modal';

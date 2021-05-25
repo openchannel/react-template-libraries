@@ -2,67 +2,66 @@ import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
 import { OcTags, OcTagsProps } from '../../../../src/ui/form';
-import { Button, OcDropboxComponent, OcTagElement } from '../../../../src/ui/common';
-
+import { OcButtonComponent, OcDropboxComponent, OcTagElement } from '../../../../src/ui/common';
 
 const setUp = (props: OcTagsProps) => shallow(<OcTags {...props} />);
 
 describe('OcTags', () => {
-	let component: ShallowWrapper;
+  let component: ShallowWrapper;
 
-	const onChangeMock = jest.fn();
+  const onChangeMock = jest.fn();
 
-	beforeEach(() => {
-		component = setUp({
-			availableTags: [ 'item2' ],
-			onChange: onChangeMock,
-			value: [ 'item1' ],
-		});
-	});
+  beforeEach(() => {
+    component = setUp({
+      availableTags: ['item2'],
+      onChange: onChangeMock,
+      value: ['item1'],
+    });
+  });
 
-	afterEach(() => {
-		jest.clearAllMocks();
-	});
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
-	it('should works with optional props', () => {
-		component.setProps({
-			placeholder: 'Select one',
-			tagsType: 'number',
-			value: undefined, //using [] by default
-		});
+  it('should works with optional props', () => {
+    component.setProps({
+      placeholder: 'Select one',
+      tagsType: 'number',
+      value: undefined, //using [] by default
+    });
 
-		expect(component).toBeTruthy();
-	});
+    expect(component).toBeTruthy();
+  });
 
-	it('should add new tag', () => {
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		component.find(OcDropboxComponent).props().onInputChange('new-tag', { action: 'input-change' });
+  it('should add new tag', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    component.find(OcDropboxComponent).props().onInputChange('new-tag', { action: 'input-change' });
 
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		component.find(Button).props().onClick();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    component.find(OcButtonComponent).props().onClick();
 
-		expect(onChangeMock).toHaveBeenCalledWith([ 'item1', 'new-tag' ]);
-	});
+    expect(onChangeMock).toHaveBeenCalledWith(['item1', 'new-tag']);
+  });
 
-	it('should select available tag', () => {
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		component.find(OcDropboxComponent).props().selectItem('item2');
+  it('should select available tag', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    component.find(OcDropboxComponent).props().selectItem('item2');
 
-		expect(onChangeMock).toHaveBeenCalledWith([ 'item1', 'item2' ]);
-	});
+    expect(onChangeMock).toHaveBeenCalledWith(['item1', 'item2']);
+  });
 
-	it('should remove selected tag', () => {
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		component.find(OcTagElement).props().onIconClick('item1');
+  it('should remove selected tag', () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    component.find(OcTagElement).props().onIconClick('item1');
 
-		expect(onChangeMock).toHaveBeenCalledWith([]);
-	});
+    expect(onChangeMock).toHaveBeenCalledWith([]);
+  });
 });

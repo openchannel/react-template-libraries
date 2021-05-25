@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './styles.scss';
+import './style.scss';
 
 export const InputContent = () => (
   <div className="file-container__placeholder">

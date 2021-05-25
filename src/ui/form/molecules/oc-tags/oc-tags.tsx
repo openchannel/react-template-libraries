@@ -6,86 +6,78 @@ import difference from 'lodash/difference';
 import { OcTagsProps } from './types';
 import { normalizeTags } from './utils';
 import { useTagDropboxState } from './hooks';
-import { Button, OcDropboxComponent, OcTagElement } from '../../../common';
+import { OcButtonComponent, OcDropboxComponent, OcTagElement } from '../../../common';
 import './styles.scss';
 
-
 export const OcTags: React.FC<OcTagsProps> = (props) => {
-	const {
-		availableTags,
-		value = [],
-		onChange,
-		tagsType = 'string',
-		placeholder = '',
-	} = props;
+  const { availableTags, value = [], onChange, tagsType = 'string', placeholder = '' } = props;
 
-	const setNormalizedValues = React.useCallback((values) => {
-		onChange(normalizeTags(values, tagsType));
-	}, [onChange, tagsType]);
+  const setNormalizedValues = React.useCallback(
+    (values) => {
+      onChange(normalizeTags(values, tagsType));
+    },
+    [onChange, tagsType],
+  );
 
-	const onSelectTag = React.useCallback((selectedTag: string) => {
-		setNormalizedValues([ ...value, selectedTag ]);
-	}, [setNormalizedValues, value]);
+  const onSelectTag = React.useCallback(
+    (selectedTag: string) => {
+      setNormalizedValues([...value, selectedTag]);
+    },
+    [setNormalizedValues, value],
+  );
 
-	const onRemoveTag = React.useCallback((selectedTag: string) => {
-		setNormalizedValues(value.filter((item) => String(item) !== selectedTag));
-	}, [setNormalizedValues, value]);
+  const onRemoveTag = React.useCallback(
+    (selectedTag: string) => {
+      setNormalizedValues(value.filter((item) => String(item) !== selectedTag));
+    },
+    [setNormalizedValues, value],
+  );
 
-	const {
-		inputValue,
-		resetInputValue,
-		onInputChange,
-		onKeyDown,
-	} = useTagDropboxState({ createTag: onSelectTag });
+  const { inputValue, resetInputValue, onInputChange, onKeyDown } = useTagDropboxState({
+    createTag: onSelectTag,
+  });
 
-	const onAddTag = React.useCallback(() => {
-		if (!inputValue) return;
+  const onAddTag = React.useCallback(() => {
+    if (!inputValue) return;
 
-		setNormalizedValues([ ...value, inputValue ]);
-		resetInputValue();
-	}, [setNormalizedValues, value, inputValue]);
+    setNormalizedValues([...value, inputValue]);
+    resetInputValue();
+  }, [setNormalizedValues, value, inputValue]);
 
-	const dropboxOptions = React.useMemo(() => {
-		return orderBy(difference(availableTags, value)).map(String);
-	}, [availableTags, value]);
+  const dropboxOptions = React.useMemo(() => {
+    return orderBy(difference(availableTags, value)).map(String);
+  }, [availableTags, value]);
 
-	return (
-		<div className="tags">
-			<div className="tags__group">
-				<div className="tags__group-wrapper">
-					<OcDropboxComponent
-						className="tags__select"
-						placeholder={placeholder}
-						items={dropboxOptions}
-						selectItem={onSelectTag}
-						selectedItem=""
-						inputValue={inputValue}
-						onInputChange={onInputChange}
-						onKeyDown={onKeyDown}
-					/>
-					<div className="tags__button-add">
-						<Button
-							type="secondary"
-							onClick={onAddTag}
-						>
-							Add
-						</Button>
-					</div>
-				</div>
-			</div>
-			{
-				value.length > 0 && (
-					<div className="tags__list">
-						{
-							value.map((item) => (
-								<span key={String(item)} className="tags__list-item">
-									<OcTagElement title={String(item)} onIconClick={onRemoveTag} />
-								</span>
-							))
-						}
-					</div>
-				)
-			}
-		</div>
-	);
-}
+  return (
+    <div className="tags">
+      <div className="tags__group">
+        <div className="tags__group-wrapper">
+          <OcDropboxComponent
+            className="tags__select"
+            placeholder={placeholder}
+            items={dropboxOptions}
+            selectItem={onSelectTag}
+            selectedItem=""
+            inputValue={inputValue}
+            onInputChange={onInputChange}
+            onKeyDown={onKeyDown}
+          />
+          <div className="tags__button-add">
+            <OcButtonComponent type="secondary" onClick={onAddTag}>
+              Add
+            </OcButtonComponent>
+          </div>
+        </div>
+      </div>
+      {value.length > 0 && (
+        <div className="tags__list">
+          {value.map((item) => (
+            <span key={String(item)} className="tags__list-item">
+              <OcTagElement title={String(item)} onIconClick={onRemoveTag} />
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
