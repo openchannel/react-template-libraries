@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
-
 import { OcRichTextEditorComponent, OcRtfProps } from '../../../src/ui/common';
 
 export default {
@@ -8,10 +7,20 @@ export default {
   component: OcRichTextEditorComponent,
 } as Meta;
 
-const Component: Story<OcRtfProps> = (args) => <OcRichTextEditorComponent {...args} />;
+const Component: Story<OcRtfProps> = (args) => {
+  const [value, setValue] = React.useState('');
+  // React.useEffect(() => setValue(args.value ?? ''), [args.value]);
+  return (
+    <OcRichTextEditorComponent
+      {...args}
+      value={value}
+      onChange={(newValue: string, _editor: any) => setValue(newValue)}
+    />
+  );
+};
 
 export const DefaultEditor = Component.bind({});
 DefaultEditor.args = {
-  initialContent: '',
+  initialValue: '',
   placeholderText: 'Default value',
 };

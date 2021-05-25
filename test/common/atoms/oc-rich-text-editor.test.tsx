@@ -5,7 +5,7 @@ import { OcRichTextEditorComponent } from '../../../src/ui/common';
 
 describe('Rich text format text editor', () => {
   const component: ShallowWrapper = shallow(
-    <OcRichTextEditorComponent placeholderText="Default value" initialContent="" />,
+    <OcRichTextEditorComponent placeholderText="Default value" value="" onChange={()=>void} />,
   );
 
   it('should create', () => {

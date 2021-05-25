@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Editor, IAllProps } from '@tinymce/tinymce-react';
-
 import './style.scss';
 
 export interface OcRtfProps extends IAllProps {
@@ -11,16 +10,30 @@ export interface OcRtfProps extends IAllProps {
   /**
    * Text value which will be already typed in editor
    */
-  initialContent: string | undefined;
+  initialValue: string | undefined;
+  /**
+   * Current editor value
+   */
+  value: string | undefined;
+  /**
+   * Text value which will be already typed in editor
+   */
+  onChange: any;
 }
 
 export const OcRichTextEditorComponent = (props: OcRtfProps) => {
-  const { placeholderText, initialContent } = props;
+  const { placeholderText, value, onChange, initialValue } = props;
+
+  const editorRef: any = React.useRef();
 
   return (
     <div className="rich-editor">
       <Editor
-        initialValue={initialContent}
+        id="tiny"
+        onEditorChange={onChange}
+        onInit={(_e, editor) => (editorRef.current = editor)}
+        initialValue={initialValue}
+        value={value}
         init={{
           suffix: '.min',
           menubar: false,
