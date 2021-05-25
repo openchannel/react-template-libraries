@@ -1,6 +1,6 @@
 import * as React from 'react';
 import UploadIcon from '../../../../assets/img/upload_icon.svg';
-import './styles.scss';
+import './style.scss';
 import { ILayoutProps } from 'react-dropzone-uploader';
 
 export const Layout = ({

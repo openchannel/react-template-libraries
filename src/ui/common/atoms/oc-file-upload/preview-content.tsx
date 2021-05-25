@@ -4,7 +4,7 @@ import DefaultFileIcon from '../../../../assets/img/file_icon.svg';
 import StandardAppIcon from '../../../../assets/img/standard-app-icon.svg';
 import { getUploadParams } from './utils';
 import { IFileWithMeta, IMeta, IPreviewProps } from 'react-dropzone-uploader';
-import './styles.scss';
+import './style.scss';
 
 export const PreviewContent = (props: IPreviewProps) => {
   const { fileWithMeta }: { fileWithMeta: IFileWithMeta } = props;
