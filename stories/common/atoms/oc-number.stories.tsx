@@ -14,4 +14,6 @@ export const SimpleNumberInput = InputComponent.bind({});
 SimpleNumberInput.args = {
   required: false,
   placeholder: 'Write any number here',
+  inputType: 'number',
+  customClass: '',
 };

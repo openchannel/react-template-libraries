@@ -12,6 +12,10 @@ export interface InputNumberProps extends React.InputHTMLAttributes<HTMLInputEle
    */
   disabled?: boolean;
   /**
+   * Type of the input. Can be 'text', 'email', 'password'
+   */
+  inputType?: 'text' | 'email' | 'password' | 'number';
+  /**
    * Placeholder text for input
    */
   placeholder?: string;
@@ -19,8 +23,12 @@ export interface InputNumberProps extends React.InputHTMLAttributes<HTMLInputEle
    * Input value
    */
   value?: string;
+  /**
+   * List of classes which can be attached to the current list
+   */
+  customClass?: string;
 }
 
 export const OcNumberComponent: React.FC<InputNumberProps> = (props) => {
-  return <input type="number" className="form-control" {...props} />;
+  return <input type="number" className={`form-control ${props.customClass}`} {...props} />;
 };
