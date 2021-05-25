@@ -68,6 +68,7 @@
     "@types/lodash": "^4.14.168",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
+    "@types/react-router-dom": "^5.1.7",
     "@types/react-select": "^4.0.15",
     "@types/tinymce": "^4.6.1",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
@@ -110,8 +111,9 @@
     "react-datetime": "^3.0.4",
     "react-dropzone-uploader": "^2.11.0",
     "react-player": "^2.9.0",
-    "react-select": "^4.3.1",
-    "tinymce": "^5.8.1"
+    "tinymce": "^5.8.1",
+    "react-router-dom": "^5.2.0",
+    "react-select": "^4.3.1"
   },
   "jest": {
     "setupFilesAfterEnv": [
