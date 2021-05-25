@@ -1,8 +1,7 @@
 import * as React from 'react';
 import BootstrapModal, { ModalProps as BootstrapModalProps } from 'react-bootstrap/Modal';
 
-import './styles.scss';
-
+import './style.scss';
 
 type ExtendedModalSizeVariants = BootstrapModalProps['size'] | 'md';
 
@@ -36,13 +35,7 @@ export interface ModalProps {
 }
 
 export const Modal: React.FC<ModalProps> = (props) => {
-	const {
-		size = 'md',
-		isOpened,
-		onClose,
-		className = '',
-		children,
-	} = props
+	const { size = 'md', isOpened, onClose, className = '', children } = props;
 
 	return (
 		<BootstrapModal
@@ -55,5 +48,5 @@ export const Modal: React.FC<ModalProps> = (props) => {
 		>
 			{children}
 		</BootstrapModal>
-	)
-}
+	);
+};

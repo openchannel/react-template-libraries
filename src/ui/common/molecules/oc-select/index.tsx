@@ -3,12 +3,12 @@ import * as React from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { SelectCallback } from 'react-bootstrap/helpers';
 
-import { Toggle } from './toggle';
 import { ListItem } from './listItem';
 import { ListWrapper } from './listWrapper';
+import { Toggle } from './toggle';
 import { transformToValidOptions } from './utils';
-import './styles.scss';
 
+import './style.scss';
 
 export type Option = { [T in string]: string };
 
@@ -45,7 +45,7 @@ export interface OcSelectProps {
 	/**
 	 * A callback fired when a menu item is selected.
 	 */
-	onSelectionChange: (eventKey: string | Option, e: React.SyntheticEvent<unknown>) => void
+	onSelectionChange: (eventKey: string | Option, e: React.SyntheticEvent<unknown>) => void;
 }
 
 export const OcSelect: React.FC<Partial<OcSelectProps>> = (props) => {
@@ -57,17 +57,23 @@ export const OcSelect: React.FC<Partial<OcSelectProps>> = (props) => {
 		placeholder = '',
 		// eslint-disable-next-line @typescript-eslint/no-empty-function
 		onSelectionChange = () => {},
-	} = props
+	} = props;
 
-	const options = React.useMemo(() => transformToValidOptions(selectValArr, labelField), [selectValArr, labelField])
+	const options = React.useMemo(() => transformToValidOptions(selectValArr, labelField), [
+		selectValArr,
+		labelField,
+	]);
 
-	const onSelect = React.useCallback((eventKey: string, event: React.SyntheticEvent) => {
-		const value = labelField ? { [labelField]: eventKey } : eventKey
+	const onSelect = React.useCallback(
+		(eventKey: string, event: React.SyntheticEvent) => {
+			const value = labelField ? { [labelField]: eventKey } : eventKey;
 
-		onSelectionChange(value, event)
-	}, [onSelectionChange, labelField]) as SelectCallback
+			onSelectionChange(value, event);
+		},
+		[onSelectionChange, labelField],
+	) as SelectCallback;
 
-	const toggleValue = value ? (typeof value === 'object' ? value[labelField] : value) : placeholder
+	const toggleValue = value ? (typeof value === 'object' ? value[labelField] : value) : placeholder;
 
 	return (
 		<Dropdown className="select-component">
@@ -76,22 +82,20 @@ export const OcSelect: React.FC<Partial<OcSelectProps>> = (props) => {
 			</Dropdown.Toggle>
 
 			<Dropdown.Menu as={ListWrapper}>
-				{
-					options.map((item) => {
-						return (
-							<Dropdown.Item
-								key={item[labelField]}
-								name={String(item[labelField])}
-								eventKey={String(item[labelField])}
-								as={ListItem}
-								onSelect={onSelect}
-							>
-								{item[labelField]}
-							</Dropdown.Item>
-						)
-					})
-				}
+				{options.map((item) => {
+					return (
+						<Dropdown.Item
+							key={item[labelField]}
+							name={String(item[labelField])}
+							eventKey={String(item[labelField])}
+							as={ListItem}
+							onSelect={onSelect}
+						>
+							{item[labelField]}
+						</Dropdown.Item>
+					);
+				})}
 			</Dropdown.Menu>
 		</Dropdown>
-	)
-}
+	);
+};

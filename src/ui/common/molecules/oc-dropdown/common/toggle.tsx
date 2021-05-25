@@ -3,22 +3,16 @@ import { DropdownToggleProps } from 'react-bootstrap/DropdownToggle';
 
 import { DropdownVariants } from '../base-dropdown';
 
-
 export interface ToggleProps extends DropdownToggleProps {
 	variant: DropdownVariants;
 }
 
 export const Toggle = React.forwardRef(
 	(props: ToggleProps, ref: React.ForwardedRef<HTMLDivElement>) => {
-		const {
-			variant,
-			onClick,
-			className,
-			'aria-haspopup': ariaHasPopup,
-			children,
-		} = props
+		const { variant, onClick, className, 'aria-haspopup': ariaHasPopup, children } = props;
 
-		const classByVariant = variant === 'inline' ? 'dropdown-label__text' : 'dropdown-button__placeholder-container'
+		const classByVariant =
+			variant === 'inline' ? 'dropdown-label__text' : 'dropdown-button__placeholder-container';
 
 		return (
 			<div
