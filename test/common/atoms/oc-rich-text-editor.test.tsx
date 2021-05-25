@@ -3,8 +3,15 @@ import { shallow, ShallowWrapper } from 'enzyme';
 
 import { OcRichTextEditorComponent } from '../../../src/ui/common';
 
-describe('Input content for replacing mockups in dropzone library', () => {
-  const component: ShallowWrapper = shallow(<OcRichTextEditorComponent />);
+describe('Rich text format text editor', () => {
+  const component: ShallowWrapper = shallow(
+    <OcRichTextEditorComponent
+      placeholderText="Default value"
+      value=""
+      onChange={undefined}
+      initialValue=""
+    />,
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();
