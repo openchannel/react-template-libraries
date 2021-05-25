@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { DropdownVariants } from '../base-dropdown';
 
-
 export interface ListWrapperProps {
 	alignRight?: boolean;
 	variant: DropdownVariants;
@@ -26,9 +25,10 @@ export const ListWrapper = React.forwardRef(
 			'data-popper-escaped': dataPopperEscaped,
 			'data-popper-placement': dataPopperPlacement,
 			'data-popper-reference-hidden': dataPopperReferenceHidden,
-		} = props
+		} = props;
 
-		const classByVariant = variant === 'inline' ? 'dropdown-label__dropdown' : 'dropdown-button__menu'
+		const classByVariant =
+			variant === 'inline' ? 'dropdown-label__dropdown' : 'dropdown-button__menu';
 
 		return (
 			<div

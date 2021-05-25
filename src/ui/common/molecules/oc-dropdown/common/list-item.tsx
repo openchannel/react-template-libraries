@@ -2,31 +2,20 @@ import * as React from 'react';
 
 import { DropdownVariants } from '../base-dropdown';
 
-
 export interface ListItemProps {
-	variant: DropdownVariants,
+	variant: DropdownVariants;
 	className?: string;
-	children: React.ReactNode,
+	children: React.ReactNode;
 }
 
 export const ListItem = React.forwardRef(
 	(props: ListItemProps, ref: React.Ref<HTMLButtonElement>) => {
-		const {
-			variant,
-			children,
-			className,
-			...p
-		} = props
+		const { variant, children, className, ...p } = props;
 
-		const classByVariant = variant === 'inline' ? 'dropdown-label__dropdown-item' : ''
+		const classByVariant = variant === 'inline' ? 'dropdown-label__dropdown-item' : '';
 
 		return (
-			<button
-				{...p}
-				ref={ref}
-				type="button"
-				className={`${classByVariant} ${className}`}
-			>
+			<button {...p} ref={ref} type="button" className={`${classByVariant} ${className}`}>
 				{children}
 			</button>
 		);

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { DropdownToggleProps } from 'react-bootstrap/DropdownToggle';
 
-import { Button } from '../../atoms';
-
+import { OcButtonComponent } from '../../atoms';
 
 export const Toggle = React.forwardRef(
 	(props: DropdownToggleProps, ref: React.ForwardedRef<HTMLButtonElement>) => {
@@ -13,10 +12,10 @@ export const Toggle = React.forwardRef(
 			'aria-expanded': ariaExpanded,
 			'aria-haspopup': ariaHasPopup,
 			children,
-		} = props
+		} = props;
 
 		return (
-			<Button
+			<OcButtonComponent
 				ref={ref}
 				aria-expanded={ariaExpanded}
 				aria-haspopup={ariaHasPopup}
@@ -26,7 +25,7 @@ export const Toggle = React.forwardRef(
 				disabled={disabled}
 			>
 				<div className="select-component__text">{children}</div>
-			</Button>
+			</OcButtonComponent>
 		);
 	},
 );

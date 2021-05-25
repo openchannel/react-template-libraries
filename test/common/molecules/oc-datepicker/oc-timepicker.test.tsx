@@ -9,7 +9,7 @@ import {
 
 const setUp = (props: TimepickerProps) => shallow(<OcTimePicker {...props} />);
 
-describe('OcSelect - list item component', () => {
+describe('Time picker', () => {
   const component: ShallowWrapper = setUp({
     value: moment(),
     onChange: () => {},

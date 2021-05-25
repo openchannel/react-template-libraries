@@ -1,2 +1,2 @@
-export * from './oc-tags'
-export * from './types'
+export * from './oc-tags';
+export * from './types';

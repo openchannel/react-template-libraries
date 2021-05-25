@@ -1,5 +1,4 @@
-import { useState, useCallback, EffectCallback } from 'react';
-
+import { EffectCallback, useCallback, useState } from 'react';
 
 interface useModalStateProps {
 	isOpened: boolean;
@@ -8,14 +7,14 @@ interface useModalStateProps {
 }
 
 export const useModalState = (): useModalStateProps => {
-	const [isOpened, setOpened] = useState(false)
+	const [isOpened, setOpened] = useState(false);
 
-	const openModal = useCallback(() => setOpened(true), [])
-	const closeModal = useCallback(() => setOpened(false), [])
+	const openModal = useCallback(() => setOpened(true), []);
+	const closeModal = useCallback(() => setOpened(false), []);
 
 	return {
 		isOpened,
 		openModal,
 		closeModal,
-	}
-}
+	};
+};
