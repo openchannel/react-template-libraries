@@ -36,6 +36,7 @@ module.exports = {
     'react/prop-types': 'off',
 		'react/destructuring-assignment': 'error',
     '@typescript-eslint/no-unused-vars': 'off',
+		'@typescript-eslint/no-use-before-define': 'off',
     'jsx-a11y/no-noninteractive-tabindex': 'off',
 		'simple-import-sort/imports': 'error',
 		'simple-import-sort/exports': 'error',
