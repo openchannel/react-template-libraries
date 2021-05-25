@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { UPDATE_SORT, SET_TABLE_DATA } from './chart-state';
-import { TABULAR_DATA_TYPE, GRAPH_DATA_TYPE } from './utils';
 import { MinDropdownWidth } from '../../../common/molecules/oc-dropdown';
 
+import { SET_TABLE_DATA, UPDATE_SORT } from './chart-state';
+import { GRAPH_DATA_TYPE, TABULAR_DATA_TYPE } from './utils';
 
 export type DataType = string | typeof TABULAR_DATA_TYPE | typeof GRAPH_DATA_TYPE;
 
@@ -92,11 +92,11 @@ export interface TotalInfoProps {
 export type ChartProps = BaseChartProps & TotalInfoProps & CanvasProps;
 
 export interface ChartReducer {
-	tableData: { label: string, value: number }[];
+	tableData: { label: string; value: number }[];
 	sort: {
 		key: string;
 		orderBy: string;
-	},
+	};
 }
 
 export interface ChartAction {

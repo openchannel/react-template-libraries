@@ -1,18 +1,13 @@
 import * as React from 'react';
 import { Chart } from 'chart.js';
-import merge from 'lodash/merge';
 import assign from 'lodash/assign';
+import merge from 'lodash/merge';
 
-import { defaultChartParams } from '../utils';
 import { CanvasProps, ChartStatisticDataModel } from '../types';
-
+import { defaultChartParams } from '../utils';
 
 export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> = (props) => {
-	const {
-		data,
-		isBackgroundPainted,
-		enablePoints,
-	} = props;
+	const { data, isBackgroundPainted, enablePoints } = props;
 
 	const chartRef = React.useRef<HTMLCanvasElement | null>(null);
 	const [chart, setChart] = React.useState<Chart>();
@@ -22,7 +17,7 @@ export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> =
 
 		return () => {
 			destroyChart();
-		}
+		};
 	}, []);
 
 	React.useEffect(() => {
@@ -35,7 +30,7 @@ export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> =
 		const context = chartRef.current.getContext('2d');
 
 		if (!context) {
-			return
+			return;
 		}
 
 		const gradientFill = context.createLinearGradient(0, 0, 0, 170);
@@ -68,34 +63,28 @@ export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> =
 		});
 
 		setChart(
-			new Chart(
-				chartRef.current,
-				{
-					type: defaultChartParams.type,
-					data: computedData,
-					options: computedOptions,
-				},
-			)
+			new Chart(chartRef.current, {
+				type: defaultChartParams.type,
+				data: computedData,
+				options: computedOptions,
+			}),
 		);
 	};
 
 	const updateChart = () => {
 		if (!chart) return;
 
-		assign(
-			chart.config.data,
-			{
-				labels: data.labelsX ? data.labelsX : [],
-				datasets: [
-					{
-						// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-						// @ts-ignore
-						...chart.config.data.datasets[0],
-						data: data.labelsY ? data.labelsY : [],
-					},
-				],
-			},
-		);
+		assign(chart.config.data, {
+			labels: data.labelsX ? data.labelsX : [],
+			datasets: [
+				{
+					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+					// @ts-ignore
+					...chart.config.data.datasets[0],
+					data: data.labelsY ? data.labelsY : [],
+				},
+			],
+		});
 
 		chart.update();
 	};
@@ -110,5 +99,5 @@ export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> =
 		<div className="chart__data-container-canvas">
 			<canvas ref={chartRef} height="220" />
 		</div>
-	)
-}
+	);
+};

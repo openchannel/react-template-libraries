@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react';
 
 import { UseTagDropboxState } from './types';
 
-
 export const useTagDropboxState: UseTagDropboxState = ({ createTag }) => {
 	const [inputValue, setInputValue] = useState('');
 
@@ -17,19 +16,22 @@ export const useTagDropboxState: UseTagDropboxState = ({ createTag }) => {
 		setInputValue('');
 	}, []);
 
-	const onKeyDown = useCallback((event) => {
-		if (!inputValue) return;
+	const onKeyDown = useCallback(
+		(event) => {
+			if (!inputValue) return;
 
-		switch (event.key) {
-			case 'Enter':
-			case 'Tab':
-				createTag(inputValue);
-				resetInputValue();
-				// call blur to blur and close menu
-				event.target.blur();
-				event.preventDefault();
-		}
-	}, [inputValue, createTag]);
+			switch (event.key) {
+				case 'Enter':
+				case 'Tab':
+					createTag(inputValue);
+					resetInputValue();
+					// call blur to blur and close menu
+					event.target.blur();
+					event.preventDefault();
+			}
+		},
+		[inputValue, createTag],
+	);
 
 	return {
 		inputValue,
@@ -37,4 +39,4 @@ export const useTagDropboxState: UseTagDropboxState = ({ createTag }) => {
 		onInputChange,
 		onKeyDown,
 	};
-}
+};

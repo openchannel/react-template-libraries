@@ -2,54 +2,48 @@
 import * as React from 'react';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  /**
-   * Marks the input as required
-   */
-  required?: boolean;
-  /**
-   * Type of the input. Can be 'text', 'email', 'password'
-   */
-  inputType?: 'text' | 'email' | 'password';
-  /**
-   * Autocomplete
-   */
-  autocomplete?: boolean;
-  /**
-   * Set auto focus to true or false
-   */
-  autoFocus?: boolean;
-  /**
-   * List of classes which can be attached to the current list
-   */
-  customClass?: string;
-  /**
-   * Set disabled state for input
-   */
-  disabled?: boolean;
-  /**
-   * Placeholder text for input
-   */
-  placeholder?: string;
-  /**
-   * Input value
-   */
-  value?: string;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  /**
-   * Style which can be added to the title
-   * Supposed to be the style object
-   */
-  style?: React.CSSProperties;
+	/**
+	 * Marks the input as required
+	 */
+	required?: boolean;
+	/**
+	 * Type of the input. Can be 'text', 'email', 'password'
+	 */
+	inputType?: 'text' | 'email' | 'password';
+	/**
+	 * Autocomplete
+	 */
+	autocomplete?: boolean;
+	/**
+	 * Set auto focus to true or false
+	 */
+	autoFocus?: boolean;
+	/**
+	 * List of classes which can be attached to the current list
+	 */
+	customClass?: string;
+	/**
+	 * Set disabled state for input
+	 */
+	disabled?: boolean;
+	/**
+	 * Placeholder text for input
+	 */
+	placeholder?: string;
+	/**
+	 * Input value
+	 */
+	value?: string;
+	onChange?: React.ChangeEventHandler<HTMLInputElement>;
+	/**
+	 * Style which can be added to the title
+	 * Supposed to be the style object
+	 */
+	style?: React.CSSProperties;
 }
 
 export const OcInputComponent: React.FC<InputProps> = (props) => {
-  const { customClass, inputType, ...p } = props;
+	const { customClass, inputType, ...p } = props;
 
-  return (
-    <input
-      type={inputType}
-      className={`form-control ${customClass}`}
-      {...p}
-    />
-  );
+	return <input type={inputType} className={`form-control ${customClass}`} {...p} />;
 };

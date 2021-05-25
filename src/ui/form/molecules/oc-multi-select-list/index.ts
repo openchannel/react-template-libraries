@@ -1,2 +1,2 @@
-export * from './oc-multi-select-list'
-export * from './types'
+export * from './oc-multi-select-list';
+export * from './types';

@@ -1,6 +1,5 @@
 import { ChartTooltipOptions, NestedTickOptions } from 'chart.js';
 
-
 export const TABULAR_DATA_TYPE = 'tabular';
 export const GRAPH_DATA_TYPE = 'graph';
 
@@ -8,7 +7,7 @@ export const defaultChartStatisticParameter = {
 	label: '',
 	active: true,
 	id: Math.random().toString(36).substr(2, 9),
-}
+};
 
 export const defaultChartParams = {
 	type: 'line',
@@ -24,7 +23,7 @@ export const defaultChartParams = {
 				backgroundColor: 'transparent',
 				borderColor: 'rgba(83, 124, 253, 1)',
 				lineTension: 0,
-				borderWidth: 1.7
+				borderWidth: 1.7,
 			},
 		],
 	},
@@ -32,7 +31,7 @@ export const defaultChartParams = {
 		responsive: true,
 		maintainAspectRatio: false,
 		legend: {
-			display: false
+			display: false,
 		},
 		tooltips: {
 			enabled: true,
@@ -55,7 +54,7 @@ export const defaultChartParams = {
 			callbacks: {
 				title: (tooltipItem) => `  ${tooltipItem[0].value}  `,
 				label: ({ label }) => label,
-			}
+			},
 		} as ChartTooltipOptions,
 		elements: {
 			point: {
@@ -70,7 +69,7 @@ export const defaultChartParams = {
 			},
 			line: {
 				tension: 0, // 0 disables bezier curves
-			}
+			},
 		},
 		scales: {
 			xAxes: [
@@ -85,7 +84,8 @@ export const defaultChartParams = {
 						fontColor: '#727272',
 						maxRotation: 0,
 						autoSkipPadding: 20,
-						callback: (value) => typeof value !== 'number' && value.length >= 8 ? value.substring(0, 3) : value
+						callback: (value) =>
+							typeof value !== 'number' && value.length >= 8 ? value.substring(0, 3) : value,
 					} as NestedTickOptions,
 				},
 			],
@@ -94,7 +94,7 @@ export const defaultChartParams = {
 					gridLines: {
 						drawBorder: false,
 						color: 'rgba(201, 213, 234, 0.4)',
-						zeroLineWidth: 0
+						zeroLineWidth: 0,
 					},
 					ticks: {
 						autoSkip: true,
@@ -102,7 +102,7 @@ export const defaultChartParams = {
 						beginAtZero: true,
 						fontColor: '#727272',
 						lineHeight: 3,
-						callback: (value) => value > 999 ? `${Number(value) / 1000}k` : value,
+						callback: (value) => (value > 999 ? `${Number(value) / 1000}k` : value),
 					} as NestedTickOptions,
 				},
 			],
@@ -114,4 +114,4 @@ export const defaultChartParams = {
 			},
 		},
 	},
-}
+};

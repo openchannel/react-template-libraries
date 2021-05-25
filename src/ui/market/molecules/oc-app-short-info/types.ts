@@ -20,7 +20,13 @@ export interface Restrict {
 	};
 }
 
-export declare type AppStatusValue = 'pending' | 'inReview' | 'inDevelopment' | 'approved' | 'suspended' | 'rejected';
+export declare type AppStatusValue =
+	| 'pending'
+	| 'inReview'
+	| 'inDevelopment'
+	| 'approved'
+	| 'suspended'
+	| 'rejected';
 
 export interface AppStatus {
 	value: AppStatusValue;
