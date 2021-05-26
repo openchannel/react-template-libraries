@@ -5,7 +5,7 @@ import { OcForgotPasswordComponent, OcForgotPasswordProps } from '../../../src/u
 
 const setUp = (props: OcForgotPasswordProps) => shallow(<OcForgotPasswordComponent {...props} />);
 
-describe('OcActivation', () => {
+describe('Forgot Password', () => {
 	let component: ShallowWrapper;
 
 	beforeEach(() => {
