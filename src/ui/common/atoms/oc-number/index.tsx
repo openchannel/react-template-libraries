@@ -3,32 +3,28 @@ import * as React from 'react';
 import './style.scss';
 
 export interface InputNumberProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  /**
-   * Marks the input as required
-   */
-  required?: boolean;
-  /**
-   * Set disabled state for input
-   */
-  disabled?: boolean;
-  /**
-   * Type of the input. Can be 'text', 'email', 'password'
-   */
-  inputType?: 'text' | 'email' | 'password' | 'number';
-  /**
-   * Placeholder text for input
-   */
-  placeholder?: string;
-  /**
-   * Input value
-   */
-  value?: string;
-  /**
-   * List of classes which can be attached to the current list
-   */
-  customClass?: string;
+	/**
+	 * Marks the input as required
+	 */
+	required?: boolean;
+	/**
+	 * Set disabled state for input
+	 */
+	disabled?: boolean;
+	/**
+	 * Placeholder text for input
+	 */
+	placeholder?: string;
+	/**
+	 * Input value
+	 */
+	value?: string;
+	/**
+	 * List of classes which can be attached to the current list
+	 */
+	customClass?: string;
 }
 
-export const OcNumberComponent: React.FC<InputNumberProps> = (props) => {
-  return <input type="number" className={`form-control ${props.customClass}`} {...props} />;
+export const OcNumberComponent: React.FC<InputNumberProps> = ({ customClass, ...p }) => {
+	return <input type="number" className={`form-control ${customClass}`} {...p} />;
 };

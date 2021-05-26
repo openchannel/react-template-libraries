@@ -4,16 +4,17 @@ import { Story, Meta } from '@storybook/react';
 import { OcNumberComponent, InputNumberProps } from '../../../src/ui/common';
 
 export default {
-  title: 'Number Input Component [BEM]',
-  component: OcNumberComponent,
+	title: 'Number Input Component [BEM]',
+	component: OcNumberComponent,
 } as Meta;
 
-const InputComponent: Story<InputNumberProps> = (args) => <OcNumberComponent {...args} />;
+const InputComponent: Story<InputNumberProps> = (args) => {
+	return <OcNumberComponent {...args} />;
+};
 
 export const SimpleNumberInput = InputComponent.bind({});
 SimpleNumberInput.args = {
-  required: false,
-  placeholder: 'Write any number here',
-  inputType: 'number',
-  customClass: '',
+	required: false,
+	placeholder: 'Write any number here',
+	customClass: '',
 };
