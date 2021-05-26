@@ -61,7 +61,7 @@ export const Button = React.forwardRef(
 						<div className="spinner-border la-ball-spin" style={{ width: '2.5rem', height: '2.5rem' }} role="status" />
 					</div>
 				)}
-				{Boolean(children) && children}
+				{Boolean(children) && !process && children}
 				{!children && !process && (
 					<span className="oc-button__text">{text}</span>
 				)}
