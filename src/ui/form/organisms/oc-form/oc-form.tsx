@@ -10,7 +10,7 @@ import {
 import { OcError, OcInputComponent, OcLabelComponent } from '../../../common';
 
 import { AppFormModel } from './types';
-import { getInitialValues } from './utils';
+import { getInitialValues, transform } from './utils';
 
 
 const formJsonData: AppFormModel = {
@@ -155,20 +155,20 @@ const FormGroup = (props: any) => {
 	} = props;
 
 	return (
-		<div>
+		<>
 			{label && <OcLabelComponent htmlFor={labelFor} required={required}>{label}</OcLabelComponent>}
 			{children}
-			{error && <OcError message={error} />}
-		</div>
+			{/*{error && <OcError message={error} />}*/}
+		</>
 	);
 }
 
 const FormGroupWrapper = (props: any) => {
 	const formik = useFormikContext();
-	const { error, touched } = formik.getFieldMeta(props.name);
+	const { error, touched } = formik.getFieldMeta(props.id);
 
 	return (
-		<FormGroup {...props} error={!!touched && !!error && error} />
+		<FormGroup {...props} error={touched && !!error && error} />
 	)
 }
 
@@ -185,25 +185,23 @@ const RecursiveContainer: any = ({ fields, formik }) => {
 			// attributes,
 			// options,
 			// subFieldDefinitions,
-			fields,
+			// fields,
 			placeholder,
 			// category,
 		} = element;
-
-		console.log('element', element)
 
 		switch (type) {
 			case 'text':
 				return (
 					<FormGroupWrapper
-						name={name}
+						name={id}
 						label={label}
 						labelFor={id}
 						required={required}
 						// title={}
 					>
 						<Field
-							name={name}
+							name={id}
 							as={OcInputComponent}
 							placeholder={placeholder}
 							required={required}
@@ -219,7 +217,7 @@ const RecursiveContainer: any = ({ fields, formik }) => {
 				)
 			case 'dynamicFieldArray':
 				return (
-					<RecursiveContainer fields={fields || []} formik={formik} />
+					<RecursiveContainer fields={element.fields || []} formik={formik} />
 				);
 			default:
 				return <div>Unsupported field</div>
@@ -227,30 +225,40 @@ const RecursiveContainer: any = ({ fields, formik }) => {
 	}
 
 	return (
-		fields.map(builder)
+		fields.map((item) => (
+			<div className="form__field">
+				{builder(item)}
+			</div>
+		))
 	);
 }
 
 export const OcForm: React.FC<any> = (props) => {
 	const { data } = props;
 
-	const [form, setForm] = React.useState(formJsonData);
+	// const [form, setForm] = React.useState(formJsonData);
 
 	const onSubmit = React.useCallback((...args) => {
 		console.log('args', ...args)
 	}, []);
 
+	// const { initialValues, fields } = transform(formJsonData.fields);
+
 	const formik = useFormik({
-		initialValues: getInitialValues(formJsonData.fields),
+		// initialValues: getInitialValues(formJsonData.fields),
+		initialValues: {},
 		onSubmit,
 		// enableReinitialize: true,
 		// validationSchema,
 		...props,
 	});
 
+	console.log('getInitialValues(formJsonData.fields)', getInitialValues(formJsonData.fields))
+	// console.log('getInitialValues(formJsonData.fields)', transform(formJsonData.fields))
+
 	return (
 		<FormikContext.Provider value={formik}>
-			<FormikForm>
+			<FormikForm className="form">
 
 				<RecursiveContainer fields={formJsonData.fields} formik={formik} />
 
