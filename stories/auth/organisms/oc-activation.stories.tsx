@@ -11,29 +11,30 @@ export default {
 	component: OcActivation,
 } as Meta;
 
-export const Default: Story<OcActivationProps> = () => (
+const DefaultComponent: Story<OcActivationProps> = (args) => (
 	<BrowserRouter>
-		<OcActivation
-			companyLogoUrl="./img/logo-company.png"
-			resendActivationUrl="/"
-			signupUrl="/"
-			inputProps={{
-				id: 'input',
-			}}
-		/>
+		<OcActivation {...args} />
 	</BrowserRouter>
 );
 
-export const Filled: Story<OcActivationProps> = () => {
-	const [value, setValue] = React.useState('');
+export const Default = DefaultComponent.bind({});
+Default.args = {
+	companyLogoUrl: './img/logo-company.png',
+	resendActivationUrl: '/',
+	signupUrl: '/',
+	inputProps: {
+		id: 'input',
+	},
+}
+
+const FilledComponent: Story<OcActivationProps> = (args) => {
+	const [value, setValue] = React.useState('one-time-activation-code');
 	const [blurred, setBlurred] = React.useState(false);
 
 	return (
 		<BrowserRouter>
 			<OcActivation
-				companyLogoUrl="./img/logo-company.png"
-				resendActivationUrl="/"
-				signupUrl="/"
+				{...args}
 				inputProps={{
 					id: 'input',
 					value,
@@ -44,4 +45,11 @@ export const Filled: Story<OcActivationProps> = () => {
 			/>
 		</BrowserRouter>
 	);
+}
+
+export const Filled = FilledComponent.bind({});
+Filled.args = {
+	companyLogoUrl: './img/logo-company.png',
+	resendActivationUrl: '/',
+	signupUrl: '/',
 }
