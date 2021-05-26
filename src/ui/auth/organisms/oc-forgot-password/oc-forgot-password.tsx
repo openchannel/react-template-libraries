@@ -26,11 +26,11 @@ export const OcForgotPasswordComponent: React.FC<OcForgotPasswordProps> = (props
 	} = props;
 
 	return (
-		<div className="activation login-card login-card_borders">
+		<div className="forgot-password login-card login-card_borders">
 			{/*<form noValidate>*/}
-			<div className="activation__card-body">
-				<div className="activation__logo">
-					<img src={companyLogoUrl} className="activation__logo-img company-logo" alt="logo" />
+			<div className="forgot-password__card-body">
+				<div className="forgot-password__logo">
+					<img src={companyLogoUrl} className="forgot-password__logo-img company-logo" alt="logo" />
 				</div>
 				{showResultPage ? (
 					<div className="forgot-password__header forgot-password__header-result">
@@ -43,18 +43,18 @@ export const OcForgotPasswordComponent: React.FC<OcForgotPasswordProps> = (props
 					</div>
 				) : (
 					<>
-						<div className="activation__header">
-							<h4 className="activation__header-heading">Forgot Password?</h4>
+						<div className="forgot-password__header">
+							<h4 className="forgot-password__header-heading">Forgot Password?</h4>
 							<OcLabelComponent>We will send you a link to reset your password</OcLabelComponent>
 						</div>
-						<div className="activation__form-group">
-							<span className="activation__form-group-label">
+						<div className="forgot-password__email">
+							<span className="forgot-password__email-label">
 								<OcLabelComponent htmlFor={inputProps?.id}>Email</OcLabelComponent>
 							</span>
 							<OcInputComponent
 								inputType="text"
 								placeholder="Email"
-								customClass="activation__form-group-input"
+								customClass="forgot-password__email-input"
 								required
 								{...inputProps}
 							/>
@@ -63,27 +63,27 @@ export const OcForgotPasswordComponent: React.FC<OcForgotPasswordProps> = (props
 						<OcButtonComponent
 							htmlType="submit"
 							type="primary"
-							customClass="activation__button"
+							customClass="forgot-password__button"
 							process={process}
 						>
 							Reset Password
 						</OcButtonComponent>
-						<div className="activation__reactivation">
-							<span className="activation__reactivation-label">
+						<div className="forgot-password__log-in">
+							<span>
 								<OcLabelComponent>Already have an account?</OcLabelComponent>
 							</span>
-							<Link to={loginUrl} className="activation__link">
+							<Link to={loginUrl} className="forgot-password__link">
 								{' '}
 								Log In
 							</Link>
 						</div>
 					</>
 				)}
-				<div className="activation__sign-up">
-					<span className="activation__reactivation-label">
+				<div className="forgot-password__sign-up">
+					<span>
 						<OcLabelComponent>Dont have an account yet?</OcLabelComponent>
 					</span>
-					<Link to={signupUrl} className="activation__link">
+					<Link to={signupUrl} className="forgot-password__link">
 						{' '}
 						Sign Up
 					</Link>
