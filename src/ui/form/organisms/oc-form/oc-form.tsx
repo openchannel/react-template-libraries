@@ -1,8 +1,15 @@
 import * as React from 'react';
-import { useFormik, FormikContext, Form as FormikForm, FormikProps, Field, FieldArray } from 'formik';
-import { AppFormFieldAttributes } from './types';
+import {
+	useFormikContext,
+	useFormik,
+	FormikContext,
+	Form as FormikForm,
+	Field,
+} from 'formik';
 
-import { AppFormModel, AppFormField } from './types';
+import { OcError, OcInputComponent, OcLabelComponent } from '../../../common';
+
+import { AppFormModel } from './types';
 import { getInitialValues } from './utils';
 
 
@@ -138,20 +145,48 @@ const formJsonData: AppFormModel = {
 	],
 };
 
+const FormGroup = (props: any) => {
+	const {
+		children,
+		error,
+		label,
+		labelFor,
+		required,
+	} = props;
+
+	return (
+		<div>
+			{label && <OcLabelComponent htmlFor={labelFor} required={required}>{label}</OcLabelComponent>}
+			{children}
+			{error && <OcError message={error} />}
+		</div>
+	);
+}
+
+const FormGroupWrapper = (props: any) => {
+	const formik = useFormikContext();
+	const { error, touched } = formik.getFieldMeta(props.name);
+
+	return (
+		<FormGroup {...props} error={!!touched && !!error && error} />
+	)
+}
+
 const RecursiveContainer: any = ({ fields, formik }) => {
 	const builder = (element) => {
 		const {
-			// id,
-			// label,
+			id,
+			label,
 			// description,
 			// defaultValue,
 			type,
-			// required,
+			name,
+			required,
 			// attributes,
 			// options,
 			// subFieldDefinitions,
 			fields,
-			// placeholder,
+			placeholder,
 			// category,
 		} = element;
 
@@ -160,8 +195,22 @@ const RecursiveContainer: any = ({ fields, formik }) => {
 		switch (type) {
 			case 'text':
 				return (
-					<Field>
-					</Field>
+					<FormGroupWrapper
+						name={name}
+						label={label}
+						labelFor={id}
+						required={required}
+						// title={}
+					>
+						<Field
+							name={name}
+							as={OcInputComponent}
+							placeholder={placeholder}
+							required={required}
+							id={id}
+							inputType="text"
+						/>
+					</FormGroupWrapper>
 				);
 			case 'number':
 				return (
@@ -182,7 +231,7 @@ const RecursiveContainer: any = ({ fields, formik }) => {
 	);
 }
 
-export const Form: React.FC<any> = (props) => {
+export const OcForm: React.FC<any> = (props) => {
 	const { data } = props;
 
 	const [form, setForm] = React.useState(formJsonData);
