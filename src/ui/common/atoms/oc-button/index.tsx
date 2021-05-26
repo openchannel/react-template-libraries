@@ -63,7 +63,7 @@ export const OcButtonComponent = React.forwardRef(
 						/>
 					</div>
 				)}
-				{Boolean(children) && children}
+				{Boolean(children) && !process && children}
 				{!children && !process && <span className="oc-button__text">{text}</span>}
 			</button>
 		);

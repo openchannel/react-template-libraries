@@ -1,3 +1,6 @@
+export * from './oc-checkbox'
+export * from './oc-input'
+export * from './oc-password'
 export * from './oc-button';
 export * from './oc-checkbox';
 export * from './oc-color';
