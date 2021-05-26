@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 import DefaultCloseIcon from '../../../../assets/img/close-icon.svg';
-import './styles.scss';
 
+import './style.scss';
 
 export interface OcTagElementProps {
 	/**
@@ -23,11 +23,7 @@ export interface OcTagElementProps {
 }
 
 export const OcTagElement: React.FC<OcTagElementProps> = React.memo((props) => {
-	const {
-		title,
-		deleteTagImgUrl,
-		onIconClick,
-	} = props;
+	const { title, deleteTagImgUrl, onIconClick } = props;
 
 	const onClick = () => {
 		if (!onIconClick) return;
@@ -61,14 +57,14 @@ export const OcTagElement: React.FC<OcTagElementProps> = React.memo((props) => {
 						onClick={onClick}
 						onKeyDown={onKeyDown}
 					>
-						{
-							deleteTagImgUrl
-								? <img src={deleteTagImgUrl} className="tag-element__close-icon-svg" alt={title} />
-								: <DefaultCloseIcon className="tag-element__close-icon-svg" />
-						}
+						{deleteTagImgUrl ? (
+							<img src={deleteTagImgUrl} className="tag-element__close-icon-svg" alt={title} />
+						) : (
+							<DefaultCloseIcon className="tag-element__close-icon-svg" />
+						)}
 					</span>
 				</OverlayTrigger>
 			)}
 		</button>
-	)
-})
+	);
+});

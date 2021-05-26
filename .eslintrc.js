@@ -12,7 +12,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['@typescript-eslint', 'jest', 'react', 'jsx-a11y', 'cypress'],
+  plugins: ['@typescript-eslint', 'jest', 'react', 'jsx-a11y', 'cypress', 'simple-import-sort', 'import'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
@@ -34,8 +34,15 @@ module.exports = {
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/prop-types': 'off',
+		'react/destructuring-assignment': 'error',
     '@typescript-eslint/no-unused-vars': 'off',
+		'@typescript-eslint/no-use-before-define': 'off',
     'jsx-a11y/no-noninteractive-tabindex': 'off',
+		'simple-import-sort/imports': 'error',
+		'simple-import-sort/exports': 'error',
+		'import/first': 'error',
+		'import/newline-after-import': 'error',
+		'import/no-duplicates': 'error',
   },
   overrides: [
     {
@@ -51,5 +58,29 @@ module.exports = {
         jest: true,
       },
     },
+		{
+			files: [
+				'**/*.ts',
+				'**/*.tsx',
+			],
+			rules: {
+				'simple-import-sort/imports': [
+					'error',
+					{
+						groups: [
+							['^react', '^@?\\w'],
+							// Side effect imports.
+							['^\\u0000'],
+							// Parent imports. Put `..` last.
+							['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+							// Other relative imports. Put same-folder imports and `.` last.
+							['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+							// Style imports.
+							['^.+\\.s?css$'],
+						],
+					},
+				],
+			},
+		},
   ],
 };

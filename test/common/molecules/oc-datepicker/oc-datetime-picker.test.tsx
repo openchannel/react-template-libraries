@@ -3,14 +3,19 @@ import moment from 'moment';
 import { shallow, mount, ShallowWrapper } from 'enzyme';
 import { OcTimePicker } from '../../../../src/ui/common/molecules/oc-datetime-picker/oc-timepicker/index';
 
-import {
-  OcDatetimePicker,
-  // DatepickerProps,
-} from '../../../../src/ui/common/molecules/oc-datetime-picker/index';
+import { OcDatetimePicker } from '../../../../src/ui/common/molecules/oc-datetime-picker/index';
 
 describe('OcDatetimePicker', () => {
+  const dummyDate = moment();
+
   let component: ShallowWrapper = shallow(
-    <OcDatetimePicker date={moment()} setDate={() => {}} disabled={false} type="date" />,
+    <OcDatetimePicker
+      value={dummyDate}
+      onChange={() => {}}
+      disabled={false}
+      type="date"
+      settings="DD/MM/YYYY"
+    />,
   );
 
   it('should create', () => {
@@ -18,14 +23,19 @@ describe('OcDatetimePicker', () => {
   });
 
   it('should have date', () => {
-    const dummyDate = moment();
     component.setProps({ date: dummyDate });
     expect(component.prop('value')).toEqual(dummyDate);
   });
 
   it('should set correct type and make timepicker visible', () => {
     const wrapper = mount(
-      <OcDatetimePicker date={moment()} setDate={() => {}} disabled={false} type="date" />,
+      <OcDatetimePicker
+        value={dummyDate}
+        onChange={() => {}}
+        disabled={false}
+        type="date"
+        settings="DD/MM/YYYY"
+      />,
     );
     wrapper.setProps({ type: 'datetime' });
 
@@ -36,7 +46,13 @@ describe('OcDatetimePicker', () => {
 
   it('should imitate disabled state', () => {
     const wrapper = mount(
-      <OcDatetimePicker date={moment()} setDate={() => {}} disabled={false} type="date" />,
+      <OcDatetimePicker
+        value={dummyDate}
+        onChange={() => {}}
+        disabled={false}
+        type="date"
+        settings="DD/MM/YYYY"
+      />,
     );
     wrapper.setProps({ disabled: true });
     expect(wrapper.find('input').prop('disabled')).toBe(true);
