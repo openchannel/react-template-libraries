@@ -3,57 +3,38 @@ import flattenDeep from 'lodash/flattenDeep';
 
 import { AppFormField, FormikField } from './types';
 
-// export const getInitialValues = (fields: AppFormField[], namespace: string): FormikField[] => {
-// 	let fieldsObject = {};
-//
-// 	if (Array.isArray(fields)) {
-// 		fieldsObject = fields.reduce((acc, item) => ({ ...acc, [item.id]: item }), {})
-// 	}
-//
-// 	return Object.values(fieldsObject).reduce((prev: FormikField[], curr: any) => {
-// 		// const name: string = namespace ? `${namespace}.fields.${curr.id}` : curr.id;
-//
-// 		if (curr.type === 'dynamicFieldArray') {
-// 			prev = {
-// 				...prev,
-// 				// ...getInitialValues(curr.fields, name),
-// 				...getInitialValues(curr.fields),
-// 			};
-// 		} else {
-// 			prev[curr.id] = curr.defaultValue;
-// 		}
-//
-// 		return prev;
-// 	}, {} as any);
-// }
+export const extendFieldWithRequiredKeys = (field, name) => ({
+	...field, name: name.replaceAll('.', '/'), value: field.defaultValue || '',
+});
 
-export const addKeys = (field, name) => {
-	return { ...field, name, value: field.defaultValue }
-}
+export const normalizeFieldsForFormik = (fields: AppFormField[], namespace: string) => {
+	return fields.map((field) => {
+		const name: string = namespace ? `${namespace}.fields.${field.id}` : field.id;
 
-export const createNameValue = (field) => {
-	return { [field.name]: field.value }
-}
-
-export const transform = (fields, namespace) => {
-	return flattenDeep(fields.map((item) => {
-		const name: string = namespace ? `${namespace}.fields.${item.id}` : item.id;
-
-		if (item.type === 'dynamicFieldArray') {
-			return transform(item.fields, name)
+		if (field.type === 'dynamicFieldArray') {
+			return {
+				...extendFieldWithRequiredKeys(field, name),
+				fields: normalizeFieldsForFormik(field.fields, name),
+			};
 		}
-		return {
-			...item,
-			...addKeys(item, name),
-		}
-	}))
+
+		return extendFieldWithRequiredKeys(field, name);
+	});
+};
+
+export const getInitialValuesFromFields = (fields) => {
+	return fields.reduce((acc, field) => (
+		field.type === 'dynamicFieldArray'
+			? ({ ...acc, ...getInitialValuesFromFields(field.fields) })
+			: ({ ...acc, [field.name]: field.value })
+	), {});
 }
 
-export const getInitialValues = (fields: AppFormField[]): FormikField[] => {
-
-	const initialValues = transform(fields).reduce((acc, item) => ({ ...acc, [item.name]: item.value }), {});
+export const getValidParams = (fields: AppFormField[]): FormikField[] => {
+	const extendedFields = normalizeFieldsForFormik(fields);
 
 	return {
-		initialValues
-	}
+		fields: extendedFields,
+		initialValues: getInitialValuesFromFields(extendedFields),
+	};
 }
