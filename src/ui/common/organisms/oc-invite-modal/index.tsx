@@ -1,16 +1,16 @@
-//commit 240aa1e72cb6b2f67e9148e5d21917065b56fb19 Author: Julia Date: 12.05.21, 18:30
+//commit 48ea5cbd79e7ab31781a2417c39a1059f9c22739 Author: Vitaliy Samofal Date: 29.03.21, 12:05
 import * as React from 'react';
 
 import { ButtonVariants } from '../../atoms';
 import { Modal, ModalProps } from '../modal';
 
-import { Content } from './content';
+import { InviteUserContent } from './content';
 
 import './style.scss';
 
 type ModalButtonVariants = Exclude<ButtonVariants, 'none'>;
 
-export interface ConfirmationModalProps extends Omit<ModalProps, 'children'> {
+export interface InviteModalProps extends Omit<ModalProps, 'children'> {
 	/**
 	 * A callback fired when the rejectButton is clicked.
 	 */
@@ -68,12 +68,12 @@ export interface ConfirmationModalProps extends Omit<ModalProps, 'children'> {
 	rejectButtonHide?: boolean;
 }
 
-export const OcConfirmationModalComponent: React.FC<ConfirmationModalProps> = (props) => {
+export const OcConfirmationModalComponent: React.FC<InviteModalProps> = (props) => {
 	const { isOpened, onClose, ...p } = props;
 
 	return (
 		<Modal isOpened={isOpened} onClose={onClose} className="invite-modal">
-			<Content {...p} onClose={onClose} />
+			<InviteUserContent {...p} onClose={onClose} />
 		</Modal>
 	);
 };
