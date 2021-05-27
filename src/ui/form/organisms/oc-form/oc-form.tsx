@@ -7,143 +7,143 @@ import {
 	Field,
 } from 'formik';
 
-import { OcError, OcInputComponent, OcLabelComponent } from '../../../common';
+import { OcColorComponent, OcError, OcInputComponent } from '../../../common';
+
+import { OcTooltipLabel } from '../../atoms';
 
 import { AppFormModel } from './types';
-import { getInitialValues, transform } from './utils';
+import { getValidParams } from './utils';
+
+import './style.scss';
 
 
 const formJsonData: AppFormModel = {
-	formId: 'test',
-	name: 'test',
-	createdDate: 1599982592157,
-	fields: [
+	"createdDate": 1612464314950,
+	"appTypeId": "dynamic-field_array",
+	"description": "",
+	"label": "dynamic-field_array",
+	"fields": [
 		{
-			attributes: {
-				maxCount: null,
-				minCount: null,
-				ordering: 'append',
-				required: null,
-				rowLabel: null,
+			"attributes": {
+				"required": true
 			},
-			required: null,
-			rowLabel: null,
-			category: 'CUSTOM',
-			defaultValue: null,
-			description: '',
-			id: 'test-dynamic-field-array',
-			isOpen: false,
-			isValid: true,
-			label: 'Test Dynamic field array',
-			placeholder: null,
-			fields: [
-				{
-					attributes: {
-						maxChars: null,
-						minChars: null,
-						required: null,
-					},
-					category: 'CUSTOM',
-					defaultValue: null,
-					description: 'some description',
-					id: 'field1',
-					isOpen: false,
-					isValid: true,
-					label: 'field1',
-					placeholder: 'write some text',
-					type: 'text',
-				},
-				{
-					id: 'long-text-example',
-					label: 'Long Text Example',
-					type: 'longText',
-					placeholder: 'Write your text here...',
-					category: 'CUSTOM',
-					defaultValue: null,
-					attributes: {
-						maxChars: 200,
-						required: null,
-						minChars: 2,
-					},
-				},
-				{
-					attributes: {
-						maxCount: null,
-						minCount: null,
-						ordering: 'append',
-						required: null,
-						rowLabel: null,
-					},
-					required: null,
-					rowLabel: null,
-					category: 'CUSTOM',
-					defaultValue: null,
-					description: '',
-					id: 'test-dynamic-field-array-2',
-					isOpen: false,
-					isValid: true,
-					label: 'Test Dynamic field array 2',
-					placeholder: null,
-					fields: [
-						{
-							attributes: {
-								maxChars: null,
-								minChars: null,
-								required: null,
-							},
-							category: 'CUSTOM',
-							defaultValue: null,
-							description: 'some description',
-							id: 'field2',
-							isOpen: false,
-							isValid: true,
-							label: 'field2',
-							placeholder: 'write some text',
-							type: 'text',
-						},
-						{
-							attributes: {
-								maxCount: null,
-								minCount: 1,
-								ordering: 'append',
-								required: false,
-								rowLabel: null,
-							},
-							required: null,
-							rowLabel: null,
-							category: 'CUSTOM',
-							defaultValue: null,
-							description: '',
-							id: 'test-dynamic-field-array-3',
-							isOpen: false,
-							isValid: true,
-							label: 'Test Dynamic field array 3',
-							placeholder: null,
-							fields: [
-								{
-									id: 'long-text-example2',
-									label: 'Long Text Example2',
-									type: 'longText',
-									placeholder: 'Write your text here...',
-									category: 'CUSTOM',
-									defaultValue: null,
-									attributes: {
-										maxChars: 200,
-										required: null,
-										minChars: 2,
-									},
-								},
-							],
-							type: 'dynamicFieldArray',
-						},
-					],
-					type: 'dynamicFieldArray',
-				},
-			],
-			type: 'dynamicFieldArray',
+			"id": "name",
+			"label": "Name",
+			"type": "text"
 		},
-	],
+		{
+			"defaultValue": "aaaa",
+			"description": "",
+			"attributes": {
+				"maxChars": null,
+				"required": null,
+				"minChars": null
+			},
+			"id": "customData.test-first",
+			"label": "test-first",
+			"type": "longText"
+		},
+		{
+			"description": "",
+			"attributes": {
+				"ordering": "append",
+				"minCount": null,
+				"rowLabel": null,
+				"maxCount": null,
+				"required": null
+			},
+			"id": "customData.fileds-fileds",
+			"label": "fileds fileds",
+			"type": "dynamicFieldArray",
+			"fields": [
+				{
+					"attributes": {
+						"maxChars": null,
+						"required": null,
+						"minChars": null
+					},
+					"id": "number",
+					"label": "number",
+					"type": "text"
+				},
+				{
+					"attributes": {
+						"ordering": null,
+						"minCount": null,
+						"rowLabel": null,
+						"maxCount": null,
+						"required": null
+					},
+					"id": "",
+					"label": "",
+					"type": "dynamicFieldArray",
+					"fields": [
+						{
+							"attributes": {
+								"required": null
+							},
+							"id": "aaaaa",
+							"label": "aaaaa",
+							"type": "emailAddress"
+						},
+						{
+							"attributes": {
+								"required": null
+							},
+							"id": "date-time",
+							"label": "date-time",
+							"type": "datetime"
+						},
+						{
+							"attributes": {
+								"ordering": null,
+								"minCount": null,
+								"rowLabel": null,
+								"maxCount": null,
+								"required": null
+							},
+							"id": "",
+							"label": "",
+							"type": "dynamicFieldArray",
+							"fields": [
+								{
+									"defaultValue": [],
+									"attributes": {
+										"minCount": null,
+										"maxCount": null,
+										"required": null
+									},
+									"id": "boolean-tags",
+									"label": "boolean-tags",
+									"type": "booleanTags"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"description": "",
+			"attributes": {
+				"required": null
+			},
+			"id": "customData.check-box",
+			"label": "check-box",
+			"type": "checkbox"
+		}
+	]
 };
+
+const FormikFieldWrapper = ({ field, form, ...props }) => {
+	const onChange = React.useCallback((value) => {
+		form.setFieldValue(field.name, value);
+	}, [form.setFieldValue]);
+
+	return (
+		<OcColorComponent colorValue={field.value} onValueChange={onChange} />
+	)
+}
 
 const FormGroup = (props: any) => {
 	const {
@@ -151,24 +151,33 @@ const FormGroup = (props: any) => {
 		error,
 		label,
 		labelFor,
+		description,
 		required,
 	} = props;
 
 	return (
 		<>
-			{label && <OcLabelComponent htmlFor={labelFor} required={required}>{label}</OcLabelComponent>}
-			{children}
-			{/*{error && <OcError message={error} />}*/}
+			{label && (
+				<OcTooltipLabel htmlFor={labelFor} required={required} description={description}>
+					{label}
+				</OcTooltipLabel>
+			)}
+			<div className="form__field-input">
+				{children}
+			</div>
+			{error && <OcError message={error} />}
 		</>
 	);
 }
 
 const FormGroupWrapper = (props: any) => {
 	const formik = useFormikContext();
-	const { error, touched } = formik.getFieldMeta(props.id);
+	const { error, touched } = formik.getFieldMeta(props.name);
 
 	return (
-		<FormGroup {...props} error={touched && !!error && error} />
+		<div className="form__field">
+			<FormGroup {...props} error={touched && !!error && error} />
+		</div>
 	)
 }
 
@@ -177,12 +186,10 @@ const RecursiveContainer: any = ({ fields, formik }) => {
 		const {
 			id,
 			label,
-			// description,
-			// defaultValue,
+			description,
 			type,
 			name,
-			required,
-			// attributes,
+			attributes,
 			// options,
 			// subFieldDefinitions,
 			// fields,
@@ -194,17 +201,17 @@ const RecursiveContainer: any = ({ fields, formik }) => {
 			case 'text':
 				return (
 					<FormGroupWrapper
-						name={id}
+						name={name}
 						label={label}
 						labelFor={id}
-						required={required}
-						// title={}
+						description={description}
+						required={attributes.required}
 					>
 						<Field
-							name={id}
+							name={name}
 							as={OcInputComponent}
 							placeholder={placeholder}
-							required={required}
+							required={attributes.required}
 							id={id}
 							inputType="text"
 						/>
@@ -212,8 +219,25 @@ const RecursiveContainer: any = ({ fields, formik }) => {
 				);
 			case 'number':
 				return (
-					<>
-					</>
+					'number input'
+				)
+			case 'color':
+				return (
+					<FormGroupWrapper
+						name={name}
+						label={label}
+						labelFor={id}
+						description={description}
+						required={attributes.required}
+					>
+						<Field
+							name={name}
+							component={FormikFieldWrapper}
+							placeholder={placeholder}
+							id={id}
+							{...attributes}
+						/>
+					</FormGroupWrapper>
 				)
 			case 'dynamicFieldArray':
 				return (
@@ -225,43 +249,30 @@ const RecursiveContainer: any = ({ fields, formik }) => {
 	}
 
 	return (
-		fields.map((item) => (
-			<div className="form__field">
-				{builder(item)}
-			</div>
-		))
+		fields.map(builder)
 	);
 }
 
 export const OcForm: React.FC<any> = (props) => {
 	const { data } = props;
 
-	// const [form, setForm] = React.useState(formJsonData);
-
 	const onSubmit = React.useCallback((...args) => {
 		console.log('args', ...args)
 	}, []);
 
-	// const { initialValues, fields } = transform(formJsonData.fields);
+	const { initialValues, fields } = getValidParams(formJsonData.fields);
 
 	const formik = useFormik({
-		// initialValues: getInitialValues(formJsonData.fields),
-		initialValues: {},
+		initialValues,
 		onSubmit,
-		// enableReinitialize: true,
 		// validationSchema,
 		...props,
 	});
 
-	console.log('getInitialValues(formJsonData.fields)', getInitialValues(formJsonData.fields))
-	// console.log('getInitialValues(formJsonData.fields)', transform(formJsonData.fields))
-
 	return (
 		<FormikContext.Provider value={formik}>
 			<FormikForm className="form">
-
-				<RecursiveContainer fields={formJsonData.fields} formik={formik} />
-
+				<RecursiveContainer fields={fields} formik={formik} />
 			</FormikForm>
 		</FormikContext.Provider>
 	)
