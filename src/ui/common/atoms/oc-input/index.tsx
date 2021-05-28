@@ -34,6 +34,9 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 	 * Input value
 	 */
 	value?: string;
+	/**
+	 * Change hander input function
+	 */
 	onChange?: React.ChangeEventHandler<HTMLInputElement>;
 	/**
 	 * Style which can be added to the title
@@ -43,7 +46,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 export const OcInputComponent: React.FC<InputProps> = (props) => {
-	const { customClass, inputType, ...p } = props;
+	const { customClass, inputType, value, ...p } = props;
 
-	return <input type={inputType} className={`form-control ${customClass}`} {...p} />;
+	return <input type={inputType} className={`form-control ${customClass}`} value={value} {...p} />;
 };
