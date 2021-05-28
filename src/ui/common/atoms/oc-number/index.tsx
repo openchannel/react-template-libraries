@@ -1,6 +1,6 @@
 //commit 76bf4f179cc8ee87ed5117f7d80d1abb451cc096 Author: Julia Date: 06.10.20, 12:59
 import * as React from 'react';
-import { onSelect, onInput, onKeypress } from './utils';
+import { onInput } from './utils';
 import './style.scss';
 
 export interface InputNumberProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -28,13 +28,6 @@ export interface InputNumberProps extends React.InputHTMLAttributes<HTMLInputEle
 
 export const OcNumberComponent: React.FC<InputNumberProps> = ({ customClass, ...p }) => {
 	return (
-		<input
-			type="number"
-			className={`form-control ${customClass}`}
-			onKeyPress={onKeypress}
-			onInput={onInput}
-			onSelect={onSelect}
-			{...p}
-		/>
+		<input type="number" className={`form-control ${customClass}`} onKeyDown={onInput} {...p} />
 	);
 };
