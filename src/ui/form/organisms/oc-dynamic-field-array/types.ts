@@ -5,4 +5,6 @@ export interface OcDynamicFieldArrayProps {
 	fieldDefinitionData: AppTypeFieldModel;
 	/** Generated Form Array for the DFA */
 	dfaFormArray: any[];
+
+	fields: any[];
 }
