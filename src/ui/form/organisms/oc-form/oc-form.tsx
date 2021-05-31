@@ -6,14 +6,17 @@ import {
 	Form as FormikForm,
 	Field,
 } from 'formik';
+import merge from 'lodash/merge';
 
 import { OcColorComponent, OcError, OcInputComponent } from '../../../common';
 import { OcTooltipLabel } from '../../atoms';
 import { FIELD_TYPE } from '../../lib';
 import { OcDynamicFieldArray } from '../oc-dynamic-field-array';
+import { useOcFormContext } from './context';
 
 import { AppFormModel } from './types';
 import { getValidParams } from './utils';
+import { OcFormContextProvider } from './context';
 
 import './style.scss';
 
@@ -269,7 +272,12 @@ export const RecursiveContainer: any = ({ fields, initialValues }) => {
 						description={description}
 						required={attributes.required}
 					>
-						<OcDynamicFieldArray element={element} fields={element.fields} initialValues={initialValues} />
+						<OcDynamicFieldArray
+							element={element}
+							fields={element.fields}
+							// fieldsDefinition={fieldsDefinition}
+							initialValues={initialValues}
+						/>
 					</FormGroupWrapper>
 				);
 			default:
@@ -280,6 +288,14 @@ export const RecursiveContainer: any = ({ fields, initialValues }) => {
 	return (
 		fields.map(builder)
 	);
+}
+
+const RecursiveContainerWrapper = ({ initialValues }) => {
+	const context = useOcFormContext();
+
+	return (
+		<RecursiveContainer fields={context.fieldsDefinition} initialValues={initialValues} />
+	)
 }
 
 export const OcForm: React.FC<any> = (props) => {
@@ -299,11 +315,16 @@ export const OcForm: React.FC<any> = (props) => {
 		// ...props,
 	});
 
+	console.log('fields', fields)
+	console.log('formik.values', formik.values)
+
 	return (
-		<FormikContext.Provider value={formik}>
-			<FormikForm className="form">
-				<RecursiveContainer fields={fields} initialValues={initialValues} />
-			</FormikForm>
-		</FormikContext.Provider>
+		<OcFormContextProvider initialValue={{ fields }}>
+			<FormikContext.Provider value={formik}>
+				<FormikForm className="form">
+					<RecursiveContainerWrapper initialValues={initialValues} />
+				</FormikForm>
+			</FormikContext.Provider>
+		</OcFormContextProvider>
 	)
 }
