@@ -3,7 +3,11 @@ import { FIELD_TYPE } from '../../lib';
 import { AppFormField, FormikField } from './types';
 
 export const extendFieldWithRequiredKeys = (field, name) => ({
-	...field, name: name.replaceAll('.', '/'), value: field.defaultValue || '',
+	...field,
+	name: name.replaceAll('.', '/'),
+	value: field.defaultValue || '',
+	isEditing: true,
+	isNew: false,
 });
 
 export const normalizeFieldsForFormik = (fields: AppFormField[], namespace: string) => {
