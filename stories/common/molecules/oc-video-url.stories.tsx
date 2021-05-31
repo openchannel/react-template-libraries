@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcVideoUrlComponent, VideoUrlProps } from '../../../src/ui/common';
+import { OcVideoUrlComponent, VideoUrlProps } from '../../../src/ui/common/molecules';
 
 export default {
 	title: 'Video Url component [BEM]',
@@ -9,7 +9,9 @@ export default {
 } as Meta;
 
 const VideoUrlComponent: Story<VideoUrlProps> = (args) => {
-	return <OcVideoUrlComponent {...args} />;
+	const [value, setValue] = React.useState(args.videoUrl);
+
+	return <OcVideoUrlComponent {...args} value={value} onChange={setValue} />;
 };
 
 export const DefaultVideoUrl = VideoUrlComponent.bind({});
