@@ -7,31 +7,32 @@ import { PreviewFieldModel } from '../../models';
 import { OcDynamicFieldArray } from '../oc-dynamic-field-array';
 
 export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
-	const { type, isValidField, fieldValue, formArrayDFA } = field;
+	const { type, isValidField, value, formArrayDFA } = field;
 
-	if (!isValidField) {
-		return (
-			<span className="array-preview__field-content__text">{stripHtmlTags(fieldValue)}</span>
-		);
-	}
+	// if (!isValidField) {
+	// 	return (
+	// 		<span className="array-preview__field-content__text">{stripHtmlTags(value)}</span>
+	// 	);
+	// }
 
 	switch (type) {
 		case FIELD_TYPE.DYNAMIC_FIELD_ARRAY: {
-			return (
-				<OcDynamicFieldArray fieldDefinitionData={field} dfaFormArray={formArrayDFA} />
-			);
+			return '111111111111';
+			// return (
+				// <OcDynamicFieldArray fieldDefinitionData={field} dfaFormArray={formArrayDFA} />
+			// );
 		}
 		case FIELD_TYPE.TAGS:
 		case FIELD_TYPE.BOOLEAN_TAGS:
 		case FIELD_TYPE.NUMBER_TAGS: {
-			if (!fieldValue?.length) {
+			if (!value?.length) {
 				return null;
 			}
 
 			return (
 				<div className="array-preview__field-content__tags">
 					{
-						fieldValue.map((tag) => (
+						value.map((tag) => (
 							<div key={tag} className="array-preview__field-content__tags-item">
 								<OcTagElement title={tag} />
 							</div>
@@ -42,25 +43,25 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 		}
 		case FIELD_TYPE.RICH_TEXT: {
 			return (
-				<div dangerouslySetInnerHTML={{ __html: sanitizeHtml(fieldValue) }} />
+				<div dangerouslySetInnerHTML={{ __html: sanitizeHtml(value) }} />
 			);
 		}
 		case FIELD_TYPE.SINGLE_IMAGE: {
 			return (
 				<div className="array-preview__field-content__image-mono">
-					<img src={fieldValue} className="array-preview__field-content__image-mono-item" alt="image" />
+					<img src={value} className="array-preview__field-content__image-mono-item" alt="image" />
 				</div>
 			);
 		}
 		case FIELD_TYPE.MULTI_IMAGE: {
-			if (!fieldValue?.length) {
+			if (!value?.length) {
 				return null;
 			}
 
 			return (
 				<div className="array-preview__field-content__image-multi">
 					{
-						fieldValue.map((src) => (
+						value.map((src) => (
 							<div className="array-preview__field-content__image-multi-container">
 								<img src={src} className="array-preview__field-content__image-multi-item" alt="image" />
 							</div>
@@ -71,7 +72,7 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 		}
 		default:
 			return (
-				<span className="array-preview__field-content__text">{stripHtmlTags(fieldValue)}</span>
+				<span className="array-preview__field-content__text">{stripHtmlTags(value)}</span>
 			);
 	}
 }

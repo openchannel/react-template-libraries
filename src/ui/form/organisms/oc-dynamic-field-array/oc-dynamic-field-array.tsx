@@ -6,13 +6,14 @@ import { OcButtonComponent } from '../../../common';
 import { OcDynamicArrayItem } from '../oc-dynamic-array-item';
 import TrashIconSvg from '../../../../assets/img/trash-icon.svg';
 import { RecursiveContainer } from '../oc-form';
+import { useOcFormContext } from '../oc-form/context';
 
 import { OcDynamicFieldArrayProps } from './types';
 
 import './style.scss';
 
 export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) => {
-	const { element, fields } = props;
+	const { element, fields, fieldsDefinition } = props;
 
 	const formik = useFormikContext();
 	const { value } = formik.getFieldMeta(element.name);
@@ -31,6 +32,16 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 
 		formik.setValues(values);
 	}
+
+	const context = useOcFormContext();
+
+	console.log('context', context)
+
+	const onSaveField = React.useCallback((event: React.SyntheticEvent) => {
+		context.toggleEditingField(formik.values, event.target.id)
+	}, [formik.values, context.toggleEditingField])
+
+	console.log('fields', fields)
 
 	return (
 		<div className="cards-interface">
@@ -66,9 +77,10 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 											</div>
 											<div className="cards-interface__preview-buttons-save">
 												<OcButtonComponent
+													id={element.name}
 													htmlType="button"
 													type="primary"
-													onClick={() => alert('saveItemFieldsData')}
+													onClick={onSaveField}
 												>
 													Save
 												</OcButtonComponent>

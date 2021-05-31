@@ -1,3 +1,4 @@
+import { useFormikContext } from 'formik';
 import * as React from 'react';
 
 import { OcLabelComponent } from '../../../common';
@@ -35,26 +36,27 @@ const isValidDataForFieldType = (type: string, fieldValue: any) => {
 }
 
 export const OcDynamicArrayPreview: React.FC<OcDynamicArrayPreviewProps> = (props) => {
-	const { fieldDefinition, fieldValues } = props;
+	const { fields } = props;
+
+	const formik = useFormikContext();
 
 	const previewFields = React.useMemo(() => {
-		if (!fieldDefinition?.fields || fieldDefinition.fields.length === 0) {
+		if (!fields || fields.length === 0) {
 			return [];
 		}
 
-		return fieldDefinition.fields.map((field) => {
+		return fields.map((field) => {
+			const { value, error, touched } = formik.getFieldMeta(field.name);
+
 			const result: PreviewFieldModel = {
-				isValidField: false,
-				fieldValue: null,
-				formArrayDFA: null,
 				...field,
+				fieldValue: null,
+				isValidField: false,
+				formArrayDFA: null,
+				value,
 			};
 
-			if (fieldValues?.length > 0) {
-				result.fieldValue = fieldValues.find(v => v.fieldId === field.id)?.fieldValue;
-			}
-
-			result.isValidField = isValidDataForFieldType(field.type, result.fieldValue);
+			// result.isValidField = isValidDataForFieldType(field.type, result.fieldValue);
 
 			// if (result.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY) {
 			// result.formArrayDFA = this.dfaForm.get(result.id) as FormArray;
@@ -62,12 +64,14 @@ export const OcDynamicArrayPreview: React.FC<OcDynamicArrayPreviewProps> = (prop
 
 			return result;
 		});
-	}, [fieldDefinition.fields, fieldValues]);
+	}, [formik, fields]);
+
+	console.log('previewFields', previewFields)
 
 	return (
 		<div className="array-preview">
 			{
-				previewFields.length > 0 && previewFields.map((field) => (
+				previewFields.map((field) => (
 					<div className="array-preview__field">
 						<span className="array-preview__field-title">
 							<OcLabelComponent>{field.label}</OcLabelComponent>
