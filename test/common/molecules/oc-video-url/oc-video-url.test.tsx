@@ -9,7 +9,8 @@ const component: ShallowWrapper = shallow(
 		videoUrl="https://www.youtube.com/watch?v=DGQwd1_dpuc"
 		withoutPreview={false}
 		disabled={false}
-		onChange={(e) => e.target.value}
+		onChange={(e: any) => e.target.value}
+		value=""
 	/>,
 );
 
@@ -25,7 +26,8 @@ describe('Video Url component', () => {
 				videoUrl="https://www.youtube.com/watch?v=DGQwd1_dpuc"
 				withoutPreview={false}
 				disabled={false}
-				onChange={(e) => e.target.value}
+				onChange={(e: any) => e.target.value}
+				value=""
 			/>,
 		);
 		expect(wrapper.prop('placeholder')).toEqual('Enter your video url here');

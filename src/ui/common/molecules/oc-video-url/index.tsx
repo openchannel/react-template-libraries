@@ -5,13 +5,17 @@ import './style.scss';
 
 export interface VideoUrlProps extends VideoProps, InputProps {
 	/**
-	 * input value
+	 * initial input value
+	 */
+	videoUrl: string;
+	/**
+	 * value - useState input value
 	 */
 	value: string;
 	/**
 	 * Change handler for input
 	 */
-	onChange: any;
+	onChange?: any;
 	/**
 	 * withoutPreview - boolean value, if you don't want preview video
 	 */
