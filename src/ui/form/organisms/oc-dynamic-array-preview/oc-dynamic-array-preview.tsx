@@ -71,13 +71,13 @@ export const OcDynamicArrayPreview: React.FC<OcDynamicArrayPreviewProps> = (prop
 	return (
 		<div className="array-preview">
 			{
-				previewFields.map((field) => (
+				previewFields.map((element) => (
 					<div className="array-preview__field">
 						<span className="array-preview__field-title">
-							<OcLabelComponent>{field.label}</OcLabelComponent>
+							<OcLabelComponent>{element.label}</OcLabelComponent>
 						</span>
 						<div className="array-preview__field-content">
-							<FieldPreview {...field} />
+							<FieldPreview {...element} />
 						</div>
 					</div>
 				))

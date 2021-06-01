@@ -6,8 +6,10 @@ import { FIELD_TYPE } from '../../lib';
 import { PreviewFieldModel } from '../../models';
 import { OcDynamicFieldArray } from '../oc-dynamic-field-array';
 
-export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
-	const { type, isValidField, value, formArrayDFA } = field;
+export const FieldPreview: React.FC<PreviewFieldModel> = (element) => {
+	const { type, isValidField, value, formArrayDFA } = element;
+
+	console.log('element', element)
 
 	// if (!isValidField) {
 	// 	return (
@@ -17,10 +19,9 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 
 	switch (type) {
 		case FIELD_TYPE.DYNAMIC_FIELD_ARRAY: {
-			return '111111111111';
-			// return (
-				// <OcDynamicFieldArray fieldDefinitionData={field} dfaFormArray={formArrayDFA} />
-			// );
+			return (
+				<OcDynamicFieldArray element={element} fields={element.fields} />
+			);
 		}
 		case FIELD_TYPE.TAGS:
 		case FIELD_TYPE.BOOLEAN_TAGS:
