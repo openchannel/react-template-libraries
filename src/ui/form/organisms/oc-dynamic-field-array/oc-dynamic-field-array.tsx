@@ -38,7 +38,7 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 	console.log('context', context)
 
 	const onSaveField = React.useCallback((event: React.SyntheticEvent) => {
-		context.toggleEditingField(formik.values, event.target.id)
+		context.toggleEditingField(formik.values, event.target.id);
 	}, [formik.values, context.toggleEditingField])
 
 	console.log('fields', fields)
