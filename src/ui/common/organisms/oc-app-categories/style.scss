@@ -28,18 +28,20 @@
 			}
 
 			img {
-				width: 9px;
+				width: 12px;
 			}
 		}
 
 		.categories__card {
+			padding-left: 22px;
+			list-style: none;
 			cursor: pointer;
-			width: 160px;
 			height: 120px;
+			width: 80%;
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;
-			padding-top: 28px;
+			padding-top: 18px;
 			position: relative;
 			text-align: center;
 			color: $primary;
@@ -47,19 +49,18 @@
 				width: 100%;
 			}
 
-			&-logo {
+			&-logo,
+			img {
 				width: 34px;
 				height: 34px;
-				margin: 0 auto;
+				margin: 0;
 			}
 
 			&-text {
-				position: absolute;
-				top: 60%;
-				left: 50%;
 				color: $primary;
 				font-family: 'Rubik-Medium', serif;
-				margin-top: 16px;
+				margin-top: 15%;
+				padding-left: 18%;
 				transform: translate(-50%, -50%);
 			}
 		}

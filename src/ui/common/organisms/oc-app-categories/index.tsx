@@ -1,7 +1,7 @@
 //commit 1f8476fdd1021aa7c3062f340499ee030bcba500 Author: Julia Date: 19.05.21, 14:35
 import * as React from 'react';
 import Carousel from 'react-multi-carousel';
-// import 'react-multi-carousel/lib/styles.css';
+import 'react-multi-carousel/lib/styles.css';
 import { CarouselProps, ArrowProps, ResponsiveType } from 'react-multi-carousel/lib/types';
 import LeftArrowIcon from '../../../../assets/img/arrow-left-analog.svg';
 import RightArrowIcon from '../../../../assets/img/arrow-right-analog.svg';
@@ -90,15 +90,16 @@ export const OcAppCategoriesComponent: React.FC<AppCategoriesProps> = (props) =>
 				customLeftArrow={<CustomLeftArrow />}
 				containerClass="categories__carousel"
 				itemClass="categories__card"
-				infinite={data.length > 4}
+				infinite={true}
 			>
-				{data.map((item) => (
+				{data.map((item, index) => (
 					<CategoryItem
 						categoryCardClass={item.categoryCardClass}
 						categoryLogo={item.categoryLogo}
 						categoryName={item.categoryName}
 						categoryBackgroundImage={item.categoryBackgroundImage}
 						categoryTitleColor={item.categoryTitleColor}
+						key={index}
 					/>
 				))}
 			</Carousel>

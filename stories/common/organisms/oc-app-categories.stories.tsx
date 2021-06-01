@@ -11,18 +11,15 @@ export default {
 const responsive = {
 	desktop: {
 		breakpoint: { max: 3000, min: 1024 },
-		items: 3,
-		slidesToSlide: 3, // optional, default to 1.
+		items: 5,
 	},
 	tablet: {
 		breakpoint: { max: 1024, min: 464 },
 		items: 2,
-		slidesToSlide: 2, // optional, default to 1.
 	},
 	mobile: {
 		breakpoint: { max: 464, min: 0 },
 		items: 1,
-		slidesToSlide: 1, // optional, default to 1.
 	},
 };
 
@@ -47,19 +44,18 @@ const data = [
 	},
 ];
 
-const duplicateItems = (arr, numberOfRepetitions) =>
-	arr.flatMap((i) => Array.from({ length: numberOfRepetitions }).fill(i));
+const duplicateItems = (arr, numberOfRepetitions) => Array(numberOfRepetitions).fill(arr).flat();
 
 const AppCategories: Story<AppCategoriesProps> = (args) => {
 	return (
 		<OcAppCategoriesComponent
-			customOptions={responsive}
-			autoPlaySpeed={700}
-			swipeable={false}
-			draggable={false}
-			showDots={false}
-			centerMode={true}
-			categoryHeaderTitle="Categories to Explore"
+			customOptions={args.customOptions}
+			autoPlaySpeed={args.autoPlaySpeed}
+			swipeable={args.swipeable}
+			draggable={args.draggable}
+			showDots={args.showDots}
+			centerMode={args.autoWidth}
+			categoryHeaderTitle={args.categoryHeaderTitle}
 			data={args.data}
 		/>
 	);
@@ -69,11 +65,11 @@ export const EmptyCategories = AppCategories.bind({});
 EmptyCategories.args = {
 	categoryHeaderTitle: 'Categories to Explore',
 	customOptions: responsive,
-	autoPlaySpeed: 700,
-	swipeable: false,
-	draggable: false,
-	showDots: false,
-	centerMode: true,
+	navSpeed: 700,
+	touchDrag: false,
+	mouseDrag: false,
+	dots: false,
+	autoWidth: true,
 	data: [],
 };
 EmptyCategories.storyName = 'Empty';
@@ -82,24 +78,38 @@ export const SomeCategories = AppCategories.bind({});
 SomeCategories.args = {
 	categoryHeaderTitle: 'Categories to Explore',
 	customOptions: responsive,
-	autoPlaySpeed: 700,
-	swipeable: false,
-	draggable: false,
-	showDots: false,
-	centerMode: true,
-	data: data,
+	navSpeed: 700,
+	touchDrag: false,
+	mouseDrag: false,
+	dots: false,
+	autoWidth: true,
+	data: [data[0], data[0], data[0], data[0]],
 };
 SomeCategories.storyName = 'Some';
 
 export const AllCategories = AppCategories.bind({});
 AllCategories.args = {
 	categoryHeaderTitle: 'Categories to Explore',
-	customOptions: responsive,
-	autoPlaySpeed: 700,
-	swipeable: false,
-	draggable: false,
-	showDots: false,
-	centerMode: true,
+	customOptions: {
+		desktop: {
+			breakpoint: { max: 3000, min: 1024 },
+			items: 8,
+			slidesToSlide: 1,
+		},
+		tablet: {
+			breakpoint: { max: 1024, min: 464 },
+			items: 2,
+		},
+		mobile: {
+			breakpoint: { max: 464, min: 0 },
+			items: 1,
+		},
+	},
+	navSpeed: 700,
+	touchDrag: false,
+	mouseDrag: false,
+	dots: false,
+	autoWidth: false,
 	data: duplicateItems(data, 5),
 };
 AllCategories.storyName = 'All';
