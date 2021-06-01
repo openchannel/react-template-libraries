@@ -1,3 +1,4 @@
+//@ts-nocheck
 import * as React from 'react';
 import includes from 'lodash/includes';
 import { useFormikContext } from 'formik';
@@ -12,11 +13,27 @@ import { OcDynamicFieldArrayProps } from './types';
 
 import './style.scss';
 
+
+const getFieldLabel = (element, formikValues) => {
+	if (!element.attributes.rowLabel) return '';
+
+	const rowLabel = element.fields.find(f => f.id === element.attributes.rowLabel);
+	if (!rowLabel) return '';
+
+	const item: string[] | undefined = Object.entries(formikValues)
+	.find(([key, value]) => key.includes(element.attributes.rowLabel) && value);
+
+	return item ? item[1] : '';
+};
+
 export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) => {
 	const { element, fields, fieldsDefinition } = props;
 
 	const formik = useFormikContext();
 	const { value } = formik.getFieldMeta(element.name);
+
+	console.log('element', element)
+	console.log('value', value)
 
 	const addDynamicFieldToFormikValues = () => {
 		formik.setValues({ ...formik.values, [fields[0].name]: fields[0].value });
@@ -31,11 +48,11 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 		}, {});
 
 		formik.setValues(values);
+
+		context.resetField(element.name);
 	}
 
 	const context = useOcFormContext();
-
-	console.log('context', context)
 
 	const onSaveField = React.useCallback((event: React.SyntheticEvent) => {
 		context.toggleEditingField(event.target.id, formik.values);
@@ -44,17 +61,23 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 	return (
 		<div className="cards-interface">
 			{
-				fields && fields.length > 0 && fields.map((field, k) => (
-					!includes(Object.keys(formik.values), field.name) ? null :
-						<div className="cards-interface__added-item">
+				fields && fields.length > 0 && fields
+				.filter(({ name }) => includes(Object.keys(formik.values), name))
+				.map((field, k) => (
+						<div key={field.id} className="cards-interface__added-item">
 							{
 								!field.isEditing ? (
-									<OcDynamicArrayItem fields={fields} />
+									<OcDynamicArrayItem
+										elementName={element.name}
+										fields={fields}
+										fieldLabel={getFieldLabel(element, formik.values) || `Item ${k + 1}`}
+										onDelete={removeDynamicFieldFromFormikValues}
+									/>
 								) : (
 									<div className="cards-interface__preview">
 										<div className="cards-interface__preview-header">
 											<h3 className="cards-interface__preview-header-text">
-												{field.attributes.rowLabel || `Item ${(k + 1)}` }
+												{getFieldLabel(element, formik.values) || `Item ${k + 1}`}
 											</h3>
 											<div className="cards-interface__preview-icon">
 												<TrashIconSvg onClick={removeDynamicFieldFromFormikValues} />
