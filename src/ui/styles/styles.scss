@@ -475,6 +475,13 @@ a.link {
   }
 }
 
+// Special field label for the oc-dynamic-array-preview component
+.array-preview__field-title {
+	.oc-form-label {
+		font-weight: bold;
+	}
+}
+
 .modal-button {
   width: 255px;
 }
