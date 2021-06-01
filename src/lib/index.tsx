@@ -1,3 +1,3 @@
-export * from './useModalState'
-export * from './html-utils'
-export * from './utils'
+export * from './html-utils';
+export * from './useModalState';
+export * from './utils';

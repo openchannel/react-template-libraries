@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-import { Button } from '../../atoms';
-
+import { OcButtonComponent } from '../../atoms';
 
 export interface SelectListItemProps {
 	name: string;
@@ -10,20 +9,17 @@ export interface SelectListItemProps {
 
 export const ListItem = React.forwardRef(
 	(props: SelectListItemProps, ref: React.Ref<HTMLButtonElement>) => {
-		const {
-			children,
-			...p
-		} = props
+		const { children, ...p } = props;
 
 		return (
-			<Button
+			<OcButtonComponent
 				{...p}
 				ref={ref}
 				type="secondary"
 				customClass="select-component__dropdown-item dropdown-item"
 			>
 				{children}
-			</Button>
+			</OcButtonComponent>
 		);
 	},
 );

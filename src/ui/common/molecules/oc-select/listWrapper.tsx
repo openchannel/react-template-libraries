@@ -1,13 +1,12 @@
 import * as React from 'react';
 
-
 export interface ListWrapperProps {
-	style?: React.CSSProperties,
+	style?: React.CSSProperties;
 	className: string;
 	children: React.ReactNode;
-	'data-popper-escaped'?: boolean,
-	'data-popper-placement'?: string,
-	'data-popper-reference-hidden'?: boolean,
+	'data-popper-escaped'?: boolean;
+	'data-popper-placement'?: string;
+	'data-popper-reference-hidden'?: boolean;
 }
 
 export const ListWrapper = React.forwardRef(
@@ -19,7 +18,7 @@ export const ListWrapper = React.forwardRef(
 			'data-popper-escaped': dataPopperEscaped,
 			'data-popper-placement': dataPopperPlacement,
 			'data-popper-reference-hidden': dataPopperReferenceHidden,
-		} = props
+		} = props;
 
 		return (
 			<div

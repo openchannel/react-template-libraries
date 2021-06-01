@@ -1,17 +1,26 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
-
-import { OcRichTextEditorComponent } from '../../../src/ui/common';
+import { OcRichTextEditorComponent, OcRtfProps } from '../../../src/ui/common';
 
 export default {
   title: 'Simple Rich Text Editor',
   component: OcRichTextEditorComponent,
 } as Meta;
 
-const Component: Story<any> = (args) => <OcRichTextEditorComponent {...args} />;
+const Component: Story<OcRtfProps> = (args) => {
+  const [value, setValue] = React.useState('');
+  // React.useEffect(() => setValue(args.value ?? ''), [args.value]);
+  return (
+    <OcRichTextEditorComponent
+      {...args}
+      value={value}
+      onChange={(newValue: string, _editor: any) => setValue(newValue)}
+    />
+  );
+};
 
 export const DefaultEditor = Component.bind({});
 DefaultEditor.args = {
-  initialContent: '',
+  initialValue: '',
   placeholderText: 'Default value',
 };

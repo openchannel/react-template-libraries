@@ -1,2 +1,2 @@
-export * from './oc-activation'
-export * from './types'
+export * from './oc-activation';
+export * from './types';

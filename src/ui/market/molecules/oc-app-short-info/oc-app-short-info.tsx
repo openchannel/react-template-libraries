@@ -2,14 +2,17 @@
 import * as React from 'react';
 import { sanitizeUrl } from '@braintree/sanitize-url';
 
-import { Rating } from '../../atoms';
-import { parsePrice } from './utils';
+import { isStorybook, stripHtmlTags } from '../../../../lib';
+import { OcRatingComponent } from '../../atoms';
+
 import { OcAppShortInfoProps } from './types';
-import { stripHtmlTags, isStorybook } from '../../../../lib';
+import { parsePrice } from './utils';
+
 import './styles.scss';
 
-
-const defaultAppIcon = isStorybook() ? './img/standard-app-icon.svg' : '../../../../assets/img/standard-app-icon.svg';
+const defaultAppIcon = isStorybook()
+	? './img/standard-app-icon.svg'
+	: '../../../../assets/img/standard-app-icon.svg';
 
 const textEllipsis = {
 	'white-space': 'nowrap',
@@ -18,22 +21,14 @@ const textEllipsis = {
 };
 
 export const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
-	const {
-		app,
-		clickByApp,
-		customDropdown,
-	} = props;
+	const { app, clickByApp, customDropdown } = props;
 
 	const {
 		name,
 		model,
 		rating,
 		reviewCount,
-		customData: {
-			icon,
-			summary,
-			description,
-		},
+		customData: { icon, summary, description },
 	} = app;
 
 	const onNameClick = () => {
@@ -57,14 +52,19 @@ export const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
 				<div className="info-card__content">
 					<div className="info-card__content-wrapper">
 						{/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex,jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
-						<p className="info-card__content-name" style={textEllipsis} tabIndex={0} onClick={onNameClick}>{name}</p>
-						<div className="info-card__dropdown info-card__dropdown_mobile">
-							{customDropdown}
-						</div>
+						<p
+							className="info-card__content-name"
+							style={textEllipsis}
+							tabIndex={0}
+							onClick={onNameClick}
+						>
+							{name}
+						</p>
+						<div className="info-card__dropdown info-card__dropdown_mobile">{customDropdown}</div>
 					</div>
 					<div className="info-card__content-data">
 						<span className="info-card__content-price">{parsePrice(model[0])}</span>
-						<Rating
+						<OcRatingComponent
 							type="single-star"
 							rating={Number(rating) * 0.01}
 							reviewCount={reviewCount}
@@ -76,9 +76,7 @@ export const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
 					</p>
 				</div>
 			</div>
-			<div className="info-card__dropdown info-card__dropdown_desktop">
-				{customDropdown}
-			</div>
+			<div className="info-card__dropdown info-card__dropdown_desktop">{customDropdown}</div>
 		</div>
-	)
-}
+	);
+};
