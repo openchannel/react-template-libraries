@@ -37,7 +37,7 @@ export const OcForgotPasswordComponent: React.FC<OcForgotPasswordProps> = (props
 						<img src={forgotPasswordDoneUrl} alt="done" />
 						<h4 className="forgot-password__header-result-heading">Done!</h4>
 						<span className="forgot-password__header-result-label">
-							If your email address exists in out database, you will receive a password recovery
+							If your email address exists in our database, you will receive a password recovery
 							link at your email address in a few minutes.
 						</span>
 					</div>

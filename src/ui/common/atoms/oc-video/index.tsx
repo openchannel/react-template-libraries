@@ -9,10 +9,14 @@ export interface VideoProps {
 	 * Video url
 	 */
 	videoUrl: string;
+	/**
+	 * custom classname to be passed
+	 */
+	customClass?: string;
 }
 
 export const OcVideoComponent: React.FC<VideoProps> = (props) => {
-	const { videoUrl } = props;
+	const { videoUrl, customClass } = props;
 	return (
 		<div className="oc-video">
 			<div className="oc-video__container">
@@ -20,7 +24,7 @@ export const OcVideoComponent: React.FC<VideoProps> = (props) => {
 					<div className="oc-video__preview-data">
 						<ReactPlayer
 							url={videoUrl}
-							className="oc-video_frame-video"
+							className={`oc-video_frame-video ${customClass}`}
 							playing={false}
 							controls
 							width={300}
