@@ -2,26 +2,29 @@
 import { FIELD_TYPE } from '../../lib';
 import { AppFormField, FormikField } from './types';
 
-export const extendFieldWithRequiredKeys = (field, name) => ({
+export const extendFieldWithRequiredKeys = (field, { name, path, index }) => ({
 	...field,
+	index,
+	path,
 	name: name.replaceAll('.', '/'),
 	value: field.defaultValue || '',
 	isEditing: true,
 	isNew: false,
 });
 
-export const normalizeFieldsForFormik = (fields: AppFormField[], namespace: string) => {
-	return fields.map((field) => {
+export const normalizeFieldsForFormik = (fields: AppFormField[], { namespace, deepPath } = {}) => {
+	return fields.map((field, index) => {
 		const name: string = namespace ? `${namespace}.fields.${field.id}` : field.id;
+		const path: string = deepPath ? `${deepPath}.fields.${index}` : `${index}`;
 
 		if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY) {
 			return {
-				...extendFieldWithRequiredKeys(field, name),
-				fields: normalizeFieldsForFormik(field.fields, name),
+				...extendFieldWithRequiredKeys(field, { name, path, index }),
+				fields: normalizeFieldsForFormik(field.fields, { namespace: name, deepPath: path }),
 			};
 		}
 
-		return extendFieldWithRequiredKeys(field, name);
+		return extendFieldWithRequiredKeys(field, { name, path, index });
 	});
 };
 
