@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { InputProps } from '../oc-input';
 import TextSearchIcon from '../../../../assets/img/text-search-icon.svg';
+import { OcButtonComponent } from '../../../../ui/common/atoms/oc-button';
 import './style.scss';
 
 export interface TextSearchProps extends InputProps {
@@ -25,28 +26,76 @@ export interface TextSearchProps extends InputProps {
 	 * onChange handler
 	 */
 	onChange: any;
+	/**
+	 * Search with buttons - boolean
+	 */
+	hasButtons?: boolean;
+	/**
+	 * Magnifier image presence on input
+	 */
+	hasMagnifier?: boolean;
 }
 
 const enterAction = () => {};
 
 export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
-	const { placeholder, value, onChange } = props;
+	const { placeholder, value, onChange, hasMagnifier, hasButtons } = props;
 	const handleChange = React.useCallback(
 		(e: any) => {
 			onChange(e.target.value);
 		},
 		[onChange, value],
 	);
+	const clearSearch = React.useCallback(() => {
+		onChange('');
+	}, [onChange, value]);
 	return (
 		<div className="text-search">
-			<input
-				className="text-search__input"
-				placeholder={placeholder}
-				type="text"
-				value={value}
-				onChange={handleChange}
-			/>
-			<TextSearchIcon className="text-search__icon" onClick={enterAction} />
+			<div className="text-search__container">
+				<input
+					className="text-search__input"
+					placeholder={placeholder}
+					type="text"
+					value={value}
+					onChange={handleChange}
+				/>
+				{hasMagnifier && <TextSearchIcon className="text-search__icon" onClick={enterAction} />}
+			</div>
+			<div className="text-search__controls">
+				{hasButtons && (
+					<>
+						<OcButtonComponent
+							text="Cancel"
+							customClass="clear-button"
+							type="secondary"
+							style={{
+								borderRadius: '4px',
+								fontWeight: 300,
+								minHeight: '52px',
+								maxWidth: '160px',
+								padding: '10px 20px',
+								position: 'relative',
+								transition: 'all 0.3s ease',
+							}}
+							onClick={clearSearch}
+						/>
+						<OcButtonComponent
+							text="Search"
+							customClass="search-button"
+							type="primary"
+							style={{
+								borderRadius: '4px',
+								fontWeight: 300,
+								minHeight: '52px',
+								maxWidth: '160px',
+								padding: '10px 20px',
+								position: 'relative',
+								transition: 'all 0.3s ease',
+							}}
+						/>
+					</>
+				)}
+			</div>
 		</div>
 	);
 };
