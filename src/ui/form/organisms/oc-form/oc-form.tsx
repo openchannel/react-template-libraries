@@ -109,6 +109,44 @@ const formJsonData: AppFormModel = {
 							placeholder: 'write some text',
 							type: 'text',
 						},
+						{
+							attributes: {
+								maxCount: null,
+								minCount: null,
+								ordering: 'prepend',
+								required: null,
+								rowLabel: null,
+							},
+							required: null,
+							rowLabel: null,
+							category: 'CUSTOM',
+							defaultValue: null,
+							description: '',
+							id: 'one-more',
+							isOpen: false,
+							isValid: true,
+							label: 'one-more',
+							placeholder: null,
+							fields: [
+								{
+									attributes: {
+										maxChars: null,
+										minChars: null,
+										required: null,
+									},
+									category: 'CUSTOM',
+									defaultValue: null,
+									description: 'some description',
+									id: 'one-more-2',
+									isOpen: false,
+									isValid: true,
+									label: 'one-more-2',
+									placeholder: 'write some text',
+									type: 'text',
+								},
+							],
+							type: 'dynamicFieldArray',
+						},
 					],
 					type: 'dynamicFieldArray',
 				},
@@ -170,7 +208,8 @@ const FormGroupWrapper = (props: any) => {
 	)
 }
 
-export const RecursiveContainer: any = ({ fields, initialValues }) => {
+export const RecursiveContainer: any = ({ fields }) => {
+
 	const builder = (element) => {
 		const {
 			id,
@@ -240,8 +279,6 @@ export const RecursiveContainer: any = ({ fields, initialValues }) => {
 						<OcDynamicFieldArray
 							element={element}
 							fields={element.fields}
-							// fieldsDefinition={fieldsDefinition}
-							initialValues={initialValues}
 						/>
 					</FormGroupWrapper>
 				);
@@ -255,12 +292,93 @@ export const RecursiveContainer: any = ({ fields, initialValues }) => {
 	);
 }
 
-const RecursiveContainerWrapper = ({ initialValues }) => {
+export const FieldDeterminant: any = (element) => {
+	const {
+		id,
+		label,
+		description,
+		type,
+		name,
+		attributes,
+		// options,
+		// subFieldDefinitions,
+		// fields,
+		placeholder,
+		// category,
+	} = element;
+
+	switch (type) {
+		case FIELD_TYPE.TEXT:
+			return (
+				<FormGroupWrapper
+					name={name}
+					label={label}
+					labelFor={id}
+					description={description}
+					required={attributes.required}
+				>
+					<Field
+						name={name}
+						as={OcInputComponent}
+						placeholder={placeholder}
+						required={attributes.required}
+						id={id}
+						inputType="text"
+					/>
+				</FormGroupWrapper>
+			);
+		case 'number':
+			return (
+				'number input'
+			)
+		case FIELD_TYPE.COLOR:
+			return (
+				<FormGroupWrapper
+					name={name}
+					label={label}
+					labelFor={id}
+					description={description}
+					required={attributes.required}
+				>
+					<Field
+						name={name}
+						component={FormikFieldWrapper}
+						placeholder={placeholder}
+						id={id}
+						{...attributes}
+					/>
+				</FormGroupWrapper>
+			)
+		case FIELD_TYPE.DYNAMIC_FIELD_ARRAY:
+			return (
+				<FormGroupWrapper
+					name={name}
+					label={label}
+					labelFor={id}
+					description={description}
+					required={attributes.required}
+				>
+					<OcDynamicFieldArray
+						element={element}
+						fields={element.fields}
+					/>
+				</FormGroupWrapper>
+			);
+		default:
+			return <div>Unsupported field</div>
+	}
+};
+
+const RecursiveContainerWrapper = () => {
 	const context = useOcFormContext();
 
-	return (
-		<RecursiveContainer fields={context.fieldsDefinition} initialValues={initialValues} />
-	)
+	console.log('context.fieldsDefinition', context.fieldsDefinition)
+
+	return context.fieldsDefinition.map(FieldDeterminant)
+
+	// return (
+	// 	<RecursiveContainer fields={context.fieldsDefinition} />
+	// )
 }
 
 export const OcForm: React.FC<any> = (props) => {
@@ -280,14 +398,14 @@ export const OcForm: React.FC<any> = (props) => {
 		// ...props,
 	});
 
-	console.log('fields', fields)
-	console.log('formik.values', formik.values)
+	// console.log('fields', fields)
+	// console.log('formik.values', formik.values)
 
 	return (
 		<OcFormContextProvider initialValue={{ fields }}>
 			<FormikContext.Provider value={formik}>
 				<FormikForm className="form">
-					<RecursiveContainerWrapper initialValues={initialValues} />
+					<RecursiveContainerWrapper />
 				</FormikForm>
 			</FormikContext.Provider>
 		</OcFormContextProvider>
