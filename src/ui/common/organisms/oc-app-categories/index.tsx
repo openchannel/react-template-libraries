@@ -104,7 +104,6 @@ export const OcAppCategoriesComponent: React.FC<AppCategoriesProps> = (props) =>
 				customRightArrow={<CustomRightArrow />}
 				customLeftArrow={<CustomLeftArrow />}
 				containerClass="categories__carousel"
-				itemClass="categories__card"
 				infinite={true}
 			>
 				{data.map((item, index) => (
