@@ -44,11 +44,11 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 		(e: any) => {
 			onChange(e.target.value);
 		},
-		[onChange, value],
+		[onChange],
 	);
 	const clearSearch = React.useCallback(() => {
 		onChange('');
-	}, [onChange, value]);
+	}, [onChange]);
 	return (
 		<div className="text-search">
 			<div className="text-search__container">
