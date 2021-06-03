@@ -27,19 +27,33 @@ export interface TextSearchProps extends InputProps {
 	 */
 	onChange: any;
 	/**
-	 * Search with buttons - boolean
-	 */
-	hasButtons?: boolean;
-	/**
 	 * Magnifier image presence on input
 	 */
 	hasMagnifier?: boolean;
+	/**
+	 * search handler function
+	 */
+	enterAction?: React.MouseEventHandler;
+	/**
+	 * text for search button
+	 */
+	searchButtonText: string;
+	/**
+	 * text for clear button
+	 */
+	clearButtonText: string;
 }
 
-const enterAction = () => {};
-
 export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
-	const { placeholder, value, onChange, hasMagnifier, hasButtons } = props;
+	const {
+		placeholder,
+		value,
+		onChange,
+		hasMagnifier,
+		enterAction,
+		searchButtonText,
+		clearButtonText,
+	} = props;
 	const handleChange = React.useCallback(
 		(e: any) => {
 			onChange(e.target.value);
@@ -62,36 +76,19 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 				{hasMagnifier && <TextSearchIcon className="text-search__icon" onClick={enterAction} />}
 			</div>
 			<div className="text-search__controls">
-				{hasButtons && (
+				{!hasMagnifier && (
 					<>
 						<OcButtonComponent
-							text="Cancel"
+							text={clearButtonText}
 							customClass="clear-button"
 							type="secondary"
-							style={{
-								borderRadius: '4px',
-								fontWeight: 300,
-								minHeight: '52px',
-								maxWidth: '160px',
-								padding: '10px 20px',
-								position: 'relative',
-								transition: 'all 0.3s ease',
-							}}
 							onClick={clearSearch}
 						/>
 						<OcButtonComponent
-							text="Search"
-							customClass="search-button"
+							text={searchButtonText}
+							customClass="clear-button"
 							type="primary"
-							style={{
-								borderRadius: '4px',
-								fontWeight: 300,
-								minHeight: '52px',
-								maxWidth: '160px',
-								padding: '10px 20px',
-								position: 'relative',
-								transition: 'all 0.3s ease',
-							}}
+							onClick={enterAction}
 						/>
 					</>
 				)}

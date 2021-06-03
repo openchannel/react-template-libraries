@@ -10,7 +10,10 @@ export default {
 
 const SearchComponent: Story<TextSearchProps> = (args) => {
 	const [value, onChange] = React.useState('');
-	return <OcTextSearchComponent {...args} value={value} onChange={onChange} />;
+	const enterAction = () => {};
+	return (
+		<OcTextSearchComponent {...args} value={value} onChange={onChange} enterAction={enterAction} />
+	);
 };
 
 export const SimpleSearch = SearchComponent.bind({});
@@ -27,5 +30,6 @@ SearchWithButtons.args = {
 	disabled: false,
 	placeholder: 'Search',
 	hasMagnifier: false,
-	hasButtons: true,
+	searchButtonText: 'Search',
+	clearButtonText: 'Cancel',
 };
