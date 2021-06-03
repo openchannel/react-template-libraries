@@ -22,6 +22,7 @@ SimpleSearch.args = {
 	disabled: false,
 	placeholder: 'Search',
 	hasMagnifier: true,
+	hasClearTextControl: false,
 };
 
 export const SearchWithButtons = SearchComponent.bind({});
@@ -30,6 +31,7 @@ SearchWithButtons.args = {
 	disabled: false,
 	placeholder: 'Search',
 	hasMagnifier: false,
+	hasClearTextControl: true,
 	searchButtonText: 'Search',
 	clearButtonText: 'Cancel',
 };

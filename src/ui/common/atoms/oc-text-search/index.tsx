@@ -31,6 +31,10 @@ export interface TextSearchProps extends InputProps {
 	 */
 	hasMagnifier?: boolean;
 	/**
+	 * Magnifier image presence on input
+	 */
+	hasClearTextControl?: boolean;
+	/**
 	 * search handler function
 	 */
 	enterAction?: React.MouseEventHandler;
@@ -50,9 +54,10 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 		value,
 		onChange,
 		hasMagnifier,
+		hasClearTextControl,
 		enterAction,
-		searchButtonText,
-		clearButtonText,
+		searchButtonText = 'Search',
+		clearButtonText = 'Cancel',
 	} = props;
 	const handleChange = React.useCallback(
 		(e: any) => {
@@ -76,21 +81,25 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 				{hasMagnifier && <TextSearchIcon className="text-search__icon" onClick={enterAction} />}
 			</div>
 			<div className="text-search__controls">
-				{!hasMagnifier && (
-					<>
+				{hasClearTextControl && (
+					<div className="clear-button">
 						<OcButtonComponent
 							text={clearButtonText}
-							customClass="clear-button"
 							type="secondary"
 							onClick={clearSearch}
+							customClass="oc-button_small-size "
 						/>
+					</div>
+				)}
+				{!hasMagnifier && (
+					<div className="search-button">
 						<OcButtonComponent
 							text={searchButtonText}
-							customClass="clear-button"
 							type="primary"
 							onClick={enterAction}
+							customClass="oc-button_small-size"
 						/>
-					</>
+					</div>
 				)}
 			</div>
 		</div>
