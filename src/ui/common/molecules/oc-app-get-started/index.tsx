@@ -9,6 +9,7 @@ export interface GetStartedProps {
 	getStartedDescription: string;
 	getStartedButtonText: string;
 	getStartedImage: string;
+	onClick?: React.MouseEventHandler;
 }
 
 export const OcGetStartedComponent: React.FC<GetStartedProps> = (props) => {
@@ -18,6 +19,7 @@ export const OcGetStartedComponent: React.FC<GetStartedProps> = (props) => {
 		getStartedDescription,
 		getStartedButtonText,
 		getStartedImage,
+		onClick,
 	} = props;
 
 	return (
@@ -34,7 +36,7 @@ export const OcGetStartedComponent: React.FC<GetStartedProps> = (props) => {
 							customClass="get-started__button"
 							type="primary"
 							text={getStartedButtonText}
-							style={{ minHeight: '64px' }}
+							onClick={onClick}
 						/>
 					</div>
 				</>
@@ -47,7 +49,7 @@ export const OcGetStartedComponent: React.FC<GetStartedProps> = (props) => {
 							customClass="get-started__button-wrapper"
 							type="primary"
 							text={getStartedButtonText}
-							style={{ minHeight: '64px' }}
+							onClick={onClick}
 						/>
 					</div>
 				</div>

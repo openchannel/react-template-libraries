@@ -9,7 +9,8 @@ export default {
 } as Meta;
 
 const GetStartedComponent: Story<GetStartedProps> = (args) => {
-	return <OcGetStartedComponent {...args} />;
+	const onClick = () => {};
+	return <OcGetStartedComponent {...args} onClick={onClick} />;
 };
 
 export const DefaultHomePage = GetStartedComponent.bind({});
