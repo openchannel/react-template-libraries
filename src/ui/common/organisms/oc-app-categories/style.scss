@@ -33,15 +33,13 @@
 		}
 
 		.categories__card {
-			padding-left: 22px;
-			list-style: none;
 			cursor: pointer;
 			height: 120px;
-			width: 80%;
+			width: 160px;
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;
-			padding-top: 18px;
+			padding-top: 28px;
 			position: relative;
 			text-align: center;
 			color: $primary;
@@ -53,14 +51,16 @@
 			img {
 				width: 34px;
 				height: 34px;
-				margin: 0;
+				margin: 0 auto;
 			}
 
 			&-text {
+				@include font-medium();
+				position: absolute;
+				top: 60%;
+				left: 50%;
 				color: $primary;
-				font-family: 'Rubik-Medium', serif;
-				margin-top: 15%;
-				padding-left: 18%;
+				margin-top: 16px;
 				transform: translate(-50%, -50%);
 			}
 		}
