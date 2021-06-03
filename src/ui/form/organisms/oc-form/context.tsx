@@ -7,6 +7,7 @@ import get from 'lodash/get';
 import update from 'lodash/update';
 import flatMapDeep from 'lodash/flatMapDeep';
 import { FIELD_TYPE } from '../../lib';
+import { updateElementKeys } from './utils';
 import { normalizeFieldsForFormik } from './utils';
 
 export const OcFormContext = React.createContext({});
@@ -118,18 +119,20 @@ const fieldsUtils = {
 
 const elementUtils = {
 	getParentPath: (path) => {
-		if (path.length <= 1) {
-			return {
-				path,
-				isFirstLevelDeep: true,
-			};
-		}
+		// if (path.length <= 1) {
+		// 	return {
+		// 		path,
+		// 		isFirstLevelDeep: true,
+		// 	};
+		// }
 
 		const modified = path.substring(0, path.lastIndexOf('.'));
 
 		return {
+			original: path,
 			path: modified,
 			isFirstLevelDeep: modified.length <= 1,
+			depth: path.split('.').length - 1,
 		};
 	},
 	clone: (element) => {
@@ -148,7 +151,6 @@ const elementUtils = {
 		};
 	},
 	dumpNestedFields: (element) => {
-		console.log('element', element)
 		if (element.type !== FIELD_TYPE.DYNAMIC_FIELD_ARRAY) return {};
 
 		return {
@@ -164,8 +166,6 @@ export const OcFormContextProvider = ({ children, initialValue }) => {
 
 	const [fieldsDefinition, setFieldsDefinition] = React.useState(fieldsUtils.dumpDeepNestedFields(sourceFields.current));
 
-	console.log('fieldsDefinition', fieldsDefinition)
-
 	const toggleEditingField = React.useCallback((fieldName: string, formikValues) => {
 		setFieldsDefinition(prev => updateFieldsDefinition(prev, fieldName, formikValues));
 	}, []);
@@ -174,23 +174,22 @@ export const OcFormContextProvider = ({ children, initialValue }) => {
 		setFieldsDefinition(prev => updateFieldsDefinition(prev, fieldName, null, true));
 	}, []);
 
-	const fillDynamicField = (deepElementName) => {
+	const fillDynamicField = (deepElementName, deepElementPath) => {
 		const copiedElement = flattenFields.find(item => item.name === deepElementName);
 
-		const { path, isFirstLevelDeep } = elementUtils.getParentPath(copiedElement.path);
+		const { path, isFirstLevelDeep } = elementUtils.getParentPath(deepElementPath);
 
 		setFieldsDefinition(prev => {
 			let next = [ ...prev ];
 
 			if (isFirstLevelDeep) {
-				const isAlreadyExistInState = Boolean(prev[copiedElement.index]);
+				const isAlreadyExistInState = prev[copiedElement.index];
 
-				if (isAlreadyExistInState) {
+				if (isAlreadyExistInState.fields.length === 0) {
 					next[copiedElement.index] = elementUtils.clone(copiedElement);
 				} else {
 					next.push(elementUtils.generateBy(copiedElement))
 				}
-
 			} else {
 				next = update(prev, path, (el) => {
 					const isAlreadyExistInState = el[copiedElement.index];
@@ -205,7 +204,7 @@ export const OcFormContextProvider = ({ children, initialValue }) => {
 				})
 			}
 
-			return normalizeFieldsForFormik(next)
+			return normalizeFieldsForFormik(updateElementKeys)(next)
 		})
 	};
 

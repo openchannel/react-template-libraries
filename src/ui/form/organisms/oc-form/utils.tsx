@@ -1,30 +1,40 @@
 // @ts-nocheck
+import { nanoid } from 'nanoid';
+
 import { FIELD_TYPE } from '../../lib';
 import { AppFormField, FormikField } from './types';
 
-export const extendFieldWithRequiredKeys = (field, { name, path, index }) => ({
-	...field,
+export const extendElementWithRequiredKeys = (element, { path, index }) => ({
+	...element,
 	index,
 	path,
-	name: name.replaceAll('.', '/'),
-	value: field.defaultValue || '',
+	name: `${element.id}-${nanoid()}`,
+	value: element.defaultValue || '',
 	isEditing: true,
 	isNew: false,
 });
 
-export const normalizeFieldsForFormik = (fields: AppFormField[], { namespace, deepPath } = {}) => {
-	return fields.map((field, index) => {
-		const name: string = namespace ? `${namespace}.fields.${field.id}` : field.id;
+export const updateElementKeys = (element, { path, index }) => ({
+	...element,
+	index,
+	path,
+	value: element.defaultValue,
+	isEditing: true,
+	isNew: false,
+});
+
+export const normalizeFieldsForFormik = (todo) => (fields: AppFormField[], { deepPath } = {}) => {
+	return fields.map((element, index) => {
 		const path: string = deepPath ? `${deepPath}.fields.${index}` : `${index}`;
 
-		if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY) {
+		if (element.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY) {
 			return {
-				...extendFieldWithRequiredKeys(field, { name, path, index }),
-				fields: normalizeFieldsForFormik(field.fields, { namespace: name, deepPath: path }),
+				...todo(element, { path, index }),
+				fields: normalizeFieldsForFormik(todo)(element.fields, { deepPath: path }),
 			};
 		}
 
-		return extendFieldWithRequiredKeys(field, { name, path, index });
+		return todo(element, { path, index });
 	});
 };
 
@@ -37,7 +47,7 @@ export const getInitialValuesFromFields = (fields) => {
 }
 
 export const getValidParams = (fields: AppFormField[]): FormikField[] => {
-	const extendedFields = normalizeFieldsForFormik(fields);
+	const extendedFields = normalizeFieldsForFormik(extendElementWithRequiredKeys)(fields);
 
 	return {
 		fields: extendedFields,

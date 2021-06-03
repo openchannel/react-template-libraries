@@ -6,6 +6,7 @@ import { useFormikContext } from 'formik';
 import { OcButtonComponent } from '../../../common';
 import { FIELD_TYPE } from '../../lib';
 import { OcDynamicArrayItem } from '../oc-dynamic-array-item';
+import EditIconSvg from '../../../../assets/img/edit.svg';
 import TrashIconSvg from '../../../../assets/img/trash-icon.svg';
 import { FieldDeterminant } from '../oc-form';
 import { RecursiveContainer } from '../oc-form';
@@ -29,22 +30,20 @@ const getFieldLabel = (element, formikValues) => {
 };
 
 export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) => {
-	const { element, fields, fieldsDefinition } = props;
+	const { element, fieldsDefinition, showAddButton } = props;
 
 	const formik = useFormikContext();
 	const { value } = formik.getFieldMeta(element.name);
 
 	const context = useOcFormContext();
 
-	console.log('context', context)
 
 	// console.log('OcDynamicFieldArray formik.values', formik.values)
 	// console.log('OcDynamicFieldArray element', element)
 	// console.log('OcDynamicFieldArray fields', fields);
 
 	const addDynamicFieldToFormikValues = () => {
-		console.log('element', element.name)
-		context.fillDynamicField(element.name);
+		context.fillDynamicField(element.name, element.path);
 		// context.
 		// formik.setValues({
 		// 	...formik.values,
@@ -85,68 +84,82 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 	return (
 		<div className="cards-interface">
 			{
-				fields && fields.length > 0 && (
-					<div key={fields.id} className="cards-interface__added-item">
-						{
-							!element.isEditing ? (
-								<OcDynamicArrayItem
-									elementName={element.name}
-									fields={fields}
-									fieldLabel={getFieldLabel(element, formik.values) || `Item ${0 + 1}`}
-									onDelete={removeDynamicFieldFromFormikValues}
-								/>
-							) : (
-								<div className="cards-interface__preview">
-									<div className="cards-interface__preview-header">
-										<h3 className="cards-interface__preview-header-text">
-											{getFieldLabel(element, formik.values) || `Item ${0 + 1}`}
-										</h3>
-										<div className="cards-interface__preview-icon">
-											<TrashIconSvg onClick={removeDynamicFieldFromFormikValues} />
-										</div>
-									</div>
+				element.fields && element.fields.length > 0 && (
+					<div key={element.id} className="cards-interface__added-item">
 
-									<div className="cards-interface__preview-content">
-										{/*<RecursiveContainer fields={fields} />*/}
-										{fields.map((element) => <FieldDeterminant key={element.name} {...element} />)}
-									</div>
+						<div className="cards-interface__preview">
+							<div className="cards-interface__preview-header">
+								<h3 className="cards-interface__preview-header-text">
+									{getFieldLabel(element, formik.values) || `Item ${0 + 1}`}
+								</h3>
 
-									<div className="cards-interface__preview-buttons">
-										<div className="cards-interface__preview-buttons-cancel">
-											<OcButtonComponent
-												htmlType="button"
-												type="secondary"
-												onClick={() => alert('cancelArrayItemAdding')}
-											>
-												Cancel
-											</OcButtonComponent>
-										</div>
-										<div className="cards-interface__preview-buttons-save">
-											<OcButtonComponent
-												id={element.name}
-												htmlType="button"
-												type="primary"
-												onClick={onSaveField}
-											>
-												Save
-											</OcButtonComponent>
-										</div>
+								<div className="cards-interface__icons-handler">
+									{
+										!element.isEditing && (
+											<div className="cards-interface__preview-icon" onClick={onStartEditing}>
+												<EditIconSvg />
+											</div>
+										)
+									}
+									<div className="cards-interface__preview-icon" onClick={removeDynamicFieldFromFormikValues}>
+										<TrashIconSvg />
 									</div>
 								</div>
-							)
-						}
+							</div>
+
+							{
+								!element.isEditing ? (
+									<OcDynamicArrayPreview
+										// elementName={element.name}
+										// fields={fields}
+										// fieldLabel={getFieldLabel(element, formik.values) || `Item ${0 + 1}`}
+										// onDelete={removeDynamicFieldFromFormikValues}
+									/>
+								) : (
+									<>
+										<div className="cards-interface__preview-content">
+											<RecursiveContainer fields={element.fields} />
+										</div>
+
+										<div className="cards-interface__preview-buttons">
+											<div className="cards-interface__preview-buttons-cancel">
+												<OcButtonComponent
+													htmlType="button"
+													type="secondary"
+													onClick={() => alert('cancelArrayItemAdding')}
+												>
+													Cancel
+												</OcButtonComponent>
+											</div>
+											<div className="cards-interface__preview-buttons-save">
+												<OcButtonComponent
+													id={element.name}
+													htmlType="button"
+													type="primary"
+													onClick={onSaveField}
+												>
+													Save
+												</OcButtonComponent>
+											</div>
+										</div>
+									</>
+								)
+							}
+						</div>
 					</div>
 				)
 			}
-			<div className="cards-interface__add-btn">
-				<OcButtonComponent
-					htmlType="button"
-					type="primary"
-					onClick={addDynamicFieldToFormikValues}
-				>
-					Add
-				</OcButtonComponent>
-			</div>
+			{showAddButton && (
+				<div className="cards-interface__add-btn">
+					<OcButtonComponent
+						htmlType="button"
+						type="primary"
+						onClick={addDynamicFieldToFormikValues}
+					>
+						Add
+					</OcButtonComponent>
+				</div>
+			)}
 		</div>
 	);
 }

@@ -209,8 +209,7 @@ const FormGroupWrapper = (props: any) => {
 }
 
 export const RecursiveContainer: any = ({ fields }) => {
-
-	const builder = (element) => {
+	const builder = (element, index) => {
 		const {
 			id,
 			label,
@@ -278,7 +277,7 @@ export const RecursiveContainer: any = ({ fields }) => {
 					>
 						<OcDynamicFieldArray
 							element={element}
-							fields={element.fields}
+							showAddButton={fields.length === 0 || fields.length === (index + 1)}
 						/>
 					</FormGroupWrapper>
 				);
@@ -372,13 +371,9 @@ export const FieldDeterminant: any = (element) => {
 const RecursiveContainerWrapper = () => {
 	const context = useOcFormContext();
 
-	console.log('context.fieldsDefinition', context.fieldsDefinition)
-
-	return context.fieldsDefinition.map(FieldDeterminant)
-
-	// return (
-	// 	<RecursiveContainer fields={context.fieldsDefinition} />
-	// )
+	return (
+		<RecursiveContainer fields={context.fieldsDefinition} />
+	)
 }
 
 export const OcForm: React.FC<any> = (props) => {
@@ -399,7 +394,7 @@ export const OcForm: React.FC<any> = (props) => {
 	});
 
 	// console.log('fields', fields)
-	// console.log('formik.values', formik.values)
+	console.log('formik.values', formik.values)
 
 	return (
 		<OcFormContextProvider initialValue={{ fields }}>
