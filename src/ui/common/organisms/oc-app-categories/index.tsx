@@ -78,11 +78,11 @@ export interface AppCategoriesProps extends CarouselProps {
 export const OcAppCategoriesComponent: React.FC<AppCategoriesProps> = (props) => {
 	const {
 		customOptions = defaultOptions,
-		navSpeed,
-		touchDrag,
-		mouseDrag,
-		dots,
-		autoWidth,
+		navSpeed = 700,
+		touchDrag = false,
+		mouseDrag = false,
+		dots = false,
+		autoWidth = false,
 		categoryHeaderTitle,
 		data,
 	} = props;
