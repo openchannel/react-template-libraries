@@ -6,6 +6,7 @@ export const FIELD_TYPE = {
 	SINGLE_IMAGE: 'singleImage',
 	SINGLE_FILE: 'singleFile',
 	MULTIPLE: 'multiple',
+	MULTI_FILE: 'multiFile',
 	PRIVATE_SINGLE_FILE: 'privateSingleFile',
 	MULTI_PRIVATE_FILE: 'multiPrivateFile',
 	TEXT: 'text',

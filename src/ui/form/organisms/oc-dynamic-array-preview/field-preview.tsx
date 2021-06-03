@@ -6,6 +6,8 @@ import { FIELD_TYPE } from '../../lib';
 import { PreviewFieldModel } from '../../models';
 import { OcDynamicFieldArray } from '../oc-dynamic-field-array';
 
+import FileIconSvg from '../../../../assets/img/file_icon.svg';
+
 export const FieldPreview: React.FC<PreviewFieldModel> = (element) => {
 	const { type, isValidField, value, formArrayDFA } = element;
 
@@ -25,7 +27,8 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (element) => {
 		}
 		case FIELD_TYPE.TAGS:
 		case FIELD_TYPE.BOOLEAN_TAGS:
-		case FIELD_TYPE.NUMBER_TAGS: {
+		case FIELD_TYPE.NUMBER_TAGS:
+		case FIELD_TYPE.MULTISELECT_LIST: {
 			if (!value?.length) {
 				return null;
 			}
@@ -70,6 +73,73 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (element) => {
 					}
 				</div>
 			);
+		}
+		case FIELD_TYPE.CHECKBOX: {
+			return (
+				<span className="array-preview__field-content__text">{value ? 'Yes' : 'No'}</span>
+			);
+		}
+		case FIELD_TYPE.COLOR: {
+			return (
+				<span className="array-preview__field-content__text">
+					<span className="array-preview__field-content__color" style={{ backgroundColor: value }} />
+				</span>
+			);
+		}
+		case FIELD_TYPE.DROPDOWN_LIST: {
+			return (
+				<span className="array-preview__field-content__text">
+					{stripHtmlTags(value)}
+				</span>
+			)
+		}
+		case FIELD_TYPE.DATE_TIME: {
+			return (
+				<span className="array-preview__field-content__text">
+					{value}
+				</span>
+			);
+		}
+		case FIELD_TYPE.DATE: {
+			return (
+				<span className="array-preview__field-content__text">
+					{value}
+				</span>
+			);
+		}
+		case FIELD_TYPE.PRIVATE_SINGLE_FILE:
+		case FIELD_TYPE.SINGLE_FILE: {
+			return (
+				<div className="array-preview__field-content__file-single-container">
+					<div className="array-preview__field-content__file-single">
+						{/*<img*/}
+						{/*	className="array-preview__field-content__file-single-icon"*/}
+						{/*	src="assets/angular-common-components/file_icon.svg"*/}
+						{/*	alt="file image"*/}
+						{/*/>*/}
+						<FileIconSvg className="array-preview__field-content__file-single-icon" />
+						<span className="array-preview__field-content__file-single-title">{value.name}</span>
+					</div>
+				</div>
+			)
+		}
+		case FIELD_TYPE.MULTI_PRIVATE_FILE:
+		case FIELD_TYPE.MULTI_FILE: {
+			return (
+				<div className="array-preview__field-content__file-multi">
+					{value.map((item) => (
+						<div className="array-preview__field-content__file-single">
+							{/*<img*/}
+							{/*	className="array-preview__field-content__file-single-icon"*/}
+							{/*	src="assets/angular-common-components/file_icon.svg"*/}
+							{/*	alt="file image"*/}
+							{/*/>*/}
+							<FileIconSvg className="array-preview__field-content__file-single-icon" />
+							<span className="array-preview__field-content__file-single-title">{item.name}</span>
+						</div>
+					))}
+				</div>
+			)
 		}
 		default:
 			return (
