@@ -25,11 +25,26 @@ const CustomRightArrow = (props: ArrowProps) => {
 	);
 };
 
+const defaultOptions = {
+	desktop: {
+		breakpoint: { max: 3000, min: 1024 },
+		items: 5,
+	},
+	tablet: {
+		breakpoint: { max: 1024, min: 464 },
+		items: 2,
+	},
+	mobile: {
+		breakpoint: { max: 464, min: 0 },
+		items: 1,
+	},
+};
+
 export interface AppCategoriesProps extends CarouselProps {
 	/**
 	 * responsive config
 	 */
-	customOptions: ResponsiveType;
+	customOptions?: ResponsiveType;
 	/**
 	 * timing of slides changing
 	 */
@@ -62,7 +77,7 @@ export interface AppCategoriesProps extends CarouselProps {
 
 export const OcAppCategoriesComponent: React.FC<AppCategoriesProps> = (props) => {
 	const {
-		customOptions,
+		customOptions = defaultOptions,
 		navSpeed,
 		touchDrag,
 		mouseDrag,

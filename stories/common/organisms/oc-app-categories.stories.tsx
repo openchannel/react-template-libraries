@@ -8,21 +8,6 @@ export default {
 	component: OcAppCategoriesComponent,
 } as Meta;
 
-const responsive = {
-	desktop: {
-		breakpoint: { max: 3000, min: 1024 },
-		items: 5,
-	},
-	tablet: {
-		breakpoint: { max: 1024, min: 464 },
-		items: 2,
-	},
-	mobile: {
-		breakpoint: { max: 464, min: 0 },
-		items: 1,
-	},
-};
-
 const data = [
 	{
 		categoryCardClass: 'category-card',
@@ -64,7 +49,6 @@ const AppCategories: Story<AppCategoriesProps> = (args) => {
 export const EmptyCategories = AppCategories.bind({});
 EmptyCategories.args = {
 	categoryHeaderTitle: 'Categories to Explore',
-	customOptions: responsive,
 	navSpeed: 700,
 	touchDrag: false,
 	mouseDrag: false,
@@ -77,7 +61,6 @@ EmptyCategories.storyName = 'Empty';
 export const SomeCategories = AppCategories.bind({});
 SomeCategories.args = {
 	categoryHeaderTitle: 'Categories to Explore',
-	customOptions: responsive,
 	navSpeed: 700,
 	touchDrag: false,
 	mouseDrag: false,
