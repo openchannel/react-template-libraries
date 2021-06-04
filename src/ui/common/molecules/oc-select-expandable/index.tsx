@@ -32,8 +32,12 @@ export interface ExpandSelectProps {
 }
 
 export const OcExpandableSelect: React.FC<ExpandSelectProps> = (props) => {
-	const { title, isCollapsed, toggle, selectModels, onChange } = props;
-
+	const { title, isCollapsed, toggle, selectModels = [], onChange } = props;
+	const newItems = selectModels.map((item) => item);
+	const handleChange = (e: any) => {
+		newItems[e.target.name].checked = !newItems[e.target.name].checked;
+		onChange(newItems);
+	};
 	return (
 		<div className="select-expandable">
 			<nav className="select-expandable__sidebar">
@@ -45,12 +49,13 @@ export const OcExpandableSelect: React.FC<ExpandSelectProps> = (props) => {
 				</h6>
 				{!isCollapsed && (
 					<ul className="select-expandable__options">
-						{selectModels?.map((item, index) => (
+						{selectModels.map((item, index) => (
 							<ExpandableListItem
 								checked={item.checked}
 								label={item.label}
-								onChange={onChange}
+								onChange={handleChange}
 								name={index.toString()}
+								key={item.label}
 							/>
 						))}
 					</ul>

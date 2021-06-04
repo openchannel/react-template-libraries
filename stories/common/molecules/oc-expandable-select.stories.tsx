@@ -8,7 +8,7 @@ export default {
 	component: OcExpandableSelect,
 } as Meta;
 
-let selectModels = [
+const selectModels = [
 	{
 		label: 'Category 1',
 		checked: false,
@@ -29,21 +29,16 @@ let selectModels = [
 
 const SelectComponent: Story<ExpandSelectProps> = (args) => {
 	const [isCollapsed, toggle] = React.useState(args.isCollapsed);
-	const onChange = React.useCallback(
-		(e) => {
-			console.log(selectModels[e.target.name].checked);
-			return (selectModels[e.target.name].checked = !selectModels[e.target.name].checked);
-		},
-		[selectModels],
-	);
+	const [items, handleChange] = React.useState(args.selectModels);
+
 	return (
 		<OcExpandableSelect
 			{...args}
 			title={args.title}
 			toggle={toggle}
 			isCollapsed={isCollapsed}
-			selectModels={args.selectModels}
-			onChange={onChange}
+			onChange={handleChange}
+			selectModels={items}
 		/>
 	);
 };

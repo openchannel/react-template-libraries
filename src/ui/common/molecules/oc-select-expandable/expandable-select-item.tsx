@@ -8,7 +8,7 @@ export interface SelectModel {
 	name: string;
 }
 
-export const ExpandableListItem: React.FC<SelectModel> = (props) => {
+export const ExpandableListItem: React.FC<SelectModel> = (props: SelectModel) => {
 	const { label, ...p } = props;
 
 	return (
