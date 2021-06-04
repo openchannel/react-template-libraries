@@ -65,12 +65,13 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 	}
 
 	const onSaveField = (event: React.SyntheticEvent) => {
-		context.stopFieldEditing(event.target.name);
+		context.stopFieldEditing(element.name, element.path, element.index);
 	}
 
 	const onCancelFields = React.useCallback((event: React.SyntheticEvent) => {
-		context.stopFieldEditing(event.target.id);
-	}, [formik.values, context.stopFieldEditing]);
+		// const path = event.currentTarget.dataset.path;
+		context.onCancelField(element.name, element.path, element.index);
+	}, [context.stopFieldEditing]);
 
 
 	return (
@@ -118,7 +119,7 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 										<div className="cards-interface__preview-buttons">
 											<div className="cards-interface__preview-buttons-cancel">
 												<OcButtonComponent
-													name={element.name}
+													// name={element.name}
 													htmlType="button"
 													type="secondary"
 													onClick={onCancelFields}
@@ -128,7 +129,8 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 											</div>
 											<div className="cards-interface__preview-buttons-save">
 												<OcButtonComponent
-													name={element.name}
+													// name={element.name}
+													// data-path={element.path}
 													htmlType="button"
 													type="primary"
 													onClick={onSaveField}

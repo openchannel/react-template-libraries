@@ -28,7 +28,6 @@ export const OcDynamicArrayPreview: React.FC<OcDynamicArrayPreviewProps> = (prop
 				fieldValue: null,
 				isValidField: false,
 				formArrayDFA: null,
-				value,
 			};
 
 			// result.isValidField = isValidDataForFieldType(field.type, result.fieldValue);

@@ -4,13 +4,17 @@ import { nanoid } from 'nanoid';
 import { FIELD_TYPE } from '../../lib';
 import { AppFormField, FormikField } from './types';
 
+
+export const getNewName = (element) => `${element.id}-${nanoid()}`;
+
 export const extendElementWithRequiredKeys = (element, { path, index }) => ({
 	...element,
 	index,
 	path,
-	staticId: nanoid(),
-	name: `${element.id}-${nanoid()}`,
+	staticId: nanoid(), // use as unique non-updatable element id
+	name: getNewName(element),
 	value: element.defaultValue || '',
+	previousValue: element.defaultValue || '',
 	isEditing: true,
 	isNew: false,
 });
