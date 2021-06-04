@@ -16,7 +16,7 @@ export const extendElementWithRequiredKeys = (element, { path, index }) => ({
 	value: element.defaultValue || '',
 	previousValue: element.defaultValue || '',
 	isEditing: true,
-	isNew: false,
+	isNew: true,
 });
 
 export const updateElementKeys = (element, { path, index }) => ({

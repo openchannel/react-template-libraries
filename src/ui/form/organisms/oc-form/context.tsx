@@ -10,6 +10,7 @@ import get from 'lodash/get';
 import update from 'lodash/update';
 import flatMapDeep from 'lodash/flatMapDeep';
 import { FIELD_TYPE } from '../../lib';
+import { getInitialValuesFromFields } from './utils';
 import { getNewName } from './utils';
 import { updateElementKeys } from './utils';
 import { normalizeFieldsForFormik } from './utils';
@@ -20,7 +21,7 @@ export const useOcFormContext = () => {
 	return React.useContext(OcFormContext);
 }
 
-const setFieldValueByName = ({ element, formikValues, isReset, isCancel }) => (
+const setFieldValueByName = ({ element, formikValues = null, isReset, isCancel }) => (
 	isReset
 		? {
 			value: element.defaultValue || '',
@@ -61,6 +62,7 @@ const updateNestedFields = (params) => {
 
 const updateElement = (params) => ({
 	...params.element,
+	isNew: false,
 	...setFieldEditable(params),
 	...setFieldValueByName(params),
 	...updateNestedFields(params),
@@ -204,7 +206,7 @@ export const OcFormContextProvider = ({ children, initialValue }) => {
 			updateFieldsDefinition({
 				data: prev,
 				fieldName,
-				formikValues: formik.values,
+				// formikValues: formik.values,
 				isEditing: true,
 			})
 		);
@@ -230,14 +232,14 @@ export const OcFormContextProvider = ({ children, initialValue }) => {
 
 			if (isFirstLevelDeep) {
 				if (existedElement.fields.length === 0) {
-					next[existedElement.index] = elementUtils.cloneAndUpdate(instance);
+					next[existedElement.index] = elementUtils.cloneAndUpdate(instance, true);
 				} else {
 					next.push(elementUtils.cloneAndUpdate(instance, true))
 				}
 			} else {
 				next = update(prev, path, (fields) => {
 					if (existedElement.fields.length === 0) {
-						fields[existedElement.index] = elementUtils.cloneAndUpdate(instance);
+						fields[existedElement.index] = elementUtils.cloneAndUpdate(instance, true);
 					} else {
 						fields.push(elementUtils.cloneAndUpdate(instance, true))
 					}
@@ -262,6 +264,10 @@ export const OcFormContextProvider = ({ children, initialValue }) => {
 		);
 	}
 
+	const updateFormikValues = (values) => {
+		formik.setValues(values);
+	}
+
 
 	const onCancelField = (elementName: string, elementPath: string, elementIndex) => {
 		console.log('stopFieldEditing elementName', elementName)
@@ -272,63 +278,69 @@ export const OcFormContextProvider = ({ children, initialValue }) => {
 		console.log('path', path)
 		console.log('isFirstLevelDeep', isFirstLevelDeep)
 
-		setFieldsDefinition(prev => {
-			let next = [ ...prev ];
-			const existedElement = get(next, elementPath);
+		let next = [ ...fieldsDefinition ];
+		const existedElement = get(next, elementPath);
 
-			console.log('existedElement', existedElement)
+		console.log('existedElement', existedElement)
 
-			if (isFirstLevelDeep) {
+		if (isFirstLevelDeep) {
+			if (existedElement.isNew) {
+				if (next.length === 1) {
+					next[existedElement.index] = {
+						...existedElement,
+						value: existedElement.previousValue,
+						isEditing: false,
+						fields: [],
+					};
+				} else {
+					next.splice(existedElement.index, 1);
+				}
+			} else {
+				next[existedElement.index] = {
+					...existedElement,
+					value: existedElement.previousValue,
+					isEditing: false,
+					fields: existedElement.fields.map((el) => ({
+						...el,
+						value: el.previousValue,
+						isEditing: false,
+					})),
+				};
+			}
+		} else {
+			next = update(fieldsDefinition, path, (fields) => {
 				if (existedElement.isNew) {
-					if (next.length === 1) {
-						next[existedElement.index] = {
+					if (fields.filter(f => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1) {
+						fields[existedElement.index] = {
 							...existedElement,
 							value: existedElement.previousValue,
-							previousValue: existedElement.defaultValue || '',
 							isEditing: false,
 							fields: [],
 						};
 					} else {
-						next.splice(existedElement.index, 1);
+						fields.splice(existedElement.index, 1);
 					}
 				} else {
-					next[existedElement.index] = {
+					fields[existedElement.index] = {
 						...existedElement,
 						value: existedElement.previousValue,
-						previousValue: existedElement.defaultValue || '',
 						isEditing: false,
 						fields: existedElement.fields.map((el) => ({
 							...el,
 							value: el.previousValue,
-							previousValue: el.defaultValue || '',
 							isEditing: false,
 						})),
 					};
 				}
-			} else {
-				next = update(prev, path, (fields) => {
-					if (existedElement.isNew) {
-						if (fields.filter(f => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1) {
-							fields[existedElement.index] = {
-								...existedElement,
-								value: existedElement.previousValue,
-								previousValue: existedElement.defaultValue || '',
-								isEditing: false,
-								fields: [],
-							};
-						} else {
-							fields.splice(existedElement.index, 1);
-						}
-					} else {
 
-					}
+				return fields;
+			});
+		}
 
-					return fields;
-				});
-			}
+		next = normalizeFieldsForFormik(updateElementKeys)(next);
 
-			return normalizeFieldsForFormik(updateElementKeys)(next);
-		});
+		setFieldsDefinition(next);
+		formik.setValues(getInitialValuesFromFields(next));
 	};
 
 	const onSaveField = (elementName: string, elementPath: string, elementIndex) => {
