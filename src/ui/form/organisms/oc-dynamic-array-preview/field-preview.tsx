@@ -11,7 +11,7 @@ import FileIconSvg from '../../../../assets/img/file_icon.svg';
 export const FieldPreview: React.FC<PreviewFieldModel> = (element) => {
 	const { type, isValidField, value, formArrayDFA } = element;
 
-	console.log('element', element)
+	// console.log('element', element)
 
 	// if (!isValidField) {
 	// 	return (

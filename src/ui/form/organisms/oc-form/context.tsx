@@ -1,6 +1,8 @@
 // @ts-nocheck
 
+import { nanoid } from 'nanoid';
 import * as React from 'react';
+import { useFormikContext } from 'formik';
 
 import produce from 'immer';
 import get from 'lodash/get';
@@ -26,7 +28,9 @@ const setFieldValueByName = (element, formikValues = null, isReset = false) => (
 
 const toggleFieldEditable = (element, isReset = false) => ({ isEditing: (isReset || !element.isEditing) });
 
-const updateNestedFields = (element, formikValues, isReset) => {
+const setFieldEditable = (element, isReset = false, isEditing) => ({ isEditing: (isReset || isEditing) });
+
+const updateNestedFields = (element, formikValues, isReset, isEditing) => {
 	if (!element.fields) {
 		return {};
 	}
@@ -34,29 +38,29 @@ const updateNestedFields = (element, formikValues, isReset) => {
 	return {
 		fields: element.fields.map((f) => ({
 			...f,
-			...toggleFieldEditable(f, isReset),
+			...setFieldEditable(f, isReset, isEditing),
 			...setFieldValueByName(f, formikValues, isReset),
 		}))
 	};
 }
 
-const updateElement = (element, formikValues, isReset) => ({
+const updateElement = ({ element, formikValues, isReset, isEditing }) => ({
 	...element,
-	...toggleFieldEditable(element, isReset),
+	...setFieldEditable(element, isReset, isEditing),
 	...setFieldValueByName(element, formikValues, isReset),
-	...updateNestedFields(element, formikValues, isReset),
+	...updateNestedFields(element, formikValues, isReset, isEditing),
 });
 
-const updateFieldsDefinition = (arr: any[], fieldName: string, formikValues: any, isReset) => {
-	return arr.map((element) => {
+const updateFieldsDefinition = ({ data, fieldName, formikValues, isReset, isEditing }) => {
+	return data.map((element) => {
 		if (element.name === fieldName) {
-			return updateElement(element, formikValues, isReset);
+			return updateElement({ element, formikValues, isReset, isEditing });
 		}
 
 		if (element.fields) {
 			return {
 				...element,
-				fields: updateFieldsDefinition(element.fields, fieldName, formikValues, isReset),
+				fields: updateFieldsDefinition({ data: element.fields, fieldName, formikValues, isReset, isEditing }),
 			};
 		}
 
@@ -97,24 +101,24 @@ const omitNestedFields = (deepElementName, fields, sourceFields) => {
 }
 
 const fieldsUtils = {
-	flatMap: (fields) => (
-		fields.reduce((acc, item) => (
-			item.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY ? [ ...acc, item, ...fieldsUtils.flatMap(item.fields) ] : [...acc, item]
+	flatMap: (arr) => (
+		arr.reduce((acc, item) => (
+			item.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY
+				? [ ...acc, item, ...fieldsUtils.flatMap(item.fields) ]
+				: [ ...acc, item ]
 		), [])
 	),
-	dumpDeepNestedFields: (fields, depth = 0) => {
-		// let initialDepth = 0;
-
-		return fields.map((el) => {
+	dumpDeepFields: (arr, depth = 1) => (
+		arr.map((el) => {
 			if (el.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY) {
 				if (depth !== 0) {
-					return { ...el, fields: fieldsUtils.dumpDeepNestedFields(el.fields, depth - 1) };
+					return { ...el, fields: [] };
 				}
-				return { ...el, fields: [] };
+				return { ...el, fields: fieldsUtils.dumpDeepFields(el.fields, depth + 1) };
 			}
 			return el;
 		})
-	}
+	),
 };
 
 const elementUtils = {
@@ -135,26 +139,19 @@ const elementUtils = {
 			depth: path.split('.').length - 1,
 		};
 	},
-	clone: (element) => {
+	updateNestedFields: (element) => (
+		element.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY
+			? { fields: element.fields.map(el => ({ ...elementUtils.cloneAndUpdate(el) })) }
+			: {}
+	),
+	cloneAndUpdate: (element) => {
 		return {
 			...element,
-			...elementUtils.dumpNestedFields(element),
-		};
-	},
-	generateBy: (element) => {
-		return {
-			...element,
-			value: '',
+			...elementUtils.updateNestedFields(element),
+			name: `${element.id}-${nanoid()}`,
+			value: element.defaultValue || '',
 			isEditing: true,
-			isNew: true,
-			...elementUtils.dumpNestedFields(element),
-		};
-	},
-	dumpNestedFields: (element) => {
-		if (element.type !== FIELD_TYPE.DYNAMIC_FIELD_ARRAY) return {};
-
-		return {
-			fields: element.fields.map(el => ({ ...elementUtils.clone(el), fields: [] }))
+			isNew: false,
 		};
 	},
 };
@@ -162,20 +159,52 @@ const elementUtils = {
 
 export const OcFormContextProvider = ({ children, initialValue }) => {
 	const sourceFields = React.useRef(initialValue.fields);
-	const [flattenFields] = React.useState(fieldsUtils.flatMap(initialValue.fields));
+	const [flattenFields] = React.useState(fieldsUtils.dumpDeepFields(fieldsUtils.flatMap(initialValue.fields), 0));
+	const [fieldsDefinition, setFieldsDefinition] = React.useState(fieldsUtils.dumpDeepFields(sourceFields.current));
 
-	const [fieldsDefinition, setFieldsDefinition] = React.useState(fieldsUtils.dumpDeepNestedFields(sourceFields.current));
+	const formik = useFormikContext();
 
-	const toggleEditingField = React.useCallback((fieldName: string, formikValues) => {
-		setFieldsDefinition(prev => updateFieldsDefinition(prev, fieldName, formikValues));
-	}, []);
+	console.log('formik', formik)
+	console.log('flattenFields', flattenFields)
+
+	const startFieldEditing = (fieldName: string) => {
+		console.log('startFieldEditing fieldName', fieldName)
+		setFieldsDefinition(prev =>
+			updateFieldsDefinition({
+				data: prev,
+				fieldName,
+				formikValues: formik.values,
+				isEditing: true,
+			})
+		);
+	}
+
+	const stopFieldEditing = (fieldName: string) => {
+		console.log('stopFieldEditing fieldName', fieldName)
+		setFieldsDefinition(prev =>
+			updateFieldsDefinition({
+				data: prev,
+				fieldName,
+				formikValues: formik.values,
+				isEditing: false,
+			})
+		);
+	}
 
 	const resetField = React.useCallback((fieldName) => {
-		setFieldsDefinition(prev => updateFieldsDefinition(prev, fieldName, null, true));
+		setFieldsDefinition(prev =>
+			updateFieldsDefinition({
+				data: prev,
+				fieldName,
+				isReset: true,
+			})
+		);
 	}, []);
 
 	const fillDynamicField = (deepElementName, deepElementPath) => {
-		const copiedElement = flattenFields.find(item => item.name === deepElementName);
+		const copiedElement = flattenFields.find(item => (item.name === deepElementName) || (item.staticId === deepElementName));
+
+		console.log('copiedElement', copiedElement)
 
 		const { path, isFirstLevelDeep } = elementUtils.getParentPath(deepElementPath);
 
@@ -186,18 +215,18 @@ export const OcFormContextProvider = ({ children, initialValue }) => {
 				const isAlreadyExistInState = prev[copiedElement.index];
 
 				if (isAlreadyExistInState.fields.length === 0) {
-					next[copiedElement.index] = elementUtils.clone(copiedElement);
+					next[copiedElement.index] = elementUtils.cloneAndUpdate(copiedElement);
 				} else {
-					next.push(elementUtils.generateBy(copiedElement))
+					next.push(elementUtils.cloneAndUpdate(copiedElement))
 				}
 			} else {
 				next = update(prev, path, (el) => {
 					const isAlreadyExistInState = el[copiedElement.index];
 
 					if (isAlreadyExistInState.fields.length === 0) {
-						el[copiedElement.index] = elementUtils.clone(copiedElement);
+						el[copiedElement.index] = elementUtils.cloneAndUpdate(copiedElement);
 					} else {
-						el.push(elementUtils.generateBy(copiedElement))
+						el.push(elementUtils.cloneAndUpdate(copiedElement))
 					}
 
 					return el;
@@ -213,9 +242,11 @@ export const OcFormContextProvider = ({ children, initialValue }) => {
 	return (
 		<OcFormContext.Provider value={{
 			fieldsDefinition,
-			toggleEditingField,
+			toggleEditingField: () => {},
 			resetField,
 			fillDynamicField,
+			startFieldEditing,
+			stopFieldEditing,
 		}}>
 			{children}
 		</OcFormContext.Provider>

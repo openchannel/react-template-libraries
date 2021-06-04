@@ -8,6 +8,7 @@ export const extendElementWithRequiredKeys = (element, { path, index }) => ({
 	...element,
 	index,
 	path,
+	staticId: nanoid(),
 	name: `${element.id}-${nanoid()}`,
 	value: element.defaultValue || '',
 	isEditing: true,
@@ -18,9 +19,9 @@ export const updateElementKeys = (element, { path, index }) => ({
 	...element,
 	index,
 	path,
-	value: element.defaultValue,
-	isEditing: true,
-	isNew: false,
+	// value: element.defaultValue,
+	// isEditing:,
+	// isNew: false,
 });
 
 export const normalizeFieldsForFormik = (todo) => (fields: AppFormField[], { deepPath } = {}) => {

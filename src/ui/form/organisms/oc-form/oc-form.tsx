@@ -397,12 +397,12 @@ export const OcForm: React.FC<any> = (props) => {
 	console.log('formik.values', formik.values)
 
 	return (
-		<OcFormContextProvider initialValue={{ fields }}>
-			<FormikContext.Provider value={formik}>
+		<FormikContext.Provider value={formik}>
+			<OcFormContextProvider initialValue={{ fields }}>
 				<FormikForm className="form">
 					<RecursiveContainerWrapper />
 				</FormikForm>
-			</FormikContext.Provider>
-		</OcFormContextProvider>
+			</OcFormContextProvider>
+		</FormikContext.Provider>
 	)
 }

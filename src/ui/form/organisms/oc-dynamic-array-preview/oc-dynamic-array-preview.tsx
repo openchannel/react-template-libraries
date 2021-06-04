@@ -47,7 +47,7 @@ export const OcDynamicArrayPreview: React.FC<OcDynamicArrayPreviewProps> = (prop
 		<div className="array-preview">
 			{
 				previewFields.map((element) => (
-					<div className="array-preview__field">
+					<div key={element.name} className="array-preview__field">
 						<span className="array-preview__field-title">
 							{!hideLabel && <OcLabelComponent>{element.label}</OcLabelComponent>}
 						</span>

@@ -1,3 +1,5 @@
+//commit e3a17b1c485b17c652a508f9359d89c8441fe44e Author: Vitaliy Samofal Date: 20.05.21, 17:55
+
 @import 'src/ui/styles/index';
 
 .cards-interface {
@@ -6,6 +8,12 @@
 	flex-direction: column;
 	align-items: flex-start;
 	word-break: break-word;
+
+	&__icons-handler {
+		display: flex;
+		margin-left: 1rem;
+		margin-bottom: 1.5rem;
+	}
 
 	&__added-item {
 		width: 100%;
