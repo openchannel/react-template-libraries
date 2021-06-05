@@ -100,7 +100,6 @@ export const OcAppCategoriesComponent: React.FC<AppCategoriesProps> = (props) =>
 				showDots={dots}
 				centerMode={autoWidth}
 				keyBoardControl={false}
-				removeArrowOnDeviceType={['tablet', 'mobile']}
 				customRightArrow={<CustomRightArrow />}
 				customLeftArrow={<CustomLeftArrow />}
 				containerClass="categories__carousel"
