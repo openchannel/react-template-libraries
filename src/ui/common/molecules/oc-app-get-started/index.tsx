@@ -16,9 +16,9 @@ export const OcGetStartedComponent: React.FC<GetStartedProps> = (props) => {
 	const {
 		getStartedType = 'home',
 		getStartedHeader = 'List Your App in our App Store',
-		getStartedDescription = 'Register as an app developer and submit your app easily with our App Store Developer Portal',
-		getStartedButtonText = 'Get Started As An App Developer',
-		getStartedImage = './img/get-started.svg',
+		getStartedDescription,
+		getStartedButtonText,
+		getStartedImage = '../../../../assets/img/get-started.svg',
 		onClick,
 	} = props;
 
