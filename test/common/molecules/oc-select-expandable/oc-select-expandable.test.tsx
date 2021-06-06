@@ -1,51 +1,52 @@
 import * as React from 'react';
-import { Dropdown } from 'react-bootstrap';
-import { shallow, ShallowWrapper } from 'enzyme';
+import { mount } from 'enzyme';
 
-import { OcExpandableSelect, ExpandSelectProps } from '../../../../src/ui/common';
-
-const setUp = (props: ExpandSelectProps) => shallow(<OcExpandableSelect {...props} />);
+import { OcExpandableSelect } from '../../../../src/ui/common';
 
 describe('OcSelect', () => {
-	let component: ShallowWrapper;
-
-	const onSelectionChangeMock = jest.fn();
-
-	beforeEach(() => {
-		component = setUp({
-			title: 'Default',
-			isCollapsed: false,
-			selectModels: [
-				{
-					label: 'Category 1',
-					checked: false,
-					name: '0',
-					onChange: () => {},
-				},
-				{
-					label: 'Category 2',
-					checked: false,
-					name: '1',
-					onChange: () => {},
-				},
-			],
-			onChange: () => {},
-			toggle: () => {},
-		});
-	});
+	const selectModels = [
+		{
+			label: 'Category 1',
+			checked: false,
+		}
+	];
 
 	it('should create', () => {
+		const component = mount(
+			<OcExpandableSelect
+				title="App Category"
+				toggle={()=>{}}
+				isCollapsed
+				onChange={()=>{}}
+				selectModels={selectModels}
+			/>);
 		expect(component).toBeTruthy();
 	});
 
 	it('should have title', () => {
+		const component = mount(
+			<OcExpandableSelect
+				title="App Category"
+				toggle={()=>{}}
+				isCollapsed
+				onChange={()=>{}}
+				selectModels={selectModels}
+			/>);
 		component.setProps({ title: 'value_1' });
-		expect(component).toContain('value_1');
+		expect(component.prop('title')).toEqual('value_1');
 	});
 
 	it('should be collapsed', () => {
-		component.setProps({ isCollapsed: true });
+		const component = mount(
+			<OcExpandableSelect
+				title="App Category"
+				toggle={()=>{}}
+				isCollapsed
+				onChange={()=>{}}
+				selectModels={selectModels}
+			/>);
+		component.setProps({ isCollapsed: false });
 
-		expect(component.prop('isCollapsed')).toBe(true);
+		expect(component.prop('isCollapsed')).toBe(false);
 	});
 });

@@ -4,8 +4,8 @@ import './style.scss';
 export interface SelectModel {
 	label: string;
 	checked: boolean;
-	onChange: any;
-	name: string;
+	onChange?: any;
+	name?: string;
 }
 
 export const ExpandableListItem: React.FC<SelectModel> = (props: SelectModel) => {
