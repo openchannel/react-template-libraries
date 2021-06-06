@@ -10,11 +10,24 @@ export default {
 	component: OcResetPasswordComponent,
 } as Meta;
 
-const DefaultComponent: Story<OcResetPasswordProps> = (args) => (
-	<BrowserRouter>
-		<OcResetPasswordComponent {...args} />
-	</BrowserRouter>
-);
+const DefaultComponent: Story<OcResetPasswordProps> = (args) => {
+	const [value, setValue] = React.useState('');
+	const [blurred, setBlurred] = React.useState(false);
+
+	return (<BrowserRouter>
+				<OcResetPasswordComponent 
+					{...args}
+					inputProps={{
+						id: 'input',
+						value,
+						onChange: (e: any) => setValue(e.target.value),
+						onBlur: () => setBlurred(true),
+					}} 
+					inputError={blurred && !value && errorMessages.required()}
+				/>
+			</BrowserRouter>
+			)
+};
 
 export const Default = DefaultComponent.bind({});
 Default.args = {
@@ -37,7 +50,7 @@ const FilledComponent: Story<OcResetPasswordProps> = (args) => {
 				inputProps={{
 					id: 'input',
 					value,
-					onChange: (e) => setValue(e.target.value),
+					onChange: (e: any) => setValue(e.target.value),
 					onBlur: () => setBlurred(true),
 				}}
 				inputError={blurred && !value && errorMessages.required()}
