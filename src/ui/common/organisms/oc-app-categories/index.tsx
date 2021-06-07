@@ -2,28 +2,10 @@
 import * as React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { CarouselProps, ArrowProps, ResponsiveType } from 'react-multi-carousel/lib/types';
-import LeftArrowIcon from '../../../../assets/img/arrow-left-analog.svg';
-import RightArrowIcon from '../../../../assets/img/arrow-right-analog.svg';
+import { CarouselProps, ResponsiveType } from 'react-multi-carousel/lib/types';
 import { CategoryItem, CategoryProps } from './category-item';
+import { CustomLeftArrow, CustomRightArrow } from './custom-arrows';
 import './style.scss';
-
-const CustomLeftArrow = (props: ArrowProps) => {
-	const { onClick } = props;
-	return (
-		<div className="categories__carousel-nav categories__carousel-nav-left" onClick={onClick}>
-			<LeftArrowIcon />
-		</div>
-	);
-};
-const CustomRightArrow = (props: ArrowProps) => {
-	const { onClick } = props;
-	return (
-		<div className="categories__carousel-nav categories__carousel-nav-right" onClick={onClick}>
-			<RightArrowIcon />
-		</div>
-	);
-};
 
 const defaultOptions = {
 	desktop: {
@@ -40,7 +22,7 @@ const defaultOptions = {
 	},
 };
 
-export interface AppCategoriesProps extends CarouselProps {
+export interface AppCategoriesProps extends Partial<CarouselProps> {
 	/**
 	 * responsive config
 	 */
@@ -48,23 +30,23 @@ export interface AppCategoriesProps extends CarouselProps {
 	/**
 	 * timing of slides changing
 	 */
-	navSpeed: number | undefined;
+	navSpeed?: number | undefined;
 	/**
 	 * ability to drag with touch(mobile), boolean attribute
 	 */
-	touchDrag: boolean | undefined;
+	touchDrag?: boolean | undefined;
 	/**
 	 * ability to drag with mouse, boolean attribute
 	 */
-	mouseDrag: boolean | undefined;
+	mouseDrag?: boolean | undefined;
 	/**
 	 * enable or disable dots in carousel, boolean attribute
 	 */
-	dots: boolean | undefined;
+	dots?: boolean | undefined;
 	/**
 	 * show previous and next set of items partially
 	 */
-	autoWidth: boolean | undefined;
+	autoWidth?: boolean | undefined;
 	/**
 	 * Title of the category section
 	 */

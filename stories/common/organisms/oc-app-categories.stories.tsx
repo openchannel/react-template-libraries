@@ -28,7 +28,7 @@ const data = [
 		categoryTitleColor: 'green',
 	},
 ];
-
+//@ts-ignore
 const duplicateItems = (arr, numberOfRepetitions) => Array(numberOfRepetitions).fill(arr).flat();
 
 const AppCategories: Story<AppCategoriesProps> = (args) => {
