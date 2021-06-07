@@ -170,6 +170,65 @@ const elementUtils = {
 		isEditing: true,
 		isNew,
 	}),
+	// update: (arr, element) => {
+	// 	if (fields.filter(f => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1) {
+	// 		fields[existedElement.index] = {
+	// 			...existedElement,
+	// 			value: existedElement.previousValue,
+	// 			isEditing: false,
+	// 			fields: [],
+	// 		};
+	// 	} else {
+	// 		fields.splice(existedElement.index, 1);
+	// 	}
+	// },
+	removeChildrenOrCurrent: (arr, field, isChildren = false) => {
+		let updatedArr = [ ...arr ];
+
+		if (isChildren) {
+			updatedArr[field.index] = {
+				...field,
+				// value: field.previousValue,
+				isEditing: false,
+				fields: [],
+			};
+		} else {
+			updatedArr.splice(field.index, 1);
+		}
+
+		return updatedArr;
+	},
+	resetFieldValueToPreviousValue: (arr, field) => {
+		arr[field.index] = {
+			...field,
+			value: field.previousValue,
+			isEditing: false,
+			fields: field.fields.map((el) => ({ ...el, value: el.previousValue, isEditing: false })),
+		};
+
+		return arr;
+	},
+	setFieldValue: (field, newValue) => ({
+		...field,
+		value: newValue,
+		previousValue: newValue || field.value || field.defaultValue || '',
+	}),
+	updateFieldsValues: (arr, formikValues) => {
+		return arr.map((element) => {
+			if (formikValues[element.name]) {
+				return elementUtils.setFieldValue(element, formikValues[element.name]);
+			}
+
+			if (element.fields) {
+				return {
+					...element,
+					fields: elementUtils.updateFieldsValues(element.fields, formikValues),
+				};
+			}
+
+			return element;
+		});
+	}
 };
 
 
@@ -270,67 +329,28 @@ export const OcFormContextProvider = ({ children, initialValue }) => {
 
 
 	const onCancelField = (elementName: string, elementPath: string, elementIndex) => {
-		console.log('stopFieldEditing elementName', elementName)
-		console.log('stopFieldEditing elementPath', elementPath)
-
-		const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
-
-		console.log('path', path)
-		console.log('isFirstLevelDeep', isFirstLevelDeep)
-
 		let next = [ ...fieldsDefinition ];
 		const existedElement = get(next, elementPath);
+		const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
 
-		console.log('existedElement', existedElement)
+		next = elementUtils.updateFieldsValues(next, formik.values);
 
 		if (isFirstLevelDeep) {
 			if (existedElement.isNew) {
-				if (next.length === 1) {
-					next[existedElement.index] = {
-						...existedElement,
-						value: existedElement.previousValue,
-						isEditing: false,
-						fields: [],
-					};
-				} else {
-					next.splice(existedElement.index, 1);
-				}
+				const removeChildrenFields = next.length === 1;
+
+				next = elementUtils.removeChildrenOrCurrent(next, existedElement, removeChildrenFields);
 			} else {
-				next[existedElement.index] = {
-					...existedElement,
-					value: existedElement.previousValue,
-					isEditing: false,
-					fields: existedElement.fields.map((el) => ({
-						...el,
-						value: el.previousValue,
-						isEditing: false,
-					})),
-				};
+				next = elementUtils.resetFieldValueToPreviousValue(next, existedElement);
 			}
 		} else {
-			next = update(fieldsDefinition, path, (fields) => {
+			next = update(next, path, (fields) => {
 				if (existedElement.isNew) {
-					if (fields.filter(f => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1) {
-						fields[existedElement.index] = {
-							...existedElement,
-							value: existedElement.previousValue,
-							isEditing: false,
-							fields: [],
-						};
-					} else {
-						fields.splice(existedElement.index, 1);
-					}
+					const removeChildrenFields = fields.filter(f => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1;
+
+					fields = elementUtils.removeChildrenOrCurrent(fields, existedElement, removeChildrenFields);
 				} else {
-					fields[existedElement.index] = {
-						...existedElement,
-						value: existedElement.previousValue,
-						isEditing: false,
-						fields: existedElement.fields.map((el) => ({
-							...el,
-							value: el.previousValue,
-							isEditing: false,
-						})),
-					};
+					fields = elementUtils.resetFieldValueToPreviousValue(fields, existedElement);
 				}
 
 				return fields;
@@ -345,23 +365,19 @@ export const OcFormContextProvider = ({ children, initialValue }) => {
 	}
 
 	const onRemoveField = (elementName: string, elementPath: string) => {
-		const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
-
 		let next = [ ...fieldsDefinition ];
+		const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
 		const existedElement = get(next, elementPath);
 
 		if (isFirstLevelDeep) {
-			if (next.length === 1) {
-				next[existedElement.index] = {
-					...existedElement,
-					fields: [],
-				};
-			} else {
-				next.splice(existedElement.index, 1);
-			}
+			const removeChildrenFields = next.length === 1;
+
+			next = elementUtils.removeChildrenOrCurrent(next, existedElement, removeChildrenFields);
 		} else {
 			next = update(next, path, (fields) => {
-				fields.splice(existedElement.index, 1);
+				const removeChildrenFields = fields.filter(f => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1;
+
+				fields = elementUtils.removeChildrenOrCurrent(fields, existedElement, removeChildrenFields);
 
 				return fields;
 			});
