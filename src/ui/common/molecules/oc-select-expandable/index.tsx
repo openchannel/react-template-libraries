@@ -4,8 +4,6 @@ import {
 	ExpandableListItem,
 	SelectModel,
 } from '../../molecules/oc-select-expandable/expandable-select-item';
-import CollapsedIcon from '../../../../assets/img/select-down.svg';
-import ExpandedIcon from '../../../../assets/img/select-up.svg';
 import './style.scss';
 
 export interface ExpandSelectProps {
@@ -28,23 +26,47 @@ export interface ExpandSelectProps {
 	/**
 	 * toggle function to change expanded state
 	 */
-	toggle: any;
+	toggle?: any;
+	/**
+	 * collapsed icon source link
+	 */
+	collapsedIconLink?: string;
+	/**
+	 * expanded icon source link
+	 */
+	expandedIconLink?: string;
 }
 
 export const OcExpandableSelect: React.FC<ExpandSelectProps> = (props) => {
-	const { title, isCollapsed, toggle, selectModels = [], onChange } = props;
+	const {
+		title,
+		isCollapsed = true,
+		toggle,
+		selectModels = [],
+		onChange,
+		collapsedIconLink = './img/select-down.svg',
+		expandedIconLink = './img/select-up.svg',
+	} = props;
 	const newItems = selectModels.map((item) => item);
-	const handleChange = (e: any) => {
-		newItems[e.target.name].checked = !newItems[e.target.name].checked;
-		onChange(newItems);
-	};
+	const handleChange = React.useCallback(
+		(e: any) => {
+			newItems[e.target.name].checked = !newItems[e.target.name].checked;
+			onChange(newItems);
+		},
+		[newItems, onChange],
+	);
+	const handleToggle = React.useCallback(() => toggle(!isCollapsed), [toggle, isCollapsed]);
 	return (
 		<div className="select-expandable">
 			<nav className="select-expandable__sidebar">
-				<h6 className="select-expandable__heading" onClick={() => toggle(!isCollapsed)}>
+				<h6 className="select-expandable__heading" onClick={handleToggle}>
 					{title}
 					<a className="select-expandable__icon">
-						{isCollapsed ? <CollapsedIcon /> : <ExpandedIcon />}
+						{isCollapsed ? (
+							<img src={collapsedIconLink} alt="collapsed-icon" />
+						) : (
+							<img src={expandedIconLink} alt="expanded-icon" />
+						)}
 					</a>
 				</h6>
 				{!isCollapsed && (
