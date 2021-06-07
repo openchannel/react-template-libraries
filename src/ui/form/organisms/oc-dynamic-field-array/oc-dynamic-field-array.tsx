@@ -48,6 +48,7 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 	}
 
 	const removeDynamicFieldFromFormikValues = () => {
+		context.onRemoveField(element.name, element.path);
 		// const values = Object.entries(formik.values).reduce((acc, item) => {
 		// 	if (!item[0].includes(element.name)) {
 		// 		acc[item[0]] = item[1];

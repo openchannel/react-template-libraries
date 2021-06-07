@@ -337,15 +337,45 @@ export const OcFormContextProvider = ({ children, initialValue }) => {
 			});
 		}
 
-		next = normalizeFieldsForFormik(updateElementKeys)(next);
-
-		setFieldsDefinition(next);
-		formik.setValues(getInitialValuesFromFields(next));
+		normalizeFieldsAndUpdateDefinition(next);
 	};
 
 	const onSaveField = (elementName: string, elementPath: string, elementIndex) => {
 
 	}
+
+	const onRemoveField = (elementName: string, elementPath: string) => {
+		const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
+
+		let next = [ ...fieldsDefinition ];
+		const existedElement = get(next, elementPath);
+
+		if (isFirstLevelDeep) {
+			if (next.length === 1) {
+				next[existedElement.index] = {
+					...existedElement,
+					fields: [],
+				};
+			} else {
+				next.splice(existedElement.index, 1);
+			}
+		} else {
+			next = update(next, path, (fields) => {
+				fields.splice(existedElement.index, 1);
+
+				return fields;
+			});
+		}
+
+		normalizeFieldsAndUpdateDefinition(next);
+	}
+
+	const normalizeFieldsAndUpdateDefinition = React.useCallback((array) => {
+		const newArray = normalizeFieldsForFormik(updateElementKeys)(array);
+
+		setFieldsDefinition(newArray);
+		formik.setValues(getInitialValuesFromFields(newArray));
+	}, [formik.setValues])
 
 	return (
 		<OcFormContext.Provider value={{
@@ -357,6 +387,7 @@ export const OcFormContextProvider = ({ children, initialValue }) => {
 			stopFieldEditing,
 			onCancelField,
 			onSaveField,
+			onRemoveField,
 		}}>
 			{children}
 		</OcFormContext.Provider>

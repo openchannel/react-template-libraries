@@ -6,17 +6,15 @@ import {
 	Form as FormikForm,
 	Field,
 } from 'formik';
-import merge from 'lodash/merge';
 
-import { OcColorComponent, OcError, OcInputComponent } from '../../../common';
 import { OcTooltipLabel } from '../../atoms';
 import { FIELD_TYPE } from '../../lib';
 import { OcDynamicFieldArray } from '../oc-dynamic-field-array';
-import { useOcFormContext } from './context';
+import { OcColorComponent, OcError, OcInputComponent } from '../../../common';
 
 import { AppFormModel } from './types';
 import { getValidParams } from './utils';
-import { OcFormContextProvider } from './context';
+import { useOcFormContext, OcFormContextProvider } from './context';
 
 import './style.scss';
 
