@@ -9,6 +9,8 @@ describe('Default text input', () => {
 			required={false}
 			disabled={false}
 			placeholder="Search"
+			searchButtonText="Search"
+			clearButtonText="Cancel"
 			onChange={() => {}}
 			clearButtonText="Cancel"
 			searchButtonText="Search"
