@@ -31,76 +31,46 @@ const getFieldLabel = (element, formikValues) => {
 };
 
 export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) => {
-	const { element, fieldsDefinition, showAddButton } = props;
+	const { element, showAddButton, groupFieldIndex } = props;
 
 	const formik = useFormikContext();
-	const { value } = formik.getFieldMeta(element.name);
-
 	const context = useOcFormContext();
-
-
-	// console.log('OcDynamicFieldArray formik.values', formik.values)
-	// console.log('OcDynamicFieldArray element', element)
-	// console.log('OcDynamicFieldArray fields', fields);
-
-	const addDynamicFieldToFormikValues = () => {
-		context.fillDynamicField(element.staticId, element.path);
-	}
-
-	const removeDynamicFieldFromFormikValues = () => {
-		context.onRemoveField(element.name, element.path);
-		// const values = Object.entries(formik.values).reduce((acc, item) => {
-		// 	if (!item[0].includes(element.name)) {
-		// 		acc[item[0]] = item[1];
-		// 	}
-		// 	return acc;
-		// }, {});
-		//
-		// formik.setValues(values);
-		//
-		// context.resetField(element.name);
-	}
-
-	const onStartEditing = () => {
-		context.startFieldEditing(element.name);
-	}
-
-	const onSaveField = (event: React.SyntheticEvent) => {
-		context.stopFieldEditing(element.name, element.path, element.index);
-	}
-
-	const onCancelFields = React.useCallback((event: React.SyntheticEvent) => {
-		// const path = event.currentTarget.dataset.path;
-		context.onCancelField(element.name, element.path, element.index);
-	}, [context.stopFieldEditing]);
-
 
 	return (
 		<div className="cards-interface">
 			{
 				element.fields && element.fields.length > 0 && (
 					<div className="cards-interface__added-item">
-
 						<div className="cards-interface__preview">
 							<div className="cards-interface__preview-header">
 								<h3 className="cards-interface__preview-header-text">
-									{getFieldLabel(element, formik.values) || `Item ${0 + 1}`}
+									{getFieldLabel(element, formik.values) || `Item ${groupFieldIndex + 1}`}
 								</h3>
-
 								<div className="cards-interface__icons-handler">
 									{
 										!element.isEditing && (
-											<div className="cards-interface__preview-icon" onClick={onStartEditing}>
+											<div
+												data-name={element.name}
+												data-index={element.index}
+												data-path={element.path}
+												onClick={context.onStartEditingField}
+												className="cards-interface__preview-icon"
+											>
 												<EditIconSvg />
 											</div>
 										)
 									}
-									<div className="cards-interface__preview-icon" onClick={removeDynamicFieldFromFormikValues}>
+									<div
+										data-name={element.name}
+										data-index={element.index}
+										data-path={element.path}
+										className="cards-interface__preview-icon"
+										onClick={context.onRemoveDynamicField}
+									>
 										<TrashIconSvg />
 									</div>
 								</div>
 							</div>
-
 							{
 								!element.isEditing ? (
 									<div className="cards-interface__preview-content">
@@ -116,25 +86,27 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 										<div className="cards-interface__preview-content">
 											<RecursiveContainer fields={element.fields} />
 										</div>
-
 										<div className="cards-interface__preview-buttons">
 											<div className="cards-interface__preview-buttons-cancel">
 												<OcButtonComponent
-													// name={element.name}
+													data-name={element.name}
+													data-index={element.index}
+													data-path={element.path}
 													htmlType="button"
 													type="secondary"
-													onClick={onCancelFields}
+													onClick={context.onCancelEditingField}
 												>
 													Cancel
 												</OcButtonComponent>
 											</div>
 											<div className="cards-interface__preview-buttons-save">
 												<OcButtonComponent
-													// name={element.name}
-													// data-path={element.path}
+													data-name={element.name}
+													data-index={element.index}
+													data-path={element.path}
 													htmlType="button"
 													type="primary"
-													onClick={onSaveField}
+													onClick={context.onSaveField}
 												>
 													Save
 												</OcButtonComponent>
@@ -150,9 +122,13 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 			{showAddButton && (
 				<div className="cards-interface__add-btn">
 					<OcButtonComponent
+						data-name={element.name}
+						data-index={element.index}
+						data-path={element.path}
+						data-staticid={element.staticId}
 						htmlType="button"
 						type="primary"
-						onClick={addDynamicFieldToFormikValues}
+						onClick={context.onAddDynamicField}
 					>
 						Add
 					</OcButtonComponent>
