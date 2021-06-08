@@ -12,8 +12,6 @@ describe('Default text input', () => {
 			searchButtonText="Search"
 			clearButtonText="Cancel"
 			onChange={() => {}}
-			clearButtonText="Cancel"
-			searchButtonText="Search"
 		/>,
 	);
 

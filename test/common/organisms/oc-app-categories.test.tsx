@@ -58,21 +58,9 @@ describe('OcAppCategoriesComponent', () => {
 
 	it('should have props and change them', () => {
 		expect(component.prop('data')).toEqual(data);
-		expect(component.prop('touchDrag')).toEqual(false);
-		expect(component.prop('mouseDrag')).toEqual(false);
-		expect(component.prop('dots')).toEqual(false);
-		expect(component.prop('autoWidth')).toEqual(false);
 		expect(component.prop('categoryHeaderTitle')).toEqual('Categories to Explore');
-		component.setProps({ touchDrag: false });
-		component.setProps({ mouseDrag: false });
-		component.setProps({ dots: false });
-		component.setProps({ autoWidth: false });
 		component.setProps({ categoryHeaderTitle: 'Default' });
 		component.update();
-		expect(component.prop('touchDrag')).toEqual(false);
-		expect(component.prop('mouseDrag')).toEqual(false);
-		expect(component.prop('dots')).toEqual(false);
-		expect(component.prop('autoWidth')).toEqual(false);
 		expect(component.prop('categoryHeaderTitle')).toEqual('Default');
 	});
 });
