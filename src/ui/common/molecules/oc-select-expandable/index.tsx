@@ -44,8 +44,8 @@ export const OcExpandableSelect: React.FC<ExpandSelectProps> = (props) => {
 		toggle,
 		selectModels = [],
 		onChange,
-		collapsedIconLink = './img/select-down.svg',
-		expandedIconLink = './img/select-up.svg',
+		collapsedIconLink = 'assets/img/select-down.svg',
+		expandedIconLink = 'assets/img/select-up.svg',
 	} = props;
 	const handleChange = React.useCallback(
 		(e: any) => {

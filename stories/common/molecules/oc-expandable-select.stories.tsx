@@ -48,6 +48,8 @@ CollapsedSelect.args = {
 	title: 'App Category',
 	selectModels: selectModels,
 	isCollapsed: true,
+	collapsedIconLink: './img/select-down.svg',
+	expandedIconLink: './img/select-up.svg',
 };
 
 export const ExpandedSelect = SelectComponent.bind({});
@@ -55,4 +57,6 @@ ExpandedSelect.args = {
 	title: 'App Category',
 	selectModels: selectModels,
 	isCollapsed: false,
+	collapsedIconLink: './img/select-down.svg',
+	expandedIconLink: './img/select-up.svg',
 };
