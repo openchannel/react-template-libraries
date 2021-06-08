@@ -1,6 +1,5 @@
 import * as React from 'react';
 import moment, { Moment } from 'moment';
-
 import ArrowLeftAnalog from '../../../../../assets/img/arrow-left-analog.svg';
 import ArrowRightAnalog from '../../../../../assets/img/arrow-right-analog.svg';
 
@@ -15,10 +14,18 @@ export interface TimepickerProps {
 	 * Set Date of datepicker
 	 */
 	onChange: (value: string | Moment) => void;
+	/**
+	 * Unique id for hours input
+	 */
+	uniqueHoursId?: string;
+	/**
+	 * Unique id for hours input
+	 */
+	uniqueMinutesId?: string;
 }
 
 export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
-	const { value, onChange } = props;
+	const { value, onChange, uniqueHoursId, uniqueMinutesId } = props;
 	const [valueMoment, setValueMoment] = React.useState(moment(value));
 
 	React.useEffect(() => {
@@ -57,7 +64,7 @@ export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
 					<div className="date-picker__time-manipulators">
 						<ArrowLeftAnalog className="date-picker__time-calendar-icon" onClick={decHour} />
 						<input
-							className="hours"
+							id={uniqueHoursId}
 							type="text"
 							value={valueMoment.hours()}
 							maxLength={2}
@@ -72,7 +79,7 @@ export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
 					<div className="date-picker__time-manipulators">
 						<ArrowLeftAnalog className="date-picker__time-calendar-icon" onClick={decMinute} />
 						<input
-							className="minutes"
+							id={uniqueMinutesId}
 							type="text"
 							maxLength={2}
 							max="60"
