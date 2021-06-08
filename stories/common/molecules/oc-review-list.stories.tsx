@@ -9,7 +9,8 @@ export default {
 } as Meta;
 
 const ReviewListComponent: Story<ReviewListProps> = (args) => {
-	return <OcReviewListComponent {...args} />;
+	const [isToggled, toggleDisplay] = React.useState(false);
+	return <OcReviewListComponent {...args} toggleDisplay={toggleDisplay} isToggled={isToggled} />;
 };
 
 export const Empty = ReviewListComponent.bind({});
@@ -36,6 +37,7 @@ SomeReviews.args = {
 export const All = ReviewListComponent.bind({});
 All.args = {
 	reviewListTitle: 'Most recent reviews',
+
 	reviewList: [
 		{
 			reviewOwnerName: 'Jon from Sales CRM',
@@ -71,4 +73,5 @@ All.args = {
 		},
 	],
 	noReviewMessage: 'No Review for this app',
+	maxReviewDisplay: 3,
 };

@@ -29,6 +29,10 @@ export interface ReviewListProps {
 	 * no review message text
 	 */
 	noReviewMessage?: string;
+	/**
+	 * Reviews displaying
+	 */
+	isToggled?: boolean;
 }
 
 export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
@@ -39,7 +43,12 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 		maxReviewDisplay = 1,
 		toggleDisplay,
 		noReviewMessage = 'No Review for this app',
+		isToggled,
 	} = props;
+	const displayedItems = [];
+	while (displayedItems.length < maxReviewDisplay) {
+		displayedItems.push(reviewList[displayedItems.length]);
+	}
 
 	return (
 		<div className="review-list">
@@ -54,26 +63,40 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 			</div>
 			{reviewList && reviewList!.length > 0 ? (
 				<div>
-					{reviewList!.map((review) => (
-						<div className="review-list__one-review">
-							<h5 className="review-list__one-review-heading">{review.reviewOwnerName}</h5>
-							<div className="review-list__one-review-rating-label">Rating</div>
-							<OcRatingComponent
-								rating={review.rating / 100}
-								type="multi-star"
-								className="review-list__one-review-rating"
-							/>
-							<div id="reviewText" className="review-list__one-review-text">
-								{review.review}
-							</div>
-							<hr />
-						</div>
-					))}
+					{!isToggled
+						? displayedItems.map((review) => (
+								<div className="review-list__one-review">
+									<h5 className="review-list__one-review-heading">{review.reviewOwnerName}</h5>
+									<div className="review-list__one-review-rating-label">Rating</div>
+									<OcRatingComponent
+										rating={review.rating / 100}
+										type="multi-star"
+										className="review-list__one-review-rating"
+									/>
+									<div id="reviewText" className="review-list__one-review-text">
+										{review.review}
+									</div>
+									<hr />
+								</div>
+						  ))
+						: reviewList.map((review) => (
+								<div className="review-list__one-review">
+									<h5 className="review-list__one-review-heading">{review.reviewOwnerName}</h5>
+									<div className="review-list__one-review-rating-label">Rating</div>
+									<OcRatingComponent
+										rating={review.rating / 100}
+										type="multi-star"
+										className="review-list__one-review-rating"
+									/>
+									<div id="reviewText" className="review-list__one-review-text">
+										{review.review}
+									</div>
+									<hr />
+								</div>
+						  ))}
 					{reviewList.length > maxReviewDisplay && (
-						<span className="review-list__drop-down" onClick={toggleDisplay}>
-							{reviewList?.length > maxReviewDisplay
-								? 'View all reviews (' + reviewList?.length + ')'
-								: 'Collapse'}
+						<span className="review-list__drop-down" onClick={() => toggleDisplay(!isToggled)}>
+							{!isToggled ? 'View all reviews (' + reviewList?.length + ')' : 'Collapse'}
 						</span>
 					)}
 				</div>
