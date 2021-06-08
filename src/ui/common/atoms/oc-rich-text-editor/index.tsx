@@ -10,7 +10,7 @@ export interface OcRtfProps extends IAllProps {
 	/**
 	 * Text value which will be already typed in editor
 	 */
-	initialValue: string | undefined;
+	initialValue?: string;
 	/**
 	 * Current editor value
 	 */
