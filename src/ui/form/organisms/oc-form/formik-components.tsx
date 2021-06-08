@@ -1,15 +1,16 @@
 import * as React from 'react';
 import { useFormikContext } from 'formik';
-import { OcDatetimePicker } from '../../../common';
-import { OcVideoUrlComponent } from '../../../common';
-import { OcCheckboxComponent } from '../../../common';
-import { OcFileUpload } from '../../../common';
 
-import { OcSelect } from '../../../common';
-import { OcRichTextEditorComponent } from '../../../common';
+import {
+	OcDatetimePicker,
+	OcVideoUrlComponent,
+	OcSelect,
+	OcRichTextEditorComponent,
+	OcColorComponent,
+	OcError,
+} from '../../../common';
 
 import { OcTooltipLabel } from '../../atoms';
-import { OcColorComponent, OcError } from '../../../common';
 import { FIELD_TYPE } from '../../lib';
 import { OcMultiSelectList } from '../../molecules/oc-multi-select-list';
 import { OcTags } from '../../molecules/oc-tags';

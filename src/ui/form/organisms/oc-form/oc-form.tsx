@@ -1,34 +1,33 @@
 import * as React from 'react';
 import {
-	useFormikContext,
 	useFormik,
 	FormikContext,
 	Form as FormikForm,
 	Field,
 } from 'formik';
 import _ from 'lodash';
-import { OcPasswordComponent } from '../../../common';
-import { OcVideoUrlComponent } from '../../../common';
-import { OcCheckboxComponent } from '../../../common';
-import { OcNumberComponent } from '../../../common';
-import { OcButtonComponent } from '../../../common';
 
-import { OcTooltipLabel } from '../../atoms';
+import {
+	OcPasswordComponent,
+	OcCheckboxComponent,
+	OcNumberComponent,
+	OcButtonComponent,
+	OcInputComponent,
+} from '../../../common';
 import { FIELD_TYPE } from '../../lib';
 import { OcDynamicFieldArray } from '../oc-dynamic-field-array';
-import { OcInputComponent } from '../../../common';
-import { FormikOcMultiSelectListWrapper } from './formik-components';
-import { FormikOcDatetimePickerWrapper } from './formik-components';
-import { FormikOcVideoUrlWrapper } from './formik-components';
-import { FormikOcTagsWrapper } from './formik-components';
-import { FormikFieldWrapper } from './formik-components';
-import { FormikOcSelectWrapper } from './formik-components';
-import { FormikRichTextWrapper } from './formik-components';
-import { FormGroupWrapper } from './formik-components';
-import { OcColorComponent, OcError, OcInputComponent } from '../../../common';
 
+import {
+	FormikOcMultiSelectListWrapper,
+	FormikOcDatetimePickerWrapper,
+	FormikOcVideoUrlWrapper,
+	FormikOcTagsWrapper,
+	FormikFieldWrapper,
+	FormikOcSelectWrapper,
+	FormGroupWrapper,
+	FormikRichTextWrapper,
+} from './formik-components';
 import { AppFormModel } from './types';
-import { getValidParams } from './utils';
 import { useOcFormContext, OcFormContextProvider } from './context';
 
 import './style.scss';
@@ -486,6 +485,7 @@ export const RecursiveContainer: any = ({ fields }) => {
 				const isFirst = group[0].fields.length === 0 || group[0].index === fields[index].index;
 
 				const groupFieldIndex = group.findIndex((g) => g.index === index);
+				console.log('groupFieldIndex', groupFieldIndex)
 
 				// render label only for first element of this type
 				if (isFirst) {
@@ -527,7 +527,7 @@ const RecursiveContainerWrapper = () => {
 	const context = useOcFormContext();
 
 	return (
-		<RecursiveContainer fields={context.fieldsDefinition} />
+		<RecursiveContainer fields={context.fields} />
 	)
 }
 
@@ -540,38 +540,26 @@ const getOcFormButtonsClass = (buttonPosition: string): string => {
 };
 
 export const OcForm: React.FC<any> = (props) => {
-	const { data, successButtonText = 'Submit', buttonPosition = 'left' } = props;
-
-	const onSubmit = React.useCallback((...args) => {
-		console.log('args', ...args)
-	}, []);
-
-	const { initialValues, fields } = getValidParams(formJsonData.fields);
+	const { data, onSubmit, successButtonText = 'Submit', buttonPosition = 'left' } = props;
 
 	const formik = useFormik({
-		// initialValues,
 		initialValues: {},
 		onSubmit,
-		// validationSchema,
-		// ...props,
 	});
-
-	// console.log('fields', fields)
-	// console.log('formik.values', formik.values)
 
 	return (
 		<FormikContext.Provider value={formik}>
-			<OcFormContextProvider initialValue={{ fields }}>
+			<OcFormContextProvider initialValue={{ data: formJsonData }}>
 				<FormikForm className="form">
 					<RecursiveContainerWrapper />
 					<div className={getOcFormButtonsClass(buttonPosition)}>
 						<div className="form__button">
-							<OcButtonComponent type="primary">
+							<OcButtonComponent htmlType="submit" type="primary">
 								{successButtonText}
 							</OcButtonComponent>
 						</div>
 						<div className="form__button">
-							<OcButtonComponent type="secondary">
+							<OcButtonComponent htmlType="button" type="secondary">
 								Cancel
 							</OcButtonComponent>
 						</div>
