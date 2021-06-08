@@ -15,7 +15,7 @@ import { FIELD_TYPE } from '../../lib';
 import { OcMultiSelectList } from '../../molecules/oc-multi-select-list';
 import { OcTags } from '../../molecules/oc-tags';
 
-export const FormGroup = (props: any) => {
+export const FieldGroup = (props: any) => {
 	const {
 		children,
 		error,
@@ -46,13 +46,13 @@ export const FormGroup = (props: any) => {
 	);
 };
 
-export const FormGroupWrapper = (props) => {
+export const FieldGroupWrapper = (props) => {
 	const formik = useFormikContext();
 	const { error, touched } = formik.getFieldMeta(props.name);
 
 	return (
 		<div className="form__field">
-			<FormGroup {...props} error={touched && !!error && error} />
+			<FieldGroup {...props} error={touched && !!error && error} />
 		</div>
 	);
 };

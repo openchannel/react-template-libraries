@@ -4,6 +4,7 @@ import { useFormikContext } from 'formik';
 import { OcButtonComponent } from '../../../common';
 import EditIconSvg from '../../../../assets/img/edit.svg';
 import TrashIconSvg from '../../../../assets/img/trash-icon.svg';
+import { FormikFieldsValues } from '../../models';
 import { OcDynamicArrayPreview } from '../oc-dynamic-array-preview';
 import { useOcFormContext, RecursiveContainer } from '../oc-form';
 
@@ -15,7 +16,7 @@ import './style.scss';
 export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) => {
 	const { field, showAddButton, groupFieldIndex } = props;
 
-	const formik = useFormikContext();
+	const { values } = useFormikContext<FormikFieldsValues>();
 	const context = useOcFormContext();
 
 	return (
@@ -26,7 +27,7 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 						<div className="cards-interface__preview">
 							<div className="cards-interface__preview-header">
 								<h3 className="cards-interface__preview-header-text">
-									{getFieldLabel(field, formik.values, groupFieldIndex)}
+									{getFieldLabel(field, values, groupFieldIndex)}
 								</h3>
 								<div className="cards-interface__icons-handler">
 									{

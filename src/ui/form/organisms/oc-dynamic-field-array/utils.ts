@@ -1,10 +1,8 @@
-import { FormikValues } from 'formik';
-
-import { AppFormField } from '../../models';
+import { AppFormField, FormikFieldsValues } from '../../models';
 
 export const getFieldLabel = (
 	element: AppFormField,
-	formikValues: unknown,
+	formikValues: FormikFieldsValues,
 	index: number,
 ): string => {
 	if (!element.fields) return `Item ${index + 1}`;

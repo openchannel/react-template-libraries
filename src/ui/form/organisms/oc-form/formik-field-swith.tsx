@@ -1,17 +1,11 @@
 import * as React from 'react';
-import {
-	useFormik,
-	FormikContext,
-	Form as FormikForm,
-	Field,
-} from 'formik';
 import _ from 'lodash';
+import { Field } from 'formik';
 
 import {
 	OcPasswordComponent,
 	OcCheckboxComponent,
 	OcNumberComponent,
-	OcButtonComponent,
 	OcInputComponent,
 } from '../../../common';
 import { FIELD_TYPE } from '../../lib';
@@ -27,12 +21,14 @@ import {
 	FieldGroupWrapper,
 	FormikRichTextWrapper,
 } from './formik-components';
-import { useOcFormContext, OcFormContextProvider } from './context';
+import { FormikMapFieldsProps } from './types';
 
-import './style.scss';
+export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
+	if (!fields || fields.length === 0) {
+		return null;
+	}
 
-export const RecursiveContainer: any = ({ fields }) => {
-	const builder = (element, index) => {
+	return fields.map((field, index) => {
 		const {
 			id,
 			label,
@@ -45,17 +41,18 @@ export const RecursiveContainer: any = ({ fields }) => {
 			// fields,
 			placeholder,
 			// category,
-		} = element;
+		} = field;
 
 		switch (type) {
 			case FIELD_TYPE.RICH_TEXT:
 				return (
 					<FieldGroupWrapper
+						key={name}
 						name={name}
 						label={label}
 						labelFor={id}
 						description={description}
-						required={attributes.required}
+						required={attributes!.required}
 					>
 						<Field
 							name={name}
@@ -67,17 +64,18 @@ export const RecursiveContainer: any = ({ fields }) => {
 			case FIELD_TYPE.TEXT:
 				return (
 					<FieldGroupWrapper
+						key={name}
 						name={name}
 						label={label}
 						labelFor={id}
 						description={description}
-						required={attributes.required}
+						required={attributes!.required}
 					>
 						<Field
 							name={name}
 							as={OcInputComponent}
 							placeholder={placeholder}
-							required={attributes.required}
+							required={attributes!.required}
 							id={id}
 							inputType="text"
 						/>
@@ -86,17 +84,18 @@ export const RecursiveContainer: any = ({ fields }) => {
 			case FIELD_TYPE.DROPDOWN_LIST:
 				return (
 					<FieldGroupWrapper
+						key={name}
 						name={name}
 						label={label}
 						labelFor={id}
 						description={description}
-						required={attributes.required}
+						required={attributes!.required}
 					>
 						<Field
 							name={name}
 							component={FormikOcSelectWrapper}
 							placeholder={placeholder}
-							required={attributes.required}
+							required={attributes!.required}
 							options={options}
 						/>
 					</FieldGroupWrapper>
@@ -104,17 +103,18 @@ export const RecursiveContainer: any = ({ fields }) => {
 			case FIELD_TYPE.NUMBER:
 				return (
 					<FieldGroupWrapper
+						key={name}
 						name={name}
 						label={label}
 						labelFor={id}
 						description={description}
-						required={attributes.required}
+						required={attributes!.required}
 					>
 						<Field
 							name={name}
 							as={OcNumberComponent}
 							placeholder={placeholder}
-							required={attributes.required}
+							required={attributes!.required}
 							id={id}
 						/>
 					</FieldGroupWrapper>
@@ -122,17 +122,18 @@ export const RecursiveContainer: any = ({ fields }) => {
 			case FIELD_TYPE.CHECKBOX:
 				return (
 					<FieldGroupWrapper
+						key={name}
 						name={name}
 						label={label}
 						labelFor={id}
 						description={description}
-						required={attributes.required}
+						required={attributes!.required}
 					>
 						<Field
 							name={name}
 							as={OcCheckboxComponent}
 							placeholder={placeholder}
-							required={attributes.required}
+							required={attributes!.required}
 							// labelText={}
 							id={id}
 						/>
@@ -141,17 +142,18 @@ export const RecursiveContainer: any = ({ fields }) => {
 			case FIELD_TYPE.EMAIL_ADDRESS:
 				return (
 					<FieldGroupWrapper
+						key={name}
 						name={name}
 						label={label}
 						labelFor={id}
 						description={description}
-						required={attributes.required}
+						required={attributes!.required}
 					>
 						<Field
 							name={name}
 							as={OcInputComponent}
 							placeholder={placeholder || 'myemail@example.com'}
-							required={attributes.required}
+							required={attributes!.required}
 							inputType="email"
 							id={id}
 						/>
@@ -160,17 +162,18 @@ export const RecursiveContainer: any = ({ fields }) => {
 			case FIELD_TYPE.WEBSITE_URL:
 				return (
 					<FieldGroupWrapper
+						key={name}
 						name={name}
 						label={label}
 						labelFor={id}
 						description={description}
-						required={attributes.required}
+						required={attributes!.required}
 					>
 						<Field
 							name={name}
 							as={OcInputComponent}
 							placeholder={placeholder || 'https://my.website.com'}
-							required={attributes.required}
+							required={attributes!.required}
 							inputType="url"
 							id={id}
 						/>
@@ -179,11 +182,12 @@ export const RecursiveContainer: any = ({ fields }) => {
 			case FIELD_TYPE.COLOR:
 				return (
 					<FieldGroupWrapper
+						key={name}
 						name={name}
 						label={label}
 						labelFor={id}
 						description={description}
-						required={attributes.required}
+						required={attributes!.required}
 					>
 						<Field
 							name={name}
@@ -199,11 +203,12 @@ export const RecursiveContainer: any = ({ fields }) => {
 			case FIELD_TYPE.NUMBER_TAGS:
 				return (
 					<FieldGroupWrapper
+						key={name}
 						name={name}
 						label={label}
 						labelFor={id}
 						description={description}
-						required={attributes.required}
+						required={attributes!.required}
 					>
 						<Field
 							id={id}
@@ -224,11 +229,12 @@ export const RecursiveContainer: any = ({ fields }) => {
 			case FIELD_TYPE.VIDEO_URL:
 				return (
 					<FieldGroupWrapper
+						key={name}
 						name={name}
 						label={label}
 						labelFor={id}
 						description={description}
-						required={attributes.required}
+						required={attributes!.required}
 					>
 						<Field
 							id={id}
@@ -242,11 +248,12 @@ export const RecursiveContainer: any = ({ fields }) => {
 			case FIELD_TYPE.DATE_TIME:
 				return (
 					<FieldGroupWrapper
+						key={name}
 						name={name}
 						label={label}
 						labelFor={id}
 						description={description}
-						required={attributes.required}
+						required={attributes!.required}
 					>
 						<Field
 							id={id}
@@ -259,11 +266,12 @@ export const RecursiveContainer: any = ({ fields }) => {
 			case FIELD_TYPE.MULTISELECT_LIST:
 				return (
 					<FieldGroupWrapper
+						key={name}
 						name={name}
 						label={label}
 						labelFor={id}
 						description={description}
-						required={attributes.required}
+						required={attributes!.required}
 					>
 						<Field
 							id={id}
@@ -277,11 +285,12 @@ export const RecursiveContainer: any = ({ fields }) => {
 			case FIELD_TYPE.PASSWORD:
 				return (
 					<FieldGroupWrapper
+						key={name}
 						name={name}
 						label={label}
 						labelFor={id}
 						description={description}
-						required={attributes.required}
+						required={attributes!.required}
 					>
 						<Field name={name} as={OcPasswordComponent} />
 					</FieldGroupWrapper>
@@ -295,23 +304,25 @@ export const RecursiveContainer: any = ({ fields }) => {
 				if (isFirst) {
 					return (
 						<FieldGroupWrapper
+							key={name}
 							name={name}
 							label={label}
 							labelFor={id}
 							description={description}
-							required={attributes.required}
+							required={attributes!.required}
 						>
-						<OcDynamicFieldArray
-							field={element}
-							groupFieldIndex={groupFieldIndex}
-							showAddButton={fields.length === 0 || fields.length === (index + 1)}
-						/>
+							<OcDynamicFieldArray
+								field={field}
+								groupFieldIndex={groupFieldIndex}
+								showAddButton={fields.length === 0 || fields.length === (index + 1)}
+							/>
 						</FieldGroupWrapper>
 					);
 				}
 				return (
 					<OcDynamicFieldArray
-						field={element}
+						key={name}
+						field={field}
 						groupFieldIndex={groupFieldIndex}
 						showAddButton={fields.length === 0 || fields.length === (index + 1)}
 					/>
@@ -320,56 +331,5 @@ export const RecursiveContainer: any = ({ fields }) => {
 			default:
 				return <div>Unsupported field</div>
 		}
-	}
-
-	return (
-		fields.map(builder)
-	);
-}
-
-const RecursiveContainerWrapper = () => {
-	const context = useOcFormContext();
-
-	return (
-		<RecursiveContainer fields={context.fields} />
-	)
-}
-
-const getOcFormButtonsClass = (buttonPosition: string): string => {
-	switch (buttonPosition) {
-		case 'center': return `form__buttons form__buttons_justify_center`;
-		case 'left': return `form__buttons form__buttons_justify_start`;
-		default: return `form__buttons form__buttons_justify_start form__buttons_direction_row_reverse`;
-	}
-};
-
-export const OcForm: React.FC<any> = (props) => {
-	const { data, onSubmit, successButtonText = 'Submit', buttonPosition = 'left' } = props;
-
-	const formik = useFormik({
-		initialValues: {},
-		onSubmit,
 	});
-
-	return (
-		<FormikContext.Provider value={formik}>
-			<OcFormContextProvider initialValue={{ data }}>
-				<FormikForm className="form">
-					<RecursiveContainerWrapper />
-					<div className={getOcFormButtonsClass(buttonPosition)}>
-						<div className="form__button">
-							<OcButtonComponent htmlType="submit" type="primary">
-								{successButtonText}
-							</OcButtonComponent>
-						</div>
-						<div className="form__button">
-							<OcButtonComponent htmlType="button" type="secondary">
-								Cancel
-							</OcButtonComponent>
-						</div>
-					</div>
-				</FormikForm>
-			</OcFormContextProvider>
-		</FormikContext.Provider>
-	)
-}
+};

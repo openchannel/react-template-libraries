@@ -1,12 +1,11 @@
 import { nanoid } from 'nanoid';
 
 import { FIELD_TYPE } from '../../lib';
-import { FormikFieldsValues } from '../../models';
-import { FormikField } from '../../models';
-import { AppFormField } from '../../models';
+import { AppFormField, FormikFieldsValues, FormikField } from '../../models';
 
-export type normalizeFieldsForFormikParams = (todo: Function) =>
-	(fields: FormikField[], deepPath?: string) => FormikField[]
+import { normalizeFieldsForFormikParams } from './types';
+
+export const noop = () => {};
 
 export const getNewName = (element: AppFormField): string => `${element.id}-${nanoid()}`;
 
@@ -34,7 +33,6 @@ export const updateElementKeys = (
 	path,
 });
 
-
 export const normalizeFieldsForFormik: normalizeFieldsForFormikParams = (todo) =>
 	(fields, deepPath) => {
 		return fields.map((field, index) => {
@@ -59,7 +57,9 @@ export const getInitialValuesFromFields = (fields: FormikField[]): { [key: strin
 	), {});
 };
 
-export const getValidParams = (fields: FormikField[]) => {
+export const getValidParams = (fields?: FormikField[]) => {
+	if (!fields) return { fields: [] };
+
 	const extendedFields = normalizeFieldsForFormik(extendElementWithRequiredKeys)(fields);
 
 	return {
