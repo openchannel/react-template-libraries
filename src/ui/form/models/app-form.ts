@@ -1,3 +1,18 @@
+import { FormikValues } from 'formik';
+
+export interface FormikField extends AppFormField {
+	index: number;
+	path: string;
+	staticId: string;
+	name: string;
+	value: any;
+	previousValue: any;
+	isEditing: boolean;
+	isNew: boolean;
+}
+
+export type FormikFieldsValues = null | FormikValues
+
 export interface AppFormField {
 	id: string;
 	label: string;
@@ -7,8 +22,8 @@ export interface AppFormField {
 	required?: any;
 	attributes?: AppFormFieldAttributes;
 	options?: any;
-	subFieldDefinitions?: AppFormField [];
-	fields?: AppFormField[];
+	subFieldDefinitions?: AppFormField[];
+	fields?: FormikField[];
 	placeholder?: string;
 	category?: string;
 }
@@ -17,7 +32,7 @@ export interface AppFormModel {
 	formId?: string;
 	name?: string;
 	createdDate?: number;
-	fields?: AppFormField[];
+	fields?: FormikField[];
 }
 
 export interface AppFormFieldAttributes {

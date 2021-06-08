@@ -104,7 +104,7 @@ export const OcFormContextProvider = ({ children, initialValue }) => {
 
 		setFieldsDefinition(prev =>
 			updateFieldsDefinition({
-				data: prev,
+				fields: prev,
 				fieldName,
 				isEditing: true,
 			}),
@@ -150,7 +150,7 @@ export const OcFormContextProvider = ({ children, initialValue }) => {
 
 		setFieldsDefinition(prev =>
 			updateFieldsDefinition({
-				data: prev,
+				fields: prev,
 				fieldName,
 				formikValues: formik.values,
 				isEditing: false,

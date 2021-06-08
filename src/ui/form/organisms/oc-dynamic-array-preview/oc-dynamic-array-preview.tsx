@@ -21,8 +21,6 @@ export const OcDynamicArrayPreview: React.FC<OcDynamicArrayPreviewProps> = (prop
 		}
 
 		return fields.map((field) => {
-			const { value, error, touched } = formik.getFieldMeta(field.name);
-
 			const result: PreviewFieldModel = {
 				...field,
 				fieldValue: null,

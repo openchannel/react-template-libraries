@@ -22,7 +22,7 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (element) => {
 	switch (type) {
 		case FIELD_TYPE.DYNAMIC_FIELD_ARRAY: {
 			return (
-				<OcDynamicFieldArray element={element} fields={element.fields} />
+				<OcDynamicFieldArray field={element} />
 			);
 		}
 		case FIELD_TYPE.TAGS:

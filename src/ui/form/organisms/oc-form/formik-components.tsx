@@ -46,7 +46,7 @@ export const FormGroup = (props: any) => {
 	);
 };
 
-export const FormGroupWrapper = (props: any) => {
+export const FormGroupWrapper = (props) => {
 	const formik = useFormikContext();
 	const { error, touched } = formik.getFieldMeta(props.name);
 

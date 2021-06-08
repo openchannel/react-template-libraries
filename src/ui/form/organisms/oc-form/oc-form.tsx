@@ -16,6 +16,7 @@ import {
 } from '../../../common';
 import { FIELD_TYPE } from '../../lib';
 import { OcDynamicFieldArray } from '../oc-dynamic-field-array';
+import { AppFormModel } from '../../models';
 
 import {
 	FormikOcMultiSelectListWrapper,
@@ -27,7 +28,6 @@ import {
 	FormGroupWrapper,
 	FormikRichTextWrapper,
 } from './formik-components';
-import { AppFormModel } from './types';
 import { useOcFormContext, OcFormContextProvider } from './context';
 
 import './style.scss';
@@ -483,9 +483,7 @@ export const RecursiveContainer: any = ({ fields }) => {
 			case FIELD_TYPE.DYNAMIC_FIELD_ARRAY: {
 				const group = _.groupBy(fields, 'type')[FIELD_TYPE.DYNAMIC_FIELD_ARRAY];
 				const isFirst = group[0].fields.length === 0 || group[0].index === fields[index].index;
-
 				const groupFieldIndex = group.findIndex((g) => g.index === index);
-				console.log('groupFieldIndex', groupFieldIndex)
 
 				// render label only for first element of this type
 				if (isFirst) {
@@ -498,7 +496,7 @@ export const RecursiveContainer: any = ({ fields }) => {
 							required={attributes.required}
 						>
 						<OcDynamicFieldArray
-							element={element}
+							field={element}
 							groupFieldIndex={groupFieldIndex}
 							showAddButton={fields.length === 0 || fields.length === (index + 1)}
 						/>
@@ -507,7 +505,7 @@ export const RecursiveContainer: any = ({ fields }) => {
 				}
 				return (
 					<OcDynamicFieldArray
-						element={element}
+						field={element}
 						groupFieldIndex={groupFieldIndex}
 						showAddButton={fields.length === 0 || fields.length === (index + 1)}
 					/>

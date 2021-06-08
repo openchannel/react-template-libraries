@@ -1,7 +1,6 @@
-import { AppTypeFieldModel, FieldValueModel } from '../../models';
+import { FormikField } from '../oc-form';
 
 export interface OcDynamicArrayPreviewProps {
-	fieldValues: FieldValueModel[];
-	fieldDefinition: AppTypeFieldModel;
-	dfaForm: any;
+	fields: FormikField[];
+	hideLabel?: boolean
 }
