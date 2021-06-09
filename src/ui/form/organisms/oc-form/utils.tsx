@@ -98,7 +98,7 @@ export const updateNestedFields = (
 		fields: params.element.fields.map((f) => ({
 			...f,
 			...setFieldEditable(params),
-			...setFieldValueByName(params),
+			...setFieldValueByName({ ...params, element: f }),
 		})),
 	};
 };

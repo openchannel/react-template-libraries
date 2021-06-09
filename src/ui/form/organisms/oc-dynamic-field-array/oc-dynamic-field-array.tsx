@@ -6,7 +6,7 @@ import EditIconSvg from '../../../../assets/img/edit.svg';
 import TrashIconSvg from '../../../../assets/img/trash-icon.svg';
 import { FormikFieldsValues } from '../../models';
 import { OcDynamicArrayPreview } from '../oc-dynamic-array-preview';
-import { useOcFormContext, RecursiveContainer } from '../oc-form';
+import { useOcFormContext, FormikMapFields } from '../oc-form';
 
 import { getFieldLabel } from './utils';
 import { OcDynamicFieldArrayProps } from './types';
@@ -67,7 +67,7 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 								) : (
 									<>
 										<div className="cards-interface__preview-content">
-											<RecursiveContainer fields={field.fields} />
+											<FormikMapFields fields={field.fields} />
 										</div>
 										<div className="cards-interface__preview-buttons">
 											<div className="cards-interface__preview-buttons-cancel">

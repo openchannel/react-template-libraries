@@ -177,7 +177,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = (
 				isEditing: false,
 			}),
 		);
-	}, []);
+	}, [values]);
 
 	return (
 		<OcFormContext.Provider
