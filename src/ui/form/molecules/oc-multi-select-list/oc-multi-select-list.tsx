@@ -2,6 +2,7 @@
 import * as React from 'react';
 import difference from 'lodash/difference';
 import orderBy from 'lodash/orderBy';
+import isEqual from 'lodash/isEqual';
 import union from 'lodash/union';
 
 import { DropboxValue, OcDropboxComponent, OcTagElement } from '../../../common';
@@ -13,6 +14,7 @@ import './styles.scss';
 export const OcMultiSelectList: React.FC<OcMultiSelectListProps> = (props) => {
 	const { label, availableItemsList, defaultItems = [], value = [], onChange } = props;
 
+	const prevValue = React.useRef(value);
 	const [options, setOptions] = React.useState<string[]>(availableItemsList);
 
 	React.useEffect(() => {
@@ -28,11 +30,14 @@ export const OcMultiSelectList: React.FC<OcMultiSelectListProps> = (props) => {
 	}, []);
 
 	React.useEffect(() => {
-		// remove selected items from options
-		const allOptions = defaultItems ? union(availableItemsList, defaultItems) : [];
-		const notSelectedOptions = difference(allOptions, value);
+		if (!isEqual(prevValue.current, value)) {
+			// remove selected items from options
+			const allOptions = defaultItems ? union(availableItemsList, defaultItems) : [];
+			const notSelectedOptions = difference(allOptions, value);
 
-		setOptions(orderBy(notSelectedOptions));
+			setOptions(orderBy(notSelectedOptions));
+			prevValue.current = value;
+		}
 	}, [value]);
 
 	const onSelectItem = (selectedItem: DropboxValue) => {

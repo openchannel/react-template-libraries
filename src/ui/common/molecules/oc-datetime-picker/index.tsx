@@ -7,6 +7,15 @@ import { InputWithIcon } from './icon-input';
 
 import './style.scss';
 
+moment.updateLocale('en', {
+	weekdays: 'S_M_T_W_T_F_S'.split('_'),
+	weekdaysShort: 'S_M_T_W_T_F_S'.split('_'),
+	weekdaysMin: 'S_M_T_W_T_F_S'.split('_'),
+	week: {
+		dow: 1,
+	},
+});
+
 export interface DatepickerProps extends DatetimepickerProps {
 	/**
 	 * Type of picker input: "datetime" or "date"
@@ -27,16 +36,8 @@ export interface DatepickerProps extends DatetimepickerProps {
 	/**
 	 * Custom date format to pass into component
 	 */
-	settings: string;
+	settings?: string;
 }
-moment.updateLocale('en', {
-	weekdays: 'S_M_T_W_T_F_S'.split('_'),
-	weekdaysShort: 'S_M_T_W_T_F_S'.split('_'),
-	weekdaysMin: 'S_M_T_W_T_F_S'.split('_'),
-	week: {
-		dow: 1,
-	},
-});
 
 export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 	const { type, disabled, value, onChange, settings } = props;

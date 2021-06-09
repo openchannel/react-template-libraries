@@ -5,12 +5,18 @@ import './style.scss';
 
 export type ButtonVariants = 'primary' | 'secondary' | 'link' | 'danger' | 'none';
 
+export type Dataset = {
+	dataset: {
+		[key: string]: any;
+	};
+}
+
 export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
 	/**
 	 * Checks if the button should be disabled
 	 */
 	disabled?: boolean;
-	onClick?: React.MouseEventHandler;
+	onClick?: (e: React.SyntheticEvent<Dataset>) => void;
 	/**
 	 * Checks if the button should be disabled
 	 * @default button
