@@ -6,8 +6,11 @@
 // ]
 // export type FieldType = typeof fieldTypeValues;
 
+import { FormikProps } from 'formik';
+import { FieldInputProps } from 'formik';
 import * as React from 'react';
 import { Dataset } from '../../../common/atoms/oc-button';
+import { FormikFieldsValues } from '../../models';
 import { AppFormModel, FormikField } from '../../models';
 
 export type FieldType = 'richText' | 'text' | 'longText' | 'dropdownList' | 'tags' | 'singleFile' |
@@ -36,3 +39,10 @@ export interface OcFormContextProps {
 export interface FormikMapFieldsProps {
 	fields: FormikField[];
 }
+
+export interface FormikComponentWrapperProps<Value> {
+	field: FieldInputProps<Value>;
+	form: FormikProps<FormikFieldsValues>;
+}
+
+export type FCWP<Value> = FormikComponentWrapperProps<Value>;

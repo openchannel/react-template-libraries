@@ -8,12 +8,20 @@ import {
 	OcRichTextEditorComponent,
 	OcColorComponent,
 	OcError,
+	DatepickerProps,
+	VideoUrlProps,
+	OcSelectProps,
 } from '../../../common';
 
 import { OcTooltipLabel } from '../../atoms';
 import { FIELD_TYPE } from '../../lib';
-import { OcMultiSelectList } from '../../molecules/oc-multi-select-list';
-import { OcTags } from '../../molecules/oc-tags';
+import {
+	OcTags,
+	OcTagsProps,
+	OcMultiSelectList,
+	OcMultiSelectListProps,
+} from '../../molecules';
+import { FCWP } from './types';
 
 export const FieldGroup = (props: any) => {
 	const {
@@ -57,17 +65,19 @@ export const FieldGroupWrapper = (props) => {
 	);
 };
 
-export const FormikFieldWrapper = ({ field, form, ...props }) => {
+export const FormikOcColoWrapper: React.FC<FCWP<string | undefined>> = ({ field, form }) => {
 	const onChange = React.useCallback((value) => {
 		form.setFieldValue(field.name, value);
 	}, [form.setFieldValue]);
 
 	return (
-		<OcColorComponent colorValue={field.value} onValueChange={onChange} />
-	)
-}
+		<OcColorComponent colorValue={field.value || ''} onValueChange={onChange} />
+	);
+};
 
-export const FormikRichTextWrapper = ({ field, form, ...props }) => {
+export const FormikRichTextWrapper: React.FC<FCWP<string | undefined> & { placeholder: string }> = (
+	{ field, form, placeholder }
+) => {
 	const onChange = React.useCallback((value) => {
 		form.setFieldValue(field.name, value);
 	}, [form.setFieldValue]);
@@ -76,81 +86,95 @@ export const FormikRichTextWrapper = ({ field, form, ...props }) => {
 		<OcRichTextEditorComponent
 			onChange={onChange}
 			value={field.value}
-			placeholderText={props.placeholder}
+			placeholderText={placeholder}
 		/>
 	);
 };
 
-export const FormikOcSelectWrapper = ({ field, form, ...props }) => {
+export const FormikOcSelectWrapper: React.FC<FCWP<OcSelectProps['value'] | undefined> & { options: OcSelectProps['selectValArr'], placeholder: OcSelectProps['placeholder'] }> = (
+	{ field, form, options, placeholder }
+) => {
 	const onChange = React.useCallback((value) => {
 		form.setFieldValue(field.name, value);
 	}, [form.setFieldValue]);
 
 	return (
 		<OcSelect
-			selectValArr={props.options}
+			selectValArr={options}
 			value={field.value}
 			onSelectionChange={onChange}
-			placeholder={props.placeholder}
+			placeholder={placeholder}
 		/>
 	);
 };
 
-export const FormikOcTagsWrapper = ({ field, form, ...props }) => {
+export const FormikOcTagsWrapper: React.FC<FCWP<OcTagsProps['value']> & {
+	options: OcTagsProps['availableTags'],
+	placeholder: OcTagsProps['placeholder'],
+	tagsType: OcTagsProps['tagsType'],
+}> = (
+	{ field, form, options, placeholder, tagsType }
+) => {
 	const onChange = React.useCallback((value) => {
 		form.setFieldValue(field.name, value);
 	}, [form.setFieldValue]);
 
 	return (
 		<OcTags
-			availableTags={props.options}
+			availableTags={options}
 			value={field.value}
 			onChange={onChange}
-			placeholder={props.placeholder}
-			tagsType={props.tagsType}
+			placeholder={placeholder}
+			tagsType={tagsType}
 		/>
 	);
 };
 
-export const FormikOcVideoUrlWrapper = ({ field, form, ...props }) => {
+export const FormikOcVideoUrlWrapper: React.FC<FCWP<VideoUrlProps['value']> & {
+	placeholder: VideoUrlProps['placeholder']
+}> = ({ field, form, placeholder }) => {
 	const onChange = React.useCallback((value) => {
 		form.setFieldValue(field.name, value);
 	}, [form.setFieldValue]);
 
 	return (
 		<OcVideoUrlComponent
-			value={field.value}
+			value={field.value || ''}
 			onChange={onChange}
-			placeholder={props.placeholder}
+			placeholder={placeholder}
 		/>
 	);
 };
 
-export const FormikOcDatetimePickerWrapper = ({ field, form, ...props }) => {
+export const FormikOcDatetimePickerWrapper: React.FC<FCWP<DatepickerProps['value']> & {
+	type: DatepickerProps['type'], disabled: DatepickerProps['disabled']
+}> = ({ field, form, type, disabled }) => {
 	const onChange = React.useCallback((value) => {
 		form.setFieldValue(field.name, value);
 	}, [form.setFieldValue]);
 
 	return (
 		<OcDatetimePicker
-			type={props.type}
+			type={type}
 			value={field.value}
 			onChange={onChange}
-			disabled={props.disabled}
-			{...(props.type === FIELD_TYPE.DATE ? { settings: 'dd/MM/yyyy' } : {})}
+			disabled={disabled}
+			{...(type === FIELD_TYPE.DATE ? { settings: 'dd/MM/yyyy' } : {})}
 		/>
 	);
 };
 
-export const FormikOcMultiSelectListWrapper = ({ field, form, ...props }) => {
+export const FormikOcMultiSelectListWrapper: React.FC<FCWP<OcMultiSelectListProps['value']> & {
+	label: OcMultiSelectListProps['label'], options: OcMultiSelectListProps['availableItemsList']
+}> = ({ field, form, label, options }) => {
 	const onChange = React.useCallback((value) => {
 		form.setFieldValue(field.name, value);
 	}, [form.setFieldValue]);
 
 	return (
 		<OcMultiSelectList
-			label={props.label}
-			availableItemsList={props.options}
+			label={label}
+			availableItemsList={options}
 			value={field.value}
 			onChange={onChange}
 		/>

@@ -16,7 +16,7 @@ import {
 	FormikOcDatetimePickerWrapper,
 	FormikOcVideoUrlWrapper,
 	FormikOcTagsWrapper,
-	FormikFieldWrapper,
+	FormikOcColoWrapper,
 	FormikOcSelectWrapper,
 	FieldGroupWrapper,
 	FormikRichTextWrapper,
@@ -189,7 +189,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 							>
 								<Field
 									name={name}
-									component={FormikFieldWrapper}
+									component={FormikOcColoWrapper}
 									placeholder={placeholder}
 									id={id}
 									{...attributes}

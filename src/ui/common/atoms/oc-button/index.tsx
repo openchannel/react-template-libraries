@@ -16,7 +16,7 @@ export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonE
 	 * Checks if the button should be disabled
 	 */
 	disabled?: boolean;
-	onClick?: (e: React.SyntheticEvent<Dataset>) => void;
+	onClick?: React.MouseEventHandler;
 	/**
 	 * Checks if the button should be disabled
 	 * @default button
