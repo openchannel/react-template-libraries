@@ -28,7 +28,7 @@ const data = [
 		categoryTitleColor: 'green',
 	},
 ];
-
+//@ts-ignore
 const duplicateItems = (arr, numberOfRepetitions) => Array(numberOfRepetitions).fill(arr).flat();
 
 const AppCategories: Story<AppCategoriesProps> = (args) => {
@@ -49,11 +49,6 @@ const AppCategories: Story<AppCategoriesProps> = (args) => {
 export const EmptyCategories = AppCategories.bind({});
 EmptyCategories.args = {
 	categoryHeaderTitle: 'Categories to Explore',
-	navSpeed: 700,
-	touchDrag: false,
-	mouseDrag: false,
-	dots: false,
-	autoWidth: true,
 	data: [],
 };
 EmptyCategories.storyName = 'Empty';
@@ -61,11 +56,6 @@ EmptyCategories.storyName = 'Empty';
 export const SomeCategories = AppCategories.bind({});
 SomeCategories.args = {
 	categoryHeaderTitle: 'Categories to Explore',
-	navSpeed: 700,
-	touchDrag: false,
-	mouseDrag: false,
-	dots: false,
-	autoWidth: true,
 	data: [data[0], data[0], data[0], data[0]],
 };
 SomeCategories.storyName = 'Some';
@@ -92,7 +82,6 @@ AllCategories.args = {
 	touchDrag: false,
 	mouseDrag: false,
 	dots: false,
-	autoWidth: false,
 	data: duplicateItems(data, 5),
 };
 AllCategories.storyName = 'All';
