@@ -56,7 +56,11 @@ describe('OcAppCategoriesComponent', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should have slides', () => {
+	it('should have props and change them', () => {
 		expect(component.prop('data')).toEqual(data);
+		expect(component.prop('categoryHeaderTitle')).toEqual('Categories to Explore');
+		component.setProps({ categoryHeaderTitle: 'Default' });
+		component.update();
+		expect(component.prop('categoryHeaderTitle')).toEqual('Default');
 	});
 });
