@@ -64,8 +64,8 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 			{reviewList && reviewList!.length > 0 ? (
 				<div>
 					{!isToggled
-						? displayedItems.map((review) => (
-								<div className="review-list__one-review">
+						? displayedItems.map((review, index) => (
+								<div className="review-list__one-review" key={index}>
 									<h5 className="review-list__one-review-heading">{review.reviewOwnerName}</h5>
 									<div className="review-list__one-review-rating-label">Rating</div>
 									<OcRatingComponent
@@ -79,8 +79,8 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 									<hr />
 								</div>
 						  ))
-						: reviewList.map((review) => (
-								<div className="review-list__one-review">
+						: reviewList.map((review, index) => (
+								<div className="review-list__one-review" key={index}>
 									<h5 className="review-list__one-review-heading">{review.reviewOwnerName}</h5>
 									<div className="review-list__one-review-rating-label">Rating</div>
 									<OcRatingComponent
