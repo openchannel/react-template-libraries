@@ -43,8 +43,6 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 					placeholder,
 				} = field;
 
-				console.log('field', field)
-
 				switch (type) {
 					case FIELD_TYPE.RICH_TEXT:
 						return (
