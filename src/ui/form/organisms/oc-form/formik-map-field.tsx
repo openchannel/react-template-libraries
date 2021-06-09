@@ -43,6 +43,8 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 					placeholder,
 				} = field;
 
+				console.log('field', field)
+
 				switch (type) {
 					case FIELD_TYPE.RICH_TEXT:
 						return (
@@ -293,6 +295,19 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 								<Field name={name} as={OcPasswordComponent} />
 							</FieldGroupWrapper>
 						);
+					// case FIELD_TYPE.PASSWORD:
+					// 	return (
+					// 		<FieldGroupWrapper
+					// 			key={name}
+					// 			name={name}
+					// 			label={label}
+					// 			labelFor={id}
+					// 			description={description}
+					// 			required={attributes!.required}
+					// 		>
+					// 			<Field name={name} as={OcPasswordComponent} />
+					// 		</FieldGroupWrapper>
+					// 	);
 					case FIELD_TYPE.DYNAMIC_FIELD_ARRAY: {
 						const group = _.groupBy(fields, 'type')[FIELD_TYPE.DYNAMIC_FIELD_ARRAY];
 						const firstElementOfGroup = group[0] || { fields: [] };

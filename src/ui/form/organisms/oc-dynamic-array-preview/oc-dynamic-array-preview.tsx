@@ -1,4 +1,3 @@
-import { useFormikContext } from 'formik';
 import * as React from 'react';
 
 import { OcLabelComponent } from '../../../common';
@@ -13,8 +12,6 @@ import './style.scss';
 export const OcDynamicArrayPreview: React.FC<OcDynamicArrayPreviewProps> = (props) => {
 	const { fields, hideLabel = false } = props;
 
-	const formik = useFormikContext();
-
 	const previewFields = React.useMemo(() => {
 		if (!fields || fields.length === 0) {
 			return [];
@@ -26,6 +23,7 @@ export const OcDynamicArrayPreview: React.FC<OcDynamicArrayPreviewProps> = (prop
 				fieldValue: null,
 				isValidField: false,
 				formArrayDFA: null,
+				groupFieldIndex: 0,
 			};
 
 			// result.isValidField = isValidDataForFieldType(field.type, result.fieldValue);
@@ -36,24 +34,22 @@ export const OcDynamicArrayPreview: React.FC<OcDynamicArrayPreviewProps> = (prop
 
 			return result;
 		});
-	}, [formik, fields]);
-
-	console.log('previewFields', previewFields)
+	}, [fields]);
 
 	return (
 		<div className="array-preview">
 			{
-				previewFields.map((element) => (
-					<div key={element.name} className="array-preview__field">
+				previewFields.map((field, index) => (
+					<div key={field.name} className="array-preview__field">
 						<span className="array-preview__field-title">
-							{!hideLabel && <OcLabelComponent>{element.label}</OcLabelComponent>}
+							{!hideLabel && <OcLabelComponent>{field.label}</OcLabelComponent>}
 						</span>
 						<div className="array-preview__field-content">
-							<FieldPreview {...element} />
+							<FieldPreview {...field} groupFieldIndex={index} />
 						</div>
 					</div>
 				))
 			}
 		</div>
-	)
+	);
 };

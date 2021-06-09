@@ -1,4 +1,4 @@
-import { FormikField } from '../oc-form';
+import { FormikField } from '../../models';
 
 export interface OcDynamicArrayPreviewProps {
 	fields: FormikField[];

@@ -1,17 +1,15 @@
 import * as React from 'react';
+import moment, { isMoment } from 'moment';
 
+import FileIconSvg from '../../../../assets/img/file_icon.svg';
 import { sanitizeHtml, stripHtmlTags } from '../../../../lib';
 import { OcTagElement } from '../../../common';
 import { FIELD_TYPE } from '../../lib';
 import { PreviewFieldModel } from '../../models';
 import { OcDynamicFieldArray } from '../oc-dynamic-field-array';
 
-import FileIconSvg from '../../../../assets/img/file_icon.svg';
-
-export const FieldPreview: React.FC<PreviewFieldModel> = (element) => {
-	const { type, isValidField, value, formArrayDFA } = element;
-
-	// console.log('element', element)
+export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
+	const { type, groupFieldIndex, value } = field;
 
 	// if (!isValidField) {
 	// 	return (
@@ -22,7 +20,7 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (element) => {
 	switch (type) {
 		case FIELD_TYPE.DYNAMIC_FIELD_ARRAY: {
 			return (
-				<OcDynamicFieldArray field={element} />
+				<OcDynamicFieldArray field={field} showAddButton={false} groupFieldIndex={groupFieldIndex} />
 			);
 		}
 		case FIELD_TYPE.TAGS:
@@ -36,9 +34,9 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (element) => {
 			return (
 				<div className="array-preview__field-content__tags">
 					{
-						value.map((tag) => (
-							<div key={tag} className="array-preview__field-content__tags-item">
-								<OcTagElement title={tag} />
+						value.map((tag: string | boolean | number) => (
+							<div key={String(tag)} className="array-preview__field-content__tags-item">
+								<OcTagElement title={String(tag)} />
 							</div>
 						))
 					}
@@ -65,7 +63,7 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (element) => {
 			return (
 				<div className="array-preview__field-content__image-multi">
 					{
-						value.map((src) => (
+						value.map((src: string) => (
 							<div className="array-preview__field-content__image-multi-container">
 								<img src={src} className="array-preview__field-content__image-multi-item" alt="image" />
 							</div>
@@ -89,21 +87,21 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (element) => {
 		case FIELD_TYPE.DROPDOWN_LIST: {
 			return (
 				<span className="array-preview__field-content__text">
-					{stripHtmlTags(value)}
+					{stripHtmlTags(String(value))}
 				</span>
 			)
 		}
 		case FIELD_TYPE.DATE_TIME: {
 			return (
 				<span className="array-preview__field-content__text">
-					{value}
+					{isMoment(value) ? moment(value).format('MMM D, Y HH:MM') : value}
 				</span>
 			);
 		}
 		case FIELD_TYPE.DATE: {
 			return (
 				<span className="array-preview__field-content__text">
-					{value}
+					{isMoment(value) ? moment(value).format('MMM D, Y') : value}
 				</span>
 			);
 		}
@@ -127,7 +125,7 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (element) => {
 		case FIELD_TYPE.MULTI_FILE: {
 			return (
 				<div className="array-preview__field-content__file-multi">
-					{value.map((item) => (
+					{value.map((item: any) => (
 						<div className="array-preview__field-content__file-single">
 							{/*<img*/}
 							{/*	className="array-preview__field-content__file-single-icon"*/}
@@ -143,7 +141,7 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (element) => {
 		}
 		default:
 			return (
-				<span className="array-preview__field-content__text">{stripHtmlTags(value)}</span>
+				<span className="array-preview__field-content__text">{stripHtmlTags(String(value))}</span>
 			);
 	}
-}
+};
