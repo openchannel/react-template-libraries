@@ -62,6 +62,10 @@
 	&__button {
 		width: 260px;
 		display: block;
+		&:focus {
+			outline: none;
+			border: 0;
+		}
 		@include media-breakpoint-sm {
 			margin: 2rem 0 0;
 		}
