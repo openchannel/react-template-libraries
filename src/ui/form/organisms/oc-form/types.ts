@@ -28,11 +28,11 @@ export interface OcFormContextProviderProps {
 
 export interface OcFormContextProps {
 	fields: FormikField[];
-	onAddDynamicField: (event: React.SyntheticEvent<Dataset>) => void;
+	onAddDynamicField: React.MouseEventHandler;
 	onRemoveDynamicField: (event: React.SyntheticEvent<Dataset>) => void;
 	onStartEditingField: (event: React.SyntheticEvent<Dataset>) => void;
-	onCancelEditingField: (event: React.SyntheticEvent<Dataset>) => void;
-	onSaveField: (event: React.SyntheticEvent<Dataset>) => void;
+	onCancelEditingField: React.MouseEventHandler;
+	onSaveField: React.MouseEventHandler;
 }
 
 export interface FormikMapFieldsProps {
