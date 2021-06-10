@@ -6,7 +6,7 @@ export const InputContent = () => (
 	<div className="file-container__placeholder">
 		<p className="file-container__placeholder-text">
 			Drag & drop file or
-			<a className="file-container__placeholder-browse"> Browse File</a>
+			<span className="file-container__placeholder-browse"> Browse File</span>
 		</p>
 	</div>
 );

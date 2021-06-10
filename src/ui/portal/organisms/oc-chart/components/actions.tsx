@@ -68,7 +68,10 @@ export const Actions: React.FC<ActionsProps> = (props) => {
 			</div>
 			<div className="chart__filter-buttons-container">
 				<div className="chart__filter-buttons-container-tabs">
+					{/*eslint-disable-next-line jsx-a11y/click-events-have-key-events*/}
 					<div
+						tabIndex={0}
+						role="button"
 						data-name={TABULAR_DATA_TYPE}
 						onClick={onClickDataType}
 						className={`chart__swap-type-button chart__tabular-button ${
@@ -77,7 +80,10 @@ export const Actions: React.FC<ActionsProps> = (props) => {
 					>
 						<TabularIcon />
 					</div>
+					{/*eslint-disable-next-line jsx-a11y/click-events-have-key-events*/}
 					<div
+						tabIndex={0}
+						role="button"
 						data-name={GRAPH_DATA_TYPE}
 						onClick={onClickDataType}
 						className={`chart__swap-type-button chart__graph-button ${

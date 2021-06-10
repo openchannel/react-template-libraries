@@ -43,7 +43,10 @@ export const Table: React.FC<TableProps> = (props) => {
 					<thead className="chart__table-view-head">
 						<tr className="chart__table-view-row">
 							<th scope="col" className="chart__table-view-cell chart__table-view-cell_padding">
+								{/*eslint-disable-next-line jsx-a11y/click-events-have-key-events*/}
 								<div
+									tabIndex={0}
+									role="button"
 									data-sortkey="label"
 									onClick={onSortData}
 									className="chart__table-view-heading"
@@ -62,7 +65,10 @@ export const Table: React.FC<TableProps> = (props) => {
 								</div>
 							</th>
 							<th scope="col" className="chart__table-view-cell">
+								{/*eslint-disable-next-line jsx-a11y/click-events-have-key-events*/}
 								<div
+									tabIndex={0}
+									role="button"
 									data-sortkey="value"
 									onClick={onSortData}
 									className="chart__table-view-heading"

@@ -1,10 +1,12 @@
 //commit 1f8476fdd1021aa7c3062f340499ee030bcba500 Author: Julia Date: 19.05.21, 14:35
 import * as React from 'react';
 import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
 import { CarouselProps, ResponsiveType } from 'react-multi-carousel/lib/types';
+
 import { CategoryItem, CategoryProps } from './category-item';
 import { CustomLeftArrow, CustomRightArrow } from './custom-arrows';
+
+import 'react-multi-carousel/lib/styles.css';
 import './style.scss';
 
 const defaultOptions = {

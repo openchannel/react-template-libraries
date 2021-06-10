@@ -20,9 +20,10 @@ export interface ColorProps extends React.InputHTMLAttributes<HTMLInputElement> 
 	/**
 	 * setter function to set value of input type "text"
 	 */
-	onValueChange: Function;
+	onValueChange: (v: string) => void;
 }
 
+// eslint-disable-next-line
 const colorRegEx = /(?:#|0x)(?:[a-f0-9]{3}|[a-f0-9]{6})\b|(?:rgb|hsl)a?\([^\)]*\)/gi;
 
 const validateColor = (target: string) => target.match(colorRegEx) !== null;
@@ -44,12 +45,16 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
 		[onValueChange],
 	);
 
-	const handleColorChange = React.useCallback((e: { target: HTMLInputElement }) => {
-		setInputColorValue(e.target.value);
-		debouncedOnChange(e.target.value);
-	}, [debouncedOnChange]);
+	const handleColorChange = React.useCallback(
+		(e: { target: HTMLInputElement }) => {
+			setInputColorValue(e.target.value);
+			debouncedOnChange(e.target.value);
+		},
+		[debouncedOnChange],
+	);
 
-	const handleTextChange = React.useCallback((e: { target: HTMLInputElement }) => {
+	const handleTextChange = React.useCallback(
+		(e: { target: HTMLInputElement }) => {
 			setInputColorValue(e.target.value);
 
 			if (validateColor(e.target.value)) {
@@ -74,7 +79,13 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
 					className="color-adjust__input form-control"
 				/>
 			</div>
-			<div className="color-adjust__picker form-control" onClick={dummyClick}>
+			{/*eslint-disable-next-line jsx-a11y/click-events-have-key-events*/}
+			<div
+				role="button"
+				tabIndex={0}
+				className="color-adjust__picker form-control"
+				onClick={dummyClick}
+			>
 				<span className="color-adjust__picker-icon">
 					<svg
 						fill="currentColor"
