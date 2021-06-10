@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Editor, IAllProps } from '@tinymce/tinymce-react';
+
 import './style.scss';
 
 export interface OcRtfProps extends IAllProps {
@@ -10,7 +11,7 @@ export interface OcRtfProps extends IAllProps {
 	/**
 	 * Text value which will be already typed in editor
 	 */
-	initialValue: string | undefined;
+	initialValue?: string;
 	/**
 	 * Current editor value
 	 */

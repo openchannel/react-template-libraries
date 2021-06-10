@@ -32,8 +32,8 @@ export const OcResendActivation: React.FC<OcResendProps> = (props) => {
 						<OcLabelComponent htmlFor={inputProps?.id}>Email</OcLabelComponent>
 					</span>
 					<OcInputComponent
-						inputType="email"
 						placeholder="Email"
+						inputType="email"
 						customClass="resend-activation__email-group-input"
 						required
 						{...inputProps}
