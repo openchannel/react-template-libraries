@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useFormikContext } from 'formik';
+import { ColorProps } from '../../../common';
 
 import {
 	OcDatetimePicker,
@@ -21,9 +22,9 @@ import {
 	OcMultiSelectList,
 	OcMultiSelectListProps,
 } from '../../molecules';
-import { FCWP } from './types';
+import { FCWP, FieldGroupProps } from './types';
 
-export const FieldGroup = (props: any) => {
+export const FieldGroup: React.FC<FieldGroupProps & { error?: string }> = (props) => {
 	const {
 		children,
 		error,
@@ -54,18 +55,20 @@ export const FieldGroup = (props: any) => {
 	);
 };
 
-export const FieldGroupWrapper = (props) => {
+export const FieldGroupWrapper: React.FC<FieldGroupProps> = (props) => {
 	const formik = useFormikContext();
 	const { error, touched } = formik.getFieldMeta(props.name);
 
 	return (
 		<div className="form__field">
-			<FieldGroup {...props} error={touched && !!error && error} />
+			<FieldGroup {...props} error={(touched && !!error && error) || ''} />
 		</div>
 	);
 };
 
-export const FormikOcColoWrapper: React.FC<FCWP<string | undefined>> = ({ field, form }) => {
+export const FormikOcColoWrapper: React.FC<FCWP<ColorProps['colorValue']>> = (
+	{ field, form }
+) => {
 	const onChange = React.useCallback((value) => {
 		form.setFieldValue(field.name, value);
 	}, [form.setFieldValue]);
