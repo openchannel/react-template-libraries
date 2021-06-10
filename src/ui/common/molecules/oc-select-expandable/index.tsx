@@ -44,13 +44,12 @@ export const OcExpandableSelect: React.FC<ExpandSelectProps> = (props) => {
 		toggle,
 		selectModels = [],
 		onChange,
-		collapsedIconLink = 'src/assets/img/select-down.svg',
-		expandedIconLink = 'src/assets/img/select-up.svg',
+		collapsedIconLink = '../../../../assets/img/select-down.svg',
+		expandedIconLink = '../../../../assets/img/select-up.svg',
 	} = props;
 	const handleChange = React.useCallback(
 		(e: any) => {
-			const newItems = selectModels.map((item) => item);
-
+			let newItems = [...selectModels];
 			newItems[e.target.name].checked = !newItems[e.target.name].checked;
 			onChange(newItems);
 		},

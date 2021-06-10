@@ -29,7 +29,7 @@ const selectModels = [
 
 const SelectComponent: Story<ExpandSelectProps> = (args) => {
 	const [isCollapsed, toggle] = React.useState(args.isCollapsed);
-	const [items, handleChange] = React.useState(args.selectModels);
+	const [items, handleChange] = React.useState(selectModels);
 
 	return (
 		<OcExpandableSelect
