@@ -21,6 +21,7 @@ export const OcLabelComponent: React.FC<Partial<LabelProps>> = (props) => {
 	const { text, children, required, ...p } = props;
 
 	return (
+		// eslint-disable-next-line jsx-a11y/label-has-for
 		<label className="oc-form-label" {...p}>
 			{text || children}
 			{required && <span className="oc-form-label__required">*</span>}

@@ -3,25 +3,25 @@ import { Field } from 'formik';
 import _ from 'lodash';
 
 import {
-	OcPasswordComponent,
 	OcCheckboxComponent,
-	OcNumberComponent,
 	OcInputComponent,
+	OcNumberComponent,
+	OcPasswordComponent,
 } from '../../../common';
 import { FIELD_TYPE } from '../../lib';
 import { OcDynamicFieldArray } from '../oc-dynamic-field-array';
 
+import { useOcFormContext } from './context';
 import {
-	FormikOcMultiSelectListWrapper,
-	FormikOcDatetimePickerWrapper,
-	FormikOcVideoUrlWrapper,
-	FormikOcTagsWrapper,
-	FormikOcColoWrapper,
-	FormikOcSelectWrapper,
 	FieldGroupWrapper,
+	FormikOcColoWrapper,
+	FormikOcDatetimePickerWrapper,
+	FormikOcMultiSelectListWrapper,
+	FormikOcSelectWrapper,
+	FormikOcTagsWrapper,
+	FormikOcVideoUrlWrapper,
 	FormikRichTextWrapper,
 } from './formik-components';
-import { useOcFormContext } from './context';
 import { FormikMapFieldsProps } from './types';
 
 export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
@@ -32,16 +32,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 	return (
 		<>
 			{fields.map((field, index) => {
-				const {
-					id,
-					label,
-					description,
-					type,
-					name,
-					attributes,
-					options,
-					placeholder,
-				} = field;
+				const { id, label, description, type, name, attributes, options, placeholder } = field;
 
 				switch (type) {
 					case FIELD_TYPE.RICH_TEXT:
@@ -54,11 +45,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 								description={description}
 								required={attributes!.required}
 							>
-								<Field
-									name={name}
-									component={FormikRichTextWrapper}
-									placeholder={placeholder}
-								/>
+								<Field name={name} component={FormikRichTextWrapper} placeholder={placeholder} />
 							</FieldGroupWrapper>
 						);
 					case FIELD_TYPE.TEXT:
@@ -253,12 +240,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 								description={description}
 								required={attributes!.required}
 							>
-								<Field
-									id={id}
-									name={name}
-									component={FormikOcDatetimePickerWrapper}
-									type={type}
-								/>
+								<Field id={id} name={name} component={FormikOcDatetimePickerWrapper} type={type} />
 							</FieldGroupWrapper>
 						);
 					case FIELD_TYPE.MULTISELECT_LIST:
@@ -309,7 +291,9 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 					case FIELD_TYPE.DYNAMIC_FIELD_ARRAY: {
 						const group = _.groupBy(fields, 'type')[FIELD_TYPE.DYNAMIC_FIELD_ARRAY];
 						const firstElementOfGroup = group[0] || { fields: [] };
-						const isFirst = firstElementOfGroup?.fields?.length === 0 || firstElementOfGroup.index === fields[index].index;
+						const isFirst =
+							firstElementOfGroup?.fields?.length === 0 ||
+							firstElementOfGroup.index === fields[index].index;
 						const groupFieldIndex = group.findIndex((g) => g.index === index);
 
 						// render label only for first element of this type
@@ -326,7 +310,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 									<OcDynamicFieldArray
 										field={field}
 										groupFieldIndex={groupFieldIndex}
-										showAddButton={fields.length === 0 || fields.length === (index + 1)}
+										showAddButton={fields.length === 0 || fields.length === index + 1}
 									/>
 								</FieldGroupWrapper>
 							);
@@ -336,12 +320,12 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 								key={name}
 								field={field}
 								groupFieldIndex={groupFieldIndex}
-								showAddButton={fields.length === 0 || fields.length === (index + 1)}
+								showAddButton={fields.length === 0 || fields.length === index + 1}
 							/>
 						);
 					}
 					default:
-						return <div>Unsupported field</div>
+						return <div>Unsupported field</div>;
 				}
 			})}
 		</>
@@ -351,7 +335,5 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 export const FormikMapFieldsWrapper = () => {
 	const context = useOcFormContext();
 
-	return (
-		<FormikMapFields fields={context.fields} />
-	);
+	return <FormikMapFields fields={context.fields} />;
 };

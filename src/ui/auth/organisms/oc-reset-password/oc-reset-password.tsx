@@ -66,7 +66,7 @@ export const OcResetPasswordComponent: React.FC<OcResetPasswordProps> = (props) 
 					</Link>
 				</div>
 				<div className="reset-password__sign-up">
-					<OcLabelComponent>Don't have an account yet?</OcLabelComponent>
+					<OcLabelComponent>Don&apos;t have an account yet?</OcLabelComponent>
 					<Link to={signupUrl} className="reset-password__link">
 						{' '}
 						Sign Up

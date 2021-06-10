@@ -7,18 +7,41 @@
 // export type FieldType = typeof fieldTypeValues;
 
 import * as React from 'react';
-import { FormikProps, FieldInputProps } from 'formik';
+import { FieldInputProps, FormikProps } from 'formik';
 
 import { Dataset } from '../../../common';
 import { AppFormModel, FormikField, FormikFieldsValues } from '../../models';
 
-export type FieldType = 'richText' | 'text' | 'longText' | 'dropdownList' | 'tags' | 'singleFile' |
-	'multiple' | 'multiImage' | 'singleImage' | 'privateSingleFile' | 'multiPrivateFile' | 'number' |
-	'checkbox' | 'emailAddress' | 'websiteUrl' | 'color' | 'booleanTags' | 'numberTags' | 'videoUrl' |
-	'date' | 'datetime' | 'multiselectList' | 'dynamicFieldArray' | 'password';
+export type FieldType =
+	| 'richText'
+	| 'text'
+	| 'longText'
+	| 'dropdownList'
+	| 'tags'
+	| 'singleFile'
+	| 'multiple'
+	| 'multiImage'
+	| 'singleImage'
+	| 'privateSingleFile'
+	| 'multiPrivateFile'
+	| 'number'
+	| 'checkbox'
+	| 'emailAddress'
+	| 'websiteUrl'
+	| 'color'
+	| 'booleanTags'
+	| 'numberTags'
+	| 'videoUrl'
+	| 'date'
+	| 'datetime'
+	| 'multiselectList'
+	| 'dynamicFieldArray'
+	| 'password';
 
-export type normalizeFieldsForFormikParams = (todo: Function) =>
-	(fields: FormikField[], deepPath?: string) => FormikField[]
+export type normalizeFieldsForFormikParams = (
+	// eslint-disable-next-line
+	todo: Function,
+) => (fields: FormikField[], deepPath?: string) => FormikField[];
 
 export interface OcFormContextProviderProps {
 	initialValue: {

@@ -9,7 +9,7 @@ export type Dataset = {
 	dataset: {
 		[key: string]: any;
 	};
-}
+};
 
 export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
 	/**

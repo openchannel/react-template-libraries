@@ -1,17 +1,18 @@
 import { nanoid } from 'nanoid';
 
 import { FIELD_TYPE } from '../../lib';
-import { AppFormField, FormikFieldsValues, FormikField } from '../../models';
+import { AppFormField, FormikField, FormikFieldsValues } from '../../models';
 
 import { normalizeFieldsForFormikParams } from './types';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 export const noop = () => {};
 
 export const getNewName = (element: AppFormField): string => `${element.id}-${nanoid()}`;
 
 export const extendElementWithRequiredKeys = (
 	element: AppFormField,
-	{ path, index }: { path: string, index: number },
+	{ path, index }: { path: string; index: number },
 ) => ({
 	...element,
 	index,
@@ -26,35 +27,39 @@ export const extendElementWithRequiredKeys = (
 
 export const updateElementKeys = (
 	element: AppFormField,
-	{ path, index }: { path: string, index: number },
+	{ path, index }: { path: string; index: number },
 ) => ({
 	...element,
 	index,
 	path,
 });
 
-export const normalizeFieldsForFormik: normalizeFieldsForFormikParams = (todo) =>
-	(fields, deepPath) => {
-		return fields.map((field, index) => {
-			const path: string = deepPath ? `${deepPath}.fields.${index}` : `${index}`;
+export const normalizeFieldsForFormik: normalizeFieldsForFormikParams = (todo) => (
+	fields,
+	deepPath,
+) => {
+	return fields.map((field, index) => {
+		const path: string = deepPath ? `${deepPath}.fields.${index}` : `${index}`;
 
-			if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields) {
-				return {
-					...todo(field, { path, index }),
-					fields: normalizeFieldsForFormik(todo)(field.fields, path),
-				};
-			}
+		if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields) {
+			return {
+				...todo(field, { path, index }),
+				fields: normalizeFieldsForFormik(todo)(field.fields, path),
+			};
+		}
 
-			return todo(field, { path, index });
-		});
-	};
+		return todo(field, { path, index });
+	});
+};
 
 export const getInitialValuesFromFields = (fields: FormikField[]): { [key: string]: any } => {
-	return fields.reduce((acc, field) => (
-		field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields
-			? ({ ...acc, ...getInitialValuesFromFields(field.fields) })
-			: ({ ...acc, [field.name]: field.value })
-	), {});
+	return fields.reduce(
+		(acc, field) =>
+			field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields
+				? { ...acc, ...getInitialValuesFromFields(field.fields) }
+				: { ...acc, [field.name]: field.value },
+		{},
+	);
 };
 
 export const getValidParams = (fields?: FormikField[]) => {
@@ -66,30 +71,34 @@ export const getValidParams = (fields?: FormikField[]) => {
 		fields: extendedFields,
 		initialValues: getInitialValuesFromFields(extendedFields),
 	} as {
-		fields: FormikField[],
+		fields: FormikField[];
 	};
-}
+};
 
-export const setFieldValueByName = (
-	{ element, formikValues }: { element: FormikField, formikValues?: FormikFieldsValues }
-) => (
+export const setFieldValueByName = ({
+	element,
+	formikValues,
+}: {
+	element: FormikField;
+	formikValues?: FormikFieldsValues;
+}) =>
 	!formikValues
 		? {}
 		: {
-			value: formikValues[element.name]
-				? formikValues[element.name]
-				: element.value,
-			previousValue: (formikValues[element.name]
-				? formikValues[element.name]
-				: element.value) || (element.defaultValue || ''),
-		}
-);
+				value: formikValues[element.name] ? formikValues[element.name] : element.value,
+				previousValue:
+					(formikValues[element.name] ? formikValues[element.name] : element.value) ||
+					element.defaultValue ||
+					'',
+		  };
 
 export const setFieldEditable = ({ isEditing }: { isEditing: boolean }) => ({ isEditing });
 
-export const updateNestedFields = (
-	params: { element: FormikField, formikValues?: FormikFieldsValues, isEditing: boolean }
-) => {
+export const updateNestedFields = (params: {
+	element: FormikField;
+	formikValues?: FormikFieldsValues;
+	isEditing: boolean;
+}) => {
 	if (!params.element.fields) {
 		return {};
 	}
@@ -103,9 +112,11 @@ export const updateNestedFields = (
 	};
 };
 
-export const updateElement = (
-	params: { element: FormikField, formikValues?: FormikFieldsValues, isEditing: boolean }
-) => ({
+export const updateElement = (params: {
+	element: FormikField;
+	formikValues?: FormikFieldsValues;
+	isEditing: boolean;
+}) => ({
 	...params.element,
 	isNew: false,
 	...setFieldEditable(params),
@@ -113,12 +124,19 @@ export const updateElement = (
 	...updateNestedFields(params),
 });
 
-export const updateFieldsDefinition = (
-	params: { fields: FormikField[], formikValues?: FormikFieldsValues, fieldName: string, isEditing: boolean }
-): FormikField[] => {
+export const updateFieldsDefinition = (params: {
+	fields: FormikField[];
+	formikValues?: FormikFieldsValues;
+	fieldName: string;
+	isEditing: boolean;
+}): FormikField[] => {
 	return params.fields.map((element) => {
 		if (element.name === params.fieldName) {
-			return updateElement({ element, formikValues: params.formikValues, isEditing: params.isEditing  });
+			return updateElement({
+				element,
+				formikValues: params.formikValues,
+				isEditing: params.isEditing,
+			});
 		}
 
 		if (element.fields) {
@@ -133,14 +151,15 @@ export const updateFieldsDefinition = (
 };
 
 export const fieldsUtils = {
-	flatMap: (arr: FormikField[]): FormikField[] => (
-		arr.reduce((acc, item) => (
-			item.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && item.fields
-				? [ ...acc, item, ...fieldsUtils.flatMap(item.fields) ]
-				: [ ...acc, item ]
-		), [] as FormikField[])
-	),
-	dumpDeepFields: (arr: FormikField[], depth = 1): FormikField[] => (
+	flatMap: (arr: FormikField[]): FormikField[] =>
+		arr.reduce(
+			(acc, item) =>
+				item.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && item.fields
+					? [...acc, item, ...fieldsUtils.flatMap(item.fields)]
+					: [...acc, item],
+			[] as FormikField[],
+		),
+	dumpDeepFields: (arr: FormikField[], depth = 1): FormikField[] =>
 		arr.map((item) => {
 			if (item.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && item.fields) {
 				if (depth !== 0) {
@@ -149,8 +168,7 @@ export const fieldsUtils = {
 				return { ...item, fields: fieldsUtils.dumpDeepFields(item.fields, depth + 1) };
 			}
 			return item;
-		})
-	),
+		}),
 };
 
 export const elementUtils = {
@@ -164,11 +182,10 @@ export const elementUtils = {
 			depth: path.split('.').length - 1,
 		};
 	},
-	updateNestedFields: (field: FormikField): {} | { fields: FormikField[] } => (
+	updateNestedFields: (field: FormikField): Record<string, never> | { fields: FormikField[] } =>
 		field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields
-			? { fields: field.fields.map(el => ({ ...elementUtils.cloneAndUpdate(el) })) }
-			: {}
-	),
+			? { fields: field.fields.map((el) => ({ ...elementUtils.cloneAndUpdate(el) })) }
+			: {},
 	cloneAndUpdate: (element: FormikField, isNew = false) => ({
 		...element,
 		...elementUtils.updateNestedFields(element),
@@ -179,7 +196,7 @@ export const elementUtils = {
 		isNew,
 	}),
 	removeChildrenOrCurrent: (arr: FormikField[], field: FormikField, isChildren = false) => {
-		let updatedArr = [ ...arr ];
+		const updatedArr = [...arr];
 
 		if (isChildren) {
 			updatedArr[field.index] = {
@@ -198,9 +215,9 @@ export const elementUtils = {
 			...field,
 			value: field.previousValue,
 			isEditing: false,
-			fields: field.fields && field.fields.map(
-				(el) => ({ ...el, value: el.previousValue, isEditing: false }),
-			),
+			fields:
+				field.fields &&
+				field.fields.map((el) => ({ ...el, value: el.previousValue, isEditing: false })),
 		};
 
 		return arr;

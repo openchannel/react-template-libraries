@@ -52,6 +52,7 @@ export const OcTagElement: React.FC<OcTagElementProps> = React.memo((props) => {
 					}
 				>
 					<span
+						role="button"
 						tabIndex={0}
 						className="tag-element__close-icon"
 						onClick={onClick}

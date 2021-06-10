@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Editor, IAllProps } from '@tinymce/tinymce-react';
+
 import './style.scss';
 
 export interface OcRtfProps extends IAllProps {

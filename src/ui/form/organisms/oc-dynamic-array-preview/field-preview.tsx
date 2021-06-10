@@ -20,7 +20,11 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 	switch (type) {
 		case FIELD_TYPE.DYNAMIC_FIELD_ARRAY: {
 			return (
-				<OcDynamicFieldArray field={field} showAddButton={false} groupFieldIndex={groupFieldIndex} />
+				<OcDynamicFieldArray
+					field={field}
+					showAddButton={false}
+					groupFieldIndex={groupFieldIndex}
+				/>
 			);
 		}
 		case FIELD_TYPE.TAGS:
@@ -33,25 +37,25 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 
 			return (
 				<div className="array-preview__field-content__tags">
-					{
-						value.map((tag: string | boolean | number) => (
-							<div key={String(tag)} className="array-preview__field-content__tags-item">
-								<OcTagElement title={String(tag)} />
-							</div>
-						))
-					}
+					{value.map((tag: string | boolean | number) => (
+						<div key={String(tag)} className="array-preview__field-content__tags-item">
+							<OcTagElement title={String(tag)} />
+						</div>
+					))}
 				</div>
 			);
 		}
 		case FIELD_TYPE.RICH_TEXT: {
-			return (
-				<div dangerouslySetInnerHTML={{ __html: sanitizeHtml(value) }} />
-			);
+			return <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(value) }} />;
 		}
 		case FIELD_TYPE.SINGLE_IMAGE: {
 			return (
 				<div className="array-preview__field-content__image-mono">
-					<img src={value} className="array-preview__field-content__image-mono-item" alt="image" />
+					<img
+						src={value}
+						className="array-preview__field-content__image-mono-item"
+						alt="Single file preview"
+					/>
 				</div>
 			);
 		}
@@ -62,34 +66,35 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 
 			return (
 				<div className="array-preview__field-content__image-multi">
-					{
-						value.map((src: string) => (
-							<div className="array-preview__field-content__image-multi-container">
-								<img src={src} className="array-preview__field-content__image-multi-item" alt="image" />
-							</div>
-						))
-					}
+					{value.map((src: string) => (
+						<div key={src} className="array-preview__field-content__image-multi-container">
+							<img
+								src={src}
+								className="array-preview__field-content__image-multi-item"
+								alt="Multiple file preview"
+							/>
+						</div>
+					))}
 				</div>
 			);
 		}
 		case FIELD_TYPE.CHECKBOX: {
-			return (
-				<span className="array-preview__field-content__text">{value ? 'Yes' : 'No'}</span>
-			);
+			return <span className="array-preview__field-content__text">{value ? 'Yes' : 'No'}</span>;
 		}
 		case FIELD_TYPE.COLOR: {
 			return (
 				<span className="array-preview__field-content__text">
-					<span className="array-preview__field-content__color" style={{ backgroundColor: value }} />
+					<span
+						className="array-preview__field-content__color"
+						style={{ backgroundColor: value }}
+					/>
 				</span>
 			);
 		}
 		case FIELD_TYPE.DROPDOWN_LIST: {
 			return (
-				<span className="array-preview__field-content__text">
-					{stripHtmlTags(String(value))}
-				</span>
-			)
+				<span className="array-preview__field-content__text">{stripHtmlTags(String(value))}</span>
+			);
 		}
 		case FIELD_TYPE.DATE_TIME: {
 			return (
@@ -119,14 +124,14 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 						<span className="array-preview__field-content__file-single-title">{value.name}</span>
 					</div>
 				</div>
-			)
+			);
 		}
 		case FIELD_TYPE.MULTI_PRIVATE_FILE:
 		case FIELD_TYPE.MULTI_FILE: {
 			return (
 				<div className="array-preview__field-content__file-multi">
 					{value.map((item: any) => (
-						<div className="array-preview__field-content__file-single">
+						<div key={item.name} className="array-preview__field-content__file-single">
 							{/*<img*/}
 							{/*	className="array-preview__field-content__file-single-icon"*/}
 							{/*	src="assets/angular-common-components/file_icon.svg"*/}
@@ -137,7 +142,7 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 						</div>
 					))}
 				</div>
-			)
+			);
 		}
 		default:
 			return (

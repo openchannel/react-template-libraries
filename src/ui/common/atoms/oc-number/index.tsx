@@ -1,6 +1,8 @@
 //commit 76bf4f179cc8ee87ed5117f7d80d1abb451cc096 Author: Julia Date: 06.10.20, 12:59
 import * as React from 'react';
+
 import { onInput } from './utils';
+
 import './style.scss';
 
 export interface InputNumberProps extends React.InputHTMLAttributes<HTMLInputElement> {
