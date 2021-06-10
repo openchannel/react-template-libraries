@@ -24,6 +24,8 @@ export interface PasswordProps extends React.InputHTMLAttributes<HTMLInputElemen
 	 */
 	value: string;
 	onChange: (e: React.SyntheticEvent) => void;
+	/**custom classname to be passed */
+	customClass?: string;
 }
 
 export const OcPasswordComponent: React.FC<PasswordProps> = (props) => {
@@ -31,7 +33,11 @@ export const OcPasswordComponent: React.FC<PasswordProps> = (props) => {
 
 	return (
 		<div className="oc-password">
-			<input {...props} type={isPassword ? 'text' : 'password'} className="oc-password__input" />
+			<input
+				{...props}
+				type={isPassword ? 'text' : 'password'}
+				className={`oc-password__input ${props.customClass}`}
+			/>
 			<span onClick={toggle} className={`toggle_password ${isPassword ? 'fa-eye-slash' : ''}`} />
 		</div>
 	);
