@@ -59,9 +59,10 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 		[setValues],
 	);
 
-	const onAddDynamicField = (event: React.SyntheticEvent<Dataset>) => {
-		const elementStaticId = event.currentTarget.dataset.staticid;
-		const elementPath = event.currentTarget.dataset.path;
+	const onAddDynamicField = (event: React.MouseEvent) => {
+		const button = event.target as HTMLButtonElement;
+		const elementStaticId = button.dataset.staticid || '';
+		const elementPath = button.dataset.path || '';
 
 		const instance = flattenFields.find((item) => item.staticId === elementStaticId);
 
@@ -139,8 +140,9 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 		);
 	}, []);
 
-	const onCancelEditingField = (event: React.SyntheticEvent<Dataset>) => {
-		const elementPath = event.currentTarget.dataset.path;
+	const onCancelEditingField = (event: React.MouseEvent) => {
+		const button = event.target as HTMLButtonElement;
+		const elementPath = button.dataset.path || '';
 
 		let next = [...fieldsDefinition];
 		const existedElement = get(next, elementPath);

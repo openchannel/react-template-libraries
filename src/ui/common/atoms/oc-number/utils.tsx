@@ -2,7 +2,7 @@ import * as React from 'react';
 
 const notADigit = /^[-]?\d*\.?\d*$/;
 
-export const onInput = (e: React.KeyboardEvent<Record<string, unknown>>) => {
+export const onInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
 	if (
 		e.key.match(notADigit) === null &&
 		e.keyCode !== 38 &&
