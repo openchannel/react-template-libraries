@@ -1,18 +1,15 @@
+import * as React from 'react';
+
 const notADigit = /^[-]?\d*\.?\d*$/;
-export const onInput = (e: any) => {
-	console.log(
+
+export const onInput = (e: React.KeyboardEvent<HTMLInputElement>) => {
+	if (
 		e.key.match(notADigit) === null &&
-			e.keyCode !== 38 &&
-			e.keyCode !== 40 &&
-			e.keyCode !== 8 &&
-			e.keyCode !== 46,
-	);
-	console.log(e);
-	e.key.match(notADigit) === null &&
-	e.keyCode !== 38 &&
-	e.keyCode !== 40 &&
-	e.keyCode !== 8 &&
-	e.keyCode !== 46
-		? e.preventDefault()
-		: e.target.value;
+		e.keyCode !== 38 &&
+		e.keyCode !== 40 &&
+		e.keyCode !== 8 &&
+		e.keyCode !== 46
+	) {
+		e.preventDefault();
+	}
 };

@@ -1,3 +1,4 @@
+/* eslint-disable */
 //commit 76978c0770aa82676498c56dd58843d7008b45d5 Author: Alex Tkachenko Date: 20.10.20, 13:52
 import * as React from 'react';
 import {

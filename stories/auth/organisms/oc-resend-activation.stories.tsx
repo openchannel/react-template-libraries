@@ -9,12 +9,35 @@ export default {
 	title: 'Resend Activation Code [BEM]',
 	component: OcResendActivation,
 } as Meta;
+const regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
 
-const DefaultComponent: Story<OcResendProps> = (args) => (
-	<BrowserRouter>
-		<OcResendActivation {...args} />
-	</BrowserRouter>
-);
+const DefaultComponent: Story<OcResendProps> = (args) => {
+	const [value, setValue] = React.useState('');
+	const [blurred, setBlurred] = React.useState(false);
+	const [validationError, setValidationError] = React.useState(false);
+	const handleChange = (e: any) => {
+		setValue(e.target.value);
+		(e.target.value.match(regexEmail) === null && args.inputProps.inputType === 'email') ? 
+		(setValidationError(true), e.preventDefault()) :
+		(setValidationError(false), setValue(e.target.value))
+	  };
+	return (
+		<BrowserRouter>
+			<OcResendActivation {...args} 
+				inputProps={{
+					id: 'input',
+					inputType: 'email',
+					value,
+					onChange: (e) => handleChange(e),
+					onBlur: () => setBlurred(true),
+				}}
+				inputError={validationError ? 
+					errorMessages.emailValidator() :
+					blurred && !value && errorMessages.required() 
+				}
+			/>
+		</BrowserRouter>)
+};
 
 export const Empty = DefaultComponent.bind({});
 Empty.args = {
@@ -23,24 +46,35 @@ Empty.args = {
 	signupUrl: '/',
 	inputProps: {
 		id: 'input',
+		inputType: 'email',
 	},
 };
 
 const FilledComponent: Story<OcResendProps> = (args) => {
 	const [value, setValue] = React.useState('zmehta@tenupsoft.com');
 	const [blurred, setBlurred] = React.useState(false);
-
+	const [validationError, setValidationError] = React.useState(false);
+	const handleChange = (e: any) => {
+		console.log(e.target.value);
+		(e.target.value.match(regexEmail) === null && args.inputProps.inputType === 'email') ? 
+		(setValidationError(true), e.preventDefault()) :
+		(setValidationError(false), setValue(e.target.value))
+	  };
 	return (
 		<BrowserRouter>
 			<OcResendActivation
 				{...args}
 				inputProps={{
 					id: 'input',
+					inputType: 'email',
 					value,
-					onChange: (e) => setValue(e.target.value),
+					onChange: (e) => handleChange(e),
 					onBlur: () => setBlurred(true),
 				}}
-				inputError={blurred && !value && errorMessages.required()}
+				inputError={
+					blurred && !value && errorMessages.required() || 
+					blurred && validationError && errorMessages.emailValidator()
+				}
 			/>
 		</BrowserRouter>
 	);
@@ -51,4 +85,8 @@ Filled.args = {
 	companyLogoUrl: './img/logo-company.png',
 	loginUrl: '/',
 	signupUrl: '/',
+	inputProps: {
+		id: 'input',
+		inputType: 'email',
+	},
 };

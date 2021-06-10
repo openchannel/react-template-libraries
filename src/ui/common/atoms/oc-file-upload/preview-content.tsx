@@ -13,6 +13,7 @@ export const PreviewContent = (props: IPreviewProps) => {
 	const { fileWithMeta }: { fileWithMeta: IFileWithMeta } = props;
 	const { meta }: { meta: IMeta } = props;
 	const { canCancel, canRemove }: { canCancel: boolean; canRemove: boolean } = props;
+
 	return (
 		<div className="file-container__upload-item">
 			{fileWithMeta.meta &&
@@ -23,7 +24,7 @@ export const PreviewContent = (props: IPreviewProps) => {
 				))}
 			{fileWithMeta.meta && (
 				<div className="file-container__upload-item-type">
-					<a className="file-container__upload-item-name">{fileWithMeta.meta.name}</a>
+					<span className="file-container__upload-item-name">{fileWithMeta.meta.name}</span>
 					<div className="file-container__upload-item-status">
 						{fileWithMeta.meta.status !== 'done' ? 'Uploading' : 'Complete'}
 					</div>

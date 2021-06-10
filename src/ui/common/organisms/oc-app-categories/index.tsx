@@ -1,29 +1,13 @@
 //commit 1f8476fdd1021aa7c3062f340499ee030bcba500 Author: Julia Date: 19.05.21, 14:35
 import * as React from 'react';
 import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
-import { CarouselProps, ArrowProps, ResponsiveType } from 'react-multi-carousel/lib/types';
-import LeftArrowIcon from '../../../../assets/img/arrow-left-analog.svg';
-import RightArrowIcon from '../../../../assets/img/arrow-right-analog.svg';
-import { CategoryItem, CategoryProps } from './category-item';
-import './style.scss';
+import { CarouselProps, ResponsiveType } from 'react-multi-carousel/lib/types';
 
-const CustomLeftArrow = (props: ArrowProps) => {
-	const { onClick } = props;
-	return (
-		<div className="categories__carousel-nav categories__carousel-nav-left" onClick={onClick}>
-			<LeftArrowIcon />
-		</div>
-	);
-};
-const CustomRightArrow = (props: ArrowProps) => {
-	const { onClick } = props;
-	return (
-		<div className="categories__carousel-nav categories__carousel-nav-right" onClick={onClick}>
-			<RightArrowIcon />
-		</div>
-	);
-};
+import { CategoryItem, CategoryProps } from './category-item';
+import { CustomLeftArrow, CustomRightArrow } from './custom-arrows';
+
+import 'react-multi-carousel/lib/styles.css';
+import './style.scss';
 
 const defaultOptions = {
 	desktop: {
@@ -40,7 +24,7 @@ const defaultOptions = {
 	},
 };
 
-export interface AppCategoriesProps extends CarouselProps {
+export interface AppCategoriesProps extends Partial<CarouselProps> {
 	/**
 	 * responsive config
 	 */
@@ -48,23 +32,23 @@ export interface AppCategoriesProps extends CarouselProps {
 	/**
 	 * timing of slides changing
 	 */
-	navSpeed: number | undefined;
+	navSpeed?: number | undefined;
 	/**
 	 * ability to drag with touch(mobile), boolean attribute
 	 */
-	touchDrag: boolean | undefined;
+	touchDrag?: boolean | undefined;
 	/**
 	 * ability to drag with mouse, boolean attribute
 	 */
-	mouseDrag: boolean | undefined;
+	mouseDrag?: boolean | undefined;
 	/**
 	 * enable or disable dots in carousel, boolean attribute
 	 */
-	dots: boolean | undefined;
+	dots?: boolean | undefined;
 	/**
 	 * show previous and next set of items partially
 	 */
-	autoWidth: boolean | undefined;
+	autoWidth?: boolean | undefined;
 	/**
 	 * Title of the category section
 	 */
@@ -78,11 +62,11 @@ export interface AppCategoriesProps extends CarouselProps {
 export const OcAppCategoriesComponent: React.FC<AppCategoriesProps> = (props) => {
 	const {
 		customOptions = defaultOptions,
-		navSpeed,
-		touchDrag,
-		mouseDrag,
-		dots,
-		autoWidth,
+		navSpeed = 700,
+		touchDrag = false,
+		mouseDrag = false,
+		dots = false,
+		autoWidth = false,
 		categoryHeaderTitle,
 		data,
 	} = props;
@@ -100,7 +84,6 @@ export const OcAppCategoriesComponent: React.FC<AppCategoriesProps> = (props) =>
 				showDots={dots}
 				centerMode={autoWidth}
 				keyBoardControl={false}
-				removeArrowOnDeviceType={['tablet', 'mobile']}
 				customRightArrow={<CustomRightArrow />}
 				customLeftArrow={<CustomLeftArrow />}
 				containerClass="categories__carousel"
