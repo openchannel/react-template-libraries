@@ -12,7 +12,7 @@ export interface ReviewListProps {
 	/**
 	 * writeReview - onClick handler
 	 */
-	writeReview?: any;
+	writeReview?: (e: React.SyntheticEvent<unknown, Event>) => void;
 	/**
 	 * Reviews array
 	 */
@@ -22,17 +22,9 @@ export interface ReviewListProps {
 	 */
 	maxReviewDisplay?: number;
 	/**
-	 * toggleDisplay - clickHandler to open more items
-	 */
-	toggleDisplay?: any;
-	/**
 	 * no review message text
 	 */
 	noReviewMessage?: string;
-	/**
-	 * Reviews displaying
-	 */
-	isToggled?: boolean;
 }
 
 export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
@@ -41,14 +33,11 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 		reviewList = [],
 		writeReview,
 		maxReviewDisplay = 1,
-		toggleDisplay,
 		noReviewMessage = 'No Review for this app',
-		isToggled,
 	} = props;
-	const displayedItems = [];
-	while (displayedItems.length < maxReviewDisplay) {
-		displayedItems.push(reviewList[displayedItems.length]);
-	}
+
+	const [isToggled, toggleDisplay] = React.useState(false);
+	const displayedItems = [...reviewList].splice(0, maxReviewDisplay);
 
 	return (
 		<div className="review-list">
@@ -73,9 +62,7 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 										type="multi-star"
 										className="review-list__one-review-rating"
 									/>
-									<div id="reviewText" className="review-list__one-review-text">
-										{review.review}
-									</div>
+									<div className="review-list__one-review-text">{review.review}</div>
 									<hr />
 								</div>
 						  ))
@@ -88,9 +75,7 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 										type="multi-star"
 										className="review-list__one-review-rating"
 									/>
-									<div id="reviewText" className="review-list__one-review-text">
-										{review.review}
-									</div>
+									<div className="review-list__one-review-text">{review.review}</div>
 									<hr />
 								</div>
 						  ))}

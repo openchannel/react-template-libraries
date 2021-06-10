@@ -9,8 +9,7 @@ export default {
 } as Meta;
 
 const ReviewListComponent: Story<ReviewListProps> = (args) => {
-	const [isToggled, toggleDisplay] = React.useState(false);
-	return <OcReviewListComponent {...args} toggleDisplay={toggleDisplay} isToggled={isToggled} />;
+	return <OcReviewListComponent {...args} />;
 };
 
 export const Empty = ReviewListComponent.bind({});
