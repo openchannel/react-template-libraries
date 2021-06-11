@@ -35,12 +35,12 @@ export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
 			: onChange(valueMoment.subtract(quantity, measure));
 	};
 	const handleHours = React.useCallback(
-		(e) => onChange(valueMoment.hours(parseInt(e.target.value || '0'))),
+		(e) => onChange(valueMoment.hours(Number(e.target.value || '0'))),
 		[onChange, valueMoment],
 	);
 	const handleMinutes = React.useCallback(
 		(e) => {
-			onChange(valueMoment.minutes(parseInt(e.target.value || '0')));
+			onChange(valueMoment.minutes(Number(e.target.value || '0')));
 		},
 		[onChange, valueMoment],
 	);
@@ -57,6 +57,7 @@ export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
 					<div className="date-picker__time-manipulators">
 						<ArrowLeftAnalog className="date-picker__time-calendar-icon" onClick={decHour} />
 						<input
+							id="hours"
 							type="text"
 							value={valueMoment.hours()}
 							maxLength={2}
@@ -71,6 +72,7 @@ export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
 					<div className="date-picker__time-manipulators">
 						<ArrowLeftAnalog className="date-picker__time-calendar-icon" onClick={decMinute} />
 						<input
+							id="minutes"
 							type="text"
 							maxLength={2}
 							max="60"

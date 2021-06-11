@@ -2,10 +2,19 @@ import * as React from 'react';
 import Datetime, { DatetimepickerProps } from 'react-datetime';
 import moment, { Moment } from 'moment';
 
-import { OcTimePicker } from './oc-timepicker/index';
 import { InputWithIcon } from './icon-input';
+import { OcTimePicker } from './oc-timepicker';
 
 import './style.scss';
+
+moment.updateLocale('en', {
+	weekdays: 'S_M_T_W_T_F_S'.split('_'),
+	weekdaysShort: 'S_M_T_W_T_F_S'.split('_'),
+	weekdaysMin: 'S_M_T_W_T_F_S'.split('_'),
+	week: {
+		dow: 1,
+	},
+});
 
 export interface DatepickerProps extends DatetimepickerProps {
 	/**
@@ -27,16 +36,8 @@ export interface DatepickerProps extends DatetimepickerProps {
 	/**
 	 * Custom date format to pass into component
 	 */
-	settings: string;
+	settings?: string;
 }
-moment.updateLocale('en', {
-	weekdays: 'S_M_T_W_T_F_S'.split('_'),
-	weekdaysShort: 'S_M_T_W_T_F_S'.split('_'),
-	weekdaysMin: 'S_M_T_W_T_F_S'.split('_'),
-	week: {
-		dow: 1,
-	},
-});
 
 export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 	const { type, disabled, value, onChange, settings } = props;
@@ -49,7 +50,7 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 	const returnDateFormat = (): string => (settings ? moment().format(settings) : 'DD/MM/YYYY');
 
 	const renderWithTime = React.useCallback(
-		(mode: string, renderDefault: Function) => {
+		(mode: string, renderDefault: any) => {
 			if (mode !== 'days') return renderDefault();
 			return (
 				<>

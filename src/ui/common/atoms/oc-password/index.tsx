@@ -32,7 +32,13 @@ export const OcPasswordComponent: React.FC<PasswordProps> = (props) => {
 	return (
 		<div className="oc-password">
 			<input {...props} type={isPassword ? 'text' : 'password'} className="oc-password__input" />
-			<span onClick={toggle} className={`toggle_password ${isPassword ? 'fa-eye-slash' : ''}`} />
+			{/*eslint-disable-next-line jsx-a11y/click-events-have-key-events*/}
+			<span
+				role="button"
+				tabIndex={0}
+				onClick={toggle}
+				className={`toggle_password ${isPassword ? 'fa-eye-slash' : ''}`}
+			/>
 		</div>
 	);
 };
