@@ -54,7 +54,7 @@ export const OcExpandableSelect: React.FC<ExpandSelectProps> = (props) => {
 			newItems[e.target.name].checked = !newItems[e.target.name].checked;
 			onChange(newItems);
 		},
-		[onChange],
+		[onChange, selectModels],
 	);
 	const handleToggle = React.useCallback(() => toggle(!isCollapsed), [toggle, isCollapsed]);
 	return (
