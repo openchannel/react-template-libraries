@@ -5,7 +5,7 @@ export const getFieldLabel = (
 	formikValues: FormikFieldsValues,
 	index: number,
 ): string => {
-	if (!element.fields|| formikValues === null) return `Item ${index + 1}`;
+	if (!element.fields || formikValues === null) return `Item ${index + 1}`;
 
 	const rowLabel = element.fields.find((f) => f.id === element.attributes?.rowLabel);
 	if (!rowLabel) return `Item ${index + 1}`;
