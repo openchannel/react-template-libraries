@@ -1,3 +1,4 @@
+//eslint-disable jsx-a11y
 import * as React from 'react';
 
 import './style.scss';
@@ -29,6 +30,7 @@ export interface PasswordProps extends React.InputHTMLAttributes<HTMLInputElemen
 }
 
 export const OcPasswordComponent: React.FC<PasswordProps> = (props) => {
+	const { customClass } = props;
 	const [isPassword, toggle] = React.useReducer((is) => !is, false);
 
 	return (
@@ -36,7 +38,7 @@ export const OcPasswordComponent: React.FC<PasswordProps> = (props) => {
 			<input
 				{...props}
 				type={isPassword ? 'text' : 'password'}
-				className={`oc-password__input ${props.customClass}`}
+				className={`oc-password__input ${customClass}`}
 			/>
 			<span
 				onClick={toggle}
