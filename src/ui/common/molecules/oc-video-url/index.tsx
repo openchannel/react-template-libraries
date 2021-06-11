@@ -9,7 +9,7 @@ export interface VideoUrlProps extends InputProps {
 	/**
 	 * value - useState input value
 	 */
-	value: string;
+	value?: string;
 	/**
 	 * Change handler for input
 	 */
