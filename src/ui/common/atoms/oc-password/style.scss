@@ -2,7 +2,11 @@
 @import '../../../styles/theme.scss';
 
 .oc-password {
-  &__input {
-    @include form-control($info, $primary, $body-color);
-  }
+	&__input {
+		@include form-control($info, $primary, $body-color);
+	}
+}
+
+.error {
+	border-color: $danger;
 }
