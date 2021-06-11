@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useFormik, FormikContext, Form as FormikForm } from 'formik';
+import { Form as FormikForm, FormikContext, useFormik } from 'formik';
 
 import { OcButtonComponent } from '../../../common';
 
@@ -8,12 +8,14 @@ import { FormikMapFieldsWrapper } from './formik-map-field';
 
 import './style.scss';
 
-
 const getOcFormButtonsClass = (buttonPosition: string): string => {
 	switch (buttonPosition) {
-		case 'center': return `form__buttons form__buttons_justify_center`;
-		case 'left': return `form__buttons form__buttons_justify_start`;
-		default: return `form__buttons form__buttons_justify_start form__buttons_direction_row_reverse`;
+		case 'center':
+			return `form__buttons form__buttons_justify_center`;
+		case 'left':
+			return `form__buttons form__buttons_justify_start`;
+		default:
+			return `form__buttons form__buttons_justify_start form__buttons_direction_row_reverse`;
 	}
 };
 

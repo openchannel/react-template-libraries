@@ -11,7 +11,7 @@ export interface FormikField extends AppFormField {
 	isNew: boolean;
 }
 
-export type FormikFieldsValues = null | FormikValues
+export type FormikFieldsValues = null | FormikValues;
 
 export interface AppFormField {
 	id: string;
@@ -46,4 +46,3 @@ export interface AppFormFieldAttributes {
 	ordering?: 'append' | 'prepend';
 	rowLabel?: string;
 }
-

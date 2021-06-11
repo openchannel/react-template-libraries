@@ -2,8 +2,8 @@ import * as React from 'react';
 import Datetime, { DatetimepickerProps } from 'react-datetime';
 import moment, { Moment } from 'moment';
 
-import { OcTimePicker } from './oc-timepicker/index';
 import { InputWithIcon } from './icon-input';
+import { OcTimePicker } from './oc-timepicker';
 
 import './style.scss';
 
@@ -50,7 +50,7 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 	const returnDateFormat = (): string => (settings ? moment().format(settings) : 'DD/MM/YYYY');
 
 	const renderWithTime = React.useCallback(
-		(mode: string, renderDefault: Function) => {
+		(mode: string, renderDefault: any) => {
 			if (mode !== 'days') return renderDefault();
 			return (
 				<>

@@ -38,7 +38,11 @@ export const OcPasswordComponent: React.FC<PasswordProps> = (props) => {
 				type={isPassword ? 'text' : 'password'}
 				className={`oc-password__input ${props.customClass}`}
 			/>
-			<span onClick={toggle} className={`toggle_password ${isPassword ? 'fa-eye-slash' : ''}`} />
+			<span
+				onClick={toggle}
+				className={`toggle_password ${isPassword ? 'fa-eye-slash' : ''}`}
+				tabIndex={0}
+			/>
 		</div>
 	);
 };

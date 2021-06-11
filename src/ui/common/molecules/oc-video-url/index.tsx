@@ -1,6 +1,8 @@
 //commit 91e34d420898eff90181614319cb86372907fafc Author: Alex Tkachenko Date: 08.10.20, 11:46
 import * as React from 'react';
-import { OcVideoComponent, OcInputComponent, InputProps } from '../../index';
+
+import { InputProps, OcInputComponent, OcVideoComponent } from '../../index';
+
 import './style.scss';
 
 export interface VideoUrlProps extends InputProps {
@@ -19,6 +21,7 @@ export interface VideoUrlProps extends InputProps {
 }
 
 export const validateURL = (str: string) => {
+	// eslint-disable-next-line
 	const pattern = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
 	return pattern.test(str);
 };
