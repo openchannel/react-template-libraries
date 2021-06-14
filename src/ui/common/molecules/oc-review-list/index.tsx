@@ -32,12 +32,13 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 		reviewListTitle = 'Most recent reviews',
 		reviewList = [],
 		writeReview,
-		maxReviewDisplay = 1,
-		noReviewMessage = 'No Review for this app',
+		maxReviewDisplay = 3,
+		noReviewMessage = 'There is no review for this app',
 	} = props;
 
 	const [isToggled, toggleDisplay] = React.useState(false);
 	const displayedItems = [...reviewList].splice(0, maxReviewDisplay);
+	const handleToggle = React.useCallback(() => toggleDisplay(!isToggled), [toggleDisplay]);
 
 	return (
 		<div className="review-list">
@@ -80,7 +81,7 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 								</div>
 						  ))}
 					{reviewList.length > maxReviewDisplay && (
-						<span className="review-list__drop-down" onClick={() => toggleDisplay(!isToggled)}>
+						<span className="review-list__drop-down" onClick={handleToggle}>
 							{!isToggled ? 'View all reviews (' + reviewList?.length + ')' : 'Collapse'}
 						</span>
 					)}
