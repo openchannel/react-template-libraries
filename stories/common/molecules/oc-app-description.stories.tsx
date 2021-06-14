@@ -9,14 +9,7 @@ export default {
 } as Meta;
 
 const AppDescription: Story<AppDescriptionProps> = (args) => {
-	const [showFullDescription, toggleDescription] = React.useState(args.showFullDescription);
-	return (
-		<OcAppDescription
-			{...args}
-			toggleDescription={toggleDescription}
-			showFullDescription={showFullDescription}
-		/>
-	);
+	return <OcAppDescription {...args} />;
 };
 
 export const ExpandableDescription = AppDescription.bind({});

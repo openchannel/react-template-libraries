@@ -21,8 +21,6 @@ export interface AppDescriptionProps {
 	showMoreDescriptionText?: string;
 	/** Text for switch button. Shows when description >= truncateTextLength. */
 	showLessDescriptionText?: string;
-	/** toggle expand text function */
-	toggleDescription?: any;
 	/**If we want a short description without expander */
 	shortDescription?: boolean;
 }
@@ -31,18 +29,18 @@ export const OcAppDescription: React.FC<AppDescriptionProps> = (props) => {
 	const {
 		appDescription = '',
 		header = '',
-		showFullDescription = false,
 		headerClass = '',
 		enableTruncateTextLogic = true,
 		truncateTextLength = 800,
 		showMoreDescriptionText = 'Show more',
 		showLessDescriptionText = 'Show less',
-		toggleDescription,
 		shortDescription = false,
+		showFullDescription = false,
 	} = props;
+	const [isFullDescription, toggleDescription] = React.useState(showFullDescription);
 
 	const handleExpand = React.useCallback(() => {
-		toggleDescription(!showFullDescription);
+		toggleDescription(!isFullDescription);
 	}, [toggleDescription]);
 
 	const tempDescription = sanitizeHtml(stripHtmlTags(appDescription)) || '';
@@ -56,11 +54,11 @@ export const OcAppDescription: React.FC<AppDescriptionProps> = (props) => {
 		<div className="description">
 			<h4 className={`description__heading ${headerClass}`}>{header}</h4>
 			<p className="description__text">
-				{!showFullDescription && enableTruncateTextLogic ? tempDescriptionHtml : tempDescription}
+				{!isFullDescription && enableTruncateTextLogic ? tempDescriptionHtml : tempDescription}
 			</p>
 			{!shortDescription && (
 				<span className="description__show-more" onClick={handleExpand}>
-					{!showFullDescription ? showMoreDescriptionText : showLessDescriptionText}
+					{!isFullDescription ? showMoreDescriptionText : showLessDescriptionText}
 				</span>
 			)}
 		</div>
