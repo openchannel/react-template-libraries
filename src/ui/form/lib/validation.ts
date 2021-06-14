@@ -1,10 +1,9 @@
 import { stripHtmlTags } from '../../../lib';
-import { FieldValidators } from '../models';
-import { ValidatorFn } from '../models';
-import { FormikField } from '../models';
+import { FieldValidators, FormikField, ValidatorFn } from '../models';
 
 import { FIELD_TYPE } from './constants';
 
+// eslint-disable-next-line
 const URL_REGEX = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%!^&]).{8,}$/;
 const EMAIL_REGEX = /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -86,7 +85,9 @@ const password = () => (value: string) => {
 	return { key: 'passwordValidator', value: {} };
 };
 
-const minLengthArray = (min: number, label: string, showLengthErrorText?: boolean) => (value: any[]) => {
+const minLengthArray = (min: number, label: string, showLengthErrorText?: boolean) => (
+	value: any[],
+) => {
 	if (!value || value.length === 0 || value.length >= min) {
 		return null;
 	}
@@ -96,7 +97,9 @@ const minLengthArray = (min: number, label: string, showLengthErrorText?: boolea
 		: { key: 'minCount', value: true };
 };
 
-const maxLengthArray = (max: number, label: string, showLengthErrorText?: boolean) => (value: any[]) => {
+const maxLengthArray = (max: number, label: string, showLengthErrorText?: boolean) => (
+	value: any[],
+) => {
 	if (!value || value.length === 0 || value.length <= max) {
 		return null;
 	}
@@ -156,7 +159,7 @@ const booleanTags = (label: string) => (value: boolean[]) => {
 export const setUpFieldValidators = (
 	{ attributes, label }: FormikField,
 	type?: { [k: string]: boolean },
-): ValidatorFn[] | [] => {
+): ValidatorFn[] => {
 	if (!attributes) return [];
 
 	const {
@@ -172,67 +175,67 @@ export const setUpFieldValidators = (
 	} = type || {};
 
 	return Object.keys(attributes)
-	.reduce((acc, key) => {
-		switch (key) {
-			case 'required':
-				if (isCheckbox) {
-					acc.push(requiredTrue());
-				} else {
-					acc.push(required());
-				}
-				break;
-			case 'maxChars':
-				if (isRichText) {
-					acc.push(richTextMaxCharacters(Number(attributes[key])));
-				} else {
-					acc.push(maxLength(Number(attributes[key])));
-				}
-				break;
-			case 'minChars':
-				if (isRichText) {
-					acc.push(richTextMinCharacters(Number(attributes[key])));
-				} else {
-					acc.push(minLength(Number(attributes[key])));
-				}
-				break;
-			case 'minCount':
-				acc.push(minLengthArray(Number(attributes[key]), label, isList));
-				break;
-			case 'maxCount':
-				acc.push(maxLengthArray(Number(attributes[key]), label, isList));
-				break;
-			case 'min':
-				acc.push(min(Number(attributes[key])));
-				break;
-			case 'max':
-				acc.push(max(Number(attributes[key])));
-				break;
-			default:
-				break;
-		}
+		.reduce((acc, key) => {
+			switch (key) {
+				case 'required':
+					if (isCheckbox) {
+						acc.push(requiredTrue());
+					} else {
+						acc.push(required());
+					}
+					break;
+				case 'maxChars':
+					if (isRichText) {
+						acc.push(richTextMaxCharacters(Number(attributes[key])));
+					} else {
+						acc.push(maxLength(Number(attributes[key])));
+					}
+					break;
+				case 'minChars':
+					if (isRichText) {
+						acc.push(richTextMinCharacters(Number(attributes[key])));
+					} else {
+						acc.push(minLength(Number(attributes[key])));
+					}
+					break;
+				case 'minCount':
+					acc.push(minLengthArray(Number(attributes[key]), label, isList));
+					break;
+				case 'maxCount':
+					acc.push(maxLengthArray(Number(attributes[key]), label, isList));
+					break;
+				case 'min':
+					acc.push(min(Number(attributes[key])));
+					break;
+				case 'max':
+					acc.push(max(Number(attributes[key])));
+					break;
+				default:
+					break;
+			}
 
-		if (isEmail) {
-			acc.push(email());
-		}
-		if (isUrl) {
-			acc.push(url());
-		}
-		if (isColor) {
-			acc.push(color());
-		}
-		if (isPassword) {
-			acc.push(password());
-		}
-		if (isNumberTags) {
-			acc.push(numberTags(label));
-		}
-		if (isBooleanTags) {
-			acc.push(booleanTags(label));
-		}
+			if (isEmail) {
+				acc.push(email());
+			}
+			if (isUrl) {
+				acc.push(url());
+			}
+			if (isColor) {
+				acc.push(color());
+			}
+			if (isPassword) {
+				acc.push(password());
+			}
+			if (isNumberTags) {
+				acc.push(numberTags(label));
+			}
+			if (isBooleanTags) {
+				acc.push(booleanTags(label));
+			}
 
-		return acc;
-	}, [] as ValidatorFn[])
-	.filter(Boolean);
+			return acc;
+		}, [] as ValidatorFn[])
+		.filter(Boolean);
 };
 
 export const getFieldValidators = (field: FormikField): FieldValidators => {

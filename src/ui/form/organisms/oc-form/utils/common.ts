@@ -1,7 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
 
 import { errorMessages } from '../../../lib';
-import { FormikFieldsValues, FieldValidators } from '../../../models';
+import { FieldValidators, FormikFieldsValues } from '../../../models';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export const noop = () => {};
@@ -20,16 +20,14 @@ export const getOcFormButtonsClass = (buttonPosition: string): string => {
 export const validateOcFormValues = (values: FormikFieldsValues, validators: FieldValidators) => {
 	if (!values || isEmpty(validators)) return {};
 
-	return Object.entries(values)
-	.reduce((acc, [name, value]) => {
+	return Object.entries(values).reduce((acc, [name, value]) => {
 		if (!validators[name] || validators[name]?.length === 0) return acc;
 
 		return {
 			...acc,
-			[name]: validators[name]!
-			.map((validate) => validate(value))
-			.filter(Boolean)
-			.map((error) => errorMessages[error!.key](error!.value)),
+			[name]: validators[name]!.map((validate) => validate(value))
+				.filter(Boolean)
+				.map((error) => errorMessages[error!.key](error!.value)),
 		};
 	}, {});
 };
