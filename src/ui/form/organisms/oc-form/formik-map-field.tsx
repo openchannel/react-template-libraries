@@ -118,7 +118,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 							>
 								<Field
 									name={name}
-									component={OcCheckboxComponent}
+									as={OcCheckboxComponent}
 									required={attributes!.required}
 									labelText={label}
 								/>
