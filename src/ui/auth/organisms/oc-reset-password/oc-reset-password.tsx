@@ -55,6 +55,7 @@ export const OcResetPasswordComponent: React.FC<OcResetPasswordProps> = (props) 
 					type="primary"
 					customClass="reset-password__button"
 					process={process}
+					onClick={onChange}
 				>
 					Confirm
 				</OcButtonComponent>
