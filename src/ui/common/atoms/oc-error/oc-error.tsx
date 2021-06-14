@@ -14,7 +14,11 @@ export const OcError: React.FC<OcErrorProps> = (props) => {
 	return (
 		<div className="error">
 			{Array.isArray(message)
-				? message.map((value) => <span className="error__feedback">{value}</span>)
+				? message.map((value) => (
+						<span key={value} className="error__feedback">
+							{value}
+						</span>
+				  ))
 				: message}
 		</div>
 	);
