@@ -1,6 +1,7 @@
 //commit 9cf9b208d5a753c4fbbff30895ef07d41ffc260e Author: Julia Date: 21.05.21, 19:47
 import * as React from 'react';
-
+import { truncateWithHTML } from '../../../../lib/utils';
+import { sanitizeHtml, stripHtmlTags } from '../../../../lib/html-utils';
 import './style.scss';
 
 export interface AppDescriptionProps {
@@ -40,46 +41,22 @@ export const OcAppDescription: React.FC<AppDescriptionProps> = (props) => {
 		shortDescription = false,
 	} = props;
 
-	const handleExpand = () => {
+	const handleExpand = React.useCallback(() => {
 		toggleDescription(!showFullDescription);
-	};
+	}, [toggleDescription]);
 
-	const getTextFromHtml = (html: string): string => {
-		const tempDiv = document.createElement('div');
-		tempDiv.innerHTML = html;
-		return tempDiv.textContent || tempDiv.innerText || '';
-	};
+	const tempDescription = sanitizeHtml(stripHtmlTags(appDescription)) || '';
+	let tempDescriptionHtml = truncateWithHTML(tempDescription, truncateTextLength);
 
-	const truncateWithHTML = (htmlText: string, truncateTo: number): string => {
-		const substrings = htmlText.split(/(<[^>]*>)/g);
-		let count = 0;
-		const truncated = [];
-		for (const substr of substrings) {
-			if (!substr.startsWith('<')) {
-				if (count > truncateTo) {
-					continue;
-				} else if (substr.length > truncateTo - count - 1) {
-					truncated.push(`${substr.substring(0, truncateTo - count)}...`);
-					return truncated.join('');
-				} else {
-					truncated.push(substr);
-				}
-				count += substr.length;
-			} else {
-				truncated.push(substr);
-			}
-		}
-		return truncated.join('');
-	};
-
-	const tempDescription = getTextFromHtml(appDescription) || '';
-	const truncatedText = truncateWithHTML(tempDescription, truncateTextLength);
+	if (enableTruncateTextLogic && truncateTextLength < tempDescription.length) {
+		tempDescriptionHtml = truncateWithHTML(tempDescription, truncateTextLength);
+	}
 
 	return (
 		<div className="description">
 			<h4 className={`description__heading ${headerClass}`}>{header}</h4>
 			<p className="description__text">
-				{!showFullDescription && enableTruncateTextLogic ? truncatedText : tempDescription}
+				{!showFullDescription && enableTruncateTextLogic ? tempDescriptionHtml : tempDescription}
 			</p>
 			{!shortDescription && (
 				<span className="description__show-more" onClick={handleExpand}>

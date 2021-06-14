@@ -13,10 +13,18 @@ describe('Item for expandable select', () => {
 		label: 'Category 1',
 		checked: false,
 		name: '1',
-		onChange: () => {},
 	});
 
 	it('should create', () => {
 		expect(component).toBeTruthy();
+	});
+
+	it('should trigger onChange', async () => {
+		const onButtonClickMock = jest.fn();
+
+		component.setProps({ onChange: onButtonClickMock });
+		component.find('input').simulate('change', []);
+
+		expect(onButtonClickMock).toHaveBeenCalled();
 	});
 });

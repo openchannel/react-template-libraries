@@ -1,3 +1,4 @@
+//eslint-disable jsx-a11y
 import * as React from 'react';
 
 import './style.scss';
@@ -24,20 +25,25 @@ export interface PasswordProps extends React.InputHTMLAttributes<HTMLInputElemen
 	 */
 	value: string;
 	onChange: (e: React.SyntheticEvent) => void;
+	/**custom classname to be passed */
+	customClass?: string;
 }
 
 export const OcPasswordComponent: React.FC<PasswordProps> = (props) => {
+	const { customClass } = props;
 	const [isPassword, toggle] = React.useReducer((is) => !is, false);
 
 	return (
 		<div className="oc-password">
-			<input {...props} type={isPassword ? 'text' : 'password'} className="oc-password__input" />
-			{/*eslint-disable-next-line jsx-a11y/click-events-have-key-events*/}
+			<input
+				{...props}
+				type={isPassword ? 'text' : 'password'}
+				className={`oc-password__input ${customClass}`}
+			/>
 			<span
-				role="button"
-				tabIndex={0}
 				onClick={toggle}
 				className={`toggle_password ${isPassword ? 'fa-eye-slash' : ''}`}
+				tabIndex={0}
 			/>
 		</div>
 	);
