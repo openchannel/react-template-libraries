@@ -26,7 +26,7 @@ export const FIELD_TYPE = {
 	DYNAMIC_FIELD_ARRAY: 'dynamicFieldArray',
 };
 
-export const errorMessages = {
+export const errorMessages: Record<string, any> = {
 	required: (): string => 'Please fill out this field',
 	minlength: ({ requiredLength }: { requiredLength: string | number }): string =>
 		`The min number of characters is ${requiredLength}`,

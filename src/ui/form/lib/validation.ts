@@ -1,4 +1,6 @@
 import { stripHtmlTags } from '../../../lib';
+import { FieldValidators } from '../models';
+import { ValidatorFn } from '../models';
 import { FormikField } from '../models';
 
 import { FIELD_TYPE } from './constants';
@@ -11,9 +13,9 @@ const isEmptyInputValue = (value: any) => value == null || value.length === 0;
 
 const hasValidLength = (value: any) => value != null && typeof value.length === 'number';
 
-const requiredTrue = (value: boolean) => (value ? null : { key: 'required', value: true });
+const requiredTrue = () => (value: boolean) => (value ? null : { key: 'required', value: true });
 
-const required = (value: any) =>
+const required = () => (value: any) =>
 	isEmptyInputValue(value) ? { key: 'required', value: true } : null;
 
 const maxLength = (maxLength: number) => (value: any) => {
@@ -52,7 +54,7 @@ const max = (max: number) => (value: any) => {
 	return !isNaN(value) && value > max ? { key: 'max', value: { max, actual: parsedValue } } : null;
 };
 
-const email = (value: string) => {
+const email = () => (value: string) => {
 	if (isEmptyInputValue(value)) {
 		return null;
 	}
@@ -60,117 +62,102 @@ const email = (value: string) => {
 	return EMAIL_REGEX.test(value) ? null : { key: 'email', value: true };
 };
 
-const url = () => {
-	return (value) => {
-		if (URL_REGEX.test(value) || value === '') {
-			return null;
-		}
+const url = () => (value: string) => {
+	if (URL_REGEX.test(value) || value === '') {
+		return null;
+	}
 
-		return { key: 'websiteValidator', value: true };
-	};
+	return { key: 'websiteValidator', value: true };
 };
 
-const color = () => {
-	return (value) => {
-		if ((value.charAt(0) === '#' && value.length === 7) || value === '') {
-			return null;
-		}
-		return { key: 'colorValidator', value: true };
-	};
+const color = () => (value: string) => {
+	if ((value.charAt(0) === '#' && value.length === 7) || value === '') {
+		return null;
+	}
+
+	return { key: 'colorValidator', value: true };
 };
 
-const password = () => {
-	return (value: string) => {
-		if ((value ? value : '').match(PASSWORD_REGEX)) {
-			return null;
-		}
+const password = () => (value: string) => {
+	if ((value ? value : '').match(PASSWORD_REGEX)) {
+		return null;
+	}
 
-		return { key: 'passwordValidator', value: {} };
-	};
+	return { key: 'passwordValidator', value: {} };
 };
 
-const minLengthArray = (min: number, label: string, showLengthErrorText?: boolean) => {
-	return (value) => {
-		if (!value || value.length === 0 || value.length >= min) {
-			return null;
-		}
+const minLengthArray = (min: number, label: string, showLengthErrorText?: boolean) => (value: any[]) => {
+	if (!value || value.length === 0 || value.length >= min) {
+		return null;
+	}
 
-		return showLengthErrorText
-			? { key: 'minElementsCount', value: { requiredCount: min, fieldLabel: label } }
-			: { key: 'minCount', value: true };
-	};
+	return showLengthErrorText
+		? { key: 'minElementsCount', value: { requiredCount: min, fieldLabel: label } }
+		: { key: 'minCount', value: true };
 };
 
-const maxLengthArray = (max: number, label: string, showLengthErrorText?: boolean) => {
-	return (value) => {
-		if (!value || value.length === 0 || value.length <= max) {
-			return null;
-		}
+const maxLengthArray = (max: number, label: string, showLengthErrorText?: boolean) => (value: any[]) => {
+	if (!value || value.length === 0 || value.length <= max) {
+		return null;
+	}
 
-		return showLengthErrorText
-			? { key: 'maxElementsCount', value: { requiredCount: max, fieldLabel: label } }
-			: { key: 'maxCount', value: true };
-	};
+	return showLengthErrorText
+		? { key: 'maxElementsCount', value: { requiredCount: max, fieldLabel: label } }
+		: { key: 'maxCount', value: true };
 };
 
-const richTextMinCharacters = (min: number) => {
-	return (value) => {
-		const characters = stripHtmlTags(value);
+const richTextMinCharacters = (min: number) => (value: string) => {
+	const characters = stripHtmlTags(value);
 
-		return characters.length >= min ? null : { key: 'minlength', value: { requiredLength: min } };
-	};
+	return characters.length >= min ? null : { key: 'minlength', value: { requiredLength: min } };
 };
 
-const richTextMaxCharacters = (max: number) => {
-	return (value) => {
-		const characters = stripHtmlTags(value);
+const richTextMaxCharacters = (max: number) => (value: string) => {
+	const characters = stripHtmlTags(value);
 
-		return characters.length <= max ? null : { key: 'maxlength', value: { requiredLength: max } };
-	};
+	return characters.length <= max ? null : { key: 'maxlength', value: { requiredLength: max } };
 };
 
-const fillArrayForNumberTags = (maxCount: number): number[] => {
-	return Array.from({ length: maxCount }, (_, i) => i + 1);
-};
+// const fillArrayForNumberTags = (maxCount: number): number[] => {
+// 	return Array.from({ length: maxCount }, (_, i) => i + 1);
+// };
 
-const numberTags = (label: string) => {
-	return (value) => {
-		const numberArray = value as any[];
+const numberTags = (label: string) => (value: number[]) => {
+	const numberArray = value;
 
-		if (numberArray) {
-			for (const numberItem of numberArray) {
-				if (isNaN(Number(numberItem))) {
-					return { key: 'numberTags', value: { fieldTitle: label } };
-				}
+	if (numberArray) {
+		for (const numberItem of numberArray) {
+			if (isNaN(Number(numberItem))) {
+				return { key: 'numberTags', value: { fieldTitle: label } };
 			}
-			return null;
 		}
 		return null;
-	};
+	}
+
+	return null;
 };
 
-const booleanTags = (label: string) => {
-	return (value) => {
-		const booleanAcceptedValues = new Set([true, false]);
-		const booleanArray = value as any[];
+const booleanTags = (label: string) => (value: boolean[]) => {
+	const booleanAcceptedValues = new Set([true, false]);
+	const booleanArray = value;
 
-		if (booleanArray) {
-			for (const booleanItem of booleanArray) {
-				if (!booleanAcceptedValues.has(booleanItem)) {
-					return { key: 'booleanTags', value: { fieldTitle: label } };
-				}
+	if (booleanArray) {
+		for (const booleanItem of booleanArray) {
+			if (!booleanAcceptedValues.has(booleanItem)) {
+				return { key: 'booleanTags', value: { fieldTitle: label } };
 			}
-			return null;
 		}
 		return null;
-	};
+	}
+
+	return null;
 };
 
 export const setUpFieldValidators = (
 	{ attributes, label }: FormikField,
 	type?: { [k: string]: boolean },
-): any => {
-	if (!attributes) return null;
+): ValidatorFn[] | [] => {
+	if (!attributes) return [];
 
 	const {
 		isCheckbox = false,
@@ -184,35 +171,35 @@ export const setUpFieldValidators = (
 		isNumberTags = false,
 	} = type || {};
 
-	return Object.keys(attributes).reduce((acc, key) => {
-		// if (!attributes[key]) return acc;
+	return Object.keys(attributes)
+	.reduce((acc, key) => {
 		switch (key) {
 			case 'required':
 				if (isCheckbox) {
-					acc.push(requiredTrue);
+					acc.push(requiredTrue());
 				} else {
-					acc.push(required);
+					acc.push(required());
 				}
 				break;
 			case 'maxChars':
 				if (isRichText) {
-					acc.push(richTextMaxCharacters(attributes[key]));
+					acc.push(richTextMaxCharacters(Number(attributes[key])));
 				} else {
-					acc.push(maxLength(attributes[key]));
+					acc.push(maxLength(Number(attributes[key])));
 				}
 				break;
 			case 'minChars':
 				if (isRichText) {
-					acc.push(richTextMinCharacters(attributes[key]));
+					acc.push(richTextMinCharacters(Number(attributes[key])));
 				} else {
-					acc.push(minLength(attributes[key]));
+					acc.push(minLength(Number(attributes[key])));
 				}
 				break;
 			case 'minCount':
-				acc.push(minLengthArray(attributes[key], label, isList));
+				acc.push(minLengthArray(Number(attributes[key]), label, isList));
 				break;
 			case 'maxCount':
-				acc.push(maxLengthArray(attributes[key], label, isList));
+				acc.push(maxLengthArray(Number(attributes[key]), label, isList));
 				break;
 			case 'min':
 				acc.push(min(Number(attributes[key])));
@@ -225,7 +212,7 @@ export const setUpFieldValidators = (
 		}
 
 		if (isEmail) {
-			acc.push(email);
+			acc.push(email());
 		}
 		if (isUrl) {
 			acc.push(url());
@@ -244,11 +231,12 @@ export const setUpFieldValidators = (
 		}
 
 		return acc;
-	}, [] as any[]);
+	}, [] as ValidatorFn[])
+	.filter(Boolean);
 };
 
-export const getFieldValidators = (field: FormikField) => {
-	let validators = [];
+export const getFieldValidators = (field: FormikField): FieldValidators => {
+	let validators: ValidatorFn[] = [];
 
 	switch (field.type) {
 		case FIELD_TYPE.DATE:
@@ -298,10 +286,6 @@ export const getFieldValidators = (field: FormikField) => {
 			break;
 		default:
 			break;
-	}
-
-	if (validators.length === 0) {
-		return {};
 	}
 
 	return { [field.name]: validators };
