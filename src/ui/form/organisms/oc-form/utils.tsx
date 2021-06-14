@@ -1,6 +1,7 @@
 import { nanoid } from 'nanoid';
 
 import { FIELD_TYPE } from '../../lib';
+import { getValidator } from '../../lib/validation';
 import { AppFormField, FormikField, FormikFieldsValues } from '../../models';
 
 import { normalizeFieldsForFormikParams } from './types';
@@ -169,6 +170,14 @@ export const fieldsUtils = {
 			}
 			return item;
 		}),
+	getFieldsValidation: (fields: FormikField[]): any => (
+		fields.reduce((acc, field) => {
+			if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields) {
+				return { ...acc, ...getValidator(field), ...fieldsUtils.getFieldsValidation(field.fields) };
+			}
+			return { ...acc, ...getValidator(field) };
+		}, {})
+	),
 };
 
 export const elementUtils = {

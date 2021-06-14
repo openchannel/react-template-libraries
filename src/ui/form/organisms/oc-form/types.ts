@@ -46,6 +46,7 @@ export type normalizeFieldsForFormikParams = (
 export interface OcFormContextProviderProps {
 	initialValue: {
 		data: AppFormModel;
+		setValidation: (validation: any) => void;
 	};
 }
 
