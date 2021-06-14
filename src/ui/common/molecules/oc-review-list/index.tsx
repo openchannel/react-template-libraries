@@ -1,7 +1,9 @@
 //commit 240aa1e72cb6b2f67e9148e5d21917065b56fb19 author: Julia Date: 12.05.21 18:29
 import * as React from 'react';
+
 import { OcRatingComponent } from '../../../market/atoms/oc-rating/index';
 import { OcButtonComponent } from '../../index';
+
 import './style.scss';
 
 export interface ReviewListProps {
@@ -82,7 +84,7 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 						  ))}
 					{reviewList.length > maxReviewDisplay && (
 						<span className="review-list__drop-down" onClick={handleToggle}>
-							{!isToggled ? 'View all reviews (' + reviewList?.length + ')' : 'Collapse'}
+							{!isToggled ? `View all reviews (${reviewList?.length})` : 'Collapse'}
 						</span>
 					)}
 				</div>
