@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
-import { errorMessages } from '../../../src/lib/validation';
+import { errorMessages } from '../../../src/ui/form/lib';
 import { OcResetPasswordComponent, OcResetPasswordProps } from '../../../src/ui/auth/index';
 
 export default {
@@ -15,14 +15,14 @@ const DefaultComponent: Story<OcResetPasswordProps> = (args) => {
 	const [blurred, setBlurred] = React.useState(false);
 
 	return (<BrowserRouter>
-				<OcResetPasswordComponent 
+				<OcResetPasswordComponent
 					{...args}
 					inputProps={{
 						id: 'input',
 						value,
 						onChange: (e: any) => setValue(e.target.value),
 						onBlur: () => setBlurred(true),
-					}} 
+					}}
 					inputError={blurred && !value && errorMessages.required()}
 				/>
 			</BrowserRouter>

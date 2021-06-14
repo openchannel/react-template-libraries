@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
-import { errorMessages } from '../../../src/lib/validation';
+import { errorMessages } from '../../../src/form/lib';
 import { OcResendActivation, OcResendProps } from '../../../src/ui/auth';
 
 export default {
@@ -17,13 +17,13 @@ const DefaultComponent: Story<OcResendProps> = (args) => {
 	const [validationError, setValidationError] = React.useState(false);
 	const handleChange = (e: any) => {
 		setValue(e.target.value);
-		(e.target.value.match(regexEmail) === null && args.inputProps.inputType === 'email') ? 
+		(e.target.value.match(regexEmail) === null && args.inputProps.inputType === 'email') ?
 		(setValidationError(true), e.preventDefault()) :
 		(setValidationError(false), setValue(e.target.value))
 	  };
 	return (
 		<BrowserRouter>
-			<OcResendActivation {...args} 
+			<OcResendActivation {...args}
 				inputProps={{
 					id: 'input',
 					inputType: 'email',
@@ -31,9 +31,9 @@ const DefaultComponent: Story<OcResendProps> = (args) => {
 					onChange: (e) => handleChange(e),
 					onBlur: () => setBlurred(true),
 				}}
-				inputError={validationError ? 
+				inputError={validationError ?
 					errorMessages.emailValidator() :
-					blurred && !value && errorMessages.required() 
+					blurred && !value && errorMessages.required()
 				}
 			/>
 		</BrowserRouter>)
@@ -56,7 +56,7 @@ const FilledComponent: Story<OcResendProps> = (args) => {
 	const [validationError, setValidationError] = React.useState(false);
 	const handleChange = (e: any) => {
 		console.log(e.target.value);
-		(e.target.value.match(regexEmail) === null && args.inputProps.inputType === 'email') ? 
+		(e.target.value.match(regexEmail) === null && args.inputProps.inputType === 'email') ?
 		(setValidationError(true), e.preventDefault()) :
 		(setValidationError(false), setValue(e.target.value))
 	  };
@@ -72,7 +72,7 @@ const FilledComponent: Story<OcResendProps> = (args) => {
 					onBlur: () => setBlurred(true),
 				}}
 				inputError={
-					blurred && !value && errorMessages.required() || 
+					blurred && !value && errorMessages.required() ||
 					blurred && validationError && errorMessages.emailValidator()
 				}
 			/>
