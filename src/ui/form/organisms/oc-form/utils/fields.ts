@@ -1,13 +1,8 @@
 import { nanoid } from 'nanoid';
 
-import { FIELD_TYPE } from '../../lib';
-import { getValidator } from '../../lib/validation';
-import { AppFormField, FormikField, FormikFieldsValues } from '../../models';
-
-import { normalizeFieldsForFormikParams } from './types';
-
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-export const noop = () => {};
+import { FIELD_TYPE, getFieldValidators } from '../../../lib';
+import { AppFormField, FormikField, FormikFieldsValues } from '../../../models';
+import { normalizeFieldsForFormikParams } from '../types';
 
 export const getNewName = (element: AppFormField): string => `${element.id}-${nanoid()}`;
 
@@ -170,14 +165,13 @@ export const fieldsUtils = {
 			}
 			return item;
 		}),
-	getFieldsValidation: (fields: FormikField[]): any => (
+	getValidators: (fields: FormikField[]): any =>
 		fields.reduce((acc, field) => {
 			if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields) {
-				return { ...acc, ...getValidator(field), ...fieldsUtils.getFieldsValidation(field.fields) };
+				return { ...acc, ...getFieldValidators(field), ...fieldsUtils.getValidators(field.fields) };
 			}
-			return { ...acc, ...getValidator(field) };
-		}, {})
-	),
+			return { ...acc, ...getFieldValidators(field) };
+		}, {}),
 };
 
 export const elementUtils = {

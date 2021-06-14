@@ -7,17 +7,17 @@ import { Dataset } from '../../../common/atoms/oc-button';
 import { FIELD_TYPE } from '../../lib';
 import { FormikField, FormikFieldsValues } from '../../models';
 
-import { OcFormContextProps, OcFormContextProviderProps } from './types';
+import { noop } from './utils/common';
 import {
 	elementUtils,
 	fieldsUtils,
 	getInitialValuesFromFields,
 	getValidParams,
-	noop,
 	normalizeFieldsForFormik,
 	updateElementKeys,
 	updateFieldsDefinition,
-} from './utils';
+} from './utils/fields';
+import { OcFormContextProps, OcFormContextProviderProps } from './types';
 
 export const OcFormContext = React.createContext<OcFormContextProps>({
 	fields: [],
@@ -34,7 +34,7 @@ export const useOcFormContext = () => {
 
 export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 	children,
-	initialValue: { data, setValidation },
+	initialValue: { data, setValidators },
 }) => {
 	const { fields } = React.useMemo(() => getValidParams(data.fields), [data.fields]);
 
@@ -48,7 +48,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 	const { values, setValues } = useFormikContext<FormikFieldsValues>();
 
 	React.useEffect(() => {
-		setValidation(fieldsDefinition);
+		setValidators(fieldsDefinition);
 	}, []);
 
 	const normalizeFieldsAndUpdateDefinition = React.useCallback(
@@ -56,13 +56,14 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 			const newArray = normalizeFieldsForFormik(updateElementKeys)(array);
 
 			setFieldsDefinition(newArray);
-			setValidation(newArray);
+			setValidators(newArray);
 			setValues(getInitialValuesFromFields(newArray));
 		},
-		[setValues, setValidation],
+		[setValues, setValidators],
 	);
 
-	const onAddDynamicField = React.useCallback((event: React.MouseEvent) => {
+	const onAddDynamicField = React.useCallback(
+		(event: React.MouseEvent) => {
 			const button = event.target as HTMLButtonElement;
 			const elementStaticId = button.dataset.staticid || '';
 			const elementPath = button.dataset.path || '';
@@ -70,8 +71,8 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 			const instance = flattenFields.find((item) => item.staticId === elementStaticId);
 			if (!instance) return;
 
-			let next = [ ...fieldsDefinition ];
-			const {path, isFirstLevelDeep} = elementUtils.getParentPath(elementPath);
+			let next = [...fieldsDefinition];
+			const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
 			const existedElement = get(next, elementPath);
 
 			if (isFirstLevelDeep) {

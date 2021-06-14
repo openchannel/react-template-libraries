@@ -7,11 +7,12 @@ import {
 	OcInputComponent,
 	OcNumberComponent,
 	OcPasswordComponent,
-} from '../../../common';
-import { FIELD_TYPE } from '../../lib';
-import { OcDynamicFieldArray } from '../oc-dynamic-field-array';
+} from '../../../../common';
+import { FIELD_TYPE } from '../../../lib';
+import { OcDynamicFieldArray } from '../../oc-dynamic-field-array';
+import { useOcFormContext } from '../context';
+import { FormikMapFieldsProps } from '../types';
 
-import { useOcFormContext } from './context';
 import {
 	FieldGroupWrapper,
 	FormikOcColoWrapper,
@@ -22,7 +23,6 @@ import {
 	FormikOcVideoUrlWrapper,
 	FormikRichTextWrapper,
 } from './formik-components';
-import { FormikMapFieldsProps } from './types';
 
 export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 	if (!fields || fields.length === 0) {

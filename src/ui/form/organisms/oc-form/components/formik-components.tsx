@@ -12,12 +12,11 @@ import {
 	OcSelectProps,
 	OcVideoUrlComponent,
 	VideoUrlProps,
-} from '../../../common';
-import { OcTooltipLabel } from '../../atoms';
-import { FIELD_TYPE } from '../../lib';
-import { OcMultiSelectList, OcMultiSelectListProps, OcTags, OcTagsProps } from '../../molecules';
-
-import { FCWP, FieldGroupProps } from './types';
+} from '../../../../common';
+import { OcTooltipLabel } from '../../../atoms';
+import { FIELD_TYPE } from '../../../lib';
+import { OcMultiSelectList, OcMultiSelectListProps, OcTags, OcTagsProps } from '../../../molecules';
+import { FCWP, FieldGroupProps } from '../types';
 
 export const FieldGroup: React.FC<FieldGroupProps & { error?: string }> = (props) => {
 	const { children, error, label, labelFor, description, required } = props;
