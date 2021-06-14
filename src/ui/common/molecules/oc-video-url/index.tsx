@@ -9,7 +9,7 @@ export interface VideoUrlProps extends InputProps {
 	/**
 	 * value - useState input value
 	 */
-	value?: string;
+	value?: string | undefined;
 	/**
 	 * Change handler for input
 	 */
@@ -45,7 +45,7 @@ export const OcVideoUrlComponent: React.FC<VideoUrlProps> = (props) => {
 				className={`form-control ${customClass}`}
 				{...p}
 			/>
-			{!withoutPreview && validateURL(value) && (
+			{!withoutPreview && validateURL(value!) && (
 				<OcVideoComponent customClass="video-url__reference" videoUrl={value} />
 			)}
 		</>

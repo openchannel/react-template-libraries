@@ -1,8 +1,11 @@
 //commit 77c7c788ebd91651e6edbb765e0501d609a55bf0 Author: Julia Date: 05.05.21, 19:28
 import * as React from 'react';
-import { FullAppData } from './types';
-import { OcRatingComponent } from '../../../market/atoms/oc-rating';
+
 import { getTextFromHtml, transformCurrency, truncateWithHTML } from '../../../../lib/utils';
+import { OcRatingComponent } from '../../../market/atoms/oc-rating';
+
+import { FullAppData } from './types';
+
 import './style.scss';
 
 export interface OcAppCardProps {

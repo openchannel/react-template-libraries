@@ -82,8 +82,8 @@ export interface App {
 	developerId: string;
 	model: AppModel[];
 	access?: string[];
-	restrict?: Restrict | {};
-	allow?: Restrict | {};
+	restrict?: Restrict | Record<string, unknown>;
+	allow?: Restrict | Record<string, unknown>;
 	submittedDate: Date | number;
 	created: Date | number;
 	attributes?: any;
@@ -165,8 +165,8 @@ export class FullAppData {
 	developerId: string;
 	model: AppModel[];
 	access?: string[];
-	restrict?: {} | Restrict;
-	allow?: {} | Restrict;
+	restrict?: Record<string, unknown> | Restrict;
+	allow?: Record<string, unknown> | Restrict;
 	submittedDate: number | Date;
 	created: number | Date;
 	attributes?: any;
