@@ -1,16 +1,29 @@
-// export const fieldTypeValues = [
-// 	'richText', 'text', 'longText', 'dropdownList', 'tags', 'singleFile',
-// 	'multiple', 'multiImage', 'singleImage', 'privateSingleFile', 'multiPrivateFile', 'number',
-// 	'checkbox', 'emailAddress', 'websiteUrl', 'color', 'booleanTags', 'numberTags', 'videoUrl',
-// 	'date', 'datetime', 'multiselectList', 'dynamicFieldArray', 'password',
-// ]
-// export type FieldType = typeof fieldTypeValues;
-
 import * as React from 'react';
-import { FieldInputProps, FormikProps } from 'formik';
+import type { FieldInputProps, FormikProps } from 'formik';
 
-import { Dataset } from '../../../common';
-import { AppFormModel, FormikField, FormikFieldsValues } from '../../models';
+import type { Dataset } from '../../../common';
+import type { AppFormModel, FormikField, FormikFieldsValues } from '../../models';
+
+export interface OcFormProps {
+	formJsonData: AppFormModel;
+	onSubmit: () => void;
+	onCancel: () => void;
+	/**
+	 * Set position of the field label. Can be: 'top', 'left', 'right'.
+	 * @param {('top'|'left'|'right')} position
+	 * @default top
+	 */
+	labelPosition?: string;
+	/**
+	 * @default Submit
+	 */
+	successButtonText?: string;
+	/**
+	 * Set position of the field label. Can be: 'top', 'left', 'right'.
+	 * @default left
+	 */
+	buttonPosition?: string;
+}
 
 export type FieldType =
 	| 'richText'
@@ -45,8 +58,9 @@ export type normalizeFieldsForFormikParams = (
 
 export interface OcFormContextProviderProps {
 	initialValue: {
-		data: AppFormModel;
-		setValidators: (validation: any) => void;
+		flattenFields: FormikField[];
+		fieldsDefinition: FormikField[];
+		updateState: (normalizedFields: FormikField[]) => void;
 	};
 }
 

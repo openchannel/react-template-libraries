@@ -10,9 +10,7 @@ import { FormikField, FormikFieldsValues } from '../../models';
 import { noop } from './utils/common';
 import {
 	elementUtils,
-	fieldsUtils,
 	getInitialValuesFromFields,
-	getValidParams,
 	normalizeFieldsForFormik,
 	updateElementKeys,
 	updateFieldsDefinition,
@@ -34,32 +32,18 @@ export const useOcFormContext = () => {
 
 export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 	children,
-	initialValue: { data, setValidators },
+	initialValue: { flattenFields, fieldsDefinition, updateState },
 }) => {
-	const { fields } = React.useMemo(() => getValidParams(data.fields), [data.fields]);
-
-	const [flattenFields] = React.useState(
-		fieldsUtils.dumpDeepFields(fieldsUtils.flatMap(fields), 0),
-	);
-	const [fieldsDefinition, setFieldsDefinition] = React.useState(
-		fieldsUtils.dumpDeepFields(fields),
-	);
-
 	const { values, setValues } = useFormikContext<FormikFieldsValues>();
-
-	React.useEffect(() => {
-		setValidators(fieldsDefinition);
-	}, []);
 
 	const normalizeFieldsAndUpdateDefinition = React.useCallback(
 		(array) => {
 			const newArray = normalizeFieldsForFormik(updateElementKeys)(array);
 
-			setFieldsDefinition(newArray);
-			setValidators(newArray);
+			updateState(newArray);
 			setValues(getInitialValuesFromFields(newArray));
 		},
-		[setValues, setValidators],
+		[setValues, updateState],
 	);
 
 	const onAddDynamicField = React.useCallback(
@@ -130,17 +114,20 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 		[fieldsDefinition, normalizeFieldsAndUpdateDefinition],
 	);
 
-	const onStartEditingField = React.useCallback((event: React.SyntheticEvent<Dataset>) => {
-		const fieldName = event.currentTarget.dataset.name;
+	const onStartEditingField = React.useCallback(
+		(event: React.SyntheticEvent<Dataset>) => {
+			const fieldName = event.currentTarget.dataset.name;
 
-		setFieldsDefinition((prev) =>
-			updateFieldsDefinition({
-				fields: prev,
-				fieldName,
-				isEditing: true,
-			}),
-		);
-	}, []);
+			updateState(
+				updateFieldsDefinition({
+					fields: fieldsDefinition,
+					fieldName,
+					isEditing: true,
+				}),
+			);
+		},
+		[updateState],
+	);
 
 	const onCancelEditingField = (event: React.MouseEvent) => {
 		const button = event.target as HTMLButtonElement;
@@ -186,16 +173,16 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 		(event) => {
 			const fieldName = event.currentTarget.dataset.name;
 
-			setFieldsDefinition((prev) =>
+			updateState(
 				updateFieldsDefinition({
-					fields: prev,
+					fields: fieldsDefinition,
 					fieldName,
 					formikValues: values,
 					isEditing: false,
 				}),
 			);
 		},
-		[values],
+		[values, updateState],
 	);
 
 	return (

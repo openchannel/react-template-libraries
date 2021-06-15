@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useFormikContext } from 'formik';
+import moment from 'moment';
 
 import {
 	ColorProps,
@@ -83,23 +84,28 @@ export const FormikOcSelectWrapper: React.FC<
 		options: OcSelectProps['selectValArr'];
 		placeholder: OcSelectProps['placeholder'];
 	}
-> = ({ field, form, options, placeholder }) => {
-	const onChange = React.useCallback(
-		(value) => {
-			form.setFieldValue(field.name, value);
-		},
-		[form.setFieldValue],
-	);
+> = React.memo(
+	({ field, form, options, placeholder }) => {
+		const onChange = React.useCallback(
+			(value) => {
+				form.setFieldValue(field.name, value);
+			},
+			[form.setFieldValue],
+		);
 
-	return (
-		<OcSelect
-			selectValArr={options}
-			value={field.value}
-			onSelectionChange={onChange}
-			placeholder={placeholder}
-		/>
-	);
-};
+		return (
+			<OcSelect
+				selectValArr={options}
+				value={field.value}
+				onSelectionChange={onChange}
+				placeholder={placeholder}
+			/>
+		);
+	},
+	(prevProps, nextProps) => {
+		return prevProps.field.value === nextProps.field.value;
+	},
+);
 
 export const FormikOcTagsWrapper: React.FC<
 	FCWP<OcTagsProps['value']> & {
@@ -148,24 +154,31 @@ export const FormikOcDatetimePickerWrapper: React.FC<
 		type: DatepickerProps['type'];
 		disabled: DatepickerProps['disabled'];
 	}
-> = ({ field, form, type, disabled }) => {
-	const onChange = React.useCallback(
-		(value) => {
-			form.setFieldValue(field.name, value);
-		},
-		[form.setFieldValue],
-	);
+> = React.memo(
+	({ field, form, type, disabled }) => {
+		const onChange = React.useCallback(
+			(value) => {
+				console.log('value', value);
+				console.log('field.name', field.name);
+				form.setFieldValue(field.name, value);
+			},
+			[form.setFieldValue],
+		);
 
-	return (
-		<OcDatetimePicker
-			type={type}
-			value={field.value}
-			onChange={onChange}
-			disabled={disabled}
-			{...(type === FIELD_TYPE.DATE ? { settings: 'dd/MM/yyyy' } : {})}
-		/>
-	);
-};
+		return (
+			<OcDatetimePicker
+				type={type}
+				value={field.value}
+				onChange={onChange}
+				disabled={disabled}
+				{...(type === FIELD_TYPE.DATE ? { settings: 'DD/MM/yyyy' } : {})}
+			/>
+		);
+	},
+	(prevProps, nextProps) => {
+		return moment(prevProps.field.value).isSame(nextProps.field.value);
+	},
+);
 
 export const FormikOcMultiSelectListWrapper: React.FC<
 	FCWP<OcMultiSelectListProps['value']> & {
