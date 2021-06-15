@@ -7,8 +7,6 @@ import { stripHtmlTags } from '../../../../lib/index';
 import { parsePrice } from '../../../market/index';
 import { OcRatingComponent } from '../../../market/atoms/oc-rating';
 
-// import { FullAppData } from '';
-
 import './style.scss';
 
 export interface OcAppCardProps {
@@ -31,7 +29,7 @@ export const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 		appIcon = '../../../../assets/img/standard-app-icon.svg',
 		appRedirectLink = '/',
 	} = props;
-
+	console.log('oc-app-card', app);
 	return (
 		<Link className="oc-card" to={appRedirectLink}>
 			<div className="oc-card__icon">
@@ -40,7 +38,7 @@ export const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 			<div className="oc-card__content">
 				<p className="oc-card__content-name">{app?.name || 'Default App'}</p>
 				<div className="oc-card__content-info">
-					<p className="oc-card__content-price">{parsePrice(app?.model[0]) || '0'}</p>
+					<p className="oc-card__content-price">{parsePrice(app?.model[0])}</p>
 					<OcRatingComponent
 						rating={app?.rating || 0}
 						reviewCount={app?.reviewCount || 0}
