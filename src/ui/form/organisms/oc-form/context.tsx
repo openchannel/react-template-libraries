@@ -114,20 +114,17 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 		[fieldsDefinition, normalizeFieldsAndUpdateDefinition],
 	);
 
-	const onStartEditingField = React.useCallback(
-		(event: React.SyntheticEvent<Dataset>) => {
-			const fieldName = event.currentTarget.dataset.name;
+	const onStartEditingField = (event: React.SyntheticEvent<Dataset>) => {
+		const fieldName = event.currentTarget.dataset.name;
 
-			updateState(
-				updateFieldsDefinition({
-					fields: fieldsDefinition,
-					fieldName,
-					isEditing: true,
-				}),
-			);
-		},
-		[updateState],
-	);
+		updateState(
+			updateFieldsDefinition({
+				fields: fieldsDefinition,
+				fieldName,
+				isEditing: true,
+			}),
+		);
+	};
 
 	const onCancelEditingField = (event: React.MouseEvent) => {
 		const button = event.target as HTMLButtonElement;
@@ -169,21 +166,19 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 		normalizeFieldsAndUpdateDefinition(next);
 	};
 
-	const onSaveField = React.useCallback(
-		(event) => {
-			const fieldName = event.currentTarget.dataset.name;
+	const onSaveField = (event: React.MouseEvent) => {
+		const button = event.target as HTMLButtonElement;
+		const fieldName = button.dataset.name || '';
 
-			updateState(
-				updateFieldsDefinition({
-					fields: fieldsDefinition,
-					fieldName,
-					formikValues: values,
-					isEditing: false,
-				}),
-			);
-		},
-		[values, updateState],
-	);
+		updateState(
+			updateFieldsDefinition({
+				fields: fieldsDefinition,
+				fieldName,
+				formikValues: values,
+				isEditing: false,
+			}),
+		);
+	};
 
 	return (
 		<OcFormContext.Provider
