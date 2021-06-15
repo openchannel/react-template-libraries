@@ -72,29 +72,6 @@ export interface GalleryItem {
 	image: string;
 }
 
-export interface App {
-	appId: string;
-	customData?: any;
-	lastUpdated: Date | number;
-	version: number;
-	name: string;
-	safeName: string[];
-	developerId: string;
-	model: AppModel[];
-	access?: string[];
-	restrict?: Restrict | Record<string, unknown>;
-	allow?: Restrict | Record<string, unknown>;
-	submittedDate: Date | number;
-	created: Date | number;
-	attributes?: any;
-	rating: number;
-	reviewCount: number;
-	status: AppStatus;
-	statistics: Statistics;
-	isLive: boolean;
-	type?: string;
-}
-
 export interface OwnershipModel {
 	ownershipId: string;
 	date: Date;
@@ -152,7 +129,7 @@ export interface AppTypeModel {
  * this.appService.getAppById('appId')
  *  .map((app: App) => new MyFullAppData(app, {icon: 'image1', myFiled: 'fieldNameInCustomData'}))
  */
-export class FullAppData {
+export interface FullAppData {
 	/**
 	 * App fields
 	 */
@@ -197,51 +174,4 @@ export class FullAppData {
 	categories?: string[];
 	author?: string;
 	gallery?: GalleryItem[];
-
-	/**
-	 * Create a class with mapped customData to proper fields
-	 *
-	 * @example
-	 * this.appService.getAppById('appId')
-	 *  .map((app: App) => new FullAppData(app, {icon: 'image1'}))
-	 *
-	 * @param appData app data or appversion data from api response
-	 * @param customDataConfig customDataConfig  config for customData fields name information
-	 */
-	constructor(appData: any, customDataConfig: CustomDataAppConfig) {
-		this.appId = appData.appId;
-		this.type = appData.type;
-		this.lastUpdated = new Date(appData.lastUpdated);
-		this.version = appData.version;
-		this.name = appData.name;
-		this.safeName = appData.safeName;
-		this.developerId = appData.developerId;
-		this.model = appData.model;
-		this.access = appData.access || [];
-		this.restrict = appData.restrict || null;
-		this.allow = appData.allow || null;
-		this.submittedDate = new Date(appData.submittedDate);
-		this.created = new Date(appData.created);
-		this.attributes = appData.attributes || null;
-		this.rating = appData.rating;
-		this.reviewCount = appData.reviewCount;
-		this.status = appData.status;
-		this.statistics = appData.statistics;
-		this.isLive = appData.isLive;
-		this.customData = appData.customData;
-		this.isLatestVersion = appData.isLatestVersion || null;
-		this.children = appData.children || [];
-		this.parent = appData.parent;
-		this.ownership = appData?.ownership;
-		// custom data mapping
-		this.icon = appData.customData[customDataConfig.icon] || '';
-		this.logo = appData.customData[customDataConfig.logo] || '';
-		this.summary = appData.customData[customDataConfig.summary] || '';
-		this.description = appData.customData[customDataConfig.description] || '';
-		this.video = appData.customData[customDataConfig.video] || '';
-		this.images = appData.customData[customDataConfig.images] || [];
-		this.categories = appData.customData[customDataConfig.categories] || [];
-		this.author = appData.customData[customDataConfig.author] || '';
-		this.gallery = appData.customData[customDataConfig.gallery] || [];
-	}
 }
