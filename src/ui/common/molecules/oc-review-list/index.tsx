@@ -40,7 +40,7 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 
 	const [isToggled, toggleDisplay] = React.useState(false);
 	const displayedItems = [...reviewList].splice(0, maxReviewDisplay);
-	const handleToggle = React.useCallback(() => toggleDisplay(!isToggled), [toggleDisplay]);
+	const handleToggle = React.useCallback(() => toggleDisplay(!isToggled), [isToggled]);
 
 	return (
 		<div className="review-list">
