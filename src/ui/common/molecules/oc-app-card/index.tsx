@@ -38,7 +38,7 @@ export const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 				<img className="img-fluid" src={appIcon} alt="" />
 			</div>
 			<div className="oc-card__content">
-				<p className="oc-card__content-name">{app.name}</p>
+				<p className="oc-card__content-name">{app.name || 'Default App'}</p>
 				<div className="oc-card__content-info">
 					<p className="oc-card__content-price">{parsePrice(app?.model[0]) || '0'}</p>
 					<OcRatingComponent
