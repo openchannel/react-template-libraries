@@ -1,6 +1,6 @@
 //commit 9cf9b208d5a753c4fbbff30895ef07d41ffc260e Author: Julia Date: 21.05.21, 19:47
 import * as React from 'react';
-import { truncateWithHTML } from '../../../../lib/utils';
+import { truncateWithHTML } from '../../utils';
 import { sanitizeHtml, stripHtmlTags } from '../../../../lib/html-utils';
 import './style.scss';
 

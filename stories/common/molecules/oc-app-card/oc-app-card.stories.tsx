@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 import { app1, app2 } from './mocks';
 import { OcAppCard, OcAppCardProps } from '../../../../src/ui/common/molecules';
@@ -9,7 +10,11 @@ export default {
 } as Meta;
 
 const CardComponent: Story<OcAppCardProps> = (args) => {
-	return <OcAppCard {...args} />;
+	return (
+		<BrowserRouter>
+			<OcAppCard {...args} />
+		</BrowserRouter>
+	);
 };
 
 export const Card = CardComponent.bind({});

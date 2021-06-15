@@ -1,10 +1,13 @@
 //commit 77c7c788ebd91651e6edbb765e0501d609a55bf0 Author: Julia Date: 05.05.21, 19:28
 import * as React from 'react';
-
-import { getTextFromHtml, transformCurrency, truncateWithHTML } from '../../../../lib/utils';
+import { Link } from 'react-router-dom';
+import { FullAppData } from './types';
+import { truncateWithHTML } from '../../utils';
+import { stripHtmlTags } from '../../../../lib/index';
+import { parsePrice } from '../../../market/index';
 import { OcRatingComponent } from '../../../market/atoms/oc-rating';
 
-import { FullAppData } from './types';
+// import { FullAppData } from '';
 
 import './style.scss';
 
@@ -30,28 +33,26 @@ export const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 	} = props;
 
 	return (
-		<a className="oc-card" href={appRedirectLink}>
+		<Link className="oc-card" to={appRedirectLink}>
 			<div className="oc-card__icon">
 				<img className="img-fluid" src={appIcon} alt="" />
 			</div>
 			<div className="oc-card__content">
 				<p className="oc-card__content-name">{app.name}</p>
 				<div className="oc-card__content-info">
-					<p className="oc-card__content-price">
-						{transformCurrency(app.model[0]) || app.model[0].type}
-					</p>
+					<p className="oc-card__content-price">{parsePrice(app?.model[0]) || '0'}</p>
 					<OcRatingComponent
 						rating={app.rating || 0}
-						reviewCount={app.reviewCount}
+						reviewCount={app.reviewCount || 0}
 						type="single-star"
 					/>
 				</div>
 				<p className="oc-card__content-summary">
-					{app.summary
-						? truncateWithHTML(getTextFromHtml(app.summary), 160)
-						: truncateWithHTML(getTextFromHtml(app.description), 160)}
+					{app && app.summary
+						? truncateWithHTML(stripHtmlTags(app.summary), 160)
+						: truncateWithHTML(stripHtmlTags(app.description), 160)}
 				</p>
 			</div>
-		</a>
+		</Link>
 	);
 };
