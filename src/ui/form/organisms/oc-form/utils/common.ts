@@ -23,11 +23,12 @@ export const validateOcFormValues = (values: FormikFieldsValues, validators: Fie
 	return Object.entries(values).reduce((acc, [name, value]) => {
 		if (!validators[name] || validators[name]?.length === 0) return acc;
 
-		return {
-			...acc,
-			[name]: validators[name]!.map((validate) => validate(value))
-				.filter(Boolean)
-				.map((error) => errorMessages[error!.key](error!.value)),
-		};
+		const errors = validators[name]!.map((validate) => validate(value))
+			.filter(Boolean)
+			.map((error) => errorMessages[error!.key](error!.value));
+
+		if (errors.length === 0) return acc;
+
+		return { ...acc, [name]: errors };
 	}, {});
 };
