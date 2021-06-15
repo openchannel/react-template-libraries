@@ -27,7 +27,7 @@ export interface RatingProps {
 	 * Count of the reviews
 	 * @default 0
 	 * */
-	reviewCount: number;
+	reviewCount?: number;
 	/**
 	 * Text that can be added near the review count
 	 * @default
