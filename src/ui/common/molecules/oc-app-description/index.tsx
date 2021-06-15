@@ -41,7 +41,7 @@ export const OcAppDescription: React.FC<AppDescriptionProps> = (props) => {
 
 	const handleExpand = React.useCallback(() => {
 		toggleDescription(!isFullDescription);
-	}, [toggleDescription]);
+	}, [isFullDescription]);
 
 	const tempDescription = sanitizeHtml(stripHtmlTags(appDescription)) || '';
 	let tempDescriptionHtml = truncateWithHTML(tempDescription, truncateTextLength);
