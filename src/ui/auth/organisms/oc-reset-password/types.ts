@@ -25,4 +25,7 @@ export interface OcResetPasswordProps {
 	inputError?: string | boolean;
 	value?: any;
 	onChange?: any;
+	customClass: string;
+	handleButtonClick?: any;
+	validationError: boolean;
 }
