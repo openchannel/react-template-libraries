@@ -57,7 +57,14 @@ export const FormikOcColoWrapper: React.FC<FCWP<ColorProps['colorValue']>> = ({ 
 		[form.setFieldValue],
 	);
 
-	return <OcColorComponent colorValue={field.value || ''} onValueChange={onChange} />;
+	return (
+		<OcColorComponent
+			colorValue={field.value || ''}
+			onValueChange={onChange}
+			onBlur={field.onBlur}
+			name={field.name}
+		/>
+	);
 };
 
 export const FormikRichTextWrapper: React.FC<
