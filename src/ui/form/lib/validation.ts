@@ -66,7 +66,7 @@ const url = () => (value: string) => {
 		return null;
 	}
 
-	return { key: 'websiteValidator', value: true };
+	return { key: 'url', value: true };
 };
 
 const color = () => (value: string) => {
@@ -74,7 +74,7 @@ const color = () => (value: string) => {
 		return null;
 	}
 
-	return { key: 'colorValidator', value: true };
+	return { key: 'color', value: true };
 };
 
 const password = () => (value: string) => {
@@ -82,7 +82,7 @@ const password = () => (value: string) => {
 		return null;
 	}
 
-	return { key: 'passwordValidator', value: {} };
+	return { key: 'password', value: {} };
 };
 
 const minLengthArray = (min: number, label: string, showLengthErrorText?: boolean) => (
