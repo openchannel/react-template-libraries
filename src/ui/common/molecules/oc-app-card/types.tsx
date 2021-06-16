@@ -112,23 +112,6 @@ export interface AppTypeModel {
 	fields?: AppTypeFieldModel[];
 }
 
-/**
- * Class used for mapping apps customData to proper fields.
- * If you need more fields just extend this class.
- *
- * @example
- * export class MyFullAppData extends FullAppData {
- *   myField: string;
- *
- *   constructor(appData: AppVersion, customDataConfig: CustomDataAppConfig) {
- *   super(appData, customDataConfig);
- *
- *   this.myField = appData.customData[customDataConfig.myField] || '';
- * }
- *
- * this.appService.getAppById('appId')
- *  .map((app: App) => new MyFullAppData(app, {icon: 'image1', myFiled: 'fieldNameInCustomData'}))
- */
 export interface FullAppData {
 	/**
 	 * App fields

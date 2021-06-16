@@ -12,7 +12,7 @@ export interface AppDescriptionProps {
 	/** Show full description always. Text for expand description will not be shown */
 	showFullDescription: boolean;
 	/** String with classes that will be applied to the header */
-	headerClass: string;
+	headerClass?: string;
 	/** Show button for switching between long and short description. */
 	enableTruncateTextLogic?: boolean;
 	/** Limit for description length for showing switch button */
