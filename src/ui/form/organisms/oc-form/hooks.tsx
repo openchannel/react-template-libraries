@@ -1,21 +1,26 @@
 import * as React from 'react';
+import { FormikValues } from 'formik';
 
 import { AppFormModel, FieldValidators, FormikField, FormikFieldsValues } from '../../models';
 
 import { validateOcFormValues } from './utils/common';
-import { fieldsUtils, getValidParams } from './utils/fields';
+import { fieldsUtils, getInitialFieldsAndValues } from './utils/fields';
 
-const init = (initialFields?: FormikField[]) => {
-	const { fields } = getValidParams(initialFields);
+const init = (
+	fields?: FormikField[],
+): {
+	validators: FieldValidators;
+	flattenFields: FormikField[];
+	fieldsDefinition: FormikField[];
+	initialValues: FormikValues;
+} => {
+	const { initialFields, initialValues } = getInitialFieldsAndValues(fields);
 
 	return {
-		validators: fieldsUtils.getValidators(fields),
-		flattenFields: fieldsUtils.dumpDeepFields(fieldsUtils.flatMap(fields), 0),
-		fieldsDefinition: fieldsUtils.dumpDeepFields(fields),
-	} as {
-		validators: FieldValidators;
-		flattenFields: FormikField[];
-		fieldsDefinition: FormikField[];
+		validators: fieldsUtils.getValidators(initialFields || []),
+		flattenFields: fieldsUtils.dumpDeepFields(fieldsUtils.flatMap(initialFields || []), 0),
+		fieldsDefinition: fieldsUtils.dumpDeepFields(initialFields || []),
+		initialValues,
 	};
 };
 

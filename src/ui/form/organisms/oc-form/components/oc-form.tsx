@@ -5,7 +5,7 @@ import { OcButtonComponent } from '../../../../common';
 import { OcFormContextProvider } from '../context';
 import { useFormikValidation, useOcFormState } from '../hooks';
 import { OcFormProps } from '../types';
-import { getOcFormButtonsClass } from '../utils/common';
+import { formatOcFormValues, getOcFormButtonsClass } from '../utils/common';
 
 import { FormikMapFieldsWrapper } from './formik-map-field';
 
@@ -21,19 +21,17 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	} = props;
 
 	const {
-		state: { validators, flattenFields, fieldsDefinition },
+		state: { initialValues, validators, flattenFields, fieldsDefinition },
 		updateState,
 	} = useOcFormState(formJsonData);
 
 	const { validate } = useFormikValidation(validators);
 
 	const formik = useFormik({
-		initialValues: {},
+		initialValues,
 		validate,
 		onSubmit: (values, formikProps) => {
-			console.log('values', values);
-
-			onSubmit(values, formikProps);
+			onSubmit(formatOcFormValues(fieldsDefinition, values), formikProps);
 		},
 	});
 

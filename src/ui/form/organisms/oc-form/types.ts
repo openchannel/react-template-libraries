@@ -1,12 +1,15 @@
 import * as React from 'react';
-import type { FieldInputProps, FormikProps } from 'formik';
+import type { FieldInputProps, FormikHelpers, FormikProps } from 'formik';
 
 import type { Dataset } from '../../../common';
 import type { AppFormModel, FormikField, FormikFieldsValues } from '../../models';
 
 export interface OcFormProps {
 	formJsonData: AppFormModel;
-	onSubmit: () => void;
+	onSubmit: (
+		values: Record<string, any>,
+		formikProps: FormikHelpers<Record<string, unknown>>,
+	) => void;
 	onCancel: () => void;
 	/**
 	 * Set position of the field label. Can be: 'top', 'left', 'right'.

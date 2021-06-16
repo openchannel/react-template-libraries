@@ -1,7 +1,8 @@
+import type { FormikValues } from 'formik';
 import isEmpty from 'lodash/isEmpty';
 
-import { errorMessages } from '../../../lib';
-import { FieldValidators, FormikFieldsValues } from '../../../models';
+import { errorMessages, FIELD_TYPE } from '../../../lib';
+import type { FieldValidators, FormikField, FormikFieldsValues } from '../../../models';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export const noop = () => {};
@@ -31,4 +32,31 @@ export const validateOcFormValues = (values: FormikFieldsValues, validators: Fie
 
 		return { ...acc, [name]: errors };
 	}, {});
+};
+
+export const formatOcFormValues = (
+	arr: FormikField[],
+	values: FormikValues,
+): Record<string, any> => {
+	return arr.reduce((acc, item) => {
+		if (item.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY) {
+			if (!item.fields || item.fields.length === 0) {
+				return acc;
+			}
+
+			const children = formatOcFormValues(item.fields, values);
+			const curr = acc[item.id];
+			return {
+				...acc,
+				[item.id]: !isEmpty(children) ? [...(curr || []), { ...children }] : [...(curr || [])],
+			};
+		}
+
+		const isValueExist = values[item.name];
+		if (isValueExist) {
+			acc[item.id] = isValueExist;
+		}
+
+		return acc;
+	}, {} as Record<string, any>);
 };

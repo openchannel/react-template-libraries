@@ -1,3 +1,4 @@
+import { FormikValues } from 'formik';
 import { nanoid } from 'nanoid';
 
 import { FIELD_TYPE, getFieldValidators } from '../../../lib';
@@ -58,16 +59,19 @@ export const getInitialValuesFromFields = (fields: FormikField[]): { [key: strin
 	);
 };
 
-export const getValidParams = (fields?: FormikField[]) => {
-	if (!fields) return { fields: [] };
+export const getInitialFieldsAndValues = (
+	fields?: FormikField[],
+): {
+	initialFields: FormikField[];
+	initialValues: FormikValues;
+} => {
+	if (!fields) return { initialFields: [], initialValues: {} };
 
 	const extendedFields = normalizeFieldsForFormik(extendElementWithRequiredKeys)(fields);
 
 	return {
-		fields: extendedFields,
+		initialFields: extendedFields,
 		initialValues: getInitialValuesFromFields(extendedFields),
-	} as {
-		fields: FormikField[];
 	};
 };
 
