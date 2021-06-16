@@ -29,7 +29,7 @@ export const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 		appIcon = '../../../../assets/img/standard-app-icon.svg',
 		appRedirectLink = '/',
 	} = props;
-	console.log('oc-app-card', app);
+
 	return (
 		<Link className="oc-card" to={appRedirectLink}>
 			<div className="oc-card__icon">

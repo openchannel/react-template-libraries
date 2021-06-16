@@ -31,17 +31,17 @@ export const OcRecommendedAppsComponent: React.FC<RecommendedAppsProps> = (props
 	return (
 		<div className="recommended-apps">
 			<h4 className="recommended-apps__heading">{recommendedAppTitle}</h4>
-			<div className="recommended-apps__container">
-				{appList.length ? (
-					appList.map((appCard) => (
+			{appList.length ? (
+				<div className="recommended-apps__container">
+					{appList.map((appCard) => (
 						<div className="recommended-apps__card" onClick={clickByAppCard}>
 							<OcAppCard appRedirectLink={appCard.link} appIcon={appCard.icon} app={appCard} />
 						</div>
-					))
-				) : (
-					<h5 className="recommended-apps_empty">{noAppMessage}</h5>
-				)}
-			</div>
+					))}
+				</div>
+			) : (
+				<h5 className="recommended-apps_empty">{noAppMessage}</h5>
+			)}
 		</div>
 	);
 };
