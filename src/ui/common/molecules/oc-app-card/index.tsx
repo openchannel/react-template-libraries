@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { FullAppData } from './types';
-import { truncateWithHTML } from '../../utils';
 import { stripHtmlTags } from '../../../../lib/index';
 import { parsePrice } from '../../../market/index';
 import { OcRatingComponent } from '../../../market/atoms/oc-rating';
@@ -48,9 +47,7 @@ export const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 					/>
 				</div>
 				<p className="oc-card__content-summary">
-					{app && app.summary
-						? truncateWithHTML(stripHtmlTags(app.summary), 160)
-						: truncateWithHTML(stripHtmlTags(app.description), 160)}
+					{app && app.summary ? stripHtmlTags(app.summary) : stripHtmlTags(app.description)}
 				</p>
 			</div>
 		</Link>
