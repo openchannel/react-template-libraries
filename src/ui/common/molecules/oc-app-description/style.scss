@@ -1,0 +1,29 @@
+@import 'src/ui/styles/index';
+
+.description {
+	width: 40%;
+
+	&__heading {
+		margin-bottom: 2rem;
+	}
+
+	&__text {
+		color: $secondary;
+		@include default-text();
+
+		&_visible {
+			height: auto;
+		}
+		p {
+			margin-top: 1rem;
+		}
+	}
+
+	&__show-more {
+		@include font-medium();
+		@include font-size-md;
+		cursor: pointer;
+		color: #537cfd;
+		font-weight: 600;
+	}
+}
