@@ -7,17 +7,15 @@ import { Dataset } from '../../../common/atoms/oc-button';
 import { FIELD_TYPE } from '../../lib';
 import { FormikField, FormikFieldsValues } from '../../models';
 
-import { OcFormContextProps, OcFormContextProviderProps } from './types';
+import { noop } from './utils/common';
 import {
 	elementUtils,
-	fieldsUtils,
 	getInitialValuesFromFields,
-	getValidParams,
-	noop,
 	normalizeFieldsForFormik,
 	updateElementKeys,
 	updateFieldsDefinition,
-} from './utils';
+} from './utils/fields';
+import { OcFormContextProps, OcFormContextProviderProps } from './types';
 
 export const OcFormContext = React.createContext<OcFormContextProps>({
 	fields: [],
@@ -34,44 +32,31 @@ export const useOcFormContext = () => {
 
 export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 	children,
-	initialValue,
+	initialValue: { flattenFields, fieldsDefinition, updateState },
 }) => {
-	const { fields } = React.useMemo(() => getValidParams(initialValue.data.fields), [
-		initialValue.data.fields,
-	]);
-
-	const [flattenFields] = React.useState(
-		fieldsUtils.dumpDeepFields(fieldsUtils.flatMap(fields), 0),
-	);
-	const [fieldsDefinition, setFieldsDefinition] = React.useState(
-		fieldsUtils.dumpDeepFields(fields),
-	);
-
 	const { values, setValues } = useFormikContext<FormikFieldsValues>();
 
 	const normalizeFieldsAndUpdateDefinition = React.useCallback(
 		(array) => {
 			const newArray = normalizeFieldsForFormik(updateElementKeys)(array);
 
-			setFieldsDefinition(newArray);
+			updateState(newArray);
 			setValues(getInitialValuesFromFields(newArray));
 		},
-		[setValues],
+		[setValues, updateState],
 	);
 
-	const onAddDynamicField = (event: React.MouseEvent) => {
-		const button = event.target as HTMLButtonElement;
-		const elementStaticId = button.dataset.staticid || '';
-		const elementPath = button.dataset.path || '';
+	const onAddDynamicField = React.useCallback(
+		(event: React.MouseEvent) => {
+			const button = event.target as HTMLButtonElement;
+			const elementStaticId = button.dataset.staticid || '';
+			const elementPath = button.dataset.path || '';
 
-		const instance = flattenFields.find((item) => item.staticId === elementStaticId);
+			const instance = flattenFields.find((item) => item.staticId === elementStaticId);
+			if (!instance) return;
 
-		if (!instance) return;
-
-		const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
-
-		setFieldsDefinition((prev) => {
-			let next = [...prev];
+			let next = [...fieldsDefinition];
+			const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
 			const existedElement = get(next, elementPath);
 
 			if (isFirstLevelDeep) {
@@ -81,7 +66,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 					next.push(elementUtils.cloneAndUpdate(instance, true));
 				}
 			} else {
-				next = update(prev, path, (fields) => {
+				next = update(fieldsDefinition, path, (fields) => {
 					if (existedElement.fields && existedElement.fields.length === 0) {
 						fields[existedElement.index] = elementUtils.cloneAndUpdate(instance, true);
 					} else {
@@ -92,9 +77,10 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 				});
 			}
 
-			return normalizeFieldsForFormik(updateElementKeys)(next);
-		});
-	};
+			normalizeFieldsAndUpdateDefinition(next);
+		},
+		[fieldsDefinition, normalizeFieldsAndUpdateDefinition],
+	);
 
 	const onRemoveDynamicField = React.useCallback(
 		(event: React.SyntheticEvent<Dataset>) => {
@@ -128,17 +114,17 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 		[fieldsDefinition, normalizeFieldsAndUpdateDefinition],
 	);
 
-	const onStartEditingField = React.useCallback((event: React.SyntheticEvent<Dataset>) => {
+	const onStartEditingField = (event: React.SyntheticEvent<Dataset>) => {
 		const fieldName = event.currentTarget.dataset.name;
 
-		setFieldsDefinition((prev) =>
+		updateState(
 			updateFieldsDefinition({
-				fields: prev,
+				fields: fieldsDefinition,
 				fieldName,
 				isEditing: true,
 			}),
 		);
-	}, []);
+	};
 
 	const onCancelEditingField = (event: React.MouseEvent) => {
 		const button = event.target as HTMLButtonElement;
@@ -180,21 +166,19 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 		normalizeFieldsAndUpdateDefinition(next);
 	};
 
-	const onSaveField = React.useCallback(
-		(event) => {
-			const fieldName = event.currentTarget.dataset.name;
+	const onSaveField = (event: React.MouseEvent) => {
+		const button = event.target as HTMLButtonElement;
+		const fieldName = button.dataset.name || '';
 
-			setFieldsDefinition((prev) =>
-				updateFieldsDefinition({
-					fields: prev,
-					fieldName,
-					formikValues: values,
-					isEditing: false,
-				}),
-			);
-		},
-		[values],
-	);
+		updateState(
+			updateFieldsDefinition({
+				fields: fieldsDefinition,
+				fieldName,
+				formikValues: values,
+				isEditing: false,
+			}),
+		);
+	};
 
 	return (
 		<OcFormContext.Provider

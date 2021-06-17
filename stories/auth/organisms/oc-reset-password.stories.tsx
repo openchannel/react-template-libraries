@@ -2,8 +2,8 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
-import { errorMessages } from '../../../src/lib/validation';
 import { OcResetPasswordComponent, OcResetPasswordProps } from '../../../src/ui/auth/index';
+import { errorMessages } from '../../../src/ui/form/lib';
 
 export default {
 	title: 'Reset Password [BEM]',
