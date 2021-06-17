@@ -13,9 +13,9 @@ export interface RecommendedAppsProps {
 	 */
 	appList: Array<any>;
 	/** Message that will be shown when no apps */
-	noAppMessage: string;
+	noAppMessage?: string;
 	/** Title for the Recommended apps list. Default 'Recommended Apps' */
-	recommendedAppTitle: string;
+	recommendedAppTitle?: string;
 	/** Router link for one app click */
 	routerLinkForOneApp: string | any;
 	/** Emitter for click by App card.*/
