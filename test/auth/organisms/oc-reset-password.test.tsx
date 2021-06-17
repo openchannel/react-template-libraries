@@ -14,6 +14,8 @@ describe('OcResetPassword', () => {
 			companyLogoUrl: '/imgDir/img.png',
 			loginUrl: '/',
 			signupUrl: '/',
+			customClass: '',
+			validationError: false,
 		});
 	});
 

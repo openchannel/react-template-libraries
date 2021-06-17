@@ -1,15 +1,18 @@
 import * as React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { mount, shallow } from 'enzyme';
 import { app1, app2 } from '../../../../stories/common/molecules/oc-app-card/mocks';
 import { OcAppCard } from '../../../../src/ui/common/molecules';
 
 describe('OcAppCard', () => {
 	const component = shallow(
-		<OcAppCard
-			appRedirectLink="/"
-			appIcon="https://stage1-philips-market-test.openchannel.io/assets/angular-common-components/item-1.png"
-			app={app1}
-		/>,
+		<BrowserRouter>
+			<OcAppCard
+				appRedirectLink="/"
+				appIcon="https://stage1-philips-market-test.openchannel.io/assets/angular-common-components/item-1.png"
+				app={app1}
+			/>
+		</BrowserRouter>,
 	);
 
 	it('should create', () => {
@@ -18,22 +21,26 @@ describe('OcAppCard', () => {
 
 	it('should show icon', () => {
 		const component = mount(
-			<OcAppCard
-				appRedirectLink="/"
-				appIcon="https://stage1-philips-market-test.openchannel.io/assets/angular-common-components/item-1.png"
-				app={app1}
-			/>,
+			<BrowserRouter>
+				<OcAppCard
+					appRedirectLink="/"
+					appIcon="https://stage1-philips-market-test.openchannel.io/assets/angular-common-components/item-1.png"
+					app={app1}
+				/>
+			</BrowserRouter>,
 		);
 		expect(component.find('img')).toBeTruthy();
 	});
 
 	it('should change props', () => {
 		const component = mount(
-			<OcAppCard
-				appRedirectLink="/"
-				appIcon="https://stage1-philips-market-test.openchannel.io/assets/angular-common-components/item-1.png"
-				app={app1}
-			/>,
+			<BrowserRouter>
+				<OcAppCard
+					appRedirectLink="/"
+					appIcon="https://stage1-philips-market-test.openchannel.io/assets/angular-common-components/item-1.png"
+					app={app1}
+				/>
+			</BrowserRouter>,
 		);
 		component.setProps({ app: app2 });
 		component.setProps({ appRedirectLink: '/home' });
