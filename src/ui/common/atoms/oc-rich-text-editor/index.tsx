@@ -4,6 +4,7 @@ import { Editor, IAllProps } from '@tinymce/tinymce-react';
 import './style.scss';
 
 export interface OcRtfProps extends IAllProps {
+	name?: string;
 	/**
 	 * Placeholder text to pass in text editor
 	 */
@@ -23,16 +24,29 @@ export interface OcRtfProps extends IAllProps {
 }
 
 export const OcRichTextEditorComponent = (props: OcRtfProps) => {
-	const { placeholderText, value, onChange, initialValue } = props;
+	const { name, placeholderText, value, onChange, initialValue, onBlur } = props;
 
 	const editorRef: any = React.useRef();
+
+	const onInit = React.useCallback(
+		(_e, editor) => {
+			editorRef.current = editor;
+
+			if (onBlur) {
+				editor.on('blur', (event: any) => {
+					onBlur(event, editor);
+				});
+			}
+		},
+		[onBlur],
+	);
 
 	return (
 		<div className="rich-editor">
 			<Editor
-				id="tiny"
+				id={name}
 				onEditorChange={onChange}
-				onInit={(_e, editor) => (editorRef.current = editor)}
+				onInit={onInit}
 				initialValue={initialValue}
 				value={value}
 				init={{

@@ -12,7 +12,15 @@ import { OcMultiSelectListProps } from './types';
 import './styles.scss';
 
 export const OcMultiSelectList: React.FC<OcMultiSelectListProps> = (props) => {
-	const { label, availableItemsList, defaultItems = [], value = [], onChange } = props;
+	const {
+		name,
+		label,
+		availableItemsList,
+		defaultItems = [],
+		value = [],
+		onChange,
+		onBlur,
+	} = props;
 
 	const prevValue = React.useRef(value);
 	const [options, setOptions] = React.useState<string[]>(availableItemsList);
@@ -51,11 +59,13 @@ export const OcMultiSelectList: React.FC<OcMultiSelectListProps> = (props) => {
 	return (
 		<div className="multiselect">
 			<OcDropboxComponent
+				name={name}
 				className="multiselect__dropbox"
 				placeholder={label ? `Select ${label}` : ''}
 				items={options}
 				selectItem={onSelectItem}
 				selectedItem=""
+				onBlur={onBlur}
 			/>
 			{value.map((item) => (
 				<span key={item} className="multiselect__tag">

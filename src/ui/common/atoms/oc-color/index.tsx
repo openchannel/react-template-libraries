@@ -29,7 +29,7 @@ const colorRegEx = /(?:#|0x)(?:[a-f0-9]{3}|[a-f0-9]{6})\b|(?:rgb|hsl)a?\([^\)]*\
 const validateColor = (target: string) => target.match(colorRegEx) !== null;
 
 export const OcColorComponent: React.FC<ColorProps> = (props) => {
-	const { disabled, placeholder, colorValue, onValueChange } = props;
+	const { disabled, placeholder, colorValue, onValueChange, name, onBlur } = props;
 
 	const [inputColorValue, setInputColorValue] = React.useState('');
 	const colorInput: React.RefObject<HTMLInputElement> = React.createRef();
@@ -56,12 +56,9 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
 	const handleTextChange = React.useCallback(
 		(e: { target: HTMLInputElement }) => {
 			setInputColorValue(e.target.value);
-
-			if (validateColor(e.target.value)) {
-				debouncedOnChange(Color(e.target.value)?.hex());
-			}
+			onValueChange(validateColor(e.target.value) ? Color(e.target.value)?.hex() : e.target.value);
 		},
-		[debouncedOnChange],
+		[onValueChange],
 	);
 
 	return (
@@ -72,11 +69,13 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
 					style={{ backgroundColor: inputColorValue }}
 				/>
 				<input
+					name={name}
 					disabled={disabled}
 					placeholder={placeholder}
 					value={inputColorValue}
 					onChange={handleTextChange}
 					className="color-adjust__input form-control"
+					onBlur={onBlur}
 				/>
 			</div>
 			{/*eslint-disable-next-line jsx-a11y/click-events-have-key-events*/}
@@ -104,12 +103,14 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
 						/>
 					</svg>
 					<input
+						name={name}
 						type="color"
 						tabIndex={-1}
 						className="color-adjust__picker-input"
 						value={colorValue}
 						onChange={handleColorChange}
 						ref={colorInput}
+						onBlur={onBlur}
 					/>
 				</span>
 			</div>
