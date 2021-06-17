@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
-import { errorMessages } from '../../../src/lib/validation';
+import { errorMessages } from '../../../src/ui/form';
 import { OcResendActivation, OcResendProps } from '../../../src/ui/auth';
 
 export default {

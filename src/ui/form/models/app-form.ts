@@ -46,3 +46,13 @@ export interface AppFormFieldAttributes {
 	ordering?: 'append' | 'prepend';
 	rowLabel?: string;
 }
+
+type ValidationErrors = {
+	[key: string]: any;
+};
+
+export interface ValidatorFn {
+	(value: any): ValidationErrors | null;
+}
+
+export type FieldValidators = { [k: string]: ValidatorFn[] };

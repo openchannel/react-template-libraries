@@ -6,7 +6,8 @@ import TrashIconSvg from '../../../../assets/img/trash-icon.svg';
 import { OcButtonComponent } from '../../../common';
 import { FormikFieldsValues } from '../../models';
 import { OcDynamicArrayPreview } from '../oc-dynamic-array-preview';
-import { FormikMapFields, useOcFormContext } from '../oc-form';
+import { FormikMapFields } from '../oc-form';
+import { useOcFormContext } from '../oc-form/context';
 
 import { OcDynamicFieldArrayProps } from './types';
 import { getFieldLabel } from './utils';

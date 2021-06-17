@@ -365,12 +365,12 @@ const Component: Story<any> = (args) => {
 
 export const Default = Component.bind({});
 Default.args = {
-	data: formJsonData,
+	formJsonData,
 };
 
 export const FormWithTestData = Component.bind({});
 FormWithTestData.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -437,7 +437,7 @@ FormWithTestData.args = {
 
 export const FormWithRequiredOnly = Component.bind({});
 FormWithRequiredOnly.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -505,7 +505,7 @@ FormWithRequiredOnly.args = {
 
 export const FormWithNumberInput = Component.bind({});
 FormWithNumberInput.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -532,7 +532,7 @@ FormWithNumberInput.args = {
 
 export const FormWithCheckboxComponent = Component.bind({});
 FormWithCheckboxComponent.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -557,7 +557,7 @@ FormWithCheckboxComponent.args = {
 
 export const FormWithEmailComponent = Component.bind({});
 FormWithEmailComponent.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -583,7 +583,7 @@ FormWithEmailComponent.args = {
 
 export const FormWithUrlComponent = Component.bind({});
 FormWithUrlComponent.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -609,7 +609,7 @@ FormWithUrlComponent.args = {
 
 export const FormWithColorComponent = Component.bind({});
 FormWithColorComponent.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -635,7 +635,7 @@ FormWithColorComponent.args = {
 
 export const FormWithBooleanTags = Component.bind({});
 FormWithBooleanTags.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -664,7 +664,7 @@ FormWithBooleanTags.args = {
 
 export const FormWithNumberTags = Component.bind({});
 FormWithNumberTags.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -693,7 +693,7 @@ FormWithNumberTags.args = {
 
 export const FormWithDateAndDateTime = Component.bind({});
 FormWithDateAndDateTime.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -734,7 +734,7 @@ FormWithDateAndDateTime.args = {
 
 export const FormWithVideoUrlComponent = Component.bind({});
 FormWithVideoUrlComponent.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -760,7 +760,7 @@ FormWithVideoUrlComponent.args = {
 
 export const FormWithMultiSelect = Component.bind({});
 FormWithMultiSelect.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -789,7 +789,7 @@ FormWithMultiSelect.args = {
 
 export const FormWithDynamicFieldArray = Component.bind({});
 FormWithDynamicFieldArray.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -853,7 +853,7 @@ FormWithDynamicFieldArray.args = {
 
 export const FormWithDynamicFieldArraySecondLvl = Component.bind({});
 FormWithDynamicFieldArraySecondLvl.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -953,7 +953,7 @@ FormWithDynamicFieldArraySecondLvl.args = {
 
 export const FormWithDynamicFieldArrayThirdLvl = Component.bind({});
 FormWithDynamicFieldArrayThirdLvl.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -1088,7 +1088,7 @@ FormWithDynamicFieldArrayThirdLvl.args = {
 
 export const FormWithUpdatedRichTextEditor = Component.bind({});
 FormWithUpdatedRichTextEditor.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,
@@ -1113,7 +1113,7 @@ FormWithUpdatedRichTextEditor.args = {
 
 export const FormWithFileUpload = Component.bind({});
 FormWithFileUpload.args = {
-	data: {
+	formJsonData: {
 		formId: 'test',
 		name: 'test',
 		createdDate: 1599982592157,

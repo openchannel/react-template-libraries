@@ -1,6 +1,7 @@
 //@ts-nocheck
 import * as React from 'react';
-import { mount, ShallowWrapper } from 'enzyme';
+import { BrowserRouter } from 'react-router-dom';
+import { mount } from 'enzyme';
 import { OcFeaturedAppsComponent } from '../../../src/ui/common/organisms/oc-featured-apps';
 
 const statElement = {
@@ -52,18 +53,31 @@ const featuredApp = {
 	isLive: true,
 };
 
+const data = [featuredApp, featuredApp, featuredApp];
+
 describe('OcFeaturedApps', () => {
-	let component: ShallowWrapper = mount(<OcFeaturedAppsComponent />);
+	let component = mount(
+		<BrowserRouter>
+			<OcFeaturedAppsComponent label="Featured" data={data} customClass="" mainRouterLink="/" />
+		</BrowserRouter>,
+	);
 
 	it('should create', () => {
 		expect(component).toBeTruthy();
 	});
 
-	it('should have props and change them', () => {
+	it('should show apps data', () => {
+		component.setProps({ data: data });
+		component.setProps({ label: 'Featured' });
+		component.setProps({ mainRouterLink: '/' });
 		expect(component.prop('data')).toEqual(data);
-		expect(component.prop('categoryHeaderTitle')).toEqual('Categories to Explore');
-		component.setProps({ categoryHeaderTitle: 'Default' });
+		expect(component.prop('label')).toEqual('Featured');
+		expect(component.prop('mainRouterLink')).toEqual('/');
+	});
+
+	it('should show no data message', () => {
+		component.setProps({ emptyDataMessage: 'No Apps Loaded' });
 		component.update();
-		expect(component.prop('categoryHeaderTitle')).toEqual('Default');
+		expect(component.prop('emptyDataMessage')).toEqual('No Apps Loaded');
 	});
 });

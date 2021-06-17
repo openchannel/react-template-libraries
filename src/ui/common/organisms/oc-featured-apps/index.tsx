@@ -34,8 +34,8 @@ export const OcFeaturedAppsComponent: React.FC<FeaturedAppsProps> = (props) => {
 			</div>
 			{data && data.length ? (
 				<div className="featured-apps__container">
-					{data.map((card) => (
-						<div className="featured-apps__card-wrapper">
+					{data.map((card, index) => (
+						<div className="featured-apps__card-wrapper" key={label + index}>
 							<div className="featured-apps__card">
 								<Link to={mainRouterLink} className={`featured-apps__card-body ${customClass}`}>
 									<div className="featured-apps__card-img">

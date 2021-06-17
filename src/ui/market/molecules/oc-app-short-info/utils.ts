@@ -19,6 +19,5 @@ export const parsePrice = ({ type, currency, price, billingPeriod }: ParsePrice)
 	if (billingPeriod) {
 		parsedPrice = parsedPrice.concat(`/${billingPeriod.substring(0, 2)}`);
 	}
-
 	return parsedPrice;
 };
