@@ -47,3 +47,6 @@
 		@include font-family-rubik('Medium');
 	}
 }
+.error {
+	border-color: $danger;
+}

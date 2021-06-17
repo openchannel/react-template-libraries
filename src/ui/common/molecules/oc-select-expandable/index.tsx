@@ -1,12 +1,10 @@
 /* eslint-disable */
 //commit 76978c0770aa82676498c56dd58843d7008b45d5 Author: Alex Tkachenko Date: 20.10.20, 13:52
 import * as React from 'react';
-
-import CollapsedIcon from '../../../../assets/img/select-down.svg';
-import ExpandedIcon from '../../../../assets/img/select-up.svg';
-
-import { ExpandableListItem, SelectModel } from './expandable-select-item';
-
+import {
+	ExpandableListItem,
+	SelectModel,
+} from '../../molecules/oc-select-expandable/expandable-select-item';
 import './style.scss';
 
 export interface ExpandSelectProps {
@@ -29,23 +27,47 @@ export interface ExpandSelectProps {
 	/**
 	 * toggle function to change expanded state
 	 */
-	toggle: any;
+	toggle?: any;
+	/**
+	 * collapsed icon source link
+	 */
+	collapsedIconLink?: string;
+	/**
+	 * expanded icon source link
+	 */
+	expandedIconLink?: string;
 }
 
 export const OcExpandableSelect: React.FC<ExpandSelectProps> = (props) => {
-	const { title, isCollapsed, toggle, selectModels = [], onChange } = props;
-	const newItems = selectModels.map((item) => item);
-	const handleChange = (e: any) => {
-		newItems[e.target.name].checked = !newItems[e.target.name].checked;
-		onChange(newItems);
-	};
+	const {
+		title,
+		isCollapsed = true,
+		toggle,
+		selectModels = [],
+		onChange,
+		collapsedIconLink = '../../../../assets/img/select-down.svg',
+		expandedIconLink = '../../../../assets/img/select-up.svg',
+	} = props;
+	const handleChange = React.useCallback(
+		(e: any) => {
+			let newItems = [...selectModels];
+			newItems[e.target.name].checked = !newItems[e.target.name].checked;
+			onChange(newItems);
+		},
+		[onChange, selectModels],
+	);
+	const handleToggle = React.useCallback(() => toggle(!isCollapsed), [toggle, isCollapsed]);
 	return (
 		<div className="select-expandable">
 			<nav className="select-expandable__sidebar">
-				<h6 className="select-expandable__heading" onClick={() => toggle(!isCollapsed)}>
+				<h6 className="select-expandable__heading" onClick={handleToggle}>
 					{title}
 					<a className="select-expandable__icon">
-						{isCollapsed ? <CollapsedIcon /> : <ExpandedIcon />}
+						{isCollapsed ? (
+							<img src={collapsedIconLink} alt="collapsed-icon" />
+						) : (
+							<img src={expandedIconLink} alt="expanded-icon" />
+						)}
 					</a>
 				</h6>
 				{!isCollapsed && (
