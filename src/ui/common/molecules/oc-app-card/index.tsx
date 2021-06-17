@@ -1,11 +1,13 @@
 //commit 77c7c788ebd91651e6edbb765e0501d609a55bf0 Author: Julia Date: 05.05.21, 19:28
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { FullAppData } from './types';
-import { truncateWithHTML } from '../../utils';
+
 import { stripHtmlTags } from '../../../../lib/index';
-import { parsePrice } from '../../../market/index';
 import { OcRatingComponent } from '../../../market/atoms/oc-rating';
+import { parsePrice } from '../../../market/index';
+import { truncateWithHTML } from '../../utils';
+
+import { FullAppData } from './types';
 
 import './style.scss';
 

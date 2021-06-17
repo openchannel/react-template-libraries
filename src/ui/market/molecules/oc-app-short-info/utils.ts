@@ -8,7 +8,6 @@ const isoCurrencyCodes = new Map([
 ]);
 
 export const parsePrice = ({ type, currency, price, billingPeriod }: ParsePrice): string => {
-	
 	if (type === 'free') {
 		return 'Free';
 	}
