@@ -11,64 +11,29 @@ import './style.scss';
 type ModalButtonVariants = Exclude<ButtonVariants, 'none'>;
 
 export interface InviteModalProps extends Omit<ModalProps, 'children'> {
-	/**
-	 * A callback fired when the rejectButton is clicked.
-	 */
+	/** A callback fired when the rejectButton is clicked.*/
 	onCancel?: (event: React.SyntheticEvent) => void;
-
-	/**
-	 * A callback fired when the confirmButton is clicked.
-	 */
+	/** A callback fired when the confirmButton is clicked.*/
 	onSubmit?: (event: React.SyntheticEvent) => void;
-
-	/**
-	 * The content of the modal title
-	 */
+	/** The content of the modal title */
 	modalTitle: string;
-
-	/**
-	 * The content of the modal
-	 */
+	/** The content of the modal */
 	modalText: string;
-
-	/**
-	 * Button content
-	 * @default Ok
-	 */
+	/** Button content * @default Ok*/
 	confirmButtonText?: string;
-
-	/**
-	 * The variant of the confirm button.
-	 * @default 'primary'
-	 */
+	/** The variant of the confirm button. @default 'primary'*/
 	confirmButtonType?: ModalButtonVariants;
-
-	/**
-	 * Hide element when not needed
-	 * @default false
-	 */
+	/** Hide element when not needed @default false */
 	confirmButtonHide?: boolean;
-
-	/**
-	 * Button content
-	 * @default No, cancel
-	 */
+	/** Button content @default No, cancel */
 	rejectButtonText?: string;
-
-	/**
-	 * The variant of the confirm button.
-	 * @default 'secondary'
-	 */
+	/** The variant of the confirm button. @default 'secondary' */
 	rejectButtonType?: ModalButtonVariants;
-
-	/**
-	 * Hide element when not needed
-	 * @default false
-	 */
+	/** Hide element when not needed @default false */
 	rejectButtonHide?: boolean;
 }
 
-export const OcConfirmationModalComponent: React.FC<InviteModalProps> = (props) => {
+export const OcInviteModal: React.FC<InviteModalProps> = (props) => {
 	const { isOpened, onClose, ...p } = props;
 
 	return (
