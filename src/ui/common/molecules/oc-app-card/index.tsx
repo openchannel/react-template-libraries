@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import { stripHtmlTags } from '../../../../lib/index';
 import { OcRatingComponent } from '../../../market/atoms/oc-rating';
 import { parsePrice } from '../../../market/index';
-import { truncateWithHTML } from '../../utils';
 
 import { FullAppData } from './types';
 
+// import { FullAppData } from '';
 import './style.scss';
 
 export interface OcAppCardProps {
