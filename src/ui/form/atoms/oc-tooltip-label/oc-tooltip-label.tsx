@@ -2,8 +2,8 @@
 // commit 240aa1e72cb6b2f67e9148e5d21917065b56fb19 Author: Julia Date: 12.05.21, 18:29
 import * as React from 'react';
 
-import { OcTooltipComponent } from '../../../common/';
 import InfoIcon from '../../../../assets/img/info.svg';
+import { OcTooltipComponent } from '../../../common/';
 
 import './style.scss';
 
@@ -39,11 +39,20 @@ export interface OcTooltipLabelProps {
 	infoTitleIconCsv?: string;
 }
 
-export const OcTooltipLabel: React.FC<OcTooltipLabelProps> = (props) => {
-	const { text, children, htmlFor, labelClass = '', required, description, infoTitleIconCsv } = props;
+export const OcTooltipLabel: React.FC<OcTooltipLabelProps> = React.memo((props) => {
+	const {
+		text,
+		children,
+		htmlFor,
+		labelClass = '',
+		required,
+		description,
+		infoTitleIconCsv,
+	} = props;
 
 	return (
 		<div className="tooltip-label">
+			{/* eslint-disable-next-line jsx-a11y/label-has-for */}
 			<label className={`tooltip-label__text ${labelClass}`} htmlFor={htmlFor}>
 				{text || children}
 				{required && <span className="tooltip-label__required">*</span>}
@@ -60,5 +69,5 @@ export const OcTooltipLabel: React.FC<OcTooltipLabelProps> = (props) => {
 				</OcTooltipComponent>
 			)}
 		</div>
-	)
-}
+	);
+});

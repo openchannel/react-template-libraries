@@ -1,27 +1,17 @@
 import * as React from 'react';
 import moment from 'moment';
-import { shallow, ShallowWrapper } from 'enzyme';
-
-import {
-  OcTimePicker,
-  TimepickerProps,
-} from '../../../../src/ui/common/molecules/oc-datetime-picker/oc-timepicker/index';
-
-const setUp = (props: TimepickerProps) => shallow(<OcTimePicker {...props} />);
+import { mount } from 'enzyme';
+import { OcTimePicker } from '../../../../src/ui/common/molecules/oc-datetime-picker/oc-timepicker/index';
 
 describe('Time picker', () => {
-  const component: ShallowWrapper = setUp({
-    value: moment(),
-    onChange: () => {},
-  });
+	it('should create', () => {
+		const component = mount(<OcTimePicker value={moment()} onChange={() => {}} />);
+		expect(component).toBeTruthy();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('must contain some time', () => {
-    component.find('input').forEach((input) => {
-      expect(input.prop('value')).toBeTruthy();
-    });
-  });
+	it('must contain some time', () => {
+		const component = mount(<OcTimePicker value={moment()} onChange={() => {}} />);
+		const input = component.find('input').get(0);
+		expect(input.props.value).toBeTruthy();
+	});
 });

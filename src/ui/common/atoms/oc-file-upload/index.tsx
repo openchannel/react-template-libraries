@@ -32,7 +32,7 @@ export const OcFileUpload: React.FC<IDropzoneProps> = ({
 			maxSizeBytes={maxSizeBytes}
 			accept={accept}
 			inputWithFilesContent={() => (
-				<a className="file-container__placeholder-browse"> Browse File</a>
+				<span className="file-container__placeholder-browse"> Browse File</span>
 			)}
 		/>
 	);

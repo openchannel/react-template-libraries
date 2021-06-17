@@ -5,6 +5,12 @@ import './style.scss';
 
 export type ButtonVariants = 'primary' | 'secondary' | 'link' | 'danger' | 'none';
 
+export type Dataset = {
+	dataset: {
+		[key: string]: any;
+	};
+};
+
 export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
 	/**
 	 * Checks if the button should be disabled
@@ -33,8 +39,8 @@ export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonE
 	children: React.ReactNode;
 }
 
-export const OcButtonComponent = React.forwardRef(
-	(props: Partial<ButtonProps>, ref: React.ForwardedRef<HTMLButtonElement>) => {
+export const OcButtonComponent = React.memo(
+	React.forwardRef((props: Partial<ButtonProps>, ref: React.ForwardedRef<HTMLButtonElement>) => {
 		const {
 			htmlType = 'button',
 			text,
@@ -67,5 +73,5 @@ export const OcButtonComponent = React.forwardRef(
 				{!children && !process && <span className="oc-button__text">{text}</span>}
 			</button>
 		);
-	},
+	}),
 );

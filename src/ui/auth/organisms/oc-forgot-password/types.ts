@@ -4,14 +4,14 @@ export interface OcForgotPasswordProps {
 	/**
 	 * Source image link.
 	 */
-	companyLogoUrl: string;	
+	companyLogoUrl: string;
 	/**
 	 * Router path.
 	 */
 	loginUrl: string;
 	/**
- 	* Flag if result page is shown
- 	*/
+	 * Flag if result page is shown
+	 */
 	showResultPage: boolean;
 	/**
 	 * Source image link.

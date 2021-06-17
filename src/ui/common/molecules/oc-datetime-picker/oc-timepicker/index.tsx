@@ -35,12 +35,12 @@ export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
 			: onChange(valueMoment.subtract(quantity, measure));
 	};
 	const handleHours = React.useCallback(
-		(e) => onChange(valueMoment.hours(parseInt(e.target.value || '0'))),
+		(e) => onChange(valueMoment.hours(Number(e.target.value || '0'))),
 		[onChange, valueMoment],
 	);
 	const handleMinutes = React.useCallback(
 		(e) => {
-			onChange(valueMoment.minutes(parseInt(e.target.value || '0')));
+			onChange(valueMoment.minutes(Number(e.target.value || '0')));
 		},
 		[onChange, valueMoment],
 	);
