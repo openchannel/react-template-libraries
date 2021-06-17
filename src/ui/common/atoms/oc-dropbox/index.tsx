@@ -14,6 +14,7 @@ import './style.scss';
 export type DropboxValue = string;
 
 export interface DropboxProps extends SelectProps<GroupTypeBase<OptionsType<OptionTypeBase>>> {
+	name?: string;
 	/**
 	 * Placeholder (optional) - show text inside dropbox
 	 */
@@ -48,6 +49,7 @@ export interface DropboxProps extends SelectProps<GroupTypeBase<OptionsType<Opti
 
 export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
 	const {
+		name,
 		items,
 		selectedItem,
 		selectItem,
@@ -57,6 +59,7 @@ export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
 		inputValue,
 		onInputChange,
 		onKeyDown,
+		onBlur,
 	} = props;
 
 	const options = transformToValidOptions(items);
@@ -70,6 +73,7 @@ export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
 
 	return (
 		<Select
+			inputId={name}
 			className={`oc-dropbox ${className}`}
 			classNamePrefix="oc-dropbox"
 			placeholder={placeholder}
@@ -81,6 +85,7 @@ export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
 			onInputChange={onInputChange}
 			onKeyDown={onKeyDown}
 			noOptionsMessage={() => null}
+			onBlur={onBlur}
 			isSearchable
 		/>
 	);
