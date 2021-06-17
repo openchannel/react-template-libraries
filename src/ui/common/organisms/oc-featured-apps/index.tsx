@@ -2,11 +2,12 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { stripHtmlTags } from '../../../../lib';
+import { FullAppData } from '../../molecules/oc-app-card/types';
 import './style.scss';
 
 export interface FeaturedAppsProps {
 	/** List of featured apps */
-	data: any; //Appdata
+	data: FullAppData[];
 	/** Title of featured apps */
 	label: string;
 	/** Message that'll be shown when no featured apps */
@@ -18,32 +19,42 @@ export interface FeaturedAppsProps {
 }
 
 export const OcFeaturedAppsComponent: React.FC<FeaturedAppsProps> = (props) => {
-	const { label = 'Featured', data, emptyDataMessage, customClass, mainRouterLink } = props;
+	const {
+		label = 'Featured',
+		data,
+		emptyDataMessage = 'No Featured Apps',
+		customClass,
+		mainRouterLink,
+	} = props;
 
 	return (
 		<div className="featured-apps">
 			<div className="featured-apps__heading">
 				<h4 className="featured-apps__heading-text">{label}</h4>
 			</div>
-			<div className="featured-apps__container">
-				{data.map((card) => (
-					<div className="featured-apps__card-wrapper">
-						<div className="featured-apps__card">
-							<a className={`featured-apps__card-body ${customClass}`}>
-								<div className="featured-apps__card-img">
-									<img src={card.icon} alt="card-icon" />
-								</div>
-								<h5 className="featured-apps__card-name">{card.name}</h5>
-								<span className="featured-apps__card-description">
-									{card && card.summary
-										? truncateWithHTML(stripHtmlTags(card.summary), 160)
-										: truncateWithHTML(stripHtmlTags(card.description), 160)}
-								</span>
-							</a>
+			{data && data.length ? (
+				<div className="featured-apps__container">
+					{data.map((card) => (
+						<div className="featured-apps__card-wrapper">
+							<div className="featured-apps__card">
+								<Link to={mainRouterLink} className={`featured-apps__card-body ${customClass}`}>
+									<div className="featured-apps__card-img">
+										<img src={card.icon} alt="card-icon" />
+									</div>
+									<h5 className="featured-apps__card-name">{card.name}</h5>
+									<span className="featured-apps__card-description">
+										{card && card.summary
+											? stripHtmlTags(card.summary)
+											: stripHtmlTags(card.description)}
+									</span>
+								</Link>
+							</div>
 						</div>
-					</div>
-				))}
-			</div>
+					))}
+				</div>
+			) : (
+				<h5>{emptyDataMessage}</h5>
+			)}
 		</div>
 	);
 };

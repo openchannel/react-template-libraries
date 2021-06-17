@@ -8,7 +8,6 @@ import { parsePrice } from '../../../market/index';
 
 import { FullAppData } from './types';
 
-// import { FullAppData } from '';
 import './style.scss';
 
 export interface OcAppCardProps {
