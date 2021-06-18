@@ -45,7 +45,11 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 			<OcFormContextProvider initialValue={{ flattenFields, fieldsDefinition, updateState }}>
 				<FormikForm className="form" onSubmit={formik.handleSubmit}>
 					<FormikMapFieldsWrapper />
-					<div className={getOcFormButtonsClass(buttonPosition)}>
+					<div
+						className={
+							getOcFormButtonsClass(buttonPosition) + ' form__buttons_direction_row_reverse'
+						}
+					>
 						<div className="form__button">
 							<OcButtonComponent htmlType="submit" type="primary" process={formik.isSubmitting}>
 								{successButtonText}

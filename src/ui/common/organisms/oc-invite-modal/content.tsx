@@ -1,26 +1,14 @@
 import * as React from 'react';
 
 import CloseIconSvg from '../../../../assets/img/close-icon.svg';
-import { OcButtonComponent } from '../../atoms';
+import { OcForm } from '../../../form/index';
 
 import { InviteModalProps } from './index';
 
 export type InviteContentProps = Omit<InviteModalProps, 'size' | 'isOpened'>;
 
 export const InviteUserContent: React.FC<InviteContentProps> = (props) => {
-	const {
-		onClose,
-		onCancel,
-		onSubmit,
-		modalTitle,
-		modalText,
-		confirmButtonText = 'Ok',
-		confirmButtonType = 'primary',
-		confirmButtonHide = false,
-		rejectButtonText = 'No, cancel',
-		rejectButtonType = 'secondary',
-		rejectButtonHide = false,
-	} = props;
+	const { onClose, onCancel, onSubmit, modalTitle, formConfig, buttonPosition } = props;
 
 	return (
 		<>
@@ -33,7 +21,15 @@ export const InviteUserContent: React.FC<InviteContentProps> = (props) => {
 					onClick={onClose}
 				/>
 			</div>
-			<div className="invite-modal__modal-body"></div>
+			<div className="invite-modal__modal-body">
+				<OcForm
+					formJsonData={formConfig!}
+					onCancel={onCancel!}
+					onSubmit={onSubmit!}
+					successButtonText="Send invite"
+					buttonPosition={buttonPosition}
+				/>
+			</div>
 		</>
 	);
 };

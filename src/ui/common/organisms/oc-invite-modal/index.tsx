@@ -12,13 +12,13 @@ type ModalButtonVariants = Exclude<ButtonVariants, 'none'>;
 
 export interface InviteModalProps extends Omit<ModalProps, 'children'> {
 	/** A callback fired when the rejectButton is clicked.*/
-	onCancel?: (event: React.SyntheticEvent) => void;
+	onCancel?: any;
 	/** A callback fired when the confirmButton is clicked.*/
-	onSubmit?: (event: React.SyntheticEvent) => void;
+	onSubmit?: any;
 	/** The content of the modal title */
 	modalTitle: string;
 	/** The content of the modal */
-	modalText: string;
+	modalText?: string;
 	/** Button content * @default Ok*/
 	confirmButtonText?: string;
 	/** The variant of the confirm button. @default 'primary'*/
@@ -31,6 +31,12 @@ export interface InviteModalProps extends Omit<ModalProps, 'children'> {
 	rejectButtonType?: ModalButtonVariants;
 	/** Hide element when not needed @default false */
 	rejectButtonHide?: boolean;
+	// config for custom form generation
+	formConfig?: any;
+	/** Modal data */
+	modalData?: any;
+	/** buttons position on form */
+	buttonPosition?: string;
 }
 
 export const OcInviteModal: React.FC<InviteModalProps> = (props) => {

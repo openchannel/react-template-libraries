@@ -19,9 +19,56 @@ const Component: Story<InviteContentProps> = (args) => {
 	);
 };
 
-export const ConfirmationContent = Component.bind({});
-ConfirmationContent.args = {
-	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	onClose: () => {},
+export const Modal = Component.bind({});
+Modal.args = {
+	modalData: {
+		modalTitle: 'Invite a member',
+		successButtonText: 'Send invite',
+	},
+	formConfig: {
+		fields: [
+			{
+				id: 'name',
+				label: 'Name',
+				description: '',
+				placeholder: 'Enter Name',
+				defaultValue: null,
+				type: 'text',
+				required: null,
+				attributes: {
+					maxChars: null,
+					required: true,
+					minChars: null,
+				},
+				options: null,
+			},
+			{
+				id: 'email',
+				label: 'Email',
+				description: '',
+				placeholder: 'Email',
+				defaultValue: null,
+				type: 'emailAddress',
+				required: null,
+				attributes: {
+					maxChars: null,
+					required: true,
+					minChars: null,
+				},
+				options: null,
+			},
+			{
+				id: 'roles',
+				label: 'Select role',
+				description: '',
+				defaultValue: '',
+				type: 'dropdownList',
+				required: true,
+				attributes: { required: true },
+				options: [],
+			},
+		],
+	},
+	modalTitle: 'Invite a member',
+	buttonPosition: 'between',
 };
-ConfirmationContent.storyName = 'Modal';

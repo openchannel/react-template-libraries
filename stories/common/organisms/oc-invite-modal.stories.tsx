@@ -34,7 +34,50 @@ Modal.args = {
 	modalData: {
 		modalTitle: 'Invite a member',
 		successButtonText: 'Send invite',
-		requestFindUserRoles: [],
-		requestSendInvite: [],
 	},
+	formConfig: {
+		fields: [
+			{
+				id: 'name',
+				label: 'Name',
+				description: '',
+				placeholder: 'Enter Name',
+				defaultValue: null,
+				type: 'text',
+				required: null,
+				attributes: {
+					maxChars: null,
+					required: true,
+					minChars: null,
+				},
+				options: null,
+			},
+			{
+				id: 'email',
+				label: 'Email',
+				description: '',
+				placeholder: 'Email',
+				defaultValue: null,
+				type: 'emailAddress',
+				required: null,
+				attributes: {
+					maxChars: null,
+					required: true,
+					minChars: null,
+				},
+				options: null,
+			},
+			{
+				id: 'roles',
+				label: 'Select role',
+				description: '',
+				defaultValue: '',
+				type: 'dropdownList',
+				required: true,
+				attributes: { required: true },
+				options: [],
+			},
+		],
+	},
+	buttonPosition: 'between',
 };
