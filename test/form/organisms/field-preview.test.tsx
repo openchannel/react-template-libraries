@@ -180,7 +180,7 @@ describe('FieldPreview', () => {
 			type: 'date',
 
 			...defaultProps,
-			value: moment(),
+			value: moment(1623938512563),
 		});
 		expect(component.find('.array-preview__field-content__text').text()).toBe('Jun 17, 2021');
 
@@ -198,9 +198,9 @@ describe('FieldPreview', () => {
 			type: 'datetime',
 
 			...defaultProps,
-			value: moment(),
+			value: moment(1623938512563),
 		});
-		expect(component.find('.array-preview__field-content__text').text()).toBe('Jun 17, 2021 16:06');
+		expect(component.find('.array-preview__field-content__text').text()).toBe('Jun 17, 2021 17:06');
 
 		component.setProps({
 			value: 1602489693553,
