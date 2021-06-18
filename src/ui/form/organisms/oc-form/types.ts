@@ -2,6 +2,7 @@ import * as React from 'react';
 import type { FieldInputProps, FormikHelpers, FormikProps } from 'formik';
 
 import type { Dataset } from '../../../common';
+import { AppFormField } from '../../models';
 import type { AppFormModel, FormikField, FormikFieldsValues } from '../../models';
 
 export interface OcFormProps {
@@ -57,7 +58,7 @@ export type FieldType =
 export type normalizeFieldsForFormikParams = (
 	// eslint-disable-next-line
 	todo: Function,
-) => (fields: FormikField[], deepPath?: string) => FormikField[];
+) => (fields: FormikField[] | AppFormField[], deepPath?: string) => FormikField[];
 
 export interface OcFormContextProviderProps {
 	initialValue: {

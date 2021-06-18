@@ -35,7 +35,7 @@ export const normalizeFieldsForFormik: normalizeFieldsForFormikParams = (todo) =
 	fields,
 	deepPath,
 ) => {
-	return fields.map((field, index) => {
+	return fields.map((field: FormikField | AppFormField, index: any) => {
 		const path: string = deepPath ? `${deepPath}.fields.${index}` : `${index}`;
 
 		if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields) {
@@ -60,7 +60,7 @@ export const getInitialValuesFromFields = (fields: FormikField[]): { [key: strin
 };
 
 export const getInitialFieldsAndValues = (
-	fields?: FormikField[],
+	fields?: AppFormField[],
 ): {
 	initialFields: FormikField[];
 	initialValues: FormikValues;
