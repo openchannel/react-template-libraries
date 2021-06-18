@@ -325,7 +325,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 						);
 					}
 					default:
-						return <div>Unsupported field</div>;
+						return <div key={index}>Unsupported field</div>;
 				}
 			})}
 		</>

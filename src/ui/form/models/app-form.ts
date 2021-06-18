@@ -32,7 +32,7 @@ export interface AppFormModel {
 	formId?: string;
 	name?: string;
 	createdDate?: number;
-	fields?: FormikField[];
+	fields?: AppFormField[];
 }
 
 export interface AppFormFieldAttributes {
