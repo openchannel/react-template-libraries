@@ -14,7 +14,7 @@ export const getOcFormButtonsClass = (buttonPosition: string): string => {
 		case 'left':
 			return 'form__buttons form__buttons_justify_start';
 		case 'between':
-			return 'form__buttons form__buttons_justify_space-between';
+			return 'form__buttons form__buttons_justify_space-between form__buttons_direction_row_reverse';
 		default:
 			return 'form__buttons form__buttons_justify_start form__buttons_direction_row_reverse';
 	}
