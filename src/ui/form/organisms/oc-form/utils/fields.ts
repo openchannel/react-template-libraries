@@ -1,3 +1,4 @@
+import { FormikValues } from 'formik';
 import { nanoid } from 'nanoid';
 
 import { FIELD_TYPE, getFieldValidators } from '../../../lib';
@@ -34,7 +35,7 @@ export const normalizeFieldsForFormik: normalizeFieldsForFormikParams = (todo) =
 	fields,
 	deepPath,
 ) => {
-	return fields.map((field, index) => {
+	return fields.map((field: FormikField | AppFormField, index: any) => {
 		const path: string = deepPath ? `${deepPath}.fields.${index}` : `${index}`;
 
 		if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields) {
@@ -58,16 +59,19 @@ export const getInitialValuesFromFields = (fields: FormikField[]): { [key: strin
 	);
 };
 
-export const getValidParams = (fields?: FormikField[]) => {
-	if (!fields) return { fields: [] };
+export const getInitialFieldsAndValues = (
+	fields?: AppFormField[],
+): {
+	initialFields: FormikField[];
+	initialValues: FormikValues;
+} => {
+	if (!fields) return { initialFields: [], initialValues: {} };
 
 	const extendedFields = normalizeFieldsForFormik(extendElementWithRequiredKeys)(fields);
 
 	return {
-		fields: extendedFields,
+		initialFields: extendedFields,
 		initialValues: getInitialValuesFromFields(extendedFields),
-	} as {
-		fields: FormikField[];
 	};
 };
 

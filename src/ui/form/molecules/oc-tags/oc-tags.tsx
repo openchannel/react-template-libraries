@@ -12,7 +12,15 @@ import { normalizeTags } from './utils';
 import './styles.scss';
 
 export const OcTags: React.FC<OcTagsProps> = (props) => {
-	const { availableTags, value = [], onChange, tagsType = 'string', placeholder = '' } = props;
+	const {
+		name,
+		availableTags,
+		value = [],
+		onChange,
+		tagsType = 'string',
+		placeholder = '',
+		onBlur,
+	} = props;
 
 	const setNormalizedValues = React.useCallback(
 		(values) => {
@@ -55,6 +63,7 @@ export const OcTags: React.FC<OcTagsProps> = (props) => {
 			<div className="tags__group">
 				<div className="tags__group-wrapper">
 					<OcDropboxComponent
+						name={name}
 						className="tags__select"
 						placeholder={placeholder}
 						items={dropboxOptions}
@@ -63,6 +72,7 @@ export const OcTags: React.FC<OcTagsProps> = (props) => {
 						inputValue={inputValue}
 						onInputChange={onInputChange}
 						onKeyDown={onKeyDown}
+						onBlur={onBlur}
 					/>
 					<div className="tags__button-add">
 						<OcButtonComponent type="secondary" onClick={onAddTag}>

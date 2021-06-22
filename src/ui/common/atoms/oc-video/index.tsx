@@ -8,7 +8,7 @@ export interface VideoProps {
 	/**
 	 * Video url
 	 */
-	videoUrl: string;
+	videoUrl: string | undefined;
 	/**
 	 * custom classname to be passed
 	 */

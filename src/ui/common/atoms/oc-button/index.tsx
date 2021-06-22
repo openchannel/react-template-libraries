@@ -39,8 +39,8 @@ export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonE
 	children: React.ReactNode;
 }
 
-export const OcButtonComponent = React.forwardRef(
-	(props: Partial<ButtonProps>, ref: React.ForwardedRef<HTMLButtonElement>) => {
+export const OcButtonComponent = React.memo(
+	React.forwardRef((props: Partial<ButtonProps>, ref: React.ForwardedRef<HTMLButtonElement>) => {
 		const {
 			htmlType = 'button',
 			text,
@@ -48,16 +48,26 @@ export const OcButtonComponent = React.forwardRef(
 			customClass = '',
 			process = false,
 			children,
+			onClick,
 			...p
 		} = props;
 
 		const variantClass = type !== 'none' ? `oc-button_${type}` : '';
+
+		const handleClick = React.useCallback(
+			(event) => {
+				if (!onClick || process) return;
+				onClick(event);
+			},
+			[onClick, process],
+		);
 
 		return (
 			<button
 				ref={ref}
 				type={htmlType}
 				className={`oc-button ${variantClass} ${customClass}`}
+				onClick={handleClick}
 				{...p}
 			>
 				{process && (
@@ -73,5 +83,5 @@ export const OcButtonComponent = React.forwardRef(
 				{!children && !process && <span className="oc-button__text">{text}</span>}
 			</button>
 		);
-	},
+	}),
 );

@@ -23,6 +23,8 @@ export const OcResetPasswordComponent: React.FC<OcResetPasswordProps> = (props) 
 		inputError,
 		value,
 		onChange,
+		validationError,
+		handleButtonClick,
 	} = props;
 
 	return (
@@ -48,13 +50,14 @@ export const OcResetPasswordComponent: React.FC<OcResetPasswordProps> = (props) 
 						required
 						{...inputProps}
 					/>
-					{inputError && <OcError message={String(inputError)} />}
+					{validationError && <OcError message={String(inputError)} />}
 				</div>
 				<OcButtonComponent
 					htmlType="submit"
 					type="primary"
 					customClass="reset-password__button"
 					process={process}
+					onClick={handleButtonClick}
 				>
 					Confirm
 				</OcButtonComponent>

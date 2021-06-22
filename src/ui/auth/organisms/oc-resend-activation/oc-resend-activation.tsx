@@ -45,6 +45,7 @@ export const OcResendActivation: React.FC<OcResendProps> = (props) => {
 					type="primary"
 					customClass="resend-activation__button"
 					process={process}
+					onClick={inputProps?.onChange}
 				>
 					Resend
 				</OcButtonComponent>

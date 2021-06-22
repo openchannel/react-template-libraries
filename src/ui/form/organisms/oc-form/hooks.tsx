@@ -1,24 +1,54 @@
 import * as React from 'react';
+import { FormikValues } from 'formik';
 
-import { FormikFieldsValues } from '../../models';
+import {
+	AppFormField,
+	AppFormModel,
+	FieldValidators,
+	FormikField,
+	FormikFieldsValues,
+} from '../../models';
 
 import { validateOcFormValues } from './utils/common';
-import { fieldsUtils } from './utils/fields';
+import { fieldsUtils, getInitialFieldsAndValues } from './utils/fields';
 
-export const useFormikValidation = () => {
-	const [validators, _setValidators] = React.useState<Record<string, any>>({});
+const init = (
+	fields?: AppFormField[],
+): {
+	validators: FieldValidators;
+	flattenFields: FormikField[];
+	fieldsDefinition: FormikField[];
+	initialValues: FormikValues;
+} => {
+	const { initialFields, initialValues } = getInitialFieldsAndValues(fields);
 
-	const setValidators = React.useCallback((fields) => {
-		_setValidators(fieldsUtils.getValidators(fields));
+	return {
+		validators: fieldsUtils.getValidators(initialFields || []),
+		flattenFields: fieldsUtils.dumpDeepFields(fieldsUtils.flatMap(initialFields || []), 0),
+		fieldsDefinition: fieldsUtils.dumpDeepFields(initialFields || []),
+		initialValues,
+	};
+};
+
+export const useOcFormState = (formJsonData: AppFormModel) => {
+	const [state, setState] = React.useState(() => init(formJsonData.fields));
+
+	const updateState = React.useCallback((normalizedFields) => {
+		setState((prev) => ({
+			...prev,
+			validators: fieldsUtils.getValidators(normalizedFields),
+			fieldsDefinition: normalizedFields,
+		}));
 	}, []);
 
+	return { state, updateState };
+};
+
+export const useFormikValidation = (validators: FieldValidators) => {
 	const validate = React.useCallback(
 		(values: FormikFieldsValues) => validateOcFormValues(values, validators),
 		[validators],
 	);
 
-	return {
-		validate,
-		setValidators,
-	};
+	return { validate };
 };
