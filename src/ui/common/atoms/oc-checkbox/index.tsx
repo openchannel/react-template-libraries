@@ -41,7 +41,6 @@ export const OcCheckboxComponent: React.FC<CheckboxProps> = (props) => {
 			<input
 				type="checkbox"
 				className="form-checkbox__input form-checkbox__input_hidden"
-				required={required}
 				{...p}
 			/>
 			<span className="form-checkbox__checkmark" />
