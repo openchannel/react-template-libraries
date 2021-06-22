@@ -1,3 +1,5 @@
+import isNil from 'lodash/isNil';
+
 import { stripHtmlTags } from '../../../lib';
 import { FieldValidators, FormikField, ValidatorFn } from '../models';
 
@@ -177,6 +179,8 @@ export const setUpFieldValidators = (
 
 	return Object.keys(attributes)
 		.reduce((acc, key) => {
+			if (isNil(attributes[key])) return acc;
+
 			switch (key) {
 				case 'required':
 					if (isCheckbox) {
