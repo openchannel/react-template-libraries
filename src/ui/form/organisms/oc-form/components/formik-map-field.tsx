@@ -62,7 +62,6 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 									name={name}
 									as={OcInputComponent}
 									placeholder={placeholder}
-									required={attributes!.required}
 									id={id}
 									inputType="text"
 								/>
@@ -82,7 +81,6 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 									name={name}
 									component={FormikOcSelectWrapper}
 									placeholder={placeholder}
-									required={attributes!.required}
 									options={options}
 								/>
 							</FieldGroupWrapper>
@@ -97,13 +95,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 								description={description}
 								required={attributes!.required}
 							>
-								<Field
-									name={name}
-									as={OcNumberComponent}
-									placeholder={placeholder}
-									required={attributes!.required}
-									id={id}
-								/>
+								<Field name={name} as={OcNumberComponent} placeholder={placeholder} id={id} />
 							</FieldGroupWrapper>
 						);
 					case FIELD_TYPE.CHECKBOX:
@@ -138,7 +130,6 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 									name={name}
 									as={OcInputComponent}
 									placeholder={placeholder || 'myemail@example.com'}
-									required={attributes!.required}
 									inputType="email"
 									id={id}
 								/>
@@ -158,7 +149,6 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 									name={name}
 									as={OcInputComponent}
 									placeholder={placeholder || 'https://my.website.com'}
-									required={attributes!.required}
 									inputType="url"
 									id={id}
 								/>
@@ -275,19 +265,6 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 								<Field name={name} as={OcPasswordComponent} />
 							</FieldGroupWrapper>
 						);
-					// case FIELD_TYPE.PASSWORD:
-					// 	return (
-					// 		<FieldGroupWrapper
-					// 			key={name}
-					// 			name={name}
-					// 			label={label}
-					// 			labelFor={id}
-					// 			description={description}
-					// 			required={attributes!.required}
-					// 		>
-					// 			<Field name={name} as={OcPasswordComponent} />
-					// 		</FieldGroupWrapper>
-					// 	);
 					case FIELD_TYPE.DYNAMIC_FIELD_ARRAY: {
 						const group = _.groupBy(fields, 'type')[FIELD_TYPE.DYNAMIC_FIELD_ARRAY];
 						const firstElementOfGroup = group[0] || { fields: [] };
@@ -325,7 +302,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 						);
 					}
 					default:
-						return <div>Unsupported field</div>;
+						return <div key={index}>Unsupported field</div>;
 				}
 			})}
 		</>

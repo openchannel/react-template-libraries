@@ -1,4 +1,5 @@
 import * as React from 'react';
+import isNumber from 'lodash/isNumber';
 import moment, { isMoment } from 'moment';
 
 import FileIconSvg from '../../../../assets/img/file_icon.svg';
@@ -99,14 +100,14 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 		case FIELD_TYPE.DATE_TIME: {
 			return (
 				<span className="array-preview__field-content__text">
-					{isMoment(value) ? moment(value).format('MMM D, Y HH:MM') : value}
+					{isMoment(value) || isNumber(value) ? moment(value).format('MMM D, Y HH:MM') : value}
 				</span>
 			);
 		}
 		case FIELD_TYPE.DATE: {
 			return (
 				<span className="array-preview__field-content__text">
-					{isMoment(value) ? moment(value).format('MMM D, Y') : value}
+					{isMoment(value) || isNumber(value) ? moment(value).format('MMM D, Y') : value}
 				</span>
 			);
 		}

@@ -11,9 +11,7 @@ moment.updateLocale('en', {
 	weekdays: 'S_M_T_W_T_F_S'.split('_'),
 	weekdaysShort: 'S_M_T_W_T_F_S'.split('_'),
 	weekdaysMin: 'S_M_T_W_T_F_S'.split('_'),
-	week: {
-		dow: 1,
-	},
+	week: { dow: 1 },
 });
 
 export interface DatepickerProps extends DatetimepickerProps {
@@ -67,7 +65,7 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 			locale="en"
 			dateFormat={type === 'date' ? returnDateFormat() : 'DD/MM/YYYY HH:mm'}
 			inputProps={{ disabled: disabled }}
-			value={value}
+			value={value || 'DD/MM/YYYY'}
 			onChange={onChange}
 			initialViewMode="days"
 			timeFormat={false}

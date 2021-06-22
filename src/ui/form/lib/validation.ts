@@ -1,10 +1,10 @@
+import isNil from 'lodash/isNil';
+
 import { stripHtmlTags } from '../../../lib';
 import { FieldValidators, FormikField, ValidatorFn } from '../models';
 
 import { FIELD_TYPE } from './constants';
 
-// eslint-disable-next-line
-const URL_REGEX = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%!^&]).{8,}$/;
 const EMAIL_REGEX = /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
@@ -62,6 +62,9 @@ const email = () => (value: string) => {
 };
 
 const url = () => (value: string) => {
+	// eslint-disable-next-line
+	const URL_REGEX = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
+
 	if (URL_REGEX.test(value) || value === '') {
 		return null;
 	}
@@ -176,6 +179,8 @@ export const setUpFieldValidators = (
 
 	return Object.keys(attributes)
 		.reduce((acc, key) => {
+			if (isNil(attributes[key])) return acc;
+
 			switch (key) {
 				case 'required':
 					if (isCheckbox) {
