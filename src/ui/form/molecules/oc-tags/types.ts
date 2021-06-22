@@ -1,6 +1,9 @@
+import React from 'react';
+
 export type OcTagsValue = Array<string | number | boolean>;
 
 export interface OcTagsProps {
+	name?: string;
 	/**
 	 * Placeholder.
 	 */
@@ -25,6 +28,7 @@ export interface OcTagsProps {
 	 * @param v
 	 */
 	onChange: (v: OcTagsValue) => void;
+	onBlur?: (event: React.FocusEvent<HTMLElement>) => void;
 }
 
 export type NormalizeTags = (array: string[], type: 'string' | 'boolean' | 'number') => OcTagsValue;

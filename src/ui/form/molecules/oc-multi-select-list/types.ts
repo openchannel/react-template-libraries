@@ -1,4 +1,7 @@
+import React from 'react';
+
 export interface OcMultiSelectListProps {
+	name?: string;
 	/**
 	 * Label of the component.
 	 */
@@ -16,4 +19,6 @@ export interface OcMultiSelectListProps {
 	 * List of items for automatically adding to the user tags list.
 	 */
 	defaultItems?: string[];
+
+	onBlur?: (event: React.FocusEvent<HTMLElement>) => void;
 }

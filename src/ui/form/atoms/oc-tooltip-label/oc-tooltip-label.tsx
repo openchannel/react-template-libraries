@@ -39,7 +39,7 @@ export interface OcTooltipLabelProps {
 	infoTitleIconCsv?: string;
 }
 
-export const OcTooltipLabel: React.FC<OcTooltipLabelProps> = (props) => {
+export const OcTooltipLabel: React.FC<OcTooltipLabelProps> = React.memo((props) => {
 	const {
 		text,
 		children,
@@ -70,4 +70,4 @@ export const OcTooltipLabel: React.FC<OcTooltipLabelProps> = (props) => {
 			)}
 		</div>
 	);
-};
+});
