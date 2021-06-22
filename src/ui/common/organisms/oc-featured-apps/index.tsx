@@ -9,13 +9,15 @@ export interface FeaturedAppsProps {
 	/** List of featured apps */
 	data: FullAppData[];
 	/** Title of featured apps */
-	label: string;
+	label?: string;
 	/** Message that'll be shown when no featured apps */
-	emptyDataMessage: string;
+	emptyDataMessage?: string;
 	/** list of classes that will be added to default class list  */
 	customClass: string;
 	/** Router link for each app card. Will end with chosen navigation parameter */
 	mainRouterLink: string;
+	/** custom card template in format of JSON string */
+	customFeaturedAppCardTemplate?: string;
 }
 
 export const OcFeaturedAppsComponent: React.FC<FeaturedAppsProps> = (props) => {
@@ -25,6 +27,7 @@ export const OcFeaturedAppsComponent: React.FC<FeaturedAppsProps> = (props) => {
 		emptyDataMessage = 'No Featured Apps',
 		customClass,
 		mainRouterLink,
+		customFeaturedAppCardTemplate = '',
 	} = props;
 
 	return (
@@ -37,17 +40,21 @@ export const OcFeaturedAppsComponent: React.FC<FeaturedAppsProps> = (props) => {
 					{data.map((card, index) => (
 						<div className="featured-apps__card-wrapper" key={label + index}>
 							<div className="featured-apps__card">
-								<Link to={mainRouterLink} className={`featured-apps__card-body ${customClass}`}>
-									<div className="featured-apps__card-img">
-										<img src={card.icon} alt="card-icon" />
-									</div>
-									<h5 className="featured-apps__card-name">{card.name}</h5>
-									<span className="featured-apps__card-description">
-										{card && card.summary
-											? stripHtmlTags(card.summary)
-											: stripHtmlTags(card.description)}
-									</span>
-								</Link>
+								{!customFeaturedAppCardTemplate ? (
+									<Link to={mainRouterLink} className={`featured-apps__card-body ${customClass}`}>
+										<div className="featured-apps__card-img">
+											<img src={card.icon} alt="card-icon" />
+										</div>
+										<h5 className="featured-apps__card-name">{card.name}</h5>
+										<span className="featured-apps__card-description">
+											{card && card.summary
+												? stripHtmlTags(card.summary)
+												: stripHtmlTags(card.description)}
+										</span>
+									</Link>
+								) : (
+									<>{customFeaturedAppCardTemplate}</>
+								)}
 							</div>
 						</div>
 					))}
