@@ -95,12 +95,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 								description={description}
 								required={attributes!.required}
 							>
-								<Field
-									name={name}
-									as={OcNumberComponent}
-									placeholder={placeholder}
-									id={id}
-								/>
+								<Field name={name} as={OcNumberComponent} placeholder={placeholder} id={id} />
 							</FieldGroupWrapper>
 						);
 					case FIELD_TYPE.CHECKBOX:

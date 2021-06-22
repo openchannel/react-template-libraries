@@ -54,10 +54,13 @@ export const OcButtonComponent = React.memo(
 
 		const variantClass = type !== 'none' ? `oc-button_${type}` : '';
 
-		const handleClick = React.useCallback((event) => {
-			if (!onClick || process) return;
-			onClick(event);
-		}, [onClick, process]);
+		const handleClick = React.useCallback(
+			(event) => {
+				if (!onClick || process) return;
+				onClick(event);
+			},
+			[onClick, process],
+		);
 
 		return (
 			<button

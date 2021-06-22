@@ -100,14 +100,14 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 		case FIELD_TYPE.DATE_TIME: {
 			return (
 				<span className="array-preview__field-content__text">
-					{(isMoment(value) || isNumber(value))  ? moment(value).format('MMM D, Y HH:MM') : value}
+					{isMoment(value) || isNumber(value) ? moment(value).format('MMM D, Y HH:MM') : value}
 				</span>
 			);
 		}
 		case FIELD_TYPE.DATE: {
 			return (
 				<span className="array-preview__field-content__text">
-					{(isMoment(value) || isNumber(value)) ? moment(value).format('MMM D, Y') : value}
+					{isMoment(value) || isNumber(value) ? moment(value).format('MMM D, Y') : value}
 				</span>
 			);
 		}

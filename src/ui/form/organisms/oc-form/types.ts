@@ -2,8 +2,8 @@ import * as React from 'react';
 import type { FieldInputProps, FormikHelpers, FormikProps } from 'formik';
 
 import type { Dataset } from '../../../common';
-import { AppFormField } from '../../models';
 import type { AppFormModel, FormikField, FormikFieldsValues } from '../../models';
+import { AppFormField } from '../../models';
 
 export interface OcFormProps {
 	formJsonData: AppFormModel;
