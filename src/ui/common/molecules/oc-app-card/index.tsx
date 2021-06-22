@@ -2,7 +2,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { FullAppData } from './types';
-import { truncateWithHTML } from '../../utils';
 import { stripHtmlTags } from '../../../../lib/index';
 import { parsePrice } from '../../../market/index';
 import { OcRatingComponent } from '../../../market/atoms/oc-rating';
