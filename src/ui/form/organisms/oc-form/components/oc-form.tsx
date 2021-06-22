@@ -35,19 +35,22 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		},
 	});
 
-	const handleSubmit = React.useCallback(() => {
-		// add submit wrapper to prevent submitting while formik.isSubmitting
-		formik.submitForm();
-	}, [formik.submitForm]);
+	const handleSubmit = React.useCallback((e) => {
+		if (formik.isSubmitting) {
+			e.preventDefault();
+		} else {
+			formik.handleSubmit(e);
+		}
+	}, [formik.isSubmitting, formik.handleSubmit]);
 
 	return (
 		<FormikContext.Provider value={formik}>
 			<OcFormContextProvider initialValue={{ flattenFields, fieldsDefinition, updateState }}>
-				<FormikForm className="form" onSubmit={formik.handleSubmit}>
+				<FormikForm className="form" onSubmit={handleSubmit}>
 					<FormikMapFieldsWrapper />
 					<div className={getOcFormButtonsClass(buttonPosition)}>
 						<div className="form__button">
-							<OcButtonComponent type="primary" process={formik.isSubmitting} onClick={handleSubmit}>
+							<OcButtonComponent htmlType="submit" type="primary" process={formik.isSubmitting}>
 								{successButtonText}
 							</OcButtonComponent>
 						</div>
