@@ -58,7 +58,7 @@ export type FieldType =
 export type normalizeFieldsForFormikParams = (
 	// eslint-disable-next-line
 	todo: Function,
-) => (fields: FormikField[] | AppFormField[], deepPath?: string) => FormikField[];
+) => (fields: AppFormField[] | FormikField[], deepPath?: string) => FormikField[];
 
 export interface OcFormContextProviderProps {
 	initialValue: {

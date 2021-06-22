@@ -55,7 +55,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 			const instance = flattenFields.find((item) => item.staticId === elementStaticId);
 			if (!instance) return;
 
-			let next = [...fieldsDefinition];
+			const next = elementUtils.updateFieldsValues(fieldsDefinition, values);
 			const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
 			const existedElement = get(next, elementPath);
 
@@ -66,7 +66,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 					next.push(elementUtils.cloneAndUpdate(instance, true));
 				}
 			} else {
-				next = update(fieldsDefinition, path, (fields) => {
+				update(next, path, (fields) => {
 					if (existedElement.fields && existedElement.fields.length === 0) {
 						fields[existedElement.index] = elementUtils.cloneAndUpdate(instance, true);
 					} else {
@@ -79,14 +79,14 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 
 			normalizeFieldsAndUpdateDefinition(next);
 		},
-		[fieldsDefinition, normalizeFieldsAndUpdateDefinition],
+		[values, fieldsDefinition, normalizeFieldsAndUpdateDefinition],
 	);
 
 	const onRemoveDynamicField = React.useCallback(
 		(event: React.SyntheticEvent<Dataset>) => {
 			const elementPath = event.currentTarget.dataset.path;
 
-			let next = [...fieldsDefinition];
+			let next = elementUtils.updateFieldsValues(fieldsDefinition, values);
 			const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
 			const existedElement = get(next, elementPath);
 
@@ -95,7 +95,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 
 				next = elementUtils.removeChildrenOrCurrent(next, existedElement, removeChildrenFields);
 			} else {
-				next = update(next, path, (fields: FormikField[]) => {
+				update(next, path, (fields: FormikField[]) => {
 					const removeChildrenFields =
 						fields.filter((f) => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1;
 
@@ -111,7 +111,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 
 			normalizeFieldsAndUpdateDefinition(next);
 		},
-		[fieldsDefinition, normalizeFieldsAndUpdateDefinition],
+		[values, fieldsDefinition, normalizeFieldsAndUpdateDefinition],
 	);
 
 	const onStartEditingField = (event: React.SyntheticEvent<Dataset>) => {
@@ -130,11 +130,9 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 		const button = event.target as HTMLButtonElement;
 		const elementPath = button.dataset.path || '';
 
-		let next = [...fieldsDefinition];
+		let next = elementUtils.updateFieldsValues(fieldsDefinition, values);
 		const existedElement = get(next, elementPath);
 		const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
-
-		next = elementUtils.updateFieldsValues(next, values);
 
 		if (isFirstLevelDeep) {
 			if (existedElement.isNew) {
@@ -145,7 +143,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 				next = elementUtils.resetFieldValueToPreviousValue(next, existedElement);
 			}
 		} else {
-			next = update(next, path, (fields: FormikField[]) => {
+			update(next, path, (fields: FormikField[]) => {
 				if (existedElement.isNew) {
 					const removeChildrenFields =
 						fields.filter((f) => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1;
