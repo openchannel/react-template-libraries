@@ -58,7 +58,7 @@ export const OcAppDescription: React.FC<AppDescriptionProps> = (props) => {
 			<p className="description__text">
 				{!isFullDescription && enableTruncateTextLogic ? tempDescriptionHtml : tempDescription}
 			</p>
-			{!shortDescription && (
+			{!shortDescription && !(truncateTextLength > tempDescription.length) && (
 				<span className="description__show-more" onClick={handleExpand}>
 					{!isFullDescription ? showMoreDescriptionText : showLessDescriptionText}
 				</span>

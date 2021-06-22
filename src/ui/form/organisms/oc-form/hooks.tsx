@@ -1,13 +1,19 @@
 import * as React from 'react';
 import { FormikValues } from 'formik';
 
-import { AppFormModel, FieldValidators, FormikField, FormikFieldsValues } from '../../models';
+import {
+	AppFormField,
+	AppFormModel,
+	FieldValidators,
+	FormikField,
+	FormikFieldsValues,
+} from '../../models';
 
 import { validateOcFormValues } from './utils/common';
 import { fieldsUtils, getInitialFieldsAndValues } from './utils/fields';
 
 const init = (
-	fields?: FormikField[],
+	fields?: AppFormField[],
 ): {
 	validators: FieldValidators;
 	flattenFields: FormikField[];

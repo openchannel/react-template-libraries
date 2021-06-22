@@ -35,15 +35,21 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		},
 	});
 
-	const handleCancel = React.useCallback(() => {
-		if (formik.isSubmitting) return;
-		onCancel();
-	}, [formik.isSubmitting, onCancel]);
+	const handleSubmit = React.useCallback(
+		(e) => {
+			if (formik.isSubmitting) {
+				e.preventDefault();
+			} else {
+				formik.handleSubmit(e);
+			}
+		},
+		[formik.isSubmitting, formik.handleSubmit],
+	);
 
 	return (
 		<FormikContext.Provider value={formik}>
 			<OcFormContextProvider initialValue={{ flattenFields, fieldsDefinition, updateState }}>
-				<FormikForm className="form" onSubmit={formik.handleSubmit}>
+				<FormikForm className="form" onSubmit={handleSubmit}>
 					<FormikMapFieldsWrapper />
 					<div className={getOcFormButtonsClass(buttonPosition)}>
 						<div className="form__button">
@@ -52,12 +58,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 							</OcButtonComponent>
 						</div>
 						<div className="form__button">
-							<OcButtonComponent
-								htmlType="button"
-								type="secondary"
-								onClick={handleCancel}
-								process={formik.isSubmitting}
-							>
+							<OcButtonComponent htmlType="button" type="secondary" onClick={onCancel}>
 								Cancel
 							</OcButtonComponent>
 						</div>
