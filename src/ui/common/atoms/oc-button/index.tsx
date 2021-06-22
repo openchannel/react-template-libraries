@@ -48,16 +48,23 @@ export const OcButtonComponent = React.memo(
 			customClass = '',
 			process = false,
 			children,
+			onClick,
 			...p
 		} = props;
 
 		const variantClass = type !== 'none' ? `oc-button_${type}` : '';
+
+		const handleClick = React.useCallback((event) => {
+			if (!onClick || process) return;
+			onClick(event);
+		}, [onClick, process]);
 
 		return (
 			<button
 				ref={ref}
 				type={htmlType}
 				className={`oc-button ${variantClass} ${customClass}`}
+				onClick={handleClick}
 				{...p}
 			>
 				{process && (
