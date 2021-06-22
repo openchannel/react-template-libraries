@@ -35,7 +35,7 @@ export interface AppFormModel {
 	fields?: AppFormField[];
 }
 
-export interface AppFormFieldAttributes {
+export interface AppFormFieldAttributes extends Record<string, any> {
 	maxCount?: number;
 	minCount?: number;
 	required?: boolean;
