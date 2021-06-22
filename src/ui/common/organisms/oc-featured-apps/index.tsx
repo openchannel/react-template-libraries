@@ -53,7 +53,7 @@ export const OcFeaturedAppsComponent: React.FC<FeaturedAppsProps> = (props) => {
 										</span>
 									</Link>
 								) : (
-									<>{customFeaturedAppCardTemplate}</>
+									{ customFeaturedAppCardTemplate }
 								)}
 							</div>
 						</div>
