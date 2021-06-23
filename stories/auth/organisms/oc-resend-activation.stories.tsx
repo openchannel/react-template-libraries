@@ -34,9 +34,7 @@ const DefaultComponent: Story<OcResendProps> = (args) => {
 					customClass: validationError ? 'error' : '',
 				}}
 				inputError={
-					validationError
-						? errorMessages.emailValidator()
-						: blurred && !value && errorMessages.required()
+					validationError ? errorMessages.email() : blurred && !value && errorMessages.required()
 				}
 			/>
 		</BrowserRouter>
@@ -77,7 +75,7 @@ const FilledComponent: Story<OcResendProps> = (args) => {
 				}}
 				inputError={
 					(blurred && !value && errorMessages.required()) ||
-					(blurred && validationError && errorMessages.emailValidator())
+					(blurred && validationError && errorMessages.email())
 				}
 			/>
 		</BrowserRouter>
