@@ -9,12 +9,12 @@ import { classNames, getUploadParams } from './utils';
 
 import './style.scss';
 
-export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
-	const {
-		// fileType,
-		// acceptType,
-		// isMultiFile = false,
-	} = props;
+export const OcFileUpload: React.FC<OcFileUploadProps> = () => {
+	// const {
+	// fileType,
+	// acceptType,
+	// isMultiFile = false,
+	// } = props;
 
 	// const isFileTypeImage = fileType === 'singleImage' || fileType === 'multiImage';
 	// const accept = acceptType || (isFileTypeImage ? 'image/*' : '*/*');

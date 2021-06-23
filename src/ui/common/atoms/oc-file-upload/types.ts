@@ -1,4 +1,10 @@
-type FileType = 'singleFile' | 'singleImage' | 'privateSingleFile' | 'multiFile' | 'multiImage' | 'multiPrivateFile';
+type FileType =
+	| 'singleFile'
+	| 'singleImage'
+	| 'privateSingleFile'
+	| 'multiFile'
+	| 'multiImage'
+	| 'multiPrivateFile';
 
 export interface OcFileUploadProps {
 	fileType: FileType;
