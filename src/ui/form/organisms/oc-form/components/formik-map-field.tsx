@@ -8,6 +8,7 @@ import {
 	OcNumberComponent,
 	OcPasswordComponent,
 } from '../../../../common';
+import { OcTextarea } from '../../../atoms';
 import { FIELD_TYPE } from '../../../lib';
 import { OcDynamicFieldArray } from '../../oc-dynamic-field-array';
 import { useOcFormContext } from '../context';
@@ -17,6 +18,7 @@ import {
 	FieldGroupWrapper,
 	FormikOcColoWrapper,
 	FormikOcDatetimePickerWrapper,
+	FormikOcFileUploadWrapper,
 	FormikOcMultiSelectListWrapper,
 	FormikOcSelectWrapper,
 	FormikOcTagsWrapper,
@@ -65,6 +67,19 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 									id={id}
 									inputType="text"
 								/>
+							</FieldGroupWrapper>
+						);
+					case FIELD_TYPE.LONG_TEXT:
+						return (
+							<FieldGroupWrapper
+								key={name}
+								name={name}
+								label={label}
+								labelFor={id}
+								description={description}
+								required={attributes!.required}
+							>
+								<Field name={name} as={OcTextarea} id={id} placeholder={placeholder} />
 							</FieldGroupWrapper>
 						);
 					case FIELD_TYPE.DROPDOWN_LIST:
@@ -263,6 +278,46 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 								required={attributes!.required}
 							>
 								<Field name={name} as={OcPasswordComponent} />
+							</FieldGroupWrapper>
+						);
+					case FIELD_TYPE.SINGLE_FILE:
+					case FIELD_TYPE.PRIVATE_SINGLE_FILE:
+					case FIELD_TYPE.SINGLE_IMAGE:
+						return (
+							<FieldGroupWrapper
+								key={name}
+								name={name}
+								label={label}
+								labelFor={id}
+								description={description}
+								required={attributes!.required}
+							>
+								<Field
+									name={name}
+									component={FormikOcFileUploadWrapper}
+									fileType={type}
+									acceptType={attributes?.accept}
+								/>
+							</FieldGroupWrapper>
+						);
+					case FIELD_TYPE.MULTI_FILE:
+					case FIELD_TYPE.MULTI_PRIVATE_FILE:
+					case FIELD_TYPE.MULTI_IMAGE:
+						return (
+							<FieldGroupWrapper
+								key={name}
+								name={name}
+								label={label}
+								labelFor={id}
+								description={description}
+								required={attributes!.required}
+							>
+								<Field
+									name={name}
+									component={FormikOcFileUploadWrapper}
+									fileType={type}
+									acceptType={attributes?.accept}
+								/>
 							</FieldGroupWrapper>
 						);
 					case FIELD_TYPE.DYNAMIC_FIELD_ARRAY: {
