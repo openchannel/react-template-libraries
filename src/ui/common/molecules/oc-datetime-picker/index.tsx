@@ -61,7 +61,7 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 	return (
 		<Datetime
 			locale="en"
-			dateFormat={type === 'date' ? (settings || 'DD/MM/YYYY') : 'DD/MM/YYYY HH:mm'}
+			dateFormat={type === 'date' ? settings || 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm'}
 			value={value || 'DD/MM/YYYY'}
 			onChange={onChange}
 			initialViewMode="days"
