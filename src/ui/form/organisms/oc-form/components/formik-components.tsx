@@ -8,6 +8,7 @@ import {
 	OcColorComponent,
 	OcDatetimePicker,
 	OcError,
+	OcFileUpload,
 	OcRichTextEditorComponent,
 	OcSelect,
 	OcSelectProps,
@@ -228,3 +229,7 @@ export const FormikOcMultiSelectListWrapper: React.FC<
 		/>
 	);
 }, shouldFieldUpdate(['options']));
+
+export const FormikOcFileUploadWrapper: React.FC<any> = React.memo(({ acceptType, fileType }) => {
+	return <OcFileUpload acceptType={acceptType} fileType={fileType} />;
+});
