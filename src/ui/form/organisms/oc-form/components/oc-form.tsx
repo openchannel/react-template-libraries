@@ -49,7 +49,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	return (
 		<FormikContext.Provider value={formik}>
 			<OcFormContextProvider initialValue={{ flattenFields, fieldsDefinition, updateState }}>
-				<FormikForm className="form" onSubmit={handleSubmit}>
+				<FormikForm className="form" onSubmit={handleSubmit} noValidate>
 					<FormikMapFieldsWrapper />
 					<div className={getOcFormButtonsClass(buttonPosition)}>
 						<div className="form__button">
