@@ -20,7 +20,7 @@ export interface Restrict {
 	};
 }
 
-export type ComponentsAppStatusValue =
+export declare type AppStatusValue =
 	| 'pending'
 	| 'inReview'
 	| 'inDevelopment'
@@ -29,14 +29,10 @@ export type ComponentsAppStatusValue =
 	| 'rejected';
 
 export interface AppStatus {
-	value: ComponentsAppStatusValue;
+	value: AppStatusValue;
 	lastUpdated: number;
 	modifiedBy: string;
 	reason: string;
-}
-
-export interface Parent {
-	status: AppStatus;
 }
 
 export interface StatElement {
@@ -72,6 +68,33 @@ export interface GalleryItem {
 	image: string;
 }
 
+export interface Parent {
+	status: AppStatus;
+}
+
+export interface App {
+	appId: string;
+	customData?: any;
+	lastUpdated: Date | number;
+	version: number;
+	name: string;
+	safeName: string[];
+	developerId: string;
+	model: AppModel[];
+	access?: string[];
+	restrict?: Restrict | Record<string, unknown>;
+	allow?: Restrict | Record<string, unknown>;
+	submittedDate: Date | number;
+	created: Date | number;
+	attributes?: any;
+	rating: number;
+	reviewCount: number;
+	status: AppStatus;
+	statistics: Statistics;
+	isLive: boolean;
+	type?: string;
+}
+
 export interface OwnershipModel {
 	ownershipId: string;
 	date: Date;
@@ -86,33 +109,14 @@ export interface OwnershipModel {
 	customData?: any;
 }
 
-export interface AppTypeOptionModel {
-	value: string;
+export interface AppVersion extends App {
+	isLatestVersion?: boolean;
+	children?: FullAppData[];
+	parent?: Parent;
+	ownership?: OwnershipModel;
 }
 
-export interface AppTypeFieldModel {
-	id: string;
-	label: string;
-	type: string;
-	attributes?: any;
-	description?: string;
-	fields?: AppTypeFieldModel[];
-	subFieldDefinitions?: AppTypeFieldModel[];
-	defaultValue?: any;
-	placeholder?: string;
-	options?: AppTypeOptionModel[] | string[];
-	specialType?: string;
-}
-
-export interface AppTypeModel {
-	appTypeId: string;
-	label?: string;
-	description?: string;
-	createdDate: any;
-	fields?: AppTypeFieldModel[];
-}
-
-export interface FullAppData {
+export interface FullAppData extends AppVersion {
 	/**
 	 * App fields
 	 */
@@ -136,7 +140,6 @@ export interface FullAppData {
 	statistics: Statistics;
 	isLive: boolean;
 	type?: string;
-
 	/**
 	 * App version fields
 	 */
@@ -144,7 +147,6 @@ export interface FullAppData {
 	children?: FullAppData[];
 	parent?: Parent;
 	ownership?: OwnershipModel;
-
 	/**
 	 * custom data fields mapped in constructor
 	 */
