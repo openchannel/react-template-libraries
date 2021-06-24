@@ -1,4 +1,4 @@
-import { FullAppData } from '../../../../src/ui/market/molecules/oc-app-short-info';
+import { FullAppData } from '../../../../src/ui/common/models';
 
 const stat = {
 	'90day': 10,

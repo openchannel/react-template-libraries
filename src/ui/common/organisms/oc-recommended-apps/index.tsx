@@ -41,7 +41,7 @@ export const OcRecommendedAppsComponent: React.FC<RecommendedAppsProps> = (props
 							onClick={clickByAppCard}
 							key={recommendedAppTitle + index}
 						>
-							<OcAppCard appRedirectLink={appCard.link} appIcon={appCard.icon} app={appCard} />
+							<OcAppCard appRedirectLink={appCard.link} app={appCard} />
 						</div>
 					))}
 				</div>

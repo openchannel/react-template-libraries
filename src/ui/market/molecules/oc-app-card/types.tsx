@@ -1,4 +1,4 @@
-import { FullAppData } from '../../../common/models';
+import type { FullAppData } from '../../../common/models';
 
 export interface OcAppCardProps {
 	/**
