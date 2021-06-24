@@ -27,7 +27,7 @@ export const AppCardWrapper: React.FC<CardWrapperProps> = (props) => {
 			onClick={onAppClick ? () => onAppClick(app) : undefined}
 		>
 			{routerLinkForOneApp ? (
-				<Link to={validateLink(routerLinkForOneApp).concat(get(app, appNavigationParam))}>
+				<Link to={validateLink(routerLinkForOneApp).concat(get(app, appNavigationParam, ''))}>
 					{customAppCardTemplate ? (
 						React.cloneElement(customAppCardTemplate, { app })
 					) : (

@@ -31,7 +31,7 @@ export interface OcAppGalleryProps {
 	/**
 	 * Router link for one app click.
 	 */
-	routerLinkForOneApp: string;
+	routerLinkForOneApp?: string;
 	/**
 	 * Key name of the App object which will be chosen like navigation parameter for the Router link.
 	 */
