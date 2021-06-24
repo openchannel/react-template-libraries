@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 
 import { stripHtmlTags } from '../../../../lib';
-import { FullAppData } from '../../molecules/oc-app-card/types';
+import { FullAppData } from '../../models';
 
 import './style.scss';
 
