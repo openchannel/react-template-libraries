@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { mount, shallow } from 'enzyme';
 import { app1, app2 } from '../../../../stories/common/molecules/oc-app-card/mocks';
-import { OcAppCard } from '../../../../src/ui/common/molecules';
+import { OcAppCard } from '../../../../src/ui/market';
 
 describe('OcAppCard', () => {
 	const component = shallow(

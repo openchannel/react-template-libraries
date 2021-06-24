@@ -1,4 +1,4 @@
-import { FullAppData } from '../../../../src/ui/common/molecules/oc-app-card/types';
+import { FullAppData } from '../../../../src/ui/market/molecules/oc-app-card/types';
 
 export const statElement = {
 	'90day': 10,
