@@ -8,6 +8,7 @@ import {
 	OcNumberComponent,
 	OcPasswordComponent
 } from '../../../src/ui/common';
+import { FormikOcFileUploadWrapper } from '../../../src/ui/form';
 import {
 	FIELD_TYPE,
 	OcDynamicFieldArray,
@@ -99,6 +100,15 @@ describe('FormikMapFields', () => {
 		expect(setUpField(FIELD_TYPE.TAGS).find(FormikOcTagsWrapper)).toBeTruthy();
 		expect(setUpField(FIELD_TYPE.BOOLEAN_TAGS).find(FormikOcTagsWrapper).props().tagsType).toBe('boolean');
 		expect(setUpField(FIELD_TYPE.NUMBER_TAGS).find(FormikOcTagsWrapper).props().tagsType).toBe('number');
+	});
+
+	it('should render the oc-file-upload', function () {
+		expect(setUpField(FIELD_TYPE.SINGLE_FILE).find(FormikOcFileUploadWrapper)).toBeTruthy();
+		expect(setUpField(FIELD_TYPE.PRIVATE_SINGLE_FILE).find(FormikOcFileUploadWrapper)).toBeTruthy();
+		expect(setUpField(FIELD_TYPE.SINGLE_IMAGE).find(FormikOcFileUploadWrapper)).toBeTruthy();
+		expect(setUpField(FIELD_TYPE.MULTI_FILE).find(FormikOcFileUploadWrapper)).toBeTruthy();
+		expect(setUpField(FIELD_TYPE.MULTI_PRIVATE_FILE).find(FormikOcFileUploadWrapper)).toBeTruthy();
+		expect(setUpField(FIELD_TYPE.MULTI_IMAGE).find(FormikOcFileUploadWrapper)).toBeTruthy();
 	});
 
 	it('should render the OcDynamicFieldArray', function () {
