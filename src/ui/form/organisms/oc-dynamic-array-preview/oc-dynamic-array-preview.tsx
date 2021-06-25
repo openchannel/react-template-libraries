@@ -1,6 +1,8 @@
 import * as React from 'react';
+import groupBy from 'lodash/groupBy';
 
 import { OcLabelComponent } from '../../../common';
+import { FIELD_TYPE } from '../../lib';
 import { PreviewFieldModel } from '../../models';
 
 import { FieldPreview } from './field-preview';
@@ -16,14 +18,18 @@ export const OcDynamicArrayPreview: React.FC<OcDynamicArrayPreviewProps> = (prop
 			return [];
 		}
 
-		return fields.map((field) => {
+		return fields.map((field, index) => {
 			const result: PreviewFieldModel = {
 				...field,
 				fieldValue: null,
 				isValidField: false,
 				formArrayDFA: null,
-				groupFieldIndex: 0,
 			};
+
+			if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY) {
+				const group = groupBy(fields, 'type')[FIELD_TYPE.DYNAMIC_FIELD_ARRAY];
+				result.groupFieldIndex = group.findIndex((g) => g.index === index);
+			}
 
 			// result.isValidField = isValidDataForFieldType(field.type, result.fieldValue);
 
@@ -37,13 +43,13 @@ export const OcDynamicArrayPreview: React.FC<OcDynamicArrayPreviewProps> = (prop
 
 	return (
 		<div className="array-preview">
-			{previewFields.map((field, index) => (
+			{previewFields.map((field) => (
 				<div key={field.name} className="array-preview__field">
 					<span className="array-preview__field-title">
 						{!hideLabel && <OcLabelComponent>{field.label}</OcLabelComponent>}
 					</span>
 					<div className="array-preview__field-content">
-						<FieldPreview {...field} groupFieldIndex={index} />
+						<FieldPreview {...field} />
 					</div>
 				</div>
 			))}
