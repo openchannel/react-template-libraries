@@ -24,6 +24,7 @@ export const OcDynamicArrayPreview: React.FC<OcDynamicArrayPreviewProps> = (prop
 				fieldValue: null,
 				isValidField: false,
 				formArrayDFA: null,
+				groupFieldIndex: 0,
 			};
 
 			if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY) {
