@@ -16,7 +16,7 @@ import { FormikMapFieldsProps } from '../types';
 
 import {
 	FieldGroupWrapper,
-	FormikOcColoWrapper,
+	FormikOcColorWrapper,
 	FormikOcDatetimePickerWrapper,
 	FormikOcFileUploadWrapper,
 	FormikOcMultiSelectListWrapper,
@@ -181,7 +181,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 							>
 								<Field
 									name={name}
-									component={FormikOcColoWrapper}
+									component={FormikOcColorWrapper}
 									placeholder={placeholder}
 									id={id}
 									{...attributes}

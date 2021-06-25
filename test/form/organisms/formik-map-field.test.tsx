@@ -16,7 +16,7 @@ import {
 	FormikOcDatetimePickerWrapper,
 	FormikOcVideoUrlWrapper,
 	FormikOcTagsWrapper,
-	FormikOcColoWrapper,
+	FormikOcColorWrapper,
 	FormikOcSelectWrapper,
 	FormikRichTextWrapper,
 	FormikMapFieldsProps,
@@ -73,7 +73,7 @@ describe('FormikMapFields', () => {
 		expect(setUpField(FIELD_TYPE.CHECKBOX).find(OcCheckboxComponent)).toBeTruthy();
 		expect(setUpField(FIELD_TYPE.EMAIL_ADDRESS).find(OcInputComponent)).toBeTruthy();
 		expect(setUpField(FIELD_TYPE.WEBSITE_URL).find(OcInputComponent)).toBeTruthy();
-		expect(setUpField(FIELD_TYPE.COLOR).find(FormikOcColoWrapper)).toBeTruthy();
+		expect(setUpField(FIELD_TYPE.COLOR).find(FormikOcColorWrapper)).toBeTruthy();
 		expect(setUpField(FIELD_TYPE.VIDEO_URL).find(FormikOcVideoUrlWrapper)).toBeTruthy();
 		expect(setUpField(FIELD_TYPE.DATE_TIME).find(FormikOcDatetimePickerWrapper)).toBeTruthy();
 		expect(setUpField(FIELD_TYPE.MULTISELECT_LIST).find(FormikOcMultiSelectListWrapper)).toBeTruthy();

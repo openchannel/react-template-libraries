@@ -51,13 +51,13 @@ export const FieldGroupWrapper: React.FC<FieldGroupProps> = (props) => {
 	);
 };
 
-export const FormikOcColoWrapper: React.FC<FCWP<ColorProps['colorValue']>> = React.memo(
+export const FormikOcColorWrapper: React.FC<FCWP<ColorProps['colorValue']>> = React.memo(
 	({ field, form }) => {
 		const onChange = React.useCallback(
 			(value) => {
 				form.setFieldValue(field.name, value);
 			},
-			[form.setFieldValue],
+			[field.name, form.setFieldValue],
 		);
 
 		return (
