@@ -9,5 +9,5 @@ export interface PreviewFieldModel extends FormikField {
 	isValidField: boolean;
 	fieldValue: any;
 	formArrayDFA: any;
-	groupFieldIndex?: number;
+	groupFieldIndex: number;
 }
