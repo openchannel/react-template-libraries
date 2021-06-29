@@ -4,9 +4,9 @@ import { sanitizeUrl } from '@braintree/sanitize-url';
 
 import { isStorybook, stripHtmlTags } from '../../../../lib';
 import { OcRatingComponent } from '../../atoms';
+import { parsePrice } from '../../lib';
 
 import { OcAppShortInfoProps } from './types';
-import { parsePrice } from './utils';
 
 import './styles.scss';
 

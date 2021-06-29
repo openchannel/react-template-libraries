@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { OcAppShortInfo, OcAppShortInfoProps, FullAppData } from '../../../src/ui/market';
+import { FullAppData } from '../../../src/ui/common/models';
+import { OcAppShortInfo, OcAppShortInfoProps } from '../../../src/ui/market';
 
 
 export default {
