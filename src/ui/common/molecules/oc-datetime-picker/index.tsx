@@ -22,7 +22,7 @@ export interface DatepickerProps extends DatetimepickerProps {
 	/**
 	 * Set disabled state of input
 	 */
-	disabled: boolean;
+	disabled?: boolean;
 	/**
 	 * Date of datepicker
 	 */

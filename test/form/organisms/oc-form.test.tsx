@@ -102,13 +102,13 @@ const formJsonData: AppFormModel = {
 const setUp = (props: OcFormProps) => mount(<OcForm {...props} />);
 
 describe('OcForm', () => {
-	let component: any;
+	let wrapper: any;
 
 	const onSubmitMock = jest.fn();
 	const onCancelMock = jest.fn();
 
 	beforeEach(() => {
-		component = setUp({
+		wrapper = setUp({
 			formJsonData,
 			onSubmit: onSubmitMock,
 			onCancel: onCancelMock,
@@ -120,11 +120,22 @@ describe('OcForm', () => {
 	});
 
 	it('should create', () => {
-		expect(component).toBeTruthy();
+		expect(wrapper).toBeTruthy();
+	});
+
+	it('render button group by buttonPosition', () => {
+		expect(wrapper.find('.form__button').at(0).parent().is('.form__buttons.form__buttons_justify_start')).toBeTruthy();
+
+		wrapper.setProps({ buttonPosition: 'center' });
+		expect(wrapper.find('.form__button').at(0).parent().is('.form__buttons.form__buttons_justify_center')).toBeTruthy();
+
+		// instead of undefined. 'left' if default
+		wrapper.setProps({ buttonPosition: 'not-valid-value' });
+		expect(wrapper.find('.form__button').at(0).parent().is('.form__buttons.form__buttons_justify_start.form__buttons_direction_row_reverse')).toBeTruthy();
 	});
 
 	it('should click cancel button', () => {
-		component.find('.form__button').find('button[type="button"]').simulate('click');
+		wrapper.find('.form__button').find('button[type="button"]').simulate('click');
 		expect(onCancelMock).toHaveBeenCalled();
 	});
 
