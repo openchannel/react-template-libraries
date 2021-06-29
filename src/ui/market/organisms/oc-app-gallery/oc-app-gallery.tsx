@@ -1,9 +1,8 @@
+// commit 18f8662efb2ed47b717100d10f41f6f716291fe9 Author: Julia Date: 28.05.21, 17:55
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-
-import ArrowIcon from '../../../../assets/img/arrow.svg';
 
 import { AppCardWrapper } from './components/app-card-wrapper';
+import { ShowMore } from './components/show-more';
 import type { OcAppGalleryProps } from './types';
 
 import './style.scss';
@@ -12,34 +11,29 @@ export const OcAppGallery: React.FC<OcAppGalleryProps> = (props) => {
 	const {
 		appGalleryTitle = '',
 		seeAllUrl,
-		moreAppsTitle = '',
+		moreAppsTitle = 'More',
+		onClickMoreApps,
 		routerIcon,
 		appGalleryDescription,
 		appsArr = [],
 		noAppMessage = '',
 		customAppCardTemplate,
 		routerLinkForOneApp,
-		appNavigationParam,
+		appNavigationParam = 'appId',
 		onAppClick,
 	} = props;
 
 	return (
 		<div className="gallery">
 			<div className="gallery__header">
-				<div className="gallery_header-top">
+				<div className="gallery__header-top">
 					<h4 className="gallery__heading">{appGalleryTitle}</h4>
-					{moreAppsTitle && seeAllUrl && (
-						<Link to={seeAllUrl} className="gallery__more">
-							<span className="gallery__more-text">{moreAppsTitle}</span>
-							{routerIcon ? (
-								<img src={routerIcon} alt="See all" />
-							) : (
-								<span className="gallery__more-icon">
-									<ArrowIcon />
-								</span>
-							)}
-						</Link>
-					)}
+					<ShowMore
+						seeAllUrl={seeAllUrl}
+						moreAppsTitle={moreAppsTitle}
+						onClickMoreApps={onClickMoreApps}
+						routerIcon={routerIcon}
+					/>
 				</div>
 				<p className="gallery__description">{appGalleryDescription}</p>
 			</div>

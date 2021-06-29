@@ -8,6 +8,7 @@ import {
 	OcNumberComponent,
 	OcPasswordComponent
 } from '../../../src/ui/common';
+import { FormikOcFileUploadWrapper } from '../../../src/ui/form';
 import {
 	FIELD_TYPE,
 	OcDynamicFieldArray,
@@ -15,7 +16,7 @@ import {
 	FormikOcDatetimePickerWrapper,
 	FormikOcVideoUrlWrapper,
 	FormikOcTagsWrapper,
-	FormikOcColoWrapper,
+	FormikOcColorWrapper,
 	FormikOcSelectWrapper,
 	FormikRichTextWrapper,
 	FormikMapFieldsProps,
@@ -72,7 +73,7 @@ describe('FormikMapFields', () => {
 		expect(setUpField(FIELD_TYPE.CHECKBOX).find(OcCheckboxComponent)).toBeTruthy();
 		expect(setUpField(FIELD_TYPE.EMAIL_ADDRESS).find(OcInputComponent)).toBeTruthy();
 		expect(setUpField(FIELD_TYPE.WEBSITE_URL).find(OcInputComponent)).toBeTruthy();
-		expect(setUpField(FIELD_TYPE.COLOR).find(FormikOcColoWrapper)).toBeTruthy();
+		expect(setUpField(FIELD_TYPE.COLOR).find(FormikOcColorWrapper)).toBeTruthy();
 		expect(setUpField(FIELD_TYPE.VIDEO_URL).find(FormikOcVideoUrlWrapper)).toBeTruthy();
 		expect(setUpField(FIELD_TYPE.DATE_TIME).find(FormikOcDatetimePickerWrapper)).toBeTruthy();
 		expect(setUpField(FIELD_TYPE.MULTISELECT_LIST).find(FormikOcMultiSelectListWrapper)).toBeTruthy();
@@ -99,6 +100,15 @@ describe('FormikMapFields', () => {
 		expect(setUpField(FIELD_TYPE.TAGS).find(FormikOcTagsWrapper)).toBeTruthy();
 		expect(setUpField(FIELD_TYPE.BOOLEAN_TAGS).find(FormikOcTagsWrapper).props().tagsType).toBe('boolean');
 		expect(setUpField(FIELD_TYPE.NUMBER_TAGS).find(FormikOcTagsWrapper).props().tagsType).toBe('number');
+	});
+
+	it('should render the oc-file-upload', function () {
+		expect(setUpField(FIELD_TYPE.SINGLE_FILE).find(FormikOcFileUploadWrapper)).toBeTruthy();
+		expect(setUpField(FIELD_TYPE.PRIVATE_SINGLE_FILE).find(FormikOcFileUploadWrapper)).toBeTruthy();
+		expect(setUpField(FIELD_TYPE.SINGLE_IMAGE).find(FormikOcFileUploadWrapper)).toBeTruthy();
+		expect(setUpField(FIELD_TYPE.MULTI_FILE).find(FormikOcFileUploadWrapper)).toBeTruthy();
+		expect(setUpField(FIELD_TYPE.MULTI_PRIVATE_FILE).find(FormikOcFileUploadWrapper)).toBeTruthy();
+		expect(setUpField(FIELD_TYPE.MULTI_IMAGE).find(FormikOcFileUploadWrapper)).toBeTruthy();
 	});
 
 	it('should render the OcDynamicFieldArray', function () {

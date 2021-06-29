@@ -21,6 +21,10 @@ export interface OcAppGalleryProps {
 	 */
 	moreAppsTitle?: string;
 	/**
+	 * Emitter for click by moreAppsTitle.
+	 */
+	onClickMoreApps?: () => void;
+	/**
 	 * Router link for the more apps navigation.
 	 */
 	seeAllUrl?: string;
@@ -34,6 +38,7 @@ export interface OcAppGalleryProps {
 	routerLinkForOneApp?: string;
 	/**
 	 * Key name of the App object which will be chosen like navigation parameter for the Router link.
+	 * @default appId
 	 */
 	appNavigationParam?: string;
 	/**
