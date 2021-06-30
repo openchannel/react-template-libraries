@@ -17,7 +17,7 @@ export const HeadColumnCell: React.FC<HeadColumnCellProps> = React.memo(
 				role="button"
 				tabIndex={0}
 				className="user-table__th-row"
-				data-key={columnKey}
+				data-columnkey={columnKey}
 				onClick={onClick}
 			>
 				{title}

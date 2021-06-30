@@ -12,7 +12,7 @@ export const OcMenuUserGrid: React.FC<OcMenuUserGridProps> = (props) => {
 		(e) => {
 			if (!onSort) return;
 
-			onSort(e.target.dataset.key);
+			onSort(e.currentTarget.dataset.columnkey);
 		},
 		[onSort],
 	);
