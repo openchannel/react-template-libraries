@@ -39,4 +39,6 @@ export interface LoginProps {
 	/**formik initial values */
 	inputEmailValue?: string;
 	inputPasswordValue?: string;
+	isIncorrectEmail?: boolean;
+	isUnverifiedEmail?: boolean;
 }
