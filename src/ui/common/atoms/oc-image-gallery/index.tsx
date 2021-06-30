@@ -28,11 +28,7 @@ export const OcImageGalleryComponent: React.FC<ImageGalleryProps> = (props) => {
 		<div className="image-gallery">
 			{processedGallery.map((item, k) => (
 				<div key={k} className="image-gallery__item">
-					<img
-						src={item.image}
-						/* height="192" */ alt="icon"
-						className="image-gallery__item-image"
-					/>
+					<img src={item.image} alt="icon" className="image-gallery__item-image" />
 					<p className="image-gallery__item-title">{item.title}</p>
 					<span className="image-gallery__item-description">{item.description}</span>
 				</div>
