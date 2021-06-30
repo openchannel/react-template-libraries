@@ -8,7 +8,6 @@ import { appData } from './constants';
 
 const setUp = (props: OcAppShortInfoProps) => shallow(<OcAppShortInfo {...props} />);
 
-
 describe('OcAppShortInfo', () => {
 	let component: ShallowWrapper;
 

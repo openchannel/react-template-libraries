@@ -1,5 +1,4 @@
-import { parsePrice } from '../../../../src/ui/market/molecules/oc-app-short-info'
-
+import { parsePrice } from '../../../../src/ui/market/lib';
 
 describe('OcAppShortInfo-utils', () => {
 	it('should parse price and return Free', () => {

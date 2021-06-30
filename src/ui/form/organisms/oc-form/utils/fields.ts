@@ -98,7 +98,7 @@ export const updateNestedFields = (params: {
 	element: FormikField;
 	formikValues?: FormikFieldsValues;
 	isEditing: boolean;
-}) => {
+}): { fields?: FormikField[] } => {
 	if (!params.element.fields) {
 		return {};
 	}
@@ -108,6 +108,7 @@ export const updateNestedFields = (params: {
 			...f,
 			...setFieldEditable(params),
 			...setFieldValueByName({ ...params, element: f }),
+			...updateNestedFields({ ...params, element: f }),
 		})),
 	};
 };
