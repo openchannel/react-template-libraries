@@ -1,18 +1,6 @@
 import * as React from 'react';
 
-import { DropdownVariants } from '../base-dropdown';
-
-export interface ListWrapperProps {
-	alignRight?: boolean;
-	variant: DropdownVariants;
-	style?: React.CSSProperties;
-	className: string;
-	children: React.ReactNode;
-	'x-placement'?: string;
-	'data-popper-escaped'?: boolean;
-	'data-popper-placement'?: string;
-	'data-popper-reference-hidden'?: boolean;
-}
+import { ListWrapperProps } from '../types';
 
 export const ListWrapper = React.forwardRef(
 	(props: ListWrapperProps, ref: React.Ref<HTMLDivElement>) => {
