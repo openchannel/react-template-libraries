@@ -1,12 +1,6 @@
 import * as React from 'react';
 
-import { DropdownVariants } from '../base-dropdown';
-
-export interface ListItemProps {
-	variant: DropdownVariants;
-	className?: string;
-	children: React.ReactNode;
-}
+import { ListItemProps } from '../types';
 
 export const ListItem = React.forwardRef(
 	(props: ListItemProps, ref: React.Ref<HTMLButtonElement>) => {
