@@ -2,7 +2,8 @@
 import * as React from 'react';
 
 import { isStorybook, stripHtmlTags } from '../../../../lib';
-import { OcRatingComponent, parsePrice } from '../../index';
+import { OcRatingComponent } from '../../index';
+import { parsePrice } from '../../lib';
 
 import { OcAppCardWrapper } from './components/oc-app-card-wrapper';
 import type { OcAppCardProps } from './types';
