@@ -1,11 +1,6 @@
 import * as React from 'react';
-import { DropdownToggleProps } from 'react-bootstrap/DropdownToggle';
 
-import { DropdownVariants } from '../base-dropdown';
-
-export interface ToggleProps extends DropdownToggleProps {
-	variant: DropdownVariants;
-}
+import { ToggleProps } from '../types';
 
 export const Toggle = React.forwardRef(
 	(props: ToggleProps, ref: React.ForwardedRef<HTMLDivElement>) => {

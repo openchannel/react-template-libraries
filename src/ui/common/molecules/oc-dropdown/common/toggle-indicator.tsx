@@ -1,12 +1,6 @@
 import * as React from 'react';
 
-export interface BaseToggleIndicatorProps {
-	isOpened: boolean;
-	defaultPlaceholderIcon?: JSX.Element;
-	activePlaceholderIcon?: JSX.Element;
-}
-
-export type ToggleIndicatorProps = Omit<BaseToggleIndicatorProps, 'isOpened'>;
+import { BaseToggleIndicatorProps } from '../types';
 
 export const ToggleIndicator: React.FC<BaseToggleIndicatorProps> = (props): JSX.Element | null => {
 	const { isOpened, defaultPlaceholderIcon, activePlaceholderIcon } = props;
