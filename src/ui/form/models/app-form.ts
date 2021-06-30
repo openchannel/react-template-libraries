@@ -32,10 +32,10 @@ export interface AppFormModel {
 	formId?: string;
 	name?: string;
 	createdDate?: number;
-	fields?: FormikField[];
+	fields?: AppFormField[];
 }
 
-export interface AppFormFieldAttributes {
+export interface AppFormFieldAttributes extends Record<string, any> {
 	maxCount?: number;
 	minCount?: number;
 	required?: boolean;

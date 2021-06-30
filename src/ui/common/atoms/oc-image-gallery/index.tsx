@@ -1,17 +1,12 @@
 import * as React from 'react';
 
-import './style.scss';
+import { GalleryItem } from '../../models';
 
-export interface GalleryItem {
-	title: string;
-	description: string;
-	image: string;
-}
+import './style.scss';
 
 export interface ImageGalleryProps {
 	/**
-	 * Array of the gallery images. Must contain a values:
-	 * 'image', 'title', 'description'
+	 * Array of the gallery images. Must contain a values: 'image', 'title', 'description'.
 	 */
 	gallery: GalleryItem[];
 	/**

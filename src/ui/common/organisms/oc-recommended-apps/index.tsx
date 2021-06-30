@@ -1,7 +1,7 @@
 //commit 77c7c788ebd91651e6edbb765e0501d609a55bf0 Author: Julia Date: 05.05.21, 19:30
 import * as React from 'react';
 
-import { OcAppCard } from '../../../common';
+import { OcAppCard } from '../../../market';
 
 import './style.scss';
 
@@ -41,7 +41,7 @@ export const OcRecommendedAppsComponent: React.FC<RecommendedAppsProps> = (props
 							onClick={clickByAppCard}
 							key={recommendedAppTitle + index}
 						>
-							<OcAppCard appRedirectLink={appCard.link} appIcon={appCard.icon} app={appCard} />
+							<OcAppCard appRedirectLink={appCard.link} app={appCard} />
 						</div>
 					))}
 				</div>

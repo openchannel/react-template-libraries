@@ -11,9 +11,7 @@ moment.updateLocale('en', {
 	weekdays: 'S_M_T_W_T_F_S'.split('_'),
 	weekdaysShort: 'S_M_T_W_T_F_S'.split('_'),
 	weekdaysMin: 'S_M_T_W_T_F_S'.split('_'),
-	week: {
-		dow: 1,
-	},
+	week: { dow: 1 },
 });
 
 export interface DatepickerProps extends DatetimepickerProps {
@@ -24,7 +22,7 @@ export interface DatepickerProps extends DatetimepickerProps {
 	/**
 	 * Set disabled state of input
 	 */
-	disabled: boolean;
+	disabled?: boolean;
 	/**
 	 * Date of datepicker
 	 */
@@ -47,8 +45,6 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 	const handleOpen = React.useCallback(() => setTimeVisible(true), [setTimeVisible]);
 	const handleClose = React.useCallback(() => setTimeVisible(false), [setTimeVisible]);
 
-	const returnDateFormat = (): string => (settings ? moment().format(settings) : 'DD/MM/YYYY');
-
 	const renderWithTime = React.useCallback(
 		(mode: string, renderDefault: any) => {
 			if (mode !== 'days') return renderDefault();
@@ -65,13 +61,13 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 	return (
 		<Datetime
 			locale="en"
-			dateFormat={type === 'date' ? returnDateFormat() : 'DD/MM/YYYY HH:mm'}
-			inputProps={{ disabled: disabled }}
-			value={value}
+			dateFormat={type === 'date' ? settings || 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm'}
+			value={value || 'DD/MM/YYYY'}
 			onChange={onChange}
 			initialViewMode="days"
 			timeFormat={false}
 			renderInput={InputWithIcon}
+			inputProps={{ disabled }}
 			renderView={renderWithTime}
 			onOpen={handleOpen}
 			onClose={handleClose}

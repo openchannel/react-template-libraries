@@ -38,12 +38,7 @@ export const OcCheckboxComponent: React.FC<CheckboxProps> = (props) => {
 	return (
 		// eslint-disable-next-line jsx-a11y/label-has-for
 		<label className="form-checkbox">
-			<input
-				type="checkbox"
-				className="form-checkbox__input form-checkbox__input_hidden"
-				required={required}
-				{...p}
-			/>
+			<input type="checkbox" className="form-checkbox__input form-checkbox__input_hidden" {...p} />
 			<span className="form-checkbox__checkmark" />
 			<span className="form-checkbox__label">
 				{labelText || ''}
