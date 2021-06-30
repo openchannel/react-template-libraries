@@ -98,6 +98,7 @@ RecentlyAddedEmpty.args = {
 	appGalleryDescription: 'The latest apps that help you team work and build faster',
 	appsArr: [],
 	onAppClick: action('onAppClick'),
+	onClickMoreApps: action('onClickMoreApps'),
 };
 
 export const RecentlyAddedSome = Component.bind({});
@@ -106,8 +107,8 @@ RecentlyAddedSome.args = {
 	appGalleryTitle: 'Recently Added',
 	appGalleryDescription: 'The latest apps that help you team work and build faster',
 	appsArr: [app1, app2, app3],
-	seeAllUrl: '',
 	onAppClick: action('onAppClick'),
+	onClickMoreApps: action('onClickMoreApps'),
 };
 
 export const RecentlyAddedMax = Component.bind({});
@@ -116,8 +117,8 @@ RecentlyAddedMax.args = {
 	appGalleryTitle: 'Recently Added',
 	appGalleryDescription: 'The latest apps that help you team work and build faster',
 	appsArr: [app1, app2, app3, app4],
-	seeAllUrl: '',
 	onAppClick: action('onAppClick'),
+	onClickMoreApps: action('onClickMoreApps'),
 };
 
 export const MostPopular = Component.bind({});
@@ -126,8 +127,8 @@ MostPopular.args = {
 	appGalleryTitle: 'Most Popular',
 	appGalleryDescription: 'The most used apps that help you and your team get more done',
 	appsArr: [app1, app2, app3, app4, app1, app2],
-	seeAllUrl: '',
 	onAppClick: action('onAppClick'),
+	onClickMoreApps: action('onClickMoreApps'),
 };
 
 export const AppsForAnalytics = Component.bind({});
@@ -136,6 +137,6 @@ AppsForAnalytics.args = {
 	appGalleryTitle: 'Apps for Analytics',
 	appGalleryDescription: 'Get insights and analytics to make the better decisions',
 	appsArr: [app1, app2, app3, app4, app1, app2],
-	seeAllUrl: '',
 	onAppClick: action('onAppClick'),
+	onClickMoreApps: action('onClickMoreApps'),
 };

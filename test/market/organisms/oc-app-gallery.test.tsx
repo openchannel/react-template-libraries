@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { Link } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { Link, BrowserRouter } from 'react-router-dom';
 
-import { OcAppGallery, OcAppGalleryProps } from '../../../../src/ui/market';
+import { OcAppGallery, OcAppGalleryProps } from '../../../src/ui/market';
 
 // @ts-ignore
 import { getMockedApp } from './mocks';
@@ -51,7 +50,7 @@ describe('OcAppGallery', () => {
 			appGalleryDescription: 'The list of test apps',
 			moreAppsTitle: 'See more',
 		});
-		expect(wrapper.find('.gallery_header-top').find(Link)).toHaveLength(0);
+		expect(wrapper.find('.gallery__header-top').find(Link)).toHaveLength(0);
 	});
 
 	it('should render link to "watch more apps"', () => {
@@ -63,7 +62,7 @@ describe('OcAppGallery', () => {
 			seeAllUrl: '/some-collection',
 		});
 
-		const headerLink = wrapper.find('.gallery_header-top').find(Link);
+		const headerLink = wrapper.find('.gallery__header-top').find(Link);
 		expect(headerLink.find('.gallery__more-text').text()).toContain('See more');
 		// should render default icon.
 		expect(headerLink.find('.gallery__more-icon')).toBeTruthy();
@@ -79,7 +78,7 @@ describe('OcAppGallery', () => {
 			routerIcon: '/path/to/icon',
 		});
 
-		const headerLink = wrapper.find('.gallery_header-top').find(Link);
+		const headerLink = wrapper.find('.gallery__header-top').find(Link);
 		expect(headerLink.find('img').props().src).toBe('/path/to/icon');
 	});
 
@@ -142,6 +141,7 @@ describe('OcAppGallery', () => {
 		const wrapper = setUp({
 			appsArr: [getMockedApp()],
 			routerLinkForOneApp: '/link-without-slash-in-end/123',
+			appNavigationParam: '',
 			customAppCardTemplate: <div className="some-custom-template" />,
 		});
 

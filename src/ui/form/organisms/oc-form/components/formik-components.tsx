@@ -51,13 +51,13 @@ export const FieldGroupWrapper: React.FC<FieldGroupProps> = (props) => {
 	);
 };
 
-export const FormikOcColoWrapper: React.FC<FCWP<ColorProps['colorValue']>> = React.memo(
+export const FormikOcColorWrapper: React.FC<FCWP<ColorProps['colorValue']>> = React.memo(
 	({ field, form }) => {
 		const onChange = React.useCallback(
 			(value) => {
 				form.setFieldValue(field.name, value);
 			},
-			[form.setFieldValue],
+			[field.name, form.setFieldValue],
 		);
 
 		return (
@@ -74,14 +74,14 @@ export const FormikOcColoWrapper: React.FC<FCWP<ColorProps['colorValue']>> = Rea
 
 export const FormikRichTextWrapper: React.FC<
 	FCWP<string | undefined> & {
-		placeholder: string;
+		placeholder?: string;
 	}
 > = React.memo(({ field, form, placeholder }) => {
 	const onChange = React.useCallback(
 		(value) => {
 			form.setFieldValue(field.name, value);
 		},
-		[form.setFieldValue],
+		[field.name, form.setFieldValue],
 	);
 
 	return (
@@ -98,14 +98,14 @@ export const FormikRichTextWrapper: React.FC<
 export const FormikOcSelectWrapper: React.FC<
 	FCWP<OcSelectProps['value'] | undefined> & {
 		options: OcSelectProps['selectValArr'];
-		placeholder: OcSelectProps['placeholder'];
+		placeholder?: OcSelectProps['placeholder'];
 	}
 > = React.memo(({ field, form, options, placeholder }) => {
 	const onChange = React.useCallback(
 		(value) => {
 			form.setFieldValue(field.name, value);
 		},
-		[form.setFieldValue],
+		[field.name, form.setFieldValue],
 	);
 
 	return (
@@ -121,15 +121,15 @@ export const FormikOcSelectWrapper: React.FC<
 export const FormikOcTagsWrapper: React.FC<
 	FCWP<OcTagsProps['value']> & {
 		options: OcTagsProps['availableTags'];
-		placeholder: OcTagsProps['placeholder'];
-		tagsType: OcTagsProps['tagsType'];
+		placeholder?: OcTagsProps['placeholder'];
+		tagsType?: OcTagsProps['tagsType'];
 	}
 > = React.memo(({ field, form, options, placeholder, tagsType }) => {
 	const onChange = React.useCallback(
 		(value) => {
 			form.setFieldValue(field.name, value);
 		},
-		[form.setFieldValue],
+		[field.name, form.setFieldValue],
 	);
 
 	return (
@@ -147,7 +147,7 @@ export const FormikOcTagsWrapper: React.FC<
 
 export const FormikOcVideoUrlWrapper: React.FC<
 	FCWP<VideoUrlProps['value']> & {
-		placeholder: VideoUrlProps['placeholder'];
+		placeholder?: VideoUrlProps['placeholder'];
 	}
 > = React.memo(({ field, form, placeholder }) => {
 	const onChange = React.useCallback(
@@ -171,7 +171,7 @@ export const FormikOcVideoUrlWrapper: React.FC<
 export const FormikOcDatetimePickerWrapper: React.FC<
 	FCWP<DatepickerProps['value']> & {
 		type: DatepickerProps['type'];
-		disabled: DatepickerProps['disabled'];
+		disabled?: DatepickerProps['disabled'];
 	}
 > = React.memo(
 	({ field, form, type, disabled }) => {
@@ -179,7 +179,7 @@ export const FormikOcDatetimePickerWrapper: React.FC<
 			(value) => {
 				form.setFieldValue(field.name, value);
 			},
-			[form.setFieldValue],
+			[field.name, form.setFieldValue],
 		);
 
 		return (
@@ -193,7 +193,7 @@ export const FormikOcDatetimePickerWrapper: React.FC<
 		);
 	},
 	shouldFieldUpdate(
-		['type'],
+		['type', 'disabled'],
 		(
 			prevProps: Readonly<
 				React.PropsWithChildren<{ field: FieldInputProps<string | moment.Moment> }>
@@ -215,7 +215,7 @@ export const FormikOcMultiSelectListWrapper: React.FC<
 		(value) => {
 			form.setFieldValue(field.name, value);
 		},
-		[form.setFieldValue],
+		[field.name, form.setFieldValue],
 	);
 
 	return (
