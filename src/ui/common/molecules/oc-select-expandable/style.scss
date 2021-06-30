@@ -24,8 +24,9 @@
 		.select-expandable__icon {
 			display: flex;
 			align-items: center;
-			filter: invert(51%) sepia(80%) saturate(4398%) hue-rotate(213deg) brightness(104%)
-				contrast(99%); //need to be changed if $primary changes
+			path {
+				fill: $primary;
+			}
 		}
 	}
 
