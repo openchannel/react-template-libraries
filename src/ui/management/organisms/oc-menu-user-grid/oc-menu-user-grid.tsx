@@ -6,12 +6,16 @@ import { OcMenuUserGridProps } from './types';
 import './style.scss';
 
 export const OcMenuUserGrid: React.FC<OcMenuUserGridProps> = (props) => {
-	const { properties, sortIcon, menuUrl, onMenuClick } = props;
+	const { properties, sortIcon, onSort, menuUrl, onMenuClick } = props;
 
-	const handleSortUsers = React.useCallback((e) => {
-		const key = e.target.dataset.key;
-		console.log('sortUsersBy key', key);
-	}, []);
+	const handleSortUsers = React.useCallback(
+		(e) => {
+			if (!onSort) return;
+
+			onSort(e.target.dataset.key);
+		},
+		[onSort],
+	);
 
 	return (
 		<div className="user-grid-container">
