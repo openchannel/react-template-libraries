@@ -69,12 +69,12 @@ export const OcExpandableSelect: React.FC<ExpandSelectProps> = (props) => {
 							collapsedIconLink ? (
 								<img src={collapsedIconLink} alt="collapsed-icon" />
 							) : (
-								<CollapsedIcon />
+								<CollapsedIcon className="svg-primary" />
 							)
 						) : expandedIconLink ? (
 							<img src={expandedIconLink} alt="expanded-icon" />
 						) : (
-							<ExpandedIcon />
+							<ExpandedIcon className="svg-primary" />
 						)}
 					</a>
 				</h6>
