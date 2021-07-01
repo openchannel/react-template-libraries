@@ -37,7 +37,7 @@ export const DataRow: React.FC<DataRowProps> = (props) => {
 			};
 			onMenuClick(action);
 		},
-		[onMenuClick],
+		[onMenuClick, user],
 	);
 
 	const isInvited = user.inviteStatus === 'INVITED';
