@@ -5,6 +5,8 @@ import {
 	ExpandableListItem,
 	SelectModel,
 } from '../../molecules/oc-select-expandable/expandable-select-item';
+import CollapsedIcon from '../../../../assets/img/down-arrow.svg';
+import ExpandedIcon from '../../../../assets/img/select-up.svg';
 import './style.scss';
 
 export interface ExpandSelectProps {
@@ -45,8 +47,8 @@ export const OcExpandableSelect: React.FC<ExpandSelectProps> = (props) => {
 		toggle,
 		selectModels = [],
 		onChange,
-		collapsedIconLink = '../../../../assets/img/select-down.svg',
-		expandedIconLink = '../../../../assets/img/select-up.svg',
+		collapsedIconLink,
+		expandedIconLink,
 	} = props;
 	const handleChange = React.useCallback(
 		(e: any) => {
@@ -64,9 +66,15 @@ export const OcExpandableSelect: React.FC<ExpandSelectProps> = (props) => {
 					{title}
 					<a className="select-expandable__icon">
 						{isCollapsed ? (
-							<img src={collapsedIconLink} alt="collapsed-icon" />
-						) : (
+							collapsedIconLink ? (
+								<img src={collapsedIconLink} alt="collapsed-icon" />
+							) : (
+								<CollapsedIcon className="svg-primary" />
+							)
+						) : expandedIconLink ? (
 							<img src={expandedIconLink} alt="expanded-icon" />
+						) : (
+							<ExpandedIcon className="svg-primary" />
 						)}
 					</a>
 				</h6>
