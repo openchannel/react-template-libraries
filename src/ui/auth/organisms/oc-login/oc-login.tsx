@@ -10,11 +10,9 @@ import {
 	OcError,
 	OcInputComponent,
 } from '../../../../ui/common';
-import { FormikInputEmail, FormikInputPassword } from './oc-login-inputs';
-import { validateLogin, onActivationLinkClick } from '../../../../lib/utils';
+import { validateLogin, onActivationLinkClick } from './utils';
 import { LoginProps } from './types';
 import './style.scss';
-import { errorMessages } from '../../../form';
 
 export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 	const {
@@ -39,7 +37,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 				onSubmit={handleSubmit}
 				validate={validateLogin}
 			>
-				{({ handleSubmit, handleChange, isSubmitting, errors, values }) => (
+				{({ handleSubmit, handleChange, isSubmitting, errors, values, handleBlur }) => (
 					<Form onSubmit={handleSubmit} noValidate>
 						<div className="login__card-body">
 							<div className="login__logo">
@@ -61,13 +59,12 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 								<div className="login__error">
 									This account has not been activated yet. <br />
 									Please check your inbox for an activation email or{' '}
-									<Link
+									<button
 										className="font-s font-med resend-link"
-										to="/"
 										onClick={() => onActivationLinkClick(values.email || '/')}
 									>
 										resend the activation email
-									</Link>
+									</button>
 								</div>
 							)}
 							<div className="login__email login__email_margin_top">
@@ -82,6 +79,8 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 									required
 									id="login_email"
 									onChange={handleChange}
+									value={values.email}
+									onBlur={handleBlur}
 									customClass="login__email-input"
 								/>
 								{errors.email && <OcError message={[errors.email]} />}
@@ -98,6 +97,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 									customClass="login__password-input"
 									id="login_password"
 									onChange={handleChange}
+									onBlur={handleBlur}
 									value={values.password}
 									required
 								/>
