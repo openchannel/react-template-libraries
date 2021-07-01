@@ -2,12 +2,19 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Formik, Form } from 'formik';
-
-import { OcButtonComponent, OcCheckboxComponent, OcLabelComponent } from '../../../../ui/common';
+import {
+	OcButtonComponent,
+	OcCheckboxComponent,
+	OcLabelComponent,
+	OcPasswordComponent,
+	OcError,
+	OcInputComponent,
+} from '../../../../ui/common';
 import { FormikInputEmail, FormikInputPassword } from './oc-login-inputs';
-
+import { validateLogin, onActivationLinkClick } from '../../../../lib/utils';
 import { LoginProps } from './types';
 import './style.scss';
+import { errorMessages } from '../../../form';
 
 export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 	const {
@@ -22,23 +29,6 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 		isUnverifiedEmail,
 	} = props;
 
-	const validateEmail = (value: string) => {
-		let error;
-		if (!value) {
-			error = 'Required';
-		} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-			error = 'Invalid email address';
-		}
-		return error;
-	};
-	const validatePassword = (value: string) => {
-		let error;
-		if (!value) {
-			error = 'Required';
-		}
-		return error;
-	};
-
 	return (
 		<div className="login login-card login-card_borders">
 			<Formik
@@ -47,8 +37,9 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 					password: inputPasswordValue || '',
 				}}
 				onSubmit={handleSubmit}
+				validate={validateLogin}
 			>
-				{({ handleSubmit, handleChange, isSubmitting }) => (
+				{({ handleSubmit, handleChange, isSubmitting, errors, values }) => (
 					<Form onSubmit={handleSubmit} noValidate>
 						<div className="login__card-body">
 							<div className="login__logo">
@@ -70,17 +61,48 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 								<div className="login__error">
 									This account has not been activated yet. <br />
 									Please check your inbox for an activation email or{' '}
-									<Link className="font-s font-med resend-link" to="/">
+									<Link
+										className="font-s font-med resend-link"
+										to="/"
+										onClick={() => onActivationLinkClick(values.email || '/')}
+									>
 										resend the activation email
 									</Link>
 								</div>
 							)}
-							<FormikInputEmail name="email" validate={validateEmail} handleChange={handleChange} />
-							<FormikInputPassword
-								name="password"
-								handleChange={handleChange}
-								validate={validatePassword}
-							/>
+							<div className="login__email login__email_margin_top">
+								<OcLabelComponent
+									htmlFor="login_email"
+									text="Email"
+									className="login__form-label login__email-label"
+								/>
+								<OcInputComponent
+									placeholder="Email"
+									name="email"
+									required
+									id="login_email"
+									onChange={handleChange}
+									customClass="login__email-input"
+								/>
+								{errors.email && <OcError message={[errors.email]} />}
+							</div>
+							<div className="login__password">
+								<OcLabelComponent
+									htmlFor="login_password"
+									text="Password"
+									className="login__form-label login__password-label"
+								/>
+								<OcPasswordComponent
+									name="password"
+									placeholder="Password"
+									customClass="login__password-input"
+									id="login_password"
+									onChange={handleChange}
+									value={values.password}
+									required
+								/>
+								{errors.password && <OcError message={[errors.password]} />}
+							</div>
 							<div className="login__forgot-block">
 								<div className="remember">
 									<OcCheckboxComponent type="checkbox" labelText="Remember Me" />

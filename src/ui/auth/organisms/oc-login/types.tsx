@@ -1,3 +1,17 @@
+import { InputProps, PasswordProps } from '../../../../ui/common';
+
+export interface FormikEmail extends InputProps {
+	field: string;
+	handleChange: (e: React.ChangeEvent<any>) => void;
+	validate: (value: string) => string | undefined;
+}
+
+export interface FormikPassword extends PasswordProps {
+	field: string;
+	handleChange: (e: React.ChangeEvent<any>) => void;
+	validate: (value: string) => string | undefined;
+}
+
 export interface LoginProps {
 	/**
 	 * function that is called on form submit
@@ -7,10 +21,6 @@ export interface LoginProps {
 	 * Router path.
 	 */
 	sendActivationLink?: string;
-	/**
-	 * handler function called on onChange
-	 */
-	onChange?: () => void;
 	/**
 	 * forgot password url
 	 */
