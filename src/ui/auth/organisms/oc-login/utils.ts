@@ -10,7 +10,7 @@ export const validateLogin = (values: FormikValues) => {
     errors.email = errorMessages.email();
   }
   if (!values.password) {
-    errors.password = errorMessages.required;
+    errors.password = errorMessages.required();
   }
 
   return errors;
