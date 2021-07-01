@@ -23,7 +23,7 @@ export interface OcFormProps {
 	 */
 	successButtonText?: string;
 	/**
-	 * Set position of the field label. Can be: 'top', 'left', 'right'.
+	 * Set position of the field label. Can be: 'top', 'left', 'right', 'between'.
 	 * @default left
 	 */
 	buttonPosition?: string;
