@@ -49,3 +49,7 @@
 		@include font-family-rubik('Medium');
 	}
 }
+
+.error-border {
+	border-color: $danger;
+}

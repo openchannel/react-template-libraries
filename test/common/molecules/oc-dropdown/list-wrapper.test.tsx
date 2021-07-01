@@ -12,7 +12,7 @@ describe('OcDropdown - list wrapper component (common dropdown)', () => {
 			style={{ position: 'absolute' }}
 			className=""
 		>
-			<ListItem variant="inline">value 1</ListItem>
+			<ListItem variant="inline" option={{ label: 'value 1', value: 'value 1' }}>value 1</ListItem>
 		</ListWrapper>
 	);
 
