@@ -15,8 +15,8 @@ const DefaultComponent: Story<OcResetPasswordProps> = (args) => {
 	const [blurred, setBlurred] = React.useState(false);
 	const [validationError, setError] = React.useState(false);
 
-	const handleButtoClick = () => {
-		!value ? setError(true) : setError(false);
+	const handleButtonClick = () => {
+		!value ? (setBlurred(true), setError(true)) : (setError(false), setBlurred(false));
 	};
 
 	React.useEffect(() => {
@@ -32,11 +32,11 @@ const DefaultComponent: Story<OcResetPasswordProps> = (args) => {
 					id: 'input',
 					value,
 					onChange: (e: any) => setValue(e.target.value),
-					onBlur: () => setBlurred(true),
-					customClass: blurred && validationError ? 'error' : '',
+					onBlur: () => (setBlurred(true), handleButtonClick()),
+					customClass: blurred && validationError ? 'error-border' : '',
 				}}
 				inputError={errorMessages.required()}
-				handleButtonClick={handleButtoClick}
+				handleButtonClick={handleButtonClick}
 				validationError={validationError}
 			/>
 		</BrowserRouter>
