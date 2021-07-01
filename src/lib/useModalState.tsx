@@ -1,9 +1,9 @@
-import { EffectCallback, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 interface useModalStateProps {
 	isOpened: boolean;
-	openModal: EffectCallback;
-	closeModal: EffectCallback;
+	openModal: () => void;
+	closeModal: () => void;
 }
 
 export const useModalState = (): useModalStateProps => {
