@@ -24,6 +24,7 @@ export const BaseDropdown: React.FC<BaseDropdownProps & ToggleIndicatorProps> = 
 		className = '',
 		children,
 		listItem,
+		listProps = {},
 		defaultPlaceholderIcon,
 		activePlaceholderIcon,
 	} = props;
@@ -45,8 +46,9 @@ export const BaseDropdown: React.FC<BaseDropdownProps & ToggleIndicatorProps> = 
 
 	const rootClassName =
 		variant === INLINE_VARIANT ? `dropdown-label ${className}` : `dropdown-button ${className}`;
-	const listProps = variant === INLINE_VARIANT ? { alignRight: true } : {};
 	const styleProps = minDropdownWidth ? { minWidth: minDropdownWidth } : {};
+	const mergedListProps =
+		variant === INLINE_VARIANT ? { alignRight: true, ...listProps } : { ...listProps };
 
 	return (
 		<BootstrapDropdown className={rootClassName} style={styleProps} onToggle={onToggleCallback}>
@@ -58,7 +60,12 @@ export const BaseDropdown: React.FC<BaseDropdownProps & ToggleIndicatorProps> = 
 					activePlaceholderIcon={activePlaceholderIcon}
 				/>
 			</BootstrapDropdown.Toggle>
-			<BootstrapDropdown.Menu as={ListWrapper} variant={variant} style={styleProps} {...listProps}>
+			<BootstrapDropdown.Menu
+				as={ListWrapper}
+				variant={variant}
+				style={styleProps}
+				{...mergedListProps}
+			>
 				{options.map((option) => (
 					<BootstrapDropdown.Item
 						key={option.label}

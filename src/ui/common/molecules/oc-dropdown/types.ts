@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { DropdownMenuProps } from 'react-bootstrap/DropdownMenu';
 import { DropdownToggleProps } from 'react-bootstrap/DropdownToggle';
 
 import { BLOCK_VARIANT, INLINE_VARIANT } from './base-dropdown';
@@ -82,6 +83,10 @@ export interface BaseDropdownProps {
 	 * ListItem component to render. Should be wrapped with forwardRef.
 	 */
 	listItem?: React.ForwardRefExoticComponent<any>;
+	/**
+	 * A set of props passed directly to dropdown-menu list.
+	 */
+	listProps?: { alignRight?: DropdownMenuProps['alignRight'] };
 }
 
 export type OcDropdownProps = Omit<BaseDropdownProps, 'variant' | 'minDropdownWidth' | 'children'>;
