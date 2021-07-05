@@ -2,7 +2,6 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-// import { errorMessages } from '../../../src/ui/form';
 import { OcLoginComponent, LoginProps } from '../../../src/ui/auth';
 
 export default {
