@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
-import { action } from '@storybook/addon-actions';
 
 import { FullAppData } from '../../../src/ui/common/models';
 import { OcAppTable } from '../../../src/ui/portal';
