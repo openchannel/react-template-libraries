@@ -20,10 +20,6 @@ export interface LoginProps {
 	 */
 	loginButtonText?: string;
 	/**
-	 * is submit process running - boolean
-	 */
-	process?: boolean;
-	/**
 	 * click handler on 'forgot password'
 	 */
 	onActivationLinkClick?: () => void;
