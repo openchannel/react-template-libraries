@@ -4,6 +4,7 @@ import get from 'lodash/get';
 import { isStorybook, stripHtmlTags, titleCase } from '../../../../../lib';
 import { OcDropdownButton } from '../../../../common';
 import { AppListMenuAction } from '../../../models';
+import { DataRowProps } from '../types';
 import { filterOptions, statusColor } from '../utils';
 
 import { DropdownListItem } from './dropdown-list-item';
@@ -16,8 +17,17 @@ const dotsMenuIcon = isStorybook()
 	? './img/dots-menu.svg'
 	: '../../../../../assets/img/dots-menu.svg';
 
-export const DataRow: React.FC<any> = (props) => {
-	const { app, index, isChild, defaultAppIcon, previewTemplate, menuUrl, menuOptions, onMenuClick } = props;
+export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
+	const {
+		app,
+		index = 0,
+		isChild = false,
+		defaultAppIcon,
+		previewTemplate,
+		menuUrl,
+		menuOptions,
+		onMenuClick,
+	} = props;
 
 	const handleMenuClick = React.useCallback(
 		({ value }) => {
@@ -25,18 +35,23 @@ export const DataRow: React.FC<any> = (props) => {
 
 			const action: AppListMenuAction = {
 				action: value,
-				appId: app.data?.appId,
-				appVersion: app.data?.version,
+				appId: app.appId,
+				appVersion: app.version,
 				isChild,
 			};
 			onMenuClick(action);
 		},
-		[onMenuClick, app.data, isChild],
+		[onMenuClick, app.appId, app.version, isChild],
 	);
 
 	const statusColorClass = statusColor(app.status.value);
 	const status = titleCase(app.status.value);
-	const filteredMenuOptions = filterOptions(menuOptions, app.status.value, app.status.modifiedBy, previewTemplate);
+	const filteredMenuOptions = filterOptions(
+		menuOptions,
+		app.status.value,
+		app.status.modifiedBy,
+		previewTemplate,
+	);
 
 	return (
 		<>
@@ -100,12 +115,12 @@ export const DataRow: React.FC<any> = (props) => {
 					)}
 				</td>
 				<td className="oc-table__td">
-					{/*	dropdown menu */}
 					<div className="oc-table__dropdown">
 						<OcDropdownButton
 							options={filteredMenuOptions}
 							onSelect={handleMenuClick}
 							listItem={DropdownListItem}
+							listProps={{ alignRight: true }}
 						>
 							<img
 								alt="View more"
@@ -117,7 +132,8 @@ export const DataRow: React.FC<any> = (props) => {
 				</td>
 				<td className="oc-table__td_blank" />
 			</tr>
-			{app.children?.length > 0 &&
+			{app.children &&
+				app.children.length > 0 &&
 				app.children.map((subApp, index) => (
 					<DataRow
 						key={subApp.appId}
@@ -126,9 +142,11 @@ export const DataRow: React.FC<any> = (props) => {
 						app={subApp}
 						defaultAppIcon={defaultAppIcon}
 						previewTemplate={previewTemplate}
+						menuUrl={menuUrl}
 						menuOptions={menuOptions}
+						onMenuClick={onMenuClick}
 					/>
 				))}
 		</>
 	);
-};
+});

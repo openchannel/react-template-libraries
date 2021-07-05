@@ -1,38 +1,47 @@
 import * as React from 'react';
 
-import ArrowDownIcon from '../../../../assets/img/select-down.svg';
-import ArrowUpIcon from '../../../../assets/img/select-up.svg';
+import { useSortingArray } from '../../../../lib/hooks';
+import { FullAppData } from '../../../common/models';
 
-import { BlankRow, DataRow, EmptyDataRow } from './components';
+import { BlankRow, DataRow, EmptyDataRow, SortIcon } from './components';
+import { OcAppTableProps } from './types';
 
 import './style.scss';
 
-const SortIcon = ({ ascendingSortIcon, descendingSortIcon }) => {
-	if (ascendingSortIcon || descendingSortIcon) {
-		return <img className="oc-table__icon-down" alt="" />;
-	}
+export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
+	const {
+		properties,
+		defaultAppIcon,
+		ascendingSortIcon,
+		descendingSortIcon,
+		onSort,
+		menuUrl,
+		onMenuClick,
+	} = props;
 
-	if (!ascendingSortIcon && !descendingSortIcon) {
-		return <ArrowDownIcon />;
-	}
+	const {
+		state: {
+			array,
+			sort: { key, orderBy },
+		},
+		setArray,
+		sortArray,
+	} = useSortingArray<FullAppData>('name');
 
-	if (!ascendingSortIcon && !descendingSortIcon) {
-		return <ArrowUpIcon />;
-	}
-
-	return null;
-};
-
-export const OcAppTable: React.FC<any> = (props) => {
-	const { properties, defaultAppIcon, ascendingSortIcon, descendingSortIcon, onSort } = props;
+	React.useEffect(() => {
+		setArray(properties.data.list);
+	}, [properties.data.list]);
 
 	const handleSortApps = React.useCallback(
 		(e) => {
 			if (!onSort) return;
 
-			onSort(e.currentTarget.dataset.sortkey);
+			const element = e.currentTarget as HTMLElement;
+			const key = element.dataset.sortkey || '';
+			sortArray({ key });
+			onSort(key);
 		},
-		[onSort],
+		[onSort, sortArray],
 	);
 
 	return (
@@ -52,6 +61,7 @@ export const OcAppTable: React.FC<any> = (props) => {
 							>
 								Name{' '}
 								<SortIcon
+									isAscending={key === 'name' && orderBy === 'asc'}
 									ascendingSortIcon={ascendingSortIcon}
 									descendingSortIcon={descendingSortIcon}
 								/>
@@ -63,11 +73,12 @@ export const OcAppTable: React.FC<any> = (props) => {
 								className="oc-table__th oc-table__data"
 								scope="col"
 								tabIndex={0}
-								data-sortkey="data"
+								data-sortkey="created"
 								onClick={handleSortApps}
 							>
 								Created{' '}
 								<SortIcon
+									isAscending={key === 'created' && orderBy === 'asc'}
 									ascendingSortIcon={ascendingSortIcon}
 									descendingSortIcon={descendingSortIcon}
 								/>
@@ -76,11 +87,12 @@ export const OcAppTable: React.FC<any> = (props) => {
 								className="oc-table__th oc-table__status"
 								scope="col"
 								tabIndex={0}
-								data-sortkey="status"
+								data-sortkey="status.value"
 								onClick={handleSortApps}
 							>
 								Status{' '}
 								<SortIcon
+									isAscending={key === 'status.value' && orderBy === 'asc'}
 									ascendingSortIcon={ascendingSortIcon}
 									descendingSortIcon={descendingSortIcon}
 								/>
@@ -90,17 +102,19 @@ export const OcAppTable: React.FC<any> = (props) => {
 						</tr>
 					</thead>
 					<tbody>
-						{(!properties.data.list || properties.data.list.length == 0) && <EmptyDataRow />}
-						{properties.data.list.map((app) => (
+						{(!array || array.length == 0) && <EmptyDataRow />}
+						{array.map((app) => (
 							<DataRow
 								key={app.appId}
 								app={app}
 								defaultAppIcon={defaultAppIcon}
 								previewTemplate={properties.previewTemplate}
+								menuUrl={menuUrl}
 								menuOptions={properties.options}
+								onMenuClick={onMenuClick}
 							/>
 						))}
-						{properties.data.list.length > 0 && <BlankRow />}
+						{array.length > 0 && <BlankRow />}
 					</tbody>
 				</table>
 			</div>

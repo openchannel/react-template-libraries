@@ -1,5 +1,4 @@
 import { titleCase } from '../../../../lib';
-
 import { AppListOptions } from '../../models';
 
 export const statusColor = (status: string): string => {
@@ -16,26 +15,29 @@ export const statusColor = (status: string): string => {
 };
 
 export const filterOptions = (
-	options: AppListOptions[], status: string, modifiedBy: string, previewTemplate?: string
+	options: AppListOptions[],
+	status: string,
+	modifiedBy: string,
+	previewTemplate?: string,
 ) => {
 	return (options || [])
-	.filter((item) => {
-		if (status === item.toLowerCase()) {
-			return false
-		}
-		switch (item) {
-			case 'PREVIEW':
-				return !!previewTemplate;
-			case 'PUBLISH':
-			case 'SUBMIT':
-				return status === 'inDevelopment';
-			case 'UNSUSPEND':
-				return status === 'suspended' && modifiedBy === 'developer';
-			case 'SUSPEND':
-				return status === 'approved';
-			default:
-				return true;
-		}
-	})
-	.map((v) => ({ label: titleCase(v), value: v }));
+		.filter((item) => {
+			if (status === item.toLowerCase()) {
+				return false;
+			}
+			switch (item) {
+				case 'PREVIEW':
+					return !!previewTemplate;
+				case 'PUBLISH':
+				case 'SUBMIT':
+					return status === 'inDevelopment';
+				case 'UNSUSPEND':
+					return status === 'suspended' && modifiedBy === 'developer';
+				case 'SUSPEND':
+					return status === 'approved';
+				default:
+					return true;
+			}
+		})
+		.map((v) => ({ label: titleCase(v), value: v }));
 };
