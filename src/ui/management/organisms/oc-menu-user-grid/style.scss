@@ -4,6 +4,13 @@
 .user-grid-container {
 	position: relative;
 
+	.dropup,
+	.dropright,
+	.dropdown,
+	.dropleft {
+		position: initial;
+	}
+
 	.user-grid-overlay {
 		@include media-breakpoint-xl {
 			position: absolute;
@@ -106,7 +113,7 @@
 			}
 		}
 		&_highlight-user {
-			background-color: rgba($light, .5);
+			background-color: rgba($light, 0.5);
 		}
 	}
 
@@ -185,10 +192,6 @@
 	}
 }
 
-.dropup, .dropright, .dropdown, .dropleft {
-	position: initial;
-}
-
 // Dropdown menu style
 .dropdown-menu {
 	border: 1px solid $info;
@@ -204,7 +207,8 @@
 		padding: 14px 42px;
 	}
 
-	.dropdown-item:hover, .dropdown-item:focus {
+	.dropdown-item:hover,
+	.dropdown-item:focus {
 		background-color: rgba(201, 213, 234, 0.1);
 		box-shadow: 0 1px 0 $info;
 		color: $primary;
