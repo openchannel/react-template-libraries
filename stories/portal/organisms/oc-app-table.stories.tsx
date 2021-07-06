@@ -361,3 +361,15 @@ Default.args = {
 	properties: propsConfig,
 	noAppMessage: 'No Apps Has Been Added Yet',
 };
+
+export const EmptyApplicationList = Component.bind({});
+EmptyApplicationList.args = {
+	properties: {
+		...propsConfig,
+		data: {
+			...propsConfig.data,
+			list: [],
+		}
+	},
+	noAppMessage: 'No Apps Has Been Added Yet',
+};
