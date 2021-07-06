@@ -116,7 +116,7 @@ const app1: FullAppData = {
 				value: 'suspended',
 				lastUpdated: 1432696823474,
 				modifiedBy: 'developer',
-				reason: '',
+				reason: 'need to double check permissions',
 			},
 			developerId: '3dcfdd48ed6b4f9d8b6a3e23deb36249',
 			model: [
