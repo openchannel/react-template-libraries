@@ -69,14 +69,24 @@
 		margin: 1.5rem 0 1rem;
 
 		.form__button {
-
 			& + .form__button {
 				margin-left: 1.5rem;
+			}
+		}
+		@media screen and (max-width: 410px) {
+			.form__button {
+				& + .form__button {
+					margin: 1rem 0;
+				}
 			}
 		}
 
 		&_justify_center {
 			justify-content: center;
+		}
+
+		&_justify_space-between {
+			justify-content: space-between;
 		}
 
 		&_justify_start {
@@ -87,12 +97,22 @@
 			flex-direction: row-reverse;
 
 			.form__button {
-
 				& + .form__button {
 					margin-left: 0;
 					margin-right: 1.5rem;
 				}
 			}
+			@media screen and (max-width: 410px) {
+				flex-direction: column;
+				.form__button {
+					& + .form__button {
+						margin: 1rem 0;
+					}
+				}
+			}
+		}
+		@media screen and (max-width: 410px) {
+			flex-direction: column;
 		}
 	}
 }
