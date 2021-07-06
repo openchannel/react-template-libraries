@@ -1,17 +1,20 @@
 // commit 8042d87b78e1a50f433116e39cb0a61c0a457b9f Author: Julia Date: 26.02.21, 19:40
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { Formik, Form } from 'formik';
+import { Form, Formik } from 'formik';
+
 import {
 	OcButtonComponent,
 	OcCheckboxComponent,
-	OcLabelComponent,
-	OcPasswordComponent,
 	OcError,
 	OcInputComponent,
+	OcLabelComponent,
+	OcPasswordComponent,
 } from '../../../../ui/common';
-import { validateLogin, onActivationLinkClick } from './utils';
+
 import { LoginProps } from './types';
+import { onActivationLinkClick, validateLogin } from './utils';
+
 import './style.scss';
 
 export const OcLoginComponent: React.FC<LoginProps> = (props) => {
