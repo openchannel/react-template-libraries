@@ -14,23 +14,21 @@ export const AppStatusPopover: React.FC<{ id: string; status: AppStatus }> = Rea
 		return (
 			<small>
 				<span className={`oc-table__text-wrapper oc-table__indicator ${color}`} />
-				<span className="oc-table__text-wrapper oc-table__text-status">
-					{!status.reason ? (
-						value
-					) : (
-						<OverlayTrigger
-							placement="bottom"
-							overlay={
-								<Popover id={`app-status-reason-${id}`}>
-									<Popover.Title>Status Change Reason</Popover.Title>
-									<Popover.Content>{status.reason}</Popover.Content>
-								</Popover>
-							}
-						>
-							<span>{value}</span>
-						</OverlayTrigger>
-					)}
-				</span>
+				{!status.reason ? (
+					<span className="oc-table__text-wrapper oc-table__text-status">{value}</span>
+				) : (
+					<OverlayTrigger
+						placement="bottom"
+						overlay={
+							<Popover id={`app-status-reason-${id}`}>
+								<Popover.Title>Status Change Reason</Popover.Title>
+								<Popover.Content>{status.reason}</Popover.Content>
+							</Popover>
+						}
+					>
+						<span className="oc-table__text-wrapper oc-table__text-status">{value}</span>
+					</OverlayTrigger>
+				)}
 			</small>
 		);
 	},
