@@ -14,7 +14,7 @@ export type AppListOptions =
 /** Configuration model for the App Listing component */
 export interface AppListing {
 	/** layout of the component. Default: 'table' */
-	layout: 'table';
+	layout: string | 'table';
 	/** data response with list of apps, pagination, etc. */
 	// data: ComponentsPage<FullAppData>;
 	data: {
