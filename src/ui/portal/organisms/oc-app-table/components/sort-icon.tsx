@@ -25,19 +25,15 @@ export const SortIcon: React.FC<SortIconProps> = React.memo(
 
 		if (!descendingSortIcon) return <ArrowUpIcon />;
 
-		if (descendingSortIcon) {
-			if (typeof descendingSortIcon === 'string') {
-				return (
-					<img
-						src={descendingSortIcon}
-						className={isAscending ? 'oc-table__icon-up' : 'oc-table__icon-down'}
-						alt="Sort by"
-					/>
-				);
-			}
-			return descendingSortIcon;
+		if (typeof descendingSortIcon === 'string') {
+			return (
+				<img
+					src={descendingSortIcon}
+					className={isAscending ? 'oc-table__icon-up' : 'oc-table__icon-down'}
+					alt="Sort by"
+				/>
+			);
 		}
-
-		return null;
+		return descendingSortIcon;
 	},
 );
