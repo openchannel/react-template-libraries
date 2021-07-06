@@ -44,6 +44,10 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 		[onMenuClick, app.appId, app.version, isChild],
 	);
 
+	const handleAppNameClick = () => {
+		handleMenuClick({ value: 'EDIT' });
+	};
+
 	const statusColorClass = statusColor(app.status.value);
 	const status = titleCase(app.status.value);
 	const filteredMenuOptions = filterOptions(
@@ -62,7 +66,7 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 						<img
 							className="oc-table__app-icon oc-table__app-icon_padded"
 							src={lineArrowDownIcon}
-							// alt=""
+							alt="child application"
 						/>
 					)}
 					{isChild && index > 0 && (
@@ -71,10 +75,10 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 					<img
 						className="oc-table__app-icon"
 						src={get(app, 'customData.icon', defaultAppIcon)}
-						// alt=""
+						alt={app.name}
 					/>
 					<div className="oc-table__td-col">
-						<h6 className="oc-table__app-name" onClick={() => {}}>
+						<h6 className="oc-table__app-name" tabIndex={0} onClick={handleAppNameClick}>
 							{app.name}
 						</h6>
 						<small className="co-table__app-version">v {app.version}</small>
@@ -134,12 +138,12 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 			</tr>
 			{app.children &&
 				app.children.length > 0 &&
-				app.children.map((subApp, index) => (
+				app.children.map((childApp, index) => (
 					<DataRow
-						key={subApp.appId}
+						key={childApp.appId}
 						isChild
 						index={index}
-						app={subApp}
+						app={childApp}
 						defaultAppIcon={defaultAppIcon}
 						previewTemplate={previewTemplate}
 						menuUrl={menuUrl}
