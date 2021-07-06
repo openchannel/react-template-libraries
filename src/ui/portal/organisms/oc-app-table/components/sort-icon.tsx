@@ -11,7 +11,13 @@ export const SortIcon: React.FC<SortIconProps> = React.memo(
 
 			if (ascendingSortIcon) {
 				if (typeof ascendingSortIcon === 'string') {
-					return <img src={ascendingSortIcon} className="oc-table__icon-down" alt="Sort by" />;
+					return (
+						<img
+							src={ascendingSortIcon}
+							className={isAscending ? 'oc-table__icon-up' : 'oc-table__icon-down'}
+							alt="Sort by"
+						/>
+					);
 				}
 				return ascendingSortIcon;
 			}
@@ -21,7 +27,13 @@ export const SortIcon: React.FC<SortIconProps> = React.memo(
 
 		if (descendingSortIcon) {
 			if (typeof descendingSortIcon === 'string') {
-				return <img src={descendingSortIcon} className="oc-table__icon-down" alt="Sort by" />;
+				return (
+					<img
+						src={descendingSortIcon}
+						className={isAscending ? 'oc-table__icon-up' : 'oc-table__icon-down'}
+						alt="Sort by"
+					/>
+				);
 			}
 			return descendingSortIcon;
 		}

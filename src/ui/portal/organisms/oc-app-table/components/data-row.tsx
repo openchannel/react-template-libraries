@@ -77,7 +77,12 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 						alt={app.name}
 					/>
 					<div className="oc-table__td-col">
-						<span role="button" tabIndex={0} onClick={handleAppNameClick}>
+						<span
+							aria-label="Edit application"
+							role="button"
+							tabIndex={0}
+							onClick={handleAppNameClick}
+						>
 							<h6 className="oc-table__app-name">{app.name}</h6>
 						</span>
 						<small className="co-table__app-version">v {app.version}</small>
