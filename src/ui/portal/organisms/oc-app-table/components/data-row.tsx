@@ -1,12 +1,13 @@
 import * as React from 'react';
 import get from 'lodash/get';
 
-import { isStorybook, stripHtmlTags, titleCase } from '../../../../../lib';
+import { isStorybook, stripHtmlTags } from '../../../../../lib';
 import { OcDropdownButton } from '../../../../common';
 import { AppListMenuAction } from '../../../models';
 import { DataRowProps } from '../types';
-import { filterOptions, statusColor } from '../utils';
+import { filterOptions } from '../utils';
 
+import { AppStatusPopover } from './app-status-popover';
 import { DropdownListItem } from './dropdown-list-item';
 
 const lineArrowDownIcon = isStorybook()
@@ -48,8 +49,6 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 		handleMenuClick({ value: 'EDIT' });
 	};
 
-	const statusColorClass = statusColor(app.status.value);
-	const status = titleCase(app.status.value);
 	const filteredMenuOptions = filterOptions(
 		menuOptions,
 		app.status.value,
@@ -99,24 +98,7 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 					</span>
 				</td>
 				<td className="oc-table__td">
-					{app.status.reason && (
-						<small>
-							<span className={`oc-table__text-wrapper oc-table__indicator ${statusColorClass}`} />
-							<span className="oc-table__text-wrapper oc-table__text-status">
-								{/* add popup with reason content */}
-								{app.status.value === 'inDevelopment' ? 'Draft' : status}
-							</span>
-						</small>
-					)}
-					{/*	app.status.reason template */}
-					{!app.status.reason && (
-						<small>
-							<span className={`oc-table__text-wrapper oc-table__indicator ${statusColorClass}`} />
-							<span className="oc-table__text-wrapper oc-table__text-status">
-								{app.status.value === 'inDevelopment' ? 'Draft' : status}
-							</span>
-						</small>
-					)}
+					<AppStatusPopover id={app.appId} status={app.status} />
 				</td>
 				<td className="oc-table__td">
 					<div className="oc-table__dropdown">
