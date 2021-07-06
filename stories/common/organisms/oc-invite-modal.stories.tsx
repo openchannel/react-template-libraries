@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { useModalState } from '../../../src/lib';
+
+import { useModalState } from '../../../src/lib/hooks';
 import { OcButtonComponent } from '../../../src/ui/common';
 import { OcInviteModal, InviteModalProps } from '../../../src/ui/common';
 
