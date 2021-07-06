@@ -1,6 +1,7 @@
 import * as React from 'react';
 import OverlayTrigger, { OverlayTriggerRenderProps } from 'react-bootstrap/OverlayTrigger';
 import BootstrapTooltip from 'react-bootstrap/Tooltip';
+import { nanoid } from 'nanoid';
 
 type PositionProps = 'bottom' | 'top' | 'left' | 'right';
 
@@ -20,7 +21,7 @@ export interface TooltipProps {
 export const OcTooltipComponent: React.FC<TooltipProps> = (props) => {
 	const { tooltip, children, position = 'right' } = props;
 
-	const uniqId = React.useRef(String(Math.random()));
+	const uniqId = React.useRef(nanoid());
 
 	return (
 		<OverlayTrigger
