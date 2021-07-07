@@ -3,7 +3,6 @@ import { nanoid } from 'nanoid';
 
 import { FIELD_TYPE, getFieldValidators } from '../../../lib';
 import { AppFormField, FormikField, FormikFieldsValues } from '../../../models';
-import { normalizeFieldsForFormikParams } from '../types';
 
 export const getNewName = (element: AppFormField): string => `${element.id}-${nanoid()}`;
 
@@ -31,11 +30,9 @@ export const updateElementKeys = (
 	path,
 });
 
-export const normalizeFieldsForFormik: normalizeFieldsForFormikParams = (todo) => (
-	fields,
-	deepPath,
-) => {
-	return fields.map((field: FormikField | AppFormField, index: any) => {
+// eslint-disable-next-line
+export const normalizeFieldsForFormik = (todo: Function) => (fields: Array<AppFormField | FormikField>, deepPath?: string): FormikField[] => {
+	return fields.map((field: AppFormField | FormikField, index: number) => {
 		const path: string = deepPath ? `${deepPath}.fields.${index}` : `${index}`;
 
 		if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields) {
