@@ -2,7 +2,7 @@ import * as React from 'react';
 import { act } from 'react-dom/test-utils';
 import { shallow, ShallowWrapper, mount } from 'enzyme';
 
-import { useChartReducer } from '../../../src/ui/portal/organisms/oc-chart/hooks';
+import { useChartReducer } from '../../../src/react-common-components/ui/portal/organisms/oc-chart/hooks';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { defaultChartProps } from './constants';

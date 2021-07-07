@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
 
-import { OcReviewListComponent } from '../../../../src/ui/common/index';
+import { OcReviewListComponent } from '../../../../src/react-common-components/ui/common/index';
 
 describe('OcReviewListComponent', () => {
 	const component = shallow(

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 
-import { OcTextSearchComponent } from '../../../src/ui/common';
+import { OcTextSearchComponent } from '../../../src/react-common-components/ui/common';
 
 describe('Default text input', () => {
 	let component = mount(

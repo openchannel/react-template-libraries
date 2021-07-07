@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react';
 import {
   Content,
   ContentProps,
-} from '../../../src/ui/common/organisms/oc-confirmation-modal/content';
+} from '../../../src/react-common-components/ui/common/organisms/oc-confirmation-modal/content';
 
 export default {
   title: 'Confirmation modal content',

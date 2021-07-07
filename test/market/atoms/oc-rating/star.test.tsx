@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { Star, StarProps } from '../../../../src/ui/market/atoms/oc-rating/star';
+import { Star, StarProps } from '../../../../src/react-common-components/ui/market/atoms/oc-rating/star';
 
 const setUp = (props: StarProps) => shallow(<Star {...props} />);
 

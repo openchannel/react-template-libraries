@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { IFileWithMeta, IMeta, IPreviewProps } from 'react-dropzone-uploader';
-import { PreviewContent } from '../../../../src/ui/common/atoms/oc-file-upload/preview-content';
+import { PreviewContent } from '../../../../src/react-common-components/ui/common/atoms/oc-file-upload/preview-content';
 
 const setUp = (props: IPreviewProps) => shallow(<PreviewContent {...props} />);
 

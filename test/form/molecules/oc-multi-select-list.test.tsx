@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
 
-import { OcDropboxComponent, OcTagElement } from '../../../src/ui/common';
-import { OcMultiSelectList, OcMultiSelectListProps } from '../../../src/ui/form';
+import { OcDropboxComponent, OcTagElement } from '../../../src/react-common-components/ui/common';
+import { OcMultiSelectList, OcMultiSelectListProps } from '../../../src/react-common-components/ui/form';
 
 
 const setUp = (props: OcMultiSelectListProps) => shallow(<OcMultiSelectList {...props} />);

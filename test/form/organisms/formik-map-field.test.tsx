@@ -7,8 +7,8 @@ import {
 	OcCheckboxComponent,
 	OcNumberComponent,
 	OcPasswordComponent
-} from '../../../src/ui/common';
-import { FormikOcFileUploadWrapper } from '../../../src/ui/form';
+} from '../../../src/react-common-components/ui/common';
+import { FormikOcFileUploadWrapper } from '../../../src/react-common-components/ui/form';
 import {
 	FIELD_TYPE,
 	OcDynamicFieldArray,
@@ -21,7 +21,7 @@ import {
 	FormikRichTextWrapper,
 	FormikMapFieldsProps,
 	FormikMapFields,
-} from '../../../src/ui/form';
+} from '../../../src/react-common-components/ui/form';
 
 const defaultFieldProps = {
 	id: 'some-field',

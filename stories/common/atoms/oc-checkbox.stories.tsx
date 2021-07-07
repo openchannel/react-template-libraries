@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcCheckboxComponent, CheckboxProps } from '../../../src/ui/common';
+import { OcCheckboxComponent, CheckboxProps } from '../../../src/react-common-components/ui/common';
 
 export default {
   title: 'Checkbox [BEM]',

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { OcDatetimePicker, DatepickerProps } from '../../../src/ui/common';
+import { OcDatetimePicker, DatepickerProps } from '../../../src/react-common-components/ui/common';
 import moment, { Moment } from 'moment';
 
 export default {

@@ -4,7 +4,7 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import {
   Content,
   ContentProps,
-} from '../../../src/ui/common/organisms/oc-confirmation-modal/content';
+} from '../../../src/react-common-components/ui/common/organisms/oc-confirmation-modal/content';
 
 const setUp = (props: ContentProps) => shallow(<Content {...props} />);
 

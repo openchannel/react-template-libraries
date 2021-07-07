@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcReviewListComponent, ReviewListProps } from '../../../src/ui/common';
+import { OcReviewListComponent, ReviewListProps } from '../../../src/react-common-components/ui/common';
 
 export default {
 	title: 'Review List [BEM]',

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import moment from 'moment';
 import { shallow, mount, ShallowWrapper } from 'enzyme';
-import { OcTimePicker } from '../../../../src/ui/common/molecules/oc-datetime-picker/oc-timepicker/index';
+import { OcTimePicker } from '../../../../src/react-common-components/ui/common/molecules/oc-datetime-picker/oc-timepicker/index';
 
-import { OcDatetimePicker } from '../../../../src/ui/common/molecules/oc-datetime-picker/index';
+import { OcDatetimePicker } from '../../../../src/react-common-components/ui/common/molecules/oc-datetime-picker/index';
 
 describe('OcDatetimePicker', () => {
   const dummyDate = moment();

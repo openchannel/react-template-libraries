@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcMenuUserGrid } from '../../../src/ui/management';
+import { OcMenuUserGrid } from '../../../src/react-common-components/ui/management';
 
 const getDate = () => {
 	const start = new Date(2021, 0, 1);

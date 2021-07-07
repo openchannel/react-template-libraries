@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { ToggleProps } from '../../../../src/ui/common';
-import { Toggle } from '../../../../src/ui/common/molecules/oc-dropdown/common/toggle';
+import { ToggleProps } from '../../../../src/react-common-components/ui/common';
+import { Toggle } from '../../../../src/react-common-components/ui/common/molecules/oc-dropdown/common/toggle';
 
 
 const setUp = (props: ToggleProps) => shallow(<Toggle {...props} />);

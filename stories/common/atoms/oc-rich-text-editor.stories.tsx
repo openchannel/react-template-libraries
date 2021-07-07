@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { OcRichTextEditorComponent, OcRtfProps } from '../../../src/ui/common';
+import { OcRichTextEditorComponent, OcRtfProps } from '../../../src/react-common-components/ui/common';
 
 export default {
   title: 'Simple Rich Text Editor',

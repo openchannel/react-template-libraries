@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { OcError, OcErrorProps } from '../../../src/ui/common';
+import { OcError, OcErrorProps } from '../../../src/react-common-components/ui/common';
 
 
 const setUp = (props: OcErrorProps) => shallow(<OcError {...props} />);

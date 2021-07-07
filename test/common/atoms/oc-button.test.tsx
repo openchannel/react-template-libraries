@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { OcButtonComponent, ButtonProps } from '../../../src/ui/common';
+import { OcButtonComponent, ButtonProps } from '../../../src/react-common-components/ui/common';
 
 const defaultButtonProps: Partial<ButtonProps> = {
   htmlType: 'button',

@@ -1,4 +1,4 @@
-import { chartReducer, chartInitialState, UPDATE_SORT } from '../../../src/ui/portal/organisms/oc-chart/chart-state'
+import { chartReducer, chartInitialState, UPDATE_SORT } from '../../../src/react-common-components/ui/portal/organisms/oc-chart/chart-state'
 
 
 describe('Chart (chart-state)', () => {

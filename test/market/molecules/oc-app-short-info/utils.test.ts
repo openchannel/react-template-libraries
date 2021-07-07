@@ -1,4 +1,4 @@
-import { parsePrice } from '../../../../src/ui/market/lib';
+import { parsePrice } from '../../../../src/react-common-components/ui/market/lib';
 
 describe('OcAppShortInfo-utils', () => {
 	it('should parse price and return Free', () => {

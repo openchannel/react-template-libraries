@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react';
 import {
 	InviteUserContent,
 	InviteContentProps,
-} from '../../../src/ui/common/organisms/oc-invite-modal/content';
+} from '../../../src/react-common-components/ui/common/organisms/oc-invite-modal/content';
 
 export default {
 	title: 'Invite user modal content [BEM]',

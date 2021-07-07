@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { RadioProps } from '../../../src/ui/portal';
-import { Radio } from '../../../src/ui/portal/organisms/oc-chart/components/radio';
+import { RadioProps } from '../../../src/react-common-components/ui/portal';
+import { Radio } from '../../../src/react-common-components/ui/portal/organisms/oc-chart/components/radio';
 
 const setUp = (props: RadioProps) => shallow(<Radio {...props} />);
 

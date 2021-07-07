@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcInputComponent } from '../../../src/ui/common';
-import { OcTooltipLabel, OcTooltipLabelProps } from '../../../src/ui/form';
+import { OcInputComponent } from '../../../src/react-common-components/ui/common';
+import { OcTooltipLabel, OcTooltipLabelProps } from '../../../src/react-common-components/ui/form';
 
 export default {
 	title: 'Label with tooltip',

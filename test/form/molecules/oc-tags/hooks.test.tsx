@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 
-import { useTagDropboxState } from '../../../../src/ui/form/molecules/oc-tags/hooks';
+import { useTagDropboxState } from '../../../../src/react-common-components/ui/form/molecules/oc-tags/hooks';
 
 
 describe('OcTags (hooks)', () => {

@@ -3,19 +3,19 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import moment from 'moment';
 
-import { OcDropboxComponent } from '../../../src/ui/common/atoms/oc-dropbox';
-import { OcRichTextEditorComponent } from '../../../src/ui/common/atoms/oc-rich-text-editor';
-import { OcDatetimePicker } from '../../../src/ui/common/molecules/oc-datetime-picker';
-import { FormikOcMultiSelectListWrapper } from '../../../src/ui/form';
-import { FormikOcDatetimePickerWrapper } from '../../../src/ui/form';
-import { FormikOcVideoUrlWrapper } from '../../../src/ui/form';
-import { FormikOcTagsWrapper } from '../../../src/ui/form';
-import { FormikOcSelectWrapper } from '../../../src/ui/form';
+import { OcDropboxComponent } from '../../../src/react-common-components/ui/common/atoms/oc-dropbox';
+import { OcRichTextEditorComponent } from '../../../src/react-common-components/ui/common/atoms/oc-rich-text-editor';
+import { OcDatetimePicker } from '../../../src/react-common-components/ui/common/molecules/oc-datetime-picker';
+import { FormikOcMultiSelectListWrapper } from '../../../src/react-common-components/ui/form';
+import { FormikOcDatetimePickerWrapper } from '../../../src/react-common-components/ui/form';
+import { FormikOcVideoUrlWrapper } from '../../../src/react-common-components/ui/form';
+import { FormikOcTagsWrapper } from '../../../src/react-common-components/ui/form';
+import { FormikOcSelectWrapper } from '../../../src/react-common-components/ui/form';
 
-import { FormikRichTextWrapper } from '../../../src/ui/form';
+import { FormikRichTextWrapper } from '../../../src/react-common-components/ui/form';
 import {
 	FormikOcColorWrapper,
-} from '../../../src/ui/form';
+} from '../../../src/react-common-components/ui/form';
 
 const setUpWithFormik = (component: any) => mount(
 	<Formik initialValues={{}} onSubmit={() => {}}>

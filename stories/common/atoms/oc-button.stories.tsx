@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcButtonComponent, ButtonProps } from '../../../src/ui/common';
+import { OcButtonComponent, ButtonProps } from '../../../src/react-common-components/ui/common';
 
 export default {
   title: 'Buttons',

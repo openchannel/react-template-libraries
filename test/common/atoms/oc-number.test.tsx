@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { OcNumberComponent, InputNumberProps } from '../../../src/ui/common';
+import { OcNumberComponent, InputNumberProps } from '../../../src/react-common-components/ui/common';
 
 const defaultInputProps: InputNumberProps = {
 	required: false,

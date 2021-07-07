@@ -2,8 +2,8 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 import moment from 'moment';
 
-import { OcTagElement } from '../../../src/ui/common';
-import { PreviewFieldModel, FieldPreview, OcDynamicFieldArray } from '../../../src/ui/form';
+import { OcTagElement } from '../../../src/react-common-components/ui/common';
+import { PreviewFieldModel, FieldPreview, OcDynamicFieldArray } from '../../../src/react-common-components/ui/form';
 
 const defaultProps = {
 	"index": 0,

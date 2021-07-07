@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { TableProps } from '../../../src/ui/portal';
-import { Table } from '../../../src/ui/portal/organisms/oc-chart/components/table';
+import { TableProps } from '../../../src/react-common-components/ui/portal';
+import { Table } from '../../../src/react-common-components/ui/portal/organisms/oc-chart/components/table';
 // import { useChartReducer } from '../../../src/ui/portal/organisms/chart/hooks';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

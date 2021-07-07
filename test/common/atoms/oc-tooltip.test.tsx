@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { OcTooltipComponent, TooltipProps } from '../../../src/ui/common';
+import { OcTooltipComponent, TooltipProps } from '../../../src/react-common-components/ui/common';
 
 const setUp = (props: TooltipProps) => shallow(<OcTooltipComponent {...props} />);
 

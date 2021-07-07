@@ -2,7 +2,7 @@
 import * as React from 'react';
 import enzyme, { mount, shallow, ShallowWrapper } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { OcFileUpload } from '../../../../src/ui/common';
+import { OcFileUpload } from '../../../../src/react-common-components/ui/common';
 
 enzyme.configure({ adapter: new Adapter() });
 

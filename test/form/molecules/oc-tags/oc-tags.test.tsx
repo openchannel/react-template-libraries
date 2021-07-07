@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { OcTags, OcTagsProps } from '../../../../src/ui/form';
-import { OcButtonComponent, OcDropboxComponent, OcTagElement } from '../../../../src/ui/common';
+import { OcTags, OcTagsProps } from '../../../../src/react-common-components/ui/form';
+import { OcButtonComponent, OcDropboxComponent, OcTagElement } from '../../../../src/react-common-components/ui/common';
 
 const setUp = (props: OcTagsProps) => shallow(<OcTags {...props} />);
 

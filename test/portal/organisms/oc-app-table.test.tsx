@@ -6,8 +6,8 @@ import { act } from 'react-dom/test-utils';
 import CustomArrowDownIcon from '../../../src/assets/img/select-down.svg';
 // @ts-ignore
 import CustomArrowUpIcon from '../../../src/assets/img/select-up.svg';
-import { OcDropdownButton } from '../../../src/ui/common/molecules/oc-dropdown';
-import { OcAppTable, OcAppTableProps } from '../../../src/ui/portal';
+import { OcDropdownButton } from '../../../src/react-common-components/ui/common/molecules/oc-dropdown';
+import { OcAppTable, OcAppTableProps } from '../../../src/react-common-components/ui/portal';
 
 // @ts-ignore
 import { mockData } from './mocks';

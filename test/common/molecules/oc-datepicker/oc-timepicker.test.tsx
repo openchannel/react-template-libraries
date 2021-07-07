@@ -1,7 +1,7 @@
 import * as React from 'react';
 import moment from 'moment';
 import { mount } from 'enzyme';
-import { OcTimePicker } from '../../../../src/ui/common/molecules/oc-datetime-picker/oc-timepicker/index';
+import { OcTimePicker } from '../../../../src/react-common-components/ui/common/molecules/oc-datetime-picker/oc-timepicker/index';
 
 describe('Time picker', () => {
 	it('should create', () => {

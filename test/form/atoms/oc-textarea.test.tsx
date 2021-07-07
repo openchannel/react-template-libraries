@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 
-import { OcTextarea, OcTextareaProps } from '../../../src/ui/form';
+import { OcTextarea, OcTextareaProps } from '../../../src/react-common-components/ui/form';
 
 const setUp = (props: OcTextareaProps) => mount(<OcTextarea {...props} />);
 

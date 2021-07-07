@@ -1,5 +1,5 @@
-import { Option } from '../../../../src/ui/common/molecules/oc-select';
-import { transformToValidOptions } from '../../../../src/ui/common/molecules/oc-select/utils';
+import { Option } from '../../../../src/react-common-components/ui/common/molecules/oc-select';
+import { transformToValidOptions } from '../../../../src/react-common-components/ui/common/molecules/oc-select/utils';
 
 
 describe('OcSelect (utilities)', () => {

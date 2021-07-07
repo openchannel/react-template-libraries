@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcExpandableSelect, ExpandSelectProps } from '../../../src/ui/common';
+import { OcExpandableSelect, ExpandSelectProps } from '../../../src/react-common-components/ui/common';
 
 export default {
 	title: 'Expandable Select [BEM]',

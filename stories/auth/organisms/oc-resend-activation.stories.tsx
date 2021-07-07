@@ -2,8 +2,8 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
-import { errorMessages } from '../../../src/ui/form';
-import { OcResendActivation, OcResendProps } from '../../../src/ui/auth';
+import { errorMessages } from '../../../src/react-common-components/ui/form';
+import { OcResendActivation, OcResendProps } from '../../../src/react-common-components/ui/auth';
 
 export default {
 	title: 'Resend Activation Code [BEM]',

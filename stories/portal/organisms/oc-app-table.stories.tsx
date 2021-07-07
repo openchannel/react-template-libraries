@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { FullAppData } from '../../../src/ui/common/models';
-import { OcAppTable } from '../../../src/ui/portal';
+import { FullAppData } from '../../../src/react-common-components/ui/common/models';
+import { OcAppTable } from '../../../src/react-common-components/ui/portal';
 
 const statElement = {
 	'90day': 10,

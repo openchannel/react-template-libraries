@@ -4,7 +4,7 @@ import { Story, Meta } from '@storybook/react';
 
 // @ts-ignore
 import { app1, app2 } from './mocks';
-import { OcAppCard, OcAppCardProps } from '../../../../src/ui/market';
+import { OcAppCard, OcAppCardProps } from '../../../../src/react-common-components/ui/market';
 
 export default {
 	title: 'App Card [BEM]',

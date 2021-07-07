@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { OcResendActivation, OcResendProps } from '../../../src/ui/auth';
-import { OcError } from '../../../src/ui/common/atoms/oc-error';
+import { OcResendActivation, OcResendProps } from '../../../src/react-common-components/ui/auth';
+import { OcError } from '../../../src/react-common-components/ui/common/atoms/oc-error';
 
 const setUp = (props: OcResendProps) => shallow(<OcResendActivation {...props} />);
 

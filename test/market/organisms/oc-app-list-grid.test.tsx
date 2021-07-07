@@ -2,8 +2,8 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { BrowserRouter, Link } from 'react-router-dom';
 
-import { OcAppListGrid, OcAppListGridProps } from '../../../src/ui/market';
-import { AppCardWrapper } from '../../../src/ui/market/organisms/oc-app-list-grid/components/app-card-wrapper';
+import { OcAppListGrid, OcAppListGridProps } from '../../../src/react-common-components/ui/market';
+import { AppCardWrapper } from '../../../src/react-common-components/ui/market/organisms/oc-app-list-grid/components/app-card-wrapper';
 
 // @ts-ignore
 import { getMockedApp } from './mocks';

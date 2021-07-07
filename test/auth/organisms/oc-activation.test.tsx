@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { OcActivation, OcActivationProps } from '../../../src/ui/auth';
-import { OcError } from '../../../src/ui/common/atoms/oc-error';
+import { OcActivation, OcActivationProps } from '../../../src/react-common-components/ui/auth';
+import { OcError } from '../../../src/react-common-components/ui/common/atoms/oc-error';
 
 const setUp = (props: OcActivationProps) => shallow(<OcActivation {...props} />);
 

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { OcTooltipComponent } from '../../../src/ui/common/atoms/oc-tooltip';
+import { OcTooltipComponent } from '../../../src/react-common-components/ui/common/atoms/oc-tooltip';
 
-import { OcTooltipLabel, OcTooltipLabelProps } from '../../../src/ui/form';
+import { OcTooltipLabel, OcTooltipLabelProps } from '../../../src/react-common-components/ui/form';
 
 const setUp = (props: OcTooltipLabelProps) => shallow(<OcTooltipLabel {...props} />);
 

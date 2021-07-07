@@ -1,4 +1,4 @@
-import { ChartProps, ChartLayoutTypeModel } from '../../../src/ui/portal/organisms/oc-chart';
+import { ChartProps, ChartLayoutTypeModel } from '../../../src/react-common-components/ui/portal/organisms/oc-chart';
 
 
 export const monthData = {

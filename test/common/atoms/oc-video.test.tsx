@@ -2,7 +2,7 @@ import * as React from 'react';
 import enzyme, { shallow, ShallowWrapper } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
-import { OcVideoComponent, VideoProps } from '../../../src/ui/common';
+import { OcVideoComponent, VideoProps } from '../../../src/react-common-components/ui/common';
 
 enzyme.configure({ adapter: new Adapter() });
 

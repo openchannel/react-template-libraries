@@ -1,6 +1,6 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 
-import { useOcFormState } from '../../../src/ui/form/organisms/oc-form/hooks';
+import { useOcFormState } from '../../../src/react-common-components/ui/form/organisms/oc-form/hooks';
 
 const formJsonDataMock = {
 	formId: 'test',

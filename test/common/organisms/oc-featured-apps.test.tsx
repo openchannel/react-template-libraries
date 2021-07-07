@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { mount } from 'enzyme';
-import { OcFeaturedAppsComponent } from '../../../src/ui/common/organisms/oc-featured-apps';
+import { OcFeaturedAppsComponent } from '../../../src/react-common-components/ui/common/organisms/oc-featured-apps';
 
 const statElement = {
 	'90day': 20,

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { Link, BrowserRouter } from 'react-router-dom';
 
-import { OcAppGallery, OcAppGalleryProps } from '../../../src/ui/market';
+import { OcAppGallery, OcAppGalleryProps } from '../../../src/react-common-components/ui/market';
 
 // @ts-ignore
 import { getMockedApp } from './mocks';

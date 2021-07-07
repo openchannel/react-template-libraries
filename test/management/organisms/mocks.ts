@@ -1,4 +1,4 @@
-import { OcMenuUserGridProps } from '../../../src/ui/management/organisms/oc-menu-user-grid';
+import { OcMenuUserGridProps } from '../../../src/react-common-components/ui/management/organisms/oc-menu-user-grid';
 
 const getDate = (): number => {
 	const start = new Date(2021, 0, 1);

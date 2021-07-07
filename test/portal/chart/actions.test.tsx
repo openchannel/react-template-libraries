@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { ActionsProps } from '../../../src/ui/portal';
-import { OcDropdownButton } from '../../../src/ui/common/molecules/oc-dropdown';
-import { Actions } from '../../../src/ui/portal/organisms/oc-chart/components/actions';
-import { Radio } from '../../../src/ui/portal/organisms/oc-chart/components/radio';
+import { ActionsProps } from '../../../src/react-common-components/ui/portal';
+import { OcDropdownButton } from '../../../src/react-common-components/ui/common/molecules/oc-dropdown';
+import { Actions } from '../../../src/react-common-components/ui/portal/organisms/oc-chart/components/actions';
+import { Radio } from '../../../src/react-common-components/ui/portal/organisms/oc-chart/components/radio';
 import {
   GRAPH_DATA_TYPE,
   TABULAR_DATA_TYPE,
-} from '../../../src/ui/portal/organisms/oc-chart/utils';
+} from '../../../src/react-common-components/ui/portal/organisms/oc-chart/utils';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { defaultChartProps } from './constants';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
 
-import { OcImageGalleryComponent, GalleryItem } from '../../../src/ui/common/index';
+import { OcImageGalleryComponent, GalleryItem } from '../../../src/react-common-components/ui/common/index';
 
 describe('Image Gallery', () => {
 	const imageItem: GalleryItem = {

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcSelect, OcSelectProps, SelectedValue } from '../../../src/ui/common';
+import { OcSelect, OcSelectProps, SelectedValue } from '../../../src/react-common-components/ui/common';
 
 
 export default {

@@ -1,0 +1,57 @@
+//commit be16099a9f2b9dc408d991d8aa603de890f8b8a8 Author: Julia Date: 11.03.21, 20:19
+@import 'src/react-common-components/ui/styles/index.scss';
+
+.select-component {
+	& button:focus {
+		border-color: $primary !important;
+	}
+
+	.dropdown-menu {
+		.dropdown-item {
+			padding: 16px;
+			border-bottom: 1px;
+			&:hover {
+				color: $body-color;
+				background-color: $light;
+			}
+			&:active {
+				color: $primary;
+				background-color: $light;
+				border-color: unset;
+			}
+			&:focus {
+				outline: none;
+				background-color: $light;
+			}
+		}
+	}
+
+	&__action {
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+
+		&::after {
+			position: absolute;
+			right: 2rem;
+		}
+	}
+
+	&__text {
+		color: $dark;
+		font-size: 14px;
+		text-align: left;
+	}
+
+	&__dropdown {
+		margin-top: 8px;
+		max-height: 228px;
+		padding: 0;
+		right: 0;
+
+		&-item {
+			font-size: 14px;
+		}
+	}
+}

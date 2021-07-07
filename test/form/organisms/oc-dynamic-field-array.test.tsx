@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { AppFormModel, OcDynamicFieldArray, OcDynamicFieldArrayProps } from '../../../src/ui/form';
+import { AppFormModel, OcDynamicFieldArray, OcDynamicFieldArrayProps } from '../../../src/react-common-components/ui/form';
 // @ts-ignore
 import { mountWithFormik } from '../test-utils';
 

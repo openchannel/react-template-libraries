@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { ListItem, SelectListItemProps } from '../../../../src/ui/common/molecules/oc-select/listItem';
+import { ListItem, SelectListItemProps } from '../../../../src/react-common-components/ui/common/molecules/oc-select/listItem';
 
 
 const setUp = (props: SelectListItemProps) => shallow(<ListItem {...props} />);

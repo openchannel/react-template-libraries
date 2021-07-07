@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, mount, ShallowWrapper } from 'enzyme';
 
-import { OcVideoUrlComponent } from '../../../../src/ui/common/molecules/oc-video-url';
+import { OcVideoUrlComponent } from '../../../../src/react-common-components/ui/common/molecules/oc-video-url';
 
 const component: ShallowWrapper = shallow(
 	<OcVideoUrlComponent

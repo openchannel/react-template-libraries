@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { OcRatingComponent, RatingProps } from '../../../../src/ui/market';
-import { Star } from '../../../../src/ui/market/atoms/oc-rating/star';
+import { OcRatingComponent, RatingProps } from '../../../../src/react-common-components/ui/market';
+import { Star } from '../../../../src/react-common-components/ui/market/atoms/oc-rating/star';
 
 const setUp = (props: RatingProps) => shallow(<OcRatingComponent {...props} />);
 

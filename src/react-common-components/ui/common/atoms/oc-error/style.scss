@@ -1,0 +1,10 @@
+@import 'src/react-common-components/ui/styles/index.scss';
+
+.error {
+	&__feedback {
+		@include font-size-sm();
+		color: $danger;
+		display: block;
+		margin-top: 6px;
+	}
+}

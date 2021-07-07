@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { StatElement, FullAppData } from '../../../src/ui/common/models';
-import { OcAppListGrid, OcAppListGridProps } from '../../../src/ui/market';
+import { StatElement, FullAppData } from '../../../src/react-common-components/ui/common/models';
+import { OcAppListGrid, OcAppListGridProps } from '../../../src/react-common-components/ui/market';
 
 export default {
 	title: 'App List Grid',
