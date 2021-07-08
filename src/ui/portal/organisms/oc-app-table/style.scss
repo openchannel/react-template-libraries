@@ -7,6 +7,13 @@
 	border-spacing: 0;
 	border-collapse: inherit;
 
+	.dropup,
+	.dropright,
+	.dropdown,
+	.dropleft {
+		position: unset;
+	}
+
 	&-container {
 		position: relative;
 
@@ -236,8 +243,4 @@
 			}
 		}
 	}
-}
-
-.dropup, .dropright, .dropdown, .dropleft {
-	position: unset;
 }
