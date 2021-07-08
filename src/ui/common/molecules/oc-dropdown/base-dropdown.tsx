@@ -3,7 +3,8 @@
 import * as React from 'react';
 import BootstrapDropdown from 'react-bootstrap/Dropdown';
 import { SelectCallback } from 'react-bootstrap/helpers';
-
+import DownArrow from '../../../../assets/img/select-down.svg';
+import UpArrow from '../../../../assets/img/select-up.svg';
 import { ListItem as DefaultListItem } from './common/list-item';
 import { ListWrapper } from './common/list-wrapper';
 import { Toggle } from './common/toggle';
@@ -56,8 +57,8 @@ export const BaseDropdown: React.FC<BaseDropdownProps & ToggleIndicatorProps> = 
 				{children || `${title} ${selected && selected.label}`}
 				<ToggleIndicator
 					isOpened={isOpened}
-					defaultPlaceholderIcon={defaultPlaceholderIcon}
-					activePlaceholderIcon={activePlaceholderIcon}
+					defaultPlaceholderIcon={defaultPlaceholderIcon || <DownArrow />}
+					activePlaceholderIcon={activePlaceholderIcon || <UpArrow />}
 				/>
 			</BootstrapDropdown.Toggle>
 			<BootstrapDropdown.Menu

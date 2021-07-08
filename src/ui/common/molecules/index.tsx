@@ -6,3 +6,4 @@ export * from './oc-review-list';
 export * from './oc-select';
 export * from './oc-select-expandable';
 export * from './oc-video-url';
+export * from './oc-profile-navbar';
