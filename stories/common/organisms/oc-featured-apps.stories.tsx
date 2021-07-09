@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
-import { OcFeaturedAppsComponent, FeaturedAppsProps } from '../../../src/react-common-components/ui/common';
+import { OcFeaturedAppsComponent, FeaturedAppsProps } from '../../../packages/react-common-components/src/ui/common';
 
 export default {
 	title: 'Featured Apps [BEM]',

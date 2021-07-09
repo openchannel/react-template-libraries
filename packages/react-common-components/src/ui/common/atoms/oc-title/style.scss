@@ -1,0 +1,24 @@
+//commit b98e1a3683be7483aa6a9252859bc1d2d99b8ccc Author: Julia Date: 05.03.21, 18:18
+@import '../../../styles/index';
+
+.oc-title {
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  &__text {
+    margin-bottom: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  &__required {
+    color: $danger;
+    margin-left: 1rem;
+  }
+  &__description {
+    margin-left: 1rem;
+    &-icon {
+      display: block;
+    }
+  }
+}

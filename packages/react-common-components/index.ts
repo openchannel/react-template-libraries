@@ -1,1 +1,1 @@
-export * from '../../src/react-common-components';
+export * from './src';

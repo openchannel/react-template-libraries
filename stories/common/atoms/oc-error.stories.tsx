@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcError, OcErrorProps } from '../../../src/react-common-components/ui/common';
+import { OcError, OcErrorProps } from '../../../packages/react-common-components/src/ui/common';
 
 
 export default {

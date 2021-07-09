@@ -13,7 +13,14 @@
 		"ui",
 		"openchannel"
 	],
-	"peerDependencies": {
+	"scripts": {
+		"build": "tsdx build --tsconfig tsconfig.build.json",
+		"test": "tsdx test --passWithNoTests",
+		"test:watch": "tsdx test --passWithNoTests --watch",
+		"test:coverage": "tsdx test --passWithNoTests --coverage",
+		"test:coverage:watch": "tsdx test --passWithNoTests --coverage --watch"
+	},
+	"dependencies": {
 		"@braintree/sanitize-url": "^5.0.1",
 		"@tinymce/tinymce-react": "^3.12.5",
 		"bootstrap": "^4.6.0",
@@ -33,5 +40,15 @@
 		"react-router-dom": "^5.2.0",
 		"react-select": "^4.3.1",
 		"tinymce": "^5.8.1"
+	},
+	"jest": {
+		"setupFilesAfterEnv": [
+			"./test/setupTests.js"
+		],
+		"moduleNameMapper": {
+			"\\.(css|less|scss|sass)$": "identity-obj-proxy",
+			"\\.svg": "<rootDir>/test/svgrMock.js",
+			"\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/fileTransformer.js"
+		}
 	}
 }

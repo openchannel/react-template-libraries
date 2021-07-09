@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { OcTagElement, OcTagElementProps } from '../../../src/react-common-components/ui/common';
+import { OcTagElement, OcTagElementProps } from '../../../packages/react-common-components/src/ui/common';
 
 
 export default {

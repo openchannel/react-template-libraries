@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from '@storybook/addons';
 import { Story, Meta } from '@storybook/react';
 
-import { OcTags, OcTagsProps, OcTagsValue } from '../../../src/react-common-components/ui/form';
+import { OcTags, OcTagsProps, OcTagsValue } from '../../../packages/react-common-components/src/ui/form';
 
 
 export default {

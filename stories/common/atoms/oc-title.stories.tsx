@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcTitleComponent, TitleProps } from '../../../src/react-common-components';
+import { OcTitleComponent, TitleProps } from '../../../packages/react-common-components/src/ui';
 
 export default {
   title: 'Title',

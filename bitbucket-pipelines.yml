@@ -33,6 +33,19 @@ definitions:
           - export AWS_S3="`aws ssm get-parameter --region $REGION --with-decryption --name /ECS-CLUSTER/${CLUSTER_NAME}/${APP_NAME}/AWS_S3 --output text --query Parameter.Value`"
           - aws s3 sync --delete storybook-static/ s3://$AWS_S3
           - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths /*
+
+    - step: &build-and-push-new-version-of-components
+        name: Push components to npm
+        script:
+          - npm install --quiet
+          - npm run build-prod angular-common-components
+          - npm run angular-common-components-pack
+          - pipe: atlassian/npm-publish:0.3.2
+        variables:
+          NPM_TOKEN: $NPM_TOKEN
+          FOLDER: 'dist'
+          EXTRA_ARGS: '--access public'
+
 pipelines:
   custom:
     Deploy to dev1:

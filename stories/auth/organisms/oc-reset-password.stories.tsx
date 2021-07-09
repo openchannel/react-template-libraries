@@ -2,8 +2,8 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
-import { OcResetPasswordComponent, OcResetPasswordProps } from '../../../src/react-common-components/ui/auth/index';
-import { errorMessages } from '../../../src/react-common-components/ui/form/lib';
+import { OcResetPasswordComponent, OcResetPasswordProps } from '../../../packages/react-common-components/src/ui/auth/index';
+import { errorMessages } from '../../../packages/react-common-components/src/ui/form/lib';
 
 export default {
 	title: 'Reset Password [BEM]',

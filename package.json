@@ -5,7 +5,7 @@
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
-    "src"
+		"src"
   ],
   "engines": {
     "node": ">=10"
@@ -13,21 +13,17 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
-    "test": "tsdx test --passWithNoTests",
-    "test:watch": "tsdx test --passWithNoTests --watch",
-    "test:coverage": "tsdx test --passWithNoTests --coverage",
-    "test:coverage:watch": "tsdx test --passWithNoTests --coverage --watch",
     "lint": "tsdx lint",
     "lint:fix": "tsdx lint src --fix",
     "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why",
-    "copy-img-assets": "cp -r src/assets/img/ storybook-static/",
-    "storybook": "start-storybook -s src/assets/ -p 6006",
-    "build-storybook": "build-storybook && npm run copy-img-assets",
-    "serve-storybook": "npm run build-storybook && npx http-server storybook-static",
-    "cypress": "cypress open"
+    "copy-img-assets": "cp -r packages/react-common-components/src/assets/img/ storybook-static/",
+    "storybook": "start-storybook -s packages/react-common-components/src/assets/ -p 6006",
+    "storybook:build": "build-storybook && npm run copy-img-assets",
+    "storybook:serve": "npm run build-storybook && npx http-server storybook-static"
   },
+	"private": true,
   "peerDependencies": {
     "bootstrap": "^4.6.0",
     "react": ">=16",
@@ -87,6 +83,7 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^6.0.0",
     "identity-obj-proxy": "^3.0.0",
+    "lerna": "^4.0.0",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -101,6 +98,9 @@
     "typescript": "^4.2.4",
     "url-loader": "^4.1.1"
   },
+	"workspaces": [
+		"packages/*"
+	],
   "dependencies": {
     "@braintree/sanitize-url": "^5.0.1",
     "@tinymce/tinymce-react": "^3.12.5",

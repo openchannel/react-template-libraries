@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcRatingComponent, RatingProps } from '../../../src/react-common-components/ui/market/index';
+import { OcRatingComponent, RatingProps } from '../../../packages/react-common-components';
 
 export default {
   title: 'Rating',

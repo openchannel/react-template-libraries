@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcColorComponent, ColorProps } from '../../../src/react-common-components/ui/common';
+import { OcColorComponent, ColorProps } from '../../../packages/react-common-components/src/ui/common';
 
 export default {
   title: 'Color [BEM]',

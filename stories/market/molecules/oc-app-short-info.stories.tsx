@@ -2,8 +2,11 @@ import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import { FullAppData } from '../../../src/react-common-components/ui/common/models';
-import { OcAppShortInfo, OcAppShortInfoProps } from '../../../src/react-common-components/ui/market';
+import {
+	OcAppShortInfo,
+	OcAppShortInfoProps,
+	FullAppData,
+} from '../../../packages/react-common-components';
 
 
 export default {

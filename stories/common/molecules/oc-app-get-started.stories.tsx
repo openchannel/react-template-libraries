@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcGetStartedComponent, GetStartedProps } from '../../../src/react-common-components/ui/common/molecules';
+import { OcGetStartedComponent, GetStartedProps } from '../../../packages/react-common-components/src/ui/common/molecules';
 
 export default {
 	title: 'Get started [BEM]',

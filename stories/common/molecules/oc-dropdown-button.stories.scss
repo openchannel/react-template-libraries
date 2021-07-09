@@ -1,4 +1,4 @@
-@import 'src/react-common-components/ui/styles/index.scss';
+@import '../../../packages/react-common-components/src/ui/styles/index.scss';
 
 .stories-dropdown-button {
   @include font-size-breakpoint(md);
