@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
-
 import { OcSidebar, SidebarProps } from '../../../src/ui/common';
 
 export default {
@@ -9,7 +8,9 @@ export default {
 } as Meta;
 
 const SidebarComponent: Story<SidebarProps> = (args) => {
-	return <OcSidebar {...args} />;
+	const [isSidebarToggled, toggleSidebar] = React.useState(false);
+
+	return <OcSidebar {...args} isSidebarToggled={isSidebarToggled} toggleSidebar={toggleSidebar} />;
 };
 
 export const OneLevel = SidebarComponent.bind({});
@@ -34,4 +35,7 @@ OneLevel.args = {
 			checked: true,
 		},
 	],
+	toggleIconDown: '../../../src/assets/img/select-down.svg',
+	toggleIconUp: '../../../src/assets/img/select-up.svg',
+	onClickSidebar: () => {},
 };

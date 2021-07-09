@@ -1,5 +1,6 @@
 //commit 240aa1e72cb6b2f67e9148e5d21917065b56fb19 author: Julia Date: 12.05.21 18:29
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import './style.scss';
 
 export interface SidebarProps {
@@ -40,14 +41,28 @@ export interface SidebarProps {
 	baseNavigation?: string;
 
 	/**
-	 * Emits sidebar model changes and passes to the parent component.
+	 * Toggle function to open and close .
 	 */
-	onChange?: any;
+	toggleSidebar?: any;
+
+	/**
+	 * Flag if the sidebar items opened
+	 */
+	isSidebarToggled?: any;
+	onClickSidebar?: any;
 }
 
 export const OcSidebar: React.FC<SidebarProps> = (props) => {
-	const { title, sidebarModel = [], baseNavigation } = props;
-	console.log(sidebarModel);
+	const {
+		title,
+		sidebarModel = [],
+		baseNavigation,
+		toggleIconDown,
+		toggleIconUp,
+		toggleSidebar,
+		isSidebarToggled,
+		onClickSidebar,
+	} = props;
 
 	return (
 		<div className="oc-sidebar">
@@ -55,30 +70,60 @@ export const OcSidebar: React.FC<SidebarProps> = (props) => {
 				<span className="oc-sidebar__heading">{title}</span>
 				<ul className="oc-sidebar__list">
 					{sidebarModel &&
-						sidebarModel?.map((selectItem) => (
-							<li className="oc-sidebar__list-item">
+						sidebarModel?.map((selectItem, index) => (
+							<li className="oc-sidebar__list-item" key={selectItem.label + index}>
 								<div className="oc-sidebar__list-item-expand-line">
 									{baseNavigation ? (
-										<a className="oc-sidebar__list-item-text">{selectItem.label}</a>
+										<>
+											<Link className="oc-sidebar__list-item-text" to="/">
+												{selectItem.label}
+											</Link>
+											{isSidebarToggled ? (
+												<img src={toggleIconUp} onClick={() => toggleSidebar(!isSidebarToggled)} />
+											) : (
+												<img
+													src={toggleIconDown}
+													onClick={() => toggleSidebar(!isSidebarToggled)}
+												/>
+											)}
+										</>
 									) : (
-										<span className="oc-sidebar__list-item-text">{selectItem.label}</span>
+										<>
+											<span className="oc-sidebar__list-item-text" onClick={onClickSidebar}>
+												{selectItem.label}
+											</span>
+											{isSidebarToggled ? (
+												<img src={toggleIconUp} onClick={() => toggleSidebar(!isSidebarToggled)} />
+											) : (
+												<img
+													src={toggleIconDown}
+													onClick={() => toggleSidebar(!isSidebarToggled)}
+												/>
+											)}
+										</>
 									)}
 								</div>
-								{selectItem.values &&
-									selectItem.values.length &&
-									selectItem.values.map((subValue: any) => (
-										<ul className="oc-sidebar__sublist">
+								<ul className="oc-sidebar__sublist">
+									{selectItem.values &&
+										selectItem.values.length &&
+										selectItem.values.map((subValue: any) => (
 											<li>
-												{' '}
-												<span className="oc-sidebar__list-item-text oc-sidebar__list-item-text_margin">
-													{subValue.label}
-												</span>
-												<a className="oc-sidebar__list-item-text oc-sidebar__list-item-text_margin">
-													{subValue.label}
-												</a>
+												{baseNavigation ? (
+													<Link
+														className="oc-sidebar__list-item-text oc-sidebar__list-item-text_margin"
+														to="/"
+													/>
+												) : (
+													<span
+														className="oc-sidebar__list-item-text oc-sidebar__list-item-text_margin"
+														onClick={onClickSidebar}
+													>
+														{subValue.label}
+													</span>
+												)}
 											</li>
-										</ul>
-									))}
+										))}
+								</ul>
 							</li>
 						))}
 				</ul>
