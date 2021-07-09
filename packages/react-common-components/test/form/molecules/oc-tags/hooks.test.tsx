@@ -1,7 +1,6 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 
-import { useTagDropboxState } from '../../../../packages/react-common-components/src/ui/form/molecules/oc-tags/hooks';
-
+import { useTagDropboxState } from '../../../../src/ui/form/molecules/oc-tags/hooks';
 
 describe('OcTags (hooks)', () => {
 	const createTagMock = jest.fn();

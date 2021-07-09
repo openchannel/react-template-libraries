@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-
-import { OcChartComponent, ChartProps } from '../../../packages/react-common-components/ui/portal';
+import { OcChartComponent, ChartProps } from '@openchannel/react-common-components';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { defaultChartProps } from './constants';

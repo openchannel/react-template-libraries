@@ -1,11 +1,8 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-
-import { Modal, ModalProps } from '../../../packages/react-common-components/src/ui/common';
-
+import { Modal, ModalProps } from '@openchannel/react-common-components';
 
 const setUp = (props: ModalProps) => shallow(<Modal {...props} />);
-
 
 describe('Modal (common modal)', () => {
 	it('should create', () => {

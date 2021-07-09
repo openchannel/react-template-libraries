@@ -1,7 +1,7 @@
 //@ts-nocheck
 import * as React from 'react';
 import { mount, ShallowWrapper } from 'enzyme';
-import { CategoryItem } from '../../../packages/react-common-components/src/ui/common/organisms/oc-app-categories/category-item';
+import { CategoryItem } from '@openchannel/react-common-components/src/ui/common/organisms/oc-app-categories/category-item';
 
 describe('Category Item', () => {
 	let component: ShallowWrapper = mount(

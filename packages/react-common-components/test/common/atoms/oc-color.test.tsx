@@ -1,10 +1,6 @@
 import * as React from 'react';
-import enzyme, { mount, shallow, ShallowWrapper } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-
-import { OcColorComponent, ColorProps } from '../../../packages/react-common-components/src/ui/common';
-
-enzyme.configure({ adapter: new Adapter() });
+import { mount, shallow, ShallowWrapper } from 'enzyme';
+import { OcColorComponent, ColorProps } from '@openchannel/react-common-components';
 
 const defaultColorProps: ColorProps = {
   placeholder: 'Enter color value here',

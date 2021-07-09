@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { mount, ReactWrapper } from 'enzyme';
 import BootstrapDropdown from 'react-bootstrap/Dropdown';
-
-import { OcDropdown, OcDropdownProps } from '../../../../packages/react-common-components/src/ui/common';
-
+import { OcDropdown, OcDropdownProps } from '@openchannel/react-common-components';
 
 const setUp = (props: OcDropdownProps) => mount(<OcDropdown {...props} />);
 

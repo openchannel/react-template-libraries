@@ -3,8 +3,8 @@ import { shallow, ShallowWrapper } from 'enzyme';
 
 import {
 	ExpandableListItem,
-	SelectModel,
-} from '../../../../packages/react-common-components/src/ui/common/molecules/oc-select-expandable/expandable-select-item';
+	SelectModel
+} from '../../../../src/ui/common/molecules/oc-select-expandable/expandable-select-item';
 
 const setUp = (props: SelectModel) => shallow(<ExpandableListItem {...props} />);
 

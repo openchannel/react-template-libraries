@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-
-import { OcExpandableSelect } from '../../../../packages/react-common-components/src/ui/common';
+import { OcExpandableSelect } from '@openchannel/react-common-components';
 
 describe('OcSelect', () => {
 	const selectModels = [

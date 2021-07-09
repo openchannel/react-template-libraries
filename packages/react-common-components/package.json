@@ -18,7 +18,12 @@
 		"test": "tsdx test --passWithNoTests",
 		"test:watch": "tsdx test --passWithNoTests --watch",
 		"test:coverage": "tsdx test --passWithNoTests --coverage",
-		"test:coverage:watch": "tsdx test --passWithNoTests --coverage --watch"
+		"test:coverage:watch": "tsdx test --passWithNoTests --coverage --watch",
+		"lint": "tsdx lint",
+		"lint:fix": "tsdx lint src --fix",
+		"prepare": "tsdx build",
+		"size": "size-limit",
+		"analyze": "size-limit --why"
 	},
 	"dependencies": {
 		"@braintree/sanitize-url": "^5.0.1",
@@ -41,6 +46,16 @@
 		"react-select": "^4.3.1",
 		"tinymce": "^5.8.1"
 	},
+	"size-limit": [
+		{
+			"path": "dist/react-template-libraries.cjs.production.min.js",
+			"limit": "1000 KB"
+		},
+		{
+			"path": "dist/react-template-libraries.esm.js",
+			"limit": "1000 KB"
+		}
+	],
 	"jest": {
 		"setupFilesAfterEnv": [
 			"./test/setupTests.js"

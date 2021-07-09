@@ -4,7 +4,7 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import {
 	InviteUserContent,
 	InviteContentProps,
-} from '../../../packages/react-common-components/src/ui/common/organisms/oc-invite-modal/content';
+} from '../../../src/ui/common/organisms/oc-invite-modal/content';
 
 const setUp = (props: InviteContentProps) => shallow(<InviteUserContent {...props} />);
 

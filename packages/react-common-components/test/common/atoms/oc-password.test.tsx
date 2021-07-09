@@ -1,17 +1,13 @@
 import * as React from 'react';
-import enzyme, { mount, shallow, ShallowWrapper } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-
-import { OcPasswordComponent, PasswordProps } from '../../../packages/react-common-components/src/ui/common';
-
-enzyme.configure({ adapter: new Adapter() });
+import { mount, shallow, ShallowWrapper } from 'enzyme';
+import { OcPasswordComponent, PasswordProps } from '@openchannel/react-common-components';
 
 const defaultPasswordProps: PasswordProps = {
   value: 'Test password',
   required: false,
   disabled: false,
   placeholder: 'default value',
-  onChange: (e) => e,
+  onChange: (e: any) => e,
 };
 
 const setUp = (props: PasswordProps) => shallow(<OcPasswordComponent {...props} />);

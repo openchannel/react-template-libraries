@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-
-import { OcDropdownButton } from '../../../packages/react-common-components/src/ui/common/molecules/oc-dropdown';
-import { OcMenuUserGrid, OcMenuUserGridProps } from '../../../packages/react-common-components';
+import { OcDropdownButton, OcMenuUserGrid, OcMenuUserGridProps } from '@openchannel/react-common-components';
 
 // @ts-ignore
 import { ocMenuUserGridPropertiesMock } from './mocks';

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { mount, ShallowWrapper } from 'enzyme';
 
-import { OcLoginComponent, LoginProps } from '../../../packages/react-common-components/src/ui/auth';
+import { OcLoginComponent, LoginProps } from '@openchannel/react-common-components/src/ui/auth';
 
 describe('Log In', () => {
 	let component: ShallowWrapper = mount(

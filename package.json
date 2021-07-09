@@ -1,52 +1,25 @@
 {
+	"name": "react-template-libraries",
   "version": "0.1.0",
   "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-		"src"
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
-  "engines": {
-    "node": ">=10"
-  },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "lint": "tsdx lint",
-    "lint:fix": "tsdx lint src --fix",
-    "prepare": "tsdx build",
-    "size": "size-limit",
-    "analyze": "size-limit --why",
+    "build": "lerna run build --stream",
+    "lint": "lerna run lint --stream",
+    "lint:fix": "lerna run lint:fix --stream",
     "copy-img-assets": "cp -r packages/react-common-components/src/assets/img/ storybook-static/",
     "storybook": "start-storybook -s packages/react-common-components/src/assets/ -p 6006",
     "storybook:build": "build-storybook && npm run copy-img-assets",
-    "storybook:serve": "npm run build-storybook && npx http-server storybook-static"
-  },
-	"private": true,
-  "peerDependencies": {
-    "bootstrap": "^4.6.0",
-    "react": ">=16",
-    "react-bootstrap": "^1.5.2"
+    "storybook:serve": "npm run storybook:build && npx http-server storybook-static"
   },
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
     }
   },
-  "name": "react-template-libraries",
-  "author": "vladimir.fedorchenko",
-  "module": "dist/react-template-libraries.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/react-template-libraries.cjs.production.min.js",
-      "limit": "1000 KB"
-    },
-    {
-      "path": "dist/react-template-libraries.esm.js",
-      "limit": "1000 KB"
-    }
-  ],
   "devDependencies": {
     "@babel/core": "^7.13.15",
     "@size-limit/preset-small-lib": "^4.11.0",
@@ -77,6 +50,7 @@
     "cypress": "^7.2.0",
     "enzyme": "^3.11.0",
     "eslint": "^7.28.0",
+    "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-jest": "^24.3.5",
     "eslint-plugin-react-hooks": "^4.2.0",
@@ -98,39 +72,25 @@
     "typescript": "^4.2.4",
     "url-loader": "^4.1.1"
   },
-	"workspaces": [
-		"packages/*"
-	],
   "dependencies": {
-    "@braintree/sanitize-url": "^5.0.1",
-    "@tinymce/tinymce-react": "^3.12.5",
-    "bootstrap": "^4.6.0",
-    "chart.js": "^2.9.4",
-    "color": "^3.1.3",
-    "dompurify": "^2.2.8",
-    "formik": "^2.2.8",
-    "identity-obj-proxy": "^3.0.0",
-    "lodash": "^4.17.21",
-    "lodash-es": "^4.17.21",
-    "moment": "^2.29.1",
-    "nanoid": "^3.1.23",
-    "react-bootstrap": "^1.5.2",
-    "react-datetime": "^3.0.4",
-    "react-dropzone-uploader": "^2.11.0",
-    "react-multi-carousel": "^2.6.3",
-    "react-player": "^2.9.0",
-    "react-router-dom": "^5.2.0",
-    "react-select": "^4.3.1",
-    "tinymce": "^5.8.1"
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "./test/setupTests.js"
-    ],
-    "moduleNameMapper": {
-      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-      "\\.svg": "<rootDir>/test/svgrMock.js",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/fileTransformer.js"
-    }
+		"@braintree/sanitize-url": "^5.0.1",
+		"@tinymce/tinymce-react": "^3.12.5",
+		"bootstrap": "^4.6.0",
+		"chart.js": "^2.9.4",
+		"color": "^3.1.3",
+		"dompurify": "^2.2.8",
+		"formik": "^2.2.8",
+		"lodash": "^4.17.21",
+		"lodash-es": "^4.17.21",
+		"moment": "^2.29.1",
+		"nanoid": "^3.1.23",
+		"react-bootstrap": "^1.5.2",
+		"react-datetime": "^3.0.4",
+		"react-dropzone-uploader": "^2.11.0",
+		"react-multi-carousel": "^2.6.3",
+		"react-player": "^2.9.0",
+		"react-router-dom": "^5.2.0",
+		"react-select": "^4.3.1",
+		"tinymce": "^5.8.1"
   }
 }

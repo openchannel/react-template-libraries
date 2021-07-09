@@ -1,4 +1,4 @@
-import { FullAppData } from '../../../../packages/react-common-components/src/ui/common/models';
+import { FullAppData } from '@openchannel/react-common-components';
 
 const stat = {
 	'90day': 10,

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { InputContent } from '../../../../packages/react-common-components/src/ui/common/atoms/oc-file-upload/input-content';
+import { InputContent } from '../../../../src/ui/common/atoms/oc-file-upload/input-content';
 
 describe('Input content for replacing mockups in dropzone library', () => {
   const component: ShallowWrapper = shallow(<InputContent />);

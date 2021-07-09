@@ -1,10 +1,6 @@
 import * as React from 'react';
-import enzyme, { mount, shallow, ShallowWrapper } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-
-import { OcDropboxComponent, DropboxProps, DropboxValue } from '../../../packages/react-common-components/src/ui/common';
-
-enzyme.configure({ adapter: new Adapter() });
+import { mount, shallow, ShallowWrapper } from 'enzyme';
+import { OcDropboxComponent, DropboxProps, DropboxValue } from '@openchannel/react-common-components';
 
 const defaultDropboxProps: DropboxProps = {
   placeholder: 'Default placeholder',

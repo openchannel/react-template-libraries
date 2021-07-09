@@ -1,6 +1,6 @@
-import { Option } from '../../../../packages/react-common-components/src/ui/common/molecules/oc-select';
-import { transformToValidOptions } from '../../../../packages/react-common-components/src/ui/common/molecules/oc-select/utils';
+import { Option } from '@openchannel/react-common-components';
 
+import { transformToValidOptions } from '../../../../src/ui/common/molecules/oc-select/utils';
 
 describe('OcSelect (utilities)', () => {
 	const defaultArrayOfStrings: string[] = [ 'option 1', 'option 2' ];

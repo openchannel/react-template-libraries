@@ -1,6 +1,5 @@
 import { nanoid } from 'nanoid';
-
-import { FullAppData } from '../../../packages/react-common-components/src/ui/common/models';
+import { FullAppData } from '@openchannel/react-common-components';
 
 const statElement = {
 	'90day': 20,

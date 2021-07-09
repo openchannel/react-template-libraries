@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { FormikField } from '../../../packages/react-common-components/src/ui/form';
-
-import { OcDynamicArrayPreview, OcDynamicArrayPreviewProps } from '../../../packages/react-common-components/src/ui/form';
+import {
+	FormikField,
+	OcDynamicArrayPreview,
+	OcDynamicArrayPreviewProps
+} from '@openchannel/react-common-components';
 
 const mockFields: FormikField[] = [
 	{

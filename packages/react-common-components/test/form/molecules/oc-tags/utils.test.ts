@@ -1,4 +1,4 @@
-import { normalizeTags } from '../../../../packages/react-common-components/src/ui/form/molecules/oc-tags/utils';
+import { normalizeTags } from '../../../../src/ui/form/molecules/oc-tags/utils';
 
 describe('OcTags (utilities)', () => {
 	it('normalizeTags - should transform string[] to number[] and return uniq', () => {

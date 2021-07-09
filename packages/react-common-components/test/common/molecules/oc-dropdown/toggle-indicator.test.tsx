@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { BaseToggleIndicatorProps } from '../../../../packages/react-common-components/src/ui/common';
-import { ToggleIndicator } from '../../../../packages/react-common-components/src/ui/common/molecules/oc-dropdown/common/toggle-indicator';
-
+import { BaseToggleIndicatorProps } from '@openchannel/react-common-components';
+import { ToggleIndicator } from '../../../../src/ui/common/molecules/oc-dropdown/common/toggle-indicator';
 
 const setUp = (props: BaseToggleIndicatorProps) => shallow(<ToggleIndicator {...props} />);
 

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-
-import { OcForm, AppFormModel, OcFormProps } from '../../../packages/react-common-components/src/ui/form';
+import { OcForm, AppFormModel, OcFormProps } from '@openchannel/react-common-components';
 
 const formJsonData: AppFormModel = {
 	// fields: [

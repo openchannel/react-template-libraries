@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
+
 import {
-	CustomLeftArrow,
 	CustomRightArrow,
-} from '../../../packages/react-common-components/src/ui/common/organisms/oc-app-categories/custom-arrows';
+	CustomLeftArrow
+} from '../../../src/ui/common/organisms/oc-app-categories/custom-arrows';
 
 describe('CategoryItem', () => {
 	let leftArrow = mount(<CustomLeftArrow onClick={undefined} />);

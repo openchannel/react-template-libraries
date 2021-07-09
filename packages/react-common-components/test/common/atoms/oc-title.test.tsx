@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-
-import { OcTitleComponent, TitleProps, OcTooltipComponent } from '../../../packages/react-common-components/src/ui/common';
+import { OcTitleComponent, TitleProps, OcTooltipComponent } from '@openchannel/react-common-components';
 
 const defaultComponentProps: TitleProps = {
   title: 'Title',

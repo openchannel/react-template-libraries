@@ -1,10 +1,6 @@
 import * as React from 'react';
-import enzyme, { shallow, ShallowWrapper } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-
-import { OcCheckboxComponent, CheckboxProps } from '../../../packages/react-common-components/src/ui/common';
-
-enzyme.configure({ adapter: new Adapter() });
+import { shallow, ShallowWrapper } from 'enzyme';
+import { OcCheckboxComponent, CheckboxProps } from '@openchannel/react-common-components';
 
 const defaultCheckboxProps: CheckboxProps = {
   labelText: 'Required Checkbox',

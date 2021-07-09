@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
 
-import { OcGetStartedComponent } from '../../../../packages/react-common-components/src/ui/common/molecules/oc-app-get-started';
+import { OcGetStartedComponent } from '@openchannel/react-common-components';
 
 describe('OcAppGetStartedComponent', () => {
 	const component = shallow(

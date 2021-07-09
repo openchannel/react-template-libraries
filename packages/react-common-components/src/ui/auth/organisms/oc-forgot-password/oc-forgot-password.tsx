@@ -2,12 +2,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import {
-	OcButtonComponent,
-	OcError,
-	OcInputComponent,
-	OcLabelComponent,
-} from '../../../common';
+import { OcButtonComponent, OcError, OcInputComponent, OcLabelComponent } from '../../../common';
 
 import { OcForgotPasswordProps } from './types';
 
