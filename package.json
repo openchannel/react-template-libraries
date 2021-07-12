@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "lerna run build --stream",
-		"react-common-components:pack": "cd packages/react-common-components/dist && npm pack",
+    "react-common-components:pack": "cd packages/react-common-components/dist && npm pack",
     "lint": "lerna run lint --stream",
     "lint:fix": "lerna run lint:fix --stream",
     "copy-img-assets": "cp -r packages/react-common-components/src/assets/img/ storybook-static/",
@@ -48,7 +48,6 @@
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.4",
-    "cypress": "^7.2.0",
     "enzyme": "^3.11.0",
     "eslint": "^7.28.0",
     "eslint-config-react-app": "^6.0.0",
