@@ -1,8 +1,8 @@
 //commit 240aa1e72cb6b2f67e9148e5d21917065b56fb19 author: Julia Date: 12.05.21 18:29
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { SidebarValue } from '../../models/component-basic.model';
 import './style.scss';
-
 export interface SidebarProps {
 	/**
 	 * Title of the sidebar.
@@ -15,7 +15,7 @@ export interface SidebarProps {
 	 * Sidebar config, contains array of sidebar list items.
 	 * @type {SidebarValue[]}.
 	 */
-	sidebarModel: any[];
+	sidebarModel: SidebarValue[];
 
 	/**
 	 * Path to the custom toggle icon down.
@@ -40,15 +40,6 @@ export interface SidebarProps {
 	 */
 	baseNavigation?: string;
 
-	/**
-	 * Toggle function to open and close .
-	 */
-	toggleSidebar?: any;
-
-	/**
-	 * Flag if the sidebar items opened
-	 */
-	isSidebarToggled?: any;
 	onClickSidebar?: any;
 }
 
@@ -57,10 +48,8 @@ export const OcSidebar: React.FC<SidebarProps> = (props) => {
 		title,
 		sidebarModel = [],
 		baseNavigation,
-		toggleIconDown,
-		toggleIconUp,
-		toggleSidebar,
-		isSidebarToggled,
+		toggleIconDown = '../../../../assets/img/select-down.svg',
+		toggleIconUp = '../../../../assets/img/select-up.svg',
 		onClickSidebar,
 	} = props;
 
@@ -75,31 +64,49 @@ export const OcSidebar: React.FC<SidebarProps> = (props) => {
 								<div className="oc-sidebar__list-item-expand-line">
 									{baseNavigation ? (
 										<>
-											<Link className="oc-sidebar__list-item-text" to="/">
+											<Link
+												className="oc-sidebar__list-item-text"
+												to={`${baseNavigation}/${selectItem.id}`}
+											>
 												{selectItem.label}
 											</Link>
-											{isSidebarToggled ? (
-												<img src={toggleIconUp} onClick={() => toggleSidebar(!isSidebarToggled)} />
-											) : (
-												<img
-													src={toggleIconDown}
-													onClick={() => toggleSidebar(!isSidebarToggled)}
-												/>
-											)}
+											{selectItem.expanded
+												? selectItem.values &&
+												  selectItem.values.length > 0 && (
+														<img src={toggleIconUp} onClick={() => (selectItem.expanded = false)} />
+												  )
+												: selectItem.values &&
+												  selectItem.values.length > 0 && (
+														<img
+															src={toggleIconDown}
+															onClick={() => (selectItem.expanded = true)}
+														/>
+												  )}
 										</>
 									) : (
 										<>
-											<span className="oc-sidebar__list-item-text" onClick={onClickSidebar}>
+											<span
+												role="button"
+												tabIndex={0}
+												className={`oc-sidebar__list-item-text ${
+													selectItem.checked ? 'font-weight-bold' : ''
+												}`}
+												onClick={() => onClickSidebar(selectItem)}
+											>
 												{selectItem.label}
 											</span>
-											{isSidebarToggled ? (
-												<img src={toggleIconUp} onClick={() => toggleSidebar(!isSidebarToggled)} />
-											) : (
-												<img
-													src={toggleIconDown}
-													onClick={() => toggleSidebar(!isSidebarToggled)}
-												/>
-											)}
+											{selectItem.expanded
+												? selectItem.values &&
+												  selectItem.values.length > 0 && (
+														<img src={toggleIconUp} onClick={() => (selectItem.expanded = false)} />
+												  )
+												: selectItem.values &&
+												  selectItem.values.length > 0 && (
+														<img
+															src={toggleIconDown}
+															onClick={() => (selectItem.expanded = true)}
+														/>
+												  )}
 										</>
 									)}
 								</div>
@@ -111,12 +118,16 @@ export const OcSidebar: React.FC<SidebarProps> = (props) => {
 												{baseNavigation ? (
 													<Link
 														className="oc-sidebar__list-item-text oc-sidebar__list-item-text_margin"
-														to="/"
+														to={`${baseNavigation}/${selectItem.id}/${subValue.id}`}
 													/>
 												) : (
 													<span
-														className="oc-sidebar__list-item-text oc-sidebar__list-item-text_margin"
-														onClick={onClickSidebar}
+														role="button"
+														tabIndex={0}
+														className={`oc-sidebar__list-item-text oc-sidebar__list-item-text_margin ${
+															subValue.checked ? 'font-weight-bold' : ''
+														}`}
+														onClick={() => onClickSidebar(subValue)}
 													>
 														{subValue.label}
 													</span>

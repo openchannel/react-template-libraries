@@ -8,9 +8,7 @@ export default {
 } as Meta;
 
 const SidebarComponent: Story<SidebarProps> = (args) => {
-	const [isSidebarToggled, toggleSidebar] = React.useState(false);
-
-	return <OcSidebar {...args} isSidebarToggled={isSidebarToggled} toggleSidebar={toggleSidebar} />;
+	return <OcSidebar {...args} />;
 };
 
 export const OneLevel = SidebarComponent.bind({});
@@ -20,10 +18,12 @@ OneLevel.args = {
 		{
 			label: 'Category 1',
 			checked: false,
+			expanded: false,
 		},
 		{
 			label: 'Category 2',
 			checked: false,
+			expanded: false,
 		},
 		{
 			label: 'Category 3',
@@ -33,9 +33,10 @@ OneLevel.args = {
 		{
 			label: 'Category 4',
 			checked: true,
+			expanded: false,
 		},
 	],
-	toggleIconDown: '../../../src/assets/img/select-down.svg',
-	toggleIconUp: '../../../src/assets/img/select-up.svg',
+	toggleIconDown: './img/select-down.svg',
+	toggleIconUp: './img/select-up.svg',
 	onClickSidebar: () => {},
 };
