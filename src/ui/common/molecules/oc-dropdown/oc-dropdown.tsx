@@ -5,6 +5,4 @@ import { OcDropdownProps } from './types';
 
 import './oc-dropdown.scss';
 
-export const OcDropdown: React.FC<OcDropdownProps> = (props) => (
-	<BaseDropdown {...props} variant="inline" />
-);
+export const OcDropdown: React.FC<OcDropdownProps> = (props) => <BaseDropdown {...props} />;

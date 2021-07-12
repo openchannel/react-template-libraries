@@ -13,10 +13,25 @@ export interface ProfileNavbarProps {
 	selected: any;
 	/** internal prop for dropdown functional */
 	onSelect: any;
+	/** default dropdown icon */
+	defaultPlaceholderIcon?: React.ReactElement;
+	/** icon for clicked state */
+	activePlaceholderIcon?: React.ReactElement;
+	/** variant of dropdown */
+	variant?: 'inline' | 'block' | undefined;
 }
 
 export const OcProfileNavbar: React.FC<ProfileNavbarProps> = (props) => {
-	const { initials, username, role, selected, onSelect } = props;
+	const {
+		initials,
+		username,
+		role,
+		selected,
+		onSelect,
+		defaultPlaceholderIcon,
+		activePlaceholderIcon,
+		variant,
+	} = props;
 
 	return (
 		<div className="profile-navbar">
@@ -32,6 +47,9 @@ export const OcProfileNavbar: React.FC<ProfileNavbarProps> = (props) => {
 					onSelect={onSelect}
 					selected={selected}
 					options={[]}
+					defaultPlaceholderIcon={defaultPlaceholderIcon}
+					activePlaceholderIcon={activePlaceholderIcon}
+					variant={variant}
 				/>
 			</div>
 		</div>
