@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "lerna run build --stream",
+		"react-common-components:pack": "cd packages/react-common-components/dist && npm pack",
     "lint": "lerna run lint --stream",
     "lint:fix": "lerna run lint:fix --stream",
     "copy-img-assets": "cp -r packages/react-common-components/src/assets/img/ storybook-static/",
