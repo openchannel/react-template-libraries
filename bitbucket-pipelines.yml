@@ -40,9 +40,10 @@ definitions:
           - yarn install
           - yarn run build
           #- yarn run react-common-components:pack
+          - echo "AWS_ACCESS_KEY_ID key - $AWS_ACCESS_KEY_ID | NPM_TOKEN - $NPM_TOKEN"
           - pipe: atlassian/npm-publish:0.3.2
         variables:
-          NPM_TOKEN: $NPM_TOKEN
+          NPM_TOKEN: $AWS_ACCESS_KEY_ID
           FOLDER: 'packages/react-common-components/dist'
           EXTRA_ARGS: '--access public'
 
