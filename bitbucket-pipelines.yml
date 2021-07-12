@@ -41,10 +41,10 @@ definitions:
           - yarn run build
           #- yarn run react-common-components:pack
           - pipe: atlassian/npm-publish:0.3.2
-        variables:
-          PUBLISH_NPM_TOKEN: $PUBLISH_NPM_TOKEN
-          FOLDER: 'packages/react-common-components/dist'
-          EXTRA_ARGS: '--access public'
+            variables:
+              NPM_TOKEN: $NPM_TOKEN
+              FOLDER: 'packages/react-common-components/dist'
+              EXTRA_ARGS: '--access public'
 
 pipelines:
   custom:
