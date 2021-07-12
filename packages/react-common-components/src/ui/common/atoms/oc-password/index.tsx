@@ -30,13 +30,13 @@ export interface PasswordProps extends React.InputHTMLAttributes<HTMLInputElemen
 }
 
 export const OcPasswordComponent: React.FC<PasswordProps> = (props) => {
-	const { customClass } = props;
+	const { customClass, ...p } = props;
 	const [isPassword, toggle] = React.useReducer((is) => !is, false);
 
 	return (
 		<div className="oc-password">
 			<input
-				{...props}
+				{...p}
 				type={isPassword ? 'text' : 'password'}
 				className={`oc-password__input ${customClass}`}
 			/>
