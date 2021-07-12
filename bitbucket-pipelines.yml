@@ -39,11 +39,11 @@ definitions:
         script:
           - yarn install
           - yarn run build
-          #- yarn run react-common-components:pack
+          - yarn run react-common-components:pack
           - pipe: atlassian/npm-publish:0.3.2
             variables:
               NPM_TOKEN: $NPM_TOKEN
-              FOLDER: 'packages/react-common-components/dist'
+              FOLDER: 'packages/react-common-components'
               EXTRA_ARGS: '--access public'
 
 pipelines:
