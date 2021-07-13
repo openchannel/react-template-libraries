@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { DropdownModel } from './types';
 import { OcDropdown } from '../../index';
+import { WithPermissionsListItem } from './withPermissionsListItem';
 import './style.scss';
 
 export interface ProfileNavbarProps {
@@ -13,12 +15,16 @@ export interface ProfileNavbarProps {
 	selected: any;
 	/** internal prop for dropdown functional */
 	onSelect: any;
+	/** Navbar options to be passed */
+	options: DropdownModel<string>[];
 	/** default dropdown icon */
 	defaultPlaceholderIcon?: React.ReactElement;
 	/** icon for clicked state */
 	activePlaceholderIcon?: React.ReactElement;
 	/** variant of dropdown */
 	variant?: 'inline' | 'block' | undefined;
+	/** ListItem component to render. Should be wrapped with forwardRef.*/
+	listItem?: React.ForwardRefExoticComponent<any>;
 }
 
 export const OcProfileNavbar: React.FC<ProfileNavbarProps> = (props) => {
@@ -31,6 +37,8 @@ export const OcProfileNavbar: React.FC<ProfileNavbarProps> = (props) => {
 		defaultPlaceholderIcon,
 		activePlaceholderIcon,
 		variant,
+		listItem,
+		options = [],
 	} = props;
 
 	return (
@@ -46,10 +54,11 @@ export const OcProfileNavbar: React.FC<ProfileNavbarProps> = (props) => {
 					}
 					onSelect={onSelect}
 					selected={selected}
-					options={[]}
+					options={options.filter((item) => item.hasOwnProperty('companyPermissions'))}
 					defaultPlaceholderIcon={defaultPlaceholderIcon}
 					activePlaceholderIcon={activePlaceholderIcon}
 					variant={variant}
+					listItem={WithPermissionsListItem || undefined}
 				/>
 			</div>
 		</div>
