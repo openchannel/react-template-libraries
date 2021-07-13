@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 import { statElement } from './oc-app-card/mocks';
-import { OcRecommendedAppsComponent, RecommendedAppsProps } from '../../../src/ui/common';
+import { OcRecommendedAppsComponent, RecommendedAppsProps } from '../../../packages/react-common-components/src/ui/common';
 
 const app = {
 	appId: '344gf-s3j-gi3423',

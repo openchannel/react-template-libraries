@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcDropdown, OcDropdownProps } from '../../../src/ui/common';
+import { OcDropdown, OcDropdownProps } from '../../../packages/react-common-components/src/ui/common';
 
 
 export default {
