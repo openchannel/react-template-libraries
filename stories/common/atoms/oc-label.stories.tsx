@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcLabelComponent, LabelProps } from '../../../src/ui/common';
+import { OcLabelComponent, LabelProps } from '../../../packages/react-common-components/src/ui/common';
 
 export default {
   title: 'Label',

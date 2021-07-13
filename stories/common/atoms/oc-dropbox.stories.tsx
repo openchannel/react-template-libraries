@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcDropboxComponent, DropboxProps, DropboxValue } from '../../../src/ui/common';
+import { OcDropboxComponent, DropboxProps, DropboxValue } from '../../../packages/react-common-components/src/ui/common';
 
 export default {
   title: 'Dropbox search [BEM]',

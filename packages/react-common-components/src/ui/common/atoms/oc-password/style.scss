@@ -1,0 +1,11 @@
+@import '../../../styles/index';
+
+.oc-password {
+	&__input {
+		@include form-control($info, $primary, $body-color);
+	}
+}
+
+.error {
+	border-color: $danger;
+}

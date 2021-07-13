@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { AppFormModel, OcForm } from '../../../src/ui/form';
+import { AppFormModel, OcForm } from '../../../packages/react-common-components/src/ui/form';
 
 const formJsonData: AppFormModel = {
 	formId: 'test',

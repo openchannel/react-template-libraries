@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcTitleComponent, TitleProps } from '../../../src/ui/common';
+import { OcTitleComponent, TitleProps } from '../../../packages/react-common-components/src/ui';
 
 export default {
   title: 'Title',
@@ -34,6 +34,6 @@ export const CustomIconTitle = TitleComponent.bind({});
 CustomIconTitle.args = {
   title: 'Options',
   required: true,
-  infoTitleIconCsv: './src/assets/img/delete.svg',
+  infoTitleIconCsv: './img/delete.svg',
   description: 'Description description description description',
 };

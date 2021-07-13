@@ -1,8 +1,12 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { ChartOptionsChange } from '../../../src/ui/portal';
 
-import { OcChartComponent, ChartProps, ChartLayoutTypeModel } from '../../../src/ui/portal';
+import {
+	OcChartComponent,
+	ChartLayoutTypeModel,
+	ChartProps,
+	ChartOptionsChange,
+} from '../../../packages/react-common-components';
 
 const month = {
   labelsY: [3, 10, 30, 50, 25, 40, 100, 70, 150, 200, 50, 85, 50],
