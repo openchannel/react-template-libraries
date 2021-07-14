@@ -1,6 +1,5 @@
 node_modules
-build
-coverage
+dist
 tsdx.config.js
-test/fileTransformer.js
-test/setupTests.js
+packages/react-common-components/test/fileTransformer.js
+packages/react-common-components/test/setupTests.js

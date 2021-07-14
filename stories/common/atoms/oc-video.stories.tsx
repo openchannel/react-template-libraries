@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcVideoComponent, VideoProps } from '../../../src/ui/common';
+import { OcVideoComponent, VideoProps } from '../../../packages/react-common-components/src/ui/common';
 
 export default {
   title: 'Video [BEM]',

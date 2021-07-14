@@ -2,8 +2,8 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
-import { errorMessages } from '../../../src/ui/form/lib';
-import { OcActivation, OcActivationProps } from '../../../src/ui/auth';
+import { errorMessages } from '../../../packages/react-common-components';
+import { OcActivation, OcActivationProps } from '../../../packages/react-common-components';
 
 
 export default {
@@ -38,7 +38,7 @@ const FilledComponent: Story<OcActivationProps> = (args) => {
 				inputProps={{
 					id: 'input',
 					value,
-					onChange: (e) => setValue(e.target.value),
+					onChange: (e: any) => setValue(e.target.value),
 					onBlur: () => setBlurred(true),
 				}}
 				inputError={blurred && !value && errorMessages.required()}

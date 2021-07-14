@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcAppDescription, AppDescriptionProps } from '../../../src/ui/common/molecules';
+import { OcAppDescription, AppDescriptionProps } from '../../../packages/react-common-components/src/ui/common/molecules';
 
 export default {
 	title: 'App Description [BEM]',
@@ -42,5 +42,4 @@ ShortDescription.args = {
 	showFullDescription: true,
 	shortDescription: true,
 	enableTruncateTextLogic: true,
-	isFullDescription: false,
 };

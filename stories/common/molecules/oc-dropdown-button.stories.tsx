@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcDropdownButton, OcDropdownButtonProps } from '../../../src/ui/common';
+import { OcDropdownButton, OcDropdownButtonProps } from '../../../packages/react-common-components/src/ui/common';
 import './oc-dropdown-button.stories.scss';
 
 export default {

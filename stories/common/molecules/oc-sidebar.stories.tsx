@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { OcSidebar, SidebarProps } from '../../../src/ui/common';
+import { OcSidebar, SidebarProps } from '@openchannel/react-common-components';
 
 export default {
 	title: 'Sidebar [BEM]',

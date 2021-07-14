@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { useModalState } from '../../../src/lib/hooks';
+import { useModalState } from '../../../packages/react-common-components/src/lib/hooks';
 
 import {
   OcButtonComponent,
   OcConfirmationModalComponent,
   ConfirmationModalProps,
-} from '../../../src/ui/common';
+} from '../../../packages/react-common-components/src/ui/common';
 
 export default {
   title: 'Confirmation modal',
