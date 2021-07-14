@@ -1,64 +1,46 @@
-// import {Injectable} from '@angular/core';
-// import {HttpRequestService} from './http-request-services';
-// import {Observable, of, throwError} from 'rxjs';
-import { LoginRequest, LoginResponse, RefreshTokenRequest } from '../model/api/login.model';
-// import {AuthHolderService} from './auth-holder.service';
-// import {catchError, flatMap, map, tap} from 'rxjs/operators';
+import { api } from '../lib/api';
+import { storage } from '../lib/storage';
+import type { LoginRequest, LoginResponse, RefreshTokenRequest } from '../model/api/login.model';
 
-// @Injectable({
-//     providedIn: 'root',
-// })
-export class AuthenticationService {
+const AUTH_URL = 'auth';
+const INIT_CSRF_URL = `${AUTH_URL}/csrf`;
 
-    private static readonly AUTH_URL = 'auth';
-    public static readonly INIT_CSRF_URL = `${AuthenticationService.AUTH_URL}/csrf`;
+export const auth = {
+	initCsrf: () => api.get(INIT_CSRF_URL),
 
-    constructor(private httpService: HttpRequestService,
-                private authHolderService: AuthHolderService) {
-    }
+	getAuthConfig: () => api.get(`${AUTH_URL}/config`),
 
-    initCsrf(): Observable<any> {
-        return this.httpService.get( AuthenticationService.INIT_CSRF_URL);
-    }
+	login: (body: LoginRequest) => api.post(`${AUTH_URL}/external/token`, { body }),
 
-    getAuthConfig(): Observable<any> {
-        return this.httpService.get(`${(AuthenticationService.AUTH_URL)}/config`);
-    }
+	refreshToken: (body: RefreshTokenRequest) => api.post(`${AUTH_URL}/refresh`, { body }),
 
-    login(request: LoginRequest): Observable<LoginResponse> {
-        return this.httpService.post(`${AuthenticationService.AUTH_URL}/external/token`, request);
-    }
+	logOut: () => api.post(`${AUTH_URL}/logout`, { body: { refreshToken: storage.getRefreshToken() } }),
 
-    refreshToken(request: RefreshTokenRequest): Observable<LoginResponse> {
-        return this.httpService.post(`${AuthenticationService.AUTH_URL}/refresh`, request);
-    }
+	refreshTokenSilent: async () => {
+		try {
+			const response: LoginResponse = await auth.refreshToken({ refreshToken: storage.getRefreshToken() });
+			storage.persist(response.accessToken, response.refreshToken);
+			return response;
 
-    logOut(): Observable<void> {
-        return this.httpService.post(`${AuthenticationService.AUTH_URL}/logout`,
-            {refreshToken: this.authHolderService.refreshToken});
-    }
+		} catch (error) {
+			console.error('refreshTokenSilent', error);
+			storage.removeTokens();
+			throw error;
+		}
+	},
 
-    refreshTokenSilent(): Observable<any> {
-        return this.refreshToken({refreshToken: this.authHolderService.refreshToken})
-        .pipe(tap((response: LoginResponse) => this.authHolderService.persist(response.accessToken, response.refreshToken)),
-            catchError(err => {
-                this.authHolderService.clearTokensInStorage();
-                return throwError(err);
-            }));
-    }
-
-    tryLoginByRefreshToken(): Observable<boolean> {
-        return of(this.authHolderService.isLoggedInUser())
-        .pipe(flatMap((isLogged: boolean) => {
-            if (isLogged) {
-                return of(isLogged);
-            } else if (!this.authHolderService.refreshToken) {
-                return of(false);
-            } else {
-                return this.refreshTokenSilent()
-                .pipe(map(() => this.authHolderService.isLoggedInUser()),
-                    catchError(() => of(false)));
-            }
-        }));
-    }
-}
+	tryLoginByRefreshToken: async (): Promise<boolean> => {
+		if (storage.isUserLoggedIn()) {
+			return true;
+		} else if (!storage.getRefreshToken()) {
+			return false;
+		} else {
+			try {
+				await auth.refreshTokenSilent();
+				return true;
+			} catch {
+				return false;
+			}
+		}
+	},
+};
