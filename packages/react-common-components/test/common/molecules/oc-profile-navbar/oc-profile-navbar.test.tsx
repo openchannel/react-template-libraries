@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 
-import { OcProfileNavbar } from '../../../../src/ui/common';
+import { OcProfileNavbar } from '@openchannel/react-common-components';
 
 describe('Profile Navbar (common)', () => {
 	const options = [

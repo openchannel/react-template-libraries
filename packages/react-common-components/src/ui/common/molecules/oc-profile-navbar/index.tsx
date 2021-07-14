@@ -2,6 +2,8 @@ import * as React from 'react';
 import { DropdownModel } from './types';
 import { OcDropdown } from '../../index';
 import { WithPermissionsListItem } from './withPermissionsListItem';
+import DownArrow from '../../../../assets/img/select-down.svg';
+import UpArrow from '../../../../assets/img/select-down.svg';
 import './style.scss';
 
 export interface ProfileNavbarProps {
@@ -12,17 +14,15 @@ export interface ProfileNavbarProps {
 	/**Role of the user that will be shown at the bottom near the avatar circle. If not set - role text will not be shown */
 	role?: string;
 	/** internal prop for dropdown functional */
-	selected: any;
+	selected?: any;
 	/** internal prop for dropdown functional */
-	onSelect: any;
+	onSelect?: any;
 	/** Navbar options to be passed */
 	options: DropdownModel<string>[];
 	/** default dropdown icon */
 	defaultPlaceholderIcon?: React.ReactElement;
 	/** icon for clicked state */
 	activePlaceholderIcon?: React.ReactElement;
-	/** variant of dropdown */
-	variant?: 'inline' | 'block' | undefined;
 	/** ListItem component to render. Should be wrapped with forwardRef.*/
 	listItem?: React.ForwardRefExoticComponent<any>;
 }
@@ -34,9 +34,8 @@ export const OcProfileNavbar: React.FC<ProfileNavbarProps> = (props) => {
 		role,
 		selected,
 		onSelect,
-		defaultPlaceholderIcon,
-		activePlaceholderIcon,
-		variant,
+		defaultPlaceholderIcon = <DownArrow />,
+		activePlaceholderIcon = <UpArrow />,
 		listItem = WithPermissionsListItem,
 		options = [],
 	} = props;
@@ -57,8 +56,8 @@ export const OcProfileNavbar: React.FC<ProfileNavbarProps> = (props) => {
 					options={options.filter((item) => item.hasOwnProperty('companyPermissions'))}
 					defaultPlaceholderIcon={defaultPlaceholderIcon}
 					activePlaceholderIcon={activePlaceholderIcon}
-					variant={variant}
-					listItem={listItem || undefined}
+					variant="block"
+					listItem={listItem}
 				/>
 			</div>
 		</div>
