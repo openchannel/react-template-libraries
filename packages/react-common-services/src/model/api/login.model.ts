@@ -1,11 +1,6 @@
-export class LoginRequest {
+export interface LoginRequest {
 	idToken: string;
 	accessToken: string;
-
-	constructor(idToken: string, accessToken: string) {
-		this.idToken = idToken;
-		this.accessToken = accessToken;
-	}
 }
 
 export interface LoginResponse {
