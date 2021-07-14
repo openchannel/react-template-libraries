@@ -2,26 +2,27 @@ import './interceptors';
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
-export type Body = string | FormData | Record<string, unknown>;
+type Body = string | FormData | Record<string, unknown>;
 
-type Options = {
-	headers?: { [key: string]: string },
-	body?: Body,
+export type Options<ReqBody = {}> = {
+	headers?: Headers | { [key: string]: string },
+	params?: { [key: string]: string },
+	body?: ReqBody | Body,
 };
 
-export const request = (method: Method, url: string, options?: Options) => {
-	const uri = `${url}`;
+export const request = <ReqBody>(method: Method, url: string, options: Options<ReqBody> = {}) => {
+	const uri = `${url}${createParams(options)}`;
 
 	const headers = new Headers({
 		'Content-Type': 'application-json',
-		...options?.headers,
+		...options.headers,
 	});
 
 	const config = new Request(uri, {
 		method,
 		headers,
 		// ...options,
-		body: createBody(options),
+		body: createBody({ ...options, headers }),
 	});
 
 	return fetch(config).then((response) => {
@@ -38,9 +39,23 @@ export const request = (method: Method, url: string, options?: Options) => {
 /**
  * @param {{ body?: {}, headers: Headers }} options
  */
-const createBody = (options: any): any => {
-	if (options.body && options.headers.get('content-type').includes('json')) {
+const createBody = (options: Options): string | undefined  => {
+	if (options.body && options.headers!.get('content-type').includes('json')) {
 		return JSON.stringify(options.body);
 	}
 	return undefined;
 };
+
+const createParams = (options: Options) => {
+	if (options.params && Object.keys(options.params).length > 0) {
+		const params = new URLSearchParams();
+
+		for (const [key, value] of Object.entries(options.params)) {
+			params.set(key, value);
+		}
+
+		return params.toString();
+	}
+
+	return '';
+}

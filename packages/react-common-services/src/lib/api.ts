@@ -1,13 +1,13 @@
-import { request, Body } from './request';
+import { request, Options } from './request';
 
 export const api = {
 	get: (url: string) => request('GET', url),
 
-	post: (url: string, body: Body) => request('POST', url, { body }),
+	post: (url: string, options: Options) => request('POST', url, options),
 
-	put: (url: string, body: Body) => request('PUT', url, { body }),
+	put: (url: string, options: Options) => request('PUT', url, options),
 
-	patch: (url: string, body: Body) => request('PATCH', url, { body }),
+	patch: (url: string, options: Options) => request('PATCH', url, options),
 
 	delete: (url: string) => request('DELETE', url),
 };
