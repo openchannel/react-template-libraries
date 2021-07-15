@@ -95,7 +95,7 @@ export class TypeMapperUtils {
 			return set(
 				{ ...type },
 				'fields',
-				this.normalizeOptions(this.injectDefaultValues((type.fields || []), oldData)),
+				this.normalizeOptions(this.injectDefaultValues(type.fields || [], oldData)),
 			);
 		}
 

@@ -8,7 +8,7 @@ const loadMarketUrl = async () => {
 		config.marketUrl = response.data;
 		return config.marketUrl;
 	} catch (error) {
-		console.error('loadMarketUrl error', error)
+		console.error('loadMarketUrl error', error);
 		return '';
 	}
 };
@@ -27,5 +27,5 @@ export const config = {
 			return loadMarketUrl();
 		}
 		return config.marketUrl;
-	}
-}
+	},
+};

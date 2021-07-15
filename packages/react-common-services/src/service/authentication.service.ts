@@ -14,14 +14,16 @@ export const auth = {
 
 	refreshToken: (body: RefreshTokenRequest) => api.post(`${AUTH_URL}/refresh`, { body }),
 
-	logOut: () => api.post(`${AUTH_URL}/logout`, { body: { refreshToken: storage.getRefreshToken() } }),
+	logOut: () =>
+		api.post(`${AUTH_URL}/logout`, { body: { refreshToken: storage.getRefreshToken() } }),
 
 	refreshTokenSilent: async () => {
 		try {
-			const response: LoginResponse = await auth.refreshToken({ refreshToken: storage.getRefreshToken() });
+			const response: LoginResponse = await auth.refreshToken({
+				refreshToken: storage.getRefreshToken(),
+			});
 			storage.persist(response.accessToken, response.refreshToken);
 			return response;
-
 		} catch (error) {
 			console.error('refreshTokenSilent', error);
 			storage.removeTokens();

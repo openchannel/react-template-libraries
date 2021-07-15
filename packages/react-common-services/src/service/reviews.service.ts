@@ -12,7 +12,7 @@ const configureReviewsParams = (
 	page = 0,
 	limit = 0,
 ) => {
-	let params = new URLSearchParams()
+	const params = new URLSearchParams();
 
 	const queries = [`{'appId':'${appId}'}`];
 	if (filter) {
@@ -26,12 +26,12 @@ const configureReviewsParams = (
 	}
 
 	if (page > 0 && limit > 0) {
-		params.append('pageNumber', String(page))
+		params.append('pageNumber', String(page));
 		params.append('limit', String(limit));
 	}
 
 	return params;
-}
+};
 
 /**
  * Description: API service for getting reviews.<br>
@@ -66,7 +66,7 @@ export const reviews = {
 
 		// let reviewPage: Page<Review>;
 
-		return api.get(REVIEWS_URL, params)
+		return api.get(REVIEWS_URL, params);
 		// .pipe(
 		// 	tap((pageData: Page<Review>) => (reviewPage = pageData)),
 		// 	mergeMap((pageData: Page<Review>) => this.usersService.getUsersByIds(pageData.list.map(value => value.userId))),
@@ -89,5 +89,5 @@ export const reviews = {
 		// 		};
 		// 	}),
 		// );
-	}
-}
+	},
+};

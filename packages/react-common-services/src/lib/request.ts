@@ -4,12 +4,12 @@ type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 type Body = string | FormData | Record<string, unknown>;
 
-type Params = { [key: string]: string } | URLSearchParams;
+type Params = URLSearchParams | { [key: string]: string };
 
-export type Options<ReqBody = {}> = {
-	headers?: Headers | { [key: string]: string },
-	params?: Params,
-	body?: ReqBody | Body,
+export type Options<ReqBody = unknown> = {
+	headers?: Headers | { [key: string]: string };
+	params?: Params;
+	body?: ReqBody | Body;
 };
 
 export const request = <ReqBody>(method: Method, url: string, options: Options<ReqBody> = {}) => {
@@ -41,7 +41,7 @@ export const request = <ReqBody>(method: Method, url: string, options: Options<R
 /**
  * @param {{ body?: {}, headers: Headers }} options
  */
-const createBody = (options: Options): string | undefined  => {
+const createBody = (options: Options): string | undefined => {
 	if (options.body) {
 		if (options.headers instanceof Headers) {
 			const contentType = options.headers.get('content-type') || '';
@@ -70,4 +70,4 @@ const createParams = (options: Options) => {
 	}
 
 	return '';
-}
+};

@@ -18,4 +18,4 @@ export const market = {
 	getCurrentMarket: (): Promise<MarketModel> => {
 		return api.get(`${MARKET_URL}/this`);
 	},
-}
+};

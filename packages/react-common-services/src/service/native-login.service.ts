@@ -1,12 +1,12 @@
 import { api } from '../lib/api';
+import type { ChangePasswordRequest } from '../model/api/change-password.model';
+import type { SignUpByInviteRequest } from '../model/api/login.model';
+import type { UserResetPassword } from '../model/api/user-activation.model';
 import type {
 	OCNativeCustomSignup,
 	OCNativeDefaultSignup,
-	UserLoginModel
+	UserLoginModel,
 } from '../model/api/user-login.model';
-import type { SignUpByInviteRequest } from '../model/api/login.model';
-import type { UserResetPassword } from '../model/api/user-activation.model';
-import type { ChangePasswordRequest } from '../model/api/change-password.model';
 
 const NATIVE_URL = 'auth/native';
 

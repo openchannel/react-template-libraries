@@ -1,6 +1,6 @@
 import jwtDecode from 'jwt-decode';
 
-import type { AccessLevel, PermissionType, Permission, UserDetails } from '../model/api/user.model';
+import type { AccessLevel, Permission, PermissionType, UserDetails } from '../model/api/user.model';
 
 const ACCESS_TOKEN_KEY = 'accessToken';
 const REFRESH_TOKEN_KEY = 'refreshToken';
@@ -69,7 +69,7 @@ const updateAccessToken = (token: string): void => {
 	if (!decodeToken()) {
 		removeTokens();
 	}
-}
+};
 
 /**
  * When exists JWT tokens (access token and refresh token) in browser local storage, return true.
@@ -98,7 +98,7 @@ const decodeToken = (): UserDetails | null => {
 const getUserDetails = (): UserDetails | null => {
 	const decodedJWT = decodeToken();
 
-	return decodedJWT ? decodedJWT : null
+	return decodedJWT ? decodedJWT : null;
 };
 
 /**
@@ -147,7 +147,10 @@ const hasPermission = (type: PermissionType, accessArray: AccessLevel[]): boolea
 			if (permission) {
 				const validType = permission.startsWith(type) || permission.startsWith('*');
 				if (validType) {
-					if (accessArray.find(access => permission.endsWith(access)) || permission.endsWith('*')) {
+					if (
+						accessArray.find((access) => permission.endsWith(access)) ||
+						permission.endsWith('*')
+					) {
 						return true;
 					}
 				}
@@ -186,7 +189,7 @@ const hasPermission = (type: PermissionType, accessArray: AccessLevel[]): boolea
  * ``
  */
 const hasAnyPermission = (permissions: Permission[]): boolean => {
-	return permissions ? !!permissions.find(p => hasPermission(p.type, p.access)) : false;
+	return permissions ? !!permissions.find((p) => hasPermission(p.type, p.access)) : false;
 };
 
 export const storage = {

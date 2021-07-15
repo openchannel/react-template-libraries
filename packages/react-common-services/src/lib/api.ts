@@ -1,7 +1,7 @@
-import { request, Options } from './request';
+import { Options, request } from './request';
 
 export const api = {
-	get: (url: string, params: Options['params']) => request('GET', url, { params }),
+	get: (url: string, params?: Options['params']) => request('GET', url, { params }),
 
 	post: (url: string, options: Options) => request('POST', url, options),
 
