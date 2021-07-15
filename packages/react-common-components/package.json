@@ -16,7 +16,9 @@
 	"main": "dist/index.js",
 	"module": "dist/react-common-components.esm.js",
 	"typings": "dist/index.d.ts",
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "npm ci && tsdx build --tsconfig tsconfig.build.json",
 		"test": "tsdx test --passWithNoTests",
