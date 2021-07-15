@@ -7,3 +7,4 @@ export * from './oc-select';
 export * from './oc-select-expandable';
 export * from './oc-video-url';
 export * from './oc-sidebar';
+export * from './oc-profile-navbar';
