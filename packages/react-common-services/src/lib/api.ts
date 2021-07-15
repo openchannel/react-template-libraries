@@ -1,7 +1,7 @@
 import { request, Options } from './request';
 
 export const api = {
-	get: (url: string) => request('GET', url),
+	get: (url: string, params: Options['params']) => request('GET', url, { params }),
 
 	post: (url: string, options: Options) => request('POST', url, options),
 

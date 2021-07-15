@@ -4,9 +4,11 @@ type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 type Body = string | FormData | Record<string, unknown>;
 
+type Params = { [key: string]: string } | URLSearchParams;
+
 export type Options<ReqBody = {}> = {
 	headers?: Headers | { [key: string]: string },
-	params?: { [key: string]: string },
+	params?: Params,
 	body?: ReqBody | Body,
 };
 
@@ -47,6 +49,10 @@ const createBody = (options: Options): string | undefined  => {
 };
 
 const createParams = (options: Options) => {
+	if (options.params instanceof URLSearchParams) {
+		return options.params.toString();
+	}
+
 	if (options.params && Object.keys(options.params).length > 0) {
 		const params = new URLSearchParams();
 
