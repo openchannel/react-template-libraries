@@ -1,5 +1,3 @@
-import './interceptors';
-
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 type Body = string | FormData | Record<string, unknown>;
