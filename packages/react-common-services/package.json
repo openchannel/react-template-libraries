@@ -1,56 +1,24 @@
 {
-	"name": "@openchannel/react-common-components",
+	"name": "@openchannel/react-common-services",
 	"version": "0.1.0",
-	"description": "Includes components for portal and market.",
-	"keywords": [
-		"component",
-		"components",
-		"design",
-		"library",
-		"react-common-components",
-		"react",
-		"system",
-		"ui",
-		"openchannel"
-	],
 	"main": "dist/index.js",
-	"module": "dist/react-common-components.esm.js",
+	"module": "dist/react-common-services.esm.js",
 	"typings": "dist/index.d.ts",
 	"files": [
 		"dist"
 	],
 	"scripts": {
 		"build": "npm ci && tsdx build --tsconfig tsconfig.build.json",
-		"test": "tsdx test --passWithNoTests",
-		"test:watch": "tsdx test --passWithNoTests --watch",
-		"test:coverage": "tsdx test --passWithNoTests --coverage",
-		"test:coverage:watch": "tsdx test --passWithNoTests --coverage --watch",
 		"lint": "tsdx lint src",
-		"lint:fix": "tsdx lint src --fix",
-		"prepare": "tsdx build",
-		"size": "size-limit",
-		"analyze": "size-limit --why"
+		"lint:fix": "tsdx lint src --fix"
 	},
 	"dependencies": {
-		"@braintree/sanitize-url": "^5.0.1",
-		"@tinymce/tinymce-react": "^3.12.5",
-		"bootstrap": "^4.6.0",
-		"chart.js": "^2.9.4",
-		"color": "^3.1.3",
-		"dompurify": "^2.2.8",
-		"formik": "^2.2.8",
+		"fetch-intercept": "^2.4.0",
+		"jwt-decode": "^3.1.2",
 		"lodash": "^4.17.21",
 		"lodash-es": "^4.17.21",
-		"moment": "^2.29.1",
 		"nanoid": "^3.1.23",
-		"react-bootstrap": "^1.5.2",
-		"react-datetime": "^3.0.4",
-		"react-dropzone-uploader": "^2.11.0",
-		"react-multi-carousel": "^2.6.3",
-		"react-player": "^2.9.0",
-		"react-router-dom": "^5.2.0",
-		"react-select": "^4.3.1",
-		"tinymce": "^5.8.1",
+		"react-helmet": "^6.1.0",
 		"tslib": "^2.3.0"
 	},
 	"devDependencies": {
@@ -104,16 +72,6 @@
 		"typescript": "^4.2.4",
 		"url-loader": "^4.1.1"
 	},
-	"size-limit": [
-		{
-			"path": "dist/react-template-libraries.cjs.production.min.js",
-			"limit": "1000 KB"
-		},
-		{
-			"path": "dist/react-template-libraries.esm.js",
-			"limit": "1000 KB"
-		}
-	],
 	"jest": {
 		"setupFilesAfterEnv": [
 			"./test/setupTests.js"
