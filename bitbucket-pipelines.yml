@@ -38,8 +38,8 @@ definitions:
         name: Push services to npm
         script:
           - yarn install
-          - yarn run build
-          - yarn run react-common-services:pack
+          - yarn run build:services
+          - yarn run pack:services
           - pipe: atlassian/npm-publish:0.3.2
             variables:
               NPM_TOKEN: $NPM_TOKEN
@@ -50,8 +50,8 @@ definitions:
         name: Push components to npm
         script:
           - yarn install
-          - yarn run build
-          - yarn run react-common-components:pack
+          - yarn run build:components
+          - yarn run pack:components
           - pipe: atlassian/npm-publish:0.3.2
             variables:
               NPM_TOKEN: $NPM_TOKEN

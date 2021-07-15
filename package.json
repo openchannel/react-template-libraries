@@ -7,9 +7,12 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "lerna run build --stream",
     "link": "lerna exec -- npm i && lerna link",
-    "react-common-components:pack": "cd packages/react-common-components && npm yarn",
+		"build": "lerna run build --stream",
+		"build:components": "cd packages/react-common-components && yarn run build",
+		"build:services": "cd packages/react-common-services && yarn run build",
+		"pack:components": "cd packages/react-common-components && yarn pack",
+		"pack:services": "cd packages/react-common-services && yarn pack",
     "lint": "lerna run lint --stream",
     "lint:fix": "lerna run lint:fix --stream",
     "copy-img-assets": "cp -r packages/react-common-components/src/assets/img/ storybook-static/",
