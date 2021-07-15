@@ -42,8 +42,14 @@ export const request = <ReqBody>(method: Method, url: string, options: Options<R
  * @param {{ body?: {}, headers: Headers }} options
  */
 const createBody = (options: Options): string | undefined  => {
-	if (options.body && options.headers!.get('content-type').includes('json')) {
-		return JSON.stringify(options.body);
+	if (options.body) {
+		if (options.headers instanceof Headers) {
+			const contentType = options.headers.get('content-type') || '';
+
+			if (contentType.includes('json')) {
+				return JSON.stringify(options.body);
+			}
+		}
 	}
 	return undefined;
 };
