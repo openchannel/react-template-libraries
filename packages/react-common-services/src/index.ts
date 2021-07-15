@@ -39,35 +39,20 @@ export * from './model/components/frontend.model';
 /**
  * Services
  */
-export * from './lib/service/app-form.service';
-export * from './lib/service/app-type.service';
-export * from './lib/service/apps.service';
-export * from './lib/service/apps-version.service';
-export * from './lib/service/auth-holder.service';
-export * from './lib/service/authentication.service';
-export * from './lib/service/chart-service';
-export * from './lib/service/developer.service';
-export * from './lib/service/developer-account.service';
-export * from './lib/service/developer-account-types.service';
-export * from './lib/service/developer-role.service';
-export * from './lib/service/developer-type.service';
-export * from './lib/service/file-upload-download.service';
-export * from './lib/service/frontend.service';
-export * from './lib/service/invite-user.service';
-export * from './lib/service/market.service';
-export * from './lib/service/native-login.service';
-export * from './lib/service/ownership.service';
-export * from './lib/service/properties.service';
-export * from './lib/service/request.service';
-export * from './lib/service/reviews.service';
-export * from './lib/service/site-config.service';
-export * from './lib/service/statistic.service';
-export * from './lib/service/title.service';
-export * from './lib/service/user-account.service';
-export * from './lib/service/user-account-types.service';
-export * from './lib/service/user-account-types.service';
-export * from './lib/service/user-role.service';
-export * from './lib/service/users.service';
+export * from './service/authentication.service';
+export * from './service/config.service';
+export * from './service/frontend.service';
+export * from './service/market.service';
+export * from './service/native-login.service';
+export * from './service/reviews.service';
 
 /* Utils */
-export * from './lib/util/type-mapper.util';
+export * from './util/query.util';
+export * from './util/type-mapper.util';
+
+/**
+ * Libs
+ */
+export * from './lib/api';
+export * from './lib/request';
+export * from './lib/storage';
