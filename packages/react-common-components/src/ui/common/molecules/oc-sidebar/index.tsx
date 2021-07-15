@@ -13,7 +13,6 @@ export interface SidebarProps {
 
 	/**
 	 * Sidebar config, contains array of sidebar list items.
-	 * @type {SidebarValue[]}.
 	 */
 	sidebarModel: SidebarValue[];
 
@@ -40,7 +39,7 @@ export interface SidebarProps {
 	 */
 	baseNavigation?: string;
 
-	onClickSidebar?: any;
+	onClickSidebar?: (selected: SidebarValue) => void;
 }
 
 export const OcSidebar: React.FC<SidebarProps> = (props) => {
@@ -91,7 +90,7 @@ export const OcSidebar: React.FC<SidebarProps> = (props) => {
 												className={`oc-sidebar__list-item-text ${
 													selectItem.checked ? 'font-weight-bold' : ''
 												}`}
-												onClick={() => onClickSidebar(selectItem)}
+												onClick={() => onClickSidebar!(selectItem)}
 											>
 												{selectItem.label}
 											</span>
@@ -127,7 +126,7 @@ export const OcSidebar: React.FC<SidebarProps> = (props) => {
 														className={`oc-sidebar__list-item-text oc-sidebar__list-item-text_margin ${
 															subValue.checked ? 'font-weight-bold' : ''
 														}`}
-														onClick={() => onClickSidebar(subValue)}
+														onClick={() => onClickSidebar!(subValue)}
 													>
 														{subValue.label}
 													</span>

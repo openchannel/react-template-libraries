@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
-import { OcSidebar, SidebarProps } from '@openchannel/react-common-components';
+import { OcSidebar, SidebarProps } from '../../../packages/react-common-components/src/ui/index';
 
 export default {
 	title: 'Sidebar [BEM]',
@@ -8,7 +9,11 @@ export default {
 } as Meta;
 
 const SidebarComponent: Story<SidebarProps> = (args) => {
-	return <OcSidebar {...args} />;
+	return (
+		<BrowserRouter>
+			<OcSidebar {...args} />
+		</BrowserRouter>
+	);
 };
 
 export const OneLevel = SidebarComponent.bind({});
