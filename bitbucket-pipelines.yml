@@ -34,6 +34,18 @@ definitions:
           - aws s3 sync --delete storybook-static/ s3://$AWS_S3
           - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths /*
 
+    - step: &build-and-push-new-version-of-services
+        name: Push services to npm
+        script:
+          - yarn install
+          - yarn run build
+          - yarn run react-common-services:pack
+          - pipe: atlassian/npm-publish:0.3.2
+            variables:
+              NPM_TOKEN: $NPM_TOKEN
+              FOLDER: 'packages/react-common-services'
+              EXTRA_ARGS: '--access public'
+
     - step: &build-and-push-new-version-of-components
         name: Push components to npm
         script:
@@ -48,6 +60,8 @@ definitions:
 
 pipelines:
   custom:
+    publish-services:
+      - step: *build-and-push-new-version-of-services
     publish-components:
       - step: *build-and-push-new-version-of-components
     Deploy to dev1:
