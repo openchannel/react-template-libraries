@@ -89,7 +89,8 @@ export interface BaseDropdownProps {
 	listProps?: { alignRight?: DropdownMenuProps['alignRight'] };
 }
 
-export type OcDropdownProps = Omit<BaseDropdownProps, 'variant' | 'minDropdownWidth' | 'children'>;
+export type OcDropdownProps = Omit<BaseDropdownProps, 'minDropdownWidth' | 'children'> &
+ToggleIndicatorProps;
 
 export type OcDropdownButtonProps = Omit<BaseDropdownProps, 'variant' | 'title'> &
 	ToggleIndicatorProps;
