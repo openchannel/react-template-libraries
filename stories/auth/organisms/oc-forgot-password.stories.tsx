@@ -2,8 +2,8 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
-import { errorMessages } from '../../../src/ui/form/lib';
-import { OcForgotPasswordComponent, OcForgotPasswordProps } from '../../../src/ui/auth';
+import { errorMessages } from '../../../packages/react-common-components/src/ui/form/lib';
+import { OcForgotPasswordComponent, OcForgotPasswordProps } from '../../../packages/react-common-components/src/ui/auth';
 
 export default {
 	title: 'Forgot Password [BEM]',

@@ -1,5 +1,5 @@
 module.exports = {
-	root: true,
+	// root: true,
 	env: {
 		browser: true,
 		es6: true,
@@ -22,6 +22,7 @@ module.exports = {
 		'import',
 	],
 	extends: [
+		'react-app',
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
 		'prettier',

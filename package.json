@@ -1,56 +1,30 @@
 {
+  "name": "react-template-libraries",
   "version": "0.1.0",
   "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "src"
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
-  "engines": {
-    "node": ">=10"
-  },
   "scripts": {
-    "start": "tsdx watch",
-    "build": "tsdx build",
-    "test": "tsdx test --passWithNoTests",
-    "test:watch": "tsdx test --passWithNoTests --watch",
-    "test:coverage": "tsdx test --passWithNoTests --coverage",
-    "test:coverage:watch": "tsdx test --passWithNoTests --coverage --watch",
-    "lint": "tsdx lint",
-    "lint:fix": "tsdx lint src --fix",
-    "prepare": "tsdx build",
-    "size": "size-limit",
-    "analyze": "size-limit --why",
-    "copy-img-assets": "cp -r src/assets/img/ storybook-static/",
-    "storybook": "start-storybook -s src/assets/ -p 6006",
-    "build-storybook": "build-storybook && npm run copy-img-assets",
-    "serve-storybook": "npm run build-storybook && npx http-server storybook-static",
-    "cypress": "cypress open"
-  },
-  "peerDependencies": {
-    "bootstrap": "^4.6.0",
-    "react": ">=16",
-    "react-bootstrap": "^1.5.2"
+    "link": "lerna exec -- npm i && lerna link",
+		"build": "lerna run build --stream",
+		"build:components": "cd packages/react-common-components && yarn run build",
+		"build:services": "cd packages/react-common-services && yarn run build",
+		"pack:components": "cd packages/react-common-components && yarn pack",
+		"pack:services": "cd packages/react-common-services && yarn pack",
+    "lint": "lerna run lint --stream",
+    "lint:fix": "lerna run lint:fix --stream",
+    "copy-img-assets": "cp -r packages/react-common-components/src/assets/img/ storybook-static/",
+    "storybook": "start-storybook -s packages/react-common-components/src/assets/ -p 6006",
+    "storybook:build": "build-storybook && yarn run copy-img-assets",
+    "storybook:serve": "yarn run storybook:build && npx http-server storybook-static"
   },
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
     }
   },
-  "name": "react-template-libraries",
-  "author": "vladimir.fedorchenko",
-  "module": "dist/react-template-libraries.esm.js",
-  "size-limit": [
-    {
-      "path": "dist/react-template-libraries.cjs.production.min.js",
-      "limit": "1000 KB"
-    },
-    {
-      "path": "dist/react-template-libraries.esm.js",
-      "limit": "1000 KB"
-    }
-  ],
   "devDependencies": {
     "@babel/core": "^7.13.15",
     "@size-limit/preset-small-lib": "^4.11.0",
@@ -65,11 +39,13 @@
     "@svgr/webpack": "^5.5.0",
     "@testing-library/react-hooks": "^6.0.0",
     "@types/chart.js": "^2.9.32",
+    "@types/color": "^3.0.2",
     "@types/dompurify": "^2.2.2",
     "@types/enzyme": "^3.10.8",
     "@types/lodash": "^4.14.168",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
+    "@types/react-helmet": "^6.1.2",
     "@types/react-router-dom": "^5.1.7",
     "@types/react-select": "^4.0.15",
     "@types/tinymce": "^4.6.1",
@@ -77,16 +53,18 @@
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.4",
-    "cypress": "^7.2.0",
     "enzyme": "^3.11.0",
     "eslint": "^7.28.0",
+    "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-jest": "^24.3.5",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^6.0.0",
     "identity-obj-proxy": "^3.0.0",
+    "lerna": "^4.0.0",
     "node-sass": "^5.0.0",
+    "prettier": "^2.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-is": "^17.0.2",
@@ -96,21 +74,19 @@
     "size-limit": "^4.10.2",
     "style-loader": "^2.0.0",
     "tsdx": "^0.14.1",
-    "tslib": "^2.2.0",
     "typescript": "^4.2.4",
     "url-loader": "^4.1.1"
   },
   "dependencies": {
     "@braintree/sanitize-url": "^5.0.1",
     "@tinymce/tinymce-react": "^3.12.5",
-    "@types/color": "^3.0.1",
     "bootstrap": "^4.6.0",
     "chart.js": "^2.9.4",
     "color": "^3.1.3",
     "dompurify": "^2.2.8",
-    "enzyme": "^3.11.0",
+    "fetch-intercept": "^2.4.0",
     "formik": "^2.2.8",
-    "identity-obj-proxy": "^3.0.0",
+    "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "moment": "^2.29.1",
@@ -119,20 +95,12 @@
     "react-cropper": "^2.1.8",
     "react-datetime": "^3.0.4",
     "react-dropzone-uploader": "^2.11.0",
+    "react-helmet": "^6.1.0",
     "react-multi-carousel": "^2.6.3",
     "react-player": "^2.9.0",
     "react-router-dom": "^5.2.0",
     "react-select": "^4.3.1",
-    "tinymce": "^5.8.1"
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "./test/setupTests.js"
-    ],
-    "moduleNameMapper": {
-      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-      "\\.svg": "<rootDir>/test/svgrMock.js",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/fileTransformer.js"
-    }
+    "tinymce": "^5.8.1",
+    "tslib": "^2.3.0"
   }
 }

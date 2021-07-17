@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcPasswordComponent, PasswordProps } from '../../../src/ui/common';
+import { OcPasswordComponent, PasswordProps } from '../../../packages/react-common-components/src/ui/common';
 
 export default {
   title: 'Password [BEM]',

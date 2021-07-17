@@ -1,0 +1,34 @@
+//commit ad6b633b01a68ffc35adddc890bf83ba621a6fb4 Author: Julia Date: 04.03.21, 11:59
+@import '../../../styles/index';
+
+.oc-rating {
+  &-single {
+    align-items: center;
+    display: flex;
+    &__rating-star {
+      height: 16px;
+      vertical-align: unset;
+      width: 16px;
+    }
+    &__label {
+      color: $secondary;
+      margin-left: 1rem;
+    }
+  }
+
+  &-multi {
+    &__star {
+      color: $secondary;
+      position: relative;
+      &_filled {
+        color: $yellow;
+      }
+      &_half-color {
+        color: $yellow;
+        left: 0;
+        overflow: hidden;
+        position: absolute;
+      }
+    }
+  }
+}

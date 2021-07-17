@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState } from '@storybook/addons';
 import { Story, Meta } from '@storybook/react';
 
-import { OcMultiSelectList, OcMultiSelectListProps } from '../../../src/ui/form';
+import { OcMultiSelectList, OcMultiSelectListProps } from '../../../packages/react-common-components/src/ui/form';
 
 
 export default {

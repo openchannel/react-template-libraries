@@ -4,8 +4,12 @@ import { Story, Meta } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 import { action } from '@storybook/addon-actions';
 
-import { StatElement, FullAppData } from '../../../src/ui/common/models';
-import { OcAppGallery, OcAppGalleryProps } from '../../../src/ui/market';
+import {
+	OcAppGallery,
+	OcAppGalleryProps,
+	StatElement,
+	FullAppData,
+} from '../../../packages/react-common-components';
 
 export default {
 	title: 'App Gallery',
