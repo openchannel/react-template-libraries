@@ -13,7 +13,7 @@ Go to the package directory and write the new dependencies in its own package.js
 Go to the root directory and link the dependency versions to the child package:
 
 ```bash
-lerna exec -- npm i && lerna link
+yarn run link
 ```
 
 ### Run storybook
@@ -21,7 +21,7 @@ lerna exec -- npm i && lerna link
 Run in the root:
 
 ```bash
-npm run storybook
+yarn run storybook
 ```
 
 ### Build
@@ -29,7 +29,7 @@ npm run storybook
 Run in the root:
 
 ```bash
-npm run build
+yarn run build
 ```
 
 All packages will be built using lerna.
