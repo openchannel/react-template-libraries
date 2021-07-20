@@ -8,16 +8,23 @@ import './style.scss';
 
 export interface CropperComponentProps {
 	setCropper?: any;
-	imagePath?: any;
+	imagePath?: string;
 	cropData?: any;
 	setCropData?: any;
+	cropper?: any;
 	getCropData?: any;
 }
 
 export const OcImageCropper: React.FC<CropperComponentProps> = (props: CropperComponentProps) => {
-	const { setCropper, cropData, getCropData, imagePath } = props;
-
+	const { /* setCropper, cropData, setCropData, cropper, getCropData, */ imagePath } = props;
+	const [cropData, setCropData] = React.useState();
+	const [cropper, setCropper] = React.useState<any>();
 	const [image, setImage] = useState(imagePath);
+	const getCropData = () => {
+		if (typeof cropper !== 'undefined') {
+			setCropData(cropper.getCroppedCanvas().toDataURL());
+		}
+	};
 	const onChange = (e: any) => {
 		e.preventDefault();
 		let files;
@@ -32,12 +39,13 @@ export const OcImageCropper: React.FC<CropperComponentProps> = (props: CropperCo
 		};
 		reader.readAsDataURL(files[0]);
 	};
+	console.log(cropData, imagePath);
 
 	return (
 		<div className="cropper">
 			<div className="cropper__header">
 				<h4 className="cropper__header-text">Edit Image</h4>
-				<input type="file" onChange={onChange} />
+				<input type="file" onChange={onChange} className="cropper__header-file-input" />
 			</div>
 			<div className="cropper__body">
 				<div className="cropper__body-container">
@@ -69,6 +77,7 @@ export const OcImageCropper: React.FC<CropperComponentProps> = (props: CropperCo
 				<div className="box" style={{ flexDirection: 'column', width: '50%' }}>
 					<div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
 						<h1>Crop</h1>
+						<br />
 						<OcButtonComponent onClick={getCropData} text="Crop Image" style={{ width: '30%' }} />
 					</div>
 					<div className="view-block">
