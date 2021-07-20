@@ -77,7 +77,6 @@ export const OcImageCropper: React.FC<CropperComponentProps> = (props: CropperCo
 				<div className="box" style={{ flexDirection: 'column', width: '50%' }}>
 					<div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
 						<h1>Crop</h1>
-						<br />
 						<OcButtonComponent onClick={getCropData} text="Crop Image" style={{ width: '30%' }} />
 					</div>
 					<div className="view-block">
