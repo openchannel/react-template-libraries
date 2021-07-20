@@ -4842,12 +4842,7 @@ arr-flatten@^1.1.0:
   resolved "https://registry.yarnpkg.com/arr-flatten/-/arr-flatten-1.1.0.tgz#36048bbff4e7b47e136644316c99669ea5ae91f1"
   integrity sha512-L3hKV5R/p5o81R7O02IGnwpDmkp6E982XhtbuwSe3O4qOtMMMtodicASA1Cny2U+aCXcNpml+m4dPsvsJ3jatg==
 
-arr-union@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/arr-union/-/arr-union-3.1.0.tgz#e39b09aea9def866a8f206e288af63919bae39c4"
-  integrity sha1-45sJrqne+Gao8gbiiK9jkZuuOcQ=
-
-array-differ@^3.0.0:
+arr-union@^3.1.0, array-differ@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/array-differ/-/array-differ-3.0.0.tgz#3cbb3d0f316810eafcc47624734237d6aee4ae6b"
   integrity sha512-THtfYS6KtME/yIAhKjZ2ul7XI96lQGHRputJQHO80LAWQnuGP4iCIN8vdMRboGbIEYBwU33q8Tch1os2+X0kMg==
@@ -6708,6 +6703,11 @@ create-react-context@0.3.0:
   dependencies:
     gud "^1.0.0"
     warning "^4.0.3"
+
+cropperjs@^1.5.12:
+  version "1.5.12"
+  resolved "https://registry.yarnpkg.com/cropperjs/-/cropperjs-1.5.12.tgz#d9c0db2bfb8c0d769d51739e8f916bbc44e10f50"
+  integrity sha512-re7UdjE5UnwdrovyhNzZ6gathI4Rs3KGCBSc8HCIjUo5hO42CtzyblmWLj6QWVw7huHyDMfpKxhiO2II77nhDw==
 
 cross-spawn@7.0.3, cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
@@ -14778,9 +14778,16 @@ react-clientside-effect@^1.2.5:
     "@babel/runtime" "^7.12.13"
 
 react-colorful@^5.1.2:
-  version "5.2.3"
-  resolved "https://registry.yarnpkg.com/react-colorful/-/react-colorful-5.2.3.tgz#579faf42542e32645c5dee66c8530292b2d61646"
-  integrity sha512-lAge4syxosZg9SX8fJiwOLd9ZJSW3poPBtypnz1aMiFoHsRnK5G3+INGGx9DGtsrso4h5uFYbiFpjAfWyK3Kag==
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/react-colorful/-/react-colorful-5.3.0.tgz#bcbae49c1affa9ab9a3c8063398c5948419296bd"
+  integrity sha512-zWE5E88zmjPXFhv6mGnRZqKin9s5vip1O3IIGynY9EhZxN8MATUxZkT3e/9OwTEm4DjQBXc6PFWP6AetY+Px+A==
+
+react-cropper@^2.1.8:
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/react-cropper/-/react-cropper-2.1.8.tgz#bf35a7de65769f8ad357e8ae884e791fe3fe9212"
+  integrity sha512-QEj6CE9et/gMRqpaKMgZQdBgtzLjjq+zj1pmHwtoWG6GqscDl4QpTwoEElWN2pieYxkwFaZa0lPiD2b9nwqLKQ==
+  dependencies:
+    cropperjs "^1.5.12"
 
 react-datetime@^3.0.4:
   version "3.0.4"
