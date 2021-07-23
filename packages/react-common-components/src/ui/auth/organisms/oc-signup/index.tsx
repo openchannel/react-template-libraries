@@ -18,8 +18,9 @@ export const OcSignupComponent: React.FC<any> = (props) => {
 		enableTypesDropdown,
 		defaultTypeLabelText,
 		customTermsDescription,
-		selectedConfig,
-		setSelectedConfig,
+		selectConfigOptions,
+		selectValue,
+		setSelectValue,
 		defaultEmptyConfigsErrorMessage,
 		onCancel,
 		onSubmit,
@@ -53,8 +54,9 @@ export const OcSignupComponent: React.FC<any> = (props) => {
 								customTermsDescription={customTermsDescription}
 								termsChecked={termsChecked}
 								setTermsChecked={setTermsChecked}
-								selectedConfig={selectedConfig}
-								setSelectedConfig={setSelectedConfig}
+								selectConfigOptions={selectConfigOptions}
+								selectValue={selectValue}
+								setSelectValue={setSelectValue}
 								onCancel={onCancel}
 								onSubmit={onSubmit}
 								defaultEmptyConfigsErrorMessage={defaultEmptyConfigsErrorMessage}
@@ -64,7 +66,7 @@ export const OcSignupComponent: React.FC<any> = (props) => {
 								htmlType="submit"
 								text="Sign Up"
 								type="primary"
-								className="sign-up__button"
+								customClass="sign-up__button"
 							/>
 						</div>
 						<div className="sign-up__login">

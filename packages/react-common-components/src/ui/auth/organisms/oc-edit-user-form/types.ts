@@ -1,17 +1,21 @@
 import type { Option } from '../../../common/index';
+import type { AppFormField } from '../../../form/models';
 
 export interface TypeModel<T extends TypeFieldModel> {
   fields?: T[];
 }
 
 export interface TypeFieldModel {
+  placeholder?: string;
+  name: string;
+  description?: string;
   id: string;
   type: string;
   label?: string;
   defaultValue?: any;
   attributes?: any;
   options?: OptionValue[] | string[];
-  fields?: TypeFieldModel[];
+  fields?: AppFormField[];
 }
 
 export interface OptionValue {
@@ -63,8 +67,9 @@ export interface EditUserComponentProps {
   customTermsDescription: any;
   termsChecked?: boolean;
   setTermsChecked?: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedConfig?: Option,
-  setSelectedConfig?: ((eventKey: string | Option, e: React.SyntheticEvent<unknown, Event>) => void) | undefined;
+  selectConfigOptions?: Option[],
+  selectValue?: Option,
+	setSelectValue?: ((eventKey: string | Option, e: React.SyntheticEvent<unknown, Event>) => void) | undefined;
   onCancel: () => void;
   onSubmit: () => void;
 }

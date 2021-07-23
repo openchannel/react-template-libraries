@@ -1,34 +1,39 @@
 import * as React from 'react';
+// import { Formik } from 'formik';
 import { OcSelect, OcError, OcCheckboxComponent } from '../../../common';
-import { OcForm, OcTooltipLabel } from '../../../form';
-import { EditUserComponentProps /* , OcEditUserFormConfig */ } from './types';
+import { configConverter } from './utils';
+import { OcForm, OcTooltipLabel /* FormikMapFields */ } from '../../../form';
+import { EditUserComponentProps } from './types';
+import type { AppFormModel } from '../../../form/models';
 
 export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props) => {
 	const {
 		formConfigs,
 		enableTypesDropdown = false,
+		enablePasswordField = false,
 		customTermsDescription,
 		enableTermsCheckbox,
 		termsChecked,
 		setTermsChecked,
 		defaultTypeLabelText = 'Type',
-		selectedConfig,
-		setSelectedConfig,
-		onCancel,
-		onSubmit,
+		selectValue,
+		setSelectValue,
+		selectConfigOptions,
+		// onCancel,
+		// onSubmit,
 		defaultEmptyConfigsErrorMessage = 'There are no forms configured',
 	} = props;
 
-	console.log(selectedConfig);
-	console.log(formConfigs);
-	// const buildFormByConfig = (formConfig: OcEditUserFormConfig): void => {
-	// 	// clearPreviousValues();
-	// 	const fieldsSorting = (field1: { id: string }, field2: { id: string }) => {
-	// 		const index1 = formConfig.fieldsOrder!.indexOf(field1.id);
-	// 		const index2 = formConfig.fieldsOrder!.indexOf(field2.id);
-	// 		return (index1 > -1 ? index1 : Infinity) - (index2 > -1 ? index2 : Infinity);
-	// 	};
-	// };
+	const convertedFormConfigs = formConfigs.map((item) =>
+		configConverter(item, enablePasswordField),
+	);
+
+	const dynamicFormFields: AppFormModel = React.useMemo(
+		() =>
+			convertedFormConfigs.filter((config) => config.name === (selectValue?.name || selectValue))[0]
+				.fields,
+		[selectValue],
+	);
 
 	return (
 		<div className="edit-user-form">
@@ -37,17 +42,22 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 			)}
 			{formConfigs?.length > 0 && (
 				<div>
+					{/* <Formik
+						initialValues={dynamicFormFields[0].fields.map((field) => field.name)}
+						onSubmit={(values) => console.log(values)}
+					> */}
 					{enableTypesDropdown && formConfigs?.length > 1 && (
 						<>
 							<OcTooltipLabel text={defaultTypeLabelText} labelClass="edit-user-form__type-label" />
 							<OcSelect
-								selectValArr={[selectedConfig!]}
-								onSelectionChange={setSelectedConfig}
+								selectValArr={selectConfigOptions}
+								onSelectionChange={setSelectValue}
 								labelField="name"
+								value={selectValue}
 							/>
 						</>
 					)}
-
+					<OcForm formJsonData={dynamicFormFields} onSubmit={() => {}} onCancel={() => {}} />
 					<div className="edit-user-form__consent">
 						{enableTermsCheckbox && (
 							<div className="edit-user-form__consent__checkbox">
@@ -60,6 +70,7 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 						)}
 						{termsChecked && <OcError message="Please confirm this checkbox" />}
 					</div>
+					{/* </Formik> */}
 				</div>
 			)}
 		</div>

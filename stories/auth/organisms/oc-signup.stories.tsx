@@ -12,7 +12,9 @@ export default {
 const DefaultComponent: Story<any> = (args) => {
 	const [showSignupFeedbackPage, setFeedbackPageVisible] = React.useState(false);
 	const [termsChecked, setTermsChecked] = React.useState(false);
-	const [selectedConfigName, setSelectedConfig] = React.useState(args.formConfigs[0].name);
+	const selectConfigOptions: string[] = args.formConfigs.map((config) => config.name);
+	const [selectValue, setSelectValue] = React.useState(selectConfigOptions[0]);
+
 	return (
 		<BrowserRouter>
 			<OcSignupComponent
@@ -21,8 +23,9 @@ const DefaultComponent: Story<any> = (args) => {
 				setFeedbackPageVisible={setFeedbackPageVisible}
 				termsChecked={termsChecked}
 				setTermsChecked={setTermsChecked}
-				selectedConfig={selectedConfigName}
-				setSelectedConfig={setSelectedConfig}
+				selectValue={selectValue}
+				setSelectValue={setSelectValue}
+				selectConfigOptions={selectConfigOptions}
 				enableTypesDropdown
 			/>
 		</BrowserRouter>
