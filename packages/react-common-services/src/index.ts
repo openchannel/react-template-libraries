@@ -54,5 +54,6 @@ export * from './util/type-mapper.util';
  * Libs
  */
 export * from './lib/api';
+export * from './lib/instance';
 export * from './lib/request';
 export * from './lib/storage';
