@@ -24,6 +24,7 @@ export const OcSignupComponent: React.FC<any> = (props) => {
 		defaultEmptyConfigsErrorMessage,
 		onCancel,
 		onSubmit,
+		enablePasswordField,
 	} = props;
 
 	const handleShowFeedback = React.useCallback(
@@ -59,6 +60,7 @@ export const OcSignupComponent: React.FC<any> = (props) => {
 								setSelectValue={setSelectValue}
 								onCancel={onCancel}
 								onSubmit={onSubmit}
+								enablePasswordField={enablePasswordField}
 								defaultEmptyConfigsErrorMessage={defaultEmptyConfigsErrorMessage}
 							/>
 							<OcButtonComponent

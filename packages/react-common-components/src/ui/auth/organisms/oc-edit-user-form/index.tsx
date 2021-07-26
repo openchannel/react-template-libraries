@@ -1,10 +1,9 @@
 import * as React from 'react';
-// import { Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import { OcSelect, OcError, OcCheckboxComponent } from '../../../common';
-import { configConverter } from './utils';
-import { OcForm, OcTooltipLabel /* FormikMapFields */ } from '../../../form';
+import { configConverter, FormikSignupFieldWrapper } from './utils';
+import { OcTooltipLabel } from '../../../form';
 import { EditUserComponentProps } from './types';
-import type { AppFormModel } from '../../../form/models';
 
 export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props) => {
 	const {
@@ -28,12 +27,22 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 		configConverter(item, enablePasswordField),
 	);
 
-	const dynamicFormFields: AppFormModel = React.useMemo(
+	const dynamicFormFields: any = React.useMemo(
 		() =>
 			convertedFormConfigs.filter((config) => config.name === (selectValue?.name || selectValue))[0]
 				.fields,
 		[selectValue],
 	);
+	const signUpInitialValues: any = React.useMemo(
+		() =>
+			dynamicFormFields.reduce((acc: any, item: any) => {
+				if (acc[item.name] === undefined) acc[item.name] = '';
+				return acc;
+			}, {}),
+		[dynamicFormFields],
+	);
+
+	console.log(formConfigs.length);
 
 	return (
 		<div className="edit-user-form">
@@ -42,10 +51,6 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 			)}
 			{formConfigs?.length > 0 && (
 				<div>
-					{/* <Formik
-						initialValues={dynamicFormFields[0].fields.map((field) => field.name)}
-						onSubmit={(values) => console.log(values)}
-					> */}
 					{enableTypesDropdown && formConfigs?.length > 1 && (
 						<>
 							<OcTooltipLabel text={defaultTypeLabelText} labelClass="edit-user-form__type-label" />
@@ -57,10 +62,22 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 							/>
 						</>
 					)}
-					<OcForm formJsonData={dynamicFormFields} onSubmit={() => {}} onCancel={() => {}} />
-					<div className="edit-user-form__consent">
+					<Formik initialValues={signUpInitialValues} onSubmit={(values) => console.log(values)}>
+						{({ /* handleSubmit, */ handleChange, values, errors, handleBlur }) => {
+							return dynamicFormFields.map((field: any) => (
+								<FormikSignupFieldWrapper
+									{...field}
+									errors={errors}
+									values={values}
+									handleChange={handleChange}
+									handleBlur={handleBlur}
+								/>
+							));
+						}}
+					</Formik>
+					<div className="edit-user-form__content">
 						{enableTermsCheckbox && (
-							<div className="edit-user-form__consent__checkbox">
+							<div className="edit-user-form__content__checkbox">
 								<OcCheckboxComponent
 									labelText={customTermsDescription || ''}
 									checked={termsChecked}
@@ -70,7 +87,6 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 						)}
 						{termsChecked && <OcError message="Please confirm this checkbox" />}
 					</div>
-					{/* </Formik> */}
 				</div>
 			)}
 		</div>

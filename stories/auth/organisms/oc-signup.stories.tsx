@@ -27,6 +27,7 @@ const DefaultComponent: Story<any> = (args) => {
 				setSelectValue={setSelectValue}
 				selectConfigOptions={selectConfigOptions}
 				enableTypesDropdown
+				enablePasswordField={args.enablePasswordField}
 			/>
 		</BrowserRouter>
 	);
@@ -158,4 +159,5 @@ Default.args = {
 	],
 	onCancel: () => {},
 	onSubmit: () => {},
+	enablePasswordField: true,
 };
