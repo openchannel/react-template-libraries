@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Form, Formik } from 'formik';
-import { OcSelect, OcError, OcCheckboxComponent } from '../../../common';
+import { Formik, Form } from 'formik';
+import { OcSelect, OcError, OcCheckboxComponent, OcButtonComponent } from '../../../common';
 import { configConverter, FormikSignupFieldWrapper } from './utils';
 import { OcTooltipLabel } from '../../../form';
 import { EditUserComponentProps } from './types';
+import './style.scss';
 
 export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props) => {
 	const {
@@ -18,35 +19,35 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 		selectValue,
 		setSelectValue,
 		selectConfigOptions,
-		// onCancel,
-		// onSubmit,
+		onSubmit,
 		defaultEmptyConfigsErrorMessage = 'There are no forms configured',
+		process,
 	} = props;
 
-	const convertedFormConfigs = formConfigs.map((item) =>
+	const convertedFormConfigs = formConfigs?.map((item) =>
 		configConverter(item, enablePasswordField),
 	);
 
 	const dynamicFormFields: any = React.useMemo(
 		() =>
-			convertedFormConfigs.filter((config) => config.name === (selectValue?.name || selectValue))[0]
-				.fields,
+			convertedFormConfigs?.filter(
+				(config) => config.name === (selectValue?.name || selectValue),
+			)[0]?.fields,
 		[selectValue],
 	);
 	const signUpInitialValues: any = React.useMemo(
 		() =>
-			dynamicFormFields.reduce((acc: any, item: any) => {
+			dynamicFormFields?.reduce((acc: any, item: any) => {
 				if (acc[item.name] === undefined) acc[item.name] = '';
 				return acc;
 			}, {}),
 		[dynamicFormFields],
 	);
-
-	console.log(formConfigs.length);
+	console.log(!formConfigs, formConfigs);
 
 	return (
 		<div className="edit-user-form">
-			{!formConfigs && (
+			{!formConfigs.length && (
 				<h6 className="edit-user-form__empty_form_configs">{defaultEmptyConfigsErrorMessage}</h6>
 			)}
 			{formConfigs?.length > 0 && (
@@ -62,31 +63,40 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 							/>
 						</>
 					)}
-					<Formik initialValues={signUpInitialValues} onSubmit={(values) => console.log(values)}>
-						{({ /* handleSubmit, */ handleChange, values, errors, handleBlur }) => {
-							return dynamicFormFields.map((field: any) => (
-								<FormikSignupFieldWrapper
-									{...field}
-									errors={errors}
-									values={values}
-									handleChange={handleChange}
-									handleBlur={handleBlur}
-								/>
-							));
-						}}
-					</Formik>
-					<div className="edit-user-form__content">
-						{enableTermsCheckbox && (
-							<div className="edit-user-form__content__checkbox">
-								<OcCheckboxComponent
-									labelText={customTermsDescription || ''}
-									checked={termsChecked}
-									onChange={() => setTermsChecked!(termsChecked!)}
-								/>
-							</div>
+					<Formik initialValues={signUpInitialValues} onSubmit={onSubmit}>
+						{({ handleSubmit, handleChange, values, errors, handleBlur }) => (
+							<Form onSubmit={handleSubmit}>
+								{dynamicFormFields?.map((field: any) => (
+									<FormikSignupFieldWrapper
+										{...field}
+										errors={errors}
+										values={values}
+										handleChange={handleChange}
+										handleBlur={handleBlur}
+									/>
+								))}
+								<div className="edit-user-form__content">
+									{enableTermsCheckbox && (
+										<div className="edit-user-form__content__checkbox">
+											<OcCheckboxComponent
+												labelText={customTermsDescription || ''}
+												checked={termsChecked}
+												onChange={() => setTermsChecked!(termsChecked!)}
+											/>
+										</div>
+									)}
+									{termsChecked && <OcError message="Please confirm this checkbox" />}
+									<OcButtonComponent
+										disabled={process}
+										htmlType="submit"
+										text="Sign Up"
+										type="primary"
+										customClass="sign-up__button"
+									/>
+								</div>
+							</Form>
 						)}
-						{termsChecked && <OcError message="Please confirm this checkbox" />}
-					</div>
+					</Formik>
 				</div>
 			)}
 		</div>

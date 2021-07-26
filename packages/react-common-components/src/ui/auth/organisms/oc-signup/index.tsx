@@ -2,6 +2,7 @@ import * as React from 'react';
 import { OcLabelComponent, OcButtonComponent } from '../../../common';
 import { OcEditUserFormComponent } from '../../../auth';
 import { Link } from 'react-router-dom';
+import './style.scss';
 
 export const OcSignupComponent: React.FC<any> = (props) => {
 	const {
@@ -16,13 +17,13 @@ export const OcSignupComponent: React.FC<any> = (props) => {
 		setTermsChecked,
 		formConfigs,
 		enableTypesDropdown,
+		enableTermsCheckbox,
 		defaultTypeLabelText,
 		customTermsDescription,
 		selectConfigOptions,
 		selectValue,
 		setSelectValue,
 		defaultEmptyConfigsErrorMessage,
-		onCancel,
 		onSubmit,
 		enablePasswordField,
 	} = props;
@@ -47,30 +48,26 @@ export const OcSignupComponent: React.FC<any> = (props) => {
 								className="sign-up__header-invitation"
 							></OcLabelComponent>
 						</div>
-						<div>
-							<OcEditUserFormComponent
-								formConfigs={formConfigs}
-								enableTypesDropdown={enableTypesDropdown}
-								defaultTypeLabelText={defaultTypeLabelText}
-								customTermsDescription={customTermsDescription}
-								termsChecked={termsChecked}
-								setTermsChecked={setTermsChecked}
-								selectConfigOptions={selectConfigOptions}
-								selectValue={selectValue}
-								setSelectValue={setSelectValue}
-								onCancel={onCancel}
-								onSubmit={onSubmit}
-								enablePasswordField={enablePasswordField}
-								defaultEmptyConfigsErrorMessage={defaultEmptyConfigsErrorMessage}
-							/>
-							<OcButtonComponent
-								disabled={process}
-								htmlType="submit"
-								text="Sign Up"
-								type="primary"
-								customClass="sign-up__button"
-							/>
-						</div>
+						{formConfigs !== null && (
+							<div>
+								<OcEditUserFormComponent
+									formConfigs={formConfigs}
+									enableTypesDropdown={enableTypesDropdown}
+									defaultTypeLabelText={defaultTypeLabelText}
+									customTermsDescription={customTermsDescription}
+									termsChecked={termsChecked}
+									setTermsChecked={setTermsChecked}
+									selectConfigOptions={selectConfigOptions}
+									selectValue={selectValue}
+									setSelectValue={setSelectValue}
+									onSubmit={onSubmit}
+									enableTermsCheckbox={enableTermsCheckbox}
+									enablePasswordField={enablePasswordField}
+									defaultEmptyConfigsErrorMessage={defaultEmptyConfigsErrorMessage}
+									process={process}
+								/>
+							</div>
+						)}
 						<div className="sign-up__login">
 							Already have an account?{' '}
 							<Link className="sign-up__login-link" to={loginUrl}>

@@ -60,9 +60,6 @@ export interface EditUserComponentProps {
   enablePasswordField?: false;
   enableTermsCheckbox?: OcCheckboxData;
   defaultTypeLabelText?:  string;
-  // defaultAccountData: OCOrganization;
-  // defaultOrganizationData: OCOrganization;
-  // defaultEmptyConfigsErrorTemplate: any;
   defaultEmptyConfigsErrorMessage: string;
   customTermsDescription: any;
   termsChecked?: boolean;
@@ -70,6 +67,6 @@ export interface EditUserComponentProps {
   selectConfigOptions?: Option[],
   selectValue?: Option,
 	setSelectValue?: ((eventKey: string | Option, e: React.SyntheticEvent<unknown, Event>) => void) | undefined;
-  onCancel: () => void;
   onSubmit: () => void;
+  process: boolean;
 }
