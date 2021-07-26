@@ -1,3 +1,4 @@
+import './interceptors/xsrf';
 /*
  * Public API Surface of angular-common-services
  */
