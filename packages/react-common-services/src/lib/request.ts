@@ -18,19 +18,26 @@ export const request = <ReqBody>(method: Method, url: string, options: Options<R
 	const uri = `${baseUrl}/${url}${createParams(options)}`;
 
 	const headers = new Headers({
-		'Content-Type': 'application-json',
+		'Content-Type': 'application/json',
 		...options.headers,
 	});
 
-	const config = new Request(uri, {
+	const config = {
 		method,
 		headers,
+		// mode: 'cors',
+		// cache: 'no-cache',
+		// credentials: 'same-origin',
 		// ...options,
 		body: createBody({ ...options, headers }),
-	});
+	};
 
 	return fetch(uri, config).then((response) => {
 		const contentType = response.headers.get('Content-Type');
+
+		if (contentType && contentType.includes('text')) {
+			return response.text();
+		}
 
 		if (contentType && contentType.includes('json')) {
 			return response.json();
