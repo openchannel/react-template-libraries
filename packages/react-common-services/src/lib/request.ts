@@ -1,3 +1,5 @@
+import { instance } from './instance';
+
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 type Body = string | FormData | Record<string, unknown>;
@@ -11,22 +13,31 @@ export type Options<ReqBody = unknown> = {
 };
 
 export const request = <ReqBody>(method: Method, url: string, options: Options<ReqBody> = {}) => {
-	const uri = `${url}${createParams(options)}`;
+	const baseUrl = instance.getUrl();
+
+	const uri = `${baseUrl}/${url}${createParams(options)}`;
 
 	const headers = new Headers({
-		'Content-Type': 'application-json',
+		'Content-Type': 'application/json',
 		...options.headers,
 	});
 
-	const config = new Request(uri, {
+	const config = {
 		method,
 		headers,
+		// mode: 'cors',
+		// cache: 'no-cache',
+		// credentials: 'same-origin',
 		// ...options,
 		body: createBody({ ...options, headers }),
-	});
+	};
 
-	return fetch(config).then((response) => {
+	return fetch(uri, config).then((response) => {
 		const contentType = response.headers.get('Content-Type');
+
+		if (contentType && contentType.includes('text')) {
+			return response.text();
+		}
 
 		if (contentType && contentType.includes('json')) {
 			return response.json();

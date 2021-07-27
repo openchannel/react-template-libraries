@@ -1,8 +1,10 @@
+import type { FormikHelpers } from 'formik';
+
 export interface LoginProps {
 	/**
 	 * function that is called on form submit
 	 */
-	handleSubmit: (values: any) => void;
+	handleSubmit: (values: any, formikHelpers: FormikHelpers<any>) => void | Promise<void>;
 	/**
 	 * forgot password url
 	 */

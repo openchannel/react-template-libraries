@@ -1,11 +1,40 @@
 import fetchIntercept from 'fetch-intercept';
 
-// import { auth } from '../service/authentication.service';
+import { instance } from '../lib/instance';
+import { cookies } from '../lib/cookies';
 
 fetchIntercept.register({
-	request: function (url, config) {
-		// Modify the url or config here
-		return [url, config];
+	request: (url, originalConfig) => {
+		// Be careful not to overwrite an existing header of the same name.
+		if (url.startsWith(instance.getUrl())) {
+			const token = cookies.getXsrfToken();
+			const headerName = instance.getHeaderName();
+
+			if (token && !originalConfig.headers.has(headerName)) {
+				const headers = new Headers(originalConfig.headers);
+				headers.append(headerName, token);
+
+				const config = {
+					...originalConfig,
+					headers,
+				};
+
+				return [url, config];
+			}
+		}
+
+		return [url, originalConfig];
+	},
+
+	response: (response) => {
+		const headerName = instance.getHeaderName();
+		const xsrfToken = response.headers.get(headerName);
+
+		if (xsrfToken) {
+			cookies.setXsrfToken(xsrfToken);
+		}
+
+		return response;
 	},
 
 	responseError: (error) => {
