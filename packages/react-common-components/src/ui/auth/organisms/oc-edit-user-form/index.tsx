@@ -3,6 +3,8 @@ import { Formik, Form } from 'formik';
 import { OcSelect, OcError, OcCheckboxComponent, OcButtonComponent } from '../../../common';
 import { configConverter, FormikSignupFieldWrapper } from './utils';
 import { OcTooltipLabel } from '../../../form';
+import { useFormikValidation } from '../../../form/organisms/oc-form/hooks';
+import { fieldsUtils } from '../../../form/organisms/oc-form/utils/fields';
 import { EditUserComponentProps } from './types';
 import './style.scss';
 
@@ -11,39 +13,48 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 		formConfigs,
 		enableTypesDropdown = false,
 		enablePasswordField = false,
+		enableCustomTerms,
 		customTermsDescription,
-		enableTermsCheckbox,
-		termsChecked,
-		setTermsChecked,
+		ordinaryTermsDescription,
+		enableTermsCheckbox = false,
 		defaultTypeLabelText = 'Type',
 		selectValue,
 		setSelectValue,
 		selectConfigOptions,
 		onSubmit,
 		defaultEmptyConfigsErrorMessage = 'There are no forms configured',
-		process,
 	} = props;
 
 	const convertedFormConfigs = formConfigs?.map((item) =>
-		configConverter(item, enablePasswordField),
+		configConverter(item, enablePasswordField, enableTermsCheckbox),
 	);
 
-	const dynamicFormFields: any = React.useMemo(
-		() =>
-			convertedFormConfigs?.filter(
-				(config) => config.name === (selectValue?.name || selectValue),
-			)[0]?.fields,
-		[selectValue],
+	const dynamicFormFields: any = React.useMemo(() => {
+		const result = convertedFormConfigs?.filter(
+			(config) => config.name === (selectValue?.name || selectValue),
+		)[0]?.fields;
+
+		return result;
+	}, [selectValue, setSelectValue]);
+
+	const signUpInitialValues: any = React.useMemo(() => {
+		const result = dynamicFormFields?.reduce((acc: any, item: any) => {
+			if (acc[item.name] === undefined) acc[item.name] = '';
+			return acc;
+		}, {});
+		if (enableTermsCheckbox) {
+			result.terms = false;
+		}
+		if (enablePasswordField) {
+			result.password = '';
+		}
+
+		return result;
+	}, [dynamicFormFields, enableTermsCheckbox]);
+
+	const { validate } = useFormikValidation(
+		fieldsUtils.getValidators(dynamicFormFields?.length ? dynamicFormFields : []),
 	);
-	const signUpInitialValues: any = React.useMemo(
-		() =>
-			dynamicFormFields?.reduce((acc: any, item: any) => {
-				if (acc[item.name] === undefined) acc[item.name] = '';
-				return acc;
-			}, {}),
-		[dynamicFormFields],
-	);
-	console.log(!formConfigs, formConfigs);
 
 	return (
 		<div className="edit-user-form">
@@ -63,37 +74,56 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 							/>
 						</>
 					)}
-					<Formik initialValues={signUpInitialValues} onSubmit={onSubmit}>
-						{({ handleSubmit, handleChange, values, errors, handleBlur }) => (
+					<Formik
+						initialValues={signUpInitialValues}
+						onSubmit={onSubmit}
+						validate={validate}
+						enableReinitialize
+					>
+						{({ handleSubmit, handleChange, values, errors, handleBlur, isSubmitting }) => (
 							<Form onSubmit={handleSubmit}>
-								{dynamicFormFields?.map((field: any) => (
-									<FormikSignupFieldWrapper
-										{...field}
-										errors={errors}
-										values={values}
-										handleChange={handleChange}
-										handleBlur={handleBlur}
-									/>
-								))}
+								{dynamicFormFields?.map(
+									(field: any, index: number) =>
+										field.name !== 'terms' && (
+											<FormikSignupFieldWrapper
+												{...field}
+												errors={errors}
+												values={values}
+												handleChange={handleChange}
+												handleBlur={handleBlur}
+												key={index}
+											/>
+										),
+								)}
 								<div className="edit-user-form__content">
 									{enableTermsCheckbox && (
 										<div className="edit-user-form__content__checkbox">
+											{enableCustomTerms && (
+												<div className="edit-user-form__content__label">
+													{customTermsDescription}
+												</div>
+											)}
 											<OcCheckboxComponent
-												labelText={customTermsDescription || ''}
-												checked={termsChecked}
-												onChange={() => setTermsChecked!(termsChecked!)}
+												labelText={ordinaryTermsDescription || ''}
+												name="terms"
+												checked={values.terms}
+												touched={values.terms}
+												onBlur={handleBlur}
+												onChange={handleChange}
 											/>
 										</div>
 									)}
-									{termsChecked && <OcError message="Please confirm this checkbox" />}
+									{errors.terms && <OcError message="Please confirm this checkbox" />}
+								</div>
+								{formConfigs !== null && (
 									<OcButtonComponent
-										disabled={process}
+										disabled={isSubmitting}
 										htmlType="submit"
 										text="Sign Up"
 										type="primary"
 										customClass="sign-up__button"
 									/>
-								</div>
+								)}
 							</Form>
 						)}
 					</Formik>

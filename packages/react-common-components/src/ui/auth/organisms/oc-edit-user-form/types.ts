@@ -56,17 +56,16 @@ export interface OCOrganization {
 
 export interface EditUserComponentProps {
   formConfigs: OcEditUserFormConfig[];
-  enableTypesDropdown?: false;
-  enablePasswordField?: false;
-  enableTermsCheckbox?: OcCheckboxData;
+  enableTypesDropdown?: boolean;
+  enablePasswordField?: boolean;
+  enableTermsCheckbox?: boolean;
   defaultTypeLabelText?:  string;
   defaultEmptyConfigsErrorMessage: string;
-  customTermsDescription: any;
-  termsChecked?: boolean;
-  setTermsChecked?: React.Dispatch<React.SetStateAction<boolean>>;
+  customTermsDescription?: React.ReactNode;
+  ordinaryTermsDescription: React.ReactNode;
   selectConfigOptions?: Option[],
   selectValue?: Option,
 	setSelectValue?: ((eventKey: string | Option, e: React.SyntheticEvent<unknown, Event>) => void) | undefined;
   onSubmit: () => void;
-  process: boolean;
+  enableCustomTerms: boolean;
 }

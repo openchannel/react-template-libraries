@@ -2,11 +2,23 @@ import * as React from 'react';
 import { nanoid } from 'nanoid';
 import { Field } from 'formik';
 import { FieldGroupWrapper } from '@openchannel/react-common-components/src/ui/form/index';
-import { OcInputComponent } from '@openchannel/react-common-components';
+import { OcInputComponent, OcPasswordComponent } from '@openchannel/react-common-components';
 
 import { OcEditUserFormConfig } from './types';
+const conditions = /[\.\s\-]/gm;
 
-export const configConverter = (item: OcEditUserFormConfig, enablePasswordField: boolean) => {
+// const getValidFormikName = (fields: any) => Object.keys(fields).forEach(field => {
+// 	if (field.name.match(conditions)) {
+// 		field[field.name.replace(conditions, '')] = '';
+// 		delete field[field.name]
+// 	}
+// });
+
+export const configConverter = (
+	item: OcEditUserFormConfig,
+	enablePasswordField: boolean,
+	enableTermsCheckbox: boolean,
+) => {
 	const fieldsSorting = (field1: { id: string }, field2: { id: string }) => {
 		const index1 = item.fieldsOrder!.indexOf(field1.id);
 		const index2 = item.fieldsOrder!.indexOf(field2.id);
@@ -34,13 +46,22 @@ export const configConverter = (item: OcEditUserFormConfig, enablePasswordField:
 			name: 'password',
 			type: 'password',
 			label: 'Password',
-			attributes: {},
+			attributes: { required: true },
 		};
 		newFormConfig.fields.push(passwordField);
 	}
+	if (enableTermsCheckbox) {
+		const checkboxField = {
+			id: 'terms',
+			name: 'terms',
+			type: 'checkbox',
+			attributes: { required: true },
+		};
+		newFormConfig.fields.push(checkboxField);
+	}
 	newFormConfig.fields.map((field) => {
 		field.description = '';
-		field.name = field.id;
+		field.name = field.id.replace(conditions, '');
 		field.placeholder = '';
 	});
 	return newFormConfig;
@@ -57,7 +78,13 @@ export const FormikSignupFieldWrapper: React.FC<any> = (field) => {
 			description={description}
 			required={attributes!.required}
 		>
-			<Field name={name} as={OcInputComponent} placeholder={placeholder} id={id} inputType="text" />
+			<Field
+				name={name}
+				as={field.name === 'password' ? OcPasswordComponent : OcInputComponent}
+				placeholder={placeholder}
+				id={id}
+				inputType="text"
+			/>
 		</FieldGroupWrapper>
 	);
 };

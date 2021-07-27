@@ -10,8 +10,9 @@ export default {
 } as Meta;
 
 const DefaultComponent: Story<any> = (args) => {
-	const [showSignupFeedbackPage, setFeedbackPageVisible] = React.useState(false);
-	const [termsChecked, setTermsChecked] = React.useState(false);
+	const [showSignupFeedbackPage, setFeedbackPageVisible] = React.useState(
+		args.showSignupFeedbackPage,
+	);
 	const selectConfigOptions: string[] =
 		args.enableTypesDropdown && args.formConfigs
 			? args.formConfigs.map((config) => config.name)
@@ -25,8 +26,6 @@ const DefaultComponent: Story<any> = (args) => {
 					{...args}
 					showSignupFeedbackPage={showSignupFeedbackPage}
 					setFeedbackPageVisible={setFeedbackPageVisible}
-					termsChecked={termsChecked}
-					setTermsChecked={setTermsChecked}
 					selectValue={selectValue}
 					setSelectValue={setSelectValue}
 					selectConfigOptions={selectConfigOptions}
@@ -181,7 +180,7 @@ MultiConfigs.args = {
 	onSubmit: (values) => console.log(values),
 	enablePasswordField: true,
 	enableTermsCheckbox: true,
-	customTermsDescription: (
+	ordinaryTermsDescription: (
 		<>
 			I agree to{' '}
 			<Link to="/" className="edit-user-form__content__link">
@@ -263,7 +262,7 @@ OneConfig.args = {
 	],
 	enablePasswordField: true,
 	enableTermsCheckbox: true,
-	customTermsDescription: (
+	ordinaryTermsDescription: (
 		<>
 			I agree to{' '}
 			<Link to="/" className="edit-user-form__content__link">
@@ -343,7 +342,15 @@ CustomTermsConfig.args = {
 			fieldsOrder: ['email', 'name'],
 		},
 	],
+	enableTermsCheckbox: true,
 	enableCustomTerms: true,
+	customTermsDescription: (
+		<>
+			Custom
+			<Link to="/">Terms</Link>
+		</>
+	),
+	enablePasswordField: true,
 };
 
 export const ResultPage = DefaultComponent.bind({});
@@ -352,4 +359,6 @@ ResultPage.args = {
 	companyLogoUrl: './img/logo-company.png',
 	showSignupFeedbackPage: true,
 	forgotPasswordDoneUrl: './img/email_done.svg',
+	formConfigs: null,
+	enableTypesDropdown: false,
 };

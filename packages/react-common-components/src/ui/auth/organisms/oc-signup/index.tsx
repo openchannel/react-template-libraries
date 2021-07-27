@@ -7,18 +7,17 @@ import './style.scss';
 export const OcSignupComponent: React.FC<any> = (props) => {
 	const {
 		companyLogoUrl = '../../../../assets/img/logo-company.png',
-		process,
 		loginUrl = '/',
 		showSignupFeedbackPage,
 		setFeedbackPageVisible,
 		forgotPasswordDoneUrl,
 		goToActivationPage,
-		termsChecked,
-		setTermsChecked,
 		formConfigs,
 		enableTypesDropdown,
+		enableCustomTerms,
 		enableTermsCheckbox,
 		defaultTypeLabelText,
+		ordinaryTermsDescription,
 		customTermsDescription,
 		selectConfigOptions,
 		selectValue,
@@ -55,16 +54,15 @@ export const OcSignupComponent: React.FC<any> = (props) => {
 									enableTypesDropdown={enableTypesDropdown}
 									defaultTypeLabelText={defaultTypeLabelText}
 									customTermsDescription={customTermsDescription}
-									termsChecked={termsChecked}
-									setTermsChecked={setTermsChecked}
+									ordinaryTermsDescription={ordinaryTermsDescription}
 									selectConfigOptions={selectConfigOptions}
 									selectValue={selectValue}
 									setSelectValue={setSelectValue}
 									onSubmit={onSubmit}
+									enableCustomTerms={enableCustomTerms}
 									enableTermsCheckbox={enableTermsCheckbox}
 									enablePasswordField={enablePasswordField}
 									defaultEmptyConfigsErrorMessage={defaultEmptyConfigsErrorMessage}
-									process={process}
 								/>
 							</div>
 						)}
@@ -98,14 +96,14 @@ export const OcSignupComponent: React.FC<any> = (props) => {
 							disabled={false}
 							text="Activate account"
 							type="primary"
-							className="sign-up__button"
+							customClass="sign-up__button"
 						></OcButtonComponent>
 						<div className="result__sign-up-message">
 							<OcLabelComponent text="Don't have an account yet?"></OcLabelComponent>
-							<button className="result__link" onClick={handleShowFeedback}>
+							<Link className="result__link" to={loginUrl} onClick={handleShowFeedback}>
 								{' '}
 								Sign Up
-							</button>
+							</Link>
 						</div>
 					</div>
 				</form>
