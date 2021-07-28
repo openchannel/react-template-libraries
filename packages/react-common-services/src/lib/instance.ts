@@ -7,7 +7,7 @@ declare global {
 
 const DEFAULT_HEADER_NAME = 'X-XSRF-TOKEN';
 
-type InitInstance = { url: string, headerName: string };
+type InitInstance = { url: string; headerName: string };
 
 export const instance = {
 	setHeaderName: (headerName: string) => {
@@ -42,5 +42,5 @@ export const instance = {
 		if (headerName) {
 			instance.setHeaderName(headerName);
 		}
-	}
+	},
 };

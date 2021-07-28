@@ -1,7 +1,7 @@
 import fetchIntercept from 'fetch-intercept';
 
-import { instance } from '../lib/instance';
 import { cookies } from '../lib/cookies';
+import { instance } from '../lib/instance';
 
 fetchIntercept.register({
 	request: (url, originalConfig) => {
