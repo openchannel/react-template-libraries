@@ -1,6 +1,6 @@
 {
 	"name": "@openchannel/react-common-components",
-	"version": "0.1.0",
+	"version": "0.1.2",
 	"description": "Includes components for portal and market.",
 	"keywords": [
 		"component",
@@ -44,6 +44,7 @@
 		"moment": "^2.29.1",
 		"nanoid": "^3.1.23",
 		"react-bootstrap": "^1.5.2",
+		"react-cropper": "^2.1.8",
 		"react-datetime": "^3.0.4",
 		"react-dropzone-uploader": "^2.11.0",
 		"react-multi-carousel": "^2.6.3",
