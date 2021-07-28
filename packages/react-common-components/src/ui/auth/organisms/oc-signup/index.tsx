@@ -2,9 +2,10 @@ import * as React from 'react';
 import { OcLabelComponent, OcButtonComponent } from '../../../common';
 import { OcEditUserFormComponent } from '../../../auth';
 import { Link } from 'react-router-dom';
+import { SignupProps } from './types';
 import './style.scss';
 
-export const OcSignupComponent: React.FC<any> = (props) => {
+export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 	const {
 		companyLogoUrl = '../../../../assets/img/logo-company.png',
 		loginUrl = '/',

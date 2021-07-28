@@ -1,18 +1,14 @@
 import * as React from 'react';
 import { nanoid } from 'nanoid';
 import { Field } from 'formik';
-import { FieldGroupWrapper } from '@openchannel/react-common-components/src/ui/form/index';
+import {
+	FieldGroupWrapper,
+	FormikField,
+} from '@openchannel/react-common-components/src/ui/form/index';
 import { OcInputComponent, OcPasswordComponent } from '@openchannel/react-common-components';
 
 import { OcEditUserFormConfig } from './types';
 const conditions = /[\.\s\-]/gm;
-
-// const getValidFormikName = (fields: any) => Object.keys(fields).forEach(field => {
-// 	if (field.name.match(conditions)) {
-// 		field[field.name.replace(conditions, '')] = '';
-// 		delete field[field.name]
-// 	}
-// });
 
 export const configConverter = (
 	item: OcEditUserFormConfig,
@@ -67,7 +63,7 @@ export const configConverter = (
 	return newFormConfig;
 };
 
-export const FormikSignupFieldWrapper: React.FC<any> = (field) => {
+export const FormikSignupFieldWrapper: React.FC<FormikField> = (field) => {
 	const { id, label, description, name, attributes, placeholder } = field;
 
 	return (

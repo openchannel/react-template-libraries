@@ -48,7 +48,7 @@ export const WithoutConfigs = DefaultComponent.bind({});
 WithoutConfigs.args = {
 	loginUrl: 'login',
 	companyLogoUrl: './img/logo-company.png',
-	formConfigsLoading: false,
+	enableTypesDropdown: false,
 	formConfigs: [],
 };
 
