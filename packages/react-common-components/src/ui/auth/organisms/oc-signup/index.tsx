@@ -10,7 +10,7 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 		companyLogoUrl = '../../../../assets/img/logo-company.png',
 		loginUrl = '/',
 		showSignupFeedbackPage,
-		setFeedbackPageVisible,
+		// setFeedbackPageVisible,
 		forgotPasswordDoneUrl,
 		goToActivationPage,
 		formConfigs,
@@ -20,22 +20,21 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 		defaultTypeLabelText,
 		ordinaryTermsDescription,
 		customTermsDescription,
-		selectConfigOptions,
-		selectValue,
-		setSelectValue,
 		defaultEmptyConfigsErrorMessage,
 		onSubmit,
 		enablePasswordField,
 	} = props;
 
+	const [showFeedbackPage, setFeedbackPageVisible] = React.useState(showSignupFeedbackPage);
+
 	const handleShowFeedback = React.useCallback(
-		() => setFeedbackPageVisible(!showSignupFeedbackPage),
-		[showSignupFeedbackPage],
+		() => setFeedbackPageVisible(!showFeedbackPage),
+		[showFeedbackPage, setFeedbackPageVisible],
 	);
 
 	return (
 		<div className="sign-up login-card login-card_borders">
-			{!showSignupFeedbackPage && (
+			{!showFeedbackPage && (
 				<div>
 					<div className="sign-up__card-body">
 						<div className="sign-up__logo">
@@ -56,9 +55,6 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 									defaultTypeLabelText={defaultTypeLabelText}
 									customTermsDescription={customTermsDescription}
 									ordinaryTermsDescription={ordinaryTermsDescription}
-									selectConfigOptions={selectConfigOptions}
-									selectValue={selectValue}
-									setSelectValue={setSelectValue}
 									onSubmit={onSubmit}
 									enableCustomTerms={enableCustomTerms}
 									enableTermsCheckbox={enableTermsCheckbox}
@@ -77,7 +73,7 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 				</div>
 			)}
 
-			{showSignupFeedbackPage && (
+			{showFeedbackPage && (
 				<form>
 					<div className="sign-up__card-body result">
 						<div className="sign-up__logo result__logo">
@@ -94,17 +90,15 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 						</div>
 						<OcButtonComponent
 							onClick={goToActivationPage}
-							disabled={false}
 							text="Activate account"
-							type="primary"
 							customClass="sign-up__button"
-						></OcButtonComponent>
+						/>
 						<div className="result__sign-up-message">
 							<OcLabelComponent text="Don't have an account yet?"></OcLabelComponent>
-							<Link className="result__link" to={loginUrl} onClick={handleShowFeedback}>
+							<span role="button" className="result__link" onClick={handleShowFeedback}>
 								{' '}
 								Sign Up
-							</Link>
+							</span>
 						</div>
 					</div>
 				</form>

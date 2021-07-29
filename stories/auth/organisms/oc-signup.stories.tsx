@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
-import { OcSignupComponent } from '@openchannel/react-common-components';
+import { OcSignupComponent } from '../../../packages/react-common-components/src/ui/auth/index';
 
 export default {
 	title: 'Sign Up Custom [BEM]',
@@ -10,26 +10,14 @@ export default {
 } as Meta;
 
 const DefaultComponent: Story<any> = (args) => {
-	const [showSignupFeedbackPage, setFeedbackPageVisible] = React.useState(
-		args.showSignupFeedbackPage,
-	);
-	const selectConfigOptions: string[] =
-		args.enableTypesDropdown && args.formConfigs
-			? args.formConfigs.map((config) => config.name)
-			: [];
-	const [selectValue, setSelectValue] = React.useState(selectConfigOptions[0]);
-
 	return (
 		<BrowserRouter>
 			<div style={{ margin: '3em' }}>
 				<OcSignupComponent
 					{...args}
-					showSignupFeedbackPage={showSignupFeedbackPage}
-					setFeedbackPageVisible={setFeedbackPageVisible}
-					selectValue={selectValue}
-					setSelectValue={setSelectValue}
-					selectConfigOptions={selectConfigOptions}
-					enableTypesDropdown
+					showSignupFeedbackPage={args.showSignupFeedbackPage}
+					// setFeedbackPageVisible={setFeedbackPageVisible}
+					enableTypesDropdown={args.enableTypesDropdown}
 					enablePasswordField={args.enablePasswordField}
 				/>
 			</div>

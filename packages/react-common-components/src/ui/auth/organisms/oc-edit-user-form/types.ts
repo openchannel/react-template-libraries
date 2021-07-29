@@ -1,5 +1,5 @@
-import type { Option } from '../../../common/index';
 import type { AppFormField } from '../../../form/models';
+import { FormikValues } from 'formik';
 
 export interface TypeModel<T extends TypeFieldModel> {
   fields?: T[];
@@ -63,9 +63,10 @@ export interface EditUserComponentProps {
   defaultEmptyConfigsErrorMessage: string;
   customTermsDescription?: React.ReactNode;
   ordinaryTermsDescription: React.ReactNode;
-  selectConfigOptions?: Option[],
-  selectValue?: Option,
-	setSelectValue?: ((eventKey: string | Option, e: React.SyntheticEvent<unknown, Event>) => void) | undefined;
-  onSubmit: () => void;
+  onSubmit: (values: FormikValues) => void;
   enableCustomTerms: boolean;
+}
+
+export interface InitialFormikValues {
+  [key: string]: any;
 }

@@ -1,5 +1,6 @@
 import type { OcEditUserFormConfig } from '../oc-edit-user-form/types';
 import type { Option } from '../../../common/index';
+import { FormikValues } from 'formik';
 
 export interface SignupProps {    
   companyLogoUrl: string;
@@ -19,6 +20,6 @@ export interface SignupProps {
 		selectValue: Option;
 		setSelectValue: any;
 		defaultEmptyConfigsErrorMessage: string;
-		onSubmit: () => void;
+		onSubmit: (values: FormikValues) => void;
 		enablePasswordField: boolean;
 }
