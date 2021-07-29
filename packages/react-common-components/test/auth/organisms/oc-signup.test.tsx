@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { mount } from 'enzyme';
-import { OcSignupComponent } from '@openchannel/react-common-components';
+import { OcSignupComponent } from '../../../src/ui/auth/index';
 import { OcEditUserFormConfig } from '../../../src/ui/auth/organisms/oc-edit-user-form/types';
 
 const formConfigs: OcEditUserFormConfig[] = [
