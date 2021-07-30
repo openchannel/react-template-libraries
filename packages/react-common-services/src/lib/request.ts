@@ -33,6 +33,12 @@ export const request = <ReqBody>(method: Method, url: string, options: Options<R
 	};
 
 	return fetch(uri, config).then((response) => {
+		const contentLength = Number(response.headers.get('content-length')) || 0;
+
+		if (Number(contentLength) === 0) {
+			return response;
+		}
+
 		const contentType = response.headers.get('Content-Type');
 
 		if (contentType && contentType.includes('text')) {

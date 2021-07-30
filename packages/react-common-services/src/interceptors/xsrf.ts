@@ -1,13 +1,13 @@
 import fetchIntercept from 'fetch-intercept';
 
-import { cookies } from '../lib/cookies';
+import { memoryStorage } from '../lib/memory-storage';
 import { instance } from '../lib/instance';
 
 fetchIntercept.register({
 	request: (url, originalConfig) => {
 		// Be careful not to overwrite an existing header of the same name.
 		if (url.startsWith(instance.getUrl())) {
-			const token = cookies.getXsrfToken();
+			const token = memoryStorage.getXsrfToken();
 			const headerName = instance.getHeaderName();
 
 			if (token && !originalConfig.headers.has(headerName)) {
@@ -31,7 +31,7 @@ fetchIntercept.register({
 		const xsrfToken = response.headers.get(headerName);
 
 		if (xsrfToken) {
-			cookies.setXsrfToken(xsrfToken);
+			memoryStorage.setXsrfToken(xsrfToken);
 		}
 
 		return response;

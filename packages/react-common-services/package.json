@@ -13,8 +13,8 @@
 		"lint:fix": "tsdx lint src --fix"
 	},
 	"dependencies": {
+		"broadcast-channel": "^4.0.0",
 		"fetch-intercept": "^2.4.0",
-		"js-cookie": "^2.2.1",
 		"jwt-decode": "^3.1.2",
 		"lodash": "^4.17.21",
 		"lodash-es": "^4.17.21",
