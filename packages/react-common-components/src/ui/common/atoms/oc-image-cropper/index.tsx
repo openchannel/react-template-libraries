@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Cropper from 'react-cropper';
 
 import { OcButtonComponent } from '../../index';
@@ -8,44 +8,19 @@ import './style.scss';
 
 export interface CropperComponentProps {
 	setCropper?: any;
-	imagePath?: string;
 	cropData?: any;
-	setCropData?: any;
 	cropper?: any;
 	getCropData?: any;
+	image?: any;
 }
 
 export const OcImageCropper: React.FC<CropperComponentProps> = (props: CropperComponentProps) => {
-	const { /* setCropper, cropData, setCropData, cropper, getCropData, */ imagePath } = props;
-	const [cropData, setCropData] = React.useState();
-	const [cropper, setCropper] = React.useState<any>();
-	const [image, setImage] = useState(imagePath);
-	const getCropData = () => {
-		if (typeof cropper !== 'undefined') {
-			setCropData(cropper.getCroppedCanvas().toDataURL());
-		}
-	};
-	const onChange = (e: any) => {
-		e.preventDefault();
-		let files;
-		if (e.dataTransfer) {
-			files = e.dataTransfer.files;
-		} else if (e.target) {
-			files = e.target.files;
-		}
-		const reader = new FileReader();
-		reader.onload = () => {
-			setImage(reader.result as any);
-		};
-		reader.readAsDataURL(files[0]);
-	};
-	console.log(cropData, imagePath);
+	const { cropData, image, setCropper, getCropData } = props;
 
 	return (
 		<div className="cropper">
 			<div className="cropper__header">
 				<h4 className="cropper__header-text">Edit Image</h4>
-				<input type="file" onChange={onChange} className="cropper__header-file-input" />
 			</div>
 			<div className="cropper__body">
 				<div className="cropper__body-container">

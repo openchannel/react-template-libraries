@@ -14,7 +14,7 @@ export interface CropperModalProps extends Omit<ModalProps, 'children'> {
 	/** A callback fired when the rejectButton is clicked.*/
 	onCancel?: (event: React.SyntheticEvent) => void;
 	/** A callback fired when the confirmButton is clicked.*/
-	onSubmit?: (event: React.SyntheticEvent) => void;
+	onFiles?: (event: React.SyntheticEvent) => void;
 	/** Button content*/
 	confirmButtonText?: string;
 	/** The variant of the confirm button.*/
@@ -27,6 +27,10 @@ export interface CropperModalProps extends Omit<ModalProps, 'children'> {
 	rejectButtonType?: ModalButtonVariants;
 	/** Hide element when not needed */
 	rejectButtonHide?: boolean;
+	image?: any;
+	setCropData: any;
+	cropData: any;
+	files: any;
 }
 
 export const OcCropperModalComponent: React.FC<CropperModalProps> = (props) => {
