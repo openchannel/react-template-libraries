@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Dropzone, { IDropzoneProps /* getFilesFromEvent */ } from 'react-dropzone-uploader';
+import Dropzone, { IDropzoneProps } from 'react-dropzone-uploader';
 
 import { useModalState } from '../../../../lib/hooks';
 import { InputContent } from './input-content';
@@ -22,6 +22,7 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 	const { isOpened, closeModal, openModal } = useModalState();
 	const [cropData, setCropData] = React.useState();
 	const [image, setImage] = React.useState();
+	const [cropFileName, setCropFilename] = React.useState('');
 
 	const onChangeCropFile = (e: any) => {
 		e.preventDefault();
@@ -34,8 +35,10 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 		const reader = new FileReader();
 		reader.onload = () => {
 			setImage(reader.result as any);
+			setCropData(reader.result as any);
 		};
 		reader.readAsDataURL(files[0]);
+		setCropFilename(files[0].name);
 	};
 
 	const handleFileSubmit: IDropzoneProps['onSubmit'] = (files, allFiles) => {
@@ -70,12 +73,13 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 						image={image}
 						fileToModalCallback={fileToModalCallback}
 						multiple={isMultiFile}
+						cropFileName={cropFileName}
 					/>
 				)}
 				PreviewComponent={PreviewContent}
 				maxFiles={10}
 				minSizeBytes={0}
-				maxSizeBytes={5000}
+				maxSizeBytes={1048576}//must be maxSizeBytes from story
 				multiple={isMultiFile}
 				// accept={accept}
 				inputWithFilesContent={() => (

@@ -31,6 +31,7 @@ export interface CropperModalProps extends Omit<ModalProps, 'children'> {
 	setCropData: any;
 	cropData: any;
 	files: any;
+	cropFileName?: string;
 }
 
 export const OcCropperModalComponent: React.FC<CropperModalProps> = (props) => {

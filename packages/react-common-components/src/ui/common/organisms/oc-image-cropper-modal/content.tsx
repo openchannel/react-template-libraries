@@ -22,6 +22,7 @@ export const OcImageCropperModalContent: React.FC<any> = (props) => {
 		setCropData,
 		cropData,
 		files,
+		cropFileName,
 	} = props;
 
 	const [cropper, setCropper] = React.useState<any>();
@@ -34,18 +35,21 @@ export const OcImageCropperModalContent: React.FC<any> = (props) => {
 
 	const zoomOut = () => cropper.zoom(-0.1);
 
-	// const b64toBlob = async (base64: string) =>
-	// 	await fetch(base64)
-	// 		.then((res) => res.blob())
-	// 		.then((blob) => new File([blob], 'filename', { type: blob.type }));
-
-	// console.log(b64toBlob(cropData));
+	const b64toFile = (b64File: string) => {
+		if (b64File !== undefined) {
+			const i = b64File.indexOf('base64,');
+			const buffer = Buffer.from(b64File.slice(i + 7), 'base64');
+			const file = new File([buffer], cropFileName, {type: 'image/jpeg'});
+			return file;
+		}
+}
+	console.log(b64toFile(cropData));
 
 	const handleSubmitAfterCrop = () => {
-		files.push();
-		console.log(files);
-
+		files.push(b64toFile(cropData));
 		onFiles(files);
+		console.log('FILES ARRAY', files);
+		
 		onClose();
 	};
 	return (

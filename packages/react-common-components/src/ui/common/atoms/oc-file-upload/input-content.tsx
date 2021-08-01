@@ -31,7 +31,11 @@ export const InputContent = (props: any) => {
 		image,
 		cropData,
 		setCropData,
+		cropFileName,
 	} = props;
+
+	console.log(files);
+	
 	return (
 		<>
 			<div className="file-container__placeholder">
@@ -57,6 +61,7 @@ export const InputContent = (props: any) => {
 				setCropData={setCropData}
 				onFiles={onFiles}
 				files={files}
+				cropFileName={cropFileName}
 			/>
 		</>
 	);
