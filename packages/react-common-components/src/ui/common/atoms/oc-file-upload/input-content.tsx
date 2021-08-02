@@ -1,29 +1,14 @@
 import * as React from 'react';
-
+import { getFilesFromEvent } from 'react-dropzone-uploader';
 import { OcCropperModalComponent } from '../../index';
 
 import './style.scss';
-
-// const Input = ({ isOpened, closeModal, openModal }: any) => {
-// 	return (
-// 		<>
-// 			<div className="file-container__placeholder" onClick={openModal}>
-// 				<p className="file-container__placeholder-text">
-// 					Drag & drop file or
-// 					<span className="file-container__placeholder-browse"> Browse File</span>
-// 				</p>
-// 			</div>
-// 			<OcCropperModalComponent onClose={closeModal} isOpened={isOpened} />
-// 		</>
-// 	);
-// };
 
 export const InputContent = (props: any) => {
 	const {
 		accept,
 		onFiles,
 		files,
-		// getFilesFromEvent,
 		multiple,
 		isOpened,
 		closeModal,
@@ -32,10 +17,15 @@ export const InputContent = (props: any) => {
 		cropData,
 		setCropData,
 		cropFileName,
+		isMultiUpload,
 	} = props;
 
-	console.log(files);
-	
+	const standardFileHandler = async (e: any) => {
+		const target = e.target;
+		const chosenFiles = await getFilesFromEvent(e);
+		onFiles(chosenFiles);
+		target.value = null;
+	};
 	return (
 		<>
 			<div className="file-container__placeholder">
@@ -48,21 +38,23 @@ export const InputContent = (props: any) => {
 							type="file"
 							accept={accept}
 							multiple={multiple}
-							onChange={fileToModalCallback}
+							onChange={isMultiUpload ? fileToModalCallback : standardFileHandler}
 						/>
 					</label>
 				</p>
 			</div>
-			<OcCropperModalComponent
-				onClose={closeModal}
-				isOpened={isOpened}
-				image={image}
-				cropData={cropData}
-				setCropData={setCropData}
-				onFiles={onFiles}
-				files={files}
-				cropFileName={cropFileName}
-			/>
+			{isMultiUpload && (
+				<OcCropperModalComponent
+					onClose={closeModal}
+					isOpened={isOpened}
+					image={image}
+					cropData={cropData}
+					setCropData={setCropData}
+					onFiles={onFiles}
+					files={files}
+					cropFileName={cropFileName}
+				/>
+			)}
 		</>
 	);
 };

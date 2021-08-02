@@ -11,18 +11,14 @@ import { classNames, getUploadParams } from './utils';
 import './style.scss';
 
 export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
-	const {
-		// fileType,
-		// acceptType,
-		isMultiFile = false,
-	} = props;
-	// const isFileTypeImage = fileType === 'singleImage' || fileType === 'multiImage';
-	// const accept = acceptType || (isFileTypeImage ? 'image/*' : '*/*');
-
+	const { fileType, acceptType, isMultiFile = false } = props;
+	const isFileTypeImage = fileType === 'singleImage' || fileType === 'multiImage';
+	const acceptImages = acceptType === 'image/*';
 	const { isOpened, closeModal, openModal } = useModalState();
-	const [cropData, setCropData] = React.useState();
-	const [image, setImage] = React.useState();
+	const [cropData, setCropData] = React.useState('');
+	const [image, setImage] = React.useState('');
 	const [cropFileName, setCropFilename] = React.useState('');
+	const isMultiUpload = isFileTypeImage && acceptImages && !isMultiFile;
 
 	const onChangeCropFile = (e: any) => {
 		e.preventDefault();
@@ -74,14 +70,15 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 						fileToModalCallback={fileToModalCallback}
 						multiple={isMultiFile}
 						cropFileName={cropFileName}
+						isMultiUpload={isMultiUpload}
 					/>
 				)}
 				PreviewComponent={PreviewContent}
 				maxFiles={10}
-				minSizeBytes={0}
-				maxSizeBytes={1048576}//must be maxSizeBytes from story
+				// minSizeBytes={0}
+				// maxSizeBytes={1048576}
 				multiple={isMultiFile}
-				// accept={accept}
+				accept={acceptType}
 				inputWithFilesContent={() => (
 					<span className="file-container__placeholder-browse"> Browse File</span>
 				)}

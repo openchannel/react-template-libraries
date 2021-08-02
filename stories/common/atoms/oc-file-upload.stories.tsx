@@ -12,15 +12,16 @@ const UploadComponent: Story<any> = (args) => <OcFileUpload {...args} />;
 
 const UploadOneFileComponent: Story<any> = (args) => <OcFileUpload {...args} maxFiles={1} />;
 
-export const SinglePrivateFile = UploadOneFileComponent.bind({});
-SinglePrivateFile.args = {
-	accept: '*',
-	maxSizeBytes: 1048576,
+export const SingleImageFile = UploadOneFileComponent.bind({});
+SingleImageFile.args = {
+	fileType: 'singleImage',
+	acceptType: 'image/*',
 };
 
 export const MultipleFiles = UploadComponent.bind({});
 MultipleFiles.args = {
 	maxFiles: 5,
-	accept: '*',
-	maxSizeBytes: 1048576,
+	acceptType: '*',
+	fileType: 'multiFile',
+	isMultiFile: true,
 };

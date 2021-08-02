@@ -38,7 +38,7 @@ export const OcCropperModalComponent: React.FC<CropperModalProps> = (props) => {
 	const { isOpened, onClose, ...p } = props;
 
 	return (
-		<Modal isOpened={isOpened} onClose={onClose} /* className="" */>
+		<Modal isOpened={isOpened} onClose={onClose}>
 			<OcImageCropperModalContent {...p} onClose={onClose} />
 		</Modal>
 	);
