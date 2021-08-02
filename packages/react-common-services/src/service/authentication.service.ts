@@ -31,7 +31,7 @@ export const auth = {
 		}
 	},
 
-	tryLoginByRefreshToken: async (): Promise<boolean> => {
+	tryLoginByRefreshToken: async () => {
 		if (storage.isUserLoggedIn()) {
 			return true;
 		} else if (!storage.getRefreshToken()) {
