@@ -37,7 +37,7 @@ export interface DatepickerProps extends DatetimepickerProps {
 	settings?: string;
 }
 
-export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
+const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 	const { type, disabled, value, onChange, settings } = props;
 
 	const [timeVisible, setTimeVisible] = React.useState(false);
@@ -74,3 +74,5 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 		/>
 	);
 };
+
+export default OcDatetimePicker;

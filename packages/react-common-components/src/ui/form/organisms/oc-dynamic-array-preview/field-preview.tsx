@@ -4,7 +4,7 @@ import moment, { isMoment } from 'moment';
 
 import FileIconSvg from '../../../../assets/img/file_icon.svg';
 import { sanitizeHtml, stripHtmlTags } from '../../../../lib';
-import { OcTagElement } from '../../../common';
+import OcTagElement from '../../../common/atoms/oc-tag-element';
 import { FIELD_TYPE } from '../../lib';
 import { PreviewFieldModel } from '../../models';
 import { OcDynamicFieldArray } from '../oc-dynamic-field-array';

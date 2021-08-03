@@ -22,7 +22,7 @@ export interface OcTagElementProps {
 	onIconClick?: (title: string) => void;
 }
 
-export const OcTagElement: React.FC<OcTagElementProps> = React.memo((props) => {
+const OcTagElement: React.FC<OcTagElementProps> = React.memo((props) => {
 	const { title, deleteTagImgUrl, onIconClick } = props;
 
 	const onClick = () => {
@@ -69,3 +69,5 @@ export const OcTagElement: React.FC<OcTagElementProps> = React.memo((props) => {
 		</button>
 	);
 });
+
+export default OcTagElement;

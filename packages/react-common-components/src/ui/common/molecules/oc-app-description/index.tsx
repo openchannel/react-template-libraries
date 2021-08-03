@@ -27,7 +27,7 @@ export interface AppDescriptionProps {
 	shortDescription?: boolean;
 }
 
-export const OcAppDescription: React.FC<AppDescriptionProps> = (props) => {
+const OcAppDescription: React.FC<AppDescriptionProps> = (props) => {
 	const {
 		appDescription = '',
 		header = '',
@@ -66,3 +66,5 @@ export const OcAppDescription: React.FC<AppDescriptionProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcAppDescription;

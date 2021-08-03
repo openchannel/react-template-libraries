@@ -50,7 +50,7 @@ export interface TextSearchProps extends InputProps {
 	clearButtonText: string;
 }
 
-export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
+const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 	const {
 		placeholder,
 		value,
@@ -107,3 +107,5 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcTextSearchComponent;

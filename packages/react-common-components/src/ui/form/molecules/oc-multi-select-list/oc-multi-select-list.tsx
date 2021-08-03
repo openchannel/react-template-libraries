@@ -5,14 +5,15 @@ import isEqual from 'lodash/isEqual';
 import orderBy from 'lodash/orderBy';
 import union from 'lodash/union';
 
-import { DropboxValue, OcTagElement } from '../../../common';
+import { DropboxValue } from '../../../common';
 import OcDropboxComponent from '../../../common/atoms/oc-dropbox';
+import OcTagElement from '../../../common/atoms/oc-tag-element';
 
 import { OcMultiSelectListProps } from './types';
 
 import './styles.scss';
 
-export const OcMultiSelectList: React.FC<OcMultiSelectListProps> = (props) => {
+const OcMultiSelectList: React.FC<OcMultiSelectListProps> = (props) => {
 	const {
 		name,
 		label,
@@ -76,3 +77,5 @@ export const OcMultiSelectList: React.FC<OcMultiSelectListProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcMultiSelectList;

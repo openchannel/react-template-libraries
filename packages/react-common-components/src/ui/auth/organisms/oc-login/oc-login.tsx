@@ -3,7 +3,9 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 
-import { OcInputComponent, OcLabelComponent, OcPasswordComponent } from '../../../common';
+import OcInputComponent from '../../../common/atoms/oc-input';
+import OcLabelComponent from '../../../common/atoms/oc-label';
+import OcPasswordComponent from '../../../common/atoms/oc-password';
 import OcError from '../../../common/atoms/oc-error/oc-error';
 import OcButtonComponent from '../../../common/atoms/oc-button';
 import OcCheckboxComponent from '../../../common/atoms/oc-checkbox';

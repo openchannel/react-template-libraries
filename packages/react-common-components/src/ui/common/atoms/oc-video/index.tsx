@@ -15,7 +15,7 @@ export interface VideoProps {
 	customClass?: string;
 }
 
-export const OcVideoComponent: React.FC<VideoProps> = (props) => {
+const OcVideoComponent: React.FC<VideoProps> = (props) => {
 	const { videoUrl, customClass } = props;
 	return (
 		<div className="oc-video">
@@ -36,3 +36,5 @@ export const OcVideoComponent: React.FC<VideoProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcVideoComponent;

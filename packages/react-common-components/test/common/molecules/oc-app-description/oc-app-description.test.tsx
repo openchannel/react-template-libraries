@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
 
-import { OcAppDescription } from '@openchannel/react-common-components';
+import OcAppDescription from '../../../../src/ui/common/molecules/oc-app-description';
 
 describe('OcAppDescription', () => {
 	const component = shallow(

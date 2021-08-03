@@ -2,7 +2,8 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { OcInputComponent, OcLabelComponent } from '../../../common';
+import OcInputComponent from '../../../common/atoms/oc-input';
+import OcLabelComponent from '../../../common/atoms/oc-label';
 import OcError from '../../../common/atoms/oc-error/oc-error';
 import OcButtonComponent from '../../../common/atoms/oc-button';
 import { OcResendProps } from './types';

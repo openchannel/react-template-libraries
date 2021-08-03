@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { OcTextSearchComponent } from '@openchannel/react-common-components';
+import OcTextSearchComponent from '../../../src/ui/common/atoms/oc-text-search';
 
 describe('Default text input', () => {
 	let component = mount(

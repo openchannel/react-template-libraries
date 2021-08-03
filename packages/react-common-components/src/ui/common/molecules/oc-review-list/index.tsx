@@ -1,7 +1,7 @@
 //commit 240aa1e72cb6b2f67e9148e5d21917065b56fb19 author: Julia Date: 12.05.21 18:29
 import * as React from 'react';
 
-import { OcRatingComponent } from '../../../market/atoms/oc-rating';
+import OcRatingComponent from '../../../market/atoms/oc-rating';
 import OcButtonComponent from '../../atoms/oc-button';
 
 import './style.scss';
@@ -29,7 +29,7 @@ export interface ReviewListProps {
 	noReviewMessage?: string;
 }
 
-export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
+const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 	const {
 		reviewListTitle = 'Most recent reviews',
 		reviewList = [],
@@ -94,3 +94,5 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcReviewListComponent;

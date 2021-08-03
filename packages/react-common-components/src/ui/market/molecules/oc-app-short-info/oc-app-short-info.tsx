@@ -3,7 +3,7 @@ import * as React from 'react';
 import { sanitizeUrl } from '@braintree/sanitize-url';
 
 import { isStorybook, stripHtmlTags } from '../../../../lib';
-import { OcRatingComponent } from '../../atoms';
+import OcRatingComponent from '../../atoms/oc-rating';
 import { parsePrice } from '../../lib';
 
 import { OcAppShortInfoProps } from './types';

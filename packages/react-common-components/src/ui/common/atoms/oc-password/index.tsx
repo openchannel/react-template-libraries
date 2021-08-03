@@ -29,7 +29,7 @@ export interface PasswordProps extends React.InputHTMLAttributes<HTMLInputElemen
 	customClass?: string;
 }
 
-export const OcPasswordComponent: React.FC<PasswordProps> = (props) => {
+const OcPasswordComponent: React.FC<PasswordProps> = (props) => {
 	const { customClass, ...p } = props;
 	const [isPassword, toggle] = React.useReducer((is) => !is, false);
 
@@ -48,3 +48,5 @@ export const OcPasswordComponent: React.FC<PasswordProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcPasswordComponent;

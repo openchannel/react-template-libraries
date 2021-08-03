@@ -4,8 +4,6 @@ import { mount } from 'enzyme';
 import moment from 'moment';
 
 import {
-	OcRichTextEditorComponent,
-	OcDatetimePicker,
 	FormikOcMultiSelectListWrapper,
 	FormikOcDatetimePickerWrapper,
 	FormikOcVideoUrlWrapper,
@@ -15,6 +13,8 @@ import {
 	FormikOcColorWrapper,
 } from '@openchannel/react-common-components';
 import OcDropboxComponent from '../../../src/ui/common/atoms/oc-dropbox';
+import OcRichTextEditorComponent from '../../../src/ui/common/atoms/oc-rich-text-editor';
+import OcDatetimePicker from '../../../src/ui/common/molecules/oc-datetime-picker';
 
 const setUpWithFormik = (component: any) =>
 	mount(

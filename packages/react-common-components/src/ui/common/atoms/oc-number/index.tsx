@@ -28,8 +28,10 @@ export interface InputNumberProps extends React.InputHTMLAttributes<HTMLInputEle
 	customClass?: string;
 }
 
-export const OcNumberComponent: React.FC<InputNumberProps> = ({ customClass, ...p }) => {
+const OcNumberComponent: React.FC<InputNumberProps> = ({ customClass, ...p }) => {
 	return (
 		<input type="number" className={`form-control ${customClass}`} onKeyDown={onInput} {...p} />
 	);
 };
+
+export default OcNumberComponent;

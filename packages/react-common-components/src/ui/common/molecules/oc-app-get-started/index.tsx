@@ -14,7 +14,7 @@ export interface GetStartedProps {
 	onClick?: React.MouseEventHandler;
 }
 
-export const OcGetStartedComponent: React.FC<GetStartedProps> = (props) => {
+const OcGetStartedComponent: React.FC<GetStartedProps> = (props) => {
 	const {
 		getStartedType = 'home',
 		getStartedHeader = 'List Your App in our App Store',
@@ -59,3 +59,5 @@ export const OcGetStartedComponent: React.FC<GetStartedProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcGetStartedComponent;

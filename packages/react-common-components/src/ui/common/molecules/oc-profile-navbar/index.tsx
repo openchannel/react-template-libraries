@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DropdownModel } from './types';
-import { OcDropdown } from '../../index';
+import OcDropdown from '../../molecules/oc-dropdown/oc-dropdown';
 import { WithPermissionsListItem } from './withPermissionsListItem';
 import DownArrow from '../../../../assets/img/select-down.svg';
 import UpArrow from '../../../../assets/img/select-up.svg';
@@ -27,7 +27,7 @@ export interface ProfileNavbarProps {
 	listItem?: React.ForwardRefExoticComponent<any>;
 }
 
-export const OcProfileNavbar: React.FC<ProfileNavbarProps> = (props) => {
+const OcProfileNavbar: React.FC<ProfileNavbarProps> = (props) => {
 	const {
 		initials,
 		username,
@@ -68,3 +68,5 @@ export const OcProfileNavbar: React.FC<ProfileNavbarProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcProfileNavbar;

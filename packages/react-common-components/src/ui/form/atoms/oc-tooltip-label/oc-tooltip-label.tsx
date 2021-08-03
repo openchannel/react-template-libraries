@@ -3,7 +3,7 @@
 import * as React from 'react';
 
 import InfoIcon from '../../../../assets/img/info.svg';
-import { OcTooltipComponent } from '../../../common';
+import OcTooltipComponent from '../../../common/atoms/oc-tooltip';
 
 import './style.scss';
 
@@ -39,7 +39,7 @@ export interface OcTooltipLabelProps {
 	infoTitleIconCsv?: string;
 }
 
-export const OcTooltipLabel: React.FC<OcTooltipLabelProps> = React.memo((props) => {
+const OcTooltipLabel: React.FC<OcTooltipLabelProps> = React.memo((props) => {
 	const {
 		text,
 		children,
@@ -71,3 +71,5 @@ export const OcTooltipLabel: React.FC<OcTooltipLabelProps> = React.memo((props) 
 		</div>
 	);
 });
+
+export default OcTooltipLabel;

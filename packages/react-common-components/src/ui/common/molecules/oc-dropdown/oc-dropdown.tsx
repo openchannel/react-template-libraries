@@ -5,4 +5,6 @@ import { OcDropdownProps } from './types';
 
 import './oc-dropdown.scss';
 
-export const OcDropdown: React.FC<OcDropdownProps> = (props) => <BaseDropdown {...props} />;
+const OcDropdown: React.FC<OcDropdownProps> = (props) => <BaseDropdown {...props} />;
+
+export default OcDropdown;

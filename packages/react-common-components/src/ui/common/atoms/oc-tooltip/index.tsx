@@ -18,7 +18,7 @@ export interface TooltipProps {
 	position?: PositionProps;
 }
 
-export const OcTooltipComponent: React.FC<TooltipProps> = (props) => {
+const OcTooltipComponent: React.FC<TooltipProps> = (props) => {
 	const { tooltip, children, position = 'right' } = props;
 
 	const uniqId = React.useRef(nanoid());
@@ -32,3 +32,5 @@ export const OcTooltipComponent: React.FC<TooltipProps> = (props) => {
 		</OverlayTrigger>
 	);
 };
+
+export default OcTooltipComponent;

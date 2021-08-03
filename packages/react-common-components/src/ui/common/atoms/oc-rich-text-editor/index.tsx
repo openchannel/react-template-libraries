@@ -23,7 +23,7 @@ export interface OcRtfProps extends IAllProps {
 	onChange: any;
 }
 
-export const OcRichTextEditorComponent = (props: OcRtfProps) => {
+const OcRichTextEditorComponent = (props: OcRtfProps) => {
 	const { name, placeholderText, value, onChange, initialValue, onBlur } = props;
 
 	const editorRef: any = React.useRef();
@@ -72,3 +72,5 @@ export const OcRichTextEditorComponent = (props: OcRtfProps) => {
 		</div>
 	);
 };
+
+export default OcRichTextEditorComponent;

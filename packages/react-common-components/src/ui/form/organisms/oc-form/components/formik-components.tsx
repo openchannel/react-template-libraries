@@ -2,22 +2,19 @@ import * as React from 'react';
 import { FieldInputProps, useFormikContext } from 'formik';
 import moment from 'moment';
 
-import {
-	ColorProps,
-	DatepickerProps,
-	OcDatetimePicker,
-	OcRichTextEditorComponent,
-	OcSelect,
-	OcSelectProps,
-	OcVideoUrlComponent,
-	VideoUrlProps,
-} from '../../../../common';
+import { ColorProps, DatepickerProps, OcSelectProps, VideoUrlProps } from '../../../../common';
 import OcFileUpload from '../../../../common/atoms/oc-file-upload';
+import OcDatetimePicker from '../../../../common/molecules/oc-datetime-picker';
+import OcSelect from '../../../../common/molecules/oc-select';
 import OcColorComponent from '../../../../common/atoms/oc-color';
 import OcError from '../../../../common/atoms/oc-error/oc-error';
-import { OcTooltipLabel } from '../../../atoms';
+import OcRichTextEditorComponent from '../../../../common/atoms/oc-rich-text-editor/index';
+import OcVideoUrlComponent from '../../../../common/molecules/oc-video-url/index';
+import OcTooltipLabel from '../../../atoms/oc-tooltip-label/oc-tooltip-label';
+import OcMultiSelectList from '../../../molecules/oc-multi-select-list/oc-multi-select-list';
+import OcTags from '../../../molecules/oc-tags/oc-tags';
 import { FIELD_TYPE } from '../../../lib';
-import { OcMultiSelectList, OcMultiSelectListProps, OcTags, OcTagsProps } from '../../../molecules';
+import { OcMultiSelectListProps, OcTagsProps } from '../../../molecules';
 import type { FCWP, FieldGroupProps } from '../types';
 import { shouldFieldGroupUpdate, shouldFieldUpdate } from '../utils/memo';
 

@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 import InfoSvgIcon from '../../../../assets/img/info.svg';
-import { OcTooltipComponent } from '../oc-tooltip';
+import OcTooltipComponent from '../oc-tooltip';
 
 import './style.scss';
 
@@ -37,7 +37,7 @@ export interface TitleProps {
 	customStyle?: React.CSSProperties;
 }
 
-export const OcTitleComponent: React.FC<TitleProps> = (props) => {
+const OcTitleComponent: React.FC<TitleProps> = (props) => {
 	const { title, description, required, customClass = '', customStyle, infoTitleIconCsv } = props;
 
 	return (
@@ -60,3 +60,5 @@ export const OcTitleComponent: React.FC<TitleProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcTitleComponent;

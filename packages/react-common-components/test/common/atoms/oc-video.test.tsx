@@ -1,25 +1,26 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { OcVideoComponent, VideoProps } from '@openchannel/react-common-components';
+import { VideoProps } from '@openchannel/react-common-components';
+import OcVideoComponent from 'packages/react-common-components/src/ui/common/atoms/oc-video';
 
 const defaultVideoProps: VideoProps = {
-  videoUrl: 'https://www.youtube.com/embed/DGQwd1_dpuc',
+	videoUrl: 'https://www.youtube.com/embed/DGQwd1_dpuc',
 };
 
 const setUp = (props: VideoProps) => shallow(<OcVideoComponent {...props} />);
 
 describe('Embedded iframe video', () => {
-  let component: ShallowWrapper;
+	let component: ShallowWrapper;
 
-  beforeEach(() => {
-    component = setUp(defaultVideoProps);
-  });
+	beforeEach(() => {
+		component = setUp(defaultVideoProps);
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 
-  it('should contain video url', () => {
-    expect(component.contains('https'));
-  });
+	it('should contain video url', () => {
+		expect(component.contains('https'));
+	});
 });
