@@ -7,7 +7,7 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
 	/**
 	 * Input value. Use text
 	 */
-	labelText?: string;
+	labelText?: React.ReactNode;
 	/**
 	 * Marks the input as required
 	 */
@@ -30,10 +30,11 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
 	 * Supposed to be the style object
 	 */
 	style?: React.CSSProperties;
+	touched?: boolean;
 }
 
 export const OcCheckboxComponent: React.FC<CheckboxProps> = (props) => {
-	const { labelText, required, ...p } = props;
+	const { labelText, required, children = labelText, ...p } = props;
 
 	return (
 		// eslint-disable-next-line jsx-a11y/label-has-for
@@ -41,7 +42,7 @@ export const OcCheckboxComponent: React.FC<CheckboxProps> = (props) => {
 			<input type="checkbox" className="form-checkbox__input form-checkbox__input_hidden" {...p} />
 			<span className="form-checkbox__checkmark" />
 			<span className="form-checkbox__label">
-				{labelText || ''}
+				{children}
 				{required && <strong className="form-checkbox__required-glyph">*</strong>}
 			</span>
 		</label>
