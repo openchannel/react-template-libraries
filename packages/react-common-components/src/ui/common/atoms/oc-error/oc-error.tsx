@@ -4,7 +4,7 @@ import { OcErrorProps } from './types';
 
 import './style.scss';
 
-export const OcError: React.FC<OcErrorProps> = (props) => {
+const OcError: React.FC<OcErrorProps> = (props) => {
 	const { message } = props;
 
 	if (!message) {
@@ -25,3 +25,4 @@ export const OcError: React.FC<OcErrorProps> = (props) => {
 		</div>
 	);
 };
+export default OcError;

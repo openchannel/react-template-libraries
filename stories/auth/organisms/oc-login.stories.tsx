@@ -2,7 +2,8 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { OcLoginComponent, LoginProps } from '../../../packages/react-common-components/src/ui/auth';
+import { LoginProps } from '../../../packages/react-common-components/src/ui/auth';
+import OcLoginComponent from '../../../packages/react-common-components/src/ui/auth/organisms/oc-login';
 
 export default {
 	title: 'Login [BEM]',

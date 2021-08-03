@@ -47,7 +47,7 @@ export interface DropboxProps extends SelectProps<GroupTypeBase<OptionsType<Opti
 	onKeyDown?: (event: React.KeyboardEvent<HTMLElement>) => void;
 }
 
-export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
+const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
 	const {
 		name,
 		items,
@@ -90,3 +90,5 @@ export const OcDropboxComponent: React.FC<DropboxProps> = (props) => {
 		/>
 	);
 };
+
+export default OcDropboxComponent;

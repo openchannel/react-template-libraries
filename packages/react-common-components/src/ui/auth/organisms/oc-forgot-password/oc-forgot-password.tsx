@@ -2,8 +2,9 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { OcButtonComponent, OcError, OcInputComponent, OcLabelComponent } from '../../../common';
-
+import { OcInputComponent, OcLabelComponent } from '../../../common';
+import OcError from '../../../common/atoms/oc-error/oc-error';
+import OcButtonComponent from '../../../common/atoms/oc-button';
 import { OcForgotPasswordProps } from './types';
 
 import './style.scss';
@@ -88,3 +89,5 @@ export const OcForgotPasswordComponent: React.FC<OcForgotPasswordProps> = (props
 		</div>
 	);
 };
+
+export default OcForgotPasswordComponent;

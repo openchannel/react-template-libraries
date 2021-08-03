@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import CloseIconSvg from '../../../../assets/img/close-icon.svg';
-import { OcButtonComponent } from '../../atoms';
+import OcButtonComponent from '../../atoms/oc-button';
 
 import { ConfirmationModalProps } from './index';
 

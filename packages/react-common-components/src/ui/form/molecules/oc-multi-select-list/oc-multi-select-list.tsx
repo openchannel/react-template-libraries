@@ -5,7 +5,8 @@ import isEqual from 'lodash/isEqual';
 import orderBy from 'lodash/orderBy';
 import union from 'lodash/union';
 
-import { DropboxValue, OcDropboxComponent, OcTagElement } from '../../../common';
+import { DropboxValue, OcTagElement } from '../../../common';
+import OcDropboxComponent from '../../../common/atoms/oc-dropbox';
 
 import { OcMultiSelectListProps } from './types';
 

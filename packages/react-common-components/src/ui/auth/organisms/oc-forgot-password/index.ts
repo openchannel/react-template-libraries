@@ -1,2 +1,2 @@
-export * from './oc-forgot-password';
+export {OcForgotPasswordComponent as default} from './oc-forgot-password';
 export * from './types';

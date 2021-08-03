@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Cropper from 'react-cropper';
 
-import { OcButtonComponent } from '../../index';
+import OcButtonComponent from '../../atoms/oc-button';
 
 import 'cropperjs/dist/cropper.css';
 import './style.scss';
@@ -15,8 +15,8 @@ export interface CropperComponentProps {
 	getCropData?: any;
 }
 
-export const OcImageCropper: React.FC<CropperComponentProps> = (props: CropperComponentProps) => {
-	const { /* setCropper, cropData, setCropData, cropper, getCropData, */ imagePath } = props;
+const OcImageCropper: React.FC<CropperComponentProps> = (props: CropperComponentProps) => {
+	const { imagePath } = props;
 	const [cropData, setCropData] = React.useState();
 	const [cropper, setCropper] = React.useState<any>();
 	const [image, setImage] = useState(imagePath);
@@ -89,3 +89,5 @@ export const OcImageCropper: React.FC<CropperComponentProps> = (props: CropperCo
 		</div>
 	);
 };
+
+export default OcImageCropper;

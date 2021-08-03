@@ -5,16 +5,16 @@ import moment from 'moment';
 import {
 	ColorProps,
 	DatepickerProps,
-	OcColorComponent,
 	OcDatetimePicker,
-	OcError,
-	OcFileUpload,
 	OcRichTextEditorComponent,
 	OcSelect,
 	OcSelectProps,
 	OcVideoUrlComponent,
 	VideoUrlProps,
 } from '../../../../common';
+import OcFileUpload from '../../../../common/atoms/oc-file-upload';
+import OcColorComponent from '../../../../common/atoms/oc-color';
+import OcError from '../../../../common/atoms/oc-error/oc-error';
 import { OcTooltipLabel } from '../../../atoms';
 import { FIELD_TYPE } from '../../../lib';
 import { OcMultiSelectList, OcMultiSelectListProps, OcTags, OcTagsProps } from '../../../molecules';

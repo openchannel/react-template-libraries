@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcImageCropper } from '../../../packages/react-common-components/src/ui/common';
+import OcImageCropper from '../../../packages/react-common-components/src/ui/common/atoms/oc-image-cropper';
 
 export default {
 	title: 'Image Cropper [BEM]',

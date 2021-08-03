@@ -3,14 +3,10 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Formik } from 'formik';
 
-import {
-	OcButtonComponent,
-	OcCheckboxComponent,
-	OcError,
-	OcInputComponent,
-	OcLabelComponent,
-	OcPasswordComponent,
-} from '../../../common';
+import { OcInputComponent, OcLabelComponent, OcPasswordComponent } from '../../../common';
+import OcError from '../../../common/atoms/oc-error/oc-error';
+import OcButtonComponent from '../../../common/atoms/oc-button';
+import OcCheckboxComponent from '../../../common/atoms/oc-checkbox';
 
 import { LoginProps } from './types';
 import { onActivationLinkClick, validateLogin } from './utils';
@@ -140,3 +136,5 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcLoginComponent;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import { OcButtonComponent } from '../../atoms';
-import { OcImageCropper } from '../../index';
+import OcButtonComponent from '../../atoms/oc-button';
+import OcImageCropper from '../../atoms/oc-image-cropper/index';
 
 import CloseIconSvg from '../../../../assets/img/close-icon.svg';
 import ZoomInImg from '../../../../assets/img/zoom-in.svg';

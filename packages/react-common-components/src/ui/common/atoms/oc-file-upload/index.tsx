@@ -10,7 +10,7 @@ import { classNames, getUploadParams } from './utils';
 
 import './style.scss';
 
-export const OcFileUpload: React.FC<OcFileUploadProps> = () => {
+const OcFileUpload: React.FC<OcFileUploadProps> = () => {
 	// const {
 	// fileType,
 	// acceptType,
@@ -71,3 +71,5 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = () => {
 		</>
 	);
 };
+
+export default OcFileUpload;

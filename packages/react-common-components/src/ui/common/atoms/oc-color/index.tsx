@@ -28,7 +28,7 @@ const colorRegEx = /(?:#|0x)(?:[a-f0-9]{3}|[a-f0-9]{6})\b|(?:rgb|hsl)a?\([^\)]*\
 
 const validateColor = (target: string) => target.match(colorRegEx) !== null;
 
-export const OcColorComponent: React.FC<ColorProps> = (props) => {
+const OcColorComponent: React.FC<ColorProps> = (props) => {
 	const { disabled, placeholder, colorValue, onValueChange, name, onBlur } = props;
 
 	const [inputColorValue, setInputColorValue] = React.useState('');
@@ -117,3 +117,5 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcColorComponent;

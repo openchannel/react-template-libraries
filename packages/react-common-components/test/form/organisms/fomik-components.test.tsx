@@ -4,7 +4,6 @@ import { mount } from 'enzyme';
 import moment from 'moment';
 
 import {
-	OcDropboxComponent,
 	OcRichTextEditorComponent,
 	OcDatetimePicker,
 	FormikOcMultiSelectListWrapper,
@@ -15,12 +14,14 @@ import {
 	FormikRichTextWrapper,
 	FormikOcColorWrapper,
 } from '@openchannel/react-common-components';
+import OcDropboxComponent from '../../../src/ui/common/atoms/oc-dropbox';
 
-const setUpWithFormik = (component: any) => mount(
-	<Formik initialValues={{}} onSubmit={() => {}}>
-		{component}
-	</Formik>
-);
+const setUpWithFormik = (component: any) =>
+	mount(
+		<Formik initialValues={{}} onSubmit={() => {}}>
+			{component}
+		</Formik>,
+	);
 
 describe('formik-components', () => {
 	const setFieldValueMock = jest.fn();
@@ -36,10 +37,13 @@ describe('formik-components', () => {
 				field={{ value: '', name: 'color' }}
 				// @ts-ignore
 				form={{ setFieldValue: setFieldValueMock }}
-			/>
+			/>,
 		);
 
-		wrapper.find('input[name="color"]').at(0).simulate('change', { target: { value: '#a1b2c3' } });
+		wrapper
+			.find('input[name="color"]')
+			.at(0)
+			.simulate('change', { target: { value: '#a1b2c3' } });
 		expect(setFieldValueMock).toHaveBeenCalledWith('color', '#A1B2C3');
 	});
 
@@ -50,7 +54,7 @@ describe('formik-components', () => {
 				field={{ value: '', name: 'richEditor' }}
 				// @ts-ignore
 				form={{ setFieldValue: setFieldValueMock }}
-			/>
+			/>,
 		);
 
 		wrapper.find(OcRichTextEditorComponent).props().onChange('<p>some html<p/>');
@@ -64,9 +68,9 @@ describe('formik-components', () => {
 				field={{ value: [], name: 'select' }}
 				// @ts-ignore
 				form={{ setFieldValue: setFieldValueMock }}
-				options={[ 'two' ]}
+				options={['two']}
 				placeholder="Select one"
-			/>
+			/>,
 		);
 
 		//click on toggle component
@@ -83,9 +87,9 @@ describe('formik-components', () => {
 				field={{ value: [], name: 'tags' }}
 				// @ts-ignore
 				form={{ setFieldValue: setFieldValueMock }}
-				options={[ 'tag-1', 'tag-2' ]}
+				options={['tag-1', 'tag-2']}
 				placeholder="Select tag"
-			/>
+			/>,
 		);
 
 		wrapper.find(OcDropboxComponent).props().selectItem('tag-2');
@@ -101,10 +105,10 @@ describe('formik-components', () => {
 				field={{ value: '', name: 'video-url' }}
 				// @ts-ignore
 				form={{ setFieldValue: setFieldValueMock }}
-			/>
+			/>,
 		);
 
-		wrapper.find('input').simulate('change', { target: { value: link }});
+		wrapper.find('input').simulate('change', { target: { value: link } });
 		expect(setFieldValueMock).toHaveBeenCalledWith('video-url', link);
 	});
 
@@ -118,7 +122,7 @@ describe('formik-components', () => {
 				// @ts-ignore
 				form={{ setFieldValue: setFieldValueMock }}
 				type="datetime"
-			/>
+			/>,
 		);
 
 		wrapper.find(OcDatetimePicker).props().onChange(nextValue);
@@ -129,15 +133,15 @@ describe('formik-components', () => {
 		const wrapper = setUpWithFormik(
 			<FormikOcMultiSelectListWrapper
 				// @ts-ignore
-				field={{ value: [ 'one' ], name: 'multi-select' }}
+				field={{ value: ['one'], name: 'multi-select' }}
 				// @ts-ignore
 				form={{ setFieldValue: setFieldValueMock }}
 				label="this is placeholder"
-				options={[ 'one', 'two', 'three' ]}
-			/>
+				options={['one', 'two', 'three']}
+			/>,
 		);
 
 		wrapper.find(OcDropboxComponent).props().selectItem('three');
-		expect(setFieldValueMock).toHaveBeenCalledWith('multi-select', [ 'one', 'three' ]);
+		expect(setFieldValueMock).toHaveBeenCalledWith('multi-select', ['one', 'three']);
 	});
 });

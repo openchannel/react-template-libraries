@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 import { OcRatingComponent } from '../../../market/atoms/oc-rating';
-import { OcButtonComponent } from '../../index';
+import OcButtonComponent from '../../atoms/oc-button';
 
 import './style.scss';
 

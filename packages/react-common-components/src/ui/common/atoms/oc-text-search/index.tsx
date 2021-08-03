@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 import TextSearchIcon from '../../../../assets/img/text-search-icon.svg';
-import { OcButtonComponent } from '../oc-button';
+import OcButtonComponent from '../oc-button';
 import { InputProps } from '../oc-input';
 
 import './style.scss';

@@ -16,13 +16,13 @@ export interface ImageGalleryProps {
 	maxItems?: number;
 }
 
-export const OcImageGalleryComponent: React.FC<ImageGalleryProps> = (props) => {
+const OcImageGalleryComponent: React.FC<ImageGalleryProps> = (props) => {
 	const { gallery, maxItems = 3 } = props;
 
-	const processedGallery: GalleryItem[] = React.useMemo(() => [...gallery].splice(0, maxItems), [
-		gallery,
-		maxItems,
-	]);
+	const processedGallery: GalleryItem[] = React.useMemo(
+		() => [...gallery].splice(0, maxItems),
+		[gallery, maxItems],
+	);
 
 	return (
 		<div className="image-gallery">
@@ -36,3 +36,5 @@ export const OcImageGalleryComponent: React.FC<ImageGalleryProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcImageGalleryComponent;

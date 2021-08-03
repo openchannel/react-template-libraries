@@ -39,7 +39,7 @@ export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonE
 	children: React.ReactNode;
 }
 
-export const OcButtonComponent = React.memo(
+const OcButtonComponent = React.memo(
 	React.forwardRef((props: Partial<ButtonProps>, ref: React.ForwardedRef<HTMLButtonElement>) => {
 		const {
 			htmlType = 'button',
@@ -85,3 +85,5 @@ export const OcButtonComponent = React.memo(
 		);
 	}),
 );
+
+export default OcButtonComponent;
