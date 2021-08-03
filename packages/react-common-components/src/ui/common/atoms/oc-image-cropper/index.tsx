@@ -1,52 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Cropper from 'react-cropper';
-
-import { OcButtonComponent } from '../../index';
 
 import 'cropperjs/dist/cropper.css';
 import './style.scss';
 
 export interface CropperComponentProps {
 	setCropper?: any;
-	imagePath?: string;
-	cropData?: any;
-	setCropData?: any;
 	cropper?: any;
-	getCropData?: any;
+	image?: any;
 }
 
 export const OcImageCropper: React.FC<CropperComponentProps> = (props: CropperComponentProps) => {
-	const { /* setCropper, cropData, setCropData, cropper, getCropData, */ imagePath } = props;
-	const [cropData, setCropData] = React.useState();
-	const [cropper, setCropper] = React.useState<any>();
-	const [image, setImage] = useState(imagePath);
-	const getCropData = () => {
-		if (typeof cropper !== 'undefined') {
-			setCropData(cropper.getCroppedCanvas().toDataURL());
-		}
-	};
-	const onChange = (e: any) => {
-		e.preventDefault();
-		let files;
-		if (e.dataTransfer) {
-			files = e.dataTransfer.files;
-		} else if (e.target) {
-			files = e.target.files;
-		}
-		const reader = new FileReader();
-		reader.onload = () => {
-			setImage(reader.result as any);
-		};
-		reader.readAsDataURL(files[0]);
-	};
-	console.log(cropData, imagePath);
+	const { image, setCropper } = props;
 
 	return (
 		<div className="cropper">
-			<div className="cropper__header">
-				<h4 className="cropper__header-text">Edit Image</h4>
-				<input type="file" onChange={onChange} className="cropper__header-file-input" />
-			</div>
 			<div className="cropper__body">
 				<div className="cropper__body-container">
 					<Cropper
@@ -67,23 +35,6 @@ export const OcImageCropper: React.FC<CropperComponentProps> = (props: CropperCo
 						}}
 						guides={true}
 					/>
-				</div>
-			</div>
-			<div className="preview-crop-container">
-				<div className="box" style={{ width: '50%' }}>
-					<h1>Preview</h1>
-					<div className="img-preview view-block"></div>
-				</div>
-				<div className="box" style={{ flexDirection: 'column', width: '50%' }}>
-					<div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-						<h1>Crop</h1>
-						<OcButtonComponent onClick={getCropData} text="Crop Image" style={{ width: '30%' }} />
-					</div>
-					<div className="view-block">
-						{cropData && (
-							<img style={{ width: '300px', height: '300px' }} src={cropData} alt="cropped" />
-						)}
-					</div>
 				</div>
 			</div>
 		</div>
