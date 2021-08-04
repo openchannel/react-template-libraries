@@ -42,6 +42,8 @@ export const OcImageCropperModalContent: React.FC<any> = (props) => {
 			const buffer = Buffer.from(b64File.slice(i + 7), 'base64');
 			const file = new File([buffer], cropFileName, { type: 'image/jpeg' });
 			return file;
+		} else {
+			return b64File;
 		}
 	};
 
