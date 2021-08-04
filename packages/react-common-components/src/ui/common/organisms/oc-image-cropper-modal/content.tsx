@@ -11,25 +11,48 @@ export const OcImageCropperModalContent: React.FC<any> = (props) => {
 	const {
 		onClose,
 		onCancel = onClose,
-		// onSubmit,
+		onFiles,
 		confirmButtonText = 'Confirm',
 		confirmButtonType = 'primary',
 		confirmButtonHide = false,
 		rejectButtonText = 'Cancel',
 		rejectButtonType = 'secondary',
 		rejectButtonHide = false,
-		imagePath,
-		cropper,
-		setCropper,
-		getCropData,
+		image,
 		setCropData,
 		cropData,
+		files,
+		cropFileName,
 	} = props;
 
+	const [cropper, setCropper] = React.useState<any>();
+
+	const getCropData = () => {
+		if (typeof cropper !== 'undefined') {
+			setCropData(cropper.getCroppedCanvas().toDataURL());
+		}
+	};
 	const zoomIn = () => cropper.zoom(0.1);
 
 	const zoomOut = () => cropper.zoom(-0.1);
 
+	const b64toFile = (b64File: string) => {
+		if (b64File !== undefined) {
+			const i = b64File.indexOf('base64,');
+			const buffer = Buffer.from(b64File.slice(i + 7), 'base64');
+			const file = new File([buffer], cropFileName, { type: 'image/jpeg' });
+			return file;
+		} else {
+			return b64File;
+		}
+	};
+
+	const handleSubmitAfterCrop = () => {
+		getCropData();
+		files.push(b64toFile(cropData));
+		onFiles(files);
+		onClose();
+	};
 	return (
 		<>
 			<div className="cropper">
@@ -45,9 +68,7 @@ export const OcImageCropperModalContent: React.FC<any> = (props) => {
 				<div className="cropper__body">
 					<div className="cropper__body-container">
 						<div className="cropper__body-size">
-							<div className="cropper__body-resolution">
-								croppedImageHeight p X croppedImageWidth p
-							</div>
+							<div className="cropper__body-resolution"></div>
 							<div className="cropper__body-zoom">
 								<a onClick={zoomIn}>
 									<ZoomInImg />
@@ -57,13 +78,7 @@ export const OcImageCropperModalContent: React.FC<any> = (props) => {
 								</a>
 							</div>
 						</div>
-						<OcImageCropper
-							setCropper={setCropper}
-							imagePath={imagePath}
-							getCropData={getCropData}
-							cropData={cropData}
-							setCropData={setCropData}
-						/>
+						<OcImageCropper setCropper={setCropper} image={image} />
 						<div className="confirmation-modal__button-container">
 							{!rejectButtonHide && (
 								<OcButtonComponent
@@ -77,7 +92,7 @@ export const OcImageCropperModalContent: React.FC<any> = (props) => {
 								<OcButtonComponent
 									type={confirmButtonType}
 									text={confirmButtonText}
-									onClick={(setCropData as any) || onClose}
+									onClick={handleSubmitAfterCrop}
 									customClass="confirmation-modal__button"
 								/>
 							)}

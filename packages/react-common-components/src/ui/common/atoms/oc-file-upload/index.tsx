@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Dropzone, { IDropzoneProps /* getFilesFromEvent */ } from 'react-dropzone-uploader';
+import Dropzone, { IDropzoneProps } from 'react-dropzone-uploader';
 
 import { useModalState } from '../../../../lib/hooks';
 import { InputContent } from './input-content';
@@ -10,24 +10,31 @@ import { classNames, getUploadParams } from './utils';
 
 import './style.scss';
 
-const OcFileUpload: React.FC<OcFileUploadProps> = () => {
-	// const {
-	// fileType,
-	// acceptType,
-	// isMultiFile = false,
-	// } = props;
-	// const isFileTypeImage = fileType === 'singleImage' || fileType === 'multiImage';
-	// const accept = acceptType || (isFileTypeImage ? 'image/*' : '*/*');
-
+export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
+	const { fileType, acceptType, isMultiFile = false } = props;
+	const isFileTypeImage = fileType === 'singleImage' || fileType === 'multiImage';
+	const acceptImages = acceptType === 'image/*';
 	const { isOpened, closeModal, openModal } = useModalState();
-	const [cropper, setCropper] = React.useState<any>();
-	const [cropData, setCropData] = React.useState();
+	const [cropData, setCropData] = React.useState('');
+	const [image, setImage] = React.useState('');
+	const [cropFileName, setCropFilename] = React.useState('');
+	const isMultiUpload = isFileTypeImage && acceptImages && !isMultiFile;
 
-	const getCropData = () => {
-		if (typeof cropper !== 'undefined') {
-			setCropData(cropper.getCroppedCanvas().toDataURL());
-			console.log(cropper);
+	const onChangeCropFile = (e: any) => {
+		e.preventDefault();
+		let files;
+		if (e.dataTransfer) {
+			files = e.dataTransfer.files;
+		} else if (e.target) {
+			files = e.target.files;
 		}
+		const reader = new FileReader();
+		reader.onload = () => {
+			setImage(reader.result as any);
+			setCropData(reader.result as any);
+		};
+		reader.readAsDataURL(files[0]);
+		setCropFilename(files[0].name);
 	};
 
 	const handleFileSubmit: IDropzoneProps['onSubmit'] = (files, allFiles) => {
@@ -39,6 +46,11 @@ const OcFileUpload: React.FC<OcFileUploadProps> = () => {
 		console.log(status, meta, file);
 	};
 
+	const fileToModalCallback = (e: any) => {
+		onChangeCropFile(e);
+		openModal();
+	};
+
 	return (
 		<>
 			<Dropzone
@@ -47,23 +59,26 @@ const OcFileUpload: React.FC<OcFileUploadProps> = () => {
 				LayoutComponent={Layout}
 				onSubmit={handleFileSubmit}
 				classNames={classNames}
-				inputContent={(props) => (
+				InputComponent={(props) => (
 					<InputContent
 						{...props}
 						isOpened={isOpened}
 						closeModal={closeModal}
-						openModal={openModal}
-						getCropData={getCropData}
-						setCropper={setCropper}
 						cropData={cropData}
 						setCropData={setCropData}
+						image={image}
+						fileToModalCallback={fileToModalCallback}
+						multiple={isMultiFile}
+						cropFileName={cropFileName}
+						isMultiUpload={isMultiUpload}
 					/>
 				)}
 				PreviewComponent={PreviewContent}
 				maxFiles={10}
-				minSizeBytes={0}
-				maxSizeBytes={5000}
-				// accept={accept}
+				// minSizeBytes={0}
+				// maxSizeBytes={1048576}
+				multiple={isMultiFile}
+				accept={acceptType}
 				inputWithFilesContent={() => (
 					<span className="file-container__placeholder-browse"> Browse File</span>
 				)}
