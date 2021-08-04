@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcNumberComponent, InputNumberProps } from '../../../packages/react-common-components/src/ui/common';
+import { InputNumberProps } from '../../../packages/react-common-components/src/ui/common';
+import OcNumberComponent from '../../../packages/react-common-components/src/ui/common/atoms/oc-number';
 
 export default {
 	title: 'Number Input Component [BEM]',
