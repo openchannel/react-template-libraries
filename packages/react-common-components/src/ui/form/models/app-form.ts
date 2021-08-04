@@ -30,7 +30,7 @@ export interface AppFormField {
 
 export interface AppFormModel {
 	formId?: string;
-	name?: string;
+	name: string;
 	createdDate?: number;
 	fields?: AppFormField[];
 }
