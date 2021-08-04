@@ -7,7 +7,8 @@ import CustomArrowDownIcon from '../../../src/react-common-components/assets/img
 // @ts-ignore
 import CustomArrowUpIcon from '../../../src/react-common-components/assets/img/select-up.svg';
 import OcDropdownButton from '../../../src/ui/common/molecules/oc-dropdown/oc-dropdown-button';
-import { OcAppTable, OcAppTableProps } from '../../../index';
+import { OcAppTableProps } from '../../../index';
+import OcAppTable from '../../../src/ui/portal/organisms/oc-app-table/oc-app-table';
 
 // @ts-ignore
 import { mockData } from './mocks';

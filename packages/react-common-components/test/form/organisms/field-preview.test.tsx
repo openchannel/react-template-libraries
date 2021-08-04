@@ -3,44 +3,44 @@ import { shallow } from 'enzyme';
 import moment from 'moment';
 import {
 	FieldPreview,
-	OcTagElement,
 	OcDynamicFieldArray,
 	PreviewFieldModel,
 } from '@openchannel/react-common-components';
+import OcTagElement from 'packages/react-common-components/src/ui/common/atoms/oc-tag-element';
 
 const defaultProps = {
-	"index": 0,
-	"path": "0",
-	"staticId": "AdKPzvZcHLrEzAeLGUppp",
-	"name": "2-6_YB6TerfKsq1GaZ--JL6",
-	"value": '',
-	"previousValue": "",
-	"isEditing": false,
-	"isNew": false,
+	index: 0,
+	path: '0',
+	staticId: 'AdKPzvZcHLrEzAeLGUppp',
+	name: '2-6_YB6TerfKsq1GaZ--JL6',
+	value: '',
+	previousValue: '',
+	isEditing: false,
+	isNew: false,
 
 	fieldValue: null,
 	isValidField: false,
 	formArrayDFA: null,
 	groupFieldIndex: 0,
-}
+};
 
 const setUp = (props: PreviewFieldModel) => shallow(<FieldPreview {...props} />);
 
 describe('FieldPreview', () => {
 	it('should create', () => {
 		const component = setUp({
-			"attributes": {
-				"ordering": "append",
+			attributes: {
+				ordering: 'append',
 			},
-			"required": null,
-			"category": "CUSTOM",
-			"defaultValue": null,
-			"description": "",
-			"id": "test-dynamic-field-array-2",
-			"label": "Test Dynamic field array 2",
-			"placeholder": undefined,
-			"fields": [],
-			"type": "dynamicFieldArray",
+			required: null,
+			category: 'CUSTOM',
+			defaultValue: null,
+			description: '',
+			id: 'test-dynamic-field-array-2',
+			label: 'Test Dynamic field array 2',
+			placeholder: undefined,
+			fields: [],
+			type: 'dynamicFieldArray',
 			...defaultProps,
 		});
 
@@ -155,7 +155,9 @@ describe('FieldPreview', () => {
 			value: '#f2a1c0',
 		});
 
-		expect(component.find('.array-preview__field-content__color').props()?.style?.backgroundColor).toEqual('#f2a1c0');
+		expect(
+			component.find('.array-preview__field-content__color').props()?.style?.backgroundColor,
+		).toEqual('#f2a1c0');
 	});
 
 	it('should render dropdown-list value', () => {
@@ -189,7 +191,7 @@ describe('FieldPreview', () => {
 
 		component.setProps({
 			value: 'Jun 18, 2021',
-		})
+		});
 		expect(component.find('.array-preview__field-content__text').text()).toBe('Jun 18, 2021');
 	});
 
@@ -234,7 +236,7 @@ describe('FieldPreview', () => {
 			...defaultProps,
 			value: [
 				new File(['foo'], 'foo.txt', { type: 'text/plain' }),
-				new File(['bar'], 'bar.txt', { type: 'text/plain' })
+				new File(['bar'], 'bar.txt', { type: 'text/plain' }),
 			],
 		});
 		expect(component.find('.array-preview__field-content__file-multi').children()).toHaveLength(2);
@@ -250,6 +252,8 @@ describe('FieldPreview', () => {
 			...defaultProps,
 			value: '<p>value of unsupported field type with html value</p>',
 		});
-		expect(component.find('.array-preview__field-content__text').text()).toEqual('value of unsupported field type with html value');
+		expect(component.find('.array-preview__field-content__text').text()).toEqual(
+			'value of unsupported field type with html value',
+		);
 	});
 });

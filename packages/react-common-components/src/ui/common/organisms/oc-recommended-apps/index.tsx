@@ -1,7 +1,7 @@
 //commit 77c7c788ebd91651e6edbb765e0501d609a55bf0 Author: Julia Date: 05.05.21, 19:30
 import * as React from 'react';
 
-import { OcAppCard } from '../../../market';
+import OcAppCard from '../../../market/molecules/oc-app-card/oc-app-card';
 
 import './style.scss';
 
@@ -22,7 +22,7 @@ export interface RecommendedAppsProps {
 	clickByAppCard: any;
 }
 
-export const OcRecommendedAppsComponent: React.FC<RecommendedAppsProps> = (props) => {
+const OcRecommendedAppsComponent: React.FC<RecommendedAppsProps> = (props) => {
 	const {
 		recommendedAppTitle = 'Recommended Apps',
 		clickByAppCard,
@@ -51,3 +51,5 @@ export const OcRecommendedAppsComponent: React.FC<RecommendedAppsProps> = (props
 		</div>
 	);
 };
+
+export default OcRecommendedAppsComponent;

@@ -2,7 +2,8 @@
 import * as React from 'react';
 
 import { ButtonVariants } from '../../atoms';
-import { Modal, ModalProps } from '../modal';
+import { ModalProps } from '../modal';
+import Modal from '../modal';
 
 import { InviteUserContent } from './content';
 
@@ -39,7 +40,7 @@ export interface InviteModalProps extends Omit<ModalProps, 'children'> {
 	buttonPosition?: string;
 }
 
-export const OcInviteModal: React.FC<InviteModalProps> = (props) => {
+const OcInviteModal: React.FC<InviteModalProps> = (props) => {
 	const { isOpened, onClose, ...p } = props;
 
 	return (
@@ -48,3 +49,5 @@ export const OcInviteModal: React.FC<InviteModalProps> = (props) => {
 		</Modal>
 	);
 };
+
+export default OcInviteModal;

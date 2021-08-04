@@ -20,7 +20,7 @@ const textEllipsis = {
 	textOverflow: 'ellipsis',
 };
 
-export const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
+const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
 	const { app, clickByApp, customDropdown } = props;
 
 	const {
@@ -80,3 +80,5 @@ export const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcAppShortInfo;

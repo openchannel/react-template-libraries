@@ -2,7 +2,8 @@
 import * as React from 'react';
 
 import { ButtonVariants } from '../../atoms';
-import { Modal, ModalProps } from '../modal';
+import { ModalProps } from '../modal';
+import Modal from '../modal';
 
 import { OcImageCropperModalContent } from './content';
 
@@ -29,7 +30,7 @@ export interface CropperModalProps extends Omit<ModalProps, 'children'> {
 	rejectButtonHide?: boolean;
 }
 
-export const OcCropperModalComponent: React.FC<CropperModalProps> = (props) => {
+const OcCropperModalComponent: React.FC<CropperModalProps> = (props) => {
 	const { isOpened, onClose, ...p } = props;
 
 	return (
@@ -38,3 +39,5 @@ export const OcCropperModalComponent: React.FC<CropperModalProps> = (props) => {
 		</Modal>
 	);
 };
+
+export default OcCropperModalComponent;

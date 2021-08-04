@@ -2,7 +2,8 @@
 import * as React from 'react';
 
 import { ButtonVariants } from '../../atoms';
-import { Modal, ModalProps } from '../modal';
+import { ModalProps } from '../modal';
+import Modal from '../modal';
 
 import { Content } from './content';
 
@@ -68,7 +69,7 @@ export interface ConfirmationModalProps extends Omit<ModalProps, 'children'> {
 	rejectButtonHide?: boolean;
 }
 
-export const OcConfirmationModalComponent: React.FC<ConfirmationModalProps> = (props) => {
+const OcConfirmationModalComponent: React.FC<ConfirmationModalProps> = (props) => {
 	const { isOpened, onClose, ...p } = props;
 
 	return (
@@ -77,3 +78,5 @@ export const OcConfirmationModalComponent: React.FC<ConfirmationModalProps> = (p
 		</Modal>
 	);
 };
+
+export default OcConfirmationModalComponent;

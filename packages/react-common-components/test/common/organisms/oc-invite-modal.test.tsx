@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { OcInviteModal, InviteModalProps } from '@openchannel/react-common-components';
+import { InviteModalProps } from '@openchannel/react-common-components';
+import OcInviteModal from '../../../src/ui/common/organisms/oc-invite-modal';
 
 const setUp = (props: InviteModalProps) => shallow(<OcInviteModal {...props} />);
 

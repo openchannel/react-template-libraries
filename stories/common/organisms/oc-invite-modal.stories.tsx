@@ -1,12 +1,10 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
+import { InviteModalProps } from '../../../packages/react-common-components/src/ui/common';
 import { useModalState } from '../../../packages/react-common-components/src/lib/hooks';
 import OcButtonComponent from '../../../packages/react-common-components/src/ui/common/atoms/oc-button';
-import {
-	OcInviteModal,
-	InviteModalProps,
-} from '../../../packages/react-common-components/src/ui/common';
+import OcInviteModal from '../../../packages/react-common-components/src/ui/common/organisms/oc-invite-modal';
 
 export default {
 	title: 'Invite User modal [BEM]',

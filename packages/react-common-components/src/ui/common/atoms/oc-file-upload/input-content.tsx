@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { OcCropperModalComponent } from '../../index';
+import OcCropperModalComponent from '../../organisms/oc-image-cropper-modal';
 
 import './style.scss';
 

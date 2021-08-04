@@ -7,7 +7,7 @@ import type { OcAppGalleryProps } from './types';
 
 import './style.scss';
 
-export const OcAppGallery: React.FC<OcAppGalleryProps> = (props) => {
+const OcAppGallery: React.FC<OcAppGalleryProps> = (props) => {
 	const {
 		appGalleryTitle = '',
 		seeAllUrl,
@@ -58,3 +58,5 @@ export const OcAppGallery: React.FC<OcAppGalleryProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcAppGallery;

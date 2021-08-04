@@ -14,7 +14,7 @@ const standardAppIcon = isStorybook()
 	? './img/standard-app-icon.svg'
 	: '../../../../assets/img/standard-app-icon.svg';
 
-export const OcAppCard: React.FC<OcAppCardProps> = (props) => {
+const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 	const { app, appRedirectLink } = props;
 
 	return (
@@ -39,3 +39,5 @@ export const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 		</OcAppCardWrapper>
 	);
 };
+
+export default OcAppCard;

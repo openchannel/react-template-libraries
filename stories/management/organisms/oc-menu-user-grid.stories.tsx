@@ -1,22 +1,20 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcMenuUserGrid } from '../../../packages/react-common-components';
+import OcMenuUserGrid from '../../../packages/react-common-components/src/ui/management/organisms/oc-menu-user-grid/oc-menu-user-grid';
 
 const getDate = () => {
 	const start = new Date(2021, 0, 1);
 	const end = new Date();
 	return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-}
+};
 
 export default {
 	title: 'Grid User',
 	component: OcMenuUserGrid,
 } as Meta;
 
-const Component: Story<any> = (args) => (
-	<OcMenuUserGrid {...args} />
-);
+const Component: Story<any> = (args) => <OcMenuUserGrid {...args} />;
 
 export const UsersGrid = Component.bind({});
 UsersGrid.args = {

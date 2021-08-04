@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { mount, ShallowWrapper } from 'enzyme';
-import { OcRecommendedAppsComponent } from '@openchannel/react-common-components';
+import OcRecommendedAppsComponent from '../../../../src/ui/common/organisms/oc-recommended-apps';
 
 const statElement = {
 	'90day': 10,
@@ -78,7 +78,7 @@ app3.model[0].price = 4.99;
 app3.rating = 4.9;
 app3.reviewCount = 87;
 
-describe('OcAppCategoriesComponent', () => {
+describe('OcRecommendedApps', () => {
 	let component: ShallowWrapper = mount(
 		<BrowserRouter>
 			<OcRecommendedAppsComponent

@@ -42,7 +42,7 @@ export interface SidebarProps {
 	onClickSidebar?: (selected: SidebarValue) => void;
 }
 
-export const OcSidebar: React.FC<SidebarProps> = (props) => {
+const OcSidebar: React.FC<SidebarProps> = (props) => {
 	const {
 		title,
 		sidebarModel = [],
@@ -141,3 +141,5 @@ export const OcSidebar: React.FC<SidebarProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcSidebar;

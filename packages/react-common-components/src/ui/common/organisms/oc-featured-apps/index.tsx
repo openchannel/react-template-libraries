@@ -22,7 +22,7 @@ export interface FeaturedAppsProps {
 	customFeaturedAppCardTemplate?: string;
 }
 
-export const OcFeaturedAppsComponent: React.FC<FeaturedAppsProps> = (props) => {
+const OcFeaturedAppsComponent: React.FC<FeaturedAppsProps> = (props) => {
 	const {
 		label = 'Featured',
 		data,
@@ -67,3 +67,5 @@ export const OcFeaturedAppsComponent: React.FC<FeaturedAppsProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcFeaturedAppsComponent;

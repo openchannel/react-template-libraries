@@ -59,7 +59,7 @@ export interface AppCategoriesProps extends Partial<CarouselProps> {
 	data: Array<CategoryProps>;
 }
 
-export const OcAppCategoriesComponent: React.FC<AppCategoriesProps> = (props) => {
+const OcAppCategoriesComponent: React.FC<AppCategoriesProps> = (props) => {
 	const {
 		customOptions = defaultOptions,
 		navSpeed = 700,
@@ -103,3 +103,5 @@ export const OcAppCategoriesComponent: React.FC<AppCategoriesProps> = (props) =>
 		</div>
 	);
 };
+
+export default OcAppCategoriesComponent;

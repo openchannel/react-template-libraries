@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcAppCategoriesComponent, AppCategoriesProps } from '../../../packages/react-common-components/src/ui/common';
+import { AppCategoriesProps } from '../../../packages/react-common-components/src/ui/common';
+import OcAppCategoriesComponent from '../../../packages/react-common-components/src/ui/common/organisms/oc-app-categories';
 
 export default {
 	title: 'App categories [BEM]',

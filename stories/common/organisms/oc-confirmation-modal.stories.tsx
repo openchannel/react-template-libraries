@@ -3,10 +3,8 @@ import { Story, Meta } from '@storybook/react';
 
 import { useModalState } from '../../../packages/react-common-components/src/lib/hooks';
 
-import {
-	OcConfirmationModalComponent,
-	ConfirmationModalProps,
-} from '../../../packages/react-common-components/src/ui/common';
+import { ConfirmationModalProps } from '../../../packages/react-common-components/src/ui/common';
+import OcConfirmationModalComponent from '../../../packages/react-common-components/src/ui/common/organisms/oc-confirmation-modal';
 import OcButtonComponent from '../../../packages/react-common-components/src/ui/common/atoms/oc-button';
 
 export default {

@@ -34,7 +34,7 @@ export interface ModalProps {
 	children: React.ReactNode;
 }
 
-export const Modal: React.FC<ModalProps> = (props) => {
+const Modal: React.FC<ModalProps> = (props) => {
 	const { size = 'md', isOpened, onClose, className = '', children } = props;
 
 	return (
@@ -50,3 +50,5 @@ export const Modal: React.FC<ModalProps> = (props) => {
 		</BootstrapModal>
 	);
 };
+
+export default Modal;

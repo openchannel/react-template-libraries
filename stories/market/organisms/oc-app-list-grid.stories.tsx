@@ -3,11 +3,11 @@ import { Story, Meta } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 
 import {
-	OcAppListGrid,
 	OcAppListGridProps,
 	StatElement,
 	FullAppData,
 } from '../../../packages/react-common-components';
+import OcAppListGrid from '../../../packages/react-common-components/src/ui/market/organisms/oc-app-list-grid/oc-app-list-grid';
 
 export default {
 	title: 'App List Grid',
@@ -17,7 +17,7 @@ export default {
 const stat: StatElement = {
 	'90day': 10,
 	'30day': 20,
-	total: 20
+	total: 20,
 };
 
 const app1: FullAppData = {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow, mount, ShallowWrapper } from 'enzyme';
-import { OcVideoUrlComponent } from '@openchannel/react-common-components';
+import OcVideoUrlComponent from '../../../../src/ui/common/molecules/oc-video-url';
 
 const component: ShallowWrapper = shallow(
 	<OcVideoUrlComponent

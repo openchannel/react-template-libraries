@@ -2,7 +2,8 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { OcLabelComponent, OcPasswordComponent } from '../../../common';
+import OcLabelComponent from '../../../common/atoms/oc-label';
+import OcPasswordComponent from '../../../common/atoms/oc-password';
 import OcButtonComponent from '../../../common/atoms/oc-button';
 import OcError from '../../../common/atoms/oc-error/oc-error';
 import { OcResetPasswordProps } from './types';
