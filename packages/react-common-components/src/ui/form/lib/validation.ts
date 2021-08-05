@@ -15,7 +15,7 @@ const hasValidLength = (value: any) => value != null && typeof value.length === 
 const requiredTrue = () => (value: boolean) => (value ? null : { key: 'required', value: true });
 
 const required = () => (value: any) =>
-	isEmptyInputValue(value) ? { key: 'required', value: true } : null;
+	isEmptyInputValue(value) ? { key: 'required', value: true } : {key: 'required', value: false};
 
 const maxLength = (maxLength: number) => (value: any) => {
 	return hasValidLength(value) && value.length > maxLength
@@ -164,6 +164,7 @@ export const setUpFieldValidators = (
 	type?: { [k: string]: boolean },
 ): ValidatorFn[] => {
 	if (!attributes) return [];
+console.log('@@@', attributes, label);
 
 	const {
 		isCheckbox = false,
@@ -185,8 +186,8 @@ export const setUpFieldValidators = (
 				case 'required':
 					if (isCheckbox) {
 						acc.push(requiredTrue());
-					} else {
-						acc.push(required());
+					} if (attributes[key]) {
+					 acc.push(required());
 					}
 					break;
 				case 'maxChars':
@@ -245,6 +246,7 @@ export const setUpFieldValidators = (
 
 export const getFieldValidators = (field: FormikField): FieldValidators => {
 	let validators: ValidatorFn[] = [];
+console.log('!!!', field);
 
 	switch (field.type) {
 		case FIELD_TYPE.DATE:

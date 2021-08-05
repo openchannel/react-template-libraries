@@ -5,7 +5,7 @@ import {
 	FieldGroupWrapper,
 	FormikField,
 } from '@openchannel/react-common-components/src/ui/form/index';
-import { OcInputComponent, OcPasswordComponent } from '@openchannel/react-common-components';
+import { OcInputComponent, OcPasswordComponent } from '../../../common/atoms/index';
 
 import { OcEditUserFormConfig } from './types';
 const conditions = /[\.\s\-]/gm;
@@ -42,7 +42,7 @@ export const configConverter = (
 			name: 'password',
 			type: 'password',
 			label: 'Password',
-			attributes: { required: true },
+			attributes: { required: false },
 		};
 		newFormConfig.fields.push(passwordField);
 	}
