@@ -1,7 +1,7 @@
 //@ts-nocheck
 import * as React from 'react';
 import { mount, ShallowWrapper } from 'enzyme';
-import { OcAppCategoriesComponent } from '@openchannel/react-common-components';
+import OcAppCategoriesComponent from '../../../src/ui/common/organisms/oc-app-categories/oc-app-categories';
 
 const data = [
 	{

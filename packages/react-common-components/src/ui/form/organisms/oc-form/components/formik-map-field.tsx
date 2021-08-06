@@ -2,13 +2,11 @@ import * as React from 'react';
 import { Field } from 'formik';
 import _ from 'lodash';
 
-import {
-	OcCheckboxComponent,
-	OcInputComponent,
-	OcNumberComponent,
-	OcPasswordComponent,
-} from '../../../../common';
-import { OcTextarea } from '../../../atoms';
+import OcInputComponent from '../../../../common/atoms/oc-input/oc-input';
+import OcNumberComponent from '../../../../common/atoms/oc-number/oc-number';
+import OcPasswordComponent from '../../../../common/atoms/oc-password/oc-password';
+import OcCheckboxComponent from '../../../../common/atoms/oc-checkbox/oc-checkbox';
+import OcTextarea from '../../../atoms/oc-textarea/oc-textarea';
 import { FIELD_TYPE } from '../../../lib';
 import { OcDynamicFieldArray } from '../../oc-dynamic-field-array';
 import { useOcFormContext } from '../context';

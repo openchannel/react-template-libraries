@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import type { OcTextareaProps } from './types';
 
-export const OcTextarea: React.FC<OcTextareaProps> = React.memo((props) => {
+const OcTextarea: React.FC<OcTextareaProps> = React.memo((props) => {
 	const {
 		rows = 5,
 		customClass = '',
@@ -27,3 +27,5 @@ export const OcTextarea: React.FC<OcTextareaProps> = React.memo((props) => {
 		/>
 	);
 });
+
+export default OcTextarea;

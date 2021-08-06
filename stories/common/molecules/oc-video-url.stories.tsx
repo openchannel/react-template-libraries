@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcVideoUrlComponent, VideoUrlProps } from '../../../packages/react-common-components/src/ui/common/molecules';
+import { VideoUrlProps } from '../../../packages/react-common-components/src/ui/common/molecules';
+import OcVideoUrlComponent from '../../../packages/react-common-components/src/ui/common/molecules/oc-video-url';
 
 export default {
 	title: 'Video Url component [BEM]',

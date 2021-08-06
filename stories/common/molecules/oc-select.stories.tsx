@@ -1,21 +1,21 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcSelect, OcSelectProps, SelectedValue } from '../../../packages/react-common-components/src/ui/common';
-
+import {
+	OcSelectProps,
+	SelectedValue,
+} from '../../../packages/react-common-components/src/ui/common';
+import OcSelect from '../../../packages/react-common-components/src/ui/common/molecules/oc-select';
 
 export default {
 	title: 'Select',
 	component: OcSelect,
 } as Meta;
 
-
 const SelectComponent: Story<OcSelectProps> = (args) => {
-	const [selected, setSelected] = React.useState<SelectedValue>(args.value)
+	const [selected, setSelected] = React.useState<SelectedValue>(args.value);
 
-	return (
-		<OcSelect {...args} onSelectionChange={setSelected} value={selected} />
-	)
+	return <OcSelect {...args} onSelectionChange={setSelected} value={selected} />;
 };
 
 export const SimpleSelect = SelectComponent.bind({});

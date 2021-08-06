@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
-import { OcReviewListComponent } from '@openchannel/react-common-components';
+import OcReviewListComponent from '../../../../src/ui/common/molecules/oc-review-list/oc-review-list';
 
 describe('OcReviewListComponent', () => {
 	const component = shallow(

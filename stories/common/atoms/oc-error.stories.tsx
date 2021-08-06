@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcError, OcErrorProps } from '../../../packages/react-common-components/src/ui/common';
-
+import { OcErrorProps } from '../../../packages/react-common-components/src/ui/common';
+import OcError from '../../../packages/react-common-components/src/ui/common/atoms/oc-error/oc-error';
 
 export default {
 	title: 'Error',
@@ -13,5 +13,5 @@ const Component: Story<OcErrorProps> = (args) => <OcError {...args} />;
 
 export const Default = Component.bind({});
 Default.args = {
-	message: 'Field should be not empty.'
+	message: 'Field should be not empty.',
 };

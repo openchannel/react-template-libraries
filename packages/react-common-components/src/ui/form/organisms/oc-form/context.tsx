@@ -3,7 +3,7 @@ import { useFormikContext } from 'formik';
 import get from 'lodash/get';
 import update from 'lodash/update';
 
-import { Dataset } from '../../../common/atoms/oc-button';
+import { Dataset } from '../../../common/atoms/oc-button/oc-button';
 import { FIELD_TYPE } from '../../lib';
 import { FormikField, FormikFieldsValues } from '../../models';
 

@@ -5,7 +5,8 @@ import {
 	FieldGroupWrapper,
 	FormikField,
 } from '@openchannel/react-common-components/src/ui/form/index';
-import { OcInputComponent, OcPasswordComponent } from '../../../common/atoms/index';
+import OcInputComponent from '../../../common/atoms/oc-input/oc-input';
+import OcPasswordComponent from '../../../common/atoms/oc-password/oc-password';
 
 import { OcEditUserFormConfig } from './types';
 const conditions = /[\.\s\-]/gm;

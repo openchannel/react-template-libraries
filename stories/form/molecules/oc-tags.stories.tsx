@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useState } from '@storybook/addons';
 import { Story, Meta } from '@storybook/react';
 
-import { OcTags, OcTagsProps, OcTagsValue } from '../../../packages/react-common-components/src/ui/form';
-
+import { OcTagsProps, OcTagsValue } from '../../../packages/react-common-components/src/ui/form';
+import OcTags from '../../../packages/react-common-components/src/ui/form/molecules/oc-tags/oc-tags';
 
 export default {
 	title: 'Tags',
@@ -17,13 +17,7 @@ const Component: Story<OcTagsProps> = (args) => {
 		setTags(items);
 	};
 
-	return (
-		<OcTags
-			{...args}
-			value={tags}
-			onChange={onChange}
-		/>
-	);
+	return <OcTags {...args} value={tags} onChange={onChange} />;
 };
 
 export const Basic = Component.bind({});

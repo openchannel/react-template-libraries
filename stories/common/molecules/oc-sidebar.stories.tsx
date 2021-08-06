@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
-import { OcSidebar, SidebarProps } from '../../../packages/react-common-components/src/ui/index';
+import { SidebarProps } from '../../../packages/react-common-components/src/ui/index';
+import OcSidebar from '../../../packages/react-common-components/src/ui/common/molecules/oc-sidebar';
 
 export default {
 	title: 'Sidebar [BEM]',

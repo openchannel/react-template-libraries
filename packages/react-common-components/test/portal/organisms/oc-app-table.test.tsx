@@ -6,8 +6,9 @@ import { act } from 'react-dom/test-utils';
 import CustomArrowDownIcon from '../../../src/react-common-components/assets/img/select-down.svg';
 // @ts-ignore
 import CustomArrowUpIcon from '../../../src/react-common-components/assets/img/select-up.svg';
-import { OcDropdownButton } from '../../../index';
-import { OcAppTable, OcAppTableProps } from '../../../index';
+import OcDropdownButton from '../../../src/ui/common/molecules/oc-dropdown/oc-dropdown-button';
+import { OcAppTableProps } from '../../../index';
+import OcAppTable from '../../../src/ui/portal/organisms/oc-app-table/oc-app-table';
 
 // @ts-ignore
 import { mockData } from './mocks';
@@ -81,7 +82,7 @@ describe('OcAppTable', () => {
 		expect(wrapper.find('img.oc-table__icon-down').at(0).props().src).toBe('path-to/desc-icon.png');
 		act(() => {
 			wrapper.find('.oc-table__th.oc-table__name').simulate('click');
-		})
+		});
 		expect(wrapper.find('img.oc-table__icon-up').at(0).props().src).toBe('path-to/asc-icon.png');
 
 		// test custom icons as svg component
@@ -89,10 +90,14 @@ describe('OcAppTable', () => {
 			ascendingSortIcon: <CustomArrowDownIcon />,
 			descendingSortIcon: <CustomArrowUpIcon />,
 		});
-		expect(wrapper.find('.oc-table__th.oc-table__name').at(0).find(CustomArrowDownIcon)).toHaveLength(1);
+		expect(
+			wrapper.find('.oc-table__th.oc-table__name').at(0).find(CustomArrowDownIcon),
+		).toHaveLength(1);
 		act(() => {
 			wrapper.find('.oc-table__th.oc-table__name').simulate('click');
-		})
-		expect(wrapper.find('.oc-table__th.oc-table__name').at(0).find(CustomArrowUpIcon)).toHaveLength(1);
+		});
+		expect(wrapper.find('.oc-table__th.oc-table__name').at(0).find(CustomArrowUpIcon)).toHaveLength(
+			1,
+		);
 	});
 });

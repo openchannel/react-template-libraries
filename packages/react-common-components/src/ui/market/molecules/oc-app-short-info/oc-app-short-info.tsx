@@ -3,7 +3,7 @@ import * as React from 'react';
 import { sanitizeUrl } from '@braintree/sanitize-url';
 
 import { isStorybook, stripHtmlTags } from '../../../../lib';
-import { OcRatingComponent } from '../../atoms';
+import OcRatingComponent from '../../atoms/oc-rating';
 import { parsePrice } from '../../lib';
 
 import { OcAppShortInfoProps } from './types';
@@ -20,7 +20,7 @@ const textEllipsis = {
 	textOverflow: 'ellipsis',
 };
 
-export const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
+const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
 	const { app, clickByApp, customDropdown } = props;
 
 	const {
@@ -80,3 +80,5 @@ export const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcAppShortInfo;

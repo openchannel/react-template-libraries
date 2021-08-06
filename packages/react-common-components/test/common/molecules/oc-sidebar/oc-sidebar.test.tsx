@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { mount } from 'enzyme';
-import { OcSidebar } from '@openchannel/react-common-components';
+import OcSidebar from '../../../../src/ui/common/molecules/oc-sidebar/oc-sidebar';
 
 describe('OcSidebar', () => {
 	it('should create', () => {

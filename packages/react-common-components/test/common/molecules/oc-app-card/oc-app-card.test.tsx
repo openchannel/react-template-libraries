@@ -3,15 +3,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { mount, shallow } from 'enzyme';
 // @ts-ignore
 import { app1, app2 } from '../../../../../../stories/common/molecules/oc-app-card/mocks';
-import { OcAppCard } from '../../../../src/ui/market';
+import OcAppCard from '../../../../src/ui/market/molecules/oc-app-card/oc-app-card';
 
 describe('OcAppCard', () => {
 	const component = shallow(
 		<BrowserRouter>
-			<OcAppCard
-				appRedirectLink="/"
-				app={app1}
-			/>
+			<OcAppCard appRedirectLink="/" app={app1} />
 		</BrowserRouter>,
 	);
 
@@ -22,10 +19,7 @@ describe('OcAppCard', () => {
 	it('should show icon', () => {
 		const component = mount(
 			<BrowserRouter>
-				<OcAppCard
-					appRedirectLink="/"
-					app={app1}
-				/>
+				<OcAppCard appRedirectLink="/" app={app1} />
 			</BrowserRouter>,
 		);
 		expect(component.find('img')).toBeTruthy();
@@ -34,10 +28,7 @@ describe('OcAppCard', () => {
 	it('should change props', () => {
 		const component = mount(
 			<BrowserRouter>
-				<OcAppCard
-					appRedirectLink="/"
-					app={app1}
-				/>
+				<OcAppCard appRedirectLink="/" app={app1} />
 			</BrowserRouter>,
 		);
 		component.setProps({ app: app2 });

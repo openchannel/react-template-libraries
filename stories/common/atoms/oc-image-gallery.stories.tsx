@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcImageGalleryComponent, ImageGalleryProps, GalleryItem } from '../../../packages/react-common-components/src/ui/common';
+import {
+	ImageGalleryProps,
+	GalleryItem,
+} from '../../../packages/react-common-components/src/ui/common';
+import OcImageGalleryComponent from '../../../packages/react-common-components/src/ui/common/atoms/oc-image-gallery';
 
 export default {
 	title: 'Image Gallery [BEM]',

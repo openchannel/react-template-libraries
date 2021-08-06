@@ -2,8 +2,8 @@ import * as React from 'react';
 import { useState } from '@storybook/addons';
 import { Story, Meta } from '@storybook/react';
 
-import { OcMultiSelectList, OcMultiSelectListProps } from '../../../packages/react-common-components/src/ui/form';
-
+import { OcMultiSelectListProps } from '../../../packages/react-common-components/src/ui/form';
+import OcMultiSelectList from '../../../packages/react-common-components/src/ui/form/molecules/oc-multi-select-list/oc-multi-select-list';
 
 export default {
 	title: 'Multi select list',
@@ -17,17 +17,11 @@ const Component: Story<OcMultiSelectListProps> = (args) => {
 		setTags(items);
 	};
 
-	return (
-		<OcMultiSelectList
-			{...args}
-			value={tags}
-			onChange={onChange}
-		/>
-	);
+	return <OcMultiSelectList {...args} value={tags} onChange={onChange} />;
 };
 
 export const Basic = Component.bind({});
 Basic.args = {
 	availableItemsList: ['item2', 'item3', 'item4', 'item5', 'item6', 'item7'],
-	defaultItems: ['item1']
+	defaultItems: ['item1'],
 };

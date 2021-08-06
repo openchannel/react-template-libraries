@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Form as FormikForm, FormikContext, useFormik } from 'formik';
 
-import { OcButtonComponent } from '../../../../common';
+import OcButtonComponent from '../../../../common/atoms/oc-button/oc-button';
 import { OcFormContextProvider } from '../context';
 import { useFormikValidation, useOcFormState } from '../hooks';
 import { OcFormProps } from '../types';

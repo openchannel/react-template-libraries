@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcTextSearchComponent, TextSearchProps } from '../../../packages/react-common-components/src/ui/common';
+import { TextSearchProps } from '../../../packages/react-common-components/src/ui/common';
+import OcTextSearchComponent from '../../../packages/react-common-components/src/ui/common/atoms/oc-text-search';
 
 export default {
 	title: 'Text Search Input [BEM]',

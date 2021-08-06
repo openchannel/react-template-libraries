@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcFileUpload } from '../../../packages/react-common-components/src/ui/common';
+import OcFileUpload from '../../../packages/react-common-components/src/ui/common/atoms/oc-file-upload';
 
 export default {
 	title: 'File uploader [BEM]',

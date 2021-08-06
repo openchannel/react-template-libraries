@@ -2,7 +2,7 @@ import * as React from 'react';
 import get from 'lodash/get';
 
 import { isStorybook, stripHtmlTags } from '../../../../../lib';
-import { OcDropdownButton } from '../../../../common';
+import OcDropdownButton from '../../../../common/molecules/oc-dropdown/oc-dropdown-button';
 import { AppListMenuAction } from '../../../models';
 import { DataRowProps } from '../types';
 import { filterOptions } from '../utils';

@@ -5,11 +5,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { action } from '@storybook/addon-actions';
 
 import {
-	OcAppGallery,
 	OcAppGalleryProps,
 	StatElement,
 	FullAppData,
 } from '../../../packages/react-common-components';
+import OcAppGallery from '../../../packages/react-common-components/src/ui/market/organisms/oc-app-gallery/oc-app-gallery';
 
 export default {
 	title: 'App Gallery',
@@ -19,22 +19,24 @@ export default {
 const stat: StatElement = {
 	'90day': 10,
 	'30day': 20,
-	total: 20
+	total: 20,
 };
 
 const app: FullAppData = {
 	appId: nanoid(),
 	icon: '',
 	name: 'Test App',
-	model: [{
-		type: 'recurring',
-		price: 5,
-		trial: 1,
-		license: 'single',
-		modelId: '23235hfg4',
-		currency: 'EUR',
-		billingPeriod: 'monthly'
-	}],
+	model: [
+		{
+			type: 'recurring',
+			price: 5,
+			trial: 1,
+			license: 'single',
+			modelId: '23235hfg4',
+			currency: 'EUR',
+			billingPeriod: 'monthly',
+		},
+	],
 	rating: 4.2,
 	reviewCount: 20,
 	summary: 'Some test summary',
@@ -48,7 +50,7 @@ const app: FullAppData = {
 		value: 'approved',
 		lastUpdated: 1.1,
 		modifiedBy: '',
-		reason: ''
+		reason: '',
 	},
 	statistics: {
 		views: stat,
@@ -56,9 +58,9 @@ const app: FullAppData = {
 		developerSales: stat,
 		totalSales: stat,
 		ownerships: stat,
-		reviews: stat
+		reviews: stat,
 	},
-	isLive: true
+	isLive: true,
 };
 
 const cloneApp = () => ({ ...app, appId: nanoid() });

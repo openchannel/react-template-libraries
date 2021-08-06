@@ -3,15 +3,16 @@ import * as React from 'react';
 import difference from 'lodash/difference';
 import orderBy from 'lodash/orderBy';
 
-import { OcButtonComponent, OcDropboxComponent, OcTagElement } from '../../../common';
-
+import OcTagElement from '../../../common/atoms/oc-tag-element/oc-tag-element';
+import OcDropboxComponent from '../../../common/atoms/oc-dropbox/oc-dropbox';
+import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
 import { useTagDropboxState } from './hooks';
 import { OcTagsProps } from './types';
 import { normalizeTags } from './utils';
 
 import './styles.scss';
 
-export const OcTags: React.FC<OcTagsProps> = (props) => {
+const OcTags: React.FC<OcTagsProps> = (props) => {
 	const {
 		name,
 		availableTags,
@@ -93,3 +94,5 @@ export const OcTags: React.FC<OcTagsProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcTags;

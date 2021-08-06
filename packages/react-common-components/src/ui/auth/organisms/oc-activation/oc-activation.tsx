@@ -3,7 +3,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { OcButtonComponent, OcError, OcInputComponent, OcLabelComponent } from '../../../common';
+import OcInputComponent from '../../../common/atoms/oc-input/oc-input';
+import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
+import OcError from '../../../common/atoms/oc-error/oc-error';
+import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
 
 import { OcActivationProps } from './types';
 
@@ -67,3 +70,5 @@ export const OcActivation: React.FC<OcActivationProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcActivation;

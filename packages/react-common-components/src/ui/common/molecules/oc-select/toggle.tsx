@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { DropdownToggleProps } from 'react-bootstrap/DropdownToggle';
 
-import { OcButtonComponent } from '../../atoms';
+import OcButtonComponent from '../../atoms/oc-button/oc-button';
 
 export const Toggle = React.forwardRef(
 	(props: DropdownToggleProps, ref: React.ForwardedRef<HTMLButtonElement>) => {

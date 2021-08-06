@@ -3,8 +3,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
 import { errorMessages } from '../../../packages/react-common-components';
-import { OcActivation, OcActivationProps } from '../../../packages/react-common-components';
-
+import { OcActivationProps } from '../../../packages/react-common-components';
+import OcActivation from '../../../packages/react-common-components/src/ui/auth/organisms/oc-activation';
 
 export default {
 	title: 'User Activation',
@@ -25,7 +25,7 @@ Default.args = {
 	inputProps: {
 		id: 'input',
 	},
-}
+};
 
 const FilledComponent: Story<OcActivationProps> = (args) => {
 	const [value, setValue] = React.useState('one-time-activation-code');
@@ -45,11 +45,11 @@ const FilledComponent: Story<OcActivationProps> = (args) => {
 			/>
 		</BrowserRouter>
 	);
-}
+};
 
 export const Filled = FilledComponent.bind({});
 Filled.args = {
 	companyLogoUrl: './img/logo-company.png',
 	resendActivationUrl: '/',
 	signupUrl: '/',
-}
+};

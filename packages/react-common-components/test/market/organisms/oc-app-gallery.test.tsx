@@ -2,16 +2,18 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { Link, BrowserRouter } from 'react-router-dom';
 
-import { OcAppGallery, OcAppGalleryProps } from '../../../../react-common-components';
+import { OcAppGalleryProps } from '../../../../react-common-components';
+import OcAppGallery from '../../../../react-common-components/src/ui/market/organisms/oc-app-gallery/oc-app-gallery';
 
 // @ts-ignore
 import { getMockedApp } from './mocks';
 
-const setUp = (props: OcAppGalleryProps) => mount(
-	<BrowserRouter>
-		<OcAppGallery {...props} />
-	</BrowserRouter>
-);
+const setUp = (props: OcAppGalleryProps) =>
+	mount(
+		<BrowserRouter>
+			<OcAppGallery {...props} />
+		</BrowserRouter>,
+	);
 
 describe('OcAppGallery', () => {
 	it('should render with empty app array and message', () => {
@@ -145,7 +147,11 @@ describe('OcAppGallery', () => {
 			customAppCardTemplate: <div className="some-custom-template" />,
 		});
 
-		expect(wrapper.find('.gallery__content-card').find(Link).find('.some-custom-template')).toHaveLength(1);
-		expect(wrapper.find('.gallery__content-card').find(Link).props().to).toBe('/link-without-slash-in-end/123/');
+		expect(
+			wrapper.find('.gallery__content-card').find(Link).find('.some-custom-template'),
+		).toHaveLength(1);
+		expect(wrapper.find('.gallery__content-card').find(Link).props().to).toBe(
+			'/link-without-slash-in-end/123/',
+		);
 	});
 });
