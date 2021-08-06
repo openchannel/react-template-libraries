@@ -2,6 +2,7 @@
 	"name": "@openchannel/react-common-components",
 	"version": "0.1.3",
 	"description": "Includes components for portal and market.",
+	"license": "MIT",
 	"keywords": [
 		"component",
 		"components",
