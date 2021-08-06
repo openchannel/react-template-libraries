@@ -164,7 +164,6 @@ export const setUpFieldValidators = (
 	type?: { [k: string]: boolean },
 ): ValidatorFn[] => {
 	if (!attributes) return [];
-console.log('@@@', attributes, label);
 
 	const {
 		isCheckbox = false,
@@ -246,7 +245,6 @@ console.log('@@@', attributes, label);
 
 export const getFieldValidators = (field: FormikField): FieldValidators => {
 	let validators: ValidatorFn[] = [];
-console.log('!!!', field);
 
 	switch (field.type) {
 		case FIELD_TYPE.DATE:

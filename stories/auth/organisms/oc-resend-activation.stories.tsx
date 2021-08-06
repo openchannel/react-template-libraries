@@ -3,13 +3,17 @@ import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
 import { errorMessages } from '../../../packages/react-common-components/src/ui/form';
-import { OcResendActivation, OcResendProps } from '../../../packages/react-common-components/src/ui/auth';
+import {
+	OcResendActivation,
+	OcResendProps,
+} from '../../../packages/react-common-components/src/ui/auth';
 
 export default {
 	title: 'Resend Activation Code [BEM]',
 	component: OcResendActivation,
 } as Meta;
-const regexEmail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+const regexEmail =
+	/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 
 const DefaultComponent: Story<OcResendProps> = (args) => {
 	const [value, setValue] = React.useState('');
@@ -57,7 +61,6 @@ const FilledComponent: Story<OcResendProps> = (args) => {
 	const [blurred, setBlurred] = React.useState(false);
 	const [validationError, setValidationError] = React.useState(false);
 	const handleChange = (e: any) => {
-		console.log(e.target.value);
 		e.target.value.match(regexEmail) === null && args.inputProps.inputType === 'email'
 			? (setValidationError(true), e.preventDefault())
 			: (setValidationError(false), setValue(e.target.value));
