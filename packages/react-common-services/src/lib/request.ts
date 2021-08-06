@@ -7,21 +7,25 @@ type Body = string | FormData | Record<string, unknown>;
 type Params = URLSearchParams | { [key: string]: string };
 
 type ResResult = {
-	data: unknown | null,
-	error: unknown | null,
+	data: unknown | null;
+	error: unknown | null;
 };
 
-export type Options<ReqBody = unknown> = {
+export interface Options<ReqBody = unknown> {
 	headers?: Headers | { [key: string]: string };
 	params?: Params;
 	body?: ReqBody | Body;
 	handlers?: {
-		onSuccess?: (response: ResResult) => {},
-		onError?: (response: ResResult) => {},
+		onSuccess?: (response: ResResult) => void;
+		onError?: (response: ResResult) => void;
 	};
-};
+}
 
-export const request = async <ReqBody>(method: Method, url: string, options: Options<ReqBody> = {}) => {
+export const request = async <ReqBody>(
+	method: Method,
+	url: string,
+	options: Options<ReqBody> = {},
+) => {
 	const baseUrl = instance.getUrl();
 
 	const uri = `${baseUrl}/${url}${createParams(options)}`;
@@ -74,7 +78,6 @@ export const request = async <ReqBody>(method: Method, url: string, options: Opt
 		result = { data: null, error: data };
 
 		return handlers && handlers.onError ? handlers.onError(result) : result;
-
 	} catch (error) {
 		if (handlers && handlers.onError) {
 			handlers.onError(error);
