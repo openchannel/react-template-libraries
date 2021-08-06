@@ -1,2 +1,5 @@
-export * from './oc-activation';
+export { 
+  OcActivation as default,
+  OcActivation
+} from './oc-activation';
 export * from './types';

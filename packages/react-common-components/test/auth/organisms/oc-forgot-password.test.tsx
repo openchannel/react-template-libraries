@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { OcForgotPasswordComponent, OcForgotPasswordProps } from '@openchannel/react-common-components';
+import { OcForgotPasswordProps } from '@openchannel/react-common-components';
+import OcForgotPasswordComponent from '../../../src/ui/auth/organisms/oc-forgot-password';
 
 const setUp = (props: OcForgotPasswordProps) => shallow(<OcForgotPasswordComponent {...props} />);
 

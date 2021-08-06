@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { OcSelect, OcSelectProps } from '@openchannel/react-common-components';
+import { OcSelectProps } from '@openchannel/react-common-components';
+import OcSelect from 'packages/react-common-components/src/ui/common/molecules/oc-select/oc-select';
 
 const setUp = (props: OcSelectProps) => shallow(<OcSelect {...props} />);
 
@@ -12,7 +13,7 @@ describe('OcSelect', () => {
 
 	beforeEach(() => {
 		component = setUp({
-			selectValArr: [ 'value_1' ],
+			selectValArr: ['value_1'],
 			onSelectionChange: onSelectionChangeMock,
 			value: '',
 		});
@@ -58,7 +59,7 @@ describe('OcSelect', () => {
 
 	it('should render toggle with selected value from passed value as object', () => {
 		component.setProps({
-			selectValArr: [ { key: 'selected value' } ],
+			selectValArr: [{ key: 'selected value' }],
 			labelField: 'key',
 			value: { key: 'selected value' },
 		});
@@ -89,14 +90,14 @@ describe('OcSelect', () => {
 		// @ts-ignore
 		listItem.prop('onSelect')('value_2', mockedEvent);
 
-		expect(onSelectionChangeMock).toHaveBeenCalledWith({ 'key': 'value_2' }, mockedEvent);
+		expect(onSelectionChangeMock).toHaveBeenCalledWith({ key: 'value_2' }, mockedEvent);
 	});
 
 	it('should click on second element and fire string', () => {
 		const onSelectionChangeMock = jest.fn();
 
 		const component = setUp({
-			selectValArr: [ 'option_1', 'option_2' ],
+			selectValArr: ['option_1', 'option_2'],
 			value: '',
 			onSelectionChange: onSelectionChangeMock,
 		});

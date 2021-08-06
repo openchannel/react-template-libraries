@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { OcButtonComponent } from '../../atoms';
+import OcButtonComponent from '../../atoms/oc-button/oc-button';
 
 export interface SelectListItemProps {
 	name: string;

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { OcDropdownButton, OcMenuUserGrid, OcMenuUserGridProps } from '@openchannel/react-common-components';
+import { OcMenuUserGridProps } from '@openchannel/react-common-components';
+import OcMenuUserGrid from 'packages/react-common-components/src/ui/management/organisms/oc-menu-user-grid/oc-menu-user-grid';
+import OcDropdownButton from '../../../src/ui/common/molecules/oc-dropdown/oc-dropdown-button';
 
 // @ts-ignore
 import { ocMenuUserGridPropertiesMock } from './mocks';
@@ -36,7 +38,9 @@ describe('OcMenuUserGrid', () => {
 			onMenuClick: onMenuClickMock,
 			onSort: onSortMock,
 		});
-		expect(wrapper.find('.user-table__row').find('.user-table__text').text()).toBe('No Users Found');
+		expect(wrapper.find('.user-table__row').find('.user-table__text').text()).toBe(
+			'No Users Found',
+		);
 	});
 
 	it('should fire callback if user clicks on table-head-cell', () => {
@@ -46,7 +50,9 @@ describe('OcMenuUserGrid', () => {
 			onSort: onSortMock,
 		});
 
-		const tableHeadColumnCell = wrapper.find('.user-table__head-cell.user-table__head-name').find('div[role="button"]');
+		const tableHeadColumnCell = wrapper
+			.find('.user-table__head-cell.user-table__head-name')
+			.find('div[role="button"]');
 		tableHeadColumnCell.simulate('click');
 		expect(onSortMock).toHaveBeenCalledWith('name');
 	});

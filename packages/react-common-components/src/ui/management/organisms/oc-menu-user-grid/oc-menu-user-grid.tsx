@@ -5,7 +5,7 @@ import { OcMenuUserGridProps } from './types';
 
 import './style.scss';
 
-export const OcMenuUserGrid: React.FC<OcMenuUserGridProps> = (props) => {
+const OcMenuUserGrid: React.FC<OcMenuUserGridProps> = (props) => {
 	const { properties, sortIcon, onSort, menuUrl, onMenuClick } = props;
 
 	const handleSortUsers = React.useCallback(
@@ -73,3 +73,5 @@ export const OcMenuUserGrid: React.FC<OcMenuUserGridProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcMenuUserGrid;

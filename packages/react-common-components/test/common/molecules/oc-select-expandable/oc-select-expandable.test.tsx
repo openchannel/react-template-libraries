@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { OcExpandableSelect } from '@openchannel/react-common-components';
+import OcExpandableSelect from '../../../../src/ui/common/molecules/oc-select-expandable/oc-select-expandable';
 
-describe('OcSelect', () => {
+describe('Expandable Select', () => {
 	const selectModels = [
 		{
 			label: 'Category 1',

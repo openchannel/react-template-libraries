@@ -2,11 +2,10 @@ import { Formik } from 'formik';
 import * as React from 'react';
 import { mount } from 'enzyme';
 
+import OcInputComponent from 'packages/react-common-components/src/ui/common/atoms/oc-input/oc-input';
+import OcNumberComponent from 'packages/react-common-components/src/ui/common/atoms/oc-number';
+import OcPasswordComponent from 'packages/react-common-components/src/ui/common/atoms/oc-password';
 import {
-	OcInputComponent,
-	OcCheckboxComponent,
-	OcNumberComponent,
-	OcPasswordComponent,
 	FormikOcFileUploadWrapper,
 	FIELD_TYPE,
 	OcDynamicFieldArray,
@@ -20,6 +19,7 @@ import {
 	FormikMapFieldsProps,
 	FormikMapFields,
 } from '@openchannel/react-common-components';
+import OcCheckboxComponent from 'packages/react-common-components/src/ui/common/atoms/oc-checkbox/oc-checkbox';
 
 const defaultFieldProps = {
 	id: 'some-field',
@@ -35,26 +35,26 @@ const defaultFieldProps = {
 	},
 	options: null,
 	index: 0,
-	path: "0",
-	staticId: "yYayIQhIgpv-7PFK2qK_b",
-	name: "some-field-kEEjoM3qdHJOwaqDmh4GV",
-	value: "123123123",
-	previousValue: "123123123",
+	path: '0',
+	staticId: 'yYayIQhIgpv-7PFK2qK_b',
+	name: 'some-field-kEEjoM3qdHJOwaqDmh4GV',
+	value: '123123123',
+	previousValue: '123123123',
 	isEditing: false,
-	isNew: false
+	isNew: false,
 };
 
-const setUp = (props: FormikMapFieldsProps) => mount(
-	<Formik initialValues={{}} onSubmit={() => {}}>
-		<FormikMapFields {...props} />
-	</Formik>
-);
+const setUp = (props: FormikMapFieldsProps) =>
+	mount(
+		<Formik initialValues={{}} onSubmit={() => {}}>
+			<FormikMapFields {...props} />
+		</Formik>,
+	);
 
-const setUpField = (type: string) => setUp({
-	fields: [
-		{ ...defaultFieldProps, type },
-	],
-});
+const setUpField = (type: string) =>
+	setUp({
+		fields: [{ ...defaultFieldProps, type }],
+	});
 
 describe('FormikMapFields', () => {
 	let component;
@@ -74,7 +74,9 @@ describe('FormikMapFields', () => {
 		expect(setUpField(FIELD_TYPE.COLOR).find(FormikOcColorWrapper)).toBeTruthy();
 		expect(setUpField(FIELD_TYPE.VIDEO_URL).find(FormikOcVideoUrlWrapper)).toBeTruthy();
 		expect(setUpField(FIELD_TYPE.DATE_TIME).find(FormikOcDatetimePickerWrapper)).toBeTruthy();
-		expect(setUpField(FIELD_TYPE.MULTISELECT_LIST).find(FormikOcMultiSelectListWrapper)).toBeTruthy();
+		expect(
+			setUpField(FIELD_TYPE.MULTISELECT_LIST).find(FormikOcMultiSelectListWrapper),
+		).toBeTruthy();
 		expect(setUpField(FIELD_TYPE.PASSWORD).find(OcPasswordComponent)).toBeTruthy();
 		expect(setUpField('some-undefined-type').html()).toEqual('<div>Unsupported field</div>');
 	});
@@ -96,8 +98,12 @@ describe('FormikMapFields', () => {
 
 	it('should render the oc-tags by type', function () {
 		expect(setUpField(FIELD_TYPE.TAGS).find(FormikOcTagsWrapper)).toBeTruthy();
-		expect(setUpField(FIELD_TYPE.BOOLEAN_TAGS).find(FormikOcTagsWrapper).props().tagsType).toBe('boolean');
-		expect(setUpField(FIELD_TYPE.NUMBER_TAGS).find(FormikOcTagsWrapper).props().tagsType).toBe('number');
+		expect(setUpField(FIELD_TYPE.BOOLEAN_TAGS).find(FormikOcTagsWrapper).props().tagsType).toBe(
+			'boolean',
+		);
+		expect(setUpField(FIELD_TYPE.NUMBER_TAGS).find(FormikOcTagsWrapper).props().tagsType).toBe(
+			'number',
+		);
 	});
 
 	it('should render the oc-file-upload', function () {
@@ -112,7 +118,13 @@ describe('FormikMapFields', () => {
 	it('should render the OcDynamicFieldArray', function () {
 		const single = setUp({
 			fields: [
-				{ ...defaultFieldProps, id: 'first', fields: [], index: 0, type: FIELD_TYPE.DYNAMIC_FIELD_ARRAY },
+				{
+					...defaultFieldProps,
+					id: 'first',
+					fields: [],
+					index: 0,
+					type: FIELD_TYPE.DYNAMIC_FIELD_ARRAY,
+				},
 			],
 		});
 		expect(single.find(OcDynamicFieldArray)).toBeTruthy();
@@ -137,5 +149,4 @@ describe('FormikMapFields', () => {
 		});
 		expect(double.find(OcDynamicFieldArray).at(1).props().groupFieldIndex).toBe(1);
 	});
-
 });

@@ -25,3 +25,4 @@ export const OcError: React.FC<OcErrorProps> = (props) => {
 		</div>
 	);
 };
+export default OcError;

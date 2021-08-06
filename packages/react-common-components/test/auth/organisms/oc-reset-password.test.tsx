@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { OcResetPasswordComponent, OcResetPasswordProps, OcError } from '@openchannel/react-common-components';
+import { OcResetPasswordProps } from '@openchannel/react-common-components';
+import OcResetPasswordComponent from '../../../src/ui/auth/organisms/oc-reset-password';
+import OcError from '../../../src/ui/common/atoms/oc-error/oc-error';
 
 const setUp = (props: OcResetPasswordProps) => shallow(<OcResetPasswordComponent {...props} />);
 

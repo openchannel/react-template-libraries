@@ -2,17 +2,19 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { BrowserRouter, Link } from 'react-router-dom';
 
-import { OcAppListGrid, OcAppListGridProps } from '../../../../react-common-components';
+import { OcAppListGridProps } from '../../../../react-common-components';
+import OcAppListGrid from '../../../../react-common-components/src/ui/market/organisms/oc-app-list-grid/oc-app-list-grid';
 import { AppCardWrapper } from '../../../src/ui/market/organisms/oc-app-list-grid/components/app-card-wrapper';
 
 // @ts-ignore
 import { getMockedApp } from './mocks';
 
-const setUp = (props: OcAppListGridProps) => mount(
-	<BrowserRouter>
-		<OcAppListGrid {...props} />
-	</BrowserRouter>
-);
+const setUp = (props: OcAppListGridProps) =>
+	mount(
+		<BrowserRouter>
+			<OcAppListGrid {...props} />
+		</BrowserRouter>,
+	);
 
 describe('OcAppListGrid', () => {
 	it('should render with empty app array and message', () => {
@@ -27,7 +29,7 @@ describe('OcAppListGrid', () => {
 
 	it('should render with 1 card app', () => {
 		const wrapper = setUp({
-			appList: [ getMockedApp() ],
+			appList: [getMockedApp()],
 		});
 		expect(wrapper.find('.app-list').children()).toHaveLength(1);
 		expect(wrapper.find('.app-list').find(AppCardWrapper)).toBeTruthy();
@@ -35,7 +37,7 @@ describe('OcAppListGrid', () => {
 
 	it('should render app card with valid router link', () => {
 		const wrapper = setUp({
-			appList: [ getMockedApp(true) ],
+			appList: [getMockedApp(true)],
 			appNavigationParam: 'appId',
 			baseLinkForOneApp: '/link-for-app',
 		});
@@ -45,7 +47,7 @@ describe('OcAppListGrid', () => {
 	it('app card should be clickable', () => {
 		const onAppClickMock = jest.fn();
 		const wrapper = setUp({
-			appList: [ getMockedApp() ],
+			appList: [getMockedApp()],
 			onAppClick: onAppClickMock,
 		});
 
@@ -55,7 +57,7 @@ describe('OcAppListGrid', () => {
 
 	it('should', () => {
 		const wrapper = setUp({
-			appList: [ getMockedApp() ],
+			appList: [getMockedApp()],
 			customAppCardTemplate: <div className="custom-template" />,
 		});
 		expect(wrapper.find('.custom-template')).toBeTruthy();

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { Modal, ModalProps } from '@openchannel/react-common-components';
+import { ModalProps } from '@openchannel/react-common-components';
+import Modal from '../../../src/ui/common/organisms/modal/modal';
 
 const setUp = (props: ModalProps) => shallow(<Modal {...props} />);
 
@@ -21,7 +22,7 @@ describe('Modal (common modal)', () => {
 			onClose: jest.fn(),
 			children: 'some content',
 			size: 'lg',
-			className: 'some-class'
+			className: 'some-class',
 		});
 
 		expect(component).toBeTruthy();

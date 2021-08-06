@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { OcAppTable, FullAppData } from '../../../packages/react-common-components';
+import { FullAppData } from '../../../packages/react-common-components';
+import OcAppTable from '../../../packages/react-common-components/src/ui/portal/organisms/oc-app-table/oc-app-table';
 
 const statElement = {
 	'90day': 10,
@@ -368,7 +369,7 @@ EmptyApplicationList.args = {
 		data: {
 			...propsConfig.data,
 			list: [],
-		}
+		},
 	},
 	noAppMessage: 'No Apps Has Been Added Yet',
 };

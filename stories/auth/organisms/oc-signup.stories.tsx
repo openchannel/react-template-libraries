@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
-import { OcSignupComponent } from '../../../packages/react-common-components/src/ui/auth/index';
+import OcSignupComponent from '../../../packages/react-common-components/src/ui/auth/organisms/oc-signup/index';
 
 export default {
 	title: 'Sign Up Custom [BEM]',

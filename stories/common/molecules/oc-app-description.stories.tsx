@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcAppDescription, AppDescriptionProps } from '../../../packages/react-common-components/src/ui/common/molecules';
+import { AppDescriptionProps } from '../../../packages/react-common-components/src/ui/common/molecules';
+import OcAppDescription from '../../../packages/react-common-components/src/ui/common/molecules/oc-app-description';
 
 export default {
 	title: 'App Description [BEM]',

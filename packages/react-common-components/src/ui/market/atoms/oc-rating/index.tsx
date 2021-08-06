@@ -44,7 +44,7 @@ export interface RatingProps {
 	className?: string;
 }
 
-export const OcRatingComponent: React.FC<RatingProps> = (props) => {
+const OcRatingComponent: React.FC<RatingProps> = (props) => {
 	const {
 		rating = 0,
 		reviewCount = 0,
@@ -76,3 +76,5 @@ export const OcRatingComponent: React.FC<RatingProps> = (props) => {
 		</div>
 	);
 };
+
+export default OcRatingComponent;
