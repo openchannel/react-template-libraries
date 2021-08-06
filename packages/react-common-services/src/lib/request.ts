@@ -6,13 +6,22 @@ type Body = string | FormData | Record<string, unknown>;
 
 type Params = URLSearchParams | { [key: string]: string };
 
+type ResResult = {
+	data: unknown | null,
+	error: unknown | null,
+};
+
 export type Options<ReqBody = unknown> = {
 	headers?: Headers | { [key: string]: string };
 	params?: Params;
 	body?: ReqBody | Body;
+	handlers?: {
+		onSuccess?: (response: ResResult) => {},
+		onError?: (response: ResResult) => {},
+	};
 };
 
-export const request = <ReqBody>(method: Method, url: string, options: Options<ReqBody> = {}) => {
+export const request = async <ReqBody>(method: Method, url: string, options: Options<ReqBody> = {}) => {
 	const baseUrl = instance.getUrl();
 
 	const uri = `${baseUrl}/${url}${createParams(options)}`;
@@ -22,7 +31,7 @@ export const request = <ReqBody>(method: Method, url: string, options: Options<R
 		...options.headers,
 	});
 
-	const config = {
+	const _config = {
 		method,
 		headers,
 		// mode: 'cors',
@@ -32,25 +41,47 @@ export const request = <ReqBody>(method: Method, url: string, options: Options<R
 		body: createBody({ ...options, headers }),
 	};
 
-	return fetch(uri, config).then((response) => {
-		const contentLength = Number(response.headers.get('content-length')) || 0;
+	const handlers = options && options.handlers;
 
-		if (Number(contentLength) === 0) {
-			return response;
+	try {
+		const response = await fetch(uri, _config);
+
+		const contentTypeHeader = response.headers.get('Content-Type');
+		const contentLengthHeader = Number(response.headers.get('content-length')) || 0;
+
+		let data = null;
+
+		if (Number(contentLengthHeader) === 0) {
+			data = '';
+		} else if (contentTypeHeader) {
+			if (contentTypeHeader.includes('text')) {
+				data = await response.text();
+			}
+
+			if (contentTypeHeader.includes('json')) {
+				data = await response.json();
+			}
 		}
 
-		const contentType = response.headers.get('Content-Type');
+		let result: ResResult;
 
-		if (contentType && contentType.includes('text')) {
-			return response.text();
+		if (response.ok) {
+			result = { data, error: null };
+
+			return handlers && handlers.onSuccess ? handlers.onSuccess(result) : result;
 		}
 
-		if (contentType && contentType.includes('json')) {
-			return response.json();
-		}
+		result = { data: null, error: data };
 
-		throw new TypeError('Unexpected content-type');
-	});
+		return handlers && handlers.onError ? handlers.onError(result) : result;
+
+	} catch (error) {
+		if (handlers && handlers.onError) {
+			handlers.onError(error);
+		}
+		console.error(error);
+		return error;
+	}
 };
 
 /**
