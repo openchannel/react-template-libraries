@@ -3,9 +3,9 @@ import * as React from 'react';
 import difference from 'lodash/difference';
 import orderBy from 'lodash/orderBy';
 
-import OcTagElement from '../../../common/atoms/oc-tag-element';
-import OcDropboxComponent from '../../../common/atoms/oc-dropbox';
-import OcButtonComponent from '../../../common/atoms/oc-button';
+import OcTagElement from '../../../common/atoms/oc-tag-element/oc-tag-element';
+import OcDropboxComponent from '../../../common/atoms/oc-dropbox/oc-dropbox';
+import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
 import { useTagDropboxState } from './hooks';
 import { OcTagsProps } from './types';
 import { normalizeTags } from './utils';

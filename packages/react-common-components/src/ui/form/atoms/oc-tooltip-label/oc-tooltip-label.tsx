@@ -3,7 +3,7 @@
 import * as React from 'react';
 
 import InfoIcon from '../../../../assets/img/info.svg';
-import OcTooltipComponent from '../../../common/atoms/oc-tooltip';
+import OcTooltipComponent from '../../../common/atoms/oc-tooltip/oc-tooltip';
 
 import './style.scss';
 

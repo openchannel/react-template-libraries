@@ -6,8 +6,8 @@ import orderBy from 'lodash/orderBy';
 import union from 'lodash/union';
 
 import { DropboxValue } from '../../../common';
-import OcDropboxComponent from '../../../common/atoms/oc-dropbox';
-import OcTagElement from '../../../common/atoms/oc-tag-element';
+import OcDropboxComponent from '../../../common/atoms/oc-dropbox/oc-dropbox';
+import OcTagElement from '../../../common/atoms/oc-tag-element/oc-tag-element';
 
 import { OcMultiSelectListProps } from './types';
 

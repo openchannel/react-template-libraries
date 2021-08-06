@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Formik, Form } from 'formik';
-import OcSelect from '../../../common/molecules/oc-select';
+import OcSelect from '../../../common/molecules/oc-select/oc-select';
 import OcError from '../../../common/atoms/oc-error/oc-error';
-import OcCheckboxComponent from '../../../common/atoms/oc-checkbox';
-import OcButtonComponent from '../../../common/atoms/oc-button';
+import OcCheckboxComponent from '../../../common/atoms/oc-checkbox/oc-checkbox';
+import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
 import OcTooltipLabel from '../../../form/atoms/oc-tooltip-label/oc-tooltip-label';
 import { configConverter, FormikSignupFieldWrapper } from './utils';
 import { FormikField } from '../../../form';

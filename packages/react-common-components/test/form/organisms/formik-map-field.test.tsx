@@ -2,7 +2,7 @@ import { Formik } from 'formik';
 import * as React from 'react';
 import { mount } from 'enzyme';
 
-import OcInputComponent from 'packages/react-common-components/src/ui/common/atoms/oc-input';
+import OcInputComponent from 'packages/react-common-components/src/ui/common/atoms/oc-input/oc-input';
 import OcNumberComponent from 'packages/react-common-components/src/ui/common/atoms/oc-number';
 import OcPasswordComponent from 'packages/react-common-components/src/ui/common/atoms/oc-password';
 import {
@@ -19,7 +19,7 @@ import {
 	FormikMapFieldsProps,
 	FormikMapFields,
 } from '@openchannel/react-common-components';
-import OcCheckboxComponent from 'packages/react-common-components/src/ui/common/atoms/oc-checkbox';
+import OcCheckboxComponent from 'packages/react-common-components/src/ui/common/atoms/oc-checkbox/oc-checkbox';
 
 const defaultFieldProps = {
 	id: 'some-field',

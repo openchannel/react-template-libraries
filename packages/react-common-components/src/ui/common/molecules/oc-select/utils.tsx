@@ -1,4 +1,4 @@
-import { Option } from './index';
+import { Option } from './oc-select';
 
 export const transformToValidOptions = (array: Array<Option | string>, key = 'value'): Option[] =>
 	array.reduce((acc, item) => {

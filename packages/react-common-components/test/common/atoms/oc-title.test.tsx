@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { TitleProps } from '@openchannel/react-common-components';
-import OcTitleComponent from 'packages/react-common-components/src/ui/common/atoms/oc-title';
-import OcTooltipComponent from 'packages/react-common-components/src/ui/common/atoms/oc-tooltip';
+import OcTitleComponent from 'packages/react-common-components/src/ui/common/atoms/oc-title/oc-title';
+import OcTooltipComponent from 'packages/react-common-components/src/ui/common/atoms/oc-tooltip/oc-tooltip';
 
 const defaultComponentProps: TitleProps = {
 	title: 'Title',

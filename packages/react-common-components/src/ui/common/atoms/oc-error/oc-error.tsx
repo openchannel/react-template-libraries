@@ -4,7 +4,7 @@ import { OcErrorProps } from './types';
 
 import './style.scss';
 
-const OcError: React.FC<OcErrorProps> = (props) => {
+export const OcError: React.FC<OcErrorProps> = (props) => {
 	const { message } = props;
 
 	if (!message) {

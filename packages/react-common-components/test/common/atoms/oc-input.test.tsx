@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { InputProps } from '@openchannel/react-common-components';
-import OcInputComponent from '../../../src/ui/common/atoms/oc-input';
+import OcInputComponent from '../../../src/ui/common/atoms/oc-input/oc-input';
 
 const defaultInputProps: InputProps = {
 	value: 'Test input',

@@ -3,7 +3,7 @@ import * as React from 'react';
 import CloseIconSvg from '../../../../assets/img/close-icon.svg';
 import { OcForm } from '../../../form';
 
-import { InviteModalProps } from './index';
+import { InviteModalProps } from './oc-invite-modal';
 
 export type InviteContentProps = Omit<InviteModalProps, 'size' | 'isOpened'>;
 

@@ -5,7 +5,7 @@ import { OcDropdownButtonProps } from './types';
 
 import './oc-dropdown-button.scss';
 
-const OcDropdownButton: React.FC<OcDropdownButtonProps> = (props) => (
+export const OcDropdownButton: React.FC<OcDropdownButtonProps> = (props) => (
 	<BaseDropdown {...props} variant="block" />
 );
 
