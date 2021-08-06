@@ -1,7 +1,7 @@
 import * as React from 'react';
 import groupBy from 'lodash/groupBy';
 
-import OcLabelComponent from '../../../common/atoms/oc-label';
+import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
 import { FIELD_TYPE } from '../../lib';
 import { PreviewFieldModel } from '../../models';
 import { FieldPreview } from './field-preview';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { VideoProps } from '@openchannel/react-common-components';
-import OcVideoComponent from 'packages/react-common-components/src/ui/common/atoms/oc-video';
+import OcVideoComponent from 'packages/react-common-components/src/ui/common/atoms/oc-video/oc-video';
 
 const defaultVideoProps: VideoProps = {
 	videoUrl: 'https://www.youtube.com/embed/DGQwd1_dpuc',

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import OcCropperModalComponent from '../../organisms/oc-image-cropper-modal';
+import OcCropperModalComponent from '../../organisms/oc-image-cropper-modal/oc-image-cropper-modal';
 import { getFilesFromEvent } from 'react-dropzone-uploader';
 
 import './style.scss';

@@ -1,4 +1,4 @@
-import { DropboxValue } from './index';
+import { DropboxValue } from './oc-dropbox';
 
 export const transformToValidOptions = (
 	array: Array<DropboxValue>,

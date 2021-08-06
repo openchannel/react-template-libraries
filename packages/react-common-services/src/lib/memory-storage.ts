@@ -22,7 +22,7 @@ const MemoryStorage = () => {
 		removeXsrfToken: async () => {
 			xsrfToken = '';
 		},
-	}
-}
+	};
+};
 
 export const memoryStorage = MemoryStorage();

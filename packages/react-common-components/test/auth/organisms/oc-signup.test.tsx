@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { mount } from 'enzyme';
-import OcSignupComponent from '../../../src/ui/auth/organisms/oc-signup';
+import OcSignupComponent from '../../../src/ui/auth/organisms/oc-signup/oc-signup-custom';
 import { OcEditUserFormConfig } from '../../../src/ui/auth/organisms/oc-edit-user-form/types';
 
 const formConfigs: OcEditUserFormConfig[] = [

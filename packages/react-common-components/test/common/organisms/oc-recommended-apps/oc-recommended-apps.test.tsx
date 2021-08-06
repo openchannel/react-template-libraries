@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { mount, ShallowWrapper } from 'enzyme';
-import OcRecommendedAppsComponent from '../../../../src/ui/common/organisms/oc-recommended-apps';
+import OcRecommendedAppsComponent from '../../../../src/ui/common/organisms/oc-recommended-apps/oc-recommended-apps';
 
 const statElement = {
 	'90day': 10,

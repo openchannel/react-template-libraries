@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
 import { PasswordProps } from '@openchannel/react-common-components';
-import OcPasswordComponent from '../../../src/ui/common/atoms/oc-password';
+import OcPasswordComponent from '../../../src/ui/common/atoms/oc-password/oc-password';
 
 const defaultPasswordProps: PasswordProps = {
 	value: 'Test password',

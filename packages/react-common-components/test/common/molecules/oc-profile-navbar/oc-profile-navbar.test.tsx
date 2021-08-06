@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
 
-import OcProfileNavbar from '../../../../src/ui/common/molecules/oc-profile-navbar';
+import OcProfileNavbar from '../../../../src/ui/common/molecules/oc-profile-navbar/oc-profile-navbar';
 
 describe('Profile Navbar (common)', () => {
 	const options = [

@@ -1,9 +1,8 @@
-import fetchIntercept from 'fetch-intercept';
-
-import { memoryStorage } from '../lib/memory-storage';
+import { fetchInterceptor } from '../lib/fetch-interceptor';
 import { instance } from '../lib/instance';
+import { memoryStorage } from '../lib/memory-storage';
 
-fetchIntercept.register({
+fetchInterceptor({
 	request: (url, originalConfig) => {
 		// Be careful not to overwrite an existing header of the same name.
 		if (url.startsWith(instance.getUrl())) {
@@ -37,11 +36,11 @@ fetchIntercept.register({
 		return response;
 	},
 
-	responseError: (error) => {
-		if (error?.status === 403 && error?.error?.toLowerCase()?.includes('csrf')) {
-			// return auth.initCsrf().pipe(mergeMap(csrf => request));
-			return fetch(error.request);
-		}
-		return Promise.reject(error);
-	},
+	// responseError: (error) => {
+	// 	if (error?.status === 403 && error?.error?.toLowerCase()?.includes('csrf')) {
+	// 		// return auth.initCsrf().pipe(mergeMap(csrf => request));
+	// 		return fetch(error.request);
+	// 	}
+	// 	return Promise.reject(error);
+	// },
 });

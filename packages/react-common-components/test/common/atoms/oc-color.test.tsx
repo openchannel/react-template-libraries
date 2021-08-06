@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
 import { ColorProps } from '@openchannel/react-common-components';
-import OcColorComponent from '../../../src/ui/common/atoms/oc-color';
+import OcColorComponent from '../../../src/ui/common/atoms/oc-color/oc-color';
 
 const defaultColorProps: ColorProps = {
 	placeholder: 'Enter color value here',

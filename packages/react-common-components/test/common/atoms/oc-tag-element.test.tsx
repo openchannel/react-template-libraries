@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { OcTagElementProps } from '@openchannel/react-common-components';
-import OcTagElement from '../../../../react-common-components/src/ui/common/atoms/oc-tag-element';
+import OcTagElement from '../../../src/ui/common/atoms/oc-tag-element/oc-tag-element';
 
 const setUp = (props: OcTagElementProps) => shallow(<OcTagElement {...props} />);
 

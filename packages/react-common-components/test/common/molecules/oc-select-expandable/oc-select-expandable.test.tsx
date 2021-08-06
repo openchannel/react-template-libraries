@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import OcExpandableSelect from '../../../../src/ui/common/molecules/oc-select-expandable';
+import OcExpandableSelect from '../../../../src/ui/common/molecules/oc-select-expandable/oc-select-expandable';
 
 describe('Expandable Select', () => {
 	const selectModels = [

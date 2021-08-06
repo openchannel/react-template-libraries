@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
 import { DropboxProps, DropboxValue } from '@openchannel/react-common-components';
-import OcDropboxComponent from '../../../src/ui/common/atoms/oc-dropbox';
+import OcDropboxComponent from '../../../src/ui/common/atoms/oc-dropbox/oc-dropbox';
 
 const defaultDropboxProps: DropboxProps = {
 	placeholder: 'Default placeholder',
