@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { nanoid } from 'nanoid';
 import { Field } from 'formik';
-import {
-	FieldGroupWrapper,
-	FormikField,
-} from '@openchannel/react-common-components/src/ui/form/index';
+import { FieldGroupWrapper } from '../../../form/organisms/oc-form/components/formik-components';
 import OcInputComponent from '../../../common/atoms/oc-input/oc-input';
 import OcPasswordComponent from '../../../common/atoms/oc-password/oc-password';
+import type { FormikField } from '../../../form/models';
 
 import { OcEditUserFormConfig } from './types';
+
 const conditions = /[\.\s\-]/gm;
 
 export const configConverter = (
@@ -43,7 +42,7 @@ export const configConverter = (
 			name: 'password',
 			type: 'password',
 			label: 'Password',
-			attributes: { required: false },
+			attributes: { required: true },
 		};
 		newFormConfig.fields.push(passwordField);
 	}
