@@ -177,7 +177,7 @@ export const setUpFieldValidators = (
 		isNumberTags = false,
 	} = type || {};
 
-	return Object.keys(attributes)
+	const fns = Object.keys(attributes)
 		.reduce((acc, key) => {
 			if (isNil(attributes[key])) return acc;
 
@@ -220,29 +220,30 @@ export const setUpFieldValidators = (
 				default:
 					break;
 			}
-
-			if (isEmail) {
-				acc.push(email());
-			}
-			if (isUrl) {
-				acc.push(url());
-			}
-			if (isColor) {
-				acc.push(color());
-			}
-			if (isPassword) {
-				acc.push(password());
-			}
-			if (isNumberTags) {
-				acc.push(numberTags(label));
-			}
-			if (isBooleanTags) {
-				acc.push(booleanTags(label));
-			}
-
 			return acc;
 		}, [] as ValidatorFn[])
 		.filter(Boolean);
+
+		if (isEmail) {
+			fns.push(email());
+		}
+		if (isUrl) {
+			fns.push(url());
+		}
+		if (isColor) {
+			fns.push(color());
+		}
+		if (isPassword) {
+			fns.push(password());
+		}
+		if (isNumberTags) {
+			fns.push(numberTags(label));
+		}
+		if (isBooleanTags) {
+			fns.push(booleanTags(label));
+		}
+
+		return fns;
 };
 
 export const getFieldValidators = (field: FormikField): FieldValidators => {
@@ -273,6 +274,9 @@ export const getFieldValidators = (field: FormikField): FieldValidators => {
 			break;
 		case FIELD_TYPE.PASSWORD:
 			validators = setUpFieldValidators(field, { isPassword: true });
+
+			console.log('validators', validators);
+			
 			break;
 		case FIELD_TYPE.RICH_TEXT:
 			validators = setUpFieldValidators(field, { isRichText: true });
