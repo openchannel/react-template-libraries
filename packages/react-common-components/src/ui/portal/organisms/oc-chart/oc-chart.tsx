@@ -10,7 +10,7 @@ import { GRAPH_DATA_TYPE, TABULAR_DATA_TYPE } from './utils';
 
 import './style.scss';
 
-const OcChartComponent: React.FC<ChartProps> = (props) => {
+export const OcChartComponent: React.FC<ChartProps> = (props) => {
 	const {
 		count,
 		countText,
@@ -52,5 +52,3 @@ const OcChartComponent: React.FC<ChartProps> = (props) => {
 		</div>
 	);
 };
-
-export default OcChartComponent;
