@@ -274,9 +274,6 @@ export const getFieldValidators = (field: FormikField): FieldValidators => {
 			break;
 		case FIELD_TYPE.PASSWORD:
 			validators = setUpFieldValidators(field, { isPassword: true });
-
-			console.log('validators', validators);
-			
 			break;
 		case FIELD_TYPE.RICH_TEXT:
 			validators = setUpFieldValidators(field, { isRichText: true });
