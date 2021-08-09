@@ -15,7 +15,7 @@ const hasValidLength = (value: any) => value != null && typeof value.length === 
 const requiredTrue = () => (value: boolean) => (value ? null : { key: 'required', value: true });
 
 const required = () => (value: any) =>
-	isEmptyInputValue(value) ? { key: 'required', value: true } : {key: 'required', value: false};
+	isEmptyInputValue(value) ? { key: 'required', value: true } : null;
 
 const maxLength = (maxLength: number) => (value: any) => {
 	return hasValidLength(value) && value.length > maxLength
@@ -183,9 +183,11 @@ export const setUpFieldValidators = (
 
 			switch (key) {
 				case 'required':
-					if (isCheckbox) {
+					if (!attributes[key]) {
+						break;
+					} else if (isCheckbox) {
 						acc.push(requiredTrue());
-					} if (attributes[key]) {
+					} else {
 					 acc.push(required());
 					}
 					break;

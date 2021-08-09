@@ -16,7 +16,6 @@ const DefaultComponent: Story<any> = (args) => {
 				<OcSignupComponent
 					{...args}
 					showSignupFeedbackPage={args.showSignupFeedbackPage}
-					// setFeedbackPageVisible={setFeedbackPageVisible}
 					enableTypesDropdown={args.enableTypesDropdown}
 					enablePasswordField={args.enablePasswordField}
 				/>
