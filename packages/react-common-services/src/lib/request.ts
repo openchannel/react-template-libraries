@@ -1,3 +1,5 @@
+import axios, { AxiosRequestConfig } from 'axios';
+
 import { instance } from './instance';
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
@@ -6,85 +8,51 @@ type Body = string | FormData | Record<string, unknown>;
 
 type Params = URLSearchParams | { [key: string]: string };
 
-type ResResult = {
+export type Handlers = {
+	onSuccess?: (result: Result) => void;
+	onError?: (result: Result) => void;
+};
+
+export type Result = {
 	data: unknown | null;
 	error: unknown | null;
 };
 
 export interface Options<ReqBody = unknown> {
-	headers?: Headers | { [key: string]: string };
+	headers?: { [key: string]: string };
 	params?: Params;
 	body?: ReqBody | Body;
-	handlers?: {
-		onSuccess?: (response: ResResult) => void;
-		onError?: (response: ResResult) => void;
-	};
+	handlers?: Handlers;
 }
 
 export const request = async <ReqBody>(
 	method: Method,
 	url: string,
 	options: Options<ReqBody> = {},
-) => {
-	const baseUrl = instance.getUrl();
+): Promise<any> => {
+	const baseURL = instance.getUrl();
 
-	const uri = `${baseUrl}/${url}${createParams(options)}`;
-
-	const headers = new Headers({
+	const headers = {
 		'Content-Type': 'application/json',
 		...options.headers,
-	});
-
-	const _config = {
-		method,
-		headers,
-		// mode: 'cors',
-		// cache: 'no-cache',
-		// credentials: 'same-origin',
-		// ...options,
-		body: createBody({ ...options, headers }),
 	};
 
-	const handlers = options && options.handlers;
+	const _config = {
+		url,
+		method,
+		baseURL,
+		headers,
+		params: createParams(options),
+		data: createBody({ ...options, headers }),
+		withCredentials: true,
+		handlers: options.handlers,
+	};
 
-	try {
-		const response = await fetch(uri, _config);
+	return axios(_config);
+};
 
-		const contentTypeHeader = response.headers.get('Content-Type');
-		const contentLengthHeader = Number(response.headers.get('content-length')) || 0;
-
-		let data = null;
-
-		if (Number(contentLengthHeader) === 0) {
-			data = '';
-		} else if (contentTypeHeader) {
-			if (contentTypeHeader.includes('text')) {
-				data = await response.text();
-			}
-
-			if (contentTypeHeader.includes('json')) {
-				data = await response.json();
-			}
-		}
-
-		let result: ResResult;
-
-		if (response.ok) {
-			result = { data, error: null };
-
-			return handlers && handlers.onSuccess ? handlers.onSuccess(result) : result;
-		}
-
-		result = { data: null, error: data };
-
-		return handlers && handlers.onError ? handlers.onError(result) : result;
-	} catch (error) {
-		if (handlers && handlers.onError) {
-			handlers.onError(error);
-		}
-		console.error(error);
-		return error;
-	}
+export const axiosRequest = (config: AxiosRequestConfig) => {
+	return axios(config);
 };
 
 /**
@@ -92,12 +60,10 @@ export const request = async <ReqBody>(
  */
 const createBody = (options: Options): string | undefined => {
 	if (options.body) {
-		if (options.headers instanceof Headers) {
-			const contentType = options.headers.get('content-type') || '';
+		const contentType = options.headers && options.headers['Content-Type'];
 
-			if (contentType.includes('json')) {
-				return JSON.stringify(options.body);
-			}
+		if (contentType?.includes('json')) {
+			return JSON.stringify(options.body);
 		}
 	}
 	return undefined;
@@ -105,7 +71,7 @@ const createBody = (options: Options): string | undefined => {
 
 const createParams = (options: Options) => {
 	if (options.params instanceof URLSearchParams) {
-		return options.params.toString();
+		return options.params;
 	}
 
 	if (options.params && Object.keys(options.params).length > 0) {
@@ -115,8 +81,8 @@ const createParams = (options: Options) => {
 			params.set(key, value);
 		}
 
-		return params.toString();
+		return params;
 	}
 
-	return '';
+	return undefined;
 };
