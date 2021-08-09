@@ -1,7 +1,7 @@
 import * as React from 'react';
 import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
 import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
-import { OcEditUserFormComponent } from '../..';
+import { OcEditUserFormComponent } from '../../organisms/index';
 import { Link } from 'react-router-dom';
 import { SignupProps } from './types';
 import './style.scss';
@@ -11,7 +11,6 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 		companyLogoUrl = '../../../../assets/img/logo-company.png',
 		loginUrl = '/',
 		showSignupFeedbackPage,
-		// setFeedbackPageVisible,
 		forgotPasswordDoneUrl,
 		goToActivationPage,
 		formConfigs,

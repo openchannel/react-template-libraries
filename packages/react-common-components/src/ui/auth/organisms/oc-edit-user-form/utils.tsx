@@ -43,7 +43,7 @@ export const configConverter = (
 			name: 'password',
 			type: 'password',
 			label: 'Password',
-			attributes: { required: true },
+			attributes: { required: false },
 		};
 		newFormConfig.fields.push(passwordField);
 	}

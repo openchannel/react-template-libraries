@@ -59,7 +59,6 @@ const FilledComponent: Story<OcResendProps> = (args) => {
 	const [blurred, setBlurred] = React.useState(false);
 	const [validationError, setValidationError] = React.useState(false);
 	const handleChange = (e: any) => {
-		console.log(e.target.value);
 		e.target.value.match(regexEmail) === null && args.inputProps.inputType === 'email'
 			? (setValidationError(true), e.preventDefault())
 			: (setValidationError(false), setValue(e.target.value));
