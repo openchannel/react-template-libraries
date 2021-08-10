@@ -1,15 +1,17 @@
 import * as React from 'react';
-import { Chart } from 'chart.js';
+import { CategoryScale, Chart, Legend, LinearScale, LineController, LineElement, PointElement, Tooltip } from 'chart.js';
 import assign from 'lodash/assign';
 import merge from 'lodash/merge';
 
 import { CanvasProps, ChartStatisticDataModel } from '../types';
 import { defaultChartParams } from '../utils';
 
+Chart.register(CategoryScale, LineController, PointElement, LineElement, LinearScale, Tooltip, Legend);
+
 export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> = (props) => {
 	const { data, isBackgroundPainted, enablePoints } = props;
 
-	const chartRef = React.useRef<HTMLCanvasElement | null>(null);
+	const chartRef = React.useRef<HTMLCanvasElement>(null);
 	const [chart, setChart] = React.useState<Chart>();
 
 	React.useEffect(() => {
@@ -38,7 +40,7 @@ export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> =
 		gradientFill.addColorStop(1, 'rgba(240, 247, 255, 0.25)');
 
 		return gradientFill;
-	}, [chartRef.current]);
+	}, []);
 
 	const renderChart = () => {
 		if (!chartRef.current) return;
@@ -64,7 +66,7 @@ export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> =
 
 		setChart(
 			new Chart(chartRef.current, {
-				type: defaultChartParams.type,
+				type: 'line',
 				data: computedData,
 				options: computedOptions,
 			}),
@@ -78,8 +80,6 @@ export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> =
 			labels: data.labelsX ? data.labelsX : [],
 			datasets: [
 				{
-					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-					// @ts-ignore
 					...chart.config.data.datasets[0],
 					data: data.labelsY ? data.labelsY : [],
 				},

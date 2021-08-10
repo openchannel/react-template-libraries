@@ -6,7 +6,7 @@ import {
 	ChartProps,
 	ChartOptionsChange,
 } from '../../../packages/react-common-components';
-import OcChartComponent from '../../../packages/react-common-components/src/ui/portal/organisms/oc-chart/oc-chart';
+import { OcChartComponent } from '../../../packages/react-common-components/src/ui/portal/organisms/oc-chart';
 
 const month = {
 	labelsY: [3, 10, 30, 50, 25, 40, 100, 70, 150, 200, 50, 85, 50],
