@@ -1,6 +1,6 @@
 {
 	"name": "@openchannel/react-common-components",
-	"version": "0.1.6-alpha.0",
+	"version": "0.1.6",
 	"description": "Includes components for portal and market.",
 	"license": "MIT",
 	"keywords": [
