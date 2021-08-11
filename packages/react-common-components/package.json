@@ -21,7 +21,7 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "npm ci && tsdx build --tsconfig tsconfig.build.json",
+		"build": "npm ci && tsdx build --tsconfig tsconfig.build.json --format esm",
 		"test": "tsdx test --passWithNoTests",
 		"test:watch": "tsdx test --passWithNoTests --watch",
 		"test:coverage": "tsdx test --passWithNoTests --coverage",
