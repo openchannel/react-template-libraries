@@ -12,7 +12,7 @@ import del from 'rollup-plugin-delete';
 import pkg from './package.json';
 
 export default {
-	input: ['src/index.ts'],
+	input: ['src/index.ts', 'src/chart.ts'],
 	// input: [
 	// 	'src/ui/auth/index.ts',
 	// 	'src/ui/common/index.ts',

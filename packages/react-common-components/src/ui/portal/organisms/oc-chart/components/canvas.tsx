@@ -6,8 +6,6 @@ import merge from 'lodash-es/merge';
 import { CanvasProps, ChartStatisticDataModel } from '../types';
 import { defaultChartParams } from '../utils';
 
-Chart.register(CategoryScale, LineController, PointElement, LineElement, LinearScale, Tooltip, Legend);
-
 export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> = (props) => {
 	const { data, isBackgroundPainted, enablePoints } = props;
 
@@ -63,6 +61,8 @@ export const Canvas: React.FC<CanvasProps & { data: ChartStatisticDataModel }> =
 				},
 			],
 		});
+
+		Chart.register(CategoryScale, LineController, PointElement, LineElement, LinearScale, Tooltip, Legend);
 
 		setChart(
 			new Chart(chartRef.current, {
