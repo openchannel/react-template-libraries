@@ -1,5 +1,5 @@
 import type { FormikValues } from 'formik';
-import isEmpty from 'lodash/isEmpty';
+import isEmpty from 'lodash-es/isEmpty';
 
 import { errorMessages, FIELD_TYPE } from '../../../lib';
 import type { FieldValidators, FormikField, FormikFieldsValues } from '../../../models';

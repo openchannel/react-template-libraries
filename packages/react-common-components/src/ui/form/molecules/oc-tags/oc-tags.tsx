@@ -1,7 +1,7 @@
 //commit a5d181b1d4b8bb6627fa44f4a3b0fe4d4218248f Author: Julia Date: 14.05.21, 20:21
 import * as React from 'react';
-import difference from 'lodash/difference';
-import orderBy from 'lodash/orderBy';
+import difference from 'lodash-es/difference';
+import orderBy from 'lodash-es/orderBy';
 
 import OcTagElement from '../../../common/atoms/oc-tag-element/oc-tag-element';
 import OcDropboxComponent from '../../../common/atoms/oc-dropbox/oc-dropbox';

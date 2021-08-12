@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Field } from 'formik';
-import _ from 'lodash';
+import groupBy from 'lodash-es/groupBy';
 
 import OcInputComponent from '../../../../common/atoms/oc-input/oc-input';
 import OcNumberComponent from '../../../../common/atoms/oc-number/oc-number';
@@ -319,7 +319,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 							</FieldGroupWrapper>
 						);
 					case FIELD_TYPE.DYNAMIC_FIELD_ARRAY: {
-						const group = _.groupBy(fields, 'type')[FIELD_TYPE.DYNAMIC_FIELD_ARRAY];
+						const group = groupBy(fields, 'type')[FIELD_TYPE.DYNAMIC_FIELD_ARRAY];
 						const firstElementOfGroup = group[0] || { fields: [] };
 						const isFirst =
 							firstElementOfGroup?.fields?.length === 0 ||

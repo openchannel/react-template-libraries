@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CategoryScale, Chart, Legend, LinearScale, LineController, LineElement, PointElement, Tooltip } from 'chart.js';
-import assign from 'lodash/assign';
-import merge from 'lodash/merge';
+import assign from 'lodash-es/assign';
+import merge from 'lodash-es/merge';
 
 import { CanvasProps, ChartStatisticDataModel } from '../types';
 import { defaultChartParams } from '../utils';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import isNumber from 'lodash/isNumber';
+import isNumber from 'lodash-es/isNumber';
 import moment, { isMoment } from 'moment';
 
 import FileIconSvg from '../../../../assets/img/file_icon.svg';
