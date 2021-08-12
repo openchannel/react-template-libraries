@@ -32,18 +32,21 @@ export default {
 		exports: 'named',
 		// inlineDynamicImports: true,
 	},
-	// manualChunks: {
-	// 	'vendor': [
-	// 		'node_modules/chart.js',
-	// 	],
-	// },
-	manualChunks: (moduleName) => {
-		// Every module whose name includes `node_modules` should be in vendor:
-		if (moduleName.includes('node_modules')) {
-			return 'vendor'
-		}
-		// Every other module will be in the chunk based on its entry point!
+	manualChunks: {
+		'chart.js': ['chart.js'],
+		'moment': ['moment'],
+		'color': ['color'],
+		'react-cropper': ['react-cropper'],
+		'react-dropzone-uploader': ['react-dropzone-uploader'],
+		'react-player': ['react-player'],
 	},
+	// manualChunks: (moduleName) => {
+	// 	// Every module whose name includes `node_modules` should be in vendor:
+	// 	if (moduleName.includes('node_modules')) {
+	// 		return 'vendor'
+	// 	}
+	// 	// Every other module will be in the chunk based on its entry point!
+	// },
 	plugins: [
 		external(),
 		// postcss({
