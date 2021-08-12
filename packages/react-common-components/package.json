@@ -21,8 +21,8 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "npm ci && tsdx build --tsconfig tsconfig.build.json --format esm",
-		"build:rollup": "rollup -c",
+		"build": "rollup -c",
+		"build:legacy": "npm ci && tsdx build --tsconfig tsconfig.build.json --format esm",
 		"test": "tsdx test --passWithNoTests",
 		"test:watch": "tsdx test --passWithNoTests --watch",
 		"test:coverage": "tsdx test --passWithNoTests --coverage",
