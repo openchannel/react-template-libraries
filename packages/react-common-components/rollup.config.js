@@ -53,6 +53,7 @@ export default [
 				// to prevent bundling the same package multiple times if package is
 				// imported from dependencies.
 				dedupe: ['react', 'react-dom'],
+				exportConditions: ['default', 'module', 'require'],
 			}),
 			typescript({
 				tsconfig: 'tsconfig.build.json',
