@@ -47,7 +47,13 @@ export default [
 			external(),
 			svgr(),
 			styles(),
-			resolve(),
+			resolve({
+				browser: true,
+				// Force resolving for these modules to root's node_modules that helps
+				// to prevent bundling the same package multiple times if package is
+				// imported from dependencies.
+				dedupe: ['react', 'react-dom'],
+			}),
 			typescript({
 				tsconfig: 'tsconfig.build.json',
 			}),
