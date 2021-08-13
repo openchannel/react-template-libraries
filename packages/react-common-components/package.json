@@ -57,6 +57,7 @@
 		"react-multi-carousel": "^2.6.3",
 		"react-player": "^2.9.0",
 		"react-select": "^4.3.1",
+		"react-toastify": "^7.0.4",
 		"tinymce": "^5.8.1",
 		"tslib": "^2.3.0"
 	},

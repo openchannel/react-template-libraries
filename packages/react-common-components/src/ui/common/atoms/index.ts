@@ -16,3 +16,4 @@ export * from './oc-title';
 export * from './oc-tooltip';
 export * from './oc-video';
 export * from './oc-image-cropper';
+export * from './oc-notify';
