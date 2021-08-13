@@ -1,3 +1,5 @@
+@import '../../../styles/theme.scss';
+
 //React toast styles
 .Toastify__toast-container {
 	width: 300px;
@@ -21,16 +23,16 @@
 	background-size: 12px;
 }
 .Toastify__toast--error {
-	background-color: #ff6262;
+	background-color: $notify-error;
 }
 .Toastify__toast--warning {
-	background-color: #eea30e;
+	background-color: $notify-warning;
 }
 .Toastify__toast--info {
-	background-color: #537cfd;
+	background-color: $notify-info;
 }
 .Toastify__toast--success {
-	background-color: #74b675;
+	background-color: $notify-success;
 }
 .rc-toast-presentation {
 	display: flex;
