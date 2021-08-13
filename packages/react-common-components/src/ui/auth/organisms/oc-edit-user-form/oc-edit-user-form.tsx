@@ -30,8 +30,8 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 	const [selectValue, setSelectValue] = React.useState(selectConfigOptions[0]);
 
 	const dynamicFormFields: any[] = formConfigs
-		?.map((item) => configConverter(item, enablePasswordField, enableTermsCheckbox))
-		?.filter((config) => config.name === (selectValue?.name || selectValue))[0]?.fields;
+	?.map((item) => configConverter(item, enablePasswordField, enableTermsCheckbox))
+	?.filter((config) => config.name === (selectValue?.name || selectValue))[0]?.fields;
 
 	const signUpInitialValues: InitialFormikValues = React.useMemo(() => {
 		const result = dynamicFormFields?.reduce((acc: any, item: any) => {

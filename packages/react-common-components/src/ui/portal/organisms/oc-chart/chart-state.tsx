@@ -1,4 +1,4 @@
-import _orderBy from 'lodash/orderBy';
+import _orderBy from 'lodash-es/orderBy';
 
 import { ChartAction, ChartReducer } from './types';
 

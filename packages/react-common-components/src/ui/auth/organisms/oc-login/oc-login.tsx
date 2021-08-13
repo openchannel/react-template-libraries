@@ -84,7 +84,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 									onBlur={handleBlur}
 									customClass="login__email-input"
 								/>
-								{errors.email && <OcError message={[errors.email]} />}
+								{errors.email && <OcError message={errors.email} />}
 							</div>
 							<div className="login__password">
 								<OcLabelComponent
@@ -102,7 +102,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 									value={values.password}
 									required
 								/>
-								{errors.password && <OcError message={[errors.password]} />}
+								{errors.password && <OcError message={errors.password} />}
 							</div>
 							<div className="login__forgot-block">
 								<div className="remember">

@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react';
-import get from 'lodash/get';
-import isEqual from 'lodash/isEqual';
-import isString from 'lodash/isString';
+import get from 'lodash-es/get';
+import isEqual from 'lodash-es/isEqual';
+import isString from 'lodash-es/isString';
 
 export type CheckFn<P> = (prevProps: P, nextProps: P) => boolean;
 

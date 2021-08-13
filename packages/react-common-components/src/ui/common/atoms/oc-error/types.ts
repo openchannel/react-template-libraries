@@ -1,3 +1,3 @@
 export interface OcErrorProps {
-	message?: string | string[];
+	message?: string | string[] | any;
 }

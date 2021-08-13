@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ArrowProps } from 'react-multi-carousel/lib/types';
+// import { ArrowProps } from 'react-multi-carousel/lib/types';
 
 import LeftArrowIcon from '../../../../assets/img/arrow-left-analog.svg';
 import RightArrowIcon from '../../../../assets/img/arrow-right-analog.svg';
@@ -7,7 +7,7 @@ import RightArrowIcon from '../../../../assets/img/arrow-right-analog.svg';
 import 'react-multi-carousel/lib/styles.css';
 import './style.scss';
 
-export const CustomLeftArrow = (props: ArrowProps) => {
+export const CustomLeftArrow = (props: any) => {
 	const { onClick } = props;
 	return (
 		// eslint-disable-next-line jsx-a11y/click-events-have-key-events
@@ -22,7 +22,7 @@ export const CustomLeftArrow = (props: ArrowProps) => {
 	);
 };
 
-export const CustomRightArrow = (props: ArrowProps) => {
+export const CustomRightArrow = (props: any) => {
 	const { onClick } = props;
 	return (
 		// eslint-disable-next-line jsx-a11y/click-events-have-key-events
