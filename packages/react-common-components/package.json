@@ -15,24 +15,23 @@
 		"openchannel"
 	],
 	"main": "dist/index.js",
-	"module": "dist/index.js",
 	"typings": "dist/index.d.ts",
 	"files": [
 		"dist"
 	],
 	"exports": {
-		"auth/organisms": "./dist/ui/auth/organisms",
-		"common/atoms": "./dist/ui/common/atoms",
-		"common/molecules": "./dist/ui/common/molecules",
-		"common/organisms": "./dist/ui/common/organisms",
-		"form/atoms": "./dist/ui/form/atoms",
-		"form/molecules": "./dist/ui/form/molecules",
-		"form/organisms": "./dist/ui/form/organisms",
-		"management/organisms": "./dist/ui/form/molecules",
-		"market/atoms": "./dist/ui/market/atoms",
-		"market/molecules": "./dist/ui/market/molecules",
-		"market/organisms": "./dist/ui/market/organisms",
-		"portal/organisms": "./dist/ui/portal/organisms"
+		"./auth/organisms": "./dist/ui/auth/organisms/",
+		"./common/atoms": "./dist/ui/common/atoms/",
+		"./common/molecules": "./dist/ui/common/molecules/",
+		"./common/organisms": "./dist/ui/common/organisms/",
+		"./form/atoms": "./dist/ui/form/atoms/",
+		"./form/molecules": "./dist/ui/form/molecules/",
+		"./form/organisms": "./dist/ui/form/organisms/",
+		"./management/organisms": "./dist/ui/form/molecules/",
+		"./market/atoms": "./dist/ui/market/atoms/",
+		"./market/molecules": "./dist/ui/market/molecules/",
+		"./market/organisms": "./dist/ui/market/organisms/",
+		"./portal/organisms": "./dist/ui/portal/organisms/"
 	},
 	"scripts": {
 		"build": "rollup -c",
