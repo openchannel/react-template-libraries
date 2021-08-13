@@ -19,21 +19,6 @@
 	"files": [
 		"dist"
 	],
-	"exports": {
-		".": "./dist/index.js",
-		"./auth/organisms": "./dist/ui/auth/organisms/index.js",
-		"./common/atoms": "./dist/ui/common/atoms/index.js",
-		"./common/molecules": "./dist/ui/common/molecules/index.js",
-		"./common/organisms": "./dist/ui/common/organisms/index.js",
-		"./form/atoms": "./dist/ui/form/atoms/index.js",
-		"./form/molecules": "./dist/ui/form/molecules/index.js",
-		"./form/organisms": "./dist/ui/form/organisms/index.js",
-		"./management/organisms": "./dist/ui/form/molecules/index.js",
-		"./market/atoms": "./dist/ui/market/atoms/index.js",
-		"./market/molecules": "./dist/ui/market/molecules/index.js",
-		"./market/organisms": "./dist/ui/market/organisms/index.js",
-		"./portal/organisms": "./dist/ui/portal/organisms/index.js"
-	},
 	"scripts": {
 		"build": "rollup -c",
 		"build:legacy": "npm ci && tsdx build --tsconfig tsconfig.build.json",
