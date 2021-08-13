@@ -20,6 +20,7 @@
 		"dist"
 	],
 	"exports": {
+		".": "./dist/index.js",
 		"./auth/organisms": "./dist/ui/auth/organisms/",
 		"./common/atoms": "./dist/ui/common/atoms/",
 		"./common/molecules": "./dist/ui/common/molecules/",
