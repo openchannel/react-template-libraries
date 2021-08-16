@@ -1,30 +1,26 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
-import 'react-toastify/dist/ReactToastify.min.css';
-import { ToastContainer } from 'react-toastify';
 import {
 	notify,
+	OcButtonComponent,
 	OcNotificationContainer,
-} from '../../../packages/react-common-components/src/ui/common/atoms/oc-notify';
+} from '@openchannel/react-common-components/src/ui/common';
+
+export const Notifications: Story = () => (
+	<div style={{ display: 'flex', flexDirection: 'column', maxWidth: 300 }}>
+		<OcNotificationContainer />
+
+		<OcButtonComponent onClick={() => notify.success('Success')}>Notify Success</OcButtonComponent>
+		<br />
+		<OcButtonComponent onClick={() => notify.error('Error')}>Notify Error</OcButtonComponent>
+		<br />
+		<OcButtonComponent onClick={() => notify.warning('Warning')}>Notify Warning</OcButtonComponent>
+		<br />
+		<OcButtonComponent onClick={() => notify.info('Info')}>Notify Info</OcButtonComponent>
+	</div>
+);
 
 export default {
 	title: 'Toast Notifications',
-	component: notify,
-} as unknown as Meta;
-
-const NotificationsComponent: Story<any> = () => {
-	const handleClick = () => {
-		notify.success('Success');
-		notify.error('Error');
-		notify.warning('Warning');
-		notify.info('Info');
-	};
-	return (
-		<div>
-			<button onClick={handleClick}>Notify!</button>
-			<OcNotificationContainer />
-		</div>
-	);
-};
-
-export const NotificationsStory = NotificationsComponent.bind({});
+	component: Notifications,
+} as Meta;
