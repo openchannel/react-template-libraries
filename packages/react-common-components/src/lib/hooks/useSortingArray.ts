@@ -1,5 +1,5 @@
 import { Reducer, useCallback, useReducer } from 'react';
-import _orderBy from 'lodash-es/orderBy';
+import { orderBy as _orderBy } from 'lodash-es';
 
 const SET_ARRAY = 'SET_ARRAY';
 const SORT_ARRAY = 'SORT_ARRAY';

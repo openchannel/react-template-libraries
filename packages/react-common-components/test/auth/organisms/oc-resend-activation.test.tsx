@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { OcResendProps } from '@openchannel/react-common-components';
-import OcResendActivation from 'packages/react-common-components/src/ui/auth/organisms/oc-resend-activation/oc-resend-activation';
-import OcError from 'packages/react-common-components/src/ui/common/atoms/oc-error/oc-error';
+import { OcResendProps, OcResendActivation } from '@openchannel/react-common-components/src/ui/auth/organisms';
+import { OcError } from '@openchannel/react-common-components/src/ui/common/atoms';
 
 const setUp = (props: OcResendProps) => shallow(<OcResendActivation {...props} />);
 

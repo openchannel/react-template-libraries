@@ -1,4 +1,4 @@
-import isNil from 'lodash-es/isNil';
+import { isNil } from 'lodash-es';
 
 import { stripHtmlTags } from '../../../lib';
 import { FieldValidators, FormikField, ValidatorFn } from '../models';

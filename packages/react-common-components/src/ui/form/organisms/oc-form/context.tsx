@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useFormikContext } from 'formik';
-import get from 'lodash-es/get';
-import update from 'lodash-es/update';
+import { get, update } from 'lodash-es';
 
 import { Dataset } from '../../../common/atoms/oc-button/oc-button';
 import { FIELD_TYPE } from '../../lib';

@@ -3,7 +3,7 @@ import {
 	OcDynamicFieldArray,
 	OcDynamicFieldArrayProps,
 	AppFormModel
-} from '@openchannel/react-common-components';
+} from '@openchannel/react-common-components/src/ui/form';
 
 // @ts-ignore
 import { mountWithFormik } from '../test-utils';

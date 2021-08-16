@@ -1,5 +1,5 @@
 import * as React from 'react';
-import groupBy from 'lodash-es/groupBy';
+import { groupBy } from 'lodash-es';
 
 import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
 import { FIELD_TYPE } from '../../lib';

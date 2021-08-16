@@ -4,7 +4,7 @@ import {
 	FormikField,
 	OcDynamicArrayPreview,
 	OcDynamicArrayPreviewProps
-} from '@openchannel/react-common-components';
+} from '@openchannel/react-common-components/src/ui';
 
 const mockFields: FormikField[] = [
 	{

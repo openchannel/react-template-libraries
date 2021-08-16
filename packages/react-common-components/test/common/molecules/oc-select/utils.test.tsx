@@ -1,4 +1,4 @@
-import { Option } from '@openchannel/react-common-components';
+import { Option } from '@openchannel/react-common-components/src/ui';
 
 import { transformToValidOptions } from '../../../../src/ui/common/molecules/oc-select/utils';
 

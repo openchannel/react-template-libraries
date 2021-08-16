@@ -1,7 +1,6 @@
 //commit a5d181b1d4b8bb6627fa44f4a3b0fe4d4218248f Author: Julia Date: 14.05.21, 20:21
 import * as React from 'react';
-import difference from 'lodash-es/difference';
-import orderBy from 'lodash-es/orderBy';
+import { difference, orderBy } from 'lodash-es';
 
 import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
 import OcDropboxComponent from '../../../common/atoms/oc-dropbox/oc-dropbox';

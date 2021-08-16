@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { OcSelectProps } from '@openchannel/react-common-components';
-import OcSelect from 'packages/react-common-components/src/ui/common/molecules/oc-select/oc-select';
+import { OcSelectProps } from '@openchannel/react-common-components/src/ui';
+import OcSelect from '@openchannel/react-common-components/src/ui/common/molecules/oc-select/oc-select';
 
 const setUp = (props: OcSelectProps) => shallow(<OcSelect {...props} />);
 

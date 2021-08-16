@@ -5,8 +5,8 @@ import {
 	FieldPreview,
 	OcDynamicFieldArray,
 	PreviewFieldModel,
-} from '@openchannel/react-common-components';
-import OcTagElement from 'packages/react-common-components/src/ui/common/atoms/oc-tag-element/oc-tag-element';
+} from '@openchannel/react-common-components/src/ui/form';
+import { OcTagElement } from '@openchannel/react-common-components/src/ui/common/atoms';
 
 const defaultProps = {
 	index: 0,

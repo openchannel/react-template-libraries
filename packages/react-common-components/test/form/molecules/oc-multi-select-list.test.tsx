@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
-import { OcMultiSelectListProps } from '@openchannel/react-common-components';
+import { OcMultiSelectListProps } from '@openchannel/react-common-components/src/ui';
 import OcTagElement from '../../../src/ui/common/atoms/oc-tag-element/oc-tag-element';
 import OcMultiSelectList from '../../../src/ui/form/molecules/oc-multi-select-list/oc-multi-select-list';
 import OcDropboxComponent from '../../../src/ui/common/atoms/oc-dropbox/oc-dropbox';

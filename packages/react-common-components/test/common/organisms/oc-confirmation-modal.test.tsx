@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { ConfirmationModalProps } from '@openchannel/react-common-components';
+import { ConfirmationModalProps } from '@openchannel/react-common-components/src/ui';
 import OcConfirmationModalComponent from '../../../src/ui/common/organisms/oc-confirmation-modal/oc-confirmation-modal';
 
 const setUp = (props: ConfirmationModalProps) =>
