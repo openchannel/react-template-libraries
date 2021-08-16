@@ -43,11 +43,6 @@ export const OcProfileNavbar: React.FC<ProfileNavbarProps> = (props) => {
 		options = [],
 	} = props;
 
-	const filteredByPermissionObjects = React.useMemo(
-		() => options.filter((item) => 'companyPermissions' in item),
-		[options],
-	);
-
 	return (
 		<div className="profile-navbar">
 			{initials && <div className="profile-navbar__initials">{initials}</div>}
@@ -55,7 +50,7 @@ export const OcProfileNavbar: React.FC<ProfileNavbarProps> = (props) => {
 				<OcDropdown
 					onSelect={onSelect}
 					selected={selected}
-					options={filteredByPermissionObjects}
+					options={options}
 					defaultPlaceholderIcon={defaultPlaceholderIcon}
 					activePlaceholderIcon={activePlaceholderIcon}
 					variant="block"
