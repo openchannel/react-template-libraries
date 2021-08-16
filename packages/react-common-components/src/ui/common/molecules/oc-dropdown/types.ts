@@ -90,7 +90,7 @@ export interface BaseDropdownProps {
 }
 
 export type OcDropdownProps = Omit<BaseDropdownProps, 'minDropdownWidth' | 'children'> &
-ToggleIndicatorProps;
+	ToggleIndicatorProps;
 
 export type OcDropdownButtonProps = Omit<BaseDropdownProps, 'variant' | 'title'> &
 	ToggleIndicatorProps;

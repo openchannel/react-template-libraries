@@ -1,2 +1,2 @@
-export { OcButtonComponent, OcButtonComponent as default } from './oc-button';
+export { OcButtonComponent as default, OcButtonComponent } from './oc-button';
 export * from './oc-button';

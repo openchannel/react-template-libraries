@@ -1,2 +1,2 @@
-export { OcInputComponent, OcInputComponent as default } from './oc-input';
-export * from './oc-input'
+export { OcInputComponent as default, OcInputComponent } from './oc-input';
+export * from './oc-input';

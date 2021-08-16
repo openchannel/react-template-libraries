@@ -1,8 +1,11 @@
 //commit 240aa1e72cb6b2f67e9148e5d21917065b56fb19 author: Julia Date: 12.05.21 18:29
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+
 import { SidebarValue } from '../../models/component-basic.model';
+
 import './style.scss';
+
 export interface SidebarProps {
 	/**
 	 * Title of the sidebar.

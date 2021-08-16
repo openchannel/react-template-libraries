@@ -188,7 +188,7 @@ export const setUpFieldValidators = (
 					} else if (isCheckbox) {
 						acc.push(requiredTrue());
 					} else {
-					 acc.push(required());
+						acc.push(required());
 					}
 					break;
 				case 'maxChars':
@@ -224,26 +224,26 @@ export const setUpFieldValidators = (
 		}, [] as ValidatorFn[])
 		.filter(Boolean);
 
-		if (isEmail) {
-			fns.push(email());
-		}
-		if (isUrl) {
-			fns.push(url());
-		}
-		if (isColor) {
-			fns.push(color());
-		}
-		if (isPassword) {
-			fns.push(password());
-		}
-		if (isNumberTags) {
-			fns.push(numberTags(label));
-		}
-		if (isBooleanTags) {
-			fns.push(booleanTags(label));
-		}
+	if (isEmail) {
+		fns.push(email());
+	}
+	if (isUrl) {
+		fns.push(url());
+	}
+	if (isColor) {
+		fns.push(color());
+	}
+	if (isPassword) {
+		fns.push(password());
+	}
+	if (isNumberTags) {
+		fns.push(numberTags(label));
+	}
+	if (isBooleanTags) {
+		fns.push(booleanTags(label));
+	}
 
-		return fns;
+	return fns;
 };
 
 export const getFieldValidators = (field: FormikField): FieldValidators => {

@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Permission } from '../../models/user.model';
+
 import { ListItemProps } from '../../../common';
+import { Permission } from '../../models/user.model';
 
 export interface PermissionsListItem extends ListItemProps {
 	/** permissions object of current user */

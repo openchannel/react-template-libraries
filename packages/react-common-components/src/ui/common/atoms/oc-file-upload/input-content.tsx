@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { getFilesFromEvent } from 'react-dropzone-uploader';
 
 import OcCropperModalComponent from '../../organisms/oc-image-cropper-modal/oc-image-cropper-modal';
-import { getFilesFromEvent } from 'react-dropzone-uploader';
 
 import './style.scss';
 
@@ -32,9 +32,10 @@ export const InputContent = (props: any) => {
 			<div className="file-container__placeholder">
 				<p className="file-container__placeholder-text">
 					Drag & drop file or
-					<label className="file-container__placeholder-browse">
+					<label htmlFor="fuic-bf" className="file-container__placeholder-browse">
 						{' Browse File'}
 						<input
+							id="fuic-bf"
 							style={{ display: 'none' }}
 							type="file"
 							accept={accept}

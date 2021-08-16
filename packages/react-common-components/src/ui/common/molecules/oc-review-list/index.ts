@@ -1,2 +1,2 @@
-export { OcReviewListComponent, OcReviewListComponent as default } from './oc-review-list';
+export { OcReviewListComponent as default, OcReviewListComponent } from './oc-review-list';
 export * from './oc-review-list';

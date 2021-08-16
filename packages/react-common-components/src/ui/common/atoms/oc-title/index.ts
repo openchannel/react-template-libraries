@@ -1,2 +1,2 @@
-export { OcTitleComponent, OcTitleComponent as default } from './oc-title';
+export { OcTitleComponent as default, OcTitleComponent } from './oc-title';
 export * from './oc-title';

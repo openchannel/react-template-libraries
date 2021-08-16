@@ -1,2 +1,2 @@
-export { OcResetPasswordComponent, OcResetPasswordComponent as default } from './oc-reset-password';
+export { OcResetPasswordComponent as default, OcResetPasswordComponent } from './oc-reset-password';
 export * from './types';

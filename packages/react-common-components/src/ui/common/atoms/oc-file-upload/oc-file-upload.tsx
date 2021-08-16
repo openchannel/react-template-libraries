@@ -2,6 +2,7 @@ import * as React from 'react';
 import Dropzone, { IDropzoneProps } from 'react-dropzone-uploader';
 
 import { useModalState } from '../../../../lib/hooks';
+
 import { InputContent } from './input-content';
 import { Layout } from './layout';
 import { PreviewContent } from './preview-content';

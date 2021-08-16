@@ -1,2 +1,2 @@
-export { OcCheckboxComponent, OcCheckboxComponent as default } from './oc-checkbox';
+export { OcCheckboxComponent as default, OcCheckboxComponent } from './oc-checkbox';
 export * from './oc-checkbox';

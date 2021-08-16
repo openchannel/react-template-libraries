@@ -14,25 +14,9 @@
 		"strictNullChecks": true,
 		"esModuleInterop": true,
 		"baseUrl": "."
-//		"paths": {
-//			"lib": ["src/lib/*"],
-//			"ui": ["src/ui/*"],
-//			"auth": ["src/ui/auth/*"],
-//			"common": ["src/ui/common/*"],
-//			"form": ["src/ui/form/*"],
-//			"management": ["src/ui/management/*"],
-//			"market": ["src/ui/market/*"],
-//			"portal": ["src/ui/portal/*"],
-//			"styles": ["src/ui/styles/*"]
-//		}
 	},
 	"exclude": [
 		"node_modules",
-		"build",
-		"dist",
-		"scripts",
-		"acceptance-tests",
-		"webpack",
-		"jest"
+		"dist"
 	]
 }

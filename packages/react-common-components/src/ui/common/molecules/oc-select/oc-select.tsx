@@ -59,10 +59,10 @@ export const OcSelect: React.FC<Partial<OcSelectProps>> = (props) => {
 		onSelectionChange = () => {},
 	} = props;
 
-	const options = React.useMemo(
-		() => transformToValidOptions(selectValArr, labelField),
-		[selectValArr, labelField],
-	);
+	const options = React.useMemo(() => transformToValidOptions(selectValArr, labelField), [
+		selectValArr,
+		labelField,
+	]);
 
 	const onSelect = React.useCallback(
 		(eventKey: string, event: React.SyntheticEvent) => {

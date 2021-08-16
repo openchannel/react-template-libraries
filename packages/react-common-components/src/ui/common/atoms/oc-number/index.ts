@@ -1,2 +1,2 @@
-export { OcNumberComponent, OcNumberComponent as default } from './oc-number';
+export { OcNumberComponent as default, OcNumberComponent } from './oc-number';
 export * from './oc-number';
