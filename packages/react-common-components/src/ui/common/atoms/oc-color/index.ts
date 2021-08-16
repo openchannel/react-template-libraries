@@ -1,2 +1,2 @@
-export { OcColorComponent, OcColorComponent as default } from './oc-color';
+export { OcColorComponent as default, OcColorComponent } from './oc-color';
 export * from './oc-color';

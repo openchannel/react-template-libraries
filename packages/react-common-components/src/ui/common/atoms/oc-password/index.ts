@@ -1,2 +1,2 @@
-export { OcPasswordComponent, OcPasswordComponent as default } from './oc-password';
+export { OcPasswordComponent as default, OcPasswordComponent } from './oc-password';
 export * from './oc-password';

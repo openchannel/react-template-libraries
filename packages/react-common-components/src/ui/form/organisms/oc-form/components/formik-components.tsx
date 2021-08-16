@@ -3,18 +3,18 @@ import { FieldInputProps, useFormikContext } from 'formik';
 import moment from 'moment';
 
 import { ColorProps, DatepickerProps, OcSelectProps, VideoUrlProps } from '../../../../common';
-import OcFileUpload from '../../../../common/atoms/oc-file-upload/oc-file-upload';
-import OcDatetimePicker from '../../../../common/molecules/oc-datetime-picker/oc-datetime';
-import OcSelect from '../../../../common/molecules/oc-select/oc-select';
 import OcColorComponent from '../../../../common/atoms/oc-color/oc-color';
 import OcError from '../../../../common/atoms/oc-error/oc-error';
+import OcFileUpload from '../../../../common/atoms/oc-file-upload/oc-file-upload';
 import OcRichTextEditorComponent from '../../../../common/atoms/oc-rich-text-editor/oc-rich-text-editor';
+import OcDatetimePicker from '../../../../common/molecules/oc-datetime-picker/oc-datetime';
+import OcSelect from '../../../../common/molecules/oc-select/oc-select';
 import OcVideoUrlComponent from '../../../../common/molecules/oc-video-url/oc-video-url';
 import OcTooltipLabel from '../../../atoms/oc-tooltip-label/oc-tooltip-label';
-import OcMultiSelectList from '../../../molecules/oc-multi-select-list/oc-multi-select-list';
-import OcTags from '../../../molecules/oc-tags/oc-tags';
 import { FIELD_TYPE } from '../../../lib';
 import { OcMultiSelectListProps, OcTagsProps } from '../../../molecules';
+import OcMultiSelectList from '../../../molecules/oc-multi-select-list/oc-multi-select-list';
+import OcTags from '../../../molecules/oc-tags/oc-tags';
 import type { FCWP, FieldGroupProps } from '../types';
 import { shouldFieldGroupUpdate, shouldFieldUpdate } from '../utils/memo';
 

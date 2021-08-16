@@ -4,6 +4,7 @@ import groupBy from 'lodash-es/groupBy';
 import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
 import { FIELD_TYPE } from '../../lib';
 import { PreviewFieldModel } from '../../models';
+
 import { FieldPreview } from './field-preview';
 import { OcDynamicArrayPreviewProps } from './types';
 

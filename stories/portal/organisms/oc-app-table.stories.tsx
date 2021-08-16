@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { FullAppData } from '../../../packages/react-common-components';
+import { FullAppData } from '@openchannel/react-common-components';
 import OcAppTable from '../../../packages/react-common-components/src/ui/portal/organisms/oc-app-table/oc-app-table';
 
 const statElement = {

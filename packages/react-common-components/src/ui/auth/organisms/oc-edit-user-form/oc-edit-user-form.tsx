@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { Formik, Form } from 'formik';
-import OcSelect from '../../../common/molecules/oc-select/oc-select';
-import OcError from '../../../common/atoms/oc-error/oc-error';
-import OcCheckboxComponent from '../../../common/atoms/oc-checkbox/oc-checkbox';
-import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
-import OcTooltipLabel from '../../../form/atoms/oc-tooltip-label/oc-tooltip-label';
-import { configConverter, FormikSignupFieldWrapper } from './utils';
+import { Form, Formik } from 'formik';
+
+import { OcButtonComponent, OcCheckboxComponent, OcError } from '../../../common/atoms';
+import { OcSelect } from '../../../common/molecules';
 import { FormikField } from '../../../form';
+import { OcTooltipLabel } from '../../../form/atoms';
 import { useFormikValidation } from '../../../form/organisms/oc-form/hooks';
 import { fieldsUtils } from '../../../form/organisms/oc-form/utils/fields';
+
 import { EditUserComponentProps, InitialFormikValues } from './types';
+import { configConverter, FormikSignupFieldWrapper } from './utils';
+
 import './style.scss';
 
 export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props) => {
@@ -30,8 +31,8 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 	const [selectValue, setSelectValue] = React.useState(selectConfigOptions[0]);
 
 	const dynamicFormFields: any[] = formConfigs
-	?.map((item) => configConverter(item, enablePasswordField, enableTermsCheckbox))
-	?.filter((config) => config.name === (selectValue?.name || selectValue))[0]?.fields;
+		?.map((item) => configConverter(item, enablePasswordField, enableTermsCheckbox))
+		?.filter((config) => config.name === (selectValue?.name || selectValue))[0]?.fields;
 
 	const signUpInitialValues: InitialFormikValues = React.useMemo(() => {
 		const result = dynamicFormFields?.reduce((acc: any, item: any) => {

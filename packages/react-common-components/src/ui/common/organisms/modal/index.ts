@@ -1,3 +1,2 @@
-export { Modal, Modal as default } from './modal';
+export { Modal as default, Modal } from './modal';
 export * from './modal';
-

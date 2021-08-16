@@ -19,6 +19,7 @@ const DefaultComponent: Story<OcResendProps> = (args) => {
 	const [validationError, setValidationError] = React.useState(false);
 	const handleChange = (e: any) => {
 		setValue(e.target.value);
+		// @ts-ignore
 		e.target.value.match(regexEmail) === null && args.inputProps.inputType === 'email'
 			? (setValidationError(true), e.preventDefault())
 			: (setValidationError(false), setValue(e.target.value));
@@ -31,7 +32,7 @@ const DefaultComponent: Story<OcResendProps> = (args) => {
 					id: 'input',
 					inputType: 'email',
 					value,
-					onChange: (e) => handleChange(e),
+					onChange: handleChange,
 					onBlur: () => setBlurred(true),
 					customClass: validationError ? 'error' : '',
 				}}
@@ -59,6 +60,7 @@ const FilledComponent: Story<OcResendProps> = (args) => {
 	const [blurred, setBlurred] = React.useState(false);
 	const [validationError, setValidationError] = React.useState(false);
 	const handleChange = (e: any) => {
+		// @ts-ignore
 		e.target.value.match(regexEmail) === null && args.inputProps.inputType === 'email'
 			? (setValidationError(true), e.preventDefault())
 			: (setValidationError(false), setValue(e.target.value));
@@ -71,7 +73,7 @@ const FilledComponent: Story<OcResendProps> = (args) => {
 					id: 'input',
 					inputType: 'email',
 					value,
-					onChange: (e) => handleChange(e),
+					onChange: handleChange,
 					onBlur: () => setBlurred(true),
 				}}
 				inputError={

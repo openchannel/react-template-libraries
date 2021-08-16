@@ -8,7 +8,7 @@ import { OcAppTableProps } from './types';
 
 import './style.scss';
 
-const OcAppTable: React.FC<OcAppTableProps> = (props) => {
+export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 	const {
 		properties,
 		defaultAppIcon,

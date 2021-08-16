@@ -164,7 +164,7 @@ MultiConfigs.args = {
 			},
 		},
 	],
-	onSubmit: (values) => console.log(values),
+	onSubmit: (values: any) => console.log(values),
 	enablePasswordField: true,
 	enableTermsCheckbox: true,
 	ordinaryTermsDescription: (

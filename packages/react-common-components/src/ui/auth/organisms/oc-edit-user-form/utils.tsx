@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { nanoid } from 'nanoid';
 import { Field } from 'formik';
-import { FieldGroupWrapper } from '../../../form/organisms/oc-form/components/formik-components';
+import { nanoid } from 'nanoid';
+
 import OcInputComponent from '../../../common/atoms/oc-input/oc-input';
 import OcPasswordComponent from '../../../common/atoms/oc-password/oc-password';
 import type { FormikField } from '../../../form/models';
+import { FieldGroupWrapper } from '../../../form/organisms/oc-form/components/formik-components';
 
 import { OcEditUserFormConfig } from './types';
 
+// eslint-disable-next-line
 const conditions = /[\.\s\-]/gm;
 
 export const configConverter = (
@@ -20,7 +22,7 @@ export const configConverter = (
 		const index2 = item.fieldsOrder!.indexOf(field2.id);
 		return (index1 > -1 ? index1 : Infinity) - (index2 > -1 ? index2 : Infinity);
 	};
-	let newFormConfig = {
+	const newFormConfig = {
 		formId: nanoid(),
 		name: item.name,
 		created: new Date(),
@@ -76,7 +78,7 @@ export const FormikSignupFieldWrapper: React.FC<FormikField> = (field) => {
 		>
 			<Field
 				name={name}
-				as={field.name === 'password' ? OcPasswordComponent : OcInputComponent}
+				as={name === 'password' ? OcPasswordComponent : OcInputComponent}
 				placeholder={placeholder}
 				id={id}
 				inputType="text"

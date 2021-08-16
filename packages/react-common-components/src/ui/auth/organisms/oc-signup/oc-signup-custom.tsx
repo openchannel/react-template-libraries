@@ -1,9 +1,12 @@
 import * as React from 'react';
-import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
-import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
-import { OcEditUserFormComponent } from '../../organisms/index';
 import { Link } from 'react-router-dom';
+
+import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
+import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
+import { OcEditUserFormComponent } from '../oc-edit-user-form';
+
 import { SignupProps } from './types';
+
 import './style.scss';
 
 export const OcSignupComponent: React.FC<SignupProps> = (props) => {
@@ -27,10 +30,10 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 
 	const [showFeedbackPage, setFeedbackPageVisible] = React.useState(showSignupFeedbackPage);
 
-	const handleShowFeedback = React.useCallback(
-		() => setFeedbackPageVisible(!showFeedbackPage),
-		[showFeedbackPage, setFeedbackPageVisible],
-	);
+	const handleShowFeedback = React.useCallback(() => setFeedbackPageVisible(!showFeedbackPage), [
+		showFeedbackPage,
+		setFeedbackPageVisible,
+	]);
 
 	return (
 		<div className="sign-up login-card login-card_borders">
@@ -86,7 +89,7 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 								src={forgotPasswordDoneUrl}
 							/>
 							<h4 className="result__message-heading">Done!</h4>
-							<OcLabelComponent text="An activation email has been sent to your inbox."></OcLabelComponent>
+							<OcLabelComponent text="An activation email has been sent to your inbox." />
 						</div>
 						<OcButtonComponent
 							onClick={goToActivationPage}
@@ -94,8 +97,13 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 							customClass="sign-up__button"
 						/>
 						<div className="result__sign-up-message">
-							<OcLabelComponent text="Don't have an account yet?"></OcLabelComponent>
-							<span role="button" className="result__link" onClick={handleShowFeedback}>
+							<OcLabelComponent text="Don't have an account yet?" />
+							<span
+								role="button"
+								tabIndex={0}
+								className="result__link"
+								onClick={handleShowFeedback}
+							>
 								{' '}
 								Sign Up
 							</span>

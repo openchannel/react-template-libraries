@@ -2,9 +2,11 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
-import { errorMessages } from '../../../packages/react-common-components/src/ui/form/lib';
-import { OcForgotPasswordProps } from '../../../packages/react-common-components/src/ui/auth';
-import OcForgotPasswordComponent from '../../../packages/react-common-components/src/ui/auth/organisms/oc-forgot-password';
+import {
+	errorMessages,
+	OcForgotPasswordProps,
+	OcForgotPasswordComponent,
+} from '@openchannel/react-common-components/src/ui';
 
 export default {
 	title: 'Forgot Password [BEM]',
@@ -38,7 +40,7 @@ const FilledComponent: Story<OcForgotPasswordProps> = (args) => {
 				inputProps={{
 					id: 'input',
 					value,
-					onChange: (e) => setValue(e.target.value),
+					onChange: (e: { target: { value: React.SetStateAction<string>; }; }) => setValue(e.target.value),
 					onBlur: () => setBlurred(true),
 				}}
 				inputError={blurred && !value && errorMessages.required()}

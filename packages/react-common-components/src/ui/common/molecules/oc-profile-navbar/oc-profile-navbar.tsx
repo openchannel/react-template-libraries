@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { DropdownModel } from './types';
-import OcDropdown from '../oc-dropdown/oc-dropdown';
-import { WithPermissionsListItem } from './withPermissionsListItem';
+
 import DownArrow from '../../../../assets/img/select-down.svg';
 import UpArrow from '../../../../assets/img/select-up.svg';
+import OcDropdown from '../oc-dropdown/oc-dropdown';
+
+import { DropdownModel } from './types';
+import { WithPermissionsListItem } from './withPermissionsListItem';
+
 import './style.scss';
 
 export interface ProfileNavbarProps {
@@ -45,12 +48,6 @@ export const OcProfileNavbar: React.FC<ProfileNavbarProps> = (props) => {
 			{initials && <div className="profile-navbar__initials">{initials}</div>}
 			<div className="profile-navbar__dropdown-container">
 				<OcDropdown
-					children={
-						<div className="profile-navbar__info-container">
-							{username && <span className="profile-navbar__username">{username}</span>}
-							{role && <span className="profile-navbar__role">{role}</span>}
-						</div>
-					}
 					onSelect={onSelect}
 					selected={selected}
 					options={options}
@@ -58,7 +55,12 @@ export const OcProfileNavbar: React.FC<ProfileNavbarProps> = (props) => {
 					activePlaceholderIcon={activePlaceholderIcon}
 					variant="block"
 					listItem={listItem}
-				/>
+				>
+					<div className="profile-navbar__info-container">
+						{username && <span className="profile-navbar__username">{username}</span>}
+						{role && <span className="profile-navbar__role">{role}</span>}
+					</div>
+				</OcDropdown>
 			</div>
 		</div>
 	);

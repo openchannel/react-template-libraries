@@ -1,2 +1,5 @@
-export { OcCropperModalComponent, OcCropperModalComponent as default } from './oc-image-cropper-modal';
+export {
+	OcCropperModalComponent as default,
+	OcCropperModalComponent,
+} from './oc-image-cropper-modal';
 export * from './oc-image-cropper-modal';

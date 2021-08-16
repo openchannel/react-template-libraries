@@ -1,6 +1,6 @@
 import * as React from 'react';
-// import { ArrowProps } from 'react-multi-carousel/lib/types';
 
+// import { ArrowProps } from 'react-multi-carousel/lib/types';
 import LeftArrowIcon from '../../../../assets/img/arrow-left-analog.svg';
 import RightArrowIcon from '../../../../assets/img/arrow-right-analog.svg';
 

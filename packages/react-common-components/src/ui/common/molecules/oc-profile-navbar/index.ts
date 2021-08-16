@@ -1,3 +1,3 @@
-export { OcProfileNavbar, OcProfileNavbar as default } from './oc-profile-navbar';
+export { OcProfileNavbar as default, OcProfileNavbar } from './oc-profile-navbar';
 export * from './oc-profile-navbar';
 export * from './types';

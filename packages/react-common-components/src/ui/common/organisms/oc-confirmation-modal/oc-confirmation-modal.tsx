@@ -2,8 +2,7 @@
 import * as React from 'react';
 
 import { ButtonVariants } from '../../atoms';
-import { ModalProps } from '../modal/modal';
-import Modal from '../modal/modal';
+import Modal, { ModalProps } from '../modal/modal';
 
 import { Content } from './content';
 

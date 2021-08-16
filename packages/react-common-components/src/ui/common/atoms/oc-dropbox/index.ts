@@ -1,2 +1,2 @@
-export { OcDropboxComponent, OcDropboxComponent as default } from './oc-dropbox';
+export { OcDropboxComponent as default, OcDropboxComponent } from './oc-dropbox';
 export * from './oc-dropbox';

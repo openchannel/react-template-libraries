@@ -1,6 +1,6 @@
 {
 	"name": "@openchannel/react-common-components",
-	"version": "0.1.8-alpha.5",
+	"version": "0.1.8",
 	"description": "Includes components for portal and market.",
 	"license": "MIT",
 	"keywords": [
@@ -22,7 +22,7 @@
 	],
 	"scripts": {
 		"build": "rollup -c",
-		"build:legacy": "npm ci && tsdx build --tsconfig tsconfig.build.json",
+		"build:legacy": "npm ci && tsdx build --tsconfig tsconfig.json",
 		"test": "tsdx test --passWithNoTests",
 		"test:watch": "tsdx test --passWithNoTests --watch",
 		"test:coverage": "tsdx test --passWithNoTests --coverage",
@@ -81,7 +81,6 @@
 		"@types/color": "^3.0.2",
 		"@types/dompurify": "^2.2.2",
 		"@types/enzyme": "^3.10.8",
-		"@types/lodash": "^4.14.168",
 		"@types/lodash-es": "^4.17.4",
 		"@types/react": "^17.0.3",
 		"@types/react-dom": "^17.0.3",
@@ -108,13 +107,9 @@
 		"react-dom": "^17.0.2",
 		"react-is": "^17.0.2",
 		"rollup": "^2.56.2",
-		"rollup-plugin-babel": "^4.4.0",
-		"rollup-plugin-commonjs": "^10.1.0",
-		"rollup-plugin-copy": "^3.4.0",
 		"rollup-plugin-delete": "^2.0.0",
 		"rollup-plugin-node-resolve": "^5.2.0",
 		"rollup-plugin-peer-deps-external": "^2.2.4",
-		"rollup-plugin-postcss": "^4.0.1",
 		"rollup-plugin-styles": "^3.14.1",
 		"rollup-plugin-typescript2": "^0.30.0",
 		"sass-lint": "^1.13.1",

@@ -1,4 +1,4 @@
-import { TooltipOptions, ChartOptions, TickOptions } from 'chart.js';
+import { ChartOptions, TickOptions, TooltipOptions } from 'chart.js';
 
 export const TABULAR_DATA_TYPE = 'tabular';
 export const GRAPH_DATA_TYPE = 'graph';
@@ -56,7 +56,8 @@ export const defaultChartParams = {
 					color: '#727272',
 					maxRotation: 0,
 					autoSkipPadding: 20,
-					callback: (value) => typeof value !== 'number' && value.length >= 8 ? value.substring(0, 3) : value,
+					callback: (value) =>
+						typeof value !== 'number' && value.length >= 8 ? value.substring(0, 3) : value,
 				} as Partial<TickOptions>,
 			},
 			y: {
@@ -70,7 +71,7 @@ export const defaultChartParams = {
 				ticks: {
 					autoSkip: true,
 					color: '#727272',
-					callback: (value) => (value > 999) ? (+value / 1000 + 'k') : value,
+					callback: (value) => (value > 999 ? `${+value / 1000}k` : value),
 				} as Partial<TickOptions>,
 			},
 		},

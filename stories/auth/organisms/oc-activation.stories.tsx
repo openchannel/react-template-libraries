@@ -2,9 +2,11 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
-import { errorMessages } from '../../../packages/react-common-components';
-import { OcActivationProps } from '../../../packages/react-common-components';
-import OcActivation from '../../../packages/react-common-components/src/ui/auth/organisms/oc-activation';
+import {
+	errorMessages,
+	OcActivationProps,
+	OcActivation,
+} from '@openchannel/react-common-components/src/ui';
 
 export default {
 	title: 'User Activation',

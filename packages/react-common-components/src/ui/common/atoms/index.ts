@@ -4,6 +4,7 @@ export * from './oc-color';
 export * from './oc-dropbox';
 export * from './oc-error';
 export * from './oc-file-upload';
+export * from './oc-image-cropper';
 export * from './oc-image-gallery';
 export * from './oc-input';
 export * from './oc-label';
