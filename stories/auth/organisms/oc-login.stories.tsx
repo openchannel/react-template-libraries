@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { LoginProps } from '../../../packages/react-common-components/src/ui/auth';
+import { LoginProps } from '@openchannel/react-common-components';
 import OcLoginComponent from '../../../packages/react-common-components/src/ui/auth/organisms/oc-login';
 
 export default {
@@ -11,16 +11,9 @@ export default {
 } as Meta;
 
 const DefaultComponent: Story<LoginProps> = (args) => {
-	const [isIncorrectEmail, setIncorrectEmailError] = React.useState(args.isIncorrectEmail);
-	const [isUnverifiedEmail, setUnverifiedEmail] = React.useState(args.isUnverifiedEmail);
-
 	return (
 		<BrowserRouter>
-			<OcLoginComponent
-				{...args}
-				isIncorrectEmail={isIncorrectEmail}
-				isUnverifiedEmail={isUnverifiedEmail}
-			/>
+			<OcLoginComponent {...args} />
 		</BrowserRouter>
 	);
 };

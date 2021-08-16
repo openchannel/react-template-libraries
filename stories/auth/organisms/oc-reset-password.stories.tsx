@@ -47,10 +47,12 @@ const DefaultComponent: Story<OcResetPasswordProps> = (args) => {
 export const Default = DefaultComponent.bind({});
 Default.args = {
 	companyLogoUrl: './img/logo-company.png',
+// @ts-ignore
 	resendActivationUrl: '/',
 	signupUrl: '/',
 	inputProps: {
-		id: 'input',
+		value: '',
+		onChange: () => {},
 	},
 };
 
