@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { OcMenuUserGridProps } from '@openchannel/react-common-components';
-import OcMenuUserGrid from 'packages/react-common-components/src/ui/management/organisms/oc-menu-user-grid/oc-menu-user-grid';
+import { OcMenuUserGridProps } from '@openchannel/react-common-components/src/ui';
+import OcMenuUserGrid from '@openchannel/react-common-components/src/ui/management/organisms/oc-menu-user-grid/oc-menu-user-grid';
 import OcDropdownButton from '../../../src/ui/common/molecules/oc-dropdown/oc-dropdown-button';
 
 // @ts-ignore

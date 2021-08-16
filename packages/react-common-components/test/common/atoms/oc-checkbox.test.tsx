@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { CheckboxProps } from '@openchannel/react-common-components';
+import { CheckboxProps } from '@openchannel/react-common-components/src/ui';
 import OcCheckboxComponent from '../../../src/ui/common/atoms/oc-checkbox/oc-checkbox';
 
 const defaultCheckboxProps: CheckboxProps = {

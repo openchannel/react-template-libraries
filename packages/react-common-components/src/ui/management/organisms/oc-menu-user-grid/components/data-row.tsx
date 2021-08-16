@@ -1,5 +1,5 @@
 import * as React from 'react';
-import get from 'lodash-es/get';
+import { get } from 'lodash-es';
 
 import { isStorybook, titleCase } from '../../../../../lib';
 import OcDropdownButton from '../../../../common/molecules/oc-dropdown/oc-dropdown-button';

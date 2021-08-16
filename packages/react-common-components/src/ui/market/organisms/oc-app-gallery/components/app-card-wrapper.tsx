@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import get from 'lodash-es/get';
+import { get } from 'lodash-es';
 
 import OcAppCard from '../../../molecules/oc-app-card/oc-app-card';
 import type { CardWrapperProps } from '../types';

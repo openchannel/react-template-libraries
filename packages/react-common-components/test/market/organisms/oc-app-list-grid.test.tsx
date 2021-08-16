@@ -2,8 +2,7 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import { BrowserRouter, Link } from 'react-router-dom';
 
-import { OcAppListGridProps } from '../../../../react-common-components';
-import OcAppListGrid from '../../../../react-common-components/src/ui/market/organisms/oc-app-list-grid/oc-app-list-grid';
+import { OcAppListGrid, OcAppListGridProps } from '../../../src/ui/market/organisms/oc-app-list-grid';
 import { AppCardWrapper } from '../../../src/ui/market/organisms/oc-app-list-grid/components/app-card-wrapper';
 
 // @ts-ignore

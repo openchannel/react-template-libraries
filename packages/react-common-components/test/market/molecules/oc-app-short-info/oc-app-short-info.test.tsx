@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { OcAppShortInfoProps } from '../../../../../react-common-components';
-import OcAppShortInfo from '../../../../../react-common-components/src/ui/market/molecules/oc-app-short-info/oc-app-short-info';
+import { OcAppShortInfo, OcAppShortInfoProps } from '../../../../src/ui/market/molecules/oc-app-short-info';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { appData } from './constants';

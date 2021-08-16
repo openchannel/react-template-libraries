@@ -6,7 +6,7 @@ import { OcAppListGridProps } from './types';
 
 import './style.scss';
 
-const OcAppListGrid: React.FC<OcAppListGridProps> = (props) => {
+export const OcAppListGrid: React.FC<OcAppListGridProps> = (props) => {
 	const {
 		appList = [],
 		baseLinkForOneApp,

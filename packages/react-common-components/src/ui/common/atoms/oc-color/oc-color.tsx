@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Color from 'color';
-import debounce from 'lodash-es/debounce';
+import { debounce } from 'lodash-es';
 
 import './style.scss';
 

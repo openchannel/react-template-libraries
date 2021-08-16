@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { OcActivationProps } from '@openchannel/react-common-components';
+import { OcActivationProps } from '../../../src/ui/auth/organisms/oc-activation';
 import OcActivation from '../../../src/ui/auth/organisms/oc-activation';
 import OcError from '../../../src/ui/common/atoms/oc-error/oc-error';
 

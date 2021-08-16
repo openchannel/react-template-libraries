@@ -1,4 +1,4 @@
-import uniq from 'lodash-es/uniq';
+import { uniq } from 'lodash-es';
 
 import { NormalizeTags } from './types';
 

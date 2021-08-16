@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Field } from 'formik';
-import groupBy from 'lodash-es/groupBy';
+import { groupBy } from 'lodash-es';
 
 import OcCheckboxComponent from '../../../../common/atoms/oc-checkbox/oc-checkbox';
 import OcInputComponent from '../../../../common/atoms/oc-input/oc-input';

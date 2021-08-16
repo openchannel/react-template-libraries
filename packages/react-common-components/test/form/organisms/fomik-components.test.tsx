@@ -11,7 +11,7 @@ import {
 	FormikOcSelectWrapper,
 	FormikRichTextWrapper,
 	FormikOcColorWrapper,
-} from '@openchannel/react-common-components';
+} from '@openchannel/react-common-components/src/ui';
 import OcDropboxComponent from '../../../src/ui/common/atoms/oc-dropbox/oc-dropbox';
 import OcRichTextEditorComponent from '../../../src/ui/common/atoms/oc-rich-text-editor/oc-rich-text-editor';
 import OcDatetimePicker from '../../../src/ui/common/molecules/oc-datetime-picker/oc-datetime';
