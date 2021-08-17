@@ -66,7 +66,7 @@ export const reviews = {
 
 		// let reviewPage: Page<Review>;
 
-		return api.get(REVIEWS_URL, params);
+		return api.get(REVIEWS_URL, { params });
 		// .pipe(
 		// 	tap((pageData: Page<Review>) => (reviewPage = pageData)),
 		// 	mergeMap((pageData: Page<Review>) => this.usersService.getUsersByIds(pageData.list.map(value => value.userId))),
