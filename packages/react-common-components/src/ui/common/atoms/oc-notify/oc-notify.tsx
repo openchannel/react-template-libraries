@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.min.css';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 import ToastErrorIcon from '../../../../assets/img/toast-error.svg';
-import ToastWarnIcon from '../../../../assets/img/toast-warning.svg';
 import ToastInfoIcon from '../../../../assets/img/toast-info.svg';
 import ToastSuccessIcon from '../../../../assets/img/toast-success.svg';
+import ToastWarnIcon from '../../../../assets/img/toast-warning.svg';
+
+import 'react-toastify/dist/ReactToastify.min.css';
 import './style.scss';
 
 interface INotifyMessage {
@@ -32,14 +32,12 @@ const icons: IIcon = {
 	info: <ToastInfoIcon />,
 };
 
-const Msg = ({ message, icon }: INotifyMessage) => {
-	return (
-		<div className="rc-toast-presentation">
-			{icons[icon]}
-			<div className="rc-toast-message">{message}</div>
-		</div>
-	);
-};
+const Msg = ({ message, icon }: INotifyMessage) => (
+	<div className="rc-toast-presentation">
+		{icons[icon]}
+		<div className="rc-toast-message">{message}</div>
+	</div>
+);
 
 export const OcNotificationContainer = () => {
 	return (
