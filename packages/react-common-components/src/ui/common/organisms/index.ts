@@ -1,5 +1,5 @@
+export * from './oc-footer';
 export * from './modal';
-export * from './footer';
 export * from './oc-app-categories';
 export * from './oc-confirmation-modal';
 export * from './oc-featured-apps';
