@@ -13,6 +13,7 @@ export * from './model/api/app-data.model';
 export * from './model/api/app-form.model';
 export * from './model/api/app-type.model';
 export * from './model/api/change-password.model';
+export * from './model/api/custom-content.model';
 export * from './model/api/developer.model';
 export * from './model/api/developer-account.model';
 export * from './model/api/file-details.model';
@@ -41,11 +42,13 @@ export * from './model/components/frontend.model';
  * Services
  */
 export * from './service/authentication.service';
+export * from './service/cms-site-content.service';
 export * from './service/config.service';
 export * from './service/frontend.service';
 export * from './service/market.service';
 export * from './service/native-login.service';
 export * from './service/reviews.service';
+export * from './service/site-content.service';
 
 /* Utils */
 export * from './util/query.util';

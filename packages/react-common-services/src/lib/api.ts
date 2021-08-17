@@ -1,7 +1,7 @@
 import { Options, request } from './request';
 
 export const api = {
-	get: (url: string, params?: Options['params']) => request('GET', url, { params }),
+	get: (url: string, options?: Pick<Options, 'params' | 'headers'>) => request('GET', url, options),
 
 	post: (url: string, options: Options) => request('POST', url, options),
 

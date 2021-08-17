@@ -18,8 +18,10 @@ export type Result = {
 	error: unknown | null;
 };
 
+export type ReqHeaders = { [key: string]: string };
+
 export interface Options<ReqBody = unknown> {
-	headers?: { [key: string]: string };
+	headers?: ReqHeaders;
 	params?: Params;
 	body?: ReqBody | Body;
 	handlers?: Handlers;
@@ -78,7 +80,7 @@ const createParams = (options: Options) => {
 		const params = new URLSearchParams();
 
 		for (const [key, value] of Object.entries(options.params)) {
-			params.set(key, value);
+			params.set(key, String(value));
 		}
 
 		return params;
