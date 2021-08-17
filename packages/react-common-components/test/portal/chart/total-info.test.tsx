@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { TotalInfoProps } from '@openchannel/react-common-components';
 
 import { TotalInfo } from '../../../src/ui/portal/organisms/oc-chart/components/total-info';
+import { TotalInfoProps } from '../../../src/ui/portal/organisms/oc-chart';
 
 const setUp = (props: TotalInfoProps) => shallow(<TotalInfo {...props} />);
 

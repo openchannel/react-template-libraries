@@ -7,7 +7,7 @@ import type { OcAppGalleryProps } from './types';
 
 import './style.scss';
 
-const OcAppGallery: React.FC<OcAppGalleryProps> = (props) => {
+export const OcAppGallery: React.FC<OcAppGalleryProps> = (props) => {
 	const {
 		appGalleryTitle = '',
 		seeAllUrl,

@@ -1,6 +1,5 @@
 @import '../../../styles/theme.scss';
 
-//React toast styles
 .Toastify__toast-container {
 	width: 300px;
 	svg {
@@ -9,37 +8,53 @@
 		height: 12px;
 	}
 }
+
+.Toastify__toast-container--top-right {
+	top: 12px;
+	right: 12px;
+	padding: 0;
+}
+
 .Toastify__toast {
 	position: relative;
 	overflow: hidden;
 	margin: 0 0 6px;
 	width: 300px;
+	min-height: 54px;
 	border-radius: 3px 3px 3px 3px;
 	background-repeat: no-repeat;
 	box-shadow: 0 0 12px #999;
 	color: #fff;
-	padding: 16px 24px 16px 48px;
+	padding: 16px 24px 16px 24px;
 	background-position: 24px center;
 	background-size: 12px;
 }
+
 .Toastify__toast--error {
 	background-color: $notify-error;
 }
+
 .Toastify__toast--warning {
 	background-color: $notify-warning;
 }
+
 .Toastify__toast--info {
 	background-color: $notify-info;
 }
+
 .Toastify__toast--success {
 	background-color: $notify-success;
 }
+
+.Toastify__toast-body {
+	padding: 0;
+}
+
 .rc-toast-presentation {
 	display: flex;
 	align-items: center;
+
 	.rc-toast-message {
 		font-size: 12px;
-		padding: 10px;
-		width: 80%;
 	}
 }

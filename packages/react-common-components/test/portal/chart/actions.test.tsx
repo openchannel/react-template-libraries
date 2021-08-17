@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { ActionsProps } from '@openchannel/react-common-components';
+import { ActionsProps } from '../../../src/ui/portal/organisms/oc-chart';
 import OcDropdownButton from '../../../src/ui/common/molecules/oc-dropdown/oc-dropdown-button';
 import { Actions } from '../../../src/ui/portal/organisms/oc-chart/components/actions';
 import { Radio } from '../../../src/ui/portal/organisms/oc-chart/components/radio';

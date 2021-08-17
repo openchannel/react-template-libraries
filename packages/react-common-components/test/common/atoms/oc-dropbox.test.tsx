@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { mount, shallow, ShallowWrapper } from 'enzyme';
-import { DropboxProps, DropboxValue } from '@openchannel/react-common-components';
+import { DropboxProps, DropboxValue } from '@openchannel/react-common-components/src/ui';
 import OcDropboxComponent from '../../../src/ui/common/atoms/oc-dropbox/oc-dropbox';
 
 const defaultDropboxProps: DropboxProps = {

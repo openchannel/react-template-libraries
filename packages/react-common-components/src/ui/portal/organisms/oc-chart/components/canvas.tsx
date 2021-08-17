@@ -9,8 +9,7 @@ import {
 	PointElement,
 	Tooltip,
 } from 'chart.js';
-import assign from 'lodash-es/assign';
-import merge from 'lodash-es/merge';
+import { assign, merge } from 'lodash-es';
 
 import { CanvasProps, ChartStatisticDataModel } from '../types';
 import { defaultChartParams } from '../utils';

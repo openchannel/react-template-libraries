@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import get from 'lodash-es/get';
+import { get } from 'lodash-es';
 
 import { validateRouterLink } from '../../../lib';
 import { AppCardWrapperProps } from '../types';

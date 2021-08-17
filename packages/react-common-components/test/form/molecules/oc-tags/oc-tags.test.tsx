@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { OcTagsProps } from '@openchannel/react-common-components';
+import { OcTagsProps } from '@openchannel/react-common-components/src/ui';
 import OcTags from '../../../../src/ui/form/molecules/oc-tags/oc-tags';
 import OcTagElement from '../../../../src/ui/common/atoms/oc-tag-element/oc-tag-element';
 import OcDropboxComponent from '../../../../src/ui/common/atoms/oc-dropbox/oc-dropbox';

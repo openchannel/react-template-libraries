@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { ChartStatisticDataModel } from '../../../../react-common-components';
-import { CanvasProps } from '../../../../react-common-components';
+import { ChartStatisticDataModel, CanvasProps } from '../../../src/ui/portal/organisms/oc-chart';
 import { Canvas } from '../../../src/ui/portal/organisms/oc-chart/components/canvas';
 // import { useChartReducer } from '../../../src/ui/portal/organisms/chart/hooks';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

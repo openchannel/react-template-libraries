@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { mount, shallow } from 'enzyme';
-import { GalleryItem } from '@openchannel/react-common-components';
+import { GalleryItem } from '@openchannel/react-common-components/src/ui';
 import OcImageGalleryComponent from '../../../src/ui/common/atoms/oc-image-gallery/oc-image-gallery';
 
 describe('Image Gallery', () => {
