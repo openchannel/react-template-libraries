@@ -48,7 +48,6 @@ export const reviews = {
 	 * @param {number} limit - (optional) Count Reviews into response. Starts from >= 1.
 	 * @param {string} sort - (optional) Sort Reviews by specific field.
 	 * @param {string} filter - (optional) Your specific search filter.
-	 * @returns {Observable<Page<OCReviewDetailsResponse>>} Observable<Page<OCReviewDetailsResponse>>
 	 *
 	 * * ### Example:
 	 *``
@@ -61,12 +60,12 @@ export const reviews = {
 		filter?: string,
 		page = 0,
 		limit = 0,
-	): Promise<Page<OCReviewDetailsResponse>> => {
+	) => {
 		const params = configureReviewsParams(appId, sort, filter, page, limit);
 
 		// let reviewPage: Page<Review>;
 
-		return api.get(REVIEWS_URL, { params });
+		return api.get<any, Page<OCReviewDetailsResponse>>(REVIEWS_URL, { params });
 		// .pipe(
 		// 	tap((pageData: Page<Review>) => (reviewPage = pageData)),
 		// 	mergeMap((pageData: Page<Review>) => this.usersService.getUsersByIds(pageData.list.map(value => value.userId))),

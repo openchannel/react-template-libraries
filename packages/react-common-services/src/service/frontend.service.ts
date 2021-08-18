@@ -8,22 +8,20 @@ export const frontend = {
 	/**
 	 *
 	 * Description: Get available sorts for frontend
-	 * @returns {Promise<Page<SortResponse>>} `Promise<Page<SortResponse>>`
 	 * * ### Example:
 	 * `getSorts();`
 	 */
-	getSorts: (): Promise<Page<SortResponse>> => {
-		return api.get(`${FRONTEND_URL}/sorts`);
+	getSorts: () => {
+		return api.get<any, Page<SortResponse>>(`${FRONTEND_URL}/sorts`);
 	},
 
 	/**
 	 *
 	 * Description: Get available filters for frontend
-	 * @returns {Promise<Page<FilterResponse>>} `Promise<Page<FilterResponse>>`
 	 * * ### Example:
 	 * `getFilters();`
 	 */
-	getFilters: (): Promise<Page<FilterResponse>> => {
-		return api.get(`${FRONTEND_URL}/filters`);
+	getFilters: () => {
+		return api.get<any, Page<FilterResponse>>(`${FRONTEND_URL}/filters`);
 	},
 };

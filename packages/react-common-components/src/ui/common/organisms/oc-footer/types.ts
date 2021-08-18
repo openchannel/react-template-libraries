@@ -5,7 +5,7 @@ interface FooterRow {
 	location: string;
 }
 
-interface FooterColumn {
+export interface FooterColumn {
 	label: string;
 	location: string;
 	items: FooterRow[];

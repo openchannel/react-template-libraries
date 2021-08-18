@@ -11,11 +11,10 @@ const MARKET_URL = 'v2/markets';
 export const market = {
 	/**
 	 * Description: Get Current Market Data
-	 * @returns {Promise<MarketModel>} `Promise<MarketModel>`
 	 * * ### Example
 	 * getCurrentMarket()
 	 */
-	getCurrentMarket: (): Promise<MarketModel> => {
-		return api.get(`${MARKET_URL}/this`);
+	getCurrentMarket: () => {
+		return api.get<any, MarketModel>(`${MARKET_URL}/this`);
 	},
 };

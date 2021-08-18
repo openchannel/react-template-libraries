@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 
 import { instance } from './instance';
 
@@ -6,7 +6,7 @@ type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 type Body = string | FormData | Record<string, unknown>;
 
-type Params = URLSearchParams | { [key: string]: string };
+type Params = URLSearchParams | Record<string, unknown>;
 
 export type Handlers = {
 	onSuccess?: (result: Result) => void;
@@ -20,18 +20,18 @@ export type Result = {
 
 export type ReqHeaders = { [key: string]: string };
 
-export interface Options<ReqBody = unknown> {
+export interface Options<B = unknown> {
 	headers?: ReqHeaders;
 	params?: Params;
-	body?: ReqBody | Body;
+	body?: B | Body;
 	handlers?: Handlers;
 }
 
-export const request = async <ReqBody>(
+export const request = async <B, R>(
 	method: Method,
 	url: string,
-	options: Options<ReqBody> = {},
-): Promise<any> => {
+	options: Options<B> = {},
+): Promise<AxiosResponse<R>> => {
 	const baseURL = instance.getUrl();
 
 	const headers = {
@@ -80,7 +80,9 @@ const createParams = (options: Options) => {
 		const params = new URLSearchParams();
 
 		for (const [key, value] of Object.entries(options.params)) {
-			params.set(key, String(value));
+			if (String(value).length > 0) {
+				params.set(key, String(value));
+			}
 		}
 
 		return params;

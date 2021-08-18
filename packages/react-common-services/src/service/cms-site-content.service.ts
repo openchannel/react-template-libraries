@@ -1,46 +1,32 @@
 import { forIn, has, get } from 'lodash-es';
 
-export const CMSSiteContent = {
-	cmsData: null,
+const _findContentByPaths = <P>(data: any, paths: P) => {
+	const tempPathsData: { [P: string]: any } = {...paths};
 
-	getContentFromAPI: () => new Promise(() => {}),
-	getContentDefault: () => null,
+	Object.keys(tempPathsData).forEach((key) => {
+		tempPathsData[key] = null;
+	});
 
-	initContent: async () => {
-		try {
-			return await CMSSiteContent.getContentFromAPI();
-		} catch {
-			CMSSiteContent.cmsData = CMSSiteContent.getContentDefault();
+	forIn(paths, (path, name) => {
+		tempPathsData[name] = _tryGetContentByPath(data, path);
+	});
 
-			return CMSSiteContent.cmsData;
-		}
-	},
+	return tempPathsData;
+};
 
-	getContentByPaths: <P>(paths: P): { [P: string]: any } => {
-		return CMSSiteContent._findContentByPaths(paths);
-	},
+const _tryGetContentByPath = (cmsData: any, path: any): string | null => {
+	if (has(cmsData, path)) {
+		return get(cmsData, path);
+	} else {
+		console.warn(`CMS content. Invalid content path: ${path}`);
+		return null;
+	}
+};
 
-	_findContentByPaths: <P>(paths: P) => {
-		const tempPathsData: { [P: string]: any } = { ...paths };
+export const cmsSiteContent = {
+	getContentByPaths: (cmsData: any, defaultCmsData: any) => <P>(paths: P) => {
+		const data = cmsData || defaultCmsData;
 
-		Object.keys(tempPathsData).forEach((key) => {
-			tempPathsData[key] = null;
-		});
-
-		forIn(paths, (path, name) => {
-			tempPathsData[name] = CMSSiteContent._tryGetContentByPath(CMSSiteContent.cmsData, path);
-		})
-
-		return tempPathsData;
-	},
-
-	_tryGetContentByPath: (cmsData: any, path: any): string | null => {
-		if (has(cmsData, path)) {
-			return get(cmsData, path);
-		} else {
-			console.warn(`CMS content. Invalid content path: ${path}`);
-			return null;
-		}
-	},
-
+		return _findContentByPaths(data, paths);
+	}
 };
