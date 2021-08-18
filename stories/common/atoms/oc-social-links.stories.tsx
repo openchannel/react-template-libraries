@@ -16,12 +16,12 @@ Default.args = {
 		{
 			link: 'https://facebook.com',
 			iconSrc: 'https://dev1-template-market.openchannel.io/assets/img/facebook-icon.svg',
-			// iconAlt: 'facebook',
+			iconAlt: '',
 		},
 		{
 			link: 'https://twitter.com',
 			iconSrc: 'https://dev1-template-market.openchannel.io/assets/img/twitter-icon.svg',
-			// iconAlt: 'twitter',
+			iconAlt: '',
 		},
 	]
 };
