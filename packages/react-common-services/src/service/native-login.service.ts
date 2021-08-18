@@ -34,7 +34,7 @@ export const nativeLogin = {
 	 *    isChecked: true
 	 * })`
 	 */
-	signIn(body: UserLoginModel): Promise<any> {
+	signIn(body: UserLoginModel) {
 		return api.post(`${NATIVE_URL}/token`, { body });
 	},
 
@@ -71,7 +71,7 @@ export const nativeLogin = {
 	 * }
 	 * })`
 	 */
-	signup: (userSignUp: OCNativeDefaultSignup | OCNativeCustomSignup): Promise<any> => {
+	signup: (userSignUp: OCNativeDefaultSignup | OCNativeCustomSignup) => {
 		return api.post(`${NATIVE_URL}/register`, { body: { userSignUp } });
 	},
 
@@ -88,7 +88,7 @@ export const nativeLogin = {
 	 *      userCustomData: {name: 'Name'}
 	 * })`
 	 */
-	signupByInvite(userSignUp: SignUpByInviteRequest): Promise<any> {
+	signupByInvite(userSignUp: SignUpByInviteRequest) {
 		return api.post(`${NATIVE_URL}/invite`, { body: { userSignUp } });
 	},
 
@@ -104,7 +104,7 @@ export const nativeLogin = {
 	 *  name: 'Name'
 	 * })`
 	 */
-	activate(activationModel: any): Promise<any> {
+	activate(activationModel: any) {
 		return api.post(`${NATIVE_URL}/activate`, activationModel);
 	},
 
@@ -118,7 +118,7 @@ export const nativeLogin = {
 	 *
 	 * `sendResetCode('email@email.com');`
 	 */
-	sendResetCode(email: string): Promise<any> {
+	sendResetCode(email: string) {
 		return api.post(`${NATIVE_URL}/send-reset-code`, { params: { email } });
 	},
 
@@ -135,7 +135,7 @@ export const nativeLogin = {
 	 *     code: '123'
 	 * })`
 	 */
-	resetPassword(body: UserResetPassword): Promise<any> {
+	resetPassword(body: UserResetPassword) {
 		return api.post(`${NATIVE_URL}/reset-password`, { body });
 	},
 
@@ -149,7 +149,7 @@ export const nativeLogin = {
 	 *
 	 * `sendActivationCode('email@email.com');`
 	 */
-	sendActivationCode(email: string): Promise<any> {
+	sendActivationCode(email: string) {
 		return api.post(`${NATIVE_URL}/send-activate-code`, { body: { email } });
 	},
 
@@ -166,7 +166,7 @@ export const nativeLogin = {
 	 *      newPassword: 'newPassword'
 	 * });`
 	 */
-	changePassword(body: ChangePasswordRequest): Promise<any> {
+	changePassword(body: ChangePasswordRequest) {
 		return api.post(`${NATIVE_URL}/change-password`, { body });
 	},
 };

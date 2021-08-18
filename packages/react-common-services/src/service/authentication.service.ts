@@ -10,11 +10,9 @@ export const auth = {
 
 	getAuthConfig: () => api.get(`${AUTH_URL}/config`),
 
-	login: (body: LoginRequest): Promise<LoginResponse> =>
-		api.post(`${AUTH_URL}/external/token`, { body }),
+	login: (body: LoginRequest) => api.post<any, LoginResponse>(`${AUTH_URL}/external/token`, { body }),
 
-	refreshToken: (body: RefreshTokenRequest): Promise<LoginResponse> =>
-		api.post(`${AUTH_URL}/refresh`, { body }),
+	refreshToken: (body: RefreshTokenRequest) => api.post<any, LoginResponse>(`${AUTH_URL}/refresh`, { body }),
 
 	logOut: () =>
 		api.post(`${AUTH_URL}/logout`, { body: { refreshToken: storage.getRefreshToken() } }),

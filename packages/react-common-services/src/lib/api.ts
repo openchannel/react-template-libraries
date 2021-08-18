@@ -1,13 +1,13 @@
 import { Options, request } from './request';
 
 export const api = {
-	get: (url: string, options?: Pick<Options, 'params' | 'headers'>) => request('GET', url, options),
+	get: <B = unknown, R = any>(url: string, options?: Pick<Options, 'params' | 'headers'>) => request<B, R>('GET', url, options),
 
-	post: (url: string, options: Options) => request('POST', url, options),
+	post: <B = unknown, R = any>(url: string, options: Options<B>) => request<B, R>('POST', url, options),
 
-	put: (url: string, options: Options) => request('PUT', url, options),
+	put: <B = unknown, R = any>(url: string, options: Options<B>) => request<B, R>('PUT', url, options),
 
-	patch: (url: string, options: Options) => request('PATCH', url, options),
+	patch: <B = unknown, R = any>(url: string, options: Options<B>) => request<B, R>('PATCH', url, options),
 
-	delete: (url: string) => request('DELETE', url),
+	delete: <B = unknown, R = any>(url: string) => request<B, R>('DELETE', url),
 };
