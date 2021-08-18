@@ -13,6 +13,7 @@ export * from './oc-notify';
 export * from './oc-number';
 export * from './oc-password';
 export * from './oc-rich-text-editor';
+export * from './oc-social-links';
 export * from './oc-tag-element';
 export * from './oc-text-search';
 export * from './oc-title';
