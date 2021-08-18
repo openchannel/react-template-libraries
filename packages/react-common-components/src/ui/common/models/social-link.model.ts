@@ -1,5 +1,5 @@
 export interface SocialLink {
-    link: string;
-    iconSrc: string;
-    iconAlt?: string;
+	link: string;
+	iconSrc: string;
+	iconAlt?: string;
 }
