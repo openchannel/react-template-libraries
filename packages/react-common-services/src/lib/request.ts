@@ -80,7 +80,9 @@ const createParams = (options: Options) => {
 		const params = new URLSearchParams();
 
 		for (const [key, value] of Object.entries(options.params)) {
-			params.set(key, String(value));
+			if (String(value).length > 0) {
+				params.set(key, String(value));
+			}
 		}
 
 		return params;
