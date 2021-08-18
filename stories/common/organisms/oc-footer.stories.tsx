@@ -18,6 +18,18 @@ const Wrapper: Story<OcFooterProps> = (args) => (
 export const Component = Wrapper.bind({});
 
 Component.args = {
+	socialLinks: [
+		{
+			link: 'https://facebook.com',
+			iconSrc: 'https://dev1-template-market.openchannel.io/assets/img/facebook-icon.svg',
+			iconAlt: '',
+		},
+		{
+			link: 'https://twitter.com',
+			iconSrc: 'https://dev1-template-market.openchannel.io/assets/img/twitter-icon.svg',
+			iconAlt: '',
+		},
+	],
 	cmsData: {
 		logoImageURL: './img/logo-company.png',
 		columnsDFA: [
