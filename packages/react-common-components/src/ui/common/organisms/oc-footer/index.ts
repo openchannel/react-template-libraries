@@ -1,6 +1,2 @@
-import { OcFooter } from './oc-footer';
-
-export  * from './types';
-export { OcFooter };
-
-export default OcFooter;
+export { OcFooter as default, OcFooter } from './oc-footer';
+export * from './types';

@@ -50,4 +50,33 @@ describe('OcFooter', () => {
 		expect((wrapper.find('.info-column').find(Link).at(0) as unknown as typeof Link).props().to).toBe('/#');
 		expect(wrapper.find('.info-column').find('.list-unstyled')).toHaveLength(1);
 	});
+
+	it('render with social links', () => {
+		const wrapper = setUp({
+			cmsData: {
+				logoImageURL: '',
+				columnsDFA: [
+					{
+						label: 'Browse',
+						location: '',
+						items: [
+							{
+								label: 'Most Popular',
+								location: '/most-popular',
+							},
+						],
+					},
+				],
+			},
+			socialLinks: [
+				{
+					link: 'https://facebook.com',
+					iconSrc: 'https://dev1-template-market.openchannel.io/assets/img/facebook-icon.svg',
+					iconAlt: '',
+				},
+			],
+		});
+
+		expect(wrapper.find('.social-networks').find('a').props().href).toBe('https://facebook.com');
+	});
 });

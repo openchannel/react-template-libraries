@@ -1,3 +1,5 @@
+import { SocialLink } from '../../models';
+
 interface FooterRow {
 	label: string;
 	location: string;
@@ -14,9 +16,5 @@ export interface OcFooterProps {
 		logoImageURL: string;
 		columnsDFA: FooterColumn[];
 	};
-	social?: {
-		link: string;
-		iconSrc: string;
-		iconAlt: string;
-	}[];
+	socialLinks?: SocialLink[];
 }
