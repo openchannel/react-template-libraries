@@ -2,7 +2,7 @@ import { api } from '../lib/api';
 import { Page } from '../model/api/page.model';
 import { FilterResponse, SortResponse } from '../model/components/frontend.model';
 
-const FRONTEND_URL = 'v2/frontend';
+const FRONTEND_URL = 'v2/frontEnd';
 
 export const frontend = {
 	/**
