@@ -188,7 +188,7 @@ export class FullAppData {
 	/**
 	 * Create a class with mapped customData to proper fields
 	 *
-	 * @param appData app data or appversion data from api response
+	 * @param appData app data or app version data from api response
 	 * @param customDataConfig customDataConfig  config for customData fields name information
 	 */
 	constructor(appData: any, customDataConfig: CustomDataAppConfig) {
