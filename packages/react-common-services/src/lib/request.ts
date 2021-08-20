@@ -1,4 +1,5 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
+import { isNil } from 'lodash-es';
 
 import { instance } from './instance';
 
@@ -80,7 +81,7 @@ const createParams = (options: Options) => {
 		const params = new URLSearchParams();
 
 		for (const [key, value] of Object.entries(options.params)) {
-			if (String(value).length > 0) {
+			if (!isNil(value) && String(value).length > 0) {
 				params.set(key, String(value));
 			}
 		}
