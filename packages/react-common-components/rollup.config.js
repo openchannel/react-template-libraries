@@ -4,7 +4,7 @@ import external from 'rollup-plugin-peer-deps-external';
 import styles from 'rollup-plugin-styles';
 import resolve from '@rollup/plugin-node-resolve';
 import svgr from '@svgr/rollup';
-import del from 'rollup-plugin-delete';
+import url from '@rollup/plugin-url';
 
 import pkg from './package.json';
 
@@ -50,6 +50,10 @@ export default [
 		plugins: [
 			external(),
 			svgr(),
+			// replace svg imports only for the components
+			url({
+				exclude: ['**/*.scss'],
+			}),
 			styles(),
 			resolve({
 				browser: true,
@@ -62,7 +66,6 @@ export default [
 				tsconfig: 'tsconfig.json',
 			}),
 			commonjs(),
-			del({ targets: 'dest/*' }),
 		],
 		external: Object.keys(pkg.peerDependencies || {}),
 	},
