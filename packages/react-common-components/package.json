@@ -1,6 +1,6 @@
 {
 	"name": "@openchannel/react-common-components",
-	"version": "0.1.16",
+	"version": "0.1.17",
 	"description": "Includes components for portal and market.",
 	"license": "MIT",
 	"keywords": [
@@ -21,7 +21,7 @@
 		"dist"
 	],
 	"scripts": {
-		"build": "rollup -c",
+		"build": "rm -rf dist & rollup -c",
 		"build:legacy": "npm ci && tsdx build --tsconfig tsconfig.json",
 		"test": "tsdx test --passWithNoTests",
 		"test:watch": "tsdx test --passWithNoTests --watch",
