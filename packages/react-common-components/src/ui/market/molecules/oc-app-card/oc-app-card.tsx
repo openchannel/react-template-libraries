@@ -4,14 +4,15 @@ import * as React from 'react';
 import { isStorybook, stripHtmlTags } from '../../../../lib';
 import OcRatingComponent from '../../atoms/oc-rating/index';
 import { parsePrice } from '../../lib';
-import appIcon from '../../../../assets/img/standard-app-icon.svg';
 
 import { OcAppCardWrapper } from './components/oc-app-card-wrapper';
 import type { OcAppCardProps } from './types';
 
 import './style.scss';
 
-const preAppIcon = isStorybook() ? './img/standard-app-icon.svg' : appIcon;
+const preAppIcon = isStorybook()
+	? './img/standard-app-icon.svg'
+	: '../../../../assets/img/standard-app-icon.svg';
 
 const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 	const { app, appRedirectLink } = props;
