@@ -49,11 +49,12 @@ export default [
 		},
 		plugins: [
 			external(),
-			svgr(),
+
 			// replace svg imports only for the components
 			url({
 				exclude: ['**/*.scss'],
 			}),
+			svgr(),
 			styles(),
 			resolve({
 				browser: true,
