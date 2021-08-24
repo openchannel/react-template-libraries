@@ -2,8 +2,8 @@
 // commit 240aa1e72cb6b2f67e9148e5d21917065b56fb19 Author: Julia Date: 12.05.21, 18:29
 import * as React from 'react';
 
-import InfoIcon from '../../../../assets/img/info.svg';
-import OcTooltipComponent from '../../../common/atoms/oc-tooltip/oc-tooltip';
+import { ReactComponent as InfoIcon } from '../../../../assets/img/info.svg';
+import OcTooltipComponent from '../../../common/atoms/oc-tooltip';
 
 import './style.scss';
 

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import CloseIconSvg from '../../../../assets/img/close-icon.svg';
+import { ReactComponent as CloseIconSvg } from '../../../../assets/img/close-icon.svg';
 import { OcForm } from '../../../form';
 
 import { InviteModalProps } from './oc-invite-modal';

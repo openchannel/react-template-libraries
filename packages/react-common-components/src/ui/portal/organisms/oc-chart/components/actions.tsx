@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import GraphIcon from '../../../../../assets/img/icon-graph.svg';
-import TabularIcon from '../../../../../assets/img/icon-tabular.svg';
-import SelectDownIcon from '../../../../../assets/img/select-down.svg';
-import SelectUpIcon from '../../../../../assets/img/select-up.svg';
+import { ReactComponent as GraphIcon } from '../../../../../assets/img/icon-graph.svg';
+import { ReactComponent as TabularIcon } from '../../../../../assets/img/icon-tabular.svg';
+import { ReactComponent as SelectDownIcon } from '../../../../../assets/img/select-down.svg';
+import { ReactComponent as SelectUpIcon } from '../../../../../assets/img/select-up.svg';
 import OcDropdownButton from '../../../../common/molecules/oc-dropdown/oc-dropdown-button';
 import { ActionsProps } from '../types';
 import { defaultChartStatisticParameter, GRAPH_DATA_TYPE, TABULAR_DATA_TYPE } from '../utils';

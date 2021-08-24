@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import CloseIconSvg from '../../../../assets/img/close-icon.svg';
-import ZoomInImg from '../../../../assets/img/zoom-in.svg';
-import ZoomOutImg from '../../../../assets/img/zoom-out.svg';
+import { ReactComponent as CloseIconSvg } from '../../../../assets/img/close-icon.svg';
+import { ReactComponent as ZoomInImg } from '../../../../assets/img/zoom-in.svg';
+import { ReactComponent as ZoomOutImg } from '../../../../assets/img/zoom-out.svg';
 import OcButtonComponent from '../../atoms/oc-button/oc-button';
 import OcImageCropper from '../../atoms/oc-image-cropper/oc-image-cropper';
 

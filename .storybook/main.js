@@ -29,20 +29,26 @@ module.exports = {
       issuer: {
         test: /\.tsx?$/
       },
-      loader: require.resolve('@svgr/webpack'),
-      options: {
-        svgoConfig: {
-          plugins: [
-            {
-              prefixIds: {
-                prefixClassNames: false,
-              },
-              removeDimensions: false,
-              removeViewBox: false,
-            },
-          ],
-        },
-      }
+			use: [
+				'babel-loader',
+				{
+					loader: '@svgr/webpack',
+					options: {
+					  svgoConfig: {
+					    plugins: [
+					      {
+					        prefixIds: {
+					          prefixClassNames: false,
+					        },
+					        removeDimensions: false,
+					        removeViewBox: false,
+					      },
+					    ],
+					  },
+					},
+				},
+				'url-loader',
+			],
     });
 
     return config;

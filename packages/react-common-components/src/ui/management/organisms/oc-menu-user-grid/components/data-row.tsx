@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { get } from 'lodash-es';
 
-import { isStorybook, titleCase } from '../../../../../lib';
+import dotsMenuIcon from '../../../../../assets/img/dots-menu.svg';
+import { titleCase } from '../../../../../lib';
 import OcDropdownButton from '../../../../common/molecules/oc-dropdown/oc-dropdown-button';
 import {
 	ComponentsUserAccountGridModel,
@@ -11,10 +12,6 @@ import {
 import { userInitials } from '../utils';
 
 import { DropdownListItem } from './dropdown-list-item';
-
-const dotsMenuIcon = isStorybook()
-	? './img/dots-menu.svg'
-	: '../../../../../assets/img/dots-menu.svg';
 
 interface DataRowProps {
 	user: ComponentsUserAccountGridModel;

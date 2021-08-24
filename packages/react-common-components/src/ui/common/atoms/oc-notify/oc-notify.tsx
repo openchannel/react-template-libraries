@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 
-import ToastErrorIcon from '../../../../assets/img/toast-error.svg';
-import ToastInfoIcon from '../../../../assets/img/toast-info.svg';
-import ToastSuccessIcon from '../../../../assets/img/toast-success.svg';
-import ToastWarnIcon from '../../../../assets/img/toast-warning.svg';
+import { ReactComponent as ToastErrorIcon } from '../../../../assets/img/toast-error.svg';
+import { ReactComponent as ToastInfoIcon } from '../../../../assets/img/toast-info.svg';
+import { ReactComponent as ToastSuccessIcon } from '../../../../assets/img/toast-success.svg';
+import { ReactComponent as ToastWarnIcon } from '../../../../assets/img/toast-warning.svg';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 import './style.scss';

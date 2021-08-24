@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useFormikContext } from 'formik';
 
-import EditIconSvg from '../../../../assets/img/edit.svg';
-import TrashIconSvg from '../../../../assets/img/trash-icon.svg';
-import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
+import { ReactComponent as EditIconSvg } from '../../../../assets/img/edit.svg';
+import { ReactComponent as TrashIconSvg } from '../../../../assets/img/trash-icon.svg';
+import OcButtonComponent from '../../../common/atoms/oc-button';
 import { FormikFieldsValues } from '../../models';
 import { OcDynamicArrayPreview } from '../oc-dynamic-array-preview';
 import { FormikMapFields } from '../oc-form';

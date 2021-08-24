@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import ArrowDownIcon from '../../../../../assets/img/select-down.svg';
-import ArrowUpIcon from '../../../../../assets/img/select-up.svg';
+import { ReactComponent as ArrowDownIcon } from '../../../../../assets/img/select-down.svg';
+import { ReactComponent as ArrowUpIcon } from '../../../../../assets/img/select-up.svg';
 import { SortIconProps } from '../types';
 
 export const SortIcon: React.FC<SortIconProps> = React.memo(

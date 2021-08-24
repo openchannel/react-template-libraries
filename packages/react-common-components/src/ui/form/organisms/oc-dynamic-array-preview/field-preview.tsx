@@ -2,7 +2,7 @@ import * as React from 'react';
 import { isNumber } from 'lodash-es';
 import moment, { isMoment } from 'moment';
 
-import FileIconSvg from '../../../../assets/img/file_icon.svg';
+import { ReactComponent as FileIconSvg } from '../../../../assets/img/file_icon.svg';
 import { sanitizeHtml, stripHtmlTags } from '../../../../lib';
 import OcTagElement from '../../../common/atoms/oc-tag-element/oc-tag-element';
 import { FIELD_TYPE } from '../../lib';

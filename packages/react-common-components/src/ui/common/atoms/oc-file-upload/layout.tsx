@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ILayoutProps } from 'react-dropzone-uploader';
 
-import UploadIcon from '../../../../assets/img/upload_icon.svg';
+import { ReactComponent as UploadIcon } from '../../../../assets/img/upload_icon.svg';
 
 import './style.scss';
 

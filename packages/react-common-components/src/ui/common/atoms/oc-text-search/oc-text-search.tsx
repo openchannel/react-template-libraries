@@ -1,9 +1,9 @@
 //commit 240aa1e72cb6b2f67e9148e5d21917065b56fb19 Author: Julia Date: 12.05.21, 18:29
 import * as React from 'react';
 
-import TextSearchIcon from '../../../../assets/img/text-search-icon.svg';
+import { ReactComponent as TextSearchIcon } from '../../../../assets/img/text-search-icon.svg';
 import OcButtonComponent from '../oc-button/oc-button';
-import { InputProps } from '../oc-input/oc-input';
+import { InputProps } from '../oc-input';
 
 import './style.scss';
 

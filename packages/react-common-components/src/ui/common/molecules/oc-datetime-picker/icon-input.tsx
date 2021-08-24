@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import CalendarIcon from '../../../../assets/img/calendar-icon.svg';
+import { ReactComponent as CalendarIcon } from '../../../../assets/img/calendar-icon.svg';
 
 import './style.scss';
 
