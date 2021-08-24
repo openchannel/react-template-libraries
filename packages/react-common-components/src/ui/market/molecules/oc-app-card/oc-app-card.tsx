@@ -4,15 +4,14 @@ import * as React from 'react';
 import { isStorybook, stripHtmlTags } from '../../../../lib';
 import OcRatingComponent from '../../atoms/oc-rating/index';
 import { parsePrice } from '../../lib';
+import appIcon from '../../../../assets/img/standard-app-icon.svg';
 
 import { OcAppCardWrapper } from './components/oc-app-card-wrapper';
 import type { OcAppCardProps } from './types';
 
 import './style.scss';
 
-const standardAppIcon = isStorybook()
-	? './img/standard-app-icon.svg'
-	: '../../../../assets/img/standard-app-icon.svg';
+const preAppIcon = isStorybook() ? './img/standard-app-icon.svg' : appIcon;
 
 const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 	const { app, appRedirectLink } = props;
@@ -20,7 +19,7 @@ const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 	return (
 		<OcAppCardWrapper appRedirectLink={appRedirectLink}>
 			<div className="oc-card__icon">
-				<img src={app?.icon || standardAppIcon} className="img-fluid" alt={app.name} />
+				<img src={app?.icon || preAppIcon} className="img-fluid" alt={app.name} />
 			</div>
 			<div className="oc-card__content">
 				<p className="oc-card__content-name">{app.name}</p>
