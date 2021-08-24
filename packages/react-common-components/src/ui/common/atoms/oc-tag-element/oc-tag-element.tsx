@@ -2,7 +2,7 @@ import * as React from 'react';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 
-import DefaultCloseIcon from '../../../../assets/img/close-icon.svg';
+import { ReactComponent as DefaultCloseIcon } from '../../../../assets/img/close-icon.svg';
 
 import './style.scss';
 

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import moment, { Moment } from 'moment';
 
-import ArrowLeftAnalog from '../../../../../assets/img/arrow-left-analog.svg';
-import ArrowRightAnalog from '../../../../../assets/img/arrow-right-analog.svg';
+import { ReactComponent as ArrowLeftAnalog } from '../../../../../assets/img/arrow-left-analog.svg';
+import { ReactComponent as ArrowRightAnalog } from '../../../../../assets/img/arrow-right-analog.svg';
 
 import './style.scss';
 

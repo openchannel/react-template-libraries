@@ -1,13 +1,9 @@
 import * as React from 'react';
 
-import RightArrow from '../../../../../assets/img/right-arrow.svg';
-import { isStorybook } from '../../../../../lib';
+import standardAppIcon from '../../../../../assets/img/standard-app-icon.svg';
+import { ReactComponent as RightArrow } from '../../../../../assets/img/right-arrow.svg';
 import OcRatingComponent from '../../../atoms/oc-rating';
 import { parsePrice } from '../../../lib';
-
-const standardAppIcon = isStorybook()
-	? './img/standard-app-icon.svg'
-	: '../../../../../assets/img/standard-app-icon.svg';
 
 export const DefaultAppCard: React.FC<any> = (props) => {
 	const { app } = props;

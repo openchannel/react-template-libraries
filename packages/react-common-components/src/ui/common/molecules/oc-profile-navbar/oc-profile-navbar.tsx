@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import DownArrow from '../../../../assets/img/select-down.svg';
-import UpArrow from '../../../../assets/img/select-up.svg';
+import { ReactComponent as DownArrow } from '../../../../assets/img/select-down.svg';
+import { ReactComponent as UpArrow } from '../../../../assets/img/select-up.svg';
 import OcDropdown from '../oc-dropdown/oc-dropdown';
 
 import { DropdownModel } from './types';

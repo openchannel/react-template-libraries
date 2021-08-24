@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { IFileWithMeta, IMeta, IPreviewProps } from 'react-dropzone-uploader';
 
-import CloseIcon from '../../../../assets/img/close-icon.svg';
-import DefaultFileIcon from '../../../../assets/img/file_icon.svg';
-import StandardAppIcon from '../../../../assets/img/standard-app-icon.svg';
+import { ReactComponent as CloseIcon } from '../../../../assets/img/close-icon.svg';
+import { ReactComponent as DefaultFileIcon } from '../../../../assets/img/file_icon.svg';
+import { ReactComponent as StandardAppIcon } from '../../../../assets/img/standard-app-icon.svg';
 
 import { getUploadParams } from './utils';
 

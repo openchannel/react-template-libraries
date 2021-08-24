@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import ArrowIcon from '../../../../../assets/img/arrow.svg';
+import { ReactComponent as ArrowIcon } from '../../../../../assets/img/arrow.svg';
 import type { OcAppGalleryProps } from '../types';
 
 const Icon = React.memo(({ routerIcon }: { routerIcon?: string }) => {

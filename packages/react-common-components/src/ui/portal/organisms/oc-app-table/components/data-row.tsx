@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { get } from 'lodash-es';
 
-import { isStorybook, stripHtmlTags } from '../../../../../lib';
+import lineArrowDownIcon from '../../../../../assets/img/line-arrow-down.svg';
+import dotsMenuIcon from '../../../../../assets/img/dots-menu.svg';
+import { stripHtmlTags } from '../../../../../lib';
 import OcDropdownButton from '../../../../common/molecules/oc-dropdown/oc-dropdown-button';
 import { AppListMenuAction } from '../../../models';
 import { DataRowProps } from '../types';
@@ -9,14 +11,6 @@ import { filterOptions } from '../utils';
 
 import { AppStatusPopover } from './app-status-popover';
 import { DropdownListItem } from './dropdown-list-item';
-
-const lineArrowDownIcon = isStorybook()
-	? './img/line-arrow-down.svg'
-	: '../../../../../assets/img/line-arrow-down.svg';
-
-const dotsMenuIcon = isStorybook()
-	? './img/dots-menu.svg'
-	: '../../../../../assets/img/dots-menu.svg';
 
 export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 	const {

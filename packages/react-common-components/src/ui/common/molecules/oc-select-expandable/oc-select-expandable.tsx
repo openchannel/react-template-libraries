@@ -2,8 +2,8 @@
 //commit 76978c0770aa82676498c56dd58843d7008b45d5 Author: Alex Tkachenko Date: 20.10.20, 13:52
 import * as React from 'react';
 import { ExpandableListItem, SelectModel } from './expandable-select-item';
-import CollapsedIcon from '../../../../assets/img/down-arrow.svg';
-import ExpandedIcon from '../../../../assets/img/select-up.svg';
+import { ReactComponent as CollapsedIcon } from '../../../../assets/img/down-arrow.svg';
+import { ReactComponent as ExpandedIcon } from '../../../../assets/img/select-up.svg';
 import './style.scss';
 
 export interface ExpandSelectProps {

@@ -1,18 +1,15 @@
 //commit 77c7c788ebd91651e6edbb765e0501d609a55bf0 Author: Julia Date: 05.05.21, 19:28
 import * as React from 'react';
 
-import { isStorybook, stripHtmlTags } from '../../../../lib';
-import OcRatingComponent from '../../atoms/oc-rating/index';
+import { stripHtmlTags } from '../../../../lib';
+import OcRatingComponent from '../../atoms/oc-rating';
 import { parsePrice } from '../../lib';
+import appIcon from '../../../../assets/img/standard-app-icon.svg';
 
 import { OcAppCardWrapper } from './components/oc-app-card-wrapper';
 import type { OcAppCardProps } from './types';
 
 import './style.scss';
-
-const preAppIcon = isStorybook()
-	? './img/standard-app-icon.svg'
-	: '../../../../assets/img/standard-app-icon.svg';
 
 const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 	const { app, appRedirectLink } = props;
@@ -20,7 +17,7 @@ const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 	return (
 		<OcAppCardWrapper appRedirectLink={appRedirectLink}>
 			<div className="oc-card__icon">
-				<img src={app?.icon || preAppIcon} className="img-fluid" alt={app.name} />
+				<img src={app?.icon || appIcon} className="img-fluid" alt={app.name} />
 			</div>
 			<div className="oc-card__content">
 				<p className="oc-card__content-name">{app.name}</p>

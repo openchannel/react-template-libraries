@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import SortIcon from '../../../../../assets/img/dropdown.svg';
+import { ReactComponent as SortIcon } from '../../../../../assets/img/dropdown.svg';
 
 interface HeadColumnCellProps {
 	title: string;
