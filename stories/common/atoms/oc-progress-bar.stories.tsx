@@ -10,25 +10,29 @@ export default {
 	component: OcProgressBar,
 } as Meta;
 
-const requestSend = () =>
-	axiosInstance.get('http://localhost:6006/progress', {
-		headers: {
-			'Access-Control-Allow-Origin': '*',
-			withCredentials: false,
-			mode: 'no-cors',
-		},
-	});
-const Progress: Story = () => {
-	return (
-		<OcProgressBar>
-			<h1>Display of progress bar work</h1>
-			<OcButton text="Send Request" onClick={requestSend} style={{ width: '100px' }} />
-		</OcProgressBar>
-	);
+const getGoogle = () => axiosInstance.get('https://google.com/');
+const requestSend = () => {
+	getGoogle();
+	getGoogle();
+	setTimeout(getGoogle, 2000);
+	setTimeout(getGoogle, 5000);
+	setTimeout(getGoogle, 8000);
+};
+const Progress: Story = (args) => {
+	return <OcProgressBar children={args.children} />;
 };
 
 export const Default = Progress.bind({});
 
 Default.parameters = {
 	layout: 'fullscreen',
+};
+
+Default.args = {
+	children: (
+		<>
+			<h1>Display of progress bar work</h1>
+			<OcButton text="Send Request" onClick={requestSend} style={{ width: '100px' }} />
+		</>
+	),
 };
