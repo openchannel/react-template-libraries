@@ -31,3 +31,9 @@ export const validateRouterLink = (link: string) => {
 	if (link[link.length - 1] === '/') return link;
 	return `${link}/`;
 };
+
+export const textEllipsis = {
+	'white-space': 'nowrap',
+	overflow: 'hidden',
+	textOverflow: 'ellipsis',
+};

@@ -5,18 +5,11 @@ import { sanitizeUrl } from '@braintree/sanitize-url';
 import defaultAppIcon from '../../../../assets/img/standard-app-icon.svg';
 import { stripHtmlTags } from '../../../../lib';
 import OcRatingComponent from '../../atoms/oc-rating';
-import { parsePrice } from '../../lib';
+import { parsePrice, textEllipsis } from '../../lib';
 
 import { OcAppShortInfoProps } from './types';
 
 import './styles.scss';
-
-
-const textEllipsis = {
-	'white-space': 'nowrap',
-	overflow: 'hidden',
-	textOverflow: 'ellipsis',
-};
 
 export const OcAppShortInfo: React.FC<OcAppShortInfoProps> = (props) => {
 	const { app, clickByApp, customDropdown } = props;
