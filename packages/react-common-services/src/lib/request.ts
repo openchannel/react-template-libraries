@@ -28,7 +28,7 @@ export interface Options<B = unknown> {
 	handlers?: Handlers;
 }
 
-export const request = async <B, R>(
+const request = async <B, R>(
 	method: Method,
 	url: string,
 	options: Options<B> = {},
@@ -54,7 +54,7 @@ export const request = async <B, R>(
 	return axios(_config);
 };
 
-export const axiosRequest = (config: AxiosRequestConfig) => {
+const axiosRequest = (config: AxiosRequestConfig) => {
 	return axios(config);
 };
 
@@ -91,3 +91,11 @@ const createParams = (options: Options) => {
 
 	return undefined;
 };
+
+const axiosInstance = axios;
+
+	export {
+		request,
+		axiosRequest,
+		axiosInstance,
+	}
