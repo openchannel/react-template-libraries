@@ -19,4 +19,3 @@ export * from './oc-text-search';
 export * from './oc-title';
 export * from './oc-tooltip';
 export * from './oc-video';
-export * from './oc-progress-bar';
