@@ -41,7 +41,7 @@ export const app1: FullAppData = {
 	version: 1,
 	submittedDate: 1432696823474,
 	created: 1432696823474,
-	rating: 4.2,
+	rating: 430,
 	reviewCount: 10,
 	statistics: {
 		views: statElement,
@@ -88,7 +88,7 @@ export const app1: FullAppData = {
 			version: 1.2,
 			submittedDate: 1432696823474,
 			created: 1432956823474,
-			rating: 4.2,
+			rating: 375,
 			reviewCount: 10,
 			statistics: {
 				views: statElement,
@@ -134,7 +134,7 @@ export const app1: FullAppData = {
 			version: 1.1,
 			submittedDate: 1432696823474,
 			created: 1434796823474,
-			rating: 4.2,
+			rating: 112,
 			reviewCount: 10,
 			statistics: {
 				views: statElement,
@@ -183,7 +183,7 @@ export const app2: FullAppData = {
 	version: 1,
 	submittedDate: 1432696823474,
 	created: 1432696823474,
-	rating: 4.2,
+	rating: 478,
 	reviewCount: 10,
 	statistics: {
 		views: statElement,

@@ -11,7 +11,7 @@ import type { OcAppCardProps } from './types';
 
 import './style.scss';
 
-const OcAppCard: React.FC<OcAppCardProps> = (props) => {
+export const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 	const { app, appRedirectLink } = props;
 
 	return (
@@ -24,7 +24,7 @@ const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 				<div className="oc-card__content-info">
 					<p className="oc-card__content-price">{parsePrice(app?.model[0])}</p>
 					<OcRatingComponent
-						rating={app.rating || 0}
+						rating={app.rating ? app.rating/100 : 0}
 						reviewCount={app.reviewCount || 0}
 						type="single-star"
 					/>
@@ -36,5 +36,3 @@ const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 		</OcAppCardWrapper>
 	);
 };
-
-export default OcAppCard;
