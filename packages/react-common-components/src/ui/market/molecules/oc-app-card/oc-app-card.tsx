@@ -11,7 +11,7 @@ import type { OcAppCardProps } from './types';
 
 import './style.scss';
 
-const OcAppCard: React.FC<OcAppCardProps> = (props) => {
+export const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 	const { app, appRedirectLink } = props;
 
 	return (
@@ -36,5 +36,3 @@ const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 		</OcAppCardWrapper>
 	);
 };
-
-export default OcAppCard;
