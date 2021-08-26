@@ -59,7 +59,7 @@ const OcRatingComponent: React.FC<RatingProps> = (props) => {
 	if (type === RatingVariants.SINGLE_STAR_TYPE) {
 		return (
 			<div className={className || 'oc-rating-single'}>
-				<StarIcon className="oc-rating-single__rating-star" style={{ width: 18, height: 18 }} />
+				<StarIcon className="oc-rating-single__rating-star" />
 				<span className={`oc-rating-single__label ${labelClass}`}>
 					{Number(rating).toFixed(1)} ({reviewCount}
 					{label ? ` ${label}` : ''})

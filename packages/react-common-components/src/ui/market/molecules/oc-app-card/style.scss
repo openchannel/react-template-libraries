@@ -1,18 +1,9 @@
+//commit 8a86e227d58db05bf16fdd40fc97cfc260ef049e Author: Pavel Date: 23.07.21, 17:22
 @import '../../../styles/index';
 
 .oc-card {
 	display: flex;
 	cursor: pointer;
-
-	svg {
-		height: 16px !important;
-		width: 16px !important;
-	}
-
-	.oc-rating-single {
-		align-items: baseline;
-		display: flex;
-	}
 
 	&__icon {
 		height: 74px;
@@ -20,23 +11,22 @@
 
 		img {
 			width: 44px;
+			height: 44px;
+			object-fit: cover;
 		}
 	}
 
 	&__content {
 		margin-left: 2rem;
 		padding: 0;
-		flex: 1;
-		min-width: 0;
+		width: 100%;
 
 		&-name {
 			@include font-medium();
-			font-weight: 600;
 			height: 19px;
 			line-height: 19px;
 			margin-bottom: 1rem;
 			color: $body-color;
-			text-transform: capitalize;
 		}
 
 		&-info {
@@ -46,24 +36,18 @@
 			.oc-card__content-price {
 				@include font-medium();
 				@include font-size-md();
-				font-weight: 600;
 				color: $primary;
 				min-width: 100px;
 				margin-bottom: 0;
-				text-transform: capitalize;
 			}
 		}
 
 		&-summary {
 			height: 2.3rem;
 			line-height: 2.3rem;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-			word-wrap: break-word;
 			@include font-size-md();
 			margin-bottom: 0;
-			color: $secondary;
+			color: $text-color;
 			@include default-text();
 		}
 	}
