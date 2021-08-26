@@ -14,6 +14,8 @@ import './style.scss';
 export const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 	const { app, appRedirectLink } = props;
 
+	const description = app.summary ? stripHtmlTags(app.summary) : stripHtmlTags(app.description);
+
 	return (
 		<OcAppCardWrapper appRedirectLink={appRedirectLink}>
 			<div className="oc-card__icon">
@@ -29,8 +31,8 @@ export const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 						type="single-star"
 					/>
 				</div>
-				<p className="oc-card__content-summary">
-					{app.summary ? stripHtmlTags(app.summary) : stripHtmlTags(app.description)}
+				<p className="oc-card__content-summary" style={textEllipsis} title={description}>
+					{description}
 				</p>
 			</div>
 		</OcAppCardWrapper>
