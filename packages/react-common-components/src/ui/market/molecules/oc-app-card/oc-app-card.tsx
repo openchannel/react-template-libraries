@@ -24,7 +24,7 @@ const OcAppCard: React.FC<OcAppCardProps> = (props) => {
 				<div className="oc-card__content-info">
 					<p className="oc-card__content-price">{parsePrice(app?.model[0])}</p>
 					<OcRatingComponent
-						rating={app.rating || 0}
+						rating={app.rating ? app.rating/100 : 0}
 						reviewCount={app.reviewCount || 0}
 						type="single-star"
 					/>
