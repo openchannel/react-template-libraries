@@ -1,5 +1,6 @@
 import './interceptors/xsrf';
-import './interceptors/progress-bar';
+
+export * from './interceptors/progress-bar';
 /*
  * Public API Surface of angular-common-services
  */

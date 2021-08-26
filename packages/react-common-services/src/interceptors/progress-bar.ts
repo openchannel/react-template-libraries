@@ -1,6 +1,7 @@
+import NProgress from 'nprogress';
+
 import { axiosInstance } from '../lib/request';
 import { requestInterceptor, responseInterceptor } from '../lib/interceptors';
-import NProgress from 'nprogress';
 
 const calculatePercentage = (loaded: number, total: number) => (Math.floor(loaded * 1.0) / total)
 
@@ -8,7 +9,7 @@ export const initProgressBar = (config = { showSpinner: false }, instance = axio
   let requestsCounter = 0
 
   const setupStartProgress = () => {
-    requestInterceptor.use(config => { 
+    requestInterceptor.use(config => {
       requestsCounter++
       NProgress.start()
       return config
@@ -44,4 +45,4 @@ export const initProgressBar = (config = { showSpinner: false }, instance = axio
   setupStartProgress()
   setupUpdateProgress()
   setupStopProgress()
-} 
+}
