@@ -1,7 +1,7 @@
-import { forIn, has, get } from 'lodash-es';
+import { forIn, get, has } from 'lodash-es';
 
 const _findContentByPaths = <P>(data: any, paths: P) => {
-	const tempPathsData: { [P: string]: any } = {...paths};
+	const tempPathsData: { [P: string]: any } = { ...paths };
 
 	Object.keys(tempPathsData).forEach((key) => {
 		tempPathsData[key] = null;
@@ -28,5 +28,5 @@ export const cmsSiteContent = {
 		const data = cmsData || defaultCmsData;
 
 		return _findContentByPaths(data, paths);
-	}
+	},
 };

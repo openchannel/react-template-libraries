@@ -16,7 +16,7 @@ export const OcFooter: React.FC<OcFooterProps> = ({ cmsData, socialLinks }) => (
 				</div>
 				{(cmsData?.columnsDFA || []).map((column) => (
 					<div className="info-column" key={`${column.label}${column.location}`}>
-						<Link to={column.location || '/#'}>
+						<Link to={column.location || '/'}>
 							<h5>{column.label}</h5>
 						</Link>
 						<ul className="list-unstyled">

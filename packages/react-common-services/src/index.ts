@@ -43,8 +43,8 @@ export * from './model/components/frontend.model';
 /**
  * Services
  */
-export * from './service/authentication.service';
 export * from './service/apps.service';
+export * from './service/authentication.service';
 export * from './service/cms-site-content.service';
 export * from './service/config.service';
 export * from './service/frontend.service';

@@ -1,11 +1,11 @@
 import { api } from '../lib/api';
-import type { Page } from '../model/api/page.model';
 import type {
 	AppResponse,
 	AppStatusValue,
 	CreateAppModel,
 	PublishAppVersionModel,
 } from '../model/api/app-data.model';
+import type { Page } from '../model/api/page.model';
 
 const APPS_URL = 'v2/apps';
 
@@ -28,11 +28,7 @@ export const apps = {
 	 * searchApp("My First App", "{"status.value": {"$in":["pending", "inDevelopment"]}}")
 	 *``
 	 */
-	searchApp: (
-		searchText: string,
-		query?: string,
-		fields: string[] = ['name'],
-	) => {
+	searchApp: (searchText: string, query?: string, fields: string[] = ['name']) => {
 		const params = {
 			fields: String(fields),
 			text: searchText || '',
@@ -63,16 +59,10 @@ export const apps = {
 	 * getApps(1, 10, "{"name": 1}", "{"name": {"$in":["first", "second"]}}", true);
 	 * ``
 	 */
-	getApps: (
-		pageNumber?: number,
-		limit?: number,
-		sort?: any,
-		query?: any,
-		isOwner: boolean = false,
-	) => api.get<any, Page<AppResponse>>(
-		APPS_URL,
-		{ params: { sort, query, isOwner, pageNumber, limit } },
-	),
+	getApps: (pageNumber?: number, limit?: number, sort?: any, query?: any, isOwner = false) =>
+		api.get<any, Page<AppResponse>>(APPS_URL, {
+			params: { sort, query, isOwner, pageNumber, limit },
+		}),
 
 	/**
 	 * Description: Retrieving an app returns a single, specific, live app by safe name.
@@ -88,7 +78,8 @@ export const apps = {
 	 * getAppBySafeName("fuel-crm-and-marketing");
 	 * ``
 	 */
-	getAppBySafeName: (appSafeName: string) => api.get<any, AppResponse>(`${APPS_URL}/bySafeName/${appSafeName}`),
+	getAppBySafeName: (appSafeName: string) =>
+		api.get<any, AppResponse>(`${APPS_URL}/bySafeName/${appSafeName}`),
 
 	/**
 	 * Description: Create an app with version 1.
@@ -179,10 +170,6 @@ export const apps = {
 	 * changeAppStatus("6238426d0c0osf654208", 1, 'pending', 'Approved by admin.')
 	 * ``
 	 */
-	changeAppStatus: (
-		id: string,
-		version: number,
-		status: AppStatusValue,
-		reason: string = '',
-	) => api.post(`${APPS_URL}/${id}/versions/${version}/status`, { body: { status, reason } }),
+	changeAppStatus: (id: string, version: number, status: AppStatusValue, reason = '') =>
+		api.post(`${APPS_URL}/${id}/versions/${version}/status`, { body: { status, reason } }),
 };

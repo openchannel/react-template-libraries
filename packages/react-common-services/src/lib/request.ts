@@ -1,4 +1,4 @@
-import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { isNil } from 'lodash-es';
 
 import { instance } from './instance';
@@ -92,10 +92,4 @@ const createParams = (options: Options) => {
 	return undefined;
 };
 
-const axiosInstance = axios;
-
-	export {
-		request,
-		axiosRequest,
-		axiosInstance,
-	}
+export { axios as axiosInstance, axiosRequest, request };

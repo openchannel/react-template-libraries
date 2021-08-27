@@ -54,13 +54,7 @@ export const reviews = {
 	 * getReviewsByAppId('a7hsd87ha8sdh8a7sd',1, 10, "{"name": 1}", "{"name": {"$in":["first", "second"]}}")
 	 *``
 	 */
-	getReviewsByAppId: (
-		appId: string,
-		sort?: string,
-		filter?: string,
-		page = 0,
-		limit = 0,
-	) => {
+	getReviewsByAppId: (appId: string, sort?: string, filter?: string, page = 0, limit = 0) => {
 		const params = configureReviewsParams(appId, sort, filter, page, limit);
 
 		// let reviewPage: Page<Review>;

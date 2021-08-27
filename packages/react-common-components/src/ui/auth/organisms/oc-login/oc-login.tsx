@@ -34,11 +34,12 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 				initialValues={{
 					email: inputEmailValue || '',
 					password: inputPasswordValue || '',
+					remember: false,
 				}}
 				onSubmit={handleSubmit}
 				validate={validateLogin}
 			>
-				{({ handleSubmit, handleChange, isSubmitting, errors, values, handleBlur }) => (
+				{({ handleSubmit, handleChange, isSubmitting, errors, values, touched, handleBlur }) => (
 					<Form onSubmit={handleSubmit} noValidate>
 						<div className="login__card-body">
 							<div className="login__logo">
@@ -106,7 +107,14 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 							</div>
 							<div className="login__forgot-block">
 								<div className="remember">
-									<OcCheckboxComponent type="checkbox" labelText="Remember Me" />
+									<OcCheckboxComponent
+										labelText="Remember Me"
+										name="remember"
+										value={values.remember}
+										onChange={handleChange}
+										touched={String(touched.remember)}
+										onBlur={handleBlur}
+									/>
 								</div>
 								{forgotPwdUrl && (
 									<div className="forgot">
@@ -119,6 +127,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 							<OcButtonComponent
 								htmlType="submit"
 								process={isSubmitting}
+								disabled={isSubmitting}
 								text={loginButtonText}
 								type="primary"
 								customClass="login__button"
