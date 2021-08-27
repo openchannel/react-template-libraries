@@ -16,5 +16,5 @@ export interface OcFooterProps {
 		logoImageURL: string;
 		columnsDFA: FooterColumn[];
 	};
-	socialLinks?: [] | null | SocialLink[];
+	socialLinks?: SocialLink[];
 }
