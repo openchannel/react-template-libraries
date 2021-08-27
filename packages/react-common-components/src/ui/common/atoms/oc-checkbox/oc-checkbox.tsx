@@ -30,7 +30,7 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
 	 * Supposed to be the style object
 	 */
 	style?: React.CSSProperties;
-	touched?: boolean;
+	touched?: string;
 }
 
 export const OcCheckboxComponent: React.FC<CheckboxProps> = (props) => {

@@ -96,7 +96,7 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 												labelText={ordinaryTermsDescription || ''}
 												name="terms"
 												checked={values.terms}
-												touched={values.terms}
+												touched={String(values.terms)}
 												onBlur={handleBlur}
 												onChange={handleChange}
 											/>
