@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { get } from 'lodash-es';
 
-import lineArrowDownIcon from '../../../../../assets/img/line-arrow-down.svg';
 import dotsMenuIcon from '../../../../../assets/img/dots-menu.svg';
+import lineArrowDownIcon from '../../../../../assets/img/line-arrow-down.svg';
 import { stripHtmlTags } from '../../../../../lib';
 import OcDropdownButton from '../../../../common/molecules/oc-dropdown/oc-dropdown-button';
 import { AppListMenuAction } from '../../../models';

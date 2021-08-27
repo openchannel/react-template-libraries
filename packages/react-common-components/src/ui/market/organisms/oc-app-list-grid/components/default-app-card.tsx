@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import standardAppIcon from '../../../../../assets/img/standard-app-icon.svg';
 import { ReactComponent as RightArrow } from '../../../../../assets/img/right-arrow.svg';
+import standardAppIcon from '../../../../../assets/img/standard-app-icon.svg';
 import OcRatingComponent from '../../../atoms/oc-rating';
 import { parsePrice } from '../../../lib';
 
