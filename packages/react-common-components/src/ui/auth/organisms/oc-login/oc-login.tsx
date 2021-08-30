@@ -110,7 +110,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 									<OcCheckboxComponent
 										labelText="Remember Me"
 										name="remember"
-										value={values.remember}
+										checked={values.remember}
 										onChange={handleChange}
 										touched={String(touched.remember)}
 										onBlur={handleBlur}

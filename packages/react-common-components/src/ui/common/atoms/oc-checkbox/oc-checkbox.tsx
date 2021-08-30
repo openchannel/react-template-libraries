@@ -23,7 +23,7 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
 	/**
 	 * Input value
 	 */
-	value?: string;
+	checked?: boolean;
 	onClick?: React.MouseEventHandler;
 	/**
 	 * Style which can be added to the title
@@ -34,7 +34,7 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
 }
 
 export const OcCheckboxComponent: React.FC<CheckboxProps> = (props) => {
-	const { labelText, required, children = labelText, ...p } = props;
+	const { labelText, required, children = labelText, touched, ...p } = props;
 
 	return (
 		// eslint-disable-next-line jsx-a11y/label-has-for
