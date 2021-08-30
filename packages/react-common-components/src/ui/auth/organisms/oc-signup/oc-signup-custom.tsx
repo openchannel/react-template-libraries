@@ -30,10 +30,10 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 
 	const [showFeedbackPage, setFeedbackPageVisible] = React.useState(showSignupFeedbackPage);
 
-	const handleShowFeedback = React.useCallback(() => setFeedbackPageVisible(!showFeedbackPage), [
-		showFeedbackPage,
-		setFeedbackPageVisible,
-	]);
+	const handleShowFeedback = React.useCallback(
+		() => setFeedbackPageVisible(!showFeedbackPage),
+		[showFeedbackPage, setFeedbackPageVisible],
+	);
 
 	return (
 		<div className="sign-up login-card login-card_borders">

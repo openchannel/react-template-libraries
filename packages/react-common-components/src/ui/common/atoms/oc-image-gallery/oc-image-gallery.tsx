@@ -19,10 +19,10 @@ export interface ImageGalleryProps {
 export const OcImageGalleryComponent: React.FC<ImageGalleryProps> = (props) => {
 	const { gallery, maxItems = 3 } = props;
 
-	const processedGallery: GalleryItem[] = React.useMemo(() => [...gallery].splice(0, maxItems), [
-		gallery,
-		maxItems,
-	]);
+	const processedGallery: GalleryItem[] = React.useMemo(
+		() => [...gallery].splice(0, maxItems),
+		[gallery, maxItems],
+	);
 
 	return (
 		<div className="image-gallery">

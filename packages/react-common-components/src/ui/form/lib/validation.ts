@@ -6,13 +6,14 @@ import { FieldValidators, FormikField, ValidatorFn } from '../models';
 import { FIELD_TYPE } from './constants';
 
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%!^&]).{8,}$/;
-const EMAIL_REGEX = /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+const EMAIL_REGEX =
+	/^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 const isEmptyInputValue = (value: any) => value == null || value.length === 0;
 
 const hasValidLength = (value: any) => value != null && typeof value.length === 'number';
 
-const requiredTrue = () => (value: boolean) => (value ? null : { key: 'required', value: true });
+const requiredTrue = () => (value: boolean) => value ? null : { key: 'required', value: true };
 
 const required = () => (value: any) =>
 	isEmptyInputValue(value) ? { key: 'required', value: true } : null;
@@ -88,29 +89,27 @@ const password = () => (value: string) => {
 	return { key: 'password', value: {} };
 };
 
-const minLengthArray = (min: number, label: string, showLengthErrorText?: boolean) => (
-	value: any[],
-) => {
-	if (!value || value.length === 0 || value.length >= min) {
-		return null;
-	}
+const minLengthArray =
+	(min: number, label: string, showLengthErrorText?: boolean) => (value: any[]) => {
+		if (!value || value.length === 0 || value.length >= min) {
+			return null;
+		}
 
-	return showLengthErrorText
-		? { key: 'minElementsCount', value: { requiredCount: min, fieldLabel: label } }
-		: { key: 'minCount', value: true };
-};
+		return showLengthErrorText
+			? { key: 'minElementsCount', value: { requiredCount: min, fieldLabel: label } }
+			: { key: 'minCount', value: true };
+	};
 
-const maxLengthArray = (max: number, label: string, showLengthErrorText?: boolean) => (
-	value: any[],
-) => {
-	if (!value || value.length === 0 || value.length <= max) {
-		return null;
-	}
+const maxLengthArray =
+	(max: number, label: string, showLengthErrorText?: boolean) => (value: any[]) => {
+		if (!value || value.length === 0 || value.length <= max) {
+			return null;
+		}
 
-	return showLengthErrorText
-		? { key: 'maxElementsCount', value: { requiredCount: max, fieldLabel: label } }
-		: { key: 'maxCount', value: true };
-};
+		return showLengthErrorText
+			? { key: 'maxElementsCount', value: { requiredCount: max, fieldLabel: label } }
+			: { key: 'maxCount', value: true };
+	};
 
 const richTextMinCharacters = (min: number) => (value: string) => {
 	const characters = stripHtmlTags(value);
