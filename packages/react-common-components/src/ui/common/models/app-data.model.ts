@@ -152,8 +152,8 @@ export class FullAppData {
 	developerId: string;
 	model: AppModel[];
 	access?: string[];
-	restrict?: null | Restrict;
-	allow?: null | Restrict;
+	restrict?: Record<string, unknown> | Restrict;
+	allow?: Record<string, unknown> | Restrict;
 	submittedDate: number | Date;
 	created: number | Date;
 	attributes?: any;

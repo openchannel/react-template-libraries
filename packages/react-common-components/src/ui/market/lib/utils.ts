@@ -1,3 +1,5 @@
+import { CSSProperties } from 'react';
+
 const isoCurrencyCodes = new Map([
 	['USD', '$'],
 	['EUR', '€'],
@@ -33,7 +35,7 @@ export const validateRouterLink = (link: string) => {
 };
 
 export const textEllipsis = {
-	'white-space': 'nowrap',
+	whiteSpace: 'nowrap',
 	overflow: 'hidden',
 	textOverflow: 'ellipsis',
-};
+} as CSSProperties;
