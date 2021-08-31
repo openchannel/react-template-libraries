@@ -39,9 +39,11 @@
 				padding: 2px;
 				&:hover {
 					font-weight: 700;
+					outline: none;
 				}
 				&:focus {
-					border: 1px solid $focus-border;
+					border: none;
+					outline: none;
 				}
 				&_margin {
 					margin-top: 2rem;
