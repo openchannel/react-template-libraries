@@ -32,19 +32,19 @@ export const updateElementKeys = (
 
 // eslint-disable-next-line
 export const normalizeFieldsForFormik = (todo: Function) => (fields: Array<AppFormField | FormikField>, deepPath?: string): FormikField[] => {
-	return fields.map((field: AppFormField | FormikField, index: number) => {
-		const path: string = deepPath ? `${deepPath}.fields.${index}` : `${index}`;
+		return fields.map((field: AppFormField | FormikField, index: number) => {
+			const path: string = deepPath ? `${deepPath}.fields.${index}` : `${index}`;
 
-		if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields) {
-			return {
-				...todo(field, { path, index }),
-				fields: normalizeFieldsForFormik(todo)(field.fields, path),
-			};
-		}
+			if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields) {
+				return {
+					...todo(field, { path, index }),
+					fields: normalizeFieldsForFormik(todo)(field.fields, path),
+				};
+			}
 
-		return todo(field, { path, index });
-	});
-};
+			return todo(field, { path, index });
+		});
+	};
 
 export const getInitialValuesFromFields = (fields: FormikField[]): { [key: string]: any } => {
 	return fields.reduce(
