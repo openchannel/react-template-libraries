@@ -1,15 +1,15 @@
 //commit 240aa1e72cb6b2f67e9148e5d21917065b56fb19 author: Julia Date: 12.05.21 18:29
-//@eslint-disable-jsx-a11y
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { noop } from 'lodash-es';
 
 import { SidebarValue } from '../../models/component-basic.model';
 
 import './style.scss';
 
 export interface SidebarClick {
-	parent: any | Record<string, never>;
-	child: any | Record<string, never>;
+	parent: SidebarValue | Record<string, never>;
+	child?: SidebarValue | Record<string, never>;
 }
 
 export interface SidebarProps {
@@ -60,15 +60,13 @@ export const OcSidebar: React.FC<SidebarProps> = (props) => {
 		baseNavigation,
 		toggleIconDown = '../../../../assets/img/select-down.svg',
 		toggleIconUp = '../../../../assets/img/select-up.svg',
-		onClickSidebar = (e) => {
-			return undefined;
-		},
+		onClickSidebar = noop,
 		selectedCategory,
 	} = props;
 
 	const handleClickSidebar = (
 		parentItem: SidebarValue | Record<string, never>,
-		childItem: SidebarValue | Record<string, never>,
+		childItem?: SidebarValue | Record<string, never>,
 	): void => onClickSidebar({ parent: parentItem, child: childItem });
 
 	return (
@@ -77,8 +75,8 @@ export const OcSidebar: React.FC<SidebarProps> = (props) => {
 				<span className="oc-sidebar__heading">{title}</span>
 				<ul className="oc-sidebar__list">
 					{sidebarModel &&
-						sidebarModel?.map((selectItem, index) => (
-							<li className="oc-sidebar__list-item" key={selectItem.label + index}>
+						sidebarModel?.map((selectItem) => (
+							<li className="oc-sidebar__list-item" key={selectItem.id}>
 								<div className="oc-sidebar__list-item-expand-line">
 									{baseNavigation ? (
 										<>
@@ -87,7 +85,7 @@ export const OcSidebar: React.FC<SidebarProps> = (props) => {
 													selectItem.id === selectedCategory?.parent?.id ? 'font-weight-bold' : ''
 												}`}
 												to={`${baseNavigation}/${selectItem.id}`}
-												onClick={() => handleClickSidebar(selectItem, {})}
+												onClick={() => handleClickSidebar(selectItem)}
 											>
 												{selectItem.label}
 											</Link>
@@ -113,7 +111,7 @@ export const OcSidebar: React.FC<SidebarProps> = (props) => {
 												className={`oc-sidebar__list-item-text ${
 													selectItem.id === selectedCategory?.parent?.id ? 'font-weight-bold' : ''
 												}`}
-												onClick={() => handleClickSidebar(selectItem, {})}
+												onClick={() => handleClickSidebar(selectItem)}
 											>
 												{selectItem.label}
 											</span>
@@ -136,8 +134,8 @@ export const OcSidebar: React.FC<SidebarProps> = (props) => {
 								<ul className="oc-sidebar__sublist">
 									{selectItem.values &&
 										selectItem.values.length > 0 &&
-										selectItem.values.map((subValue: any, index: number) => (
-											<li key={subValue.label + index}>
+										selectItem.values.map((subValue) => (
+											<li key={subValue.id}>
 												{baseNavigation ? (
 													<Link
 														className={`oc-sidebar__list-item-text oc-sidebar__list-item-text_margin ${

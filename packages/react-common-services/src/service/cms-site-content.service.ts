@@ -24,9 +24,11 @@ const _tryGetContentByPath = (cmsData: any, path: any): string | null => {
 };
 
 export const cmsSiteContent = {
-	getContentByPaths: (cmsData: any, defaultCmsData: any) => <P>(paths: P) => {
-		const data = cmsData || defaultCmsData;
+	getContentByPaths:
+		(cmsData: any, defaultCmsData: any) =>
+		<P>(paths: P) => {
+			const data = cmsData || defaultCmsData;
 
-		return _findContentByPaths(data, paths);
-	},
+			return _findContentByPaths(data, paths);
+		},
 };

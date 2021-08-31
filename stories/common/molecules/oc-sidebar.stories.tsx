@@ -10,7 +10,7 @@ export default {
 } as Meta;
 
 const SidebarComponent: Story<SidebarProps> = (args) => {
-	const [selectedCategory, setSelectedCategory] = React.useState({ parent: {}, child: {} });
+	const [selectedCategory, setSelectedCategory] = React.useState({ parent: {} });
 
 	return (
 		<BrowserRouter>
