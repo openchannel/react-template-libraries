@@ -12,9 +12,12 @@ export interface FooterColumn {
 }
 
 export interface OcFooterProps {
-	cmsData?: null | Record<string, never> | {
-		logoImageURL: string;
-		columnsDFA: FooterColumn[];
-	};
+	cmsData?:
+		| null
+		| Record<string, never>
+		| {
+				logoImageURL: string;
+				columnsDFA: FooterColumn[];
+		  };
 	socialLinks?: SocialLink[];
 }
