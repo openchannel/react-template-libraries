@@ -4,7 +4,7 @@ import {
 	notify,
 	OcButtonComponent,
 	OcNotificationContainer,
-} from '@openchannel/react-common-components/src/ui/common';
+} from '../../../packages/react-common-components/src/ui/common';
 
 export const Notifications: Story = () => (
 	<div style={{ display: 'flex', flexDirection: 'column', maxWidth: 300 }}>

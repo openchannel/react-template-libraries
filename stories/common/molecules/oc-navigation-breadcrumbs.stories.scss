@@ -1,0 +1,11 @@
+
+.bg-container {
+	width: 100%;
+	min-height: 100vh;
+	background: url(../../../packages/react-common-components/src/assets/img/container-bg.svg) center center no-repeat;
+	background-size: cover;
+}
+
+.bg-container.height-unset {
+	min-height: unset;
+}

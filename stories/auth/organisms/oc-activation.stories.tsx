@@ -6,7 +6,7 @@ import {
 	errorMessages,
 	OcActivationProps,
 	OcActivation,
-} from '@openchannel/react-common-components/src/ui';
+} from '../../../packages/react-common-components/src/ui';
 
 export default {
 	title: 'User Activation',

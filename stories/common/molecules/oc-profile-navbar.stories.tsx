@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { ProfileNavbarProps } from '@openchannel/react-common-components/src/ui';
-import OcProfileNavbar from '../../../packages/react-common-components/src/ui/common/molecules/oc-profile-navbar';
+import { OcProfileNavbar, ProfileNavbarProps } from '../../../packages/react-common-components/src/ui/common/molecules/oc-profile-navbar';
 
 export default {
 	title: 'Profile Navbar [BEM]',

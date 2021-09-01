@@ -2,11 +2,11 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
+import { errorMessages } from '../../../packages/react-common-components/src/ui/form/lib';
 import {
-	errorMessages,
 	OcForgotPasswordProps,
 	OcForgotPasswordComponent,
-} from '@openchannel/react-common-components/src/ui';
+} from '../../../packages/react-common-components/src/ui/auth';
 
 export default {
 	title: 'Forgot Password [BEM]',
