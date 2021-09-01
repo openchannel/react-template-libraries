@@ -13,7 +13,7 @@ export interface NavigationBreadcrumbsProps {
 	buttonClick?: React.MouseEventHandler;
 }
 
-export const NavigationBreadcrumbs: React.FC<NavigationBreadcrumbsProps> = (props) => {
+export const OcNavigationBreadcrumbs: React.FC<NavigationBreadcrumbsProps> = (props) => {
 	const { navigateText, navigateClick, pageTitle, buttonText, buttonClick } = props;
 
 	return (

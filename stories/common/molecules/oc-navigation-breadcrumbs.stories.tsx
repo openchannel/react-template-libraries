@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import NavigationBreadcrumbs, {NavigationBreadcrumbsProps} from "../../../packages/react-common-components/src/ui/common/molecules/oc-navigation-breadcrumbs";
+import {
+	NavigationBreadcrumbsProps,
+	OcNavigationBreadcrumbs
+} from "../../../packages/react-common-components/src/ui/common/molecules/oc-navigation-breadcrumbs";
 import './oc-navigation-breadcrumbs.stories.scss'
 
 export default {
 	title: 'Navigation Breadcrumbs',
-	component: NavigationBreadcrumbs,
+	component: OcNavigationBreadcrumbs,
 	parameters: {
 		actions: {
 			handles: ['click'],
@@ -17,7 +20,7 @@ export default {
 const NavigationComponent: Story<NavigationBreadcrumbsProps> = (args) => {
 	return (
 		<div className="bg-container height-unset">
-			<NavigationBreadcrumbs {...args}/>
+			<OcNavigationBreadcrumbs {...args}/>
 		</div>
 
 	)

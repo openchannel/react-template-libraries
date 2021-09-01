@@ -1,2 +1,2 @@
-export { NavigationBreadcrumbs as default, NavigationBreadcrumbs } from './navigation-breadcrumbs';
-export * from './navigation-breadcrumbs';
+export { OcNavigationBreadcrumbs as default, OcNavigationBreadcrumbs } from './oc-navigation-breadcrumbs';
+export * from './oc-navigation-breadcrumbs';

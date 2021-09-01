@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import { NavigationBreadcrumbs } from '../../../../src/ui/common/molecules/oc-navigation-breadcrumbs/navigation-breadcrumbs';
+import { OcNavigationBreadcrumbs } from '../../../../src/ui/common/molecules/oc-navigation-breadcrumbs/oc-navigation-breadcrumbs';
 import { mount } from "enzyme";
 
 describe('Navigation Breadcrumbs component', () => {
 
 const component = mount(
-	<NavigationBreadcrumbs
+	<OcNavigationBreadcrumbs
 		pageTitle='My Profile'
 		navigateText='Back'
 		navigateClick={() => {}}
