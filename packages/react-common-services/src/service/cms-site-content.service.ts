@@ -16,7 +16,7 @@ const _findContentByPaths = <P>(data: any, paths: P) => {
 
 const _tryGetContentByPath = (cmsData: any, path: any): string | null => {
 	if (has(cmsData, path)) {
-		return get(cmsData, path);
+		return `/${get(cmsData, path)}`;
 	} else {
 		console.warn(`CMS content. Invalid content path: ${path}`);
 		return null;
