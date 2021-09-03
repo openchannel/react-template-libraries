@@ -3,6 +3,7 @@ export * from './oc-app-get-started/oc-app-get-started';
 export * from './oc-datetime-picker/oc-datetime';
 export * from './oc-dropdown';
 export * from './oc-profile-navbar/oc-profile-navbar';
+export * from './oc-review/oc-review';
 export * from './oc-review-list/oc-review-list';
 export * from './oc-select/oc-select';
 export * from './oc-select-expandable/oc-select-expandable';

@@ -10,6 +10,8 @@ import OcRichTextEditorComponent from '../../../../common/atoms/oc-rich-text-edi
 import OcDatetimePicker from '../../../../common/molecules/oc-datetime-picker/oc-datetime';
 import OcSelect from '../../../../common/molecules/oc-select/oc-select';
 import OcVideoUrlComponent from '../../../../common/molecules/oc-video-url/oc-video-url';
+import { RatingProps } from '../../../../market';
+import OcRatingComponent from '../../../../market/atoms/oc-rating';
 import OcTooltipLabel from '../../../atoms/oc-tooltip-label/oc-tooltip-label';
 import { FIELD_TYPE } from '../../../lib';
 import { OcMultiSelectListProps, OcTagsProps } from '../../../molecules';
@@ -230,3 +232,28 @@ export const FormikOcMultiSelectListWrapper: React.FC<
 export const FormikOcFileUploadWrapper: React.FC<any> = React.memo(({ acceptType, fileType }) => {
 	return <OcFileUpload acceptType={acceptType} fileType={fileType} />;
 });
+
+export const FormikOcRatingWrapper: React.FC<
+	FCWP<RatingProps['rating']> & {
+		label?: RatingProps['label'];
+		disabled?: RatingProps['disabled'];
+	}
+> = React.memo(({ field, form, label, disabled }) => {
+	const onChange = React.useCallback(
+		(value) => {
+			form.setFieldValue(field.name, value);
+		},
+		[field.name, form.setFieldValue],
+	);
+
+	return (
+		<OcRatingComponent
+			type="multi-star"
+			name={field.name}
+			label={label}
+			rating={field.value}
+			onChange={onChange}
+			disabled={disabled}
+		/>
+	);
+}, shouldFieldUpdate(['label', 'disabled']));

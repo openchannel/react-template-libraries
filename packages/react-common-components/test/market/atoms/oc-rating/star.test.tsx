@@ -10,7 +10,7 @@ describe('Star of Rating component (market Rating)', () => {
 
   beforeEach(() => {
     component = setUp({
-      index: 0,
+      star: 1,
       rating: 3.4,
     });
   });
@@ -30,8 +30,24 @@ describe('Star of Rating component (market Rating)', () => {
   });
 
   it('should render empty star', () => {
-    component.setProps({ index: 1, rating: 0.8 });
+    component.setProps({ star: 2, rating: 0.8 });
 
     expect(component.find('span').filter('span')).toHaveLength(1);
   });
+
+	it('should render empty star', () => {
+		component.setProps({ star: 2, rating: 0.8 });
+
+		expect(component.find('span').filter('span')).toHaveLength(1);
+	});
+
+	it('should render enabled star', () => {
+		expect(component.find('.oc-rating-multi__star_disabled').exists()).not.toBeTruthy();
+	});
+
+	it('should render disabled star', () => {
+		component.setProps({ disabled: true });
+
+		expect(component.find('.oc-rating-multi__star_disabled').exists()).toBeTruthy();
+	});
 });

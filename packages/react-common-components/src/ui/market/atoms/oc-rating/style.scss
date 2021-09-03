@@ -20,6 +20,10 @@
     &__star {
       color: $secondary;
       position: relative;
+			cursor: pointer;
+			&_disabled {
+				cursor: default;
+			}
       &_filled {
         color: $yellow;
       }

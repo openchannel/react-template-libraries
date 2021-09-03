@@ -3,6 +3,7 @@ import * as React from 'react';
 export interface OcTextareaProps {
 	value: string;
 	onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
+	name?: string;
 	/**
 	 * Rows of textarea.
 	 * @default 5
