@@ -49,7 +49,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 								<h4 className="login__header-heading">Log In</h4>
 								<OcLabelComponent
 									text="Log in into your account"
-									className="login__header-invitation"
+									customClass="login__header-invitation"
 								/>
 							</div>
 							{isIncorrectEmail && (
@@ -73,7 +73,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 								<OcLabelComponent
 									htmlFor="login_email"
 									text="Email"
-									className="login__form-label login__email-label"
+									customClass="login__form-label login__email-label"
 								/>
 								<OcInputComponent
 									placeholder="Email"
@@ -91,7 +91,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 								<OcLabelComponent
 									htmlFor="login_password"
 									text="Password"
-									className="login__form-label login__password-label"
+									customClass="login__form-label login__password-label"
 								/>
 								<OcPasswordComponent
 									name="password"

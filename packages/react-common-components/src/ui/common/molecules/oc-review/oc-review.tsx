@@ -86,7 +86,7 @@ export const OcReviewComponent: React.FC<ReviewProps> = (props) => {
 				{(f) => (
 					<Form className="review__form-group" onSubmit={f.handleSubmit}>
 						<div className="review__form-group">
-							<OcLabelComponent text="Rating" required className="review__form-label" />
+							<OcLabelComponent text="Rating" required customClass="review__form-label" />
 							<FormikOcRatingWrapper
 								field={{
 									name: 'rating',
@@ -101,7 +101,7 @@ export const OcReviewComponent: React.FC<ReviewProps> = (props) => {
 							{f.touched.rating && f.errors.rating && <OcError message={f.errors.rating} />}
 						</div>
 						<div className="review__form-group">
-							<OcLabelComponent text="Title" required className="review__form-label" />
+							<OcLabelComponent text="Title" required customClass="review__form-label" />
 							<OcInputComponent
 								name="headline"
 								customClass="review__form-field review__input"
@@ -112,7 +112,7 @@ export const OcReviewComponent: React.FC<ReviewProps> = (props) => {
 							{f.touched.headline && f.errors.headline && <OcError message={f.errors.headline} />}
 						</div>
 						<div className="review__form-group">
-							<OcLabelComponent text="Review" required className="review__form-label" />
+							<OcLabelComponent text="Review" required customClass="review__form-label" />
 							<OcTextarea
 								name="description"
 								customClass="review__form-field review__textarea"
