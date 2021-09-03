@@ -36,7 +36,7 @@ export interface InviteModalProps extends Omit<ModalProps, 'children'> {
 	/** Modal data */
 	modalData?: any;
 	/** buttons position on form */
-	buttonPosition?: string;
+	buttonPosition?: 'top' | 'left' | 'right' | 'between';
 }
 
 export const OcInviteModal: React.FC<InviteModalProps> = (props) => {
