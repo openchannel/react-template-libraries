@@ -96,7 +96,7 @@ export const OcReviewComponent: React.FC<ReviewProps> = (props) => {
 								}}
 								form={f}
 							/>
-							{f.errors.rating && <OcError message={f.errors.rating} />}
+							{f.touched.rating && f.errors.rating && <OcError message={f.errors.rating} />}
 						</div>
 						<div className="review__form-group">
 							<OcLabelComponent text="Title" required className="review__form-label" />
@@ -105,8 +105,9 @@ export const OcReviewComponent: React.FC<ReviewProps> = (props) => {
 								customClass="review__form-field review__input"
 								value={f.values.headline}
 								onChange={f.handleChange}
+								onBlur={f.handleBlur}
 							/>
-							{f.errors.headline && <OcError message={f.errors.headline} />}
+							{f.touched.headline && f.errors.headline && <OcError message={f.errors.headline} />}
 						</div>
 						<div className="review__form-group">
 							<OcLabelComponent text="Review" required className="review__form-label" />
@@ -115,8 +116,11 @@ export const OcReviewComponent: React.FC<ReviewProps> = (props) => {
 								customClass="review__form-field review__textarea"
 								value={f.values.description}
 								onChange={f.handleChange}
+								onBlur={f.handleBlur}
 							/>
-							{f.errors.description && <OcError message={f.errors.description} />}
+							{f.touched.description && f.errors.description && (
+								<OcError message={f.errors.description} />
+							)}
 						</div>
 						{enableButtons && (
 							<div className="review__buttons-section">
