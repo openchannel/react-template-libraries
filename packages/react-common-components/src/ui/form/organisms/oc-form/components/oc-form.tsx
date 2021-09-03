@@ -52,16 +52,18 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 				<FormikForm className="form" onSubmit={handleSubmit} noValidate>
 					<FormikMapFieldsWrapper />
 					<div className={getOcFormButtonsClass(buttonPosition)}>
-						<div className="form__button">
+						<div className={`form__button ${!onCancel ? 'full-width' : ''}`}>
 							<OcButtonComponent htmlType="submit" type="primary" process={formik.isSubmitting}>
 								{successButtonText}
 							</OcButtonComponent>
 						</div>
-						<div className="form__button">
-							<OcButtonComponent htmlType="button" type="secondary" onClick={onCancel}>
-								Cancel
-							</OcButtonComponent>
-						</div>
+						{onCancel && (
+							<div className="form__button">
+								<OcButtonComponent htmlType="button" type="secondary" onClick={onCancel}>
+									Cancel
+								</OcButtonComponent>
+							</div>
+						)}
 					</div>
 				</FormikForm>
 			</OcFormContextProvider>

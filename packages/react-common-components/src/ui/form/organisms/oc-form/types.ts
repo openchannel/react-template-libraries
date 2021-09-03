@@ -10,22 +10,22 @@ export interface OcFormProps {
 		values: Record<string, any>,
 		formikProps: FormikHelpers<Record<string, unknown>>,
 	) => void;
-	onCancel: () => void;
+	onCancel?: () => void;
 	/**
-	 * Set position of the field label. Can be: 'top', 'left', 'right'.
+	 * Set position of the field label.
 	 * @param {('top'|'left'|'right')} position
 	 * @default top
 	 */
-	labelPosition?: string;
+	labelPosition?: 'top' | 'left' | 'right';
 	/**
 	 * @default Submit
 	 */
 	successButtonText?: string;
 	/**
-	 * Set position of the field label. Can be: 'top', 'left', 'right', 'between'.
+	 * Set position of the field label.
 	 * @default left
 	 */
-	buttonPosition?: string;
+	buttonPosition?: 'top' | 'left' | 'right' | 'between';
 }
 
 export type FieldType =
