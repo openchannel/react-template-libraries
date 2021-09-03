@@ -1,9 +1,6 @@
 import * as React from 'react';
 
-export interface OcTextareaProps {
-	value: string;
-	onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
-	name?: string;
+export interface OcTextareaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
 	/**
 	 * Rows of textarea.
 	 * @default 5

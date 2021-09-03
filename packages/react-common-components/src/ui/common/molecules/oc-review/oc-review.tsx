@@ -94,6 +94,8 @@ export const OcReviewComponent: React.FC<ReviewProps> = (props) => {
 									onChange: f.handleChange,
 									onBlur: f.handleBlur,
 								}}
+								// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+								// @ts-ignore
 								form={f}
 							/>
 							{f.touched.rating && f.errors.rating && <OcError message={f.errors.rating} />}
