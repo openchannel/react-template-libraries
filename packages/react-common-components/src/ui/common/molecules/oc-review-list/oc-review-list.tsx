@@ -64,6 +64,7 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 										rating={review.rating / 100}
 										type="multi-star"
 										className="review-list__one-review-rating"
+										disabled
 									/>
 									<div className="review-list__one-review-text">{review.review}</div>
 									<hr />
@@ -77,6 +78,7 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 										rating={review.rating / 100}
 										type="multi-star"
 										className="review-list__one-review-rating"
+										disabled
 									/>
 									<div className="review-list__one-review-text">{review.review}</div>
 									<hr />

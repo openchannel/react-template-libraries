@@ -1,0 +1,42 @@
+// commit commit 10df2e44cb7b8b25414387a7a4bc536bebaf1490 Author: Julia Date: 25/6/21, 18:20
+@import '../../../styles/index';
+
+.review {
+	&__heading {
+		margin-bottom: 2rem;
+	}
+
+	&__form {
+		&-group {
+			margin-bottom: 3rem;
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		&-label {
+			display: block;
+			margin-bottom: 1rem;
+		}
+	}
+
+	&__rating {
+		margin-top: 1rem;
+	}
+
+	&__buttons-section {
+		display: flex;
+		margin-top: 6rem;
+		justify-content: flex-end;
+	}
+
+	&__button {
+		display: block;
+		width: 160px;
+
+		&-cancel {
+			margin-right: 6rem;
+		}
+	}
+}
