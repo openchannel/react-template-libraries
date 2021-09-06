@@ -7,8 +7,8 @@ import { noop } from 'lodash-es';
 import OcError from '../../../common/atoms/oc-error/oc-error';
 import OcInputComponent from '../../../common/atoms/oc-input/oc-input';
 import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
-import { FormikOcRatingWrapper } from '../../../form';
 import OcTextarea from '../../../form/atoms/oc-textarea/oc-textarea';
+import OcRatingComponent from '../../../market/atoms/oc-rating';
 import OcButtonComponent from '../../atoms/oc-button/oc-button';
 
 import { validateReview } from './utils';
@@ -87,16 +87,12 @@ export const OcReviewComponent: React.FC<ReviewProps> = (props) => {
 					<Form className="review__form-group" onSubmit={f.handleSubmit}>
 						<div className="review__form-group">
 							<OcLabelComponent text="Rating" required customClass="review__form-label" />
-							<FormikOcRatingWrapper
-								field={{
-									name: 'rating',
-									value: f.values.rating,
-									onChange: f.handleChange,
-									onBlur: f.handleBlur,
-								}}
-								// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-								// @ts-ignore
-								form={f}
+							<OcRatingComponent
+								type="multi-star"
+								name="rating"
+								rating={f.values.rating}
+								onChange={(r) => f.setFieldValue('rating', r)}
+								onBlur={() => f.setFieldTouched('rating')}
 							/>
 							{f.touched.rating && f.errors.rating && <OcError message={f.errors.rating} />}
 						</div>

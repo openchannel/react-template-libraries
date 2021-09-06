@@ -17,6 +17,7 @@
   }
 
   &-multi {
+    display: inline-block;
     &__star {
       color: $secondary;
       position: relative;

@@ -51,6 +51,10 @@ export interface RatingProps {
 	 * */
 	onChange?: (rating: number) => void;
 	/**
+	 * A callback fired when the rating is blurred.
+	 * */
+	onBlur?: () => void;
+	/**
 	 * Disabling the rating component. That the user can not interact with it.
 	 * Component will be used only for displaying
 	 * @default false
@@ -67,6 +71,7 @@ const OcRatingComponent: React.FC<RatingProps> = (props) => {
 		labelClass = 'font-m font-med',
 		className,
 		onChange,
+		onBlur,
 		disabled = false,
 	} = props;
 
@@ -87,7 +92,7 @@ const OcRatingComponent: React.FC<RatingProps> = (props) => {
 	}
 
 	return (
-		<div className={className || 'oc-rating-multi'}>
+		<div className={className || 'oc-rating-multi'} onMouseLeave={onBlur}>
 			{stars.map((star) => (
 				<Star
 					key={star}
