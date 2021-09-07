@@ -19,6 +19,7 @@ export interface FilterValue extends SelectModel {
 	sort?: string;
 	query?: string;
 	description?: string;
+	values: FilterValue[];
 }
 
 export interface Filter {
