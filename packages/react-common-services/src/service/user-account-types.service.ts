@@ -1,7 +1,6 @@
-import { api } from "../lib/api";
-import { Page } from "../model/api/page.model";
-import { UserAccountTypeModel } from "../model/api/user-type.model";
-
+import { api } from '../lib/api';
+import { Page } from '../model/api/page.model';
+import { UserAccountTypeModel } from '../model/api/user-type.model';
 
 const USER_ACCOUNT_TYPES_URL = 'v2/userAccountTypes';
 
@@ -19,16 +18,14 @@ const USER_ACCOUNT_TYPES_URL = 'v2/userAccountTypes';
  * getUserAccountTypes(1,10,"{"name": {"$in":["first", "second"]}}")
  *``
  */
-export const userAccountTypesService = {
-	getUserAccountTypes(pageNumber?: string, limit?: number, query?: string) {
-		return api.get<any, Page<UserAccountTypeModel>>(USER_ACCOUNT_TYPES_URL,
-			{params:
-					{
-						pageNumber: pageNumber,
-						limit: limit,
-						query: query
-					}
+export const userAccountTypes = {
+	getUserAccountTypes(pageNumber?: number, limit?: number, query?: string) {
+		return api.get<any, Page<UserAccountTypeModel>>(USER_ACCOUNT_TYPES_URL, {
+			params: {
+				pageNumber: pageNumber,
+				limit: limit,
+				query: query,
 			},
-		)
-	}
-}
+		});
+	},
+};
