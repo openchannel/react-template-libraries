@@ -63,6 +63,7 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 									enableTermsCheckbox={enableTermsCheckbox}
 									enablePasswordField={enablePasswordField}
 									defaultEmptyConfigsErrorMessage={defaultEmptyConfigsErrorMessage}
+									submitText="Sign Up"
 								/>
 							</div>
 						)}

@@ -25,6 +25,7 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 		defaultTypeLabelText = 'Type',
 		onSubmit,
 		defaultEmptyConfigsErrorMessage = 'There are no forms configured',
+		submitText = 'Submit'
 	} = props;
 
 	const selectConfigOptions: any[] = formConfigs.map((config) => config.name);
@@ -108,7 +109,7 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 									<OcButtonComponent
 										disabled={isSubmitting}
 										htmlType="submit"
-										text="Sign Up"
+										text={submitText}
 										type="primary"
 										customClass="sign-up__button"
 									/>
