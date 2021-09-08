@@ -1,8 +1,7 @@
-import { ReqHeaders } from "../lib/request";
-import { api } from "../lib/api";
-import { Page } from "../model/api/page.model";
-import { TypeFieldModel, TypeModel } from "../model/api/type.model";
-
+import { api } from '../lib/api';
+import { ReqHeaders } from '../lib/request';
+import { Page } from '../model/api/page.model';
+import { TypeFieldModel, TypeModel } from '../model/api/type.model';
 
 const USER_TYPES_URL = 'v2/userTypes';
 
@@ -23,19 +22,21 @@ const USER_TYPES_URL = 'v2/userTypes';
  *``
  */
 export const UsersService = {
-	getUsersTypes(query?: string,
-								sort?: string,
-								pageNumber?: number,
-								pageLimit?: number,
-								headers?: ReqHeaders) {
+	getUsersTypes(
+		query?: string,
+		sort?: string,
+		pageNumber?: number,
+		pageLimit?: number,
+		headers?: ReqHeaders,
+	) {
 		return api.get<any, Page<TypeModel<TypeFieldModel>>>(USER_TYPES_URL, {
 			params: {
 				query: query,
 				sort: sort,
 				pageNumber: pageNumber,
 				pageLimit: pageLimit,
-				headers: headers
-			}
-		})
-	}
-}
+				headers: headers,
+			},
+		});
+	},
+};

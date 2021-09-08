@@ -1,10 +1,9 @@
-import { UserAccount } from "../model/api/user.model";
-import { api } from "../lib/api";
+import { api } from '../lib/api';
+import { UserAccount } from '../model/api/user.model';
 
 const USER_URL = 'v2/users';
 
 export const userAccount = {
-
 	/**
 	 * Description: Getting data about none-developer users
 	 *
@@ -17,7 +16,7 @@ export const userAccount = {
 	 *``
 	 */
 	getUserAccount() {
-		return api.get<any, UserAccount>(`${USER_URL}/this`)
+		return api.get<any, UserAccount>(`${USER_URL}/this`);
 	},
 
 	/**
@@ -32,6 +31,6 @@ export const userAccount = {
 	 *``
 	 */
 	updateUserAccount(accountData: any) {
-		return api.patch(`${USER_URL}/this`, accountData)
-	}
-}
+		return api.patch(`${USER_URL}/this`, accountData);
+	},
+};
