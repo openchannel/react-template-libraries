@@ -66,7 +66,7 @@ export interface EditUserComponentProps {
 	ordinaryTermsDescription: React.ReactNode;
 	onSubmit: (values: FormikValues) => void;
 	enableCustomTerms: boolean;
-	submitText: string;
+	submitText?: string;
 }
 
 export interface InitialFormikValues {
