@@ -80,7 +80,9 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 					value={value}
 					onChange={handleChange}
 				/>
-				{hasMagnifier && <TextSearchIcon className="text-search__icon" onClick={enterAction} />}
+				{hasMagnifier && (
+					<TextSearchIcon viewBox="0 0 24 24" className="text-search__icon" onClick={enterAction} />
+				)}
 			</div>
 			<div className="text-search__controls">
 				{hasClearTextControl && (
