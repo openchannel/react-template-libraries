@@ -1,5 +1,6 @@
 // commit 407dd6f5f0440dfc245d37abccc7ffd52fc6f609 author: Julia Date: 29.06.21 14:16
 import * as React from 'react';
+// @ts-ignore
 import { Review } from '@openchannel/react-common-services';
 import { Form, Formik, FormikValues } from 'formik';
 import { noop } from 'lodash-es';
