@@ -6,7 +6,7 @@ import { ReactComponent as ToastInfoIcon } from '../../../../assets/img/toast-in
 import { ReactComponent as ToastSuccessIcon } from '../../../../assets/img/toast-success.svg';
 import { ReactComponent as ToastWarnIcon } from '../../../../assets/img/toast-warning.svg';
 
-import 'react-toastify/dist/ReactToastify.min.css';
+import './react-tostify.scss';
 import './style.scss';
 
 interface INotifyMessage {
