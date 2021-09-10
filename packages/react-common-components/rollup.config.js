@@ -54,7 +54,16 @@ export default [
 			url({
 				exclude: ['**/*.scss'],
 			}),
-			svgr(),
+			svgr({
+				svgoConfig: {
+					plugins: [
+						{
+							removeDimensions: false,
+							removeViewBox: false,
+						},
+					],
+				},
+			}),
 			styles(),
 			resolve({
 				browser: true,
