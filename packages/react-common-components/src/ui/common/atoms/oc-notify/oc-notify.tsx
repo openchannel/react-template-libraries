@@ -18,15 +18,11 @@ interface IIcon {
 	[key: string]: JSX.Element;
 }
 
-const options = {
-	autoClose: 3000,
-};
-
 export const notify = {
-	error: (message: string) => toast.error(<Msg message={message} icon="error" />, options),
-	success: (message: string) => toast.success(<Msg message={message} icon="success" />, options),
-	warning: (message: string) => toast.warning(<Msg message={message} icon="warn" />, options),
-	info: (message: string) => toast.info(<Msg message={message} icon="info" />, options),
+	error: (message: string) => toast.error(<Msg message={message} icon="error" />),
+	success: (message: string) => toast.success(<Msg message={message} icon="success" />),
+	warning: (message: string) => toast.warning(<Msg message={message} icon="warn" />),
+	info: (message: string) => toast.info(<Msg message={message} icon="info" />),
 };
 
 const icons: IIcon = {
@@ -51,6 +47,7 @@ export const OcNotificationContainer = () => {
 			autoClose={5000}
 			closeButton={false}
 			newestOnTop={false}
+			closeOnClick={true}
 			rtl={false}
 			pauseOnFocusLoss
 			draggable
