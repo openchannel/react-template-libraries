@@ -1,10 +1,10 @@
 import { toString } from 'lodash';
 
-import { UserCompanyModel } from '../../dist';
 import { api } from '../lib/api';
 import { ReqHeaders } from '../lib/request';
 import { Page } from '../model/api/page.model';
 import { TypeFieldModel, TypeModel } from '../model/api/type.model';
+import { UserCompanyModel } from '../model/api/user.model';
 
 /**
  * Description: API service for getting and modifying user model.<br>

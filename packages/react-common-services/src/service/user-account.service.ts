@@ -1,5 +1,5 @@
-import { Page } from '../../dist';
 import { api } from '../lib/api';
+import { Page } from '../model/api/page.model';
 import { UserAccount } from '../model/api/user.model';
 
 /**
@@ -58,7 +58,7 @@ export const userAccount = {
 	 *``
 	 */
 	getUserAccounts(pageNumber?: number, limit?: number, sort?: string, query?: string) {
-		return api.get<Page<UserAccount>>(`${USER_URL}/all`, {
+		return api.get<any, Page<UserAccount>>(`${USER_URL}/all`, {
 			params: {
 				pageNumber: String(pageNumber),
 				limit: String(limit),
