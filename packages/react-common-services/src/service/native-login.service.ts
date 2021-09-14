@@ -1,6 +1,7 @@
 import { api } from '../lib/api';
 import type { ChangePasswordRequest } from '../model/api/change-password.model';
 import type { SignUpByInviteRequest } from '../model/api/login.model';
+import { LoginResponse } from '../model/api/login.model';
 import type { UserResetPassword } from '../model/api/user-activation.model';
 import type {
 	OCNativeCustomSignup,
@@ -164,9 +165,10 @@ export const nativeLogin = {
 	 * `changePassword({
 	 *      password: 'password',
 	 *      newPassword: 'newPassword'
+	 *      jwtRefreshToken: 'jwtRefreshToken'
 	 * });`
 	 */
 	changePassword(body: ChangePasswordRequest) {
-		return api.post(`${NATIVE_URL}/change-password`, { body });
+		return api.post<any, LoginResponse>(`${NATIVE_URL}/change-password`, { body });
 	},
 };

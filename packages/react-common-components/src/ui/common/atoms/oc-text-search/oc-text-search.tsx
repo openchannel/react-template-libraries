@@ -1,4 +1,5 @@
 //commit 240aa1e72cb6b2f67e9148e5d21917065b56fb19 Author: Julia Date: 12.05.21, 18:29
+import { noop } from 'lodash';
 import * as React from 'react';
 
 import { ReactComponent as TextSearchIcon } from '../../../../assets/img/text-search-icon.svg';
@@ -57,19 +58,26 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 		onChange,
 		hasMagnifier,
 		hasClearTextControl,
-		enterAction,
+		enterAction = noop,
 		searchButtonText = 'Search',
 		clearButtonText = 'Cancel',
 	} = props;
+
 	const handleChange = React.useCallback(
 		(e: any) => {
-			onChange(e.target.value);
+			if (e.key === 'Enter') {
+				enterAction(e as unknown as React.MouseEvent);
+			} else {
+				onChange(e.target.value);
+			}
 		},
 		[onChange],
 	);
+
 	const clearSearch = React.useCallback(() => {
 		onChange('');
 	}, [onChange]);
+
 	return (
 		<div className="text-search">
 			<div className="text-search__container">
