@@ -89,8 +89,8 @@ export const userAccount = {
 		return api.patch<any, UserAccount>(`${USER_URL}/${userAccountId}`, {
 			params: {
 				skipTypeValidation: String(skipTypeValidation),
-				body: body,
 			},
+			body
 		});
 	},
 
