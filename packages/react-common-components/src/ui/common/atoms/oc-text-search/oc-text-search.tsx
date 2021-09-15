@@ -74,6 +74,15 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 		[onChange],
 	);
 
+	const handleKeyDown = React.useCallback(
+		(e: React.KeyboardEvent) => {
+			if (e.key === 'Enter') {
+				enterAction();
+			}
+		},
+		[enterAction],
+	);
+
 	const clearSearch = React.useCallback(() => {
 		onChange('');
 	}, [onChange]);
@@ -87,6 +96,7 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 					type="text"
 					value={value}
 					onChange={handleChange}
+					onKeyDown={handleKeyDown}
 				/>
 				{hasMagnifier && (
 					<TextSearchIcon viewBox="0 0 24 24" className="text-search__icon" onClick={enterAction} />
