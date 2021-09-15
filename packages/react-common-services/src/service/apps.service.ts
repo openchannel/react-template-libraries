@@ -30,7 +30,7 @@ export const apps = {
 	 */
 	searchApp: (searchText: string, query?: string, fields: string[] = ['name']) => {
 		const params = {
-			fields: String(fields),
+			fields: JSON.stringify(fields),
 			text: searchText || '',
 			query,
 		};

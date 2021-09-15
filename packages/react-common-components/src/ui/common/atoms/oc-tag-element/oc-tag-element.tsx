@@ -12,6 +12,10 @@ export interface OcTagElementProps {
 	 */
 	title: string;
 	/**
+	 * id - component id.
+	 */
+	id?: string;
+	/**
 	 * deleteTagImgUrl - path to the SVG icon on the right title side.
 	 */
 	deleteTagImgUrl?: string;
@@ -19,23 +23,23 @@ export interface OcTagElementProps {
 	 * Return title by click event on icon.
 	 * @param title
 	 */
-	onIconClick?: (title: string) => void;
+	onIconClick?: (title: string, id?: string) => void;
 }
 
 export const OcTagElement: React.FC<OcTagElementProps> = React.memo((props) => {
-	const { title, deleteTagImgUrl, onIconClick } = props;
+	const { title, id, deleteTagImgUrl, onIconClick } = props;
 
 	const onClick = () => {
 		if (!onIconClick) return;
 
-		onIconClick(title);
+		onIconClick(title, id);
 	};
 
 	const onKeyDown = (event: React.KeyboardEvent) => {
 		if (!onIconClick) return;
 
 		if (event.key === 'Enter') {
-			onIconClick(title);
+			onIconClick(title, id);
 		}
 	};
 
