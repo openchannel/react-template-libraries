@@ -62,7 +62,7 @@ export interface RatingProps {
 	disabled?: boolean;
 }
 
-const OcRatingComponent: React.FC<RatingProps> = (props) => {
+export const OcRatingComponent: React.FC<RatingProps> = (props) => {
 	const {
 		rating = 0,
 		reviewCount = 0,
