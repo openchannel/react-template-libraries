@@ -63,7 +63,7 @@ export interface EditUserComponentProps {
 	defaultTypeLabelText?: string;
 	defaultEmptyConfigsErrorMessage: string;
 	customTermsDescription?: React.ReactNode;
-	ordinaryTermsDescription: React.ReactNode;
+	ordinaryTermsDescription?: React.ReactNode;
 	onSubmit: (values: FormikValues) => void;
 	enableCustomTerms: boolean;
 	submitText?: string;

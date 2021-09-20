@@ -44,6 +44,7 @@ export const configConverter = (
 			name: 'password',
 			type: 'password',
 			label: 'Password',
+			defaultValue: '',
 			attributes: { required: false },
 		};
 		newFormConfig.fields.push(passwordField);
@@ -53,6 +54,7 @@ export const configConverter = (
 			id: 'terms',
 			name: 'terms',
 			type: 'checkbox',
+			defaultValue: false,
 			attributes: { required: true },
 		};
 		newFormConfig.fields.push(checkboxField);
