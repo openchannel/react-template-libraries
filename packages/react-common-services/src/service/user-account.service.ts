@@ -90,7 +90,7 @@ export const userAccount = {
 			params: {
 				skipTypeValidation: String(skipTypeValidation),
 			},
-			body
+			body,
 		});
 	},
 
@@ -106,7 +106,7 @@ export const userAccount = {
 	 *``
 	 */
 	updateUserAccount(accountData: any) {
-		return api.patch<any>(`${USER_URL}/this`, accountData);
+		return api.patch<any>(`${USER_URL}/this`, { body: accountData });
 	},
 
 	/**
