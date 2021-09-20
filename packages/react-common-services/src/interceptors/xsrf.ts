@@ -16,7 +16,7 @@ requestInterceptor.use((config) => {
 });
 
 responseInterceptor.use((response) => {
-	const headerName = instance.getHeaderName();
+	const headerName = instance.getHeaderName().toLowerCase();
 	const xsrfToken = response.headers[headerName];
 
 	if (xsrfToken) {
