@@ -63,8 +63,12 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 	);
 
 	const handleFormTypeChange = React.useCallback(
-		(formType: Option) => {
-			setFormType(formType.name);
+		(formType:  string | Option) => {
+			if (typeof formType === 'string') {
+				setFormType(formType);
+			} else {
+				setFormType(formType.name);
+			}
 		},
 		[setFormType],
 	);
