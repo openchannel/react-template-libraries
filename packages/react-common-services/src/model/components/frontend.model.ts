@@ -34,7 +34,7 @@ export interface SiteConfig {
 export interface OCReviewDetailsResponse {
 	reviewOwnerName: string;
 	rating: number;
-	review: string;
+	description: string;
 }
 
 export interface ChartStatisticDataModelResponse {

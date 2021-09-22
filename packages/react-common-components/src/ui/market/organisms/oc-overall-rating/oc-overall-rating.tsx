@@ -64,7 +64,7 @@ export const OcOverallRating: React.FC<OverallRatingProps> = (props) => {
 				return (
 					<div className="overall-rating__rate">
 						<div className="overall-rating__rate-header">
-							<OcRatingComponent rating={rate} type="multi-star" />
+							<OcRatingComponent rating={rate} type="multi-star" disabled />
 							<span className="overall-rating__progressbar-label">
 								{reviewsPerRate}/{allReviewSummary.reviewCount}
 							</span>
