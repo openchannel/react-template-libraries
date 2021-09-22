@@ -98,7 +98,7 @@ export const userInvites = {
 	 * editUserInvite('807has87dha8', {})
 	 */
 	editUserInvite(inviteId: string, inviteData: any) {
-		return api.post<any>(`${USER_INVITES_URL}/users/byId/${inviteId}`, inviteData);
+		return api.post<any>(`${USER_INVITES_URL}/users/byId/${inviteId}`, { body: inviteData });
 	},
 
 	/**
@@ -173,7 +173,7 @@ export const userInvites = {
 	 * `editDeveloperInvite('9ahs09d8jas9d8', {})`
 	 */
 	editDeveloperInvite(inviteId: string, inviteData: any) {
-		return api.post<any>(`${USER_INVITES_URL}/developers/byId/${inviteId}`, inviteData);
+		return api.post<any>(`${USER_INVITES_URL}/developers/byId/${inviteId}`, { body: inviteData });
 	},
 
 	/**
@@ -232,6 +232,6 @@ export const userInvites = {
 			...inviteIDs,
 			customData: { company, ...(userInviteData?.customData ? userInviteData.customData : {}) },
 		};
-		return api.post<any>(`${USER_INVITES_URL}/${userType}`, body);
+		return api.post<any>(`${USER_INVITES_URL}/${userType}`, { body });
 	},
 };
