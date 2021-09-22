@@ -66,7 +66,7 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 										className="review-list__one-review-rating"
 										disabled
 									/>
-									<div className="review-list__one-review-text">{review.review}</div>
+									<div className="review-list__one-review-text">{review.description}</div>
 									<hr />
 								</div>
 						  ))
@@ -80,7 +80,7 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 										className="review-list__one-review-rating"
 										disabled
 									/>
-									<div className="review-list__one-review-text">{review.review}</div>
+									<div className="review-list__one-review-text">{review.description}</div>
 									<hr />
 								</div>
 						  ))}
