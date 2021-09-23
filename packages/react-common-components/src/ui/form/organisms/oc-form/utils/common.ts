@@ -1,4 +1,4 @@
-import type { FormikValues } from 'formik';
+import type { FormikValues, FormikErrors } from 'formik';
 import { isEmpty } from 'lodash-es';
 
 import { errorMessages, FIELD_TYPE } from '../../../lib';
@@ -20,17 +20,34 @@ export const getOcFormButtonsClass = (buttonPosition: string): string => {
 	}
 };
 
-export const validateOcFormValues = (values: FormikFieldsValues, validators: FieldValidators) => {
-	if (!values || isEmpty(validators)) return {};
+export const validateOcFormValues = (
+	prevValues: FormikValues,
+	prevErrors: FormikErrors<FormikValues>,
+	values: FormikFieldsValues,
+	validators: FieldValidators
+) => {
+	if (!values || isEmpty(validators)) {
+		return {};
+	}
 
 	return Object.entries(values).reduce((acc, [name, value]) => {
-		if (!validators[name] || validators[name]?.length === 0) return acc;
+		// value wasn't changed, set old error if present
+		if (value === prevValues[name] && prevErrors[name] != null) {
+			return {...acc, [name]: prevErrors[name]};
+		}
 
+		// no validator
+		if (!validators[name] || validators[name]?.length === 0) {
+			return acc;
+		}
+
+		// validate
 		const errors = validators[name]!.map((validate) => validate(value))
 			.filter(Boolean)
 			.map((error) => errorMessages[error!.key](error!.value));
-
-		if (errors.length === 0) return acc;
+		if (errors.length === 0) {
+			return acc;
+		}
 
 		return { ...acc, [name]: errors };
 	}, {});
@@ -38,7 +55,18 @@ export const validateOcFormValues = (values: FormikFieldsValues, validators: Fie
 
 export const formatOcFormValues = (
 	arr: FormikField[],
+	values: FormikValues
+): Record<string, any> => formatOcFormFields(arr, values, ['name', 'id']);
+
+export const formatOcFormErrors = (
+	arr: FormikField[],
+	errors: FormikErrors<FormikValues>
+): Record<string, any> => formatOcFormFields(arr, errors, ['id', 'name']);
+
+const formatOcFormFields = (
+	arr: FormikField[],
 	values: FormikValues,
+	[source, target]: ('id' | 'name')[]
 ): Record<string, any> => {
 	return arr.reduce((acc, item) => {
 		if (item.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY) {
@@ -47,16 +75,16 @@ export const formatOcFormValues = (
 			}
 
 			const children = formatOcFormValues(item.fields, values);
-			const curr = acc[item.id];
+			const curr = acc[item[target]];
 			return {
 				...acc,
-				[item.id]: !isEmpty(children) ? [...(curr || []), { ...children }] : [...(curr || [])],
+				[item[target]]: !isEmpty(children) ? [...(curr || []), { ...children }] : [...(curr || [])],
 			};
 		}
 
-		const isValueExist = values[item.name];
-		if (isValueExist) {
-			acc[item.id] = isValueExist;
+		const value = values[item[source]];
+		if (value != null) {
+			acc[item[target]] = value;
 		}
 
 		return acc;

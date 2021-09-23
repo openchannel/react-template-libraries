@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikValues, FormikErrors, FormikProps } from 'formik';
 
 import { OcButtonComponent, OcCheckboxComponent, OcError } from '../../../common/atoms';
 import { OcSelect, Option } from '../../../common/molecules';
 import { FormikField } from '../../../form';
 import { OcTooltipLabel } from '../../../form/atoms';
-import { useFormikValidation } from '../../../form/organisms/oc-form/hooks';
+import { validateOcFormValues } from '../../../form/organisms/oc-form/utils/common';
 import { fieldsUtils } from '../../../form/organisms/oc-form/utils/fields';
 
 import { EditUserComponentProps } from './types';
@@ -27,6 +27,8 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 		defaultEmptyConfigsErrorMessage = 'There are no forms configured',
 		submitText = 'Submit',
 	} = props;
+
+	const formikRef = React.createRef<FormikProps<FormikValues>>();
 
 	const formTypes: string[] = React.useMemo(
 		() => formConfigs.map((config) => config.name),
@@ -58,10 +60,6 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 		[dynamicFormFields],
 	);
 
-	const { validate } = useFormikValidation(
-		fieldsUtils.getValidators(dynamicFormFields?.length ? dynamicFormFields : []),
-	);
-
 	const handleFormTypeChange = React.useCallback(
 		(formType:  string | Option) => {
 			if (typeof formType === 'string') {
@@ -72,6 +70,14 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 		},
 		[setFormType],
 	);
+
+	const validate =  (values: FormikValues): void | object | Promise<FormikErrors<FormikValues>> => {
+		const formik = formikRef.current;
+		if (formik != null) {
+			const validators = fieldsUtils.getValidators(dynamicFormFields?.length ? dynamicFormFields : []);
+			return validateOcFormValues(formik.values, formik.errors, values, validators);
+		}
+	}
 
 	if (formConfigs.length === 0) {
 		return null;
@@ -96,6 +102,7 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 						</>
 					)}
 					<Formik
+						innerRef={formikRef}
 						initialValues={initialValues}
 						onSubmit={onSubmit}
 						validate={validate}

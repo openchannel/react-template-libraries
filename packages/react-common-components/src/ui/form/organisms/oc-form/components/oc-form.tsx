@@ -1,15 +1,26 @@
 import * as React from 'react';
-import { Form as FormikForm, FormikContext, useFormik } from 'formik';
+import {
+	Form as FormikForm,
+	FormikContext,
+	FormikValues,
+	useFormik
+} from 'formik';
 
 import OcButtonComponent from '../../../../common/atoms/oc-button/oc-button';
 import { OcFormContextProvider } from '../context';
-import { useFormikValidation, useOcFormState } from '../hooks';
+import { useOcFormState } from '../hooks';
 import { OcFormProps } from '../types';
-import { formatOcFormValues, getOcFormButtonsClass } from '../utils/common';
+import {
+	formatOcFormErrors,
+	formatOcFormValues,
+	getOcFormButtonsClass,
+	validateOcFormValues
+} from '../utils/common';
 
 import { FormikMapFieldsWrapper } from './formik-map-field';
 
 import '../style.scss';
+import {FormikErrors} from 'formik/dist/types';
 
 export const OcForm: React.FC<OcFormProps> = (props) => {
 	const {
@@ -25,15 +36,20 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		updateState,
 	} = useOcFormState(formJsonData);
 
-	const { validate } = useFormikValidation(validators);
-
-	const formik = useFormik({
+	const formik: any = useFormik({
 		initialValues,
-		validate,
+		validate: values => validateOcFormValues(formik.values, formik.errors, values, validators),
 		onSubmit: (values, formikProps) => {
-			onSubmit(formatOcFormValues(fieldsDefinition, values), formikProps);
+			const overriddenProps = {...formikProps, setErrors: handleSetErrors};
+			onSubmit(formatOcFormValues(fieldsDefinition, values), overriddenProps);
 		},
 	});
+
+	const handleSetErrors = (errors: FormikErrors<FormikValues>) => {
+		const ocFormErrors = formatOcFormErrors(fieldsDefinition, errors);
+		formik.setErrors(ocFormErrors);
+		formik.setSubmitting(false);
+	}
 
 	const handleSubmit = React.useCallback(
 		(e) => {

@@ -43,12 +43,3 @@ export const useOcFormState = (formJsonData: AppFormModel) => {
 
 	return { state, updateState };
 };
-
-export const useFormikValidation = (validators: FieldValidators) => {
-	const validate = React.useCallback(
-		(values: FormikFieldsValues) => validateOcFormValues(values, validators),
-		[validators],
-	);
-
-	return { validate };
-};
