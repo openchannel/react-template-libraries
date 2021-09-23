@@ -5,11 +5,9 @@ import {
 	AppFormField,
 	AppFormModel,
 	FieldValidators,
-	FormikField,
-	FormikFieldsValues,
+	FormikField
 } from '../../models';
 
-import { validateOcFormValues } from './utils/common';
 import { fieldsUtils, getInitialFieldsAndValues } from './utils/fields';
 
 const init = (
