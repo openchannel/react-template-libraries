@@ -50,6 +50,10 @@ export interface ReviewProps {
 	 * Handle review submit.
 	 */
 	onSubmit?: (reviewData: Review) => void;
+	/**
+	 * Handle review cancel
+	 */
+	onReviewCancel?: () => void;
 }
 
 export const OcReviewComponent: React.FC<ReviewProps> = (props) => {
@@ -61,6 +65,7 @@ export const OcReviewComponent: React.FC<ReviewProps> = (props) => {
 		hideCancelButton = false,
 		reviewData,
 		onSubmit = noop,
+		onReviewCancel = noop,
 	} = props;
 
 	const [review] = React.useState({
@@ -74,6 +79,11 @@ export const OcReviewComponent: React.FC<ReviewProps> = (props) => {
 			onSubmit({ ...reviewData, rating: rating * 100, ...rest }),
 		[reviewData, onSubmit],
 	);
+
+	const handleReviewCancel = React.useCallback((resetForm) => {
+		resetForm();
+		onReviewCancel();
+	}, []);
 
 	return (
 		<div className="review">
@@ -128,7 +138,7 @@ export const OcReviewComponent: React.FC<ReviewProps> = (props) => {
 										text={cancelButtonText}
 										type="secondary"
 										customClass="review__button review__button-cancel"
-										onClick={f.handleReset}
+										onClick={() => handleReviewCancel(f.resetForm)}
 									/>
 								)}
 								<OcButtonComponent
