@@ -36,6 +36,7 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 		writeReview,
 		maxReviewDisplay = 3,
 		noReviewMessage = 'There is no review for this app',
+		children,
 	} = props;
 
 	const [isToggled, toggleDisplay] = React.useState(false);
@@ -53,6 +54,7 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 					customClass="review-list__header-button"
 				/>
 			</div>
+			{children}
 			{reviewList && reviewList!.length > 0 ? (
 				<div>
 					{!isToggled
