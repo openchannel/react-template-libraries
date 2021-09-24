@@ -13,6 +13,7 @@ import './styles.scss';
 const OcMultiSelectList: React.FC<OcMultiSelectListProps> = (props) => {
 	const {
 		name,
+		customClass,
 		label,
 		availableItemsList,
 		defaultItems = [],
@@ -59,7 +60,7 @@ const OcMultiSelectList: React.FC<OcMultiSelectListProps> = (props) => {
 		<div className="multiselect">
 			<OcDropboxComponent
 				name={name}
-				className="multiselect__dropbox"
+				className={`multiselect__dropbox ${customClass}`}
 				placeholder={label ? `Select ${label}` : ''}
 				items={options}
 				selectItem={onSelectItem}

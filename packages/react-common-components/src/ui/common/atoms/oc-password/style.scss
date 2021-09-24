@@ -5,7 +5,3 @@
 		@include form-control($info, $primary, $body-color);
 	}
 }
-
-.error {
-	border-color: $danger;
-}

@@ -5,6 +5,10 @@ export type OcTagsValue = Array<string | number | boolean>;
 export interface OcTagsProps {
 	name?: string;
 	/**
+	 * List of classes which can be attached to the current list
+	 */
+	customClass?: string;
+	/**
 	 * Placeholder.
 	 */
 	placeholder?: string;

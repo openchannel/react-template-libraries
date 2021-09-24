@@ -155,26 +155,40 @@ h1, h2, h3, h4, h5, h6 {
   border-top: 1px solid $info;
 }
 
-/** form inputs validation style **/
-oc-input,
-oc-password,
-oc-select,
-oc-video-url,
-oc-color,
-oc-rich-text-editor,
-oc-textarea {
-	&.ng-invalid {
-		.custom-editor.ng-touched {
-			.tox-tinymce {
-				border-color: $danger;
-			}
+.oc-dropbox,
+.color-adjust,
+.oc-password,
+.oc-input,
+.rdt, // datepicker
+.rich-editor,
+.select-component,
+.form__field-input {
+	&.invalid {
+		.tox-tinymce, .oc-dropbox__control, .date-input  {
+			border-color: $danger !important;
 		}
 
-		&.ng-touched {
-			input, select, button.ng-invalid, textarea {
-				border-color: $danger;
+		.color-adjust__demonstration {
+			span {
+				border: 1px solid $danger;
+				border-right: none;
+			}
+			input {
+				border-color: $danger !important;
 			}
 		}
+	}
+
+	input, select, button, textarea {
+		&.invalid {
+			border-color: $danger !important;
+		}
+	}
+}
+
+.form-control {
+	&.invalid {
+		border-color: $danger !important;
 	}
 }
 

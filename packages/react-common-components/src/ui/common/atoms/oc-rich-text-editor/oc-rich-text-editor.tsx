@@ -6,6 +6,10 @@ import './style.scss';
 export interface OcRtfProps extends IAllProps {
 	name?: string;
 	/**
+	 * List of classes which can be attached to the current list
+	 */
+	customClass?: string;
+	/**
 	 * Placeholder text to pass in text editor
 	 */
 	placeholderText: string | undefined;
@@ -24,7 +28,7 @@ export interface OcRtfProps extends IAllProps {
 }
 
 export const OcRichTextEditorComponent = (props: OcRtfProps) => {
-	const { name, placeholderText, value, onChange, initialValue, onBlur } = props;
+	const { name, customClass, placeholderText, value, onChange, initialValue, onBlur } = props;
 
 	const editorRef: any = React.useRef();
 
@@ -42,7 +46,7 @@ export const OcRichTextEditorComponent = (props: OcRtfProps) => {
 	);
 
 	return (
-		<div className="rich-editor">
+		<div className={`rich-editor ${customClass}`}>
 			<Editor
 				id={name}
 				onEditorChange={onChange}

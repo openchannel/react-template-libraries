@@ -16,6 +16,10 @@ moment.updateLocale('en', {
 
 export interface DatepickerProps extends DatetimepickerProps {
 	/**
+	 * List of classes which can be attached to the current list
+	 */
+	customClass?: string;
+	/**
 	 * Type of picker input: "datetime" or "date"
 	 */
 	type: 'datetime' | 'date';
@@ -38,7 +42,7 @@ export interface DatepickerProps extends DatetimepickerProps {
 }
 
 export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
-	const { type, disabled, value, onChange, settings } = props;
+	const { customClass, type, disabled, value, onChange, settings } = props;
 
 	const [timeVisible, setTimeVisible] = React.useState(false);
 
@@ -60,6 +64,7 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 
 	return (
 		<Datetime
+			className={customClass}
 			locale="en"
 			dateFormat={type === 'date' ? settings || 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm'}
 			value={value || 'DD/MM/YYYY'}
