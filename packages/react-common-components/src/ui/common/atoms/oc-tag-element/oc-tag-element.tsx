@@ -65,7 +65,7 @@ export const OcTagElement: React.FC<OcTagElementProps> = React.memo((props) => {
 						{deleteTagImgUrl ? (
 							<img src={deleteTagImgUrl} className="tag-element__close-icon-svg" alt={title} />
 						) : (
-							<DefaultCloseIcon className="tag-element__close-icon-svg" />
+							<DefaultCloseIcon className="tag-element__close-icon-svg fill-close-icon" />
 						)}
 					</span>
 				</OverlayTrigger>
