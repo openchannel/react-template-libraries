@@ -33,7 +33,7 @@ export const OcActivation: React.FC<OcActivationProps> = (props) => {
 					<OcInputComponent
 						inputType="text"
 						placeholder="Activation Code"
-						customClass="activation__form-group-input"
+						customClass={`activation__form-group-input ${inputError ? 'invalid' : ''}`}
 						required
 						{...inputProps}
 					/>

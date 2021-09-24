@@ -111,7 +111,7 @@ export const OcReviewComponent: React.FC<ReviewProps> = (props) => {
 							<OcLabelComponent text="Title" required customClass="review__form-label" />
 							<OcInputComponent
 								name="headline"
-								customClass="review__form-field review__input"
+								customClass={`review__form-field review__input  ${f.touched.headline && f.errors.headline ? 'invalid' : ''}`}
 								value={f.values.headline}
 								onChange={f.handleChange}
 								onBlur={f.handleBlur}
@@ -122,7 +122,7 @@ export const OcReviewComponent: React.FC<ReviewProps> = (props) => {
 							<OcLabelComponent text="Review" required customClass="review__form-label" />
 							<OcTextarea
 								name="description"
-								customClass="review__form-field review__textarea"
+								customClass={`review__form-field review__textarea  ${f.touched.headline && f.errors.headline ? 'invalid' : ''}`}
 								value={f.values.description}
 								onChange={f.handleChange}
 								onBlur={f.handleBlur}

@@ -78,6 +78,7 @@ export interface FormikMapFieldsProps {
 export interface FormikComponentWrapperProps<Value> {
 	field: FieldInputProps<Value>;
 	form: FormikProps<FormikFieldsValues>;
+	customClass?: string;
 }
 
 export type FCWP<Value> = FormikComponentWrapperProps<Value>;

@@ -16,6 +16,10 @@ export type SelectedValue = string | Option;
 
 export interface OcSelectProps {
 	/**
+	 * List of classes which can be attached to the current list
+	 */
+	customClass?: string;
+	/**
 	 * Placeholder
 	 */
 	placeholder?: string;
@@ -50,6 +54,7 @@ export interface OcSelectProps {
 
 export const OcSelect: React.FC<Partial<OcSelectProps>> = (props) => {
 	const {
+		customClass,
 		selectValArr = [],
 		labelField = '',
 		disabled = false,
@@ -77,7 +82,7 @@ export const OcSelect: React.FC<Partial<OcSelectProps>> = (props) => {
 
 	return (
 		<Dropdown className="select-component">
-			<Dropdown.Toggle as={Toggle} disabled={disabled}>
+			<Dropdown.Toggle as={Toggle} disabled={disabled} className={customClass}>
 				{toggleValue}
 			</Dropdown.Toggle>
 

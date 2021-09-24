@@ -32,7 +32,7 @@ export const OcResendActivation: React.FC<OcResendProps> = (props) => {
 					<OcInputComponent
 						placeholder="Email"
 						inputType="email"
-						customClass="resend-activation__email-group-input"
+						customClass={`resend-activation__email-group-input ${inputError ? 'invalid' : ''}`}
 						required
 						{...inputProps}
 					/>

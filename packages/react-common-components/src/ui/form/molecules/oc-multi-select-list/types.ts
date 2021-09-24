@@ -3,6 +3,10 @@ import React from 'react';
 export interface OcMultiSelectListProps {
 	name?: string;
 	/**
+	 * List of classes which can be attached to the current list
+	 */
+	customClass?: string;
+	/**
 	 * Label of the component.
 	 */
 	label?: string;

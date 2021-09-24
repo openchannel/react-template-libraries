@@ -6,6 +6,10 @@ import './style.scss';
 
 export interface ColorProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	/**
+	 * List of classes which can be attached to the current list
+	 */
+	customClass?: string;
+	/**
 	 * Placeholder text for input(optional)
 	 */
 	placeholder?: string;
@@ -29,7 +33,7 @@ const colorRegEx = /(?:#|0x)(?:[a-f0-9]{3}|[a-f0-9]{6})\b|(?:rgb|hsl)a?\([^\)]*\
 const validateColor = (target: string) => target.match(colorRegEx) !== null;
 
 export const OcColorComponent: React.FC<ColorProps> = (props) => {
-	const { disabled, placeholder, colorValue, onValueChange, name, onBlur } = props;
+	const { disabled, customClass, placeholder, colorValue, onValueChange, name, onBlur } = props;
 
 	const [inputColorValue, setInputColorValue] = React.useState('');
 	const colorInput: React.RefObject<HTMLInputElement> = React.createRef();
@@ -62,7 +66,7 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
 	);
 
 	return (
-		<div className="color-adjust">
+		<div className={`color-adjust ${customClass}`}>
 			<div className="color-adjust__demonstration">
 				<span
 					className="color-adjust__display form-control"
