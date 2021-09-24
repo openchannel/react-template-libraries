@@ -30,6 +30,11 @@ export const OcRecommendedAppsComponent: React.FC<RecommendedAppsProps> = (props
 		noAppMessage = 'No App Found',
 	} = props;
 
+	const handleClick = () => {
+		clickByAppCard();
+		window.scrollTo(0, 0);
+	};
+
 	return (
 		<div className="recommended-apps">
 			<h4 className="recommended-apps__heading">{recommendedAppTitle}</h4>
@@ -38,10 +43,10 @@ export const OcRecommendedAppsComponent: React.FC<RecommendedAppsProps> = (props
 					{appList.map((appCard, index) => (
 						<div
 							className="recommended-apps__card"
-							onClick={clickByAppCard}
+							onClick={handleClick}
 							key={recommendedAppTitle + index}
 						>
-							<OcAppCard appRedirectLink={appCard.link} app={appCard} />
+							<OcAppCard appRedirectLink={appCard.safeName[0]} app={appCard} />
 						</div>
 					))}
 				</div>

@@ -16,6 +16,10 @@ export interface ReviewListProps {
 	 */
 	writeReview?: (e: React.SyntheticEvent<unknown, Event>) => void;
 	/**
+	 * Write review permission
+	 */
+	writeReviewPermission?: boolean;
+	/**
 	 * Reviews array
 	 */
 	reviewList?: Array<any>;
@@ -34,6 +38,7 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 		reviewListTitle = 'Most recent reviews',
 		reviewList = [],
 		writeReview,
+		writeReviewPermission = false,
 		maxReviewDisplay = 3,
 		noReviewMessage = 'There is no review for this app',
 		children,
@@ -47,12 +52,14 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 		<div className="review-list">
 			<div className="review-list__header">
 				<h4 className="review-list__header-heading">{reviewListTitle}</h4>
-				<OcButtonComponent
-					onClick={writeReview}
-					text="Write a Review"
-					type="primary"
-					customClass="review-list__header-button"
-				/>
+				{writeReviewPermission && (
+					<OcButtonComponent
+						onClick={writeReview}
+						text="Write a Review"
+						type="primary"
+						customClass="review-list__header-button"
+					/>
+				)}
 			</div>
 			{children}
 			{reviewList && reviewList!.length > 0 ? (
