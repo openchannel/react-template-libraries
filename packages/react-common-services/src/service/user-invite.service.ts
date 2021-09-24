@@ -1,5 +1,5 @@
-import { InviteDeveloperModel, InviteUserModel } from '../model/api/invite-user.model';
 import { api } from '../lib/api';
+import { InviteDeveloperModel, InviteUserModel } from '../model/api/invite-user.model';
 import { Page } from '../model/api/page.model';
 
 /**
