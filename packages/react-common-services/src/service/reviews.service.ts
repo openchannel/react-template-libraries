@@ -1,4 +1,4 @@
-import { Options } from 'packages/react-common-services';
+import { Options } from '../lib/request';
 
 import { api } from '../lib/api';
 import { Page } from '../model/api/page.model';
