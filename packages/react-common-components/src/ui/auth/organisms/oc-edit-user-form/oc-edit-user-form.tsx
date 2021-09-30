@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, Formik, FormikValues, FormikErrors, FormikProps } from 'formik';
+import { Form, Formik, FormikErrors, FormikProps, FormikValues } from 'formik';
 
 import { OcButtonComponent, OcCheckboxComponent, OcError } from '../../../common/atoms';
 import { OcSelect, Option } from '../../../common/molecules';
@@ -61,7 +61,7 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 	);
 
 	const handleFormTypeChange = React.useCallback(
-		(formType:  string | Option) => {
+		(formType: string | Option) => {
 			if (typeof formType === 'string') {
 				setFormType(formType);
 			} else {
@@ -71,13 +71,15 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 		[setFormType],
 	);
 
-	const validate =  (values: FormikValues): void | object | Promise<FormikErrors<FormikValues>> => {
+	const validate = (values: FormikValues): void | object | Promise<FormikErrors<FormikValues>> => {
 		const formik = formikRef.current;
 		if (formik != null) {
-			const validators = fieldsUtils.getValidators(dynamicFormFields?.length ? dynamicFormFields : []);
+			const validators = fieldsUtils.getValidators(
+				dynamicFormFields?.length ? dynamicFormFields : [],
+			);
 			return validateOcFormValues(formik.values, formik.errors, values, validators);
 		}
-	}
+	};
 
 	if (formConfigs.length === 0) {
 		return null;

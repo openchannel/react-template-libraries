@@ -74,11 +74,7 @@ export const OcButtonComponent = React.memo(
 			>
 				{process && (
 					<div className="oc-button__spinner">
-						<div
-							className="spinner-border la-ball-spin"
-							style={spinnerStyles}
-							role="status"
-						/>
+						<div className="spinner-border la-ball-spin" style={spinnerStyles} role="status" />
 					</div>
 				)}
 				{Boolean(children) && !process && children}

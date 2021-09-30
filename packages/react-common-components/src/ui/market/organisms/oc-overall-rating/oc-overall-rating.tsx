@@ -1,9 +1,11 @@
 import * as React from 'react';
+
 import { OcLabelComponent } from '../../../common';
 import { OcRatingComponent } from '../../atoms';
 
-import './style.scss';
 import ProgressBar from './components/rating-progress-bar';
+
+import './style.scss';
 
 export interface OverallRatingProps {
 	rates?: number[];

@@ -22,7 +22,9 @@ export const NotFound: React.FC<NotFoundProps> = ({
 			</div>
 		</header>
 		<div className="container mt-0 d-flex flex-column align-items-center justify-content-center">
-			{errorImgUrl && <img className="not-found-img w-100 mb-5" src={errorImgUrl} alt="Not found" />}
+			{errorImgUrl && (
+				<img className="not-found-img w-100 mb-5" src={errorImgUrl} alt="Not found" />
+			)}
 			<h1 className="mt-3 mb-3">{title}</h1>
 			<span className="subtitle mb-4">{description}</span>
 			<div className="not-found__home-page-button">
