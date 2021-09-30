@@ -44,6 +44,9 @@ export * from './model/components/frontend.model';
  * Services
  */
 export * from './service/apps.service';
+export * from './service/app-form.service';
+export * from './service/file-upload-download.service';
+export * from './service/ownership.service';
 export * from './service/authentication.service';
 export * from './service/cms-site-content.service';
 export * from './service/config.service';

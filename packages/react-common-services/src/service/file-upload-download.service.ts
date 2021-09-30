@@ -1,5 +1,5 @@
 import { api } from '../lib/api';
-import { Options, ReqHeaders } from '../lib/request';
+import { ReqHeaders } from '../lib/request';
 import { config as configService } from '../service/config.service';
 
 const FILES_URL = 'v2/files';
@@ -7,7 +7,7 @@ const FILES_URL = 'v2/files';
 // v2/userAccounts/this
 // {fileUrl}
 
-export const ownershipService = {
+export const fileService = {
 	/**
 	 *
 	 * Description: Get Token and upload file to open channel
@@ -21,9 +21,9 @@ export const ownershipService = {
 	 * `uploadToOpenChannel({file},true, ['na0s78hd09a8shd90ahsd'])`
 	 */
 	uploadToOpenChannel: (file: FormData, isPrivate: boolean, hash?: string[]) => {
-		return ownershipService
+		return fileService
 			.getToken()
-			.then((res: any) => ownershipService.prepareUploadReq(res.token, file, isPrivate, hash));
+			.then((res: any) => fileService.prepareUploadReq(res.token, file, isPrivate, hash));
 	},
 
 	/**
