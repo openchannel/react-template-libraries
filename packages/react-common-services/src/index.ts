@@ -55,6 +55,7 @@ export * from './service/market.service';
 export * from './service/native-login.service';
 export * from './service/reviews.service';
 export * from './service/site-content.service';
+export * from './service/statistic.service';
 export * from './service/user-account.service';
 export * from './service/user-account-types.service';
 export * from './service/user-invite.service';

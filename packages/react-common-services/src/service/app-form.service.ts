@@ -1,5 +1,4 @@
 import { api } from '../lib/api';
-import { Options } from '../lib/request';
 import { CreateFormSubmissionModel } from '../model/api/app-form.model';
 import { QueryUtil } from '../util/query.util';
 
@@ -42,9 +41,9 @@ export const formsService = {
 	 */
 	createFormSubmission: (
 		formId: string,
-		createFormSubmissionModel: Options<CreateFormSubmissionModel>,
+		createFormSubmissionModel: CreateFormSubmissionModel,
 	) => {
 		const mainUrl = `${FORMS_URL}/${formId}/submissions`;
-		return api.post(mainUrl, createFormSubmissionModel);
+		return api.post(mainUrl, {body: createFormSubmissionModel});
 	},
 };
