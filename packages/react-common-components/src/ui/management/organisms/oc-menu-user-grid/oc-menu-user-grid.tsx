@@ -5,7 +5,7 @@ import { OcMenuUserGridProps } from './types';
 
 import './style.scss';
 
-const OcMenuUserGrid: React.FC<OcMenuUserGridProps> = (props) => {
+export const OcMenuUserGrid: React.FC<OcMenuUserGridProps> = (props) => {
 	const { properties, sortIcon, onSort, menuUrl, onMenuClick } = props;
 
 	const handleSortUsers = React.useCallback(
@@ -59,7 +59,7 @@ const OcMenuUserGrid: React.FC<OcMenuUserGridProps> = (props) => {
 						{(!properties.data.list || properties.data.list.length == 0) && <EmptyDataRow />}
 						{properties.data.list.map((user) => (
 							<DataRow
-								key={user.userId}
+								key={user.inviteId || user.userAccountId}
 								user={user}
 								menuUrl={menuUrl}
 								dropdownOptions={properties.options}
