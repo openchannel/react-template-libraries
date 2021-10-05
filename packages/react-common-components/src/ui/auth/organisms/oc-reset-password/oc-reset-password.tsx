@@ -46,6 +46,7 @@ export const OcResetPasswordComponent: React.FC<OcResetPasswordProps> = (props) 
 						value={value}
 						onChange={onChange}
 						required
+						customClass={validationError ? 'invalid' : ''}
 						{...inputProps}
 					/>
 					{validationError && <OcError message={String(inputError)} />}

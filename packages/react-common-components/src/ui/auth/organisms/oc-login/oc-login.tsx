@@ -83,7 +83,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 									onChange={handleChange}
 									value={values.email}
 									onBlur={handleBlur}
-									customClass="login__email-input"
+									customClass={`login__email-input ${errors.email ? 'invalid' : ''}`}
 								/>
 								{errors.email && <OcError message={errors.email} />}
 							</div>
@@ -96,7 +96,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 								<OcPasswordComponent
 									name="password"
 									placeholder="Password"
-									customClass="login__password-input"
+									customClass={`login__password-input ${errors.password ? 'invalid' : ''}`}
 									id="login_password"
 									onChange={handleChange}
 									onBlur={handleBlur}

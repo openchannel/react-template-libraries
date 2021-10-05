@@ -5,11 +5,9 @@ import {
 	AppFormField,
 	AppFormModel,
 	FieldValidators,
-	FormikField,
-	FormikFieldsValues,
+	FormikField
 } from '../../models';
 
-import { validateOcFormValues } from './utils/common';
 import { fieldsUtils, getInitialFieldsAndValues } from './utils/fields';
 
 const init = (
@@ -42,13 +40,4 @@ export const useOcFormState = (formJsonData: AppFormModel) => {
 	}, []);
 
 	return { state, updateState };
-};
-
-export const useFormikValidation = (validators: FieldValidators) => {
-	const validate = React.useCallback(
-		(values: FormikFieldsValues) => validateOcFormValues(values, validators),
-		[validators],
-	);
-
-	return { validate };
 };

@@ -1,4 +1,4 @@
-import { FormikValues } from 'formik';
+import { FormikHelpers, FormikValues } from 'formik';
 
 import type { AppFormField } from '../../../form/models';
 
@@ -64,7 +64,7 @@ export interface EditUserComponentProps {
 	defaultEmptyConfigsErrorMessage: string;
 	customTermsDescription?: React.ReactNode;
 	ordinaryTermsDescription?: React.ReactNode;
-	onSubmit: (values: FormikValues) => void;
+	onSubmit: (values: FormikValues, formikHelpers: FormikHelpers<FormikValues>) => void;
 	enableCustomTerms: boolean;
 	submitText?: string;
 }

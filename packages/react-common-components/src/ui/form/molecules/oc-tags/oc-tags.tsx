@@ -15,6 +15,7 @@ import './styles.scss';
 const OcTags: React.FC<OcTagsProps> = (props) => {
 	const {
 		name,
+		customClass,
 		availableTags,
 		value = [],
 		onChange,
@@ -65,7 +66,7 @@ const OcTags: React.FC<OcTagsProps> = (props) => {
 				<div className="tags__group-wrapper">
 					<OcDropboxComponent
 						name={name}
-						className="tags__select"
+						className={`tags__select ${customClass}`}
 						placeholder={placeholder}
 						items={dropboxOptions}
 						selectItem={onSelectTag}

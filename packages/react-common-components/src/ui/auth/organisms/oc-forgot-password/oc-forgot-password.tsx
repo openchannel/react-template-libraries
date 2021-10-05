@@ -52,7 +52,7 @@ export const OcForgotPasswordComponent: React.FC<OcForgotPasswordProps> = (props
 							<OcInputComponent
 								inputType="text"
 								placeholder="Email"
-								customClass="forgot-password__email-input"
+								customClass={`forgot-password__email-input ${inputError ? 'invalid' : ''}`}
 								required
 								{...inputProps}
 							/>
