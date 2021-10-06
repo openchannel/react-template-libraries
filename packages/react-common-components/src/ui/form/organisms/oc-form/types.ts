@@ -4,11 +4,14 @@ import type { FieldInputProps, FormikHelpers, FormikProps } from 'formik';
 import type { Dataset } from '../../../common';
 import type { AppFormModel, FormikField, FormikFieldsValues } from '../../models';
 
+export type OcFormValues = Record<string, any>;
+export type OcFormFormikHelpers = FormikHelpers<Record<string, unknown>>;
+
 export interface OcFormProps {
 	formJsonData: AppFormModel;
 	onSubmit: (
-		values: Record<string, any>,
-		formikProps: FormikHelpers<Record<string, unknown>>,
+		values: OcFormValues,
+		formikHelpers: OcFormFormikHelpers,
 	) => void;
 	onCancel?: () => void;
 	/**

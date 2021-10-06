@@ -1,17 +1,14 @@
 import * as React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { InviteModalProps } from '@openchannel/react-common-components/src/ui';
+import { OcInviteModalProps } from '@openchannel/react-common-components/src/ui';
 import OcInviteModal from '../../../src/ui/common/organisms/oc-invite-modal/oc-invite-modal';
 
-const setUp = (props: InviteModalProps) => shallow(<OcInviteModal {...props} />);
+const setUp = (props: OcInviteModalProps) => shallow(<OcInviteModal {...props} />);
 
 describe('Invite Modal', () => {
 	it('should create', () => {
 		const component: ShallowWrapper = setUp({
-			modalData: {
-				modalTitle: 'Invite a member',
-				successButtonText: 'Send invite',
-			},
+			modalTitle: 'Invite a member',
 			formConfig: {
 				fields: [
 					{
@@ -23,9 +20,7 @@ describe('Invite Modal', () => {
 						type: 'text',
 						required: null,
 						attributes: {
-							maxChars: null,
 							required: true,
-							minChars: null,
 						},
 						options: null,
 					},
@@ -38,9 +33,7 @@ describe('Invite Modal', () => {
 						type: 'emailAddress',
 						required: null,
 						attributes: {
-							maxChars: null,
 							required: true,
-							minChars: null,
 						},
 						options: null,
 					},
@@ -56,10 +49,9 @@ describe('Invite Modal', () => {
 					},
 				],
 			},
-			buttonPosition: 'between',
+			onSubmit: () => {},
 			onClose: () => {},
 			isOpened: false,
-			modalTitle: 'Modal',
 		});
 
 		expect(component).toBeTruthy();
@@ -67,10 +59,6 @@ describe('Invite Modal', () => {
 
 	it('should create with additional props: size and className', () => {
 		const component: ShallowWrapper = setUp({
-			modalData: {
-				modalTitle: 'Invite a member',
-				successButtonText: 'Send invite',
-			},
 			formConfig: {
 				fields: [
 					{
@@ -82,9 +70,7 @@ describe('Invite Modal', () => {
 						type: 'text',
 						required: null,
 						attributes: {
-							maxChars: null,
 							required: true,
-							minChars: null,
 						},
 						options: null,
 					},
@@ -97,9 +83,7 @@ describe('Invite Modal', () => {
 						type: 'emailAddress',
 						required: null,
 						attributes: {
-							maxChars: null,
 							required: true,
-							minChars: null,
 						},
 						options: null,
 					},
@@ -117,6 +101,7 @@ describe('Invite Modal', () => {
 			},
 			buttonPosition: 'between',
 			onClose: () => {},
+			onSubmit: () => {},
 			isOpened: false,
 			modalTitle: 'Modal',
 		});
