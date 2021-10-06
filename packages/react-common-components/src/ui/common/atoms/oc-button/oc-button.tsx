@@ -39,6 +39,8 @@ export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonE
 	children: React.ReactNode;
 }
 
+const spinnerStyles = { width: '2.5rem', height: '2.5rem' };
+
 export const OcButtonComponent = React.memo(
 	React.forwardRef((props: Partial<ButtonProps>, ref: React.ForwardedRef<HTMLButtonElement>) => {
 		const {
@@ -74,7 +76,7 @@ export const OcButtonComponent = React.memo(
 					<div className="oc-button__spinner">
 						<div
 							className="spinner-border la-ball-spin"
-							style={{ width: '2.5rem', height: '2.5rem' }}
+							style={spinnerStyles}
 							role="status"
 						/>
 					</div>
