@@ -3,7 +3,7 @@ import BootstrapModal, { ModalProps as BootstrapModalProps } from 'react-bootstr
 
 import './style.scss';
 
-type ExtendedModalSizeVariants = BootstrapModalProps['size'] | 'md';
+export type ExtendedModalSizeVariants = BootstrapModalProps['size'] | 'md';
 
 export interface ModalProps {
 	/**
