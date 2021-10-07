@@ -39,4 +39,9 @@ export interface OcInviteModalProps {
 	 * @default left
 	 */
 	buttonPosition?: 'top' | 'left' | 'right' | 'between';
+	/**
+	 * Label of the submit button.
+	 * @default Save
+	 */
+	successButtonText?: string;
 }
