@@ -59,6 +59,7 @@ export * from './service/statistic.service';
 export * from './service/user-account.service';
 export * from './service/user-account-types.service';
 export * from './service/user-invite.service';
+export * from './service/user-role.service';
 export * from './service/users.service';
 
 /* Utils */

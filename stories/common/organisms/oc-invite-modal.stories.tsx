@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { InviteModalProps } from '../../../packages/react-common-components/src/ui/common';
+import { OcInviteModalProps } from '../../../packages/react-common-components/src/ui/common';
 import { useModalState } from '../../../packages/react-common-components/src/lib/hooks';
 import OcButtonComponent from '../../../packages/react-common-components/src/ui/common/atoms/oc-button';
 import OcInviteModal from '../../../packages/react-common-components/src/ui/common/organisms/oc-invite-modal';
@@ -11,7 +11,7 @@ export default {
 	component: OcInviteModal,
 } as Meta;
 
-const ModalComponent: Story<InviteModalProps> = (args, { name }) => {
+const ModalComponent: Story<OcInviteModalProps> = (args, { name }) => {
 	const { isOpened, closeModal, openModal } = useModalState();
 
 	return (
@@ -33,10 +33,7 @@ const ModalComponent: Story<InviteModalProps> = (args, { name }) => {
 export const Modal = ModalComponent.bind({});
 
 Modal.args = {
-	modalData: {
-		modalTitle: 'Invite a member',
-		successButtonText: 'Send invite',
-	},
+	modalTitle: 'Invite a member',
 	formConfig: {
 		fields: [
 			{
@@ -48,9 +45,7 @@ Modal.args = {
 				type: 'text',
 				required: null,
 				attributes: {
-					maxChars: null,
 					required: true,
-					minChars: null,
 				},
 				options: null,
 			},
@@ -63,9 +58,7 @@ Modal.args = {
 				type: 'emailAddress',
 				required: null,
 				attributes: {
-					maxChars: null,
 					required: true,
-					minChars: null,
 				},
 				options: null,
 			},

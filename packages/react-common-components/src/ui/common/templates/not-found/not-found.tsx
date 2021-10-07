@@ -15,7 +15,7 @@ export const NotFound: React.FC<NotFoundProps> = ({
 	onClick = noop,
 	buttonText = 'Go to home page',
 }) => (
-	<div className="main-container d-flex flex-column">
+	<div className="not-found-container d-flex flex-column">
 		<header>
 			<div className="container">
 				<img src={companyLogoUrl} className="logo" alt="Your company" />

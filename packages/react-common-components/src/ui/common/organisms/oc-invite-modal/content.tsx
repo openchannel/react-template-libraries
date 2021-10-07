@@ -3,11 +3,9 @@ import * as React from 'react';
 import { ReactComponent as CloseIconSvg } from '../../../../assets/img/close-icon.svg';
 import { OcForm } from '../../../form';
 
-import { InviteModalProps } from './oc-invite-modal';
+import { OcInviteModalProps } from './types';
 
-export type InviteContentProps = Omit<InviteModalProps, 'size' | 'isOpened'>;
-
-export const InviteUserContent: React.FC<InviteContentProps> = (props) => {
+export const InviteUserContent: React.FC<Omit<OcInviteModalProps, 'isOpened' | 'size'>> = (props) => {
 	const { onClose, onCancel, onSubmit, modalTitle, formConfig, buttonPosition } = props;
 
 	return (
@@ -23,9 +21,9 @@ export const InviteUserContent: React.FC<InviteContentProps> = (props) => {
 			</div>
 			<div className="invite-modal__modal-body">
 				<OcForm
-					formJsonData={formConfig!}
-					onCancel={onCancel!}
-					onSubmit={onSubmit!}
+					formJsonData={formConfig}
+					onCancel={onCancel || onClose}
+					onSubmit={onSubmit}
 					successButtonText="Send invite"
 					buttonPosition={buttonPosition}
 				/>

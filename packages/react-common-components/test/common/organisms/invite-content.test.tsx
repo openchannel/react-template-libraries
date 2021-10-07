@@ -3,18 +3,17 @@ import { shallow, ShallowWrapper } from 'enzyme';
 
 import {
 	InviteUserContent,
-	InviteContentProps,
 } from '../../../src/ui/common/organisms/oc-invite-modal/content';
+import {
+	OcInviteModalProps
+} from '../../../src/ui/common/organisms/oc-invite-modal';
 
-const setUp = (props: InviteContentProps) => shallow(<InviteUserContent {...props} />);
+const setUp = (props: Omit<OcInviteModalProps, 'isOpened' | 'size'>) => shallow(<InviteUserContent {...props} />);
 
 describe('Invite Modal', () => {
 	it('should create', () => {
 		const component: ShallowWrapper = setUp({
-			modalData: {
-				modalTitle: 'Invite a member',
-				successButtonText: 'Send invite',
-			},
+			modalTitle: 'Invite a member',
 			formConfig: {
 				fields: [
 					{
@@ -26,9 +25,7 @@ describe('Invite Modal', () => {
 						type: 'text',
 						required: null,
 						attributes: {
-							maxChars: null,
 							required: true,
-							minChars: null,
 						},
 						options: null,
 					},
@@ -41,9 +38,7 @@ describe('Invite Modal', () => {
 						type: 'emailAddress',
 						required: null,
 						attributes: {
-							maxChars: null,
 							required: true,
-							minChars: null,
 						},
 						options: null,
 					},
@@ -60,66 +55,8 @@ describe('Invite Modal', () => {
 				],
 			},
 			buttonPosition: 'between',
+			onSubmit: () => {},
 			onClose: () => {},
-			modalTitle: 'Modal',
-		});
-
-		expect(component).toBeTruthy();
-	});
-
-	it('should create with additional props: size and className', () => {
-		const component: ShallowWrapper = setUp({
-			modalData: {
-				modalTitle: 'Invite a member',
-				successButtonText: 'Send invite',
-			},
-			formConfig: {
-				fields: [
-					{
-						id: 'name',
-						label: 'Name',
-						description: '',
-						placeholder: 'Enter Name',
-						defaultValue: null,
-						type: 'text',
-						required: null,
-						attributes: {
-							maxChars: null,
-							required: true,
-							minChars: null,
-						},
-						options: null,
-					},
-					{
-						id: 'email',
-						label: 'Email',
-						description: '',
-						placeholder: 'Email',
-						defaultValue: null,
-						type: 'emailAddress',
-						required: null,
-						attributes: {
-							maxChars: null,
-							required: true,
-							minChars: null,
-						},
-						options: null,
-					},
-					{
-						id: 'roles',
-						label: 'Select role',
-						description: '',
-						defaultValue: '',
-						type: 'dropdownList',
-						required: true,
-						attributes: { required: true },
-						options: [],
-					},
-				],
-			},
-			buttonPosition: 'between',
-			onClose: () => {},
-			modalTitle: 'Modal',
 		});
 
 		expect(component).toBeTruthy();
