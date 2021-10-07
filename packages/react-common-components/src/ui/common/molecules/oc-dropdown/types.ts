@@ -39,7 +39,7 @@ export interface ListItemProps {
 
 export type MinDropdownWidth = number | string;
 
-export type Option = {
+type Option = {
 	label: string;
 	[key: string]: any;
 };

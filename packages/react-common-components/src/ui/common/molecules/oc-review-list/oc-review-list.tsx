@@ -4,11 +4,15 @@ import * as React from 'react';
 import OcRatingComponent from '../../../market/atoms/oc-rating';
 import OcButtonComponent from '../../atoms/oc-button/oc-button';
 import { OcDropdownButton } from '../oc-dropdown';
-import { DropdownListItem } from '../../../management/organisms/oc-menu-user-grid/components/dropdown-list-item';
-import type { Option } from '../oc-dropdown/types';
+import { DropdownListItem } from './review-list-dropdown-item';
 import { titleCase } from '../../../../lib';
 
 import './style.scss';
+
+type Option = {
+	label: string;
+	[key: string]: any;
+};
 
 export interface ReviewListProps {
 	/**
