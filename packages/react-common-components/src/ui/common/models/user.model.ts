@@ -16,9 +16,11 @@ export interface UserDetails {
 	lastName: string;
 	organizationId: string;
 	roles: string[];
-	permissions?: string[];
 	userExternalId: string;
 	isSSO: boolean;
+	permissions?: string[];
+	individualId?: string;
+	userClass?: string;
 }
 export interface UserAccount extends User {
 	userAccountId: string;
