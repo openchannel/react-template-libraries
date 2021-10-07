@@ -1,4 +1,4 @@
-import { ComponentsUsersGridParametersModel } from '../../models';
+import { ComponentsUserGridActionModel, ComponentsUsersGridParametersModel } from '../../models';
 
 export interface OcMenuUserGridProps {
 	/**
@@ -13,7 +13,7 @@ export interface OcMenuUserGridProps {
 	 * Output of menu list item clicked action.
 	 * Contains an action name, userId, userAccountId
 	 */
-	onMenuClick: () => void;
+	onMenuClick?(action: ComponentsUserGridActionModel): void;
 	/**
 	 * Path to the custom icon for the "sort" button.
 	 */
@@ -21,5 +21,5 @@ export interface OcMenuUserGridProps {
 	/**
 	 * Returns clicked sorting type. Can be 'name', 'email', 'date' or 'role'.
 	 */
-	onSort: (v: string) => void;
+	onSort?(v: string): void;
 }

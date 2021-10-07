@@ -15,9 +15,9 @@ import { DropdownListItem } from './dropdown-list-item';
 
 interface DataRowProps {
 	user: ComponentsUserAccountGridModel;
-	menuUrl?: string;
 	dropdownOptions: UserGridOptionType[];
-	onMenuClick: (v: ComponentsUserGridActionModel) => void;
+	menuUrl?: string;
+	onMenuClick?(action: ComponentsUserGridActionModel): void;
 }
 
 export const DataRow: React.FC<DataRowProps> = (props) => {
@@ -25,6 +25,10 @@ export const DataRow: React.FC<DataRowProps> = (props) => {
 
 	const handleMenuClick = React.useCallback(
 		({ value }) => {
+			if (!onMenuClick) {
+				return;
+			}
+
 			const action: ComponentsUserGridActionModel = {
 				action: value,
 				userId: user.userId,
