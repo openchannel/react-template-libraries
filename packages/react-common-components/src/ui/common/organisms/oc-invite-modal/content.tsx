@@ -6,7 +6,7 @@ import { OcForm } from '../../../form';
 import { OcInviteModalProps } from './types';
 
 export const InviteUserContent: React.FC<Omit<OcInviteModalProps, 'isOpened' | 'size'>> = (props) => {
-	const { onClose, onCancel, onSubmit, modalTitle, formConfig, buttonPosition } = props;
+	const { onClose, onCancel, onSubmit, modalTitle, formConfig, successButtonText, buttonPosition } = props;
 
 	return (
 		<>
@@ -24,7 +24,7 @@ export const InviteUserContent: React.FC<Omit<OcInviteModalProps, 'isOpened' | '
 					formJsonData={formConfig}
 					onCancel={onCancel || onClose}
 					onSubmit={onSubmit}
-					successButtonText="Send invite"
+					successButtonText={successButtonText}
 					buttonPosition={buttonPosition}
 				/>
 			</div>
