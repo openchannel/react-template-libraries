@@ -39,7 +39,7 @@ export interface ListItemProps {
 
 export type MinDropdownWidth = number | string;
 
-type Option = {
+export type Option = {
 	label: string;
 	[key: string]: any;
 };
@@ -82,7 +82,7 @@ export interface BaseDropdownProps {
 	/**
 	 * ListItem component to render. Should be wrapped with forwardRef.
 	 */
-	listItem?: React.ForwardRefExoticComponent<any>;
+	listItem?: any;
 	/**
 	 * A set of props passed directly to dropdown-menu list.
 	 */
