@@ -1,5 +1,6 @@
-import type { FormikValues, FormikErrors } from 'formik';
+import * as React from 'react';
 import { isEmpty } from 'lodash-es';
+import type { FormikValues, FormikErrors } from 'formik';
 
 import { errorMessages, FIELD_TYPE } from '../../../lib';
 import type { FieldValidators, FormikField, FormikFieldsValues } from '../../../models';
@@ -90,3 +91,17 @@ const formatOcFormFields = (
 		return acc;
 	}, {} as Record<string, any>);
 };
+
+/**
+ * Assign 'invalid' className to the customClass prop
+ * @returns string
+ */
+export const customClassWithError = (error: string | undefined, child: React.ReactElement) => {
+	if (!error) {
+		return child.props.customClass;
+	} else if (child.props.customClass != null) {
+		return child.props.customClass + ' invalid';
+	} else {
+		return 'invalid';
+	}
+}
