@@ -82,7 +82,7 @@ export interface BaseDropdownProps {
 	/**
 	 * ListItem component to render. Should be wrapped with forwardRef.
 	 */
-	listItem?: React.ForwardRefExoticComponent<any>;
+	listItem?: any;
 	/**
 	 * A set of props passed directly to dropdown-menu list.
 	 */

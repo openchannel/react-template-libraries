@@ -19,7 +19,7 @@ import type { FCWP, FieldGroupProps } from '../types';
 import { shouldFieldGroupUpdate, shouldFieldUpdate } from '../utils/memo';
 
 export const FieldGroup: React.FC<FieldGroupProps & { error?: string }> = React.memo((props) => {
-	const {children, error, label, labelFor, description, required} = props;
+	const { children, error, label, labelFor, description, required } = props;
 
 	return (
 		<>
@@ -32,17 +32,19 @@ export const FieldGroup: React.FC<FieldGroupProps & { error?: string }> = React.
 			)}
 			<div className="form__field-input">
 				{error
-					? (
-						React.Children.map(children, child => React.isValidElement(child)
-							? React.cloneElement(child, {
-								customClass: child.props.customClass != null
-									? child.props.customClass + ' invalid'
-									: 'invalid'
-							})
-							: child))
+					? React.Children.map(children, (child) =>
+							React.isValidElement(child)
+								? React.cloneElement(child, {
+										customClass:
+											child.props.customClass != null
+												? `${child.props.customClass} invalid`
+												: 'invalid',
+								  })
+								: child,
+					  )
 					: children}
 			</div>
-			{error && <OcError message={error}/>}
+			{error && <OcError message={error} />}
 		</>
 	);
 }, shouldFieldGroupUpdate);

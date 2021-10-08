@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import OcButtonComponent from '../../atoms/oc-button/oc-button';
 import arrowIcon from '../../../../assets/img/arrow-left.svg';
+import OcButtonComponent from '../../atoms/oc-button/oc-button';
 
 import './style.scss';
 

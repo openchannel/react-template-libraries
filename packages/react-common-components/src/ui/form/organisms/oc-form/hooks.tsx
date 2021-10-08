@@ -1,12 +1,7 @@
 import * as React from 'react';
 import { FormikValues } from 'formik';
 
-import {
-	AppFormField,
-	AppFormModel,
-	FieldValidators,
-	FormikField
-} from '../../models';
+import { AppFormField, AppFormModel, FieldValidators, FormikField } from '../../models';
 
 import { fieldsUtils, getInitialFieldsAndValues } from './utils/fields';
 

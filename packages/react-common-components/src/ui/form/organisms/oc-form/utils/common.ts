@@ -1,4 +1,4 @@
-import type { FormikValues, FormikErrors } from 'formik';
+import type { FormikErrors, FormikValues } from 'formik';
 import { isEmpty } from 'lodash-es';
 
 import { errorMessages, FIELD_TYPE } from '../../../lib';
@@ -24,7 +24,7 @@ export const validateOcFormValues = (
 	prevValues: FormikValues,
 	prevErrors: FormikErrors<FormikValues>,
 	values: FormikFieldsValues,
-	validators: FieldValidators
+	validators: FieldValidators,
 ) => {
 	if (!values || isEmpty(validators)) {
 		return {};
@@ -33,7 +33,7 @@ export const validateOcFormValues = (
 	return Object.entries(values).reduce((acc, [name, value]) => {
 		// value wasn't changed, set old error if present
 		if (value === prevValues[name] && prevErrors[name] != null) {
-			return {...acc, [name]: prevErrors[name]};
+			return { ...acc, [name]: prevErrors[name] };
 		}
 
 		// no validator
@@ -53,20 +53,18 @@ export const validateOcFormValues = (
 	}, {});
 };
 
-export const formatOcFormValues = (
-	arr: FormikField[],
-	values: FormikValues
-): Record<string, any> => formatOcFormFields(arr, values, ['name', 'id']);
+export const formatOcFormValues = (arr: FormikField[], values: FormikValues): Record<string, any> =>
+	formatOcFormFields(arr, values, ['name', 'id']);
 
 export const formatOcFormErrors = (
 	arr: FormikField[],
-	errors: FormikErrors<FormikValues>
+	errors: FormikErrors<FormikValues>,
 ): Record<string, any> => formatOcFormFields(arr, errors, ['id', 'name']);
 
 const formatOcFormFields = (
 	arr: FormikField[],
 	values: FormikValues,
-	[source, target]: ('id' | 'name')[]
+	[source, target]: ('id' | 'name')[],
 ): Record<string, any> => {
 	return arr.reduce((acc, item) => {
 		if (item.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY) {

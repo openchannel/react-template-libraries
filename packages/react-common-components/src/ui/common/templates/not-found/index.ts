@@ -1,4 +1,4 @@
 import type { NotFoundProps } from './types';
 
 export type { NotFoundProps };
-export { NotFound, NotFound as default } from './not-found';
+export { NotFound as default, NotFound } from './not-found';

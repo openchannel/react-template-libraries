@@ -37,7 +37,7 @@ export const OcRecommendedAppsComponent: React.FC<RecommendedAppsProps> = (props
 
 	return (
 		<div className="recommended-apps">
-			<h4 className="recommended-apps__heading">{recommendedAppTitle}</h4>
+			<h4 className="recommended-apps__heading">{recommendedAppTitle || ''}</h4>
 			{appList.length ? (
 				<div className="recommended-apps__container">
 					{appList.map((appCard, index) => (
