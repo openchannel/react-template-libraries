@@ -84,7 +84,7 @@ export const reviews = {
 	 * `updateReview({reviewId: "5565322ae4b0a70b13a4563b", headline: "Good App", rating: 400, description: ""})`
 	 */
 	updateReview: (reviewData: any) => {
-		return api.put(`${REVIEWS_URL}/${reviewData.reviewId}`, { body: reviewData });
+		return api.patch(`${REVIEWS_URL}/${reviewData.reviewId}`, { body: reviewData });
 	},
 
 	/**
