@@ -55,7 +55,7 @@ export const OcTooltipLabel: React.FC<OcTooltipLabelProps> = React.memo((props) 
 			{/* eslint-disable-next-line jsx-a11y/label-has-for */}
 			<label className={`tooltip-label__text ${labelClass}`} htmlFor={htmlFor}>
 				{text || children}
-				{required && <span className="tooltip-label__required">*</span>}
+				{required && <span className="tooltip-label__required">&nbsp;*</span>}
 			</label>
 			{description && description.length > 0 && (
 				<OcTooltipComponent tooltip={description}>

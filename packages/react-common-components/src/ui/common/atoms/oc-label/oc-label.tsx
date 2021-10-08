@@ -29,7 +29,7 @@ export const OcLabelComponent: React.FC<Partial<LabelProps>> = (props) => {
 		// eslint-disable-next-line jsx-a11y/label-has-for
 		<label className={`oc-form-label ${customClass}`} {...p}>
 			{text || children}
-			{required && <span className="oc-form-label__required">*</span>}
+			{required && <span className="oc-form-label__required">&nbsp;*</span>}
 		</label>
 	);
 };

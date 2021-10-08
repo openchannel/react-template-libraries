@@ -3,15 +3,15 @@ import { Story, Meta } from '@storybook/react';
 
 import {
 	InviteUserContent,
-	InviteContentProps,
 } from '../../../packages/react-common-components/src/ui/common/organisms/oc-invite-modal/content';
+import { OcInviteModalProps } from '../../../packages/react-common-components/src/ui/common';
 
 export default {
 	title: 'Invite user modal content [BEM]',
 	component: InviteUserContent,
 } as Meta;
 
-const Component: Story<InviteContentProps> = (args) => {
+const Component: Story<Omit<OcInviteModalProps, 'isOpened' | 'size'>> = (args) => {
 	return (
 		<div className="invite-modal">
 			<InviteUserContent {...args} />
@@ -21,10 +21,8 @@ const Component: Story<InviteContentProps> = (args) => {
 
 export const Modal = Component.bind({});
 Modal.args = {
-	modalData: {
-		modalTitle: 'Invite a member',
-		successButtonText: 'Send invite',
-	},
+	modalTitle: 'Invite a member',
+	successButtonText: 'Send invite',
 	formConfig: {
 		fields: [
 			{
@@ -36,9 +34,7 @@ Modal.args = {
 				type: 'text',
 				required: null,
 				attributes: {
-					maxChars: null,
 					required: true,
-					minChars: null,
 				},
 				options: null,
 			},
@@ -69,6 +65,5 @@ Modal.args = {
 			},
 		],
 	},
-	modalTitle: 'Invite a member',
 	buttonPosition: 'between',
 };

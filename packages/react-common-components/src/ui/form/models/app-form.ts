@@ -36,15 +36,15 @@ export interface AppFormModel {
 }
 
 export interface AppFormFieldAttributes extends Record<string, any> {
-	maxCount?: number;
-	minCount?: number;
+	maxCount?: number | null;
+	minCount?: number | null;
 	required?: boolean;
-	maxChars?: number;
-	minChars?: number;
-	min?: number;
-	max?: number;
-	ordering?: 'append' | 'prepend';
-	rowLabel?: string;
+	maxChars?: number | null;
+	minChars?: number | null;
+	min?: number | null;
+	max?: number | null;
+	ordering?: 'append' | 'prepend' | null;
+	rowLabel?: string | null;
 }
 
 type ValidationErrors = {

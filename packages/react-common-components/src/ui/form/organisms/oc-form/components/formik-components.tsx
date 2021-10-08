@@ -15,7 +15,9 @@ import { FIELD_TYPE } from '../../../lib';
 import { OcMultiSelectListProps, OcTagsProps } from '../../../molecules';
 import OcMultiSelectList from '../../../molecules/oc-multi-select-list/oc-multi-select-list';
 import OcTags from '../../../molecules/oc-tags/oc-tags';
+
 import type { FCWP, FieldGroupProps } from '../types';
+import { customClassWithError } from '../utils/common';
 import { shouldFieldGroupUpdate, shouldFieldUpdate } from '../utils/memo';
 
 export const FieldGroup: React.FC<FieldGroupProps & { error?: string }> = React.memo((props) => {
@@ -31,18 +33,10 @@ export const FieldGroup: React.FC<FieldGroupProps & { error?: string }> = React.
 				</div>
 			)}
 			<div className="form__field-input">
-				{error
-					? React.Children.map(children, (child) =>
-							React.isValidElement(child)
-								? React.cloneElement(child, {
-										customClass:
-											child.props.customClass != null
-												? `${child.props.customClass} invalid`
-												: 'invalid',
-								  })
-								: child,
-					  )
-					: children}
+				{React.Children.map(children, child => React.isValidElement(child)
+					// assign 'invalid' className to the customClass prop
+					? React.cloneElement(child, { customClass: customClassWithError(error, child) })
+					: child)}
 			</div>
 			{error && <OcError message={error} />}
 		</>
