@@ -105,7 +105,7 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 						? displayedItems.map((review, index) => (
 								<div className="review-list__one-review" key={index}>
 									<div className="review-list__one-review-head">
-										<h5 className="review-list__one-review-heading">{review.reviewOwnerName}</h5>
+										<h5 className="review-list__one-review-heading">{review.user.name}</h5>
 										{review.userId === currentUserId && (
 											<div className="review-list__menu">
 												<OcDropdownButton
