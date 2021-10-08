@@ -1,6 +1,5 @@
-import { Options } from '../lib/request';
-
 import { api } from '../lib/api';
+import { Options } from '../lib/request';
 import { Page } from '../model/api/page.model';
 import { CreateReviewRequest, ReviewResponse } from '../model/api/review.model';
 import { OCReviewDetailsResponse } from '../model/components/frontend.model';
@@ -57,7 +56,7 @@ export const reviews = {
 	 * getReviewsByAppId('a7hsd87ha8sdh8a7sd',1, 10, "{"name": 1}", "{"name": {"$in":["first", "second"]}}")
 	 *``
 	 */
-	getReviewsByAppId: (appId: string, sort?: string, filter?: string, page: number = 0, limit: number = 0) => {
+	getReviewsByAppId: (appId: string, sort?: string, filter?: string, page = 0, limit = 0) => {
 		const params = configureReviewsParams(appId, sort, filter, page, limit);
 
 		// let reviewPage: Page<Review>;
@@ -73,7 +72,7 @@ export const reviews = {
 	 * `createReview({appId: 5565322ae4b0a70b13a4563b, headline: "Good App", rating: 400, description: ""})`
 	 */
 	createReview: (reviewData: Options<ReviewResponse | CreateReviewRequest>) => {
-		return api.post(REVIEWS_URL, {body: reviewData});
+		return api.post(REVIEWS_URL, { body: reviewData });
 	},
 
 	/**
@@ -85,7 +84,7 @@ export const reviews = {
 	 * `updateReview({reviewId: "5565322ae4b0a70b13a4563b", headline: "Good App", rating: 400, description: ""})`
 	 */
 	updateReview: (reviewData: any) => {
-		return api.put(`${REVIEWS_URL}/${reviewData.reviewId}`, {body: reviewData});
+		return api.patch(`${REVIEWS_URL}/${reviewData.reviewId}`, { body: reviewData });
 	},
 
 	/**

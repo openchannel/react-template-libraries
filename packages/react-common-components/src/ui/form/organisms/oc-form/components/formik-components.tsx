@@ -21,7 +21,7 @@ import { customClassWithError } from '../utils/common';
 import { shouldFieldGroupUpdate, shouldFieldUpdate } from '../utils/memo';
 
 export const FieldGroup: React.FC<FieldGroupProps & { error?: string }> = React.memo((props) => {
-	const {children, error, label, labelFor, description, required} = props;
+	const { children, error, label, labelFor, description, required } = props;
 
 	return (
 		<>
@@ -38,7 +38,7 @@ export const FieldGroup: React.FC<FieldGroupProps & { error?: string }> = React.
 					? React.cloneElement(child, { customClass: customClassWithError(error, child) })
 					: child)}
 			</div>
-			{error && <OcError message={error}/>}
+			{error && <OcError message={error} />}
 		</>
 	);
 }, shouldFieldGroupUpdate);

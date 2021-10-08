@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ListItemProps } from '../../../../common';
+import { ListItemProps } from '../../../common';
 
 export const DropdownListItem = React.forwardRef(
 	(props: ListItemProps, ref: React.Ref<HTMLButtonElement>) => {

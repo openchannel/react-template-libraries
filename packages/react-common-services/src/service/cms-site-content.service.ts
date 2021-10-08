@@ -1,6 +1,6 @@
 import { forIn, get, has } from 'lodash-es';
 
-const isImage = (path: string): boolean => (/(?:jpg|gif|png|svg|jpeg|webp)/).test(path);
+const isImage = (path: string): boolean => /(?:jpg|gif|png|svg|jpeg|webp)/.test(path);
 
 const getContent = (cmsData: any, path: any) => {
 	const content = get(cmsData, path);
