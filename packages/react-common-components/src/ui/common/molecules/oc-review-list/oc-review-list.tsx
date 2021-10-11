@@ -44,10 +44,6 @@ export interface ReviewListProps {
 	 */
 	currentUserId?: string;
 	/**
-	 * selectedAction prop is used to compute if we want to edit or delete review
-	 */
-	selectedAction?: Option;
-	/**
 	 * setSelectedAction prop is used to compute if we want to edit or delete review
 	 */
 	setSelectedAction: (option: Option, e: React.SyntheticEvent<unknown, Event>) => void;
@@ -75,7 +71,6 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 		noReviewMessage = 'There is no review for this app',
 		children,
 		currentUserId,
-		selectedAction,
 		setSelectedAction,
 		dropdownDefaultIcon,
 		dropdownMenuOptions = [],
@@ -109,7 +104,7 @@ export const OcReviewListComponent: React.FC<ReviewListProps> = (props) => {
 										{review.userId === currentUserId && (
 											<div className="review-list__menu">
 												<OcDropdownButton
-													options={dropdownMenuOptions.map((v) => ({
+													options={dropdownMenuOptions.map((v: string) => ({
 														label: titleCase(v),
 														value: v,
 													}))}

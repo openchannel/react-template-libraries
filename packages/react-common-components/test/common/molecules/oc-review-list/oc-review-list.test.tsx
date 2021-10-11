@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { noop } from 'lodash';
 import { mount, shallow } from 'enzyme';
 import OcReviewListComponent from '../../../../src/ui/common/molecules/oc-review-list/oc-review-list';
 
 describe('OcReviewListComponent', () => {
 	const component = shallow(
 		<OcReviewListComponent
+			setSelectedAction={noop}
 			reviewListTitle="Most recent reviews"
 			reviewList={[
 				{
@@ -24,6 +26,7 @@ describe('OcReviewListComponent', () => {
 	it('should show reviews', () => {
 		const component = mount(
 			<OcReviewListComponent
+				setSelectedAction={noop}
 				reviewListTitle="Most recent reviews"
 				reviewList={[]}
 				noReviewMessage="No Review for this app"
@@ -51,6 +54,7 @@ describe('OcReviewListComponent', () => {
 	it('should show empty data message and heading', () => {
 		const component = mount(
 			<OcReviewListComponent
+				setSelectedAction={noop}
 				reviewListTitle="Most recent reviews"
 				reviewList={[
 					{
