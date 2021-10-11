@@ -46,7 +46,7 @@ export interface ReviewListProps {
 	/**
 	 * setSelectedAction prop is used to compute if we want to edit or delete review
 	 */
-	setSelectedAction: (option: Option, e: React.SyntheticEvent<unknown, Event>) => void;
+	setSelectedAction: (option: Option | undefined, e: React.SyntheticEvent<unknown, Event>) => void;
 	/**
 	 * MenuIcon to display toggle image on edit or delete(ex. down arrow)
 	 */
