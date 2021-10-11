@@ -1,5 +1,4 @@
 import { api } from '../lib/api';
-import { Options } from '../lib/request';
 import { Page } from '../model/api/page.model';
 import { CreateReviewRequest, ReviewResponse } from '../model/api/review.model';
 import { OCReviewDetailsResponse } from '../model/components/frontend.model';
@@ -71,7 +70,7 @@ export const reviews = {
 	 * ### Example:
 	 * `createReview({appId: 5565322ae4b0a70b13a4563b, headline: "Good App", rating: 400, description: ""})`
 	 */
-	createReview: (reviewData: Options<ReviewResponse | CreateReviewRequest>) => {
+	createReview: (reviewData: ReviewResponse | CreateReviewRequest) => {
 		return api.post(REVIEWS_URL, { body: reviewData });
 	},
 
