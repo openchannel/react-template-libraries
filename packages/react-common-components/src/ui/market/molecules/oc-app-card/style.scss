@@ -19,7 +19,7 @@
 	&__content {
 		margin-left: 2rem;
 		padding: 0;
-		width: 100%;
+		width: calc(100% - 44px - 2rem);
 
 		&-name {
 			@include font-medium();
