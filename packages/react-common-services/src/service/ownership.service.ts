@@ -15,12 +15,10 @@ export const ownershipService = {
 	 * {
 	 *   appId: '0a8hs09dhas09d8h9',
 	 *   modelId: '9a8hs9a86sgd97a6sgd'
-	 * },
-	 * {"Authorization":"Bearer as98hd90ahsd98has9d8ha98sd"}
-	 * )`
+	 * }`
 	 */
-	installOwnership: (ownership: CreateOwnershipModel, headers: ReqHeaders) => {
-		return api.post(`${OWNERSHIP_URL}/install`, { body: ownership, headers: headers });
+	installOwnership: (ownership: CreateOwnershipModel, headers?: ReqHeaders) => {
+		return api.post(`${OWNERSHIP_URL}/install`, { body: ownership, headers });
 	},
 
 	/**
@@ -33,7 +31,7 @@ export const ownershipService = {
 	 *
 	 * `uninstallOwnership('0a8hs09dhas09d8h9', {"Authorization":"Bearer as98hd90ahsd98has9d8ha98sd"})`
 	 */
-	uninstallOwnership: (ownershipId: string, headers: ReqHeaders) => {
+	uninstallOwnership: (ownershipId: string, headers?: ReqHeaders) => {
 		return api.post(`${OWNERSHIP_URL}/uninstall/${ownershipId}`, { body: {}, headers });
 	},
 };
