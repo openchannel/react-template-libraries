@@ -9,22 +9,22 @@ const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%!^&]).{8,}$/
 const EMAIL_REGEX =
 	/^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
-const isEmptyInputValue = (value: any) => value == null || value.length === 0;
+export const isEmptyInputValue = (value: any) => value == null || value.length === 0;
 
-const hasValidLength = (value: any) => value != null && typeof value.length === 'number';
+export const hasValidLength = (value: any) => value != null && typeof value.length === 'number';
 
-const requiredTrue = () => (value: boolean) => value ? null : { key: 'required', value: true };
+export const requiredTrue = () => (value: boolean) => value ? null : { key: 'required', value: true };
 
-const required = () => (value: any) =>
+export const required = () => (value: any) =>
 	isEmptyInputValue(value) ? { key: 'required', value: true } : null;
 
-const maxLength = (maxLength: number) => (value: any) => {
+export const maxLength = (maxLength: number) => (value: any) => {
 	return hasValidLength(value) && value.length > maxLength
 		? { key: 'maxlength', value: { requiredLength: maxLength, actualLength: value.length } }
 		: null;
 };
 
-const minLength = (minLength: number) => (value: any) => {
+export const minLength = (minLength: number) => (value: any) => {
 	if (isEmptyInputValue(value) || !hasValidLength(value)) {
 		return null;
 	}
@@ -34,7 +34,7 @@ const minLength = (minLength: number) => (value: any) => {
 		: null;
 };
 
-const min = (min: number) => (value: any) => {
+export const min = (min: number) => (value: any) => {
 	if (isEmptyInputValue(value) || isEmptyInputValue(min)) {
 		return null;
 	}
@@ -44,7 +44,7 @@ const min = (min: number) => (value: any) => {
 	return !isNaN(value) && value < min ? { key: 'min', value: { min, actual: parsedValue } } : null;
 };
 
-const max = (max: number) => (value: any) => {
+export const max = (max: number) => (value: any) => {
 	if (isEmptyInputValue(value) || isEmptyInputValue(max)) {
 		return null;
 	}
@@ -54,7 +54,7 @@ const max = (max: number) => (value: any) => {
 	return !isNaN(value) && value > max ? { key: 'max', value: { max, actual: parsedValue } } : null;
 };
 
-const email = () => (value: string) => {
+export const email = () => (value: string) => {
 	if (isEmptyInputValue(value)) {
 		return null;
 	}
@@ -62,7 +62,7 @@ const email = () => (value: string) => {
 	return EMAIL_REGEX.test(value) ? null : { key: 'email', value: true };
 };
 
-const url = () => (value: string) => {
+export const url = () => (value: string) => {
 	// eslint-disable-next-line
 	const URL_REGEX = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
 
@@ -73,7 +73,7 @@ const url = () => (value: string) => {
 	return { key: 'url', value: true };
 };
 
-const color = () => (value: string) => {
+export const color = () => (value: string) => {
 	if ((value.charAt(0) === '#' && value.length === 7) || value === '') {
 		return null;
 	}
@@ -81,7 +81,7 @@ const color = () => (value: string) => {
 	return { key: 'color', value: true };
 };
 
-const password = () => (value: string) => {
+export const password = () => (value: string) => {
 	if ((value ? value : '').match(PASSWORD_REGEX)) {
 		return null;
 	}
@@ -89,7 +89,7 @@ const password = () => (value: string) => {
 	return { key: 'password', value: {} };
 };
 
-const minLengthArray =
+export const minLengthArray =
 	(min: number, label: string, showLengthErrorText?: boolean) => (value: any[]) => {
 		if (!value || value.length === 0 || value.length >= min) {
 			return null;
@@ -100,7 +100,7 @@ const minLengthArray =
 			: { key: 'minCount', value: true };
 	};
 
-const maxLengthArray =
+export const maxLengthArray =
 	(max: number, label: string, showLengthErrorText?: boolean) => (value: any[]) => {
 		if (!value || value.length === 0 || value.length <= max) {
 			return null;
@@ -111,13 +111,13 @@ const maxLengthArray =
 			: { key: 'maxCount', value: true };
 	};
 
-const richTextMinCharacters = (min: number) => (value: string) => {
+export const richTextMinCharacters = (min: number) => (value: string) => {
 	const characters = stripHtmlTags(value);
 
 	return characters.length >= min ? null : { key: 'minlength', value: { requiredLength: min } };
 };
 
-const richTextMaxCharacters = (max: number) => (value: string) => {
+export const richTextMaxCharacters = (max: number) => (value: string) => {
 	const characters = stripHtmlTags(value);
 
 	return characters.length <= max ? null : { key: 'maxlength', value: { requiredLength: max } };
@@ -127,7 +127,7 @@ const richTextMaxCharacters = (max: number) => (value: string) => {
 // 	return Array.from({ length: maxCount }, (_, i) => i + 1);
 // };
 
-const numberTags = (label: string) => (value: number[]) => {
+export const numberTags = (label: string) => (value: number[]) => {
 	const numberArray = value;
 
 	if (numberArray) {
@@ -142,7 +142,7 @@ const numberTags = (label: string) => (value: number[]) => {
 	return null;
 };
 
-const booleanTags = (label: string) => (value: boolean[]) => {
+export const booleanTags = (label: string) => (value: boolean[]) => {
 	const booleanAcceptedValues = new Set([true, false]);
 	const booleanArray = value;
 
