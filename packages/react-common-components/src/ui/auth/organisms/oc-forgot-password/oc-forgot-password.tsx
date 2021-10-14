@@ -21,6 +21,7 @@ export const OcForgotPasswordComponent: React.FC<OcForgotPasswordProps> = (props
 		process,
 		inputProps,
 		inputError,
+		onSubmit,
 	} = props;
 
 	return (
@@ -63,6 +64,7 @@ export const OcForgotPasswordComponent: React.FC<OcForgotPasswordProps> = (props
 							type="primary"
 							customClass="forgot-password__button"
 							process={process}
+							onClick={onSubmit}
 						>
 							Reset Password
 						</OcButtonComponent>
