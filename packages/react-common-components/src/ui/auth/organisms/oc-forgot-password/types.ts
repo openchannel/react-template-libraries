@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import { InputProps } from '../../../common/atoms';
 
 export interface OcForgotPasswordProps {
@@ -31,4 +33,6 @@ export interface OcForgotPasswordProps {
 	inputProps?: InputProps;
 
 	inputError?: string | boolean;
+
+	onSubmit?: (event: React.SyntheticEvent) => void;
 }
