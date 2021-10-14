@@ -34,5 +34,5 @@ export interface OcForgotPasswordProps {
 
 	inputError?: string | boolean;
 
-	onSubmit?: (event: React.SyntheticEvent) => void;
+	onSubmit?(event: React.SyntheticEvent): void;
 }
