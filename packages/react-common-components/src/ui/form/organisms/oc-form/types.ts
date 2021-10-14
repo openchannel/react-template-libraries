@@ -7,7 +7,7 @@ import type { AppFormModel, FormikField, FormikFieldsValues } from '../../models
 export type OcFormValues = Record<string, any>;
 export type OcFormFormikHelpers = FormikHelpers<Record<string, unknown>>;
 
-export interface OcFormProps {
+export interface OcFormProps extends FormikServiceProps {
 	formJsonData: AppFormModel;
 	onSubmit: (
 		values: OcFormValues,
@@ -74,7 +74,14 @@ export interface OcFormContextProps {
 	onSaveField: React.MouseEventHandler;
 }
 
-export interface FormikMapFieldsProps {
+export interface FormikServiceProps {
+	/**
+	 * Service to make API calls.
+	 */
+	service?: any
+}
+
+export interface FormikMapFieldsProps extends FormikServiceProps {
 	fields: FormikField[];
 }
 

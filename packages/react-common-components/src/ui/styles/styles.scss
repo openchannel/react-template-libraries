@@ -162,7 +162,8 @@ h1, h2, h3, h4, h5, h6 {
 .rdt, // datepicker
 .rich-editor,
 .select-component,
-.form__field-input {
+.form__field-input,
+.dropdown-multi-app {
 	&.invalid {
 		.tox-tinymce, .oc-dropbox__control, .date-input  {
 			border-color: $danger !important;
@@ -176,6 +177,10 @@ h1, h2, h3, h4, h5, h6 {
 			input {
 				border-color: $danger !important;
 			}
+		}
+
+		.dropdown-multi-app__search__control {
+			border-color: $danger !important;
 		}
 	}
 

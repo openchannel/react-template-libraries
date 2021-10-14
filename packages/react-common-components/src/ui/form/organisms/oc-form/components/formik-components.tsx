@@ -2,7 +2,13 @@ import * as React from 'react';
 import { FieldInputProps, useFormikContext } from 'formik';
 import moment from 'moment';
 
-import { ColorProps, DatepickerProps, OcSelectProps, VideoUrlProps } from '../../../../common';
+import {
+	ColorProps,
+	DatepickerProps,
+	DropdownMultiAppProps,
+	OcSelectProps,
+	VideoUrlProps
+} from '../../../../common';
 import OcColorComponent from '../../../../common/atoms/oc-color/oc-color';
 import OcError from '../../../../common/atoms/oc-error/oc-error';
 import OcFileUpload from '../../../../common/atoms/oc-file-upload/oc-file-upload';
@@ -10,6 +16,7 @@ import OcRichTextEditorComponent from '../../../../common/atoms/oc-rich-text-edi
 import OcDatetimePicker from '../../../../common/molecules/oc-datetime-picker/oc-datetime';
 import OcSelect from '../../../../common/molecules/oc-select/oc-select';
 import OcVideoUrlComponent from '../../../../common/molecules/oc-video-url/oc-video-url';
+import OcDropdownMultiApp from '../../../../common/molecules/oc-dropdown-multi-app/dropdown';
 import OcTooltipLabel from '../../../atoms/oc-tooltip-label/oc-tooltip-label';
 import { FIELD_TYPE } from '../../../lib';
 import { OcMultiSelectListProps, OcTagsProps } from '../../../molecules';
@@ -248,3 +255,30 @@ export const FormikOcMultiSelectListWrapper: React.FC<
 export const FormikOcFileUploadWrapper: React.FC<any> = React.memo(({ acceptType, fileType }) => {
 	return <OcFileUpload acceptType={acceptType} fileType={fileType} />;
 });
+
+export const FormikOcDropdownMultiAppWrapper: React.FC<
+	FCWP<DropdownMultiAppProps['value']> & {
+	service: DropdownMultiAppProps['service'];
+	defaultValue: DropdownMultiAppProps['defaultValue'];
+	placeholder: DropdownMultiAppProps['placeholder'];
+}
+	> = React.memo(({ field, form, customClass, service, defaultValue, placeholder }) => {
+	const onChange = React.useCallback(
+		(value) => {
+			form.setFieldValue(field.name, value);
+		},
+		[field.name, form.setFieldValue],
+	);
+
+	return (
+		<OcDropdownMultiApp
+			service={service}
+			defaultValue={defaultValue}
+			value={field.value}
+			onChange={onChange}
+			placeholder={placeholder}
+			customClass={customClass}
+			onBlur={field.onBlur}
+		/>
+	);
+}, shouldFieldUpdate(['service', 'placeholder']));

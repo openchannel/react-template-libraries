@@ -172,4 +172,35 @@ export const apps = {
 	 */
 	changeAppStatus: (id: string, version: number, status: AppStatusValue, reason = '') =>
 		api.post(`${APPS_URL}/${id}/versions/${version}/status`, { body: { status, reason } }),
+
+	/**
+	 * Same as {@code getApps}, but with custom tweaks.
+	 */
+	searchInitialMultiApps: (query: string, isOwner = false, pageNumber = 1, limit = 100) => {
+		const params = {
+			query,
+			isOwner,
+			pageNumber,
+			limit,
+		};
+
+		return api.get<any, Page<AppResponse>>(`${APPS_URL}`, { params }, { ignoreNProgress: true });
+	},
+
+	/**
+	 * Same as {@code searchApp}, but with custom tweaks.
+	 */
+	searchMultiApps: (searchText: string, query?: string, fields: string[] = ['name', 'appId']) => {
+		const params = {
+			fields: JSON.stringify(fields),
+			text: searchText || '',
+			query,
+		};
+
+		return api.get<any, Page<AppResponse>>(
+			`${APPS_URL}/textSearch`,
+			{ params },
+			{ ignoreNProgress: true },
+		);
+	},
 };

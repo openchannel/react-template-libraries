@@ -1,6 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { isNil } from 'lodash-es';
 
+import { updateProgress } from '../interceptors/progress-bar';
+
 import { instance } from './instance';
 
 type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
@@ -28,10 +30,20 @@ export interface Options<B = unknown> {
 	handlers?: Handlers;
 }
 
+export interface CustomRequestConfigTweaks {
+	ignoreNProgress?: boolean;
+}
+
+export interface CustomRequestConfig extends AxiosRequestConfig {
+	handlers?: Handlers;
+	customTweaks?: CustomRequestConfigTweaks;
+}
+
 const request = async <B, R>(
 	method: Method,
 	url: string,
 	options: Options<B> = {},
+	customTweaks?: CustomRequestConfigTweaks,
 ): Promise<AxiosResponse<R>> => {
 	const baseURL = instance.getUrl();
 
@@ -40,7 +52,7 @@ const request = async <B, R>(
 		...options.headers,
 	};
 
-	const _config = {
+	const _config: CustomRequestConfig = {
 		url,
 		method,
 		baseURL,
@@ -49,6 +61,9 @@ const request = async <B, R>(
 		data: createBody({ ...options, headers }),
 		withCredentials: true,
 		handlers: options.handlers,
+		customTweaks,
+		onDownloadProgress: updateProgress(customTweaks?.ignoreNProgress),
+		onUploadProgress: updateProgress(customTweaks?.ignoreNProgress),
 	};
 
 	return axios(_config);
