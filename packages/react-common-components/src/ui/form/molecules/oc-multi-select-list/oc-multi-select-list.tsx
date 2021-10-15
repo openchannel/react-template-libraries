@@ -67,7 +67,7 @@ const OcMultiSelectList: React.FC<OcMultiSelectListProps> = (props) => {
 				selectedItem=""
 				onBlur={onBlur}
 			/>
-			{value.map((item) => (
+			{(value || []).map((item) => (
 				<span key={item} className="multiselect__tag">
 					<OcTagElement title={item} onIconClick={onRemoveSelectedItem} />
 				</span>
