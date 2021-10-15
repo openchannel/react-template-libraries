@@ -57,7 +57,7 @@ export const users = {
 	 *``
 	 */
 	updateUserCompany(companyData: any) {
-		return api.patch<any>(`${USER_URL}/this`, companyData);
+		return api.patch<any>(`${USER_URL}/this`, { body: companyData });
 	},
 
 	/**
