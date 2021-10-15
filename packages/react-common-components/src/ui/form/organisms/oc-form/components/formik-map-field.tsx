@@ -36,7 +36,11 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 	return (
 		<>
 			{fields.map((field, index) => {
-				const { id, label, description, type, name, attributes, options, defaultValue, placeholder } = field;
+				const { id, label, description, type, attributes, options, defaultValue, placeholder } = field;
+
+				// avoid formik nesting,
+				// e.g., if name = 'a.b', it will remain as {'a.b': ...}, not as {a: {b: ...}
+				const name = `['${field.name}']`;
 
 				switch (type) {
 					case FIELD_TYPE.RICH_TEXT:
