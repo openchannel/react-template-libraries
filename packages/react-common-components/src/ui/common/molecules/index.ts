@@ -2,6 +2,7 @@ export * from './oc-app-description/oc-app-description';
 export * from './oc-app-get-started/oc-app-get-started';
 export * from './oc-datetime-picker/oc-datetime';
 export * from './oc-dropdown';
+export * from './oc-dropdown-multi-app';
 export * from './oc-navigation-breadcrumbs';
 export * from './oc-profile-navbar/oc-profile-navbar';
 export * from './oc-review/oc-review';

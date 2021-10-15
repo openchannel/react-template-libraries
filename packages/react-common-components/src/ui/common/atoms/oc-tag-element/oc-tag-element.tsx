@@ -8,6 +8,11 @@ import './style.scss';
 
 export interface OcTagElementProps {
 	/**
+	 * String with class-list which can be
+	 * added to the existed title class-list
+	 */
+	customClass?: string;
+	/**
 	 * title - component title.
 	 */
 	title: string;
@@ -27,7 +32,7 @@ export interface OcTagElementProps {
 }
 
 export const OcTagElement: React.FC<OcTagElementProps> = React.memo((props) => {
-	const { title, id, deleteTagImgUrl, onIconClick } = props;
+	const { customClass, title, id, deleteTagImgUrl, onIconClick } = props;
 
 	const onClick = () => {
 		if (!onIconClick) return;
@@ -43,8 +48,11 @@ export const OcTagElement: React.FC<OcTagElementProps> = React.memo((props) => {
 		}
 	};
 
+	// clicking on the tag causes the form to be submitted, so prevent this
+	const onTagClick = (event: React.SyntheticEvent) => event.preventDefault();
+
 	return (
-		<button className="tag-element">
+		<button className={`tag-element ${customClass}`} onClick={onTagClick}>
 			<div className="tag-element__text oc-text-wrap oc-text-truncate tag-label">{title}</div>
 			{Boolean(onIconClick) && (
 				<OverlayTrigger

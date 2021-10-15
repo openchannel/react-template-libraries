@@ -278,6 +278,7 @@ export const getFieldValidators = (field: FormikField): FieldValidators => {
 			validators = setUpFieldValidators(field, { isRichText: true });
 			break;
 		case FIELD_TYPE.TAGS:
+		case FIELD_TYPE.MULTI_APP:
 			validators = setUpFieldValidators(field, { isList: true });
 			break;
 		case FIELD_TYPE.SINGLE_FILE:

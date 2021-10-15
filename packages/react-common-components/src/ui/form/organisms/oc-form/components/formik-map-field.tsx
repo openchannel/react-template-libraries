@@ -10,12 +10,16 @@ import OcTextarea from '../../../atoms/oc-textarea/oc-textarea';
 import { FIELD_TYPE } from '../../../lib';
 import { OcDynamicFieldArray } from '../../oc-dynamic-field-array';
 import { useOcFormContext } from '../context';
-import { FormikMapFieldsProps } from '../types';
+import {
+	FormikMapFieldsProps,
+	FormikServiceProps,
+} from '../types';
 
 import {
 	FieldGroupWrapper,
 	FormikOcColorWrapper,
 	FormikOcDatetimePickerWrapper,
+	FormikOcDropdownMultiAppWrapper,
 	FormikOcFileUploadWrapper,
 	FormikOcMultiSelectListWrapper,
 	FormikOcSelectWrapper,
@@ -24,7 +28,7 @@ import {
 	FormikRichTextWrapper,
 } from './formik-components';
 
-export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
+export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, service }) => {
 	if (!fields || fields.length === 0) {
 		return null;
 	}
@@ -32,7 +36,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 	return (
 		<>
 			{fields.map((field, index) => {
-				const { id, label, description, type, name, attributes, options, placeholder } = field;
+				const { id, label, description, type, name, attributes, options, defaultValue, placeholder } = field;
 
 				switch (type) {
 					case FIELD_TYPE.RICH_TEXT:
@@ -318,6 +322,26 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 								/>
 							</FieldGroupWrapper>
 						);
+					case FIELD_TYPE.MULTI_APP:
+						return (
+							<FieldGroupWrapper
+								key={name}
+								name={name}
+								label={label}
+								labelFor={id}
+								description={description}
+								required={attributes!.required}
+							>
+								<Field
+									name={name}
+									component={FormikOcDropdownMultiAppWrapper}
+									fileType={type}
+									service={service}
+									defaultValue={defaultValue}
+									placeholder={placeholder}
+								/>
+							</FieldGroupWrapper>
+						)
 					case FIELD_TYPE.DYNAMIC_FIELD_ARRAY: {
 						const group = groupBy(fields, 'type')[FIELD_TYPE.DYNAMIC_FIELD_ARRAY];
 						const firstElementOfGroup = group[0] || { fields: [] };
@@ -362,8 +386,8 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields }) => {
 	);
 };
 
-export const FormikMapFieldsWrapper = () => {
+export const FormikMapFieldsWrapper: React.FC<FormikServiceProps> = ({children, ...props}) => {
 	const context = useOcFormContext();
 
-	return <FormikMapFields fields={context.fields} />;
+	return <FormikMapFields fields={context.fields} {...props} />;
 };

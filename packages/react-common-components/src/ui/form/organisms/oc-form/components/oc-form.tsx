@@ -24,6 +24,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		onCancel,
 		successButtonText = 'Submit',
 		buttonPosition = 'left',
+		service,
 	} = props;
 
 	const {
@@ -61,7 +62,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		<FormikContext.Provider value={formik}>
 			<OcFormContextProvider initialValue={{ flattenFields, fieldsDefinition, updateState }}>
 				<FormikForm className="form" onSubmit={handleSubmit} noValidate>
-					<FormikMapFieldsWrapper />
+					<FormikMapFieldsWrapper service={service} />
 					<div className={getOcFormButtonsClass(buttonPosition)}>
 						<div className={`form__button ${!onCancel ? 'full-width' : ''}`}>
 							<OcButtonComponent htmlType="submit" type="primary" process={formik.isSubmitting}>
