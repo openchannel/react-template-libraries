@@ -8,6 +8,8 @@ import useAppsService from './hooks';
 import {InputActionMeta} from 'react-select/src/types';
 import {noop} from 'lodash-es';
 
+const noOptionsMessage = () => null;
+
 export const OcDropdownMultiApp: React.FC<DropdownMultiAppProps> = (props) => {
 	const {
 		service,
@@ -75,11 +77,11 @@ export const OcDropdownMultiApp: React.FC<DropdownMultiAppProps> = (props) => {
 				onMenuClose={handleMenuClose}
 				onInputChange={handleSearch}
 				onChange={handleOptionSelect}
-				noOptionsMessage={() => null}
+				noOptionsMessage={noOptionsMessage}
 				onBlur={onBlur}
 			/>
 			<div className="dropdown-multi-app__tags">
-				{selectedApps.map((app) => (
+				{(selectedApps || []).map((app) => (
 					<OcTagElement
 						key={app.value.appId}
 						customClass="dropdown-multi-app__tags-item"

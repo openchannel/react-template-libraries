@@ -14,7 +14,8 @@ export default {
 
 const DropdownMultiAppComponent: Story<DropdownMultiAppProps> = (args) => {
 	const [value, setValue] = React.useState<string[]>([]);
-	return <OcDropdownMultiApp {...args} value={value} onChange={setValue}/>;
+	// set onBlur as undefined to remove some 'Blocked a frame with origin' error
+	return <OcDropdownMultiApp {...args} value={value} onChange={setValue} onBlur={undefined} />;
 };
 
 const mockApps: Partial<FullAppData>[] = [
