@@ -17,7 +17,7 @@ export const statisticService = {
 	 */
 	recordVisitToApp: (appId: string, headers?: ReqHeaders) => {
 		const mainUrl = `${STATS_URL}/increment/views`;
-		return api.post(mainUrl, { body: appId, headers: headers || {} });
+		return api.post(mainUrl, { body: { appId: appId }, headers: headers || {} });
 	},
 	/**
 	 * Description: Increment app statistic field
@@ -33,6 +33,6 @@ export const statisticService = {
 	 */
 	record: (field: string, appId: string, headers?: ReqHeaders) => {
 		const mainUrl = `${STATS_URL}/increment/${field}`;
-		return api.post(mainUrl, { body: appId, headers: headers || {} });
+		return api.post(mainUrl, { body: { appId: appId }, headers: headers || {} });
 	},
 };
