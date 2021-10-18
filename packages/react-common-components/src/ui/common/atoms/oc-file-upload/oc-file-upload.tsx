@@ -52,6 +52,12 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 		openModal();
 	};
 
+	if (true) {
+		return (
+			<div>File upload component is broken. Will be fixed soon.</div>
+		)
+	}
+
 	return (
 		<>
 			<Dropzone
