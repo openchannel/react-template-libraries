@@ -22,5 +22,7 @@ export interface OcActivationProps {
 	 */
 	inputProps?: InputProps;
 
+	handleButtonClick?: any;
+
 	inputError?: string | boolean;
 }
