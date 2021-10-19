@@ -31,8 +31,8 @@ export const statisticService = {
 	 * `record('installs','a2sd876ags7dd6g')`
 	 *
 	 */
-	record: (field: string, appId: string, headers?: ReqHeaders) => {
+	record: (field: string, appId: string, value = 1, headers?: ReqHeaders) => {
 		const mainUrl = `${STATS_URL}/increment/${field}`;
-		return api.post(mainUrl, { body: { appId: appId }, headers: headers || {} });
+		return api.post(mainUrl, { body: { appId: appId, value }, headers: headers || {} });
 	},
 };
