@@ -1,4 +1,5 @@
 import { InputProps } from '../../../common/atoms';
+import * as React from "react";
 
 export interface OcActivationProps {
 	/**
@@ -22,7 +23,7 @@ export interface OcActivationProps {
 	 */
 	inputProps?: InputProps;
 
-	handleButtonClick?: any;
+	handleButtonClick?(event: React.SyntheticEvent): void;
 
 	inputError?: string | boolean;
 }
