@@ -43,7 +43,7 @@ export const OcForgotPasswordComponent: React.FC<OcForgotPasswordProps> = (props
 				) : (
 					<>
 						<div className="forgot-password__header">
-							<h4 className="forgot-password__header-heading">Forgot Password?</h4>
+							<h4 className="forgot-password__header-heading">Forgot password?</h4>
 							<OcLabelComponent>We will send you a link to reset your password</OcLabelComponent>
 						</div>
 						<div className="forgot-password__email">
@@ -66,7 +66,7 @@ export const OcForgotPasswordComponent: React.FC<OcForgotPasswordProps> = (props
 							process={process}
 							onClick={onSubmit}
 						>
-							Reset Password
+							Reset password
 						</OcButtonComponent>
 						<div className="forgot-password__log-in">
 							<span>
@@ -74,18 +74,18 @@ export const OcForgotPasswordComponent: React.FC<OcForgotPasswordProps> = (props
 							</span>
 							<Link to={loginUrl} className="forgot-password__link">
 								{' '}
-								Log In
+								Log in
 							</Link>
 						</div>
 					</>
 				)}
 				<div className="forgot-password__sign-up">
 					<span>
-						<OcLabelComponent>Dont have an account yet?</OcLabelComponent>
+						<OcLabelComponent>Don't have an account yet?</OcLabelComponent>
 					</span>
 					<Link to={signupUrl} className="forgot-password__link">
 						{' '}
-						Sign Up
+						Sign up
 					</Link>
 				</div>
 			</div>
