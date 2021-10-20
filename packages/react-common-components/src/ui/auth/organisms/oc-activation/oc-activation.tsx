@@ -13,7 +13,7 @@ import { OcActivationProps } from './types';
 import './styles.scss';
 
 export const OcActivation: React.FC<OcActivationProps> = (props) => {
-	const { companyLogoUrl, resendActivationUrl, signupUrl, process, inputProps, inputError } = props;
+	const { companyLogoUrl, resendActivationUrl, signupUrl, process, inputProps, inputError, handleButtonClick  } = props;
 
 	return (
 		<div className="activation login-card login-card_borders">
@@ -44,6 +44,7 @@ export const OcActivation: React.FC<OcActivationProps> = (props) => {
 					type="primary"
 					customClass="activation__button"
 					process={process}
+					onClick={handleButtonClick}
 				>
 					Activate
 				</OcButtonComponent>
