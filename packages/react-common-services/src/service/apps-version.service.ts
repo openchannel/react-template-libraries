@@ -27,7 +27,7 @@ export const AppVersionService = {
 	 *  Documentation <a href="https://support.openchannel.io/documentation/api/#380-query-document">Openchannel API</a>
 	 * @param searchText - (required) Text for searching.
 	 * @param searchTextByFields - (required) Fields for searching.
-	 * @return Page<AppVersionResponse>
+	 * @return Promise<Page<AppVersionResponse>>
 	 *
 	 * ### Example:
 	 * ``
@@ -67,7 +67,7 @@ export const AppVersionService = {
 	 *  Documentation <a href="https://support.openchannel.io/documentation/api/#381-sort-document">Openchannel API</a>
 	 * @param query - (optional) Your specific search query.
 	 *  Documentation <a href="https://support.openchannel.io/documentation/api/#380-query-document">Openchannel API</a>
-	 * @return Page<AppVersionResponse>
+	 * @return Promise<Page<AppVersionResponse>>
 	 *
 	 * ### Example:
 	 * ``
@@ -94,7 +94,7 @@ export const AppVersionService = {
 	 *
 	 * @param appId (required)
 	 * @param version (required) Starts from >= 1.
-	 * @return AppVersionResponse
+	 * @return Promise<AppVersionResponse>
 	 *
 	 * ### Example:
 	 * ``
@@ -114,7 +114,7 @@ export const AppVersionService = {
 	 *
 	 * @param appId (required)
 	 * @param version (required) Starts from >= 1.
-	 * @return AppVersionResponse
+	 * @return Promise<AppVersionResponse>
 	 *
 	 * ### Example:
 	 * ``
