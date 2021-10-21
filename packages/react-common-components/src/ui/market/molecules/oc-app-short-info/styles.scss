@@ -19,6 +19,7 @@
 
     &_desktop {
       display: block;
+			margin-left: -56px;
       @include media-breakpoint-sm {
         display: none;
       }
@@ -58,7 +59,7 @@
 
     &__content {
       margin-left: 2rem;
-      width: calc(100% - 90px);
+      width: calc(100% - 153px);
       @include media-breakpoint-sm {
         width: calc(100% - 66px);
       }
