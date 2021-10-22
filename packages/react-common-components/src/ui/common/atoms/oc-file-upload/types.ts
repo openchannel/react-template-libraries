@@ -9,8 +9,4 @@ type FileType =
 export interface OcFileUploadProps {
 	fileType: FileType;
 	acceptType?: string;
-	/**
-	 * default: false
-	 */
-	isMultiFile?: boolean;
 }

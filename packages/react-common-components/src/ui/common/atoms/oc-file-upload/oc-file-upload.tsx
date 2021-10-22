@@ -1,5 +1,6 @@
 import * as React from 'react';
-import Dropzone, { IDropzoneProps } from 'react-dropzone-uploader';
+import Dropzone, {getFilesFromEvent, IDropzoneProps} from 'react-dropzone-uploader';
+import {useDropzone} from 'react-dropzone';
 
 import { useModalState } from '../../../../lib/hooks';
 
@@ -10,87 +11,68 @@ import { OcFileUploadProps } from './types';
 import { classNames, getUploadParams } from './utils';
 
 import './style.scss';
+import {ReactComponent as UploadIcon} from '../../../../assets/img/upload_icon.svg';
+import OcCropperModalComponent from '../../organisms/oc-image-cropper-modal/oc-image-cropper-modal';
+import {CropperModalData} from '../../organisms/oc-image-cropper-modal/types';
 
 export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
-	const { fileType, acceptType, isMultiFile = false } = props;
+	const {fileType, acceptType} = props;
 	const isFileTypeImage = fileType === 'singleImage' || fileType === 'multiImage';
-	const acceptImages = acceptType === 'image/*';
-	const { isOpened, closeModal, openModal } = useModalState();
-	const [cropData, setCropData] = React.useState('');
-	const [image, setImage] = React.useState('');
-	const [cropFileName, setCropFilename] = React.useState('');
-	const isMultiUpload = isFileTypeImage && acceptImages && !isMultiFile;
+	const {isOpened, closeModal, openModal} = useModalState();
+	const [cropData, setCropData] = React.useState<CropperModalData>()
+	const [files, setFiles] = React.useState<File[]>([]);
 
-	const onChangeCropFile = (e: any) => {
-		e.preventDefault();
-		let files;
-		if (e.dataTransfer) {
-			files = e.dataTransfer.files;
-		} else if (e.target) {
-			files = e.target.files;
-		}
-		const reader = new FileReader();
-		reader.onload = () => {
-			setImage(reader.result as any);
-			setCropData(reader.result as any);
-		};
-		reader.readAsDataURL(files[0]);
-		setCropFilename(files[0].name);
-	};
-
-	const handleFileSubmit: IDropzoneProps['onSubmit'] = (files, allFiles) => {
-		console.log(files.map((f) => f.meta));
-		allFiles.forEach((f) => f.remove());
-	};
-
-	const handleChangeStatus = ({ meta, file }: any, status: any) => {
-		console.log(status, meta, file);
-	};
-
-	const fileToModalCallback = (e: any) => {
-		onChangeCropFile(e);
-		openModal();
-	};
-
-	if (true) {
-		return (
-			<div>File upload component is broken. Will be fixed soon.</div>
-		)
+	const addFile = (file: File) => {
+		setFiles([...files, file])
 	}
 
-	return (
-		<>
-			<Dropzone
-				onChangeStatus={handleChangeStatus}
-				getUploadParams={getUploadParams}
-				LayoutComponent={Layout}
-				onSubmit={handleFileSubmit}
-				classNames={classNames}
-				InputComponent={(props) => (
-					<InputContent
-						{...props}
+	const removeFile = (idx: number) => {
+		setFiles(files.filter((_, i) => idx !== i))
+	}
+
+	const onDrop = (acceptedFiles: File[]) => {
+		if (acceptedFiles.length > 0) {
+			const file = acceptedFiles[0];
+			if (isFileTypeImage) {
+				const reader = new FileReader()
+				reader.onload = () => {
+					setCropData({filename: file.name, image: reader.result as string});
+					openModal();
+				}
+				reader.readAsDataURL(file);
+			} else {
+				addFile(file);
+			}
+		}
+	};
+
+	const {getRootProps, getInputProps} = useDropzone({onDrop, accept: acceptType})
+
+		return (
+		<div className="file-container" {...getRootProps()}>
+			<UploadIcon className="file-container__upload-images"/>
+			<div className="file-container__placeholder">
+				<p className="file-container__placeholder-text">
+					Drag & drop file
+					<label htmlFor="fuic-bf" className="file-container__placeholder-browse">
+						here or<span>{' Browse File'}</span>
+						<input
+							id="fuic-bf"
+							{...getInputProps()}/>
+					</label>
+				</p>
+				{isFileTypeImage && (
+					<OcCropperModalComponent
+						onClose={closeModal}
 						isOpened={isOpened}
-						closeModal={closeModal}
-						cropData={cropData}
-						setCropData={setCropData}
-						image={image}
-						fileToModalCallback={fileToModalCallback}
-						multiple={isMultiFile}
-						cropFileName={cropFileName}
-						isMultiUpload={isMultiUpload}
+						cropData={cropData!}
+						onImageCrop={addFile}
 					/>
 				)}
-				PreviewComponent={PreviewContent}
-				maxFiles={10}
-				// minSizeBytes={0}
-				// maxSizeBytes={1048576}
-				multiple={isMultiFile}
-				accept={acceptType}
-				inputWithFilesContent={() => (
-					<span className="file-container__placeholder-browse"> Browse File</span>
-				)}
-			/>
-		</>
+				{files
+					.map((f, idx) => <div onClick={() => removeFile(idx)}>{f.name}</div>)}
+			</div>
+		</div>
 	);
 };
 

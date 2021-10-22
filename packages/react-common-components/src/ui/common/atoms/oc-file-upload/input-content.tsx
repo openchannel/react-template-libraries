@@ -9,31 +9,28 @@ export const InputContent = (props: any) => {
 	const {
 		accept,
 		onFiles,
-		files,
 		multiple,
 		isOpened,
 		closeModal,
 		fileToModalCallback,
-		image,
 		cropData,
-		setCropData,
-		cropFileName,
 		isMultiUpload,
 	} = props;
 
-	const standardFileHandler = async (e: any) => {
+	const standardFileHandler = (e: any) => {
 		const target = e.target;
-		const chosenFiles = await getFilesFromEvent(e);
+		const chosenFiles = getFilesFromEvent(e);
 		onFiles(chosenFiles);
 		target.value = null;
 	};
+
 	return (
 		<>
 			<div className="file-container__placeholder">
 				<p className="file-container__placeholder-text">
-					Drag & drop file or
+					Drag & drop file
 					<label htmlFor="fuic-bf" className="file-container__placeholder-browse">
-						{' Browse File'}
+						here or<span>{' Browse File'}</span>
 						<input
 							id="fuic-bf"
 							style={{ display: 'none' }}
@@ -49,12 +46,8 @@ export const InputContent = (props: any) => {
 				<OcCropperModalComponent
 					onClose={closeModal}
 					isOpened={isOpened}
-					image={image}
 					cropData={cropData}
-					setCropData={setCropData}
-					onFiles={onFiles}
-					files={files}
-					cropFileName={cropFileName}
+					onImageCrop={onFiles}
 				/>
 			)}
 		</>
