@@ -42,7 +42,7 @@ export const OcResetPasswordComponent: React.FC<OcResetPasswordProps> = (props) 
 					</span>
 					<OcPasswordComponent
 						disabled={false}
-						placeholder="New Password"
+						placeholder="New password"
 						value={value}
 						onChange={onChange}
 						required
