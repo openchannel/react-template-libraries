@@ -9,7 +9,7 @@ import { FieldGroupWrapper } from '../../../form/organisms/oc-form';
 
 import type { OcEditUserFormConfig, OcEditUserTypeConfig } from './types';
 
-const filterFields = (type: 'account' | 'organization', config?: OcEditUserTypeConfig) => {
+const filterFields = (config?: OcEditUserTypeConfig) => {
 	if (!config || !config.typeData.fields) {
 		return [];
 	} else if (!config.includeFields || config.includeFields.length === 0) {
@@ -37,8 +37,8 @@ export const configConverter = (
 		name: item.name,
 		created: new Date(),
 		fields: [
-			...filterFields('account', item.account),
-			...filterFields('organization', item.organization),
+			...filterFields(item.account),
+			...filterFields(item.organization),
 		],
 	};
 
