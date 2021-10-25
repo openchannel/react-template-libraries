@@ -5,70 +5,83 @@ import { nanoid } from 'nanoid';
 import OcInputComponent from '../../../common/atoms/oc-input/oc-input';
 import OcPasswordComponent from '../../../common/atoms/oc-password/oc-password';
 import type { FormikField } from '../../../form/models';
-import { FieldGroupWrapper } from '../../../form/organisms/oc-form/components/formik-components';
+import { FieldGroupWrapper } from '../../../form/organisms/oc-form';
 
-import { OcEditUserFormConfig } from './types';
+import type { OcEditUserFormConfig, OcEditUserTypeConfig } from './types';
 
-// eslint-disable-next-line
-const conditions = /[\.\s\-]/gm;
+const filterFields = (type: 'account' | 'organization', config?: OcEditUserTypeConfig) => {
+	if (!config || !config.typeData.fields) {
+		return [];
+	} else if (!config.includeFields || config.includeFields.length === 0) {
+		return config.typeData.fields;
+	}
+
+	const includeFields = new Set([...config.includeFields]);
+
+	return config.typeData.fields.filter((field) => includeFields.has(field.id));
+};
+
+const fieldsSorting = (config: OcEditUserFormConfig) => (field1: { id: string }, field2: { id: string }) => {
+	const index1 = config.fieldsOrder!.indexOf(field1.id);
+	const index2 = config.fieldsOrder!.indexOf(field2.id);
+	return (index1 > -1 ? index1 : Infinity) - (index2 > -1 ? index2 : Infinity);
+};
 
 export const configConverter = (
 	item: OcEditUserFormConfig,
 	enablePasswordField: boolean,
 	enableTermsCheckbox: boolean,
 ) => {
-	const fieldsSorting = (field1: { id: string }, field2: { id: string }) => {
-		const index1 = item.fieldsOrder!.indexOf(field1.id);
-		const index2 = item.fieldsOrder!.indexOf(field2.id);
-		return (index1 > -1 ? index1 : Infinity) - (index2 > -1 ? index2 : Infinity);
-	};
 	const newFormConfig = {
 		formId: nanoid(),
 		name: item.name,
 		created: new Date(),
 		fields: [
-			...item.account.typeData.fields!.filter((field: any) =>
-				item.account.includeFields.includes(field.id),
-			),
-			...item.organization.typeData.fields!.filter((field: any) =>
-				item.organization.includeFields.includes(field.id),
-			),
+			...filterFields('account', item.account),
+			...filterFields('organization', item.organization),
 		],
 	};
+
 	if (item.fieldsOrder) {
-		newFormConfig.fields.sort(fieldsSorting);
+		newFormConfig.fields.sort(fieldsSorting(item));
 	}
+
 	if (enablePasswordField) {
-		const passwordField = {
+		newFormConfig.fields.push({
 			id: 'password',
 			name: 'password',
 			type: 'password',
 			label: 'Password',
 			defaultValue: '',
 			attributes: { required: false },
-		};
-		newFormConfig.fields.push(passwordField);
+		});
 	}
+
 	if (enableTermsCheckbox) {
-		const checkboxField = {
+		newFormConfig.fields.push({
 			id: 'terms',
 			name: 'terms',
 			type: 'checkbox',
 			defaultValue: false,
 			attributes: { required: true },
-		};
-		newFormConfig.fields.push(checkboxField);
+		});
 	}
-	newFormConfig.fields.map((field) => {
+
+	newFormConfig.fields.forEach((field) => {
 		field.description = '';
-		field.name = field.id.replace(conditions, '');
+		field.name = field.id;
 		field.placeholder = '';
 	});
+
 	return newFormConfig;
 };
 
-export const FormikSignupFieldWrapper: React.FC<FormikField> = (field) => {
-	const { id, label, description, name, attributes, placeholder } = field;
+export const EditUserFormFieldWrapper: React.FC<FormikField> = (field) => {
+	const { id, label, description, attributes, placeholder } = field;
+
+	// avoid formik nesting,
+	// e.g., if name = 'a.b', it will remain as {'a.b': ...}, not as {a: {b: ...}
+	const name = `['${field.name}']`;
 
 	return (
 		<FieldGroupWrapper
@@ -83,7 +96,7 @@ export const FormikSignupFieldWrapper: React.FC<FormikField> = (field) => {
 				as={name === 'password' ? OcPasswordComponent : OcInputComponent}
 				placeholder={placeholder}
 				id={id}
-				inputType="text"
+				inputType={name === 'password' ? undefined : name === 'email' ? 'email' : 'text'}
 			/>
 		</FieldGroupWrapper>
 	);

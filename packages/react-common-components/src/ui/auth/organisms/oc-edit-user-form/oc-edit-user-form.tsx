@@ -9,7 +9,7 @@ import { validateOcFormValues } from '../../../form/organisms/oc-form/utils/comm
 import { fieldsUtils } from '../../../form/organisms/oc-form/utils/fields';
 
 import { EditUserComponentProps } from './types';
-import { configConverter, FormikSignupFieldWrapper } from './utils';
+import { configConverter, EditUserFormFieldWrapper } from './utils';
 
 import './style.scss';
 
@@ -115,7 +115,7 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 							<Form onSubmit={handleSubmit}>
 								{dynamicFormFields?.map(
 									(field: FormikField, index: number) =>
-										field.name !== 'terms' && <FormikSignupFieldWrapper {...field} key={index} />,
+										field.name !== 'terms' && <EditUserFormFieldWrapper {...field} key={index} />,
 								)}
 								<div className="edit-user-form__content">
 									{enableTermsCheckbox && (
