@@ -53,7 +53,7 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 	const initialValues: OcFormValues = React.useMemo(
 		() =>
 			dynamicFormFields.reduce((acc, field) => {
-				(acc as any)[field.name] = field.defaultValue != null ? field.defaultValue : '';
+				(acc as any)[field.name!] = field.defaultValue != null ? field.defaultValue : '';
 				return acc;
 			}, {}),
 		[dynamicFormFields],

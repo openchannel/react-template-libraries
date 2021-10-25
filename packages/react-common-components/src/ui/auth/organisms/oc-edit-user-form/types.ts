@@ -9,7 +9,7 @@ export interface TypeModel<T extends TypeFieldModel> {
 
 export interface TypeFieldModel {
 	placeholder?: string;
-	name: string;
+	name?: string;
 	description?: string;
 	id: string;
 	type: string;
