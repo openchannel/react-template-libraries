@@ -90,7 +90,7 @@ export const nativeLogin = {
 	 * })`
 	 */
 	signupByInvite(userSignUp: SignUpByInviteRequest) {
-		return api.post(`${NATIVE_URL}/invite`, { body: { userSignUp } });
+		return api.post(`${NATIVE_URL}/invite`, { body: userSignUp });
 	},
 
 	/**
