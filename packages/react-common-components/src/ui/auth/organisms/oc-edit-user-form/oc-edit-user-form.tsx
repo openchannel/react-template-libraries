@@ -16,14 +16,13 @@ import './style.scss';
 export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props) => {
 	const {
 		formConfigs,
+		onSubmit,
 		enableTypesDropdown = false,
 		enablePasswordField = false,
-		enableCustomTerms,
-		customTermsDescription,
-		ordinaryTermsDescription,
+		customTermsDescription = '',
+		ordinaryTermsDescription = '',
 		enableTermsCheckbox = false,
 		defaultTypeLabelText = 'Type',
-		onSubmit,
 		defaultEmptyConfigsErrorMessage = 'There are no forms configured',
 		submitText = 'Submit',
 	} = props;
@@ -111,7 +110,7 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 						enableReinitialize
 						noValidate
 					>
-						{({ handleSubmit, handleChange, values, errors, handleBlur, isSubmitting }) => (
+						{({ handleSubmit, handleChange, values, touched, errors, handleBlur, isSubmitting }) => (
 							<Form onSubmit={handleSubmit}>
 								{dynamicFormFields?.map(
 									(field: FormikField, index: number) =>
@@ -120,22 +119,22 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 								<div className="edit-user-form__content">
 									{enableTermsCheckbox && (
 										<div className="edit-user-form__content__checkbox">
-											{enableCustomTerms && (
+											{customTermsDescription && (
 												<div className="edit-user-form__content__label">
 													{customTermsDescription}
 												</div>
 											)}
 											<OcCheckboxComponent
-												labelText={ordinaryTermsDescription || ''}
+												labelText={ordinaryTermsDescription}
 												name="terms"
 												checked={values.terms}
-												touched={String(values.terms)}
+												touched={String(touched.terms)}
 												onBlur={handleBlur}
 												onChange={handleChange}
 											/>
 										</div>
 									)}
-									{errors.terms && <OcError message="Please confirm this checkbox" />}
+									{touched.terms && errors.terms && <OcError message="Please confirm this checkbox" />}
 								</div>
 								{formConfigs !== null && (
 									<OcButtonComponent

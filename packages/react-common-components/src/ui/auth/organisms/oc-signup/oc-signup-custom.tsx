@@ -11,28 +11,27 @@ import './style.scss';
 
 export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 	const {
-		companyLogoUrl = '../../../../assets/img/logo-company.png',
-		loginUrl = '/',
-		showSignupFeedbackPage,
+		onSubmit,
+		formConfigs,
+		loginUrl,
 		forgotPasswordDoneUrl,
 		goToActivationPage,
-		formConfigs,
-		enableTypesDropdown,
-		enableCustomTerms,
-		enableTermsCheckbox,
 		defaultTypeLabelText,
 		ordinaryTermsDescription,
 		customTermsDescription,
 		defaultEmptyConfigsErrorMessage,
-		onSubmit,
-		enablePasswordField,
+		showSignupFeedbackPage = false,
+		companyLogoUrl = '../../../../assets/img/logo-company.png',
+		enableTypesDropdown = false,
+		enableTermsCheckbox = false,
+		enablePasswordField = true,
 	} = props;
 
 	const [showFeedbackPage, setFeedbackPageVisible] = React.useState(showSignupFeedbackPage);
 
 	const handleShowFeedback = React.useCallback(
-		() => setFeedbackPageVisible(!showFeedbackPage),
-		[showFeedbackPage, setFeedbackPageVisible],
+		() => setFeedbackPageVisible(prev => !prev),
+		[],
 	);
 
 	return (
@@ -59,7 +58,6 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 									customTermsDescription={customTermsDescription}
 									ordinaryTermsDescription={ordinaryTermsDescription}
 									onSubmit={onSubmit}
-									enableCustomTerms={enableCustomTerms}
 									enableTermsCheckbox={enableTermsCheckbox}
 									enablePasswordField={enablePasswordField}
 									defaultEmptyConfigsErrorMessage={defaultEmptyConfigsErrorMessage}
@@ -67,12 +65,12 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 								/>
 							</div>
 						)}
-						<div className="sign-up__login">
+						{loginUrl && <div className="sign-up__login">
 							Already have an account?{' '}
 							<Link className="sign-up__login-link" to={loginUrl}>
 								Log In
 							</Link>
-						</div>
+						</div>}
 					</div>
 				</div>
 			)}

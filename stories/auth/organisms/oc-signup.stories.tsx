@@ -330,7 +330,6 @@ CustomTermsConfig.args = {
 		},
 	],
 	enableTermsCheckbox: true,
-	enableCustomTerms: true,
 	customTermsDescription: (
 		<>
 			Custom

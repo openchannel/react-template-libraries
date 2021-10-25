@@ -1,6 +1,7 @@
-import { FormikHelpers, FormikValues } from 'formik';
+import * as React from 'react';
 
 import type { AppFormField } from '../../../form/models';
+import { OcFormFormikHelpers, OcFormValues } from '../../../form/organisms/oc-form';
 
 export interface TypeModel<T extends TypeFieldModel> {
 	fields?: T[];
@@ -31,13 +32,13 @@ export interface OcCheckboxData {
 export interface OcEditUserFormConfig {
 	name: string;
 	account: OcEditUserTypeConfig;
-	organization: OcEditUserTypeConfig;
+	organization?: OcEditUserTypeConfig;
 	fieldsOrder?: string[];
 }
 
 export interface OcEditUserTypeConfig {
 	type: string;
-	includeFields: string[];
+	includeFields?: string[];
 	typeData: TypeModel<TypeFieldModel>;
 }
 
@@ -61,11 +62,10 @@ export interface EditUserComponentProps {
 	enablePasswordField?: boolean;
 	enableTermsCheckbox?: boolean;
 	defaultTypeLabelText?: string;
-	defaultEmptyConfigsErrorMessage: string;
+	defaultEmptyConfigsErrorMessage?: string;
 	customTermsDescription?: React.ReactNode;
 	ordinaryTermsDescription?: React.ReactNode;
-	onSubmit: (values: FormikValues, formikHelpers: FormikHelpers<FormikValues>) => void;
-	enableCustomTerms: boolean;
+	onSubmit(values: OcFormValues, formikHelpers: OcFormFormikHelpers): void;
 	submitText?: string;
 }
 
