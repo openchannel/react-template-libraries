@@ -134,15 +134,10 @@ describe('Sign Up Custom', () => {
 				formConfigs={formConfigs}
 				goToActivationPage={() => {}}
 				forgotPasswordDoneUrl=""
-				enableCustomTerms
 				defaultTypeLabelText="Type"
 				customTermsDescription=""
 				defaultEmptyConfigsErrorMessage="There are no forms configured."
 				showSignupFeedbackPage={false}
-				setFeedbackPageVisible={() => {}}
-				selectValue={{ name: 'First Form' }}
-				setSelectValue={() => {}}
-				selectConfigOptions={[{ name: 'First Form' }, { name: 'Second Form' }]}
 				enableTypesDropdown
 				enablePasswordField
 				companyLogoUrl="./img/logo-company.png"
