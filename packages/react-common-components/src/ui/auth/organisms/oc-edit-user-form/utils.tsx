@@ -93,10 +93,10 @@ export const EditUserFormFieldWrapper: React.FC<FormikField> = (field) => {
 		>
 			<Field
 				name={name}
-				as={name === 'password' ? OcPasswordComponent : OcInputComponent}
+				as={field.name === 'password' ? OcPasswordComponent : OcInputComponent}
 				placeholder={placeholder}
 				id={id}
-				inputType={name === 'password' ? undefined : name === 'email' ? 'email' : 'text'}
+				inputType={field.name === 'password' ? undefined : field.name === 'email' ? 'email' : 'text'}
 			/>
 		</FieldGroupWrapper>
 	);
