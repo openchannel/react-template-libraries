@@ -1,11 +1,5 @@
 import * as React from 'react';
-import { Field } from 'formik';
 import { nanoid } from 'nanoid';
-
-import OcInputComponent from '../../../common/atoms/oc-input/oc-input';
-import OcPasswordComponent from '../../../common/atoms/oc-password/oc-password';
-import type { FormikField } from '../../../form/models';
-import { FieldGroupWrapper } from '../../../form/organisms/oc-form';
 
 import type { OcEditUserFormConfig, OcEditUserTypeConfig } from './types';
 
@@ -74,30 +68,4 @@ export const configConverter = (
 	});
 
 	return newFormConfig;
-};
-
-export const EditUserFormFieldWrapper: React.FC<FormikField> = (field) => {
-	const { id, label, description, attributes, placeholder } = field;
-
-	// avoid formik nesting,
-	// e.g., if name = 'a.b', it will remain as {'a.b': ...}, not as {a: {b: ...}
-	const name = `['${field.name}']`;
-
-	return (
-		<FieldGroupWrapper
-			name={name}
-			label={label}
-			labelFor={id}
-			description={description}
-			required={attributes!.required}
-		>
-			<Field
-				name={name}
-				as={field.name === 'password' ? OcPasswordComponent : OcInputComponent}
-				placeholder={placeholder}
-				id={id}
-				inputType={field.name === 'password' ? undefined : field.name === 'email' ? 'email' : 'text'}
-			/>
-		</FieldGroupWrapper>
-	);
 };

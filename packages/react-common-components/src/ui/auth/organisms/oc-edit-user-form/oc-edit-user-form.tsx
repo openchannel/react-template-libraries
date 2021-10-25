@@ -3,13 +3,13 @@ import { Form, Formik, FormikErrors, FormikProps, FormikValues } from 'formik';
 
 import { OcButtonComponent, OcCheckboxComponent, OcError } from '../../../common/atoms';
 import { OcSelect, Option } from '../../../common/molecules';
-import { FormikField } from '../../../form';
+import { FormikField, FormikMapFields, OcFormValues } from '../../../form';
 import { OcTooltipLabel } from '../../../form/atoms';
 import { validateOcFormValues } from '../../../form/organisms/oc-form/utils/common';
 import { fieldsUtils } from '../../../form/organisms/oc-form/utils/fields';
 
+import { configConverter } from './utils';
 import { EditUserComponentProps } from './types';
-import { configConverter, EditUserFormFieldWrapper } from './utils';
 
 import './style.scss';
 
@@ -42,7 +42,7 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 		}
 	}, [formType, formTypes]);
 
-	const dynamicFormFields: any[] = React.useMemo(
+	const dynamicFormFields = React.useMemo(
 		() =>
 			formConfigs
 				?.map((item) => configConverter(item, enablePasswordField, enableTermsCheckbox))
@@ -50,10 +50,10 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 		[formConfigs, enablePasswordField, enableTermsCheckbox, formType],
 	);
 
-	const initialValues: { [key: string]: any } = React.useMemo(
+	const initialValues: OcFormValues = React.useMemo(
 		() =>
 			dynamicFormFields.reduce((acc, field) => {
-				acc[field.name] = field.defaultValue != null ? field.defaultValue : '';
+				(acc as any)[field.name] = field.defaultValue != null ? field.defaultValue : '';
 				return acc;
 			}, {}),
 		[dynamicFormFields],
@@ -67,18 +67,21 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 				setFormType(formType.name);
 			}
 		},
-		[setFormType],
+		[],
 	);
 
-	const validate = (values: FormikValues): void | object | Promise<FormikErrors<FormikValues>> => {
+	const validate = React.useCallback((values: OcFormValues): void | object | Promise<FormikErrors<FormikValues>> => {
 		const formik = formikRef.current;
 		if (formik != null) {
-			const validators = fieldsUtils.getValidators(
-				dynamicFormFields?.length ? dynamicFormFields : [],
-			);
+			const validators = fieldsUtils.getValidators((dynamicFormFields as FormikField[]) || []);
 			return validateOcFormValues(formik.values, formik.errors, values, validators);
 		}
-	};
+	}, [dynamicFormFields]);
+
+	const formFields = React.useMemo(() => {
+		// remove 'terms' checkbox to render render it by hand
+		return (dynamicFormFields.filter(f => f.name === 'terms') as FormikField[]);
+	}, [dynamicFormFields]);
 
 	if (formConfigs.length === 0) {
 		return null;
@@ -112,10 +115,7 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 					>
 						{({ handleSubmit, handleChange, values, touched, errors, handleBlur, isSubmitting }) => (
 							<Form onSubmit={handleSubmit}>
-								{dynamicFormFields?.map(
-									(field: FormikField, index: number) =>
-										field.name !== 'terms' && <EditUserFormFieldWrapper {...field} key={index} />,
-								)}
+								<FormikMapFields fields={formFields} />
 								<div className="edit-user-form__content">
 									{enableTermsCheckbox && (
 										<div className="edit-user-form__content__checkbox">
