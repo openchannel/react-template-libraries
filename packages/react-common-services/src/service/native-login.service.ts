@@ -106,7 +106,8 @@ export const nativeLogin = {
 	 * })`
 	 */
 	activate(activationModel: any) {
-		return api.post(`${NATIVE_URL}/activate`, { body: activationModel });
+		return api.post(`${NATIVE_URL}/activate`, {
+			headers: {'X-Native-Activation-Code': `${activationModel}`}});
 	},
 
 	/**
