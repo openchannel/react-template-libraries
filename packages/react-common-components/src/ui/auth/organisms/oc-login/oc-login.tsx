@@ -11,7 +11,7 @@ import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
 import OcPasswordComponent from '../../../common/atoms/oc-password/oc-password';
 
 import { LoginProps } from './types';
-import { onActivationLinkClick, validateLogin } from './utils';
+import { validateLogin } from './utils';
 
 import './style.scss';
 
@@ -26,6 +26,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 		inputPasswordValue,
 		isIncorrectEmail,
 		isUnverifiedEmail,
+		onActivationLinkClick,
 	} = props;
 
 	return (
@@ -64,7 +65,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 									<a
 										role="button"
 										className="font-s font-med resend-link"
-										onClick={() => onActivationLinkClick(values.email || '')}
+										onClick={!onActivationLinkClick ? undefined : () => onActivationLinkClick(values.email || '')}
 									>
 										resend the activation email
 									</a>
