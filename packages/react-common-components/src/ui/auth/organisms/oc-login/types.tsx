@@ -1,4 +1,4 @@
-import type { FormikHelpers } from 'formik';
+import { FormikHelpers } from 'formik';
 
 export interface LoginProps {
 	/**
@@ -24,7 +24,7 @@ export interface LoginProps {
 	/**
 	 * click handler on 'forgot password'
 	 */
-	onActivationLinkClick?: () => void;
+	onActivationLinkClick?(email: string): void;
 
 	/**formik initial values */
 	inputEmailValue?: string;
