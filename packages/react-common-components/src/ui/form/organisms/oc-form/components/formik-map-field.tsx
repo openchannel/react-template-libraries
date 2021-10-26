@@ -33,6 +33,8 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 		return null;
 	}
 
+	console.log('fields', fields)
+
 	return (
 		<>
 			{fields.map((field, index) => {
