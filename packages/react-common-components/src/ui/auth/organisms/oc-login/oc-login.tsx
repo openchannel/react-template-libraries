@@ -61,12 +61,13 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 								<div className="login__error">
 									This account has not been activated yet. <br />
 									Please check your inbox for an activation email or{' '}
-									<button
+									<a
+										role="button"
 										className="font-s font-med resend-link"
-										onClick={() => onActivationLinkClick(values.email || '/')}
+										onClick={() => onActivationLinkClick(values.email || '')}
 									>
 										resend the activation email
-									</button>
+									</a>
 								</div>
 							)}
 							<div className="login__email login__email_margin_top">
