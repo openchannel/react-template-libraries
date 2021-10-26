@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { nanoid } from 'nanoid';
 
 import type { OcEditUserFormConfig, OcEditUserTypeConfig } from './types';

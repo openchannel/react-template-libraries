@@ -80,7 +80,7 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 
 	const formFields = React.useMemo(() => {
 		// remove 'terms' checkbox to render render it by hand
-		return (dynamicFormFields.filter(f => f.name === 'terms') as FormikField[]);
+		return (dynamicFormFields.filter(f => f.name !== 'terms') as FormikField[]);
 	}, [dynamicFormFields]);
 
 	if (formConfigs.length === 0) {
