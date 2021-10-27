@@ -96,14 +96,12 @@ export const nativeLogin = {
 	/**
 	 * Description: This method is responsible for submit user activation form.
 	 *
-	 * @param {any} activationModel - (required) Data from activation form
+	 * @param {string} activationCode - (required) Data from activation form
 	 * @returns {Promise<any>} `Promise<any>`
 	 *
 	 * * ### Example:
 	 *
-	 * `activate({
-	 *  name: 'Name'
-	 * })`
+	 * `activate('code')`
 	 */
 	activate(activationCode: string) {
 		return api.post(`${NATIVE_URL}/activate`, {
@@ -153,7 +151,7 @@ export const nativeLogin = {
 	 * `sendActivationCode('email@email.com');`
 	 */
 	sendActivationCode(email: string) {
-		return api.post(`${NATIVE_URL}/send-activate-code`, { body: { email } });
+		return api.post(`${NATIVE_URL}/send-activate-code`, { headers: { 'X-Native-Email': email.toString() } });
 	},
 
 	/**
