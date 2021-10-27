@@ -61,7 +61,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 								incorrectEmailErrorCodeTemplate ? (
 									incorrectEmailErrorCodeTemplate
 								) : (
-									<div className="login__error">
+									<div className="login__error login__warn-block">
 										The email and password you have provided is incorrect.
 									</div>
 								)
