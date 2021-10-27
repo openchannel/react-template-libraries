@@ -28,17 +28,17 @@ export interface LoginProps {
 	onActivationLinkClick?(email: string): void;
 
 	/**
-	 * Error html template for {@link incorrectEmailErrorCode}.
+	 * Custom ReactNode element to display error for isIncorrectEmail.
 	 */
 	incorrectEmailErrorCodeTemplate?: React.ReactNode;
 
 	/**
-	 * Error html template for {@link notVerifiedEmailErrorCode}.
+	 * Custom ReactNode element to display error for isUnverifiedEmail.
 	 */
 	notVerifiedEmailErrorTemplate?: React.ReactNode;
 
 	/**
-	 * Error html template for {@link passwordResetRequiredErrorCode}.
+	 * Custom ReactNode element to display error for isPasswordResetRequired.
 	 */
 	passwordResetRequiredErrorTemplate?: React.ReactNode;
 
