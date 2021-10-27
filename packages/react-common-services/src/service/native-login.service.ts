@@ -73,7 +73,7 @@ export const nativeLogin = {
 	 * })`
 	 */
 	signup: (userSignUp: OCNativeDefaultSignup | OCNativeCustomSignup) => {
-		return api.post(`${NATIVE_URL}/register`, { body: { userSignUp } });
+		return api.post(`${NATIVE_URL}/register`, { body: userSignUp });
 	},
 
 	/**
@@ -105,7 +105,8 @@ export const nativeLogin = {
 	 */
 	activate(activationCode: string) {
 		return api.post(`${NATIVE_URL}/activate`, {
-			headers: {'X-Native-Activation-Code': `${activationCode}`}});
+			headers: { 'X-Native-Activation-Code': `${activationCode}` },
+		});
 	},
 
 	/**
