@@ -14,11 +14,12 @@ const filterFields = (config?: OcEditUserTypeConfig) => {
 	return config.typeData.fields.filter((field) => includeFields.has(field.id));
 };
 
-const fieldsSorting = (config: OcEditUserFormConfig) => (field1: { id: string }, field2: { id: string }) => {
-	const index1 = config.fieldsOrder!.indexOf(field1.id);
-	const index2 = config.fieldsOrder!.indexOf(field2.id);
-	return (index1 > -1 ? index1 : Infinity) - (index2 > -1 ? index2 : Infinity);
-};
+const fieldsSorting =
+	(config: OcEditUserFormConfig) => (field1: { id: string }, field2: { id: string }) => {
+		const index1 = config.fieldsOrder!.indexOf(field1.id);
+		const index2 = config.fieldsOrder!.indexOf(field2.id);
+		return (index1 > -1 ? index1 : Infinity) - (index2 > -1 ? index2 : Infinity);
+	};
 
 export const configConverter = (
 	item: OcEditUserFormConfig,
@@ -29,10 +30,7 @@ export const configConverter = (
 		formId: nanoid(),
 		name: item.name,
 		created: new Date(),
-		fields: [
-			...filterFields(item.account),
-			...filterFields(item.organization),
-		],
+		fields: [...filterFields(item.account), ...filterFields(item.organization)],
 	};
 
 	if (item.fieldsOrder) {
