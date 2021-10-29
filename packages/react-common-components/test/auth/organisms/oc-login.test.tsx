@@ -2,9 +2,7 @@
 import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { mount, ShallowWrapper } from 'enzyme';
-
 import { LoginProps, OcLoginComponent } from '../../../src/ui/auth/organisms/oc-login';;
-
 
 const setUp = (props: LoginProps) =>
 	mount(
@@ -14,8 +12,6 @@ const setUp = (props: LoginProps) =>
 	);
 
 describe('Log In', () => {
-	const activationLinkClick = jest.fn()
-
 	let component: ShallowWrapper = mount(
 		<BrowserRouter>
 			<OcLoginComponent
@@ -72,6 +68,7 @@ describe('Log In', () => {
 	});
 
 	it('should fire callback if user clicks', () => {
+		const activationLinkClick = jest.fn()
 		const wrapper = setUp({
 			isUnverifiedEmail: true,
 			onActivationLinkClick: activationLinkClick,
