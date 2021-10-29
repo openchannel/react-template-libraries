@@ -3,9 +3,19 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { mount, ShallowWrapper } from 'enzyme';
 
-import { OcLoginComponent } from '../../../src/ui/auth/organisms/oc-login';
+import { LoginProps, OcLoginComponent } from '../../../src/ui/auth/organisms/oc-login';;
+
+
+const setUp = (props: LoginProps) =>
+	mount(
+		<BrowserRouter>
+			<OcLoginComponent {...props} />
+		</BrowserRouter>,
+	);
 
 describe('Log In', () => {
+	const activationLinkClick = jest.fn()
+
 	let component: ShallowWrapper = mount(
 		<BrowserRouter>
 			<OcLoginComponent
@@ -42,5 +52,41 @@ describe('Log In', () => {
 		component.simulate('click');
 		expect(component.find('.oc-button__spinner')).toBeTruthy();
 		expect(component.contains('Required'));
+	});
+
+
+	it('should contain React.ReactNode element', () => {
+		const wrapper = setUp({
+			isIncorrectEmail: true
+		});
+
+		expect(wrapper.find('.login__error.login__warn-block').text()).toEqual('The email and password you have provided is incorrect.');
+	});
+
+	it('should contain React.ReactNode element', () => {
+		const wrapper = setUp({
+			isUnverifiedEmail: true,
+		});
+
+		expect(wrapper.find('.login__error').text()).toEqual('This account has not been activated yet. Please check your inbox for an activation email or resend the activation email');
+	});
+
+	it('should fire callback if user clicks', () => {
+		const wrapper = setUp({
+			isUnverifiedEmail: true,
+			onActivationLinkClick: activationLinkClick,
+		});
+
+		const activationLink = wrapper.find('.login__error').find('a[role="button"]')
+		activationLink.simulate('click')
+		expect(activationLinkClick).toHaveBeenCalled();
+	});
+
+	it('should contain React.ReactNode element', () => {
+		const wrapper = setUp({
+			isPasswordResetRequired: true
+		});
+
+		expect(wrapper.find('.login__warn.login__warn-block').text()).toEqual('Your password must be changed. We’ve sent an email to  with a link to help you reset your password.');
 	});
 });
