@@ -1,11 +1,12 @@
 //commit 240aa1e72cb6b2f67e9148e5d21917065b56fb19 author: Julia Date: 12.05.21 18:29
 import * as React from 'react';
 
+import { titleCase } from '../../../../lib';
 import OcRatingComponent from '../../../market/atoms/oc-rating';
 import OcButtonComponent from '../../atoms/oc-button/oc-button';
 import { OcDropdownButton } from '../oc-dropdown';
+
 import { DropdownListItem } from './review-list-dropdown-item';
-import { titleCase } from '../../../../lib';
 
 import './style.scss';
 

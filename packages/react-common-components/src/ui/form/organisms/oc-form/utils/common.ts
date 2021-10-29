@@ -98,8 +98,8 @@ export const customClassWithError = (error: string | undefined, child: React.Rea
 	if (!error) {
 		return child.props.customClass;
 	} else if (child.props.customClass != null) {
-		return child.props.customClass + ' invalid';
+		return `${child.props.customClass} invalid`;
 	} else {
 		return 'invalid';
 	}
-}
+};

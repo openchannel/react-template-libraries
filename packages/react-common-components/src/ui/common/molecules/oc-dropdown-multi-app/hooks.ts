@@ -1,8 +1,9 @@
-import {AppsService} from './types';
 import React from 'react';
-import {OptionTypeBase} from 'react-select';
-import {appsToOptions} from './utils';
-import {debounce} from 'lodash-es';
+import { OptionTypeBase } from 'react-select';
+import { debounce } from 'lodash-es';
+
+import { AppsService } from './types';
+import { appsToOptions } from './utils';
 
 const DEBOUNCE_WAIT = 200;
 
@@ -15,29 +16,37 @@ const useAppsService = (appsService: AppsService, initialAppsIds: string[]) => {
 			if (initialAppsIds.length > 0) {
 				const query = JSON.stringify({
 					appId: {
-						$in: initialAppsIds
-					}
+						$in: initialAppsIds,
+					},
 				});
-				const {data: {list}} = await appsService.searchInitialMultiApps(query);
-				setSelectedApps(selectedApps => [...selectedApps, ...appsToOptions(list)]);
+				const {
+					data: { list },
+				} = await appsService.searchInitialMultiApps(query);
+				setSelectedApps((selectedApps) => [...selectedApps, ...appsToOptions(list)]);
 			}
-		}
+		};
 
 		loadInitialApps();
 	}, []);
 
-	const loadApps = React.useCallback(debounce(async (searchText: string, selectedAppsIds: string[]) => {
-		const query = selectedAppsIds.length > 0
-			? JSON.stringify({
-				appId: {
-					$nin: selectedAppsIds
-				}
-			})
-			: '';
+	const loadApps = React.useCallback(
+		debounce(async (searchText: string, selectedAppsIds: string[]) => {
+			const query =
+				selectedAppsIds.length > 0
+					? JSON.stringify({
+							appId: {
+								$nin: selectedAppsIds,
+							},
+					  })
+					: '';
 
-		const {data: {list}} = await appsService.searchMultiApps(searchText, query);
-		setApps(appsToOptions(list));
-	}, DEBOUNCE_WAIT), [setApps]);
+			const {
+				data: { list },
+			} = await appsService.searchMultiApps(searchText, query);
+			setApps(appsToOptions(list));
+		}, DEBOUNCE_WAIT),
+		[setApps],
+	);
 
 	const resetApps = React.useCallback(() => {
 		setApps([]);
@@ -48,7 +57,7 @@ const useAppsService = (appsService: AppsService, initialAppsIds: string[]) => {
 		loadApps,
 		resetApps,
 		selectedApps,
-		setSelectedApps
+		setSelectedApps,
 	};
 };
 

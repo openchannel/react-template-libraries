@@ -151,7 +151,9 @@ export const nativeLogin = {
 	 * `sendActivationCode('email@email.com');`
 	 */
 	sendActivationCode(email: string) {
-		return api.post(`${NATIVE_URL}/send-activate-code`, { headers: { 'X-Native-Email': email.toString() } });
+		return api.post(`${NATIVE_URL}/send-activate-code`, {
+			headers: { 'X-Native-Email': email.toString() },
+		});
 	},
 
 	/**

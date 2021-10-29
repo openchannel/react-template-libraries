@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import type { OcFormValues, OcFormFormikHelpers } from '../../../form/organisms/oc-form';
+import type { OcFormFormikHelpers, OcFormValues } from '../../../form/organisms/oc-form';
 import type { OcEditUserFormConfig } from '../oc-edit-user-form';
 
 export interface SignupProps {

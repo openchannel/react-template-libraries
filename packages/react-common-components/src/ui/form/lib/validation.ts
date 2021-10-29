@@ -13,7 +13,8 @@ export const isEmptyInputValue = (value: any) => value == null || value.length =
 
 export const hasValidLength = (value: any) => value != null && typeof value.length === 'number';
 
-export const requiredTrue = () => (value: boolean) => value ? null : { key: 'required', value: true };
+export const requiredTrue = () => (value: boolean) =>
+	value ? null : { key: 'required', value: true };
 
 export const required = () => (value: any) =>
 	isEmptyInputValue(value) ? { key: 'required', value: true } : null;

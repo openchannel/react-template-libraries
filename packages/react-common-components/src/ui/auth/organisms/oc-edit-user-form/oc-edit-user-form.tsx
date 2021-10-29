@@ -8,8 +8,8 @@ import { OcTooltipLabel } from '../../../form/atoms';
 import { validateOcFormValues } from '../../../form/organisms/oc-form/utils/common';
 import { fieldsUtils } from '../../../form/organisms/oc-form/utils/fields';
 
-import { configConverter } from './utils';
 import { EditUserComponentProps } from './types';
+import { configConverter } from './utils';
 
 import './style.scss';
 
@@ -59,28 +59,28 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 		[dynamicFormFields],
 	);
 
-	const handleFormTypeChange = React.useCallback(
-		(formType: string | Option) => {
-			if (typeof formType === 'string') {
-				setFormType(formType);
-			} else {
-				setFormType(formType.name);
+	const handleFormTypeChange = React.useCallback((formType: string | Option) => {
+		if (typeof formType === 'string') {
+			setFormType(formType);
+		} else {
+			setFormType(formType.name);
+		}
+	}, []);
+
+	const validate = React.useCallback(
+		(values: OcFormValues): void | object | Promise<FormikErrors<FormikValues>> => {
+			const formik = formikRef.current;
+			if (formik != null) {
+				const validators = fieldsUtils.getValidators((dynamicFormFields as FormikField[]) || []);
+				return validateOcFormValues(formik.values, formik.errors, values, validators);
 			}
 		},
-		[],
+		[dynamicFormFields],
 	);
-
-	const validate = React.useCallback((values: OcFormValues): void | object | Promise<FormikErrors<FormikValues>> => {
-		const formik = formikRef.current;
-		if (formik != null) {
-			const validators = fieldsUtils.getValidators((dynamicFormFields as FormikField[]) || []);
-			return validateOcFormValues(formik.values, formik.errors, values, validators);
-		}
-	}, [dynamicFormFields]);
 
 	const formFields = React.useMemo(() => {
 		// remove 'terms' checkbox to render render it by hand
-		return (dynamicFormFields.filter(f => f.name !== 'terms') as FormikField[]);
+		return dynamicFormFields.filter((f) => f.name !== 'terms') as FormikField[];
 	}, [dynamicFormFields]);
 
 	if (formConfigs.length === 0) {
@@ -113,7 +113,15 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 						enableReinitialize
 						noValidate
 					>
-						{({ handleSubmit, handleChange, values, touched, errors, handleBlur, isSubmitting }) => (
+						{({
+							handleSubmit,
+							handleChange,
+							values,
+							touched,
+							errors,
+							handleBlur,
+							isSubmitting,
+						}) => (
 							<Form onSubmit={handleSubmit}>
 								<FormikMapFields fields={formFields} />
 								<div className="edit-user-form__content">
@@ -134,7 +142,9 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 											/>
 										</div>
 									)}
-									{touched.terms && errors.terms && <OcError message="Please confirm this checkbox" />}
+									{touched.terms && errors.terms && (
+										<OcError message="Please confirm this checkbox" />
+									)}
 								</div>
 								{formConfigs !== null && (
 									<OcButtonComponent
