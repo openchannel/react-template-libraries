@@ -29,10 +29,7 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 
 	const [showFeedbackPage, setFeedbackPageVisible] = React.useState(showSignupFeedbackPage);
 
-	const handleShowFeedback = React.useCallback(
-		() => setFeedbackPageVisible(prev => !prev),
-		[],
-	);
+	const handleShowFeedback = React.useCallback(() => setFeedbackPageVisible((prev) => !prev), []);
 
 	return (
 		<div className="sign-up login-card login-card_borders">
@@ -65,12 +62,14 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 								/>
 							</div>
 						)}
-						{loginUrl && <div className="sign-up__login">
-							Already have an account?{' '}
-							<Link className="sign-up__login-link" to={loginUrl}>
-								Log In
-							</Link>
-						</div>}
+						{loginUrl && (
+							<div className="sign-up__login">
+								Already have an account?{' '}
+								<Link className="sign-up__login-link" to={loginUrl}>
+									Log In
+								</Link>
+							</div>
+						)}
 					</div>
 				</div>
 			)}

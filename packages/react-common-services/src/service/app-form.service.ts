@@ -39,11 +39,8 @@ export const formsService = {
 	 * @param {CreateFormSubmissionModel} createFormSubmissionModel - request body.
 	 * @returns {FormSubmissionModel}
 	 */
-	createFormSubmission: (
-		formId: string,
-		createFormSubmissionModel: CreateFormSubmissionModel,
-	) => {
+	createFormSubmission: (formId: string, createFormSubmissionModel: CreateFormSubmissionModel) => {
 		const mainUrl = `${FORMS_URL}/${formId}/submissions`;
-		return api.post(mainUrl, {body: createFormSubmissionModel});
+		return api.post(mainUrl, { body: createFormSubmissionModel });
 	},
 };

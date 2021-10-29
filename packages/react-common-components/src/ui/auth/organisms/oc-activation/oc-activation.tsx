@@ -13,7 +13,15 @@ import { OcActivationProps } from './types';
 import './styles.scss';
 
 export const OcActivation: React.FC<OcActivationProps> = (props) => {
-	const { companyLogoUrl, resendActivationUrl, signupUrl, process, inputProps, inputError, handleButtonClick  } = props;
+	const {
+		companyLogoUrl,
+		resendActivationUrl,
+		signupUrl,
+		process,
+		inputProps,
+		inputError,
+		handleButtonClick,
+	} = props;
 
 	return (
 		<div className="activation login-card login-card_borders">

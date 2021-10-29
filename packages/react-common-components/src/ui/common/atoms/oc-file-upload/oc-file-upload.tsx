@@ -53,9 +53,7 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 	};
 
 	if (true) {
-		return (
-			<div>File upload component is broken. Will be fixed soon.</div>
-		)
+		return <div>File upload component is broken. Will be fixed soon.</div>;
 	}
 
 	return (

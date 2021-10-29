@@ -9,10 +9,7 @@ export type OcFormFormikHelpers = FormikHelpers<Record<string, unknown>>;
 
 export interface OcFormProps extends FormikServiceProps {
 	formJsonData: AppFormModel;
-	onSubmit: (
-		values: OcFormValues,
-		formikHelpers: OcFormFormikHelpers,
-	) => void;
+	onSubmit: (values: OcFormValues, formikHelpers: OcFormFormikHelpers) => void;
 	onCancel?: () => void;
 	/**
 	 * Set position of the field label.
@@ -78,7 +75,7 @@ export interface FormikServiceProps {
 	/**
 	 * Service to make API calls.
 	 */
-	service?: any
+	service?: any;
 }
 
 export interface FormikMapFieldsProps extends FormikServiceProps {

@@ -65,7 +65,11 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 									<a
 										role="button"
 										className="font-s font-med resend-link"
-										onClick={!onActivationLinkClick ? undefined : () => onActivationLinkClick(values.email || '')}
+										onClick={
+											!onActivationLinkClick
+												? undefined
+												: () => onActivationLinkClick(values.email || '')
+										}
 									>
 										resend the activation email
 									</a>
