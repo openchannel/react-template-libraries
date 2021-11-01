@@ -35,7 +35,7 @@ const validateColor = (target: string) => target.match(colorRegEx) !== null;
 export const OcColorComponent: React.FC<ColorProps> = (props) => {
 	const { disabled, customClass, placeholder, colorValue, onValueChange, name, onBlur } = props;
 
-	const [inputColorValue, setInputColorValue] = React.useState('');
+	const [inputColorValue, setInputColorValue] = React.useState('#32c35e');
 	const colorInput: React.RefObject<HTMLInputElement> = React.createRef();
 
 	const dummyClick = () => {

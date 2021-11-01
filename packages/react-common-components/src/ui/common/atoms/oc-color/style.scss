@@ -10,7 +10,7 @@
   }
 
   &__display {
-    width: 46px;
+    width: 46px!important;
     background-color: #e4e8ec;
     border-right: none;
     border-top-right-radius: 0;
@@ -18,7 +18,7 @@
   }
 
   &__input {
-    width: 100%;
+    width: 100%!important;
     border-left: none;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -28,9 +28,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 46px;
+    width: 46px!important;
     margin-left: 2rem;
-    padding: 0.5rem 0.7rem;
+		padding: 7px 10px!important;
     background-color: #fff;
     position: relative;
     color: $body-color;
