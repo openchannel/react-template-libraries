@@ -2,32 +2,10 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+
 import OcLoginComponent, { LoginProps } from '../../../packages/react-common-components/src/ui/auth/organisms/oc-login';
+
 import './oc-login.stories.scss';
-
-const LoginPageErrorIncorrectEmail = (): JSX.Element => {
-	return (
-		<div>
-			<p className='incorrect-email'>This 'incorrectEmailErrorCodeTemplate' custom error</p>
-		</div>
-	);
-};
-
-const LoginPageErrorVerifiedEmail = (): JSX.Element => {
-	return (
-		<div>
-			<p className='verified-email'>This 'notVerifiedEmailErrorTemplate' custom error</p>
-		</div>
-	);
-};
-
-const LoginPageErrorResetPasswordRequired= (): JSX.Element => {
-	return (
-		<div>
-			<p className='password-required'>This 'passwordResetRequiredErrorTemplate' custom error</p>
-		</div>
-	);
-};
 
 export default {
 	title: 'Login [BEM]',
@@ -75,8 +53,8 @@ DisplayErrorsLogin.args = {
 	isPasswordResetRequired: true,
 };
 
-export const DisplayErrorsTemplateLogin = DefaultComponent.bind({});
-DisplayErrorsTemplateLogin.args = {
+export const CustomErrorTemplates = DefaultComponent.bind({});
+CustomErrorTemplates.args = {
 	handleSubmit: action('handleSubmit'),
 	companyLogoUrl: './img/logo-company.png',
 	loginButtonText: 'Log In',
@@ -84,7 +62,19 @@ DisplayErrorsTemplateLogin.args = {
 	isIncorrectEmail: true,
 	isUnverifiedEmail: true,
 	isPasswordResetRequired: true,
-	incorrectEmailErrorCodeTemplate: LoginPageErrorIncorrectEmail(),
-	notVerifiedEmailErrorTemplate: LoginPageErrorVerifiedEmail(),
-	passwordResetRequiredErrorTemplate: LoginPageErrorResetPasswordRequired(),
+	incorrectEmailErrorCodeTemplate: (
+		<div>
+			<p className='incorrect-email'>This 'incorrectEmailErrorCodeTemplate' custom error</p>
+		</div>
+	),
+	notVerifiedEmailErrorTemplate: (
+		<div>
+			<p className='verified-email'>This 'notVerifiedEmailErrorTemplate' custom error</p>
+		</div>
+	),
+	passwordResetRequiredErrorTemplate: (
+		<div>
+			<p className='password-required'>This 'passwordResetRequiredErrorTemplate' custom error</p>
+		</div>
+	),
 };

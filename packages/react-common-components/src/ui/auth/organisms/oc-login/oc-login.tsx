@@ -72,7 +72,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 								notVerifiedEmailErrorTemplate ? (
 									notVerifiedEmailErrorTemplate
 								) : (
-									<div className="login__error">
+									<div className="login__error login__warn-block">
 										This account has not been activated yet. <br />
 										Please check your inbox for an activation email or{' '}
 										<a
@@ -86,6 +86,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 										>
 											resend the activation email
 										</a>
+										.
 									</div>
 								)
 							) : (

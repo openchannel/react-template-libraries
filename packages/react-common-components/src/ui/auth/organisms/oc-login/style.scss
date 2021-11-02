@@ -115,6 +115,11 @@
 }
 
 .resend-link {
+	display: inline-block;
+	@include font-size-sm();
+	color: $error;
+	font-weight: bold;
+	text-decoration: underline;
 	cursor: pointer;
 
 	&:hover {
