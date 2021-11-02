@@ -27,6 +27,25 @@ export interface LoginProps {
 	 */
 	onActivationLinkClick?(email: string): void;
 
+	/**formik initial values */
+	inputEmailValue?: string;
+	inputPasswordValue?: string;
+
+	/**
+	 * Display incorrect email error
+	 */
+	isIncorrectEmail?: boolean;
+
+	/**
+	 * Display unverified email error
+	 */
+	isUnverifiedEmail?: boolean;
+
+	/**
+	 * Display message with activation account link
+	 */
+	isPasswordResetRequired?: boolean;
+
 	/**
 	 * Custom ReactNode element to display error for isIncorrectEmail.
 	 */
@@ -41,11 +60,4 @@ export interface LoginProps {
 	 * Custom ReactNode element to display error for isPasswordResetRequired.
 	 */
 	passwordResetRequiredErrorTemplate?: React.ReactNode;
-
-	/**formik initial values */
-	inputEmailValue?: string;
-	inputPasswordValue?: string;
-	isIncorrectEmail?: boolean;
-	isUnverifiedEmail?: boolean;
-	isPasswordResetRequired?: boolean;
 }
