@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { FormikHelpers } from 'formik';
 
 export interface LoginProps {
@@ -26,9 +27,25 @@ export interface LoginProps {
 	 */
 	onActivationLinkClick?(email: string): void;
 
+	/**
+	 * Custom ReactNode element to display error for isIncorrectEmail.
+	 */
+	incorrectEmailErrorCodeTemplate?: React.ReactNode;
+
+	/**
+	 * Custom ReactNode element to display error for isUnverifiedEmail.
+	 */
+	notVerifiedEmailErrorTemplate?: React.ReactNode;
+
+	/**
+	 * Custom ReactNode element to display error for isPasswordResetRequired.
+	 */
+	passwordResetRequiredErrorTemplate?: React.ReactNode;
+
 	/**formik initial values */
 	inputEmailValue?: string;
 	inputPasswordValue?: string;
 	isIncorrectEmail?: boolean;
 	isUnverifiedEmail?: boolean;
+	isPasswordResetRequired?: boolean;
 }

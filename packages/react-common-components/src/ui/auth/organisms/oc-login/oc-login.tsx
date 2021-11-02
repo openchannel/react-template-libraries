@@ -26,7 +26,11 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 		inputPasswordValue,
 		isIncorrectEmail,
 		isUnverifiedEmail,
+		isPasswordResetRequired,
 		onActivationLinkClick,
+		incorrectEmailErrorCodeTemplate,
+		notVerifiedEmailErrorTemplate,
+		passwordResetRequiredErrorTemplate,
 	} = props;
 
 	return (
@@ -53,27 +57,51 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 									customClass="login__header-invitation"
 								/>
 							</div>
-							{isIncorrectEmail && (
-								<div className="login__error">
-									The email and password you have provided is incorrect.
-								</div>
+							{isIncorrectEmail ? (
+								incorrectEmailErrorCodeTemplate ? (
+									incorrectEmailErrorCodeTemplate
+								) : (
+									<div className="login__error login__warn-block">
+										The email and password you have provided is incorrect.
+									</div>
+								)
+							) : (
+								''
 							)}
-							{isUnverifiedEmail && (
-								<div className="login__error">
-									This account has not been activated yet. <br />
-									Please check your inbox for an activation email or{' '}
-									<a
-										role="button"
-										className="font-s font-med resend-link"
-										onClick={
-											!onActivationLinkClick
-												? undefined
-												: () => onActivationLinkClick(values.email || '')
-										}
-									>
-										resend the activation email
-									</a>
-								</div>
+							{isUnverifiedEmail ? (
+								notVerifiedEmailErrorTemplate ? (
+									notVerifiedEmailErrorTemplate
+								) : (
+									<div className="login__error">
+										This account has not been activated yet. <br />
+										Please check your inbox for an activation email or{' '}
+										<a
+											role="button"
+											className="font-s font-med resend-link"
+											onClick={
+												!onActivationLinkClick
+													? undefined
+													: () => onActivationLinkClick(values.email || '')
+											}
+										>
+											resend the activation email
+										</a>
+									</div>
+								)
+							) : (
+								''
+							)}
+							{isPasswordResetRequired ? (
+								passwordResetRequiredErrorTemplate ? (
+									passwordResetRequiredErrorTemplate
+								) : (
+									<div className="login__warn login__warn-block">
+										Your password must be changed. We’ve sent an email to {values.email} with a link
+										to help you reset your password.
+									</div>
+								)
+							) : (
+								''
 							)}
 							<div className="login__email login__email_margin_top">
 								<OcLabelComponent
