@@ -35,11 +35,11 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 		[formConfigs],
 	);
 
-	const [formType, setFormType] = React.useState<string>(defaultFormType);
+	const [formType, setFormType] = React.useState<string>('');
 
 	React.useEffect(() => {
 		if (!formType && formTypes.length > 0) {
-			setFormType(formTypes[0]);
+			setFormType(defaultFormType || formTypes[0]);
 		}
 	}, [formType, formTypes]);
 
@@ -83,10 +83,6 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 		// remove 'terms' checkbox to render render it by hand
 		return dynamicFormFields.filter((f) => f.name !== 'terms') as FormikField[];
 	}, [dynamicFormFields]);
-
-	if (formConfigs.length === 0) {
-		return null;
-	}
 
 	return (
 		<div className="edit-user-form">
