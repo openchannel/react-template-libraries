@@ -58,6 +58,7 @@ export interface OCOrganization {
 
 export interface EditUserComponentProps {
 	formConfigs: OcEditUserFormConfig[];
+	defaultFormType?: string;
 	enableTypesDropdown?: boolean;
 	enablePasswordField?: boolean;
 	enableTermsCheckbox?: boolean;

@@ -8,8 +8,8 @@ import { OcTooltipLabel } from '../../../form/atoms';
 import { validateOcFormValues } from '../../../form/organisms/oc-form/utils/common';
 import { fieldsUtils } from '../../../form/organisms/oc-form/utils/fields';
 
-import { EditUserComponentProps } from './types';
 import { configConverter } from './utils';
+import { EditUserComponentProps } from './types';
 
 import './style.scss';
 
@@ -17,6 +17,7 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 	const {
 		formConfigs,
 		onSubmit,
+		defaultFormType = '',
 		enableTypesDropdown = false,
 		enablePasswordField = false,
 		customTermsDescription = '',
@@ -34,7 +35,7 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 		[formConfigs],
 	);
 
-	const [formType, setFormType] = React.useState<string | undefined>();
+	const [formType, setFormType] = React.useState<string>(defaultFormType);
 
 	React.useEffect(() => {
 		if (!formType && formTypes.length > 0) {
