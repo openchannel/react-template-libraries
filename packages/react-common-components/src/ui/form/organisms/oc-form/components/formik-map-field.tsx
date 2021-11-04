@@ -33,13 +33,11 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 	return (
 		<>
 			{fields.map((field, index) => {
-				const { id, label, description, type, attributes, options, defaultValue, placeholder } =
+				const { id, label, description, type, attributes, options, defaultValue, placeholder, name } =
 					field;
 
-				// avoid formik nesting,
-				// e.g., if name = 'a.b', it will remain as {'a.b': ...}, not as {a: {b: ...}
-				const name = `['${field.name}']`;
-				const uniqKey = `['${field.name}${field.label.replace(' ', '').toLowerCase()}']`;
+				const uniqKey = name;
+
 				switch (type) {
 					case FIELD_TYPE.RICH_TEXT:
 						return (
