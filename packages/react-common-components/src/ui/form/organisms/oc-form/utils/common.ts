@@ -108,3 +108,23 @@ export const customClassWithError = (error: string | undefined, child: React.Rea
 		return 'invalid';
 	}
 };
+
+/**
+ * Find default form type by config name
+ * @param options
+ * @param defaultFormType
+ */
+export const getDefaultFormType = (options: { label: string; }[], defaultFormType?: string) => {
+	if (!defaultFormType) {
+		return options[0];
+	}
+
+	const defaultOption = options.find((item) => item.label === defaultFormType);
+
+	if (!defaultOption) {
+		console.error(`OcForm Error. ${defaultFormType} is wrong config name!`);
+		return options[0];
+	}
+
+	return defaultOption;
+};

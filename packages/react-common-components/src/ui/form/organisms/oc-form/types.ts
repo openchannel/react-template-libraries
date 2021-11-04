@@ -18,11 +18,21 @@ export interface FormikServiceProps {
 	service?: any;
 }
 
-export interface FormProps extends FormikServiceProps {
-	formJsonData: AppFormModel;
-
+export interface FormProps extends OcFormExtraProps {
+	/**
+	 * Form config
+	 */
+	formJsonData?: AppFormModel;
+	/**
+	 * Callback with values and formProps on button click
+	 *
+	 * @param values
+	 * @param formikHelpers
+	 */
 	onSubmit?(values: OcFormValues, formikHelpers: OcFormFormikHelpers): void;
-
+	/**
+	 * Callback on Cancel button click
+	 */
 	onCancel?(): void;
 	/**
 	 * Set position of the field label.
@@ -44,11 +54,28 @@ export interface FormProps extends FormikServiceProps {
 }
 
 export interface OcFormProps extends FormProps {
+	/**
+	 * Form configs
+	 */
 	formConfigs?: OcEditUserFormConfig[];
-
+	/**
+	 * Form type select label
+	 * @default Type
+	 */
 	formTypeLabel?: string;
-
+	/**
+	 * Default FormType (config name)
+	 */
+	defaultFormType?: string;
+	/**
+	 * Enable required password field. //todo: Set True to include field to form state.
+	 * @default false
+	 */
 	enablePasswordField?: boolean;
+	/**
+	 * Enable required Terms checkbox field. //todo: Set True to include field to form state.
+	 * @default false
+	 */
 	enableTermsCheckboxField?: boolean;
 
 	children?: OcFormChildren;

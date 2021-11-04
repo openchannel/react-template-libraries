@@ -3,46 +3,19 @@ import * as React from 'react';
 import OcSelect from '../../../../common/molecules/oc-select';
 import OcTooltipLabel from '../../../atoms/oc-tooltip-label';
 
+import { getDefaultFormType } from '../utils/common';
 import { mapConfigsToFormConfigs, mapFormTypes } from '../utils/config-mapper';
 import { OcFormFormikHelpers, OcFormProps, OcFormValues, SelectedFormType } from '../types';
 import '../style.scss';
 
 import { Form } from './form';
 
-// const AgreeWithTermsCheckbox = ({ formikProps, formFields, customTermsDescription, ordinaryTermsDescription }: any) => {
-// 	const { values, touched, errors, handleBlur, handleChange } = formikProps;
-//
-// 	const termsName = formFields.find((f) => f.id === 'terms')!.name;
-//
-// 	return (
-// 		<>
-// 			<div className="edit-user-form__content__checkbox">
-// 				{customTermsDescription && (
-// 					<div className="edit-user-form__content__label">
-// 						{customTermsDescription}
-// 					</div>
-// 				)}
-// 				<OcCheckboxComponent
-// 					labelText={ordinaryTermsDescription}
-// 					name={termsName}
-// 					checked={values[termsName]}
-// 					touched={String(touched[termsName])}
-// 					onBlur={handleBlur}
-// 					onChange={handleChange}
-// 				/>
-// 			</div>
-// 			{touched[termsName] && errors[termsName] && (
-// 				<OcError message="Please confirm this checkbox" />
-// 			)}
-// 		</>
-// 	);
-// };
-
 export const OcForm: React.FC<OcFormProps> = (props) => {
 	const {
 		formJsonData,
 		formConfigs = [],
 		formTypeLabel = 'Type',
+		defaultFormType,
 		onSubmit,
 		children,
 		enablePasswordField = false,
@@ -50,7 +23,9 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		...formProps
 	} = props;
 
-	const [formType, setFormType] = React.useState<SelectedFormType>(() => mapFormTypes(formConfigs).options[0]);
+	const [formType, setFormType] = React.useState<SelectedFormType>(
+		() => getDefaultFormType(mapFormTypes(formConfigs).options, defaultFormType)
+	);
 
 	const { configs, formTypes, formTypeOptions } = React.useMemo(() => {
 		const { types, options } = mapFormTypes(formConfigs);
@@ -104,14 +79,6 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 					onSubmit={onFormSubmit}
 				>
 					{children}
-					{/*{enableTermsCheckbox && (*/}
-					{/*	(formikProps, formFields) => <AgreeWithTermsCheckbox*/}
-					{/*		formikProps={formikProps}*/}
-					{/*		formFields={formFields}*/}
-					{/*		customTermsDescription={customTermsDescription}*/}
-					{/*		ordinaryTermsDescription={ordinaryTermsDescription}*/}
-					{/*	/>*/}
-					{/*)}*/}
 				</Form>
 			)}
 		</>
