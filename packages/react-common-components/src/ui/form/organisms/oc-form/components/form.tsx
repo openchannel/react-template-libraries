@@ -71,12 +71,15 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		<FormikContext.Provider value={formik}>
 			<OcFormContextProvider initialValue={{ flattenFields, fieldsDefinition, updateState }}>
 				<FormikForm className="form" onSubmit={handleSubmit} noValidate>
-					<FormikMapFieldsWrapper service={service} />
+					<FormikMapFieldsWrapper
+						service={service}
+						excludeRenderFields={excludeRenderFields}
+					/>
 					{children ? isFunction(children) ? children(formik, flattenFields) : children : null}
 					<div className={getOcFormButtonsClass(buttonPosition)}>
 						<div className={`form__button ${!onCancel ? 'full-width' : ''}`}>
 							<OcButtonComponent htmlType="submit" type="primary" process={formik.isSubmitting}>
-								{successButtonText}
+								{submitButtonText}
 							</OcButtonComponent>
 						</div>
 						{onCancel && (

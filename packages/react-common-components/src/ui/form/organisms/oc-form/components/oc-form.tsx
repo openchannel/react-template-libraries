@@ -20,6 +20,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		children,
 		enablePasswordField = false,
 		enableTermsCheckboxField = false,
+		excludeRenderFields,
 		...formProps
 	} = props;
 
@@ -75,6 +76,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 			{selectedFormConfig && (
 				<Form
 					{...formProps}
+					excludeRenderFields={excludeRenderFields}
 					formJsonData={selectedFormConfig}
 					onSubmit={onFormSubmit}
 				>

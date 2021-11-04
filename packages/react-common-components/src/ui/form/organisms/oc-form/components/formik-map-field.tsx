@@ -10,7 +10,7 @@ import OcTextarea from '../../../atoms/oc-textarea/oc-textarea';
 import { FIELD_TYPE } from '../../../lib';
 import { OcDynamicFieldArray } from '../../oc-dynamic-field-array';
 import { useOcFormContext } from '../context';
-import { FormikMapFieldsProps, FormikServiceProps } from '../types';
+import { FormikMapFieldsProps, OcFormExtraProps } from '../types';
 
 import {
 	FieldGroupWrapper,
@@ -25,7 +25,7 @@ import {
 	FormikRichTextWrapper,
 } from './formik-components';
 
-export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, service }) => {
+export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, service, excludeRenderFields }) => {
 	if (!fields || fields.length === 0) {
 		return null;
 	}
@@ -35,6 +35,10 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 			{fields.map((field, index) => {
 				const { id, label, description, type, attributes, options, defaultValue, placeholder, name } =
 					field;
+
+				if (excludeRenderFields && excludeRenderFields.includes(id)) {
+					return null;
+				}
 
 				const uniqKey = name;
 
@@ -386,7 +390,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 	);
 };
 
-export const FormikMapFieldsWrapper: React.FC<FormikServiceProps> = ({ children, ...props }) => {
+export const FormikMapFieldsWrapper: React.FC<OcFormExtraProps> = ({ children, ...props }) => {
 	const context = useOcFormContext();
 
 	return <FormikMapFields fields={context.fields} {...props} />;

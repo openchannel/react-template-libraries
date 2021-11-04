@@ -11,11 +11,15 @@ export type OcFormFormikHelpers = FormikHelpers<Record<string, unknown>>;
 export type OcFormChildren = React.ReactNode | ((formik: FormikProps<any>, fields: FormikField[]) => React.ReactNode);
 export type SelectedFormType = { label: string; };
 
-export interface FormikServiceProps {
+export interface OcFormExtraProps {
 	/**
 	 * Service to make API calls.
 	 */
 	service?: any;
+	/**
+	 * Don't render field by ID.
+	 */
+	excludeRenderFields?: string[];
 }
 
 export interface FormProps extends OcFormExtraProps {
@@ -43,7 +47,7 @@ export interface FormProps extends OcFormExtraProps {
 	/**
 	 * @default Submit
 	 */
-	successButtonText?: string;
+	submitButtonText?: string;
 	/**
 	 * Set position of the field label.
 	 * @default left
@@ -124,7 +128,7 @@ export interface OcFormContextProps {
 	onSaveField: React.MouseEventHandler;
 }
 
-export interface FormikMapFieldsProps extends FormikServiceProps {
+export interface FormikMapFieldsProps extends OcFormExtraProps {
 	fields: FormikField[];
 }
 
