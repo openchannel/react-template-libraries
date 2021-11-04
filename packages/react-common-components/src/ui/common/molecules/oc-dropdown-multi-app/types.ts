@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { FormikServiceProps } from '../../../form';
+import type { OcFormExtraProps } from '../../../form';
 import { FullAppData } from '../../models';
 
-export interface DropdownMultiAppProps extends FormikServiceProps {
+export interface DropdownMultiAppProps extends OcFormExtraProps {
 	service: AppsService;
 	defaultValue: string[];
 	value: string[];

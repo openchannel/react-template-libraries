@@ -10,6 +10,7 @@ describe('Invite Modal', () => {
 		const component: ShallowWrapper = setUp({
 			modalTitle: 'Invite a member',
 			formConfig: {
+				formId: '1',
 				fields: [
 					{
 						id: 'name',
@@ -60,6 +61,7 @@ describe('Invite Modal', () => {
 	it('should create with additional props: size and className', () => {
 		const component: ShallowWrapper = setUp({
 			formConfig: {
+				formId: '2',
 				fields: [
 					{
 						id: 'name',

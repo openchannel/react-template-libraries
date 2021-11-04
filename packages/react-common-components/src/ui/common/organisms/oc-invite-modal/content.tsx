@@ -27,7 +27,7 @@ export const InviteUserContent: React.FC<Omit<OcInviteModalProps, 'isOpened' | '
 					formJsonData={formConfig}
 					onCancel={onCancel || onClose}
 					onSubmit={onSubmit}
-					successButtonText={successButtonText}
+					submitButtonText={successButtonText}
 					buttonPosition={buttonPosition}
 				/>
 			</div>
