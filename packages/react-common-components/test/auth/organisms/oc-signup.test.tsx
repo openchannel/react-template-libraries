@@ -138,7 +138,6 @@ describe('Sign Up Custom', () => {
 				customTermsDescription=""
 				defaultEmptyConfigsErrorMessage="There are no forms configured."
 				showSignupFeedbackPage={false}
-				enableTypesDropdown
 				enablePasswordField
 				companyLogoUrl="./img/logo-company.png"
 				onSubmit={() => {}}
