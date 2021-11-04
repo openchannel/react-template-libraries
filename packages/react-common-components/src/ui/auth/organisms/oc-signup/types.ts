@@ -27,10 +27,6 @@ export interface SignupProps {
 	 */
 	goToActivationPage?(): void;
 	/**
-	 * Show Types dropdown to select form config
-	 */
-	enableTypesDropdown?: boolean;
-	/**
 	 * Label for the Types dropdown
 	 */
 	defaultTypeLabelText?: string;

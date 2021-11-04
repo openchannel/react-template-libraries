@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
 import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
-import { OcEditUserFormComponent } from '../oc-edit-user-form';
+import OcEditUserFormComponent from '../oc-edit-user-form';
 
 import { SignupProps } from './types';
 
@@ -22,14 +22,11 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 		defaultEmptyConfigsErrorMessage,
 		showSignupFeedbackPage = false,
 		companyLogoUrl = '../../../../assets/img/logo-company.png',
-		enableTypesDropdown = false,
 		enableTermsCheckbox = false,
 		enablePasswordField = true,
 	} = props;
 
-	const [showFeedbackPage, setFeedbackPageVisible] = React.useState(showSignupFeedbackPage);
-
-	const handleShowFeedback = React.useCallback(() => setFeedbackPageVisible((prev) => !prev), []);
+	const [showFeedbackPage, handleShowFeedback] = React.useReducer((prev) => !prev, showSignupFeedbackPage);
 
 	return (
 		<div className="sign-up login-card login-card_borders">
@@ -50,7 +47,6 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 							<div>
 								<OcEditUserFormComponent
 									formConfigs={formConfigs}
-									enableTypesDropdown={enableTypesDropdown}
 									defaultTypeLabelText={defaultTypeLabelText}
 									customTermsDescription={customTermsDescription}
 									ordinaryTermsDescription={ordinaryTermsDescription}
@@ -58,7 +54,7 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 									enableTermsCheckbox={enableTermsCheckbox}
 									enablePasswordField={enablePasswordField}
 									defaultEmptyConfigsErrorMessage={defaultEmptyConfigsErrorMessage}
-									submitText="Sign Up"
+									submitButtonText="Sign Up"
 								/>
 							</div>
 						)}

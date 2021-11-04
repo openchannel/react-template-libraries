@@ -23,16 +23,17 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		formJsonData,
 		onSubmit,
 		onCancel,
-		successButtonText = 'Submit',
+		submitButtonText = 'Submit',
 		buttonPosition = 'left',
 		service,
 		children,
+		excludeRenderFields,
 	} = props;
 
 	const {
 		state: { initialValues, validators, flattenFields, fieldsDefinition },
 		updateState,
-	} = useOcFormState(formJsonData);
+	} = useOcFormState(formJsonData!);
 
 	const formik: any = useFormik({
 		initialValues,
