@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { useFormikContext } from 'formik';
-import { get, update } from 'lodash-es';
+import { get, update, noop } from 'lodash-es';
 
-import { Dataset } from '../../../common/atoms/oc-button/oc-button';
+import { Dataset } from '../../../common/atoms/oc-button';
 import { FIELD_TYPE } from '../../lib';
 import { FormikField, FormikFieldsValues } from '../../models';
 
-import { noop } from './utils/common';
 import {
 	elementUtils,
 	getInitialValuesFromFields,

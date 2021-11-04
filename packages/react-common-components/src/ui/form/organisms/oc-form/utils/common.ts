@@ -5,9 +5,6 @@ import { isEmpty } from 'lodash-es';
 import { errorMessages, FIELD_TYPE } from '../../../lib';
 import type { FieldValidators, FormikField, FormikFieldsValues } from '../../../models';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-export const noop = () => {};
-
 export const getOcFormButtonsClass = (buttonPosition: string): string => {
 	switch (buttonPosition) {
 		case 'center':
@@ -21,6 +18,14 @@ export const getOcFormButtonsClass = (buttonPosition: string): string => {
 	}
 };
 
+/**
+ * Validate each value by function validator
+ *
+ * @param prevValues
+ * @param prevErrors
+ * @param values Object
+ * @param validators array of functions
+ */
 export const validateOcFormValues = (
 	prevValues: FormikValues,
 	prevErrors: FormikErrors<FormikValues>,
