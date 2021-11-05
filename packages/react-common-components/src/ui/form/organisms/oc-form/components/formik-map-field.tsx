@@ -10,7 +10,7 @@ import OcTextarea from '../../../atoms/oc-textarea/oc-textarea';
 import { FIELD_TYPE } from '../../../lib';
 import { OcDynamicFieldArray } from '../../oc-dynamic-field-array';
 import { useOcFormContext } from '../context';
-import { FormikMapFieldsProps, FormikServiceProps } from '../types';
+import { FormikMapFieldsProps, OcFormExtraProps } from '../types';
 
 import {
 	FieldGroupWrapper,
@@ -25,7 +25,7 @@ import {
 	FormikRichTextWrapper,
 } from './formik-components';
 
-export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, service }) => {
+export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, service, excludeRenderFields }) => {
 	if (!fields || fields.length === 0) {
 		return null;
 	}
@@ -33,13 +33,15 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 	return (
 		<>
 			{fields.map((field, index) => {
-				const { id, label, description, type, attributes, options, defaultValue, placeholder } =
+				const { id, label, description, type, attributes, options, defaultValue, placeholder, name } =
 					field;
 
-				// avoid formik nesting,
-				// e.g., if name = 'a.b', it will remain as {'a.b': ...}, not as {a: {b: ...}
-				const name = `['${field.name}']`;
-				const uniqKey = `['${field.name}${field.label.replace(' ', '').toLowerCase()}']`;
+				if (excludeRenderFields && excludeRenderFields.includes(id)) {
+					return null;
+				}
+
+				const uniqKey = name;
+
 				switch (type) {
 					case FIELD_TYPE.RICH_TEXT:
 						return (
@@ -388,7 +390,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 	);
 };
 
-export const FormikMapFieldsWrapper: React.FC<FormikServiceProps> = ({ children, ...props }) => {
+export const FormikMapFieldsWrapper: React.FC<OcFormExtraProps> = ({ children, ...props }) => {
 	const context = useOcFormContext();
 
 	return <FormikMapFields fields={context.fields} {...props} />;

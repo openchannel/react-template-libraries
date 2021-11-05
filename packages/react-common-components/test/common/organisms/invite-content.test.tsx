@@ -15,6 +15,7 @@ describe('Invite Modal', () => {
 		const component: ShallowWrapper = setUp({
 			modalTitle: 'Invite a member',
 			formConfig: {
+				formId: '1',
 				fields: [
 					{
 						id: 'name',

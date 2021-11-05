@@ -59,7 +59,6 @@ export interface OCOrganization {
 export interface EditUserComponentProps {
 	formConfigs: OcEditUserFormConfig[];
 	defaultFormType?: string;
-	enableTypesDropdown?: boolean;
 	enablePasswordField?: boolean;
 	enableTermsCheckbox?: boolean;
 	defaultTypeLabelText?: string;
@@ -67,7 +66,7 @@ export interface EditUserComponentProps {
 	customTermsDescription?: React.ReactNode;
 	ordinaryTermsDescription?: React.ReactNode;
 	onSubmit(values: OcFormValues, formikHelpers: OcFormFormikHelpers): void;
-	submitText?: string;
+	submitButtonText?: string;
 }
 
 export interface InitialFormikValues {

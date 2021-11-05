@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 import OcSignupComponent from '../../../packages/react-common-components/src/ui/auth/organisms/oc-signup/index';
+
+import { mockSignupConfigs } from './mockData';
 
 export default {
 	title: 'Sign Up Custom [BEM]',
@@ -28,143 +31,20 @@ export const LoadingConfigs = DefaultComponent.bind({});
 LoadingConfigs.args = {
 	companyLogoUrl: './img/logo-company.png',
 	formConfigs: null,
-	enableTypesDropdown: false,
 };
 
 export const WithoutConfigs = DefaultComponent.bind({});
 WithoutConfigs.args = {
 	loginUrl: 'login',
 	companyLogoUrl: './img/logo-company.png',
-	enableTypesDropdown: false,
 	formConfigs: [],
 };
 
 export const MultiConfigs = DefaultComponent.bind({});
 MultiConfigs.args = {
 	companyLogoUrl: './img/logo-company.png',
-	enableTypesDropdown: true,
-	formConfigs: [
-		{
-			name: 'First Form',
-			account: {
-				includeFields: ['name', 'email'],
-				typeData: {
-					fields: [
-						{
-							id: 'name',
-							type: 'text',
-							label: 'Name',
-							attributes: {
-								required: true,
-							},
-						},
-						{
-							id: 'email',
-							type: 'text',
-							label: 'Email',
-							attributes: {
-								required: true,
-							},
-						},
-						{
-							id: 'about-me',
-							type: 'text',
-							attributes: {
-								required: true,
-							},
-							label: 'About me',
-						},
-					],
-				},
-				type: 'first-account-form',
-			},
-			organization: {
-				includeFields: ['customData.organization'],
-				typeData: {
-					fields: [
-						{
-							id: 'customData.company',
-							type: 'text',
-							label: 'Company',
-							attributes: {
-								required: true,
-							},
-						},
-						{
-							id: 'customData.country',
-							type: 'text',
-							label: 'Country',
-							attributes: {
-								required: true,
-							},
-						},
-					],
-				},
-				type: 'first-organization-form',
-			},
-			fieldsOrder: ['email', 'name'],
-		},
-		{
-			name: 'Second Form',
-			account: {
-				includeFields: ['name', 'email', 'about-me'],
-				typeData: {
-					fields: [
-						{
-							id: 'name',
-							type: 'text',
-							label: 'Name',
-							attributes: {
-								required: true,
-							},
-						},
-						{
-							id: 'email',
-							type: 'text',
-							label: 'Email',
-							attributes: {
-								required: true,
-							},
-						},
-						{
-							id: 'about-me',
-							type: 'text',
-							attributes: {
-								required: true,
-							},
-							label: 'About me',
-						},
-					],
-				},
-				type: 'second-account-form',
-			},
-			organization: {
-				includeFields: ['customData.organization', 'customData.country'],
-				typeData: {
-					fields: [
-						{
-							id: 'customData.company',
-							type: 'text',
-							label: 'Company',
-							attributes: {
-								required: true,
-							},
-						},
-						{
-							id: 'customData.country',
-							type: 'text',
-							label: 'Country',
-							attributes: {
-								required: true,
-							},
-						},
-					],
-				},
-				type: 'second-organization-form',
-			},
-		},
-	],
-	onSubmit: (values: any) => console.log(values),
+	formConfigs: mockSignupConfigs,
+	onSubmit: action('onSubmit'),
 	enablePasswordField: true,
 	enableTermsCheckbox: true,
 	ordinaryTermsDescription: (
@@ -186,67 +66,7 @@ OneConfig.args = {
 	loginUrl: 'login',
 	companyLogoUrl: './img/logo-company.png',
 	formConfigsLoading: false,
-	formConfigs: [
-		{
-			account: {
-				includeFields: ['name', 'email'],
-				typeData: {
-					fields: [
-						{
-							id: 'name',
-							type: 'text',
-							label: 'Name',
-							attributes: {
-								required: true,
-							},
-						},
-						{
-							id: 'email',
-							type: 'text',
-							label: 'Email',
-							attributes: {
-								required: true,
-							},
-						},
-						{
-							id: 'about-me',
-							type: 'text',
-							attributes: {
-								required: true,
-							},
-							label: 'About me',
-						},
-					],
-				},
-				type: 'first-account-form',
-			},
-			organization: {
-				includeFields: ['customData.organization'],
-				typeData: {
-					fields: [
-						{
-							id: 'customData.company',
-							type: 'text',
-							label: 'Company',
-							attributes: {
-								required: true,
-							},
-						},
-						{
-							id: 'customData.country',
-							type: 'text',
-							label: 'Country',
-							attributes: {
-								required: true,
-							},
-						},
-					],
-				},
-				type: 'first-organization-form',
-			},
-			fieldsOrder: ['email', 'name'],
-		},
-	],
+	formConfigs: mockSignupConfigs,
 	enablePasswordField: true,
 	enableTermsCheckbox: true,
 	ordinaryTermsDescription: (
@@ -268,67 +88,7 @@ CustomTermsConfig.args = {
 	loginUrl: 'login',
 	companyLogoUrl: './img/logo-company.png',
 	formConfigsLoading: false,
-	formConfigs: [
-		{
-			account: {
-				includeFields: ['name', 'email'],
-				typeData: {
-					fields: [
-						{
-							id: 'name',
-							type: 'text',
-							label: 'Name',
-							attributes: {
-								required: true,
-							},
-						},
-						{
-							id: 'email',
-							type: 'text',
-							label: 'Email',
-							attributes: {
-								required: true,
-							},
-						},
-						{
-							id: 'about-me',
-							type: 'text',
-							attributes: {
-								required: true,
-							},
-							label: 'About me',
-						},
-					],
-				},
-				type: 'first-account-form',
-			},
-			organization: {
-				includeFields: ['customData.organization'],
-				typeData: {
-					fields: [
-						{
-							id: 'customData.company',
-							type: 'text',
-							label: 'Company',
-							attributes: {
-								required: true,
-							},
-						},
-						{
-							id: 'customData.country',
-							type: 'text',
-							label: 'Country',
-							attributes: {
-								required: true,
-							},
-						},
-					],
-				},
-				type: 'first-organization-form',
-			},
-			fieldsOrder: ['email', 'name'],
-		},
-	],
+	formConfigs: [mockSignupConfigs[0]],
 	enableTermsCheckbox: true,
 	customTermsDescription: (
 		<>
@@ -346,5 +106,4 @@ ResultPage.args = {
 	showSignupFeedbackPage: true,
 	forgotPasswordDoneUrl: './img/email_done.svg',
 	formConfigs: null,
-	enableTypesDropdown: false,
 };

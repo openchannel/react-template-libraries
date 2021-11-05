@@ -49,7 +49,7 @@ export interface OcSelectProps {
 	/**
 	 * A callback fired when a menu item is selected.
 	 */
-	onSelectionChange: (eventKey: string | Option, e: React.SyntheticEvent<unknown>) => void;
+	onSelectionChange(eventKey: string | Option, e: React.SyntheticEvent<unknown>): void;
 }
 
 export const OcSelect: React.FC<Partial<OcSelectProps>> = (props) => {
