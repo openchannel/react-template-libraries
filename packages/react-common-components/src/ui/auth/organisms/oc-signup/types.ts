@@ -17,7 +17,7 @@ export interface SignupProps {
 	/**
 	 * Show message after successful sign up
 	 */
-	showSignupFeedbackPage?: boolean;
+	showFeedback?: boolean;
 	/**
 	 * Image source url
 	 */
