@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
+import { OcForm } from '../../../form/organisms/oc-form';
 import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
-import OcEditUserFormComponent from '../oc-edit-user-form';
+import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
 
 import { SignupProps } from './types';
+import { AgreeWithTermsCheckbox } from './agree-with-terms-checkbox';
 
 import './style.scss';
+
+const ExcludeRenderFields = ['terms'];
 
 export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 	const {
@@ -19,7 +22,6 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 		defaultTypeLabelText,
 		ordinaryTermsDescription,
 		customTermsDescription,
-		defaultEmptyConfigsErrorMessage,
 		showFeedback = false,
 		companyLogoUrl = '../../../../assets/img/logo-company.png',
 		enableTermsCheckbox = false,
@@ -50,19 +52,26 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 							/>
 						</div>
 						{formConfigs !== null && (
-							<div>
-								<OcEditUserFormComponent
-									formConfigs={formConfigs}
-									defaultTypeLabelText={defaultTypeLabelText}
-									customTermsDescription={customTermsDescription}
-									ordinaryTermsDescription={ordinaryTermsDescription}
-									onSubmit={onSubmit}
-									enableTermsCheckbox={enableTermsCheckbox}
-									enablePasswordField={enablePasswordField}
-									defaultEmptyConfigsErrorMessage={defaultEmptyConfigsErrorMessage}
-									submitButtonText="Sign Up"
-								/>
-							</div>
+							<OcForm
+								formConfigs={formConfigs}
+								onSubmit={onSubmit}
+								formTypeLabel={defaultTypeLabelText}
+								enablePasswordField={enablePasswordField}
+								enableTermsCheckboxField={enableTermsCheckbox}
+								submitButtonText="Sign Up"
+								excludeRenderFields={ExcludeRenderFields}
+							>
+								{enableTermsCheckbox && (
+									(formikProps, formFields) => (
+										<AgreeWithTermsCheckbox
+											formikProps={formikProps}
+											formFields={formFields}
+											customTermsDescription={customTermsDescription}
+											ordinaryTermsDescription={ordinaryTermsDescription}
+										/>
+									)
+								)}
+							</OcForm>
 						)}
 						{loginUrl && (
 							<div className="sign-up__login">
