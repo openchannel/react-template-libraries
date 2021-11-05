@@ -20,17 +20,23 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 		ordinaryTermsDescription,
 		customTermsDescription,
 		defaultEmptyConfigsErrorMessage,
-		showSignupFeedbackPage = false,
+		showFeedback = false,
 		companyLogoUrl = '../../../../assets/img/logo-company.png',
 		enableTermsCheckbox = false,
 		enablePasswordField = true,
 	} = props;
 
-	const [showFeedbackPage, handleShowFeedback] = React.useReducer((prev) => !prev, showSignupFeedbackPage);
+	const [_showFeedback, setShowFeedback] = React.useState(showFeedback);
+
+	React.useEffect(() => {
+		setShowFeedback(showFeedback);
+	}, [showFeedback]);
+
+	const handleShowFeedback = React.useCallback(() => setShowFeedback((prev) => !prev), []);
 
 	return (
 		<div className="sign-up login-card login-card_borders">
-			{!showFeedbackPage && (
+			{!_showFeedback && (
 				<div>
 					<div className="sign-up__card-body">
 						<div className="sign-up__logo">
@@ -70,7 +76,7 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 				</div>
 			)}
 
-			{showFeedbackPage && (
+			{_showFeedback && (
 				<form>
 					<div className="sign-up__card-body result">
 						<div className="sign-up__logo result__logo">
