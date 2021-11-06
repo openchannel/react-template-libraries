@@ -1,5 +1,7 @@
 @import '../../../styles/index';
 
+// use !important to prevent the 'form-control' class from being overlaid
+
 .color-adjust {
 	width: 100%;
 	display: flex;
@@ -10,34 +12,34 @@
 	}
 
 	&__display {
-		width: 46px;
-		background-color: $gray;
-		border-right: none;
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
+		width: 46px !important;
+		background-color: $gray !important;
+		border-right: none !important;
+		border-top-right-radius: 0 !important;
+		border-bottom-right-radius: 0 !important;
 	}
 
 	&__input {
-		width: 100%;
-		border-left: none;
-		border-top-left-radius: 0;
-		border-bottom-left-radius: 0;
+		width: 100% !important;
+		border-left: none !important;
+		border-top-left-radius: 0 !important;
+		border-bottom-left-radius: 0 !important;
 
 		&::placeholder {
-			color: $input-placeholder-color-dark;
+			color: $input-placeholder-color-dark !important;
 		}
 	}
 
 	&__picker {
-		display: flex;
+		display: flex !important;
 		align-items: center;
 		justify-content: center;
-		width: 46px;
+		width: 46px !important;
 		margin-left: 2rem;
-		padding: 0.5rem 0.7rem;
-		background-color: $white;
+		padding: 0.5rem 0.7rem !important;
+		background-color: $white !important;
 		position: relative;
-		color: $body-color;
+		color: $body-color !important;
 
 		&:hover {
 			background-color: rgba(201, 213, 234, .11);
