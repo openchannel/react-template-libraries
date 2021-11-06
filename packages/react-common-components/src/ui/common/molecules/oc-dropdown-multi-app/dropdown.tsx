@@ -20,7 +20,7 @@ export const OcDropdownMultiApp: React.FC<DropdownMultiAppProps> = (props) => {
 		value = [],
 		onChange = noop,
 		placeholder = '',
-		customClass,
+		customClass = '',
 		onBlur = noop,
 	} = props;
 
