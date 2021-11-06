@@ -1,5 +1,5 @@
-//commit 1a2f98ab54bd357fcd3bc8c42012fafec88fb1c4 Author: Alex Tkachenko Date: 26.05.21, 19:04
-//Media breakpoint
+//commit bb6dec5596a1aecbda833107a86025ba1d7c8326 Author: Alex Tkachenko Date: 25.10.21, 13:36
+// BREAKPOINTS
 
 @mixin media-breakpoint-sm {
 	@media (max-width: 575.98px) {
@@ -25,7 +25,19 @@
 	}
 }
 
-// fonts
+@mixin media-breakpoint-xxl {
+	@media (max-width: 1399.98px) {
+		@content;
+	}
+}
+
+@mixin media-breakpoint-xxxl {
+	@media (max-width: 1919.98px) {
+		@content;
+	}
+}
+
+// FONT MIXINS
 
 @mixin font-light() {
 	font-weight: 300;
@@ -79,34 +91,17 @@
 	font-size: $size;
 }
 
-
-// temp required mixins for 'old' components
-@mixin font-family-rubik($type: 'Medium') {
-	font-family: 'Rubik-' + $type, sans-serif;
-}
-
-@mixin font-size-breakpoint($breakpoint: md) {
-	@if $breakpoint == sm {
-		font-size: 12px;
-	} @else if $breakpoint == lg {
-		font-size: 18px;
-	} @else {
-		font-size: 14px;
-	}
-}
-
-
-// headings and texts
+// HEADINGS AND TEXTS
 
 @mixin default-heading {
-
+	// this comment is essential because we need to have some line here for build process, see npm run exclude-mixins script. DO NOT DELETE
 }
 
 @mixin default-text {
-
+	// this comment is essential because we need to have some line here for build process, see npm run exclude-mixins script. DO NOT DELETE
 }
 
-// template elements
+// TEMPLATE ELEMENTS
 
 @mixin card-body {
 	font-size: 14px;
@@ -131,7 +126,7 @@
 	}
 }
 
-@mixin form-control($default-border-color: #c9d5ea, $focus-border-color: #537cfd, $placeholder-color: #333) {
+@mixin form-control($default-border-color: #c9d5ea, $focus-border-color: #537cfd, $placeholder-color: #999) {
 	border: 1px solid $default-border-color;
 	border-radius: 4px;
 	font-size: 14px;
@@ -145,6 +140,35 @@
 	}
 	&::placeholder {
 		color: $placeholder-color;
-		opacity: .5;
 	}
+}
+
+@mixin oc-dropdown-menu($primary: #537cfd, $info: #c9d5ea, $dropdown-background: rgba(201, 213, 234, 0.1)) {
+	border: 1px solid $info;
+	left: 76px;
+	padding: 0;
+	top: 70px;
+	transform: translate(0, 44px);
+	width: 136px;
+	.dropdown-item {
+		@include font-size-md();
+		border-bottom: 1px solid $info;
+		padding: 14px 42px;
+	}
+	.dropdown-item:hover, .dropdown-item:focus {
+		background-color: $dropdown-background;
+		box-shadow: 0 1px 0 $info;
+		color: $primary;
+		outline: none;
+	}
+	.dropdown-item:active {
+		box-shadow: 0 1px 0 $info;
+		color: $primary;
+	}
+}
+
+@mixin image-alt-text {
+	white-space: pre-wrap;
+	overflow: hidden;
+	display: inline-block;
 }

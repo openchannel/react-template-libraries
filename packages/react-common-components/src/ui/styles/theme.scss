@@ -1,4 +1,4 @@
-//commit e214cfa959046dbdf64c32ecef544cfc8682844a Author: Alex Tkachenko Date: 25.05.21, 12:59
+// commit bb6dec5596a1aecbda833107a86025ba1d7c8326 Author: Alex Tkachenko Date: 25.10.21, 13:36
 
 // LINKS
 $link-primary: #537cfd !default;
@@ -24,7 +24,8 @@ $dropdown-item-text-hover: #537cfd !default;
 $dropdown-item-text-alternative: #333333 !default;
 $dropdown-light: #f4f7fc !default;
 
-$light-blue: #e6f3fc;
+// MAIN COLORS
+$light-blue: #e6f3fc !default;
 $body-color: #333333 !default;
 $primary: #537cfd !default;
 $secondary: #727272 !default;
@@ -37,48 +38,85 @@ $yellow: #ffc820 !default;
 $green-alert: #74b675 !default;
 $black: #000 !default;
 $white: #fff !default;
+$danger-light: #ffb0b0 !default;
 $dark: #343a40;
 
-// apps status color indicator
+// INPUTS
+$input-placeholder-color: #999 !default;
+$input-placeholder-color-dark: #333 !default;
+
+// APPS STATUS COLOR INDICATOR
 $approved: #81cf7c !default;
 $draft: #dcdcdc !default;
 $pending: #69dbff !default;
-$suspended: #f8be1c !default;
+$suspended: #eea30e !default;
 $rejected: #ff6262 !default;
 $review: #537cfd !default;
 
 $error-bg: #ffe0e0 !default;
 $error: #6e2c2c !default;
-$profile: #06b088 !default;
 
 $gray: #ced4da !default;
 $gray-600: #6c757d !default;
 
-// username initials circle
-$gradient-top: #eeebff;
-$gradient-bottom: #f8f7ff;
+// USERNAME INITIALS CIRCLE
+$gradient-top: #eeebff !default;
+$gradient-bottom: #f8f7ff !default;
 
-$profile-gradient-top: #e8f0e7;
-$profile-gradient-bottom: #f5fff4;
+$profile-gradient-top: #e8f0e7 !default;
+$profile-gradient-bottom: #f5fff4 !default;
+$profile: #06b088 !default;
 
-// Notifications zeplin colors
-$notify-success: #74b675;
-$notify-error: #ff6262;
-$notify-warning: #eea30e;
-$notify-info: #537cfd;
+// TINY RICH EDITOR COLORS
+$editor-btn-hover:  #f4f4f4 !default;
 
-// rewriting bootstrap spacers
+// OVERRIDING BOOTSTRAP SPACERS
 $spacer: 1rem;
 $spacers: (
-	0 _5: ($spacer * 0.5),
+	0 _5: (
+		$spacer * .5
+	),
 	1: $spacer,
 	2: ($spacer * 2),
-	3: ($spacer * 3),
-	4: ($spacer * 4),
-	5: ($spacer * 5),
-	6: ($spacer * 6),
-	7: ($spacer * 7),
-	8: ($spacer * 8)
+	3: (
+		$spacer * 3
+	),
+	4: (
+		$spacer * 4
+	),
+	5: (
+		$spacer * 5
+	),
+	6: (
+		$spacer * 6
+	),
+	7: (
+		$spacer * 7
+	),
+	8: (
+		$spacer * 8
+	)
+);
+
+// OVERRIDING BOOTSTRAP GRID BREAKPOINTS
+$grid-breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	xxl: 1400px,
+	xxxl: 1920px
+);
+
+// OVERRIDING BOOTSTRAP CONTAINER-MAX-WIDTHS
+$container-max-widths: (
+	sm: 540px,
+	md: 720px,
+	lg: 960px,
+	xl: 1140px,
+	xxl: 1320px,
+	xxxl: 1820px
 );
 
 @mixin root-prop($prop: null, $value: null) {
@@ -87,8 +125,8 @@ $spacers: (
 	}
 }
 
-/* Variable for Image cropper*/
-
+// VARIABLE FOR IMAGE CROPPER
 :root {
 	@include root-prop(--root-prop, rgba(0, 0, 0, 0.5));
 }
+
