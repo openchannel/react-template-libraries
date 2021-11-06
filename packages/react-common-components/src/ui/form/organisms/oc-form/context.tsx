@@ -61,7 +61,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 				if (existedElement.fields && existedElement.fields.length === 0) {
 					next[existedElement.index] = elementUtils.cloneAndUpdate(instance, true);
 				} else {
-					next.push(elementUtils.cloneAndUpdate(instance, true));
+					next.splice(existedElement.index + 1, 0, elementUtils.cloneAndUpdate(instance, true));
 				}
 			} else {
 				update(next, path, (fields) => {
@@ -89,18 +89,19 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 			const existedElement = get(next, elementPath);
 
 			if (isFirstLevelDeep) {
-				const removeChildrenFields = next.length === 1;
+				const removeChildField =
+					next.filter((f) => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1;
 
-				next = elementUtils.removeChildrenOrCurrent(next, existedElement, removeChildrenFields);
+				next = elementUtils.removeChildOrCurrent(next, existedElement, removeChildField);
 			} else {
 				update(next, path, (fields: FormikField[]) => {
-					const removeChildrenFields =
+					const removeChildField =
 						fields.filter((f) => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1;
 
-					fields = elementUtils.removeChildrenOrCurrent(
+					fields = elementUtils.removeChildOrCurrent(
 						fields,
 						existedElement,
-						removeChildrenFields,
+						removeChildField,
 					);
 
 					return fields;
@@ -134,22 +135,23 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 
 		if (isFirstLevelDeep) {
 			if (existedElement.isNew) {
-				const removeChildrenFields = next.length === 1;
+				const removeChildField =
+					next.filter(f => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1;
 
-				next = elementUtils.removeChildrenOrCurrent(next, existedElement, removeChildrenFields);
+				next = elementUtils.removeChildOrCurrent(next, existedElement, removeChildField);
 			} else {
 				next = elementUtils.resetFieldValueToPreviousValue(next, existedElement);
 			}
 		} else {
 			update(next, path, (fields: FormikField[]) => {
 				if (existedElement.isNew) {
-					const removeChildrenFields =
+					const removeChildField =
 						fields.filter((f) => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1;
 
-					fields = elementUtils.removeChildrenOrCurrent(
+					fields = elementUtils.removeChildOrCurrent(
 						fields,
 						existedElement,
-						removeChildrenFields,
+						removeChildField,
 					);
 				} else {
 					fields = elementUtils.resetFieldValueToPreviousValue(fields, existedElement);
