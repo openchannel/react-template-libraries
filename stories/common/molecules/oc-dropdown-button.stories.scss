@@ -1,7 +1,7 @@
 @import '../../../packages/react-common-components/src/ui/styles/index.scss';
 
 .stories-dropdown-button {
-  @include font-size-breakpoint(md);
+	@include font-size-md();
   @include media-breakpoint-md {
     width: 100%;
   }
@@ -17,7 +17,7 @@
     &-label {
       margin: auto;
       width: 192px;
-      @include font-size-breakpoint(md);
+			@include font-size-md();
       cursor: pointer;
     }
 

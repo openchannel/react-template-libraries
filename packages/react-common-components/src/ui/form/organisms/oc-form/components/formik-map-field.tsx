@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Field } from 'formik';
-import { groupBy } from 'lodash-es';
+import { groupBy, last } from 'lodash-es';
 
 import OcCheckboxComponent from '../../../../common/atoms/oc-checkbox/oc-checkbox';
 import OcInputComponent from '../../../../common/atoms/oc-input/oc-input';
@@ -354,6 +354,9 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 							firstElementOfGroup.index === fields[index].index;
 						const groupFieldIndex = group.findIndex((g) => g.index === index);
 
+						// to display 'add' button only after last group element
+						const isLastOfGroup = last(group)!.index === field.index;
+
 						// render label only for first element of this type
 						if (isFirst) {
 							return (
@@ -368,7 +371,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 									<OcDynamicFieldArray
 										field={field}
 										groupFieldIndex={groupFieldIndex}
-										showAddButton={fields.length === 0 || fields.length === index + 1}
+										showAddButton={isLastOfGroup}
 									/>
 								</FieldGroupWrapper>
 							);
@@ -378,7 +381,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 								key={uniqKey}
 								field={field}
 								groupFieldIndex={groupFieldIndex}
-								showAddButton={fields.length === 0 || fields.length === index + 1}
+								showAddButton={isLastOfGroup}
 							/>
 						);
 					}

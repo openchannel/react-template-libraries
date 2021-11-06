@@ -204,7 +204,7 @@ export const elementUtils = {
 		isEditing: true,
 		isNew,
 	}),
-	removeChildrenOrCurrent: (arr: FormikField[], field: FormikField, isChildren = false) => {
+	removeChildOrCurrent: (arr: FormikField[], field: FormikField, isChildren = false) => {
 		const updatedArr = [...arr];
 
 		if (isChildren) {
