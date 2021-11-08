@@ -62,6 +62,10 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 		[type, timeVisible, onChange, value],
 	);
 
+	if (true) {
+		return <div>Datetime component is broken. Will be fixed soon.</div>;
+	}
+
 	return (
 		<Datetime
 			className={customClass}
