@@ -63,7 +63,7 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 	);
 
 	if (true) {
-		return <div>File upload component is broken. Will be fixed soon.</div>;
+		return <div>Datetime component is broken. Will be fixed soon.</div>;
 	}
 
 	return (
