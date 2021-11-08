@@ -1,10 +1,4 @@
-import * as React from 'react';
-import { BrowserRouter, Link } from 'react-router-dom';
-import { mount } from 'enzyme';
-import OcSignupComponent from '../../../src/ui/auth/organisms/oc-signup/oc-signup';
-import { OcEditUserFormConfig } from '../../../src/ui/auth/organisms/oc-edit-user-form';
-
-const formConfigs: OcEditUserFormConfig[] = [
+export const mockSignupConfigs = [
 	{
 		name: 'First Form',
 		account: {
@@ -125,54 +119,3 @@ const formConfigs: OcEditUserFormConfig[] = [
 		},
 	},
 ];
-
-describe('Sign Up Custom', () => {
-	let component = mount(
-		<BrowserRouter>
-			<OcSignupComponent
-				loginUrl="/"
-				formConfigs={formConfigs}
-				goToActivationPage={() => {}}
-				forgotPasswordDoneUrl=""
-				defaultTypeLabelText="Type"
-				customTermsDescription=""
-				defaultEmptyConfigsErrorMessage="There are no forms configured."
-				showFeedback={false}
-				enablePasswordField
-				companyLogoUrl="./img/logo-company.png"
-				onSubmit={() => {}}
-				enableTermsCheckbox
-				ordinaryTermsDescription={
-					<>
-						I agree to{' '}
-						<Link to="/" className="edit-user-form__content__link">
-							Terms of service
-						</Link>{' '}
-						and{' '}
-						<Link className="edit-user-form__content__link" to="/">
-							Data Processing Policy
-						</Link>
-					</>
-				}
-			/>
-		</BrowserRouter>,
-	);
-
-	it('should create', () => {
-		expect(component).toBeTruthy();
-	});
-
-	it('Should render first set of fields', () => {
-		expect(component.contains('Email')).toBeTruthy();
-		expect(component.contains('Name')).toBeTruthy();
-		expect(component.contains('Password')).toBeTruthy();
-	});
-
-	it('should click on submit', () => {
-		const onButtonClickMock = jest.fn();
-		component.setProps({ onSubmit: onButtonClickMock });
-		component.simulate('click');
-		component.update();
-		expect(component.find('.error')).toBeTruthy();
-	});
-});

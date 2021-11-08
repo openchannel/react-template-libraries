@@ -30,15 +30,20 @@ export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElemen
 	 * Supposed to be the style object
 	 */
 	style?: React.CSSProperties;
+	/**
+	 * String with class-list which can be added to the label
+	 */
+	customClass?: string;
+
 	touched?: string;
 }
 
 export const OcCheckboxComponent: React.FC<CheckboxProps> = (props) => {
-	const { labelText, required, children = labelText, touched, ...p } = props;
+	const { labelText, required, children = labelText, touched, customClass = '', ...p } = props;
 
 	return (
 		// eslint-disable-next-line jsx-a11y/label-has-for
-		<label className="form-checkbox">
+		<label className={`form-checkbox ${customClass}`}>
 			<input type="checkbox" className="form-checkbox__input form-checkbox__input_hidden" {...p} />
 			<span className="form-checkbox__checkmark" />
 			<span className="form-checkbox__label">

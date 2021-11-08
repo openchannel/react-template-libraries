@@ -27,7 +27,7 @@ export const OcFeaturedAppsComponent: React.FC<FeaturedAppsProps> = (props) => {
 		label = 'Featured',
 		data,
 		emptyDataMessage = 'No Featured Apps',
-		customClass,
+		customClass = '',
 		mainRouterLink,
 		customFeaturedAppCardTemplate = '',
 	} = props;

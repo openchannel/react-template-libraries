@@ -15,7 +15,7 @@ import './styles.scss';
 const OcTags: React.FC<OcTagsProps> = (props) => {
 	const {
 		name,
-		customClass,
+		customClass = '',
 		availableTags,
 		value = [],
 		onChange,

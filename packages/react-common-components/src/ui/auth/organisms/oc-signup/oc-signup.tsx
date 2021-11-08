@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
+import { OcForm } from '../../../form/organisms/oc-form';
 import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
-import { OcEditUserFormComponent } from '../oc-edit-user-form';
+import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
 
 import { SignupProps } from './types';
+import { AgreeWithTermsCheckbox } from './agree-with-terms-checkbox';
 
 import './style.scss';
+
+const ExcludeRenderFields = ['terms'];
 
 export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 	const {
@@ -19,21 +22,23 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 		defaultTypeLabelText,
 		ordinaryTermsDescription,
 		customTermsDescription,
-		defaultEmptyConfigsErrorMessage,
-		showSignupFeedbackPage = false,
+		showFeedback = false,
 		companyLogoUrl = '../../../../assets/img/logo-company.png',
-		enableTypesDropdown = false,
 		enableTermsCheckbox = false,
 		enablePasswordField = true,
 	} = props;
 
-	const [showFeedbackPage, setFeedbackPageVisible] = React.useState(showSignupFeedbackPage);
+	const [_showFeedback, setShowFeedback] = React.useState(showFeedback);
 
-	const handleShowFeedback = React.useCallback(() => setFeedbackPageVisible((prev) => !prev), []);
+	React.useEffect(() => {
+		setShowFeedback(showFeedback);
+	}, [showFeedback]);
+
+	const handleShowFeedback = React.useCallback(() => setShowFeedback((prev) => !prev), []);
 
 	return (
 		<div className="sign-up login-card login-card_borders">
-			{!showFeedbackPage && (
+			{!_showFeedback && (
 				<div>
 					<div className="sign-up__card-body">
 						<div className="sign-up__logo">
@@ -47,20 +52,26 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 							/>
 						</div>
 						{formConfigs !== null && (
-							<div>
-								<OcEditUserFormComponent
-									formConfigs={formConfigs}
-									enableTypesDropdown={enableTypesDropdown}
-									defaultTypeLabelText={defaultTypeLabelText}
-									customTermsDescription={customTermsDescription}
-									ordinaryTermsDescription={ordinaryTermsDescription}
-									onSubmit={onSubmit}
-									enableTermsCheckbox={enableTermsCheckbox}
-									enablePasswordField={enablePasswordField}
-									defaultEmptyConfigsErrorMessage={defaultEmptyConfigsErrorMessage}
-									submitText="Sign Up"
-								/>
-							</div>
+							<OcForm
+								formConfigs={formConfigs}
+								onSubmit={onSubmit}
+								formTypeLabel={defaultTypeLabelText}
+								enablePasswordField={enablePasswordField}
+								enableTermsCheckboxField={enableTermsCheckbox}
+								submitButtonText="Sign Up"
+								excludeRenderFields={ExcludeRenderFields}
+							>
+								{enableTermsCheckbox && (
+									(formikProps, formFields) => (
+										<AgreeWithTermsCheckbox
+											formikProps={formikProps}
+											formFields={formFields}
+											customTermsDescription={customTermsDescription}
+											ordinaryTermsDescription={ordinaryTermsDescription}
+										/>
+									)
+								)}
+							</OcForm>
 						)}
 						{loginUrl && (
 							<div className="sign-up__login">
@@ -74,7 +85,7 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 				</div>
 			)}
 
-			{showFeedbackPage && (
+			{_showFeedback && (
 				<form>
 					<div className="sign-up__card-body result">
 						<div className="sign-up__logo result__logo">

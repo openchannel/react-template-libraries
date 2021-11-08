@@ -1,10 +1,14 @@
-import { FormikValues } from 'formik';
 import { nanoid } from 'nanoid';
+import { FormikValues } from 'formik';
+import { isBoolean } from 'lodash-es';
 
 import { FIELD_TYPE, getFieldValidators } from '../../../lib';
 import { AppFormField, FormikField, FormikFieldsValues } from '../../../models';
 
-export const getNewName = (element: AppFormField): string => `${element.id}-${nanoid()}`;
+// replace dot to prevent nesting path in names
+const getNewName = (element: AppFormField): string =>
+	`${element.id.replaceAll('.', '#')}-${nanoid()}`;
+const toBoolean = (value?: any) => value === 'false' ? false : Boolean(value);
 
 export const extendElementWithRequiredKeys = (
 	element: AppFormField,
@@ -15,8 +19,8 @@ export const extendElementWithRequiredKeys = (
 	path,
 	staticId: nanoid(), // use as unique non-updatable element id
 	name: getNewName(element),
-	value: element.defaultValue || '',
-	previousValue: element.defaultValue || '',
+	value: isBoolean(element.defaultValue) ? toBoolean(element.defaultValue) : (element.defaultValue || ''),
+	previousValue: isBoolean(element.defaultValue) ? toBoolean(element.defaultValue) : (element.defaultValue || ''),
 	isEditing: true,
 	isNew: true,
 });
@@ -200,7 +204,7 @@ export const elementUtils = {
 		isEditing: true,
 		isNew,
 	}),
-	removeChildrenOrCurrent: (arr: FormikField[], field: FormikField, isChildren = false) => {
+	removeChildOrCurrent: (arr: FormikField[], field: FormikField, isChildren = false) => {
 		const updatedArr = [...arr];
 
 		if (isChildren) {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Field } from 'formik';
-import { groupBy } from 'lodash-es';
+import { groupBy, last } from 'lodash-es';
 
 import OcCheckboxComponent from '../../../../common/atoms/oc-checkbox/oc-checkbox';
 import OcInputComponent from '../../../../common/atoms/oc-input/oc-input';
@@ -10,7 +10,7 @@ import OcTextarea from '../../../atoms/oc-textarea/oc-textarea';
 import { FIELD_TYPE } from '../../../lib';
 import { OcDynamicFieldArray } from '../../oc-dynamic-field-array';
 import { useOcFormContext } from '../context';
-import { FormikMapFieldsProps, FormikServiceProps } from '../types';
+import { FormikMapFieldsProps, OcFormExtraProps } from '../types';
 
 import {
 	FieldGroupWrapper,
@@ -25,7 +25,7 @@ import {
 	FormikRichTextWrapper,
 } from './formik-components';
 
-export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, service }) => {
+export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, service, excludeRenderFields }) => {
 	if (!fields || fields.length === 0) {
 		return null;
 	}
@@ -33,18 +33,20 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 	return (
 		<>
 			{fields.map((field, index) => {
-				const { id, label, description, type, attributes, options, defaultValue, placeholder } =
+				const { id, label, description, type, attributes, options, defaultValue, placeholder, name } =
 					field;
 
-				// avoid formik nesting,
-				// e.g., if name = 'a.b', it will remain as {'a.b': ...}, not as {a: {b: ...}
-				const name = `['${field.name}']`;
+				if (excludeRenderFields && excludeRenderFields.includes(id)) {
+					return null;
+				}
+
+				const uniqKey = name;
 
 				switch (type) {
 					case FIELD_TYPE.RICH_TEXT:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -57,7 +59,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.TEXT:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -76,7 +78,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.LONG_TEXT:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -89,7 +91,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.DROPDOWN_LIST:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -107,7 +109,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.NUMBER:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -120,7 +122,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.CHECKBOX:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -138,7 +140,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.EMAIL_ADDRESS:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -157,7 +159,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.WEBSITE_URL:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -176,7 +178,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.COLOR:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -197,7 +199,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.NUMBER_TAGS:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -223,7 +225,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.VIDEO_URL:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -242,7 +244,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.DATE_TIME:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -255,7 +257,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.MULTISELECT_LIST:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -274,7 +276,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.PASSWORD:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -289,7 +291,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.SINGLE_IMAGE:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -309,7 +311,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.MULTI_IMAGE:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -327,7 +329,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 					case FIELD_TYPE.MULTI_APP:
 						return (
 							<FieldGroupWrapper
-								key={name}
+								key={uniqKey}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -352,11 +354,14 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 							firstElementOfGroup.index === fields[index].index;
 						const groupFieldIndex = group.findIndex((g) => g.index === index);
 
+						// to display 'add' button only after last group element
+						const isLastOfGroup = last(group)!.index === field.index;
+
 						// render label only for first element of this type
 						if (isFirst) {
 							return (
 								<FieldGroupWrapper
-									key={name}
+									key={uniqKey}
 									name={name}
 									label={label}
 									labelFor={id}
@@ -366,17 +371,17 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 									<OcDynamicFieldArray
 										field={field}
 										groupFieldIndex={groupFieldIndex}
-										showAddButton={fields.length === 0 || fields.length === index + 1}
+										showAddButton={isLastOfGroup}
 									/>
 								</FieldGroupWrapper>
 							);
 						}
 						return (
 							<OcDynamicFieldArray
-								key={name}
+								key={uniqKey}
 								field={field}
 								groupFieldIndex={groupFieldIndex}
-								showAddButton={fields.length === 0 || fields.length === index + 1}
+								showAddButton={isLastOfGroup}
 							/>
 						);
 					}
@@ -388,7 +393,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 	);
 };
 
-export const FormikMapFieldsWrapper: React.FC<FormikServiceProps> = ({ children, ...props }) => {
+export const FormikMapFieldsWrapper: React.FC<OcFormExtraProps> = ({ children, ...props }) => {
 	const context = useOcFormContext();
 
 	return <FormikMapFields fields={context.fields} {...props} />;

@@ -23,7 +23,7 @@ export interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> 
 }
 
 export const OcLabelComponent: React.FC<Partial<LabelProps>> = (props) => {
-	const { text, children, required, customClass, ...p } = props;
+	const { text, children, required, customClass = '', ...p } = props;
 
 	return (
 		// eslint-disable-next-line jsx-a11y/label-has-for
