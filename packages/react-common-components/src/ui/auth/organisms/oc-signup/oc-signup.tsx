@@ -47,7 +47,7 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 						<div className="sign-up__header">
 							<h4 className="sign-up__header-heading">Sign up</h4>
 							<OcLabelComponent
-								text="Enter your account details below"
+								text="Enter your personal details below"
 								customClass="sign-up__header-invitation"
 							/>
 						</div>
