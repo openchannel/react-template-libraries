@@ -3,3 +3,11 @@
 	padding: 0;
 	justify-content: unset;
 }
+
+.button-255 {
+	width: 255px;
+
+	& button {
+		width: 100%;
+	}
+}

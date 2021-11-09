@@ -8,27 +8,22 @@ import type { NotFoundProps } from './types';
 import './styles.scss';
 
 export const NotFound: React.FC<NotFoundProps> = ({
-	companyLogoUrl = '../../../../assets/img/company-logo-2x.png',
-	errorImgUrl = '../../../../assets/img/not_found.svg',
+	errorImgUrl = '../../../../assets/img/not-found-404.svg',
 	title = 'Page not found',
 	description = 'The page you were looking for isn’t here',
 	onClick = noop,
 	buttonText = 'Go to home page',
+	buttonClassName = ''
 }) => (
-	<div className="not-found-container d-flex flex-column">
-		<header>
-			<div className="container">
-				<img src={companyLogoUrl} className="logo" alt="Your company" />
-			</div>
-		</header>
-		<div className="container mt-0 d-flex flex-column align-items-center justify-content-center">
+	<div className="main-container">
+		<div className="container mt-0 d-flex flex-column align-items-center">
 			{errorImgUrl && (
-				<img className="not-found-img w-100 mb-5" src={errorImgUrl} alt="Not found" />
+				<img className="not-found-icon" src={errorImgUrl} alt="Not found 404" />
 			)}
-			<h1 className="mt-3 mb-3">{title}</h1>
-			<span className="subtitle mb-4">{description}</span>
+			<h1 className="mt-3 mb-3 text-center">{title}</h1>
+			<span className="subtitle mb-4 text-center">{description}</span>
 			<div className="not-found__home-page-button">
-				<OcButtonComponent onClick={onClick} customClass="button-255 mb-4">
+				<OcButtonComponent onClick={onClick} customClass={buttonClassName}>
 					{buttonText}
 				</OcButtonComponent>
 			</div>
