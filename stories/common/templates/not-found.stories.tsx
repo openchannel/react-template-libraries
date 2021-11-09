@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { BrowserRouter } from 'react-router-dom';
 import { action } from '@storybook/addon-actions';
 
 import {
@@ -16,14 +15,12 @@ export default {
 } as Meta;
 
 const Component: Story<NotFoundProps> = (args) => (
-	<BrowserRouter>
-		<NotFound {...args} />
-	</BrowserRouter>
+	<NotFound {...args} />
 );
 
 export const NotFoundTemplate = Component.bind({});
 NotFoundTemplate.args = {
 	onClick: action('button clicked'),
-	companyLogoUrl: './img/company-logo-2x.png',
-	errorImgUrl: './img/not_found.svg',
+	errorImgUrl: './img/not-found-404.svg',
+	buttonClassName: 'button-255',
 };
