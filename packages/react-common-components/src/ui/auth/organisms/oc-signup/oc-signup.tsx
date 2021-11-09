@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-import { OcForm } from '../../../form/organisms/oc-form';
-import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
 import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
+import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
+import { OcForm } from '../../../form/organisms/oc-form';
 
-import { SignupProps } from './types';
 import { AgreeWithTermsCheckbox } from './agree-with-terms-checkbox';
+import { SignupProps } from './types';
 
 import './style.scss';
 
@@ -45,9 +45,9 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 							<img alt="logo" className="sign-up__logo-img company-logo" src={companyLogoUrl} />
 						</div>
 						<div className="sign-up__header">
-							<h4 className="sign-up__header-heading">Sign Up</h4>
+							<h4 className="sign-up__header-heading">Sign up</h4>
 							<OcLabelComponent
-								text="Enter your account details below"
+								text="Enter your personal details below"
 								customClass="sign-up__header-invitation"
 							/>
 						</div>
@@ -58,26 +58,25 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 								formTypeLabel={defaultTypeLabelText}
 								enablePasswordField={enablePasswordField}
 								enableTermsCheckboxField={enableTermsCheckbox}
-								submitButtonText="Sign Up"
+								submitButtonText="Sign up"
 								excludeRenderFields={ExcludeRenderFields}
 							>
-								{enableTermsCheckbox && (
-									(formikProps, formFields) => (
+								{enableTermsCheckbox &&
+									((formikProps, formFields) => (
 										<AgreeWithTermsCheckbox
 											formikProps={formikProps}
 											formFields={formFields}
 											customTermsDescription={customTermsDescription}
 											ordinaryTermsDescription={ordinaryTermsDescription}
 										/>
-									)
-								)}
+									))}
 							</OcForm>
 						)}
 						{loginUrl && (
 							<div className="sign-up__login">
 								Already have an account?{' '}
 								<Link className="sign-up__login-link" to={loginUrl}>
-									Log In
+									Log in
 								</Link>
 							</div>
 						)}
@@ -114,7 +113,7 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 								onClick={handleShowFeedback}
 							>
 								{' '}
-								Sign Up
+								Sign up
 							</span>
 						</div>
 					</div>
