@@ -7,7 +7,7 @@ requestInterceptor.use((config) => {
 		const token = memoryStorage.getXsrfToken();
 		const headerName = instance.getHeaderName();
 
-		if (token && !config.headers[headerName]) {
+		if (token && headerName) {
 			config.headers[headerName] = token;
 		}
 	}
