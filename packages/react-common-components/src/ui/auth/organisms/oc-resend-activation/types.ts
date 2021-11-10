@@ -1,4 +1,5 @@
 import { InputProps } from '../../../common/atoms';
+import * as React from "react";
 
 export interface OcResendProps {
 	/**
@@ -23,4 +24,6 @@ export interface OcResendProps {
 	inputProps?: InputProps;
 
 	inputError?: string | boolean;
+
+	onSubmit?(event: React.SyntheticEvent): void;
 }
