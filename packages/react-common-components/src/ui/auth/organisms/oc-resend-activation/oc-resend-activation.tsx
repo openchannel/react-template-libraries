@@ -12,7 +12,7 @@ import { OcResendProps } from './types';
 import './styles.scss';
 
 export const OcResendActivation: React.FC<OcResendProps> = (props) => {
-	const { companyLogoUrl, signupUrl, loginUrl, process, inputProps, inputError } = props;
+	const { companyLogoUrl, signupUrl, loginUrl, process, inputProps, inputError, onSubmit } = props;
 
 	return (
 		<div className="resend-activation login-card login-card_borders">
@@ -43,7 +43,7 @@ export const OcResendActivation: React.FC<OcResendProps> = (props) => {
 					type="primary"
 					customClass="resend-activation__button"
 					process={process}
-					onClick={inputProps?.onChange}
+					onClick={onSubmit}
 				>
 					Resend
 				</OcButtonComponent>
