@@ -1,36 +1,30 @@
 import * as React from 'react';
-
-import { ReactComponent as CloseIconSvg } from '../../../../assets/img/close-icon.svg';
-import { ReactComponent as ZoomInImg } from '../../../../assets/img/zoom-in.svg';
-import { ReactComponent as ZoomOutImg } from '../../../../assets/img/zoom-out.svg';
+import {ReactComponent as CloseIconSvg} from '../../../../assets/img/close-icon.svg';
+import {ReactComponent as ZoomInImg} from '../../../../assets/img/zoom-in.svg';
+import {ReactComponent as ZoomOutImg} from '../../../../assets/img/zoom-out.svg';
 import OcButtonComponent from '../../atoms/oc-button/oc-button';
-import OcImageCropper from '../../atoms/oc-image-cropper/oc-image-cropper';
+import OcImageCropper from '../../atoms/oc-image-cropper';
+import {CropperModalProps} from './types';
+import {noop} from 'lodash-es';
 
-export const OcImageCropperModalContent: React.FC<any> = (props) => {
+export const OcImageCropperModalContent: React.FC<CropperModalProps> = (props) => {
 	const {
 		onClose,
 		onCancel = onClose,
-		onFiles,
+		onImageCrop = noop,
 		confirmButtonText = 'Confirm',
 		confirmButtonType = 'primary',
 		confirmButtonHide = false,
 		rejectButtonText = 'Cancel',
 		rejectButtonType = 'secondary',
 		rejectButtonHide = false,
-		image,
-		setCropData,
 		cropData,
-		files,
-		cropFileName,
+		maxWidth,
+		maxHeight,
 	} = props;
 
 	const [cropper, setCropper] = React.useState<any>();
 
-	const getCropData = () => {
-		if (typeof cropper !== 'undefined') {
-			setCropData(cropper.getCroppedCanvas().toDataURL());
-		}
-	};
 	const zoomIn = () => cropper.zoom(0.1);
 
 	const zoomOut = () => cropper.zoom(-0.1);
@@ -39,19 +33,22 @@ export const OcImageCropperModalContent: React.FC<any> = (props) => {
 		if (b64File !== undefined) {
 			const i = b64File.indexOf('base64,');
 			const buffer = Buffer.from(b64File.slice(i + 7), 'base64');
-			const file = new File([buffer], cropFileName, { type: 'image/jpeg' });
-			return file;
+			return new File([buffer], cropData.filename, {type: 'image/jpeg'});
 		} else {
 			return b64File;
 		}
 	};
 
 	const handleSubmitAfterCrop = () => {
-		getCropData();
-		files.push(b64toFile(cropData));
-		onFiles(files);
+		const options = {
+			height:maxHeight, 
+			width:maxWidth, 
+		};
+		
+		onImageCrop(b64toFile(cropper.getCroppedCanvas(options).toDataURL()));
 		onClose();
 	};
+
 	return (
 		<>
 			<div className="cropper">
@@ -67,7 +64,7 @@ export const OcImageCropperModalContent: React.FC<any> = (props) => {
 				<div className="cropper__body">
 					<div className="cropper__body-container">
 						<div className="cropper__body-size">
-							<div className="cropper__body-resolution" />
+							<div className="cropper__body-resolution" >{(maxWidth && maxHeight) && maxWidth + 'px x ' + maxHeight + 'px'}</div>
 							<div className="cropper__body-zoom">
 								<span onClick={zoomIn}>
 									<ZoomInImg />
@@ -77,7 +74,7 @@ export const OcImageCropperModalContent: React.FC<any> = (props) => {
 								</span>
 							</div>
 						</div>
-						<OcImageCropper setCropper={setCropper} image={image} />
+						<OcImageCropper setCropper={setCropper} image={cropData.image} maxWidth={maxWidth} maxHeight={maxHeight}/>
 						<div className="confirmation-modal__button-container">
 							{!rejectButtonHide && (
 								<OcButtonComponent
