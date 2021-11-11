@@ -1,6 +1,7 @@
-import { FormikHelpers, FormikValues } from 'formik';
+import * as React from 'react';
 
 import type { AppFormField } from '../../../form/models';
+import { OcFormFormikHelpers, OcFormValues } from '../../../form/organisms/oc-form';
 
 export interface TypeModel<T extends TypeFieldModel> {
 	fields?: T[];
@@ -22,22 +23,17 @@ export interface TypeFieldModel {
 export interface OptionValue {
 	value: any;
 }
-//---------------------------------------------------------------------------------------------------------
-export interface OcCheckboxData {
-	termsUrl: string;
-	policyUrl: string;
-}
 
 export interface OcEditUserFormConfig {
 	name: string;
 	account: OcEditUserTypeConfig;
-	organization: OcEditUserTypeConfig;
+	organization?: OcEditUserTypeConfig;
 	fieldsOrder?: string[];
 }
 
 export interface OcEditUserTypeConfig {
 	type: string;
-	includeFields: string[];
+	includeFields?: string[];
 	typeData: TypeModel<TypeFieldModel>;
 }
 
@@ -56,19 +52,34 @@ export interface OCOrganization {
 }
 
 export interface EditUserComponentProps {
+	/**
+	 * Configuration for Edit User form.
+	 */
 	formConfigs: OcEditUserFormConfig[];
-	enableTypesDropdown?: boolean;
-	enablePasswordField?: boolean;
-	enableTermsCheckbox?: boolean;
+	/**
+	 * A callback fired when the Submit is clicked.
+	 */
+	onSubmit(values: OcFormValues, formikHelpers: OcFormFormikHelpers): void;
+	/**
+	 * Default text for the type label.
+	 */
+	defaultFormType?: string;
+	/**
+	 * Text of the form type label.
+	 * @default 'Type'
+	 */
 	defaultTypeLabelText?: string;
-	defaultEmptyConfigsErrorMessage: string;
-	customTermsDescription?: React.ReactNode;
-	ordinaryTermsDescription?: React.ReactNode;
-	onSubmit: (values: FormikValues, formikHelpers: FormikHelpers<FormikValues>) => void;
-	enableCustomTerms: boolean;
-	submitText?: string;
-}
+	/**
+	 * Custom error template what will be shown when no {@link #formConfigs} is provided or not provided correctly.
+	 * @default null
+	 */
+	defaultEmptyConfigsErrorTemplate?: React.ReactNode;
+	/**
+	 * Error message what will be shown when no {@link #formConfigs} is provided or not provided correctly.
+	 * This message will be shown only when the {@link #defaultEmptyConfigsErrorTemplate} not set.
+	 * @default 'There are no forms configured'
+	 */
+	defaultEmptyConfigsErrorMessage?: string;
 
-export interface InitialFormikValues {
-	[key: string]: any;
+	submitButtonText?: string;
 }

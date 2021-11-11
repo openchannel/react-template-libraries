@@ -13,7 +13,7 @@ import './styles.scss';
 const OcMultiSelectList: React.FC<OcMultiSelectListProps> = (props) => {
 	const {
 		name,
-		customClass,
+		customClass = '',
 		label,
 		availableItemsList,
 		defaultItems = [],

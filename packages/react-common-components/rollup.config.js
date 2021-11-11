@@ -17,6 +17,7 @@ const INPUT_FILES = {
 	'ui/common/models/index': 'src/ui/common/models/index.ts',
 	'ui/common/molecules/index': 'src/ui/common/molecules/index.ts',
 	'ui/common/organisms/index': 'src/ui/common/organisms/index.ts',
+	'ui/common/templates/index': 'src/ui/common/templates/index.ts',
 	//form
 	'ui/form/lib/index': 'src/ui/form/lib/index.ts',
 	'ui/form/atoms/index': 'src/ui/form/atoms/index.ts',

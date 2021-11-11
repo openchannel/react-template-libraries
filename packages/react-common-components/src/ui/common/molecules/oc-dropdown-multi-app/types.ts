@@ -1,8 +1,9 @@
-import {FormikServiceProps} from '../../../form';
 import React from 'react';
-import {FullAppData} from '../../models';
 
-export interface DropdownMultiAppProps extends FormikServiceProps {
+import type { OcFormExtraProps } from '../../../form';
+import { FullAppData } from '../../models';
+
+export interface DropdownMultiAppProps extends OcFormExtraProps {
 	service: AppsService;
 	defaultValue: string[];
 	value: string[];
@@ -14,11 +15,20 @@ export interface DropdownMultiAppProps extends FormikServiceProps {
 
 export interface AppsServiceResponse {
 	data: {
-		list: FullAppData[]
-	}
+		list: FullAppData[];
+	};
 }
 
 export interface AppsService {
-	searchInitialMultiApps: (query: string, isOwner?: boolean, pageNumber?: number, limit?: number) => Promise<AppsServiceResponse>;
-	searchMultiApps: (searchText: string, query?: string, fields?: string) => Promise<AppsServiceResponse>;
+	searchInitialMultiApps: (
+		query: string,
+		isOwner?: boolean,
+		pageNumber?: number,
+		limit?: number,
+	) => Promise<AppsServiceResponse>;
+	searchMultiApps: (
+		searchText: string,
+		query?: string,
+		fields?: string,
+	) => Promise<AppsServiceResponse>;
 }

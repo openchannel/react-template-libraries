@@ -1,19 +1,43 @@
 import * as React from 'react';
-import type { FieldInputProps, FormikHelpers, FormikProps } from 'formik';
+import type { FieldInputProps, FormikHelpers, FormikProps, FormikValues } from 'formik';
+import { OcEditUserFormConfig } from '../../../auth/organisms/oc-edit-user-form';
 
 import type { Dataset } from '../../../common';
+import { FieldValidators } from '../../models';
 import type { AppFormModel, FormikField, FormikFieldsValues } from '../../models';
 
 export type OcFormValues = Record<string, any>;
 export type OcFormFormikHelpers = FormikHelpers<Record<string, unknown>>;
+export type OcFormChildren = React.ReactNode | ((formik: FormikProps<any>, fields: FormikField[]) => React.ReactNode);
+export type SelectedFormType = { label: string; };
 
-export interface OcFormProps extends FormikServiceProps {
-	formJsonData: AppFormModel;
-	onSubmit: (
-		values: OcFormValues,
-		formikHelpers: OcFormFormikHelpers,
-	) => void;
-	onCancel?: () => void;
+export interface OcFormExtraProps {
+	/**
+	 * Service to make API calls.
+	 */
+	service?: any;
+	/**
+	 * Don't render field by ID.
+	 */
+	excludeRenderFields?: string[];
+}
+
+export interface FormProps extends OcFormExtraProps {
+	/**
+	 * Form config
+	 */
+	formJsonData?: AppFormModel;
+	/**
+	 * Callback with values and formProps on button click
+	 *
+	 * @param values
+	 * @param formikHelpers
+	 */
+	onSubmit?(values: OcFormValues, formikHelpers: OcFormFormikHelpers): void;
+	/**
+	 * Callback on Cancel button click
+	 */
+	onCancel?(): void;
 	/**
 	 * Set position of the field label.
 	 * @param {('top'|'left'|'right')} position
@@ -23,12 +47,42 @@ export interface OcFormProps extends FormikServiceProps {
 	/**
 	 * @default Submit
 	 */
-	successButtonText?: string;
+	submitButtonText?: string;
 	/**
 	 * Set position of the field label.
 	 * @default left
 	 */
 	buttonPosition?: 'top' | 'left' | 'right' | 'between';
+
+	children?: OcFormChildren;
+}
+
+export interface OcFormProps extends FormProps {
+	/**
+	 * Form configs
+	 */
+	formConfigs?: OcEditUserFormConfig[];
+	/**
+	 * Form type select label
+	 * @default Type
+	 */
+	formTypeLabel?: string;
+	/**
+	 * Default FormType (config name)
+	 */
+	defaultFormType?: string;
+	/**
+	 * Enable required password field. //todo: Set True to include field to form state.
+	 * @default false
+	 */
+	enablePasswordField?: boolean;
+	/**
+	 * Enable required Terms checkbox field. //todo: Set True to include field to form state.
+	 * @default false
+	 */
+	enableTermsCheckboxField?: boolean;
+
+	children?: OcFormChildren;
 }
 
 export type FieldType =
@@ -74,14 +128,7 @@ export interface OcFormContextProps {
 	onSaveField: React.MouseEventHandler;
 }
 
-export interface FormikServiceProps {
-	/**
-	 * Service to make API calls.
-	 */
-	service?: any
-}
-
-export interface FormikMapFieldsProps extends FormikServiceProps {
+export interface FormikMapFieldsProps extends OcFormExtraProps {
 	fields: FormikField[];
 }
 
@@ -99,4 +146,12 @@ export interface FieldGroupProps {
 	labelFor?: string;
 	name: string;
 	required?: boolean;
+}
+
+export interface OcFormState {
+	formId: string;
+	validators: FieldValidators;
+	flattenFields: FormikField[];
+	fieldsDefinition: FormikField[];
+	initialValues: FormikValues;
 }

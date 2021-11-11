@@ -72,9 +72,19 @@ h1, h2, h3, h4, h5, h6 {
 .form-control {
 	border: 1px solid $info;
 	border-radius: 4px;
-	font-size: 14px;
 	height: 46px;
 	padding: 12px 16px;
+	font-size: 14px;
+	color: $body-color;
+
+	&:focus {
+		border: 1px solid $primary;
+		box-shadow: none;
+	}
+
+	&::placeholder {
+		color: $input-placeholder-color;
+	}
 }
 
 .form-control:focus {
@@ -142,7 +152,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* end */
 
-.company-logo{
+.company-logo {
   height: 27px;
 }
 
@@ -151,7 +161,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /** End buttons **/
-.divider{
+.divider {
   border-top: 1px solid $info;
 }
 
@@ -197,7 +207,7 @@ h1, h2, h3, h4, h5, h6 {
 	}
 }
 
-.toggle_password{
+.toggle_password {
 	float: right;
 	margin-top: -31px;
 	margin-right: 16px;
@@ -346,9 +356,17 @@ a.link {
 			border-bottom: 0;
 		}
 
-		&.active, &:active {
+		&:hover,
+		&:focus,
+		&.active,
+		&:active {
+			outline: none;
 			background-color: rgba($dropdown-border, .2);
 			color: $dropdown-item-text-hover;
+		}
+
+		&:hover {
+			background-color: rgba($dropdown-border, .1);
 		}
 	}
 }
@@ -381,32 +399,6 @@ a.link {
       }
     }
   }
-
-  /* Angular styles */
-	.dropdown-menu {
-		max-height: 229px;
-		width: 100%;
-
-		.dropdown-item {
-			padding: 16px;
-			border-bottom: 1px;
-
-			&:hover {
-				background-color: $dropdown-light;
-			}
-
-			&:active {
-				color: $dropdown-item-text-hover;
-				background-color: $dropdown-light;
-				border-color: unset;
-			}
-
-			&:focus {
-				outline: none;
-				background-color: $dropdown-light;
-			}
-		}
-	}
 }
 
 // Special field label for the oc-dynamic-array-preview component
@@ -421,6 +413,22 @@ a.link {
 .cards-interface__preview-header {
 	.array-preview {
 		.array-preview__field {
+			&-content {
+				.cards-interface__added-item {
+					margin-bottom: 1.5rem;
+					&:last-child {
+						margin-bottom: 0;
+					}
+					.cards-interface__preview {
+						margin-bottom: 0;
+					}
+				}
+				&__video {
+					.oc-video {
+						width: min-content;
+					}
+				}
+			}
 			margin: 0;
 			&-content__tags-item {
 				margin-bottom: 8px;
@@ -433,6 +441,7 @@ a.link {
 
 .dropdown-multi-app__search-input-field {
 	width: 100%;
+
 	.dropdown-menu .dropdown-item {
 		height: 54px;
 		padding: 4px;
@@ -603,44 +612,6 @@ a.link {
   border: none;
 }
 
-.tag-element__tooltip {
-	top: -12px !important;
-
-	.arrow {
-		&:before {
-			width: 0;
-			height: 0;
-			border-right: 4px solid transparent;
-			border-left: 4px solid transparent;
-			border-top: 6px solid $info;
-			left: -1px;
-			top: -0.8px;
-		}
-
-		&:after {
-			content: '';
-			width: 0;
-			height: 0;
-			border-left: 3px solid transparent;
-			border-right: 3px solid transparent;
-			border-top: 4.5px solid $white;
-			position: absolute;
-			left: 0;
-			top: -0.9px;
-		}
-	}
-
-	.tooltip-inner {
-		background-color: $white;
-		color: $body-color;
-		font-size: 12px;
-		line-height: 1.5;
-		border-radius: 4px;
-		border: solid 1px $info;
-		padding: 3px 10px;
-	}
-}
-
 /* React styles */
 .tag-element__tooltip-portal {
   .arrow {
@@ -716,4 +687,8 @@ a.link {
     min-height: 46px;
     line-height: 19px;
   }
+}
+
+.oc-card__icon-img {
+	@include image-alt-text;
 }

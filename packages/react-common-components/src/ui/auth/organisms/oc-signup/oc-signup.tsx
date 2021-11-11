@@ -3,81 +3,88 @@ import { Link } from 'react-router-dom';
 
 import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
 import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
-import { OcEditUserFormComponent } from '../oc-edit-user-form';
+import { OcForm } from '../../../form/organisms/oc-form';
 
+import { AgreeWithTermsCheckbox } from './agree-with-terms-checkbox';
 import { SignupProps } from './types';
 
 import './style.scss';
 
+const ExcludeRenderFields = ['terms'];
+
 export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 	const {
-		companyLogoUrl = '../../../../assets/img/logo-company.png',
-		loginUrl = '/',
-		showSignupFeedbackPage,
+		onSubmit,
+		formConfigs,
+		loginUrl,
 		forgotPasswordDoneUrl,
 		goToActivationPage,
-		formConfigs,
-		enableTypesDropdown,
-		enableCustomTerms,
-		enableTermsCheckbox,
 		defaultTypeLabelText,
 		ordinaryTermsDescription,
 		customTermsDescription,
-		defaultEmptyConfigsErrorMessage,
-		onSubmit,
-		enablePasswordField,
+		showFeedback = false,
+		companyLogoUrl = '../../../../assets/img/logo-company.png',
+		enableTermsCheckbox = false,
+		enablePasswordField = true,
 	} = props;
 
-	const [showFeedbackPage, setFeedbackPageVisible] = React.useState(showSignupFeedbackPage);
+	const [_showFeedback, setShowFeedback] = React.useState(showFeedback);
 
-	const handleShowFeedback = React.useCallback(
-		() => setFeedbackPageVisible(!showFeedbackPage),
-		[showFeedbackPage, setFeedbackPageVisible],
-	);
+	React.useEffect(() => {
+		setShowFeedback(showFeedback);
+	}, [showFeedback]);
+
+	const handleShowFeedback = React.useCallback(() => setShowFeedback((prev) => !prev), []);
 
 	return (
 		<div className="sign-up login-card login-card_borders">
-			{!showFeedbackPage && (
+			{!_showFeedback && (
 				<div>
 					<div className="sign-up__card-body">
 						<div className="sign-up__logo">
 							<img alt="logo" className="sign-up__logo-img company-logo" src={companyLogoUrl} />
 						</div>
 						<div className="sign-up__header">
-							<h4 className="sign-up__header-heading">Sign Up</h4>
+							<h4 className="sign-up__header-heading">Sign up</h4>
 							<OcLabelComponent
-								text="Enter your account details below"
+								text="Enter your personal details below"
 								customClass="sign-up__header-invitation"
 							/>
 						</div>
 						{formConfigs !== null && (
-							<div>
-								<OcEditUserFormComponent
-									formConfigs={formConfigs}
-									enableTypesDropdown={enableTypesDropdown}
-									defaultTypeLabelText={defaultTypeLabelText}
-									customTermsDescription={customTermsDescription}
-									ordinaryTermsDescription={ordinaryTermsDescription}
-									onSubmit={onSubmit}
-									enableCustomTerms={enableCustomTerms}
-									enableTermsCheckbox={enableTermsCheckbox}
-									enablePasswordField={enablePasswordField}
-									defaultEmptyConfigsErrorMessage={defaultEmptyConfigsErrorMessage}
-									submitText="Sign Up"
-								/>
+							<OcForm
+								formConfigs={formConfigs}
+								onSubmit={onSubmit}
+								formTypeLabel={defaultTypeLabelText}
+								enablePasswordField={enablePasswordField}
+								enableTermsCheckboxField={enableTermsCheckbox}
+								submitButtonText="Sign up"
+								excludeRenderFields={ExcludeRenderFields}
+							>
+								{enableTermsCheckbox &&
+									((formikProps, formFields) => (
+										<AgreeWithTermsCheckbox
+											formikProps={formikProps}
+											formFields={formFields}
+											customTermsDescription={customTermsDescription}
+											ordinaryTermsDescription={ordinaryTermsDescription}
+										/>
+									))}
+							</OcForm>
+						)}
+						{loginUrl && (
+							<div className="sign-up__login">
+								Already have an account?{' '}
+								<Link className="sign-up__login-link" to={loginUrl}>
+									Log in
+								</Link>
 							</div>
 						)}
-						<div className="sign-up__login">
-							Already have an account?{' '}
-							<Link className="sign-up__login-link" to={loginUrl}>
-								Log In
-							</Link>
-						</div>
 					</div>
 				</div>
 			)}
 
-			{showFeedbackPage && (
+			{_showFeedback && (
 				<form>
 					<div className="sign-up__card-body result">
 						<div className="sign-up__logo result__logo">
@@ -106,7 +113,7 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 								onClick={handleShowFeedback}
 							>
 								{' '}
-								Sign Up
+								Sign up
 							</span>
 						</div>
 					</div>

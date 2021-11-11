@@ -30,7 +30,7 @@ export const validateURL = (str: string) => {
 };
 
 export const OcVideoUrlComponent: React.FC<VideoUrlProps> = (props) => {
-	const { customClass, onChange, withoutPreview = false, value, ...p } = props;
+	const { customClass = '', onChange, withoutPreview = false, value, ...p } = props;
 
 	const handleChange = React.useCallback(
 		(e: any) => {

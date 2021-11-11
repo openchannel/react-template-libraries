@@ -33,16 +33,16 @@ export const OcResetPasswordComponent: React.FC<OcResetPasswordProps> = (props) 
 					<img src={companyLogoUrl} className="company-logo" alt="logo" />
 				</div>
 				<div className="reset-password__header">
-					<h4 className="reset-password__header-heading">New Password</h4>
+					<h4 className="reset-password__header-heading">New password</h4>
 					<OcLabelComponent>Create new password</OcLabelComponent>
 				</div>
 				<div className="reset-password__password-group">
 					<span className="reset-password__password-group-label">
-						<OcLabelComponent htmlFor={inputProps?.id}>New Password</OcLabelComponent>
+						<OcLabelComponent htmlFor={inputProps?.id}>Password</OcLabelComponent>
 					</span>
 					<OcPasswordComponent
 						disabled={false}
-						placeholder="New Password"
+						placeholder="New password"
 						value={value}
 						onChange={onChange}
 						required
@@ -64,14 +64,14 @@ export const OcResetPasswordComponent: React.FC<OcResetPasswordProps> = (props) 
 					<OcLabelComponent>Already have an account?</OcLabelComponent>
 					<Link to={loginUrl} className="reset-password__link">
 						{' '}
-						Log In
+						Log in
 					</Link>
 				</div>
 				<div className="reset-password__sign-up">
 					<OcLabelComponent>Don&apos;t have an account yet?</OcLabelComponent>
 					<Link to={signupUrl} className="reset-password__link">
 						{' '}
-						Sign Up
+						Sign up
 					</Link>
 				</div>
 			</div>

@@ -1,12 +1,15 @@
 import * as React from 'react';
-import AppOption from './app-option';
 import Select from 'react-select';
-import {OcTagElement} from '../../atoms';
-import './style.scss';
-import {DropdownMultiAppProps} from './types';
+import { InputActionMeta } from 'react-select/src/types';
+import { noop } from 'lodash-es';
+
+import { OcTagElement } from '../../atoms';
+
+import AppOption from './app-option';
 import useAppsService from './hooks';
-import {InputActionMeta} from 'react-select/src/types';
-import {noop} from 'lodash-es';
+import { DropdownMultiAppProps } from './types';
+
+import './style.scss';
 
 const noOptionsMessage = () => null;
 
@@ -17,20 +20,23 @@ export const OcDropdownMultiApp: React.FC<DropdownMultiAppProps> = (props) => {
 		value = [],
 		onChange = noop,
 		placeholder = '',
-		customClass,
-		onBlur = noop
+		customClass = '',
+		onBlur = noop,
 	} = props;
 
-	const {apps, loadApps, resetApps, selectedApps, setSelectedApps} = useAppsService(service, defaultValue);
+	const { apps, loadApps, resetApps, selectedApps, setSelectedApps } = useAppsService(
+		service,
+		defaultValue,
+	);
 	const [searchText, setSearchText] = React.useState<string>('');
 
 	// filtering should be remote
 	const handleFilterOption = () => true;
 
 	React.useEffect(() => {
-		const newSelectedAppsIds = selectedApps.map(sApp => sApp.value.appId);
+		const newSelectedAppsIds = selectedApps.map((sApp) => sApp.value.appId);
 		onChange(newSelectedAppsIds);
-	}, [selectedApps, onChange])
+	}, [selectedApps, onChange]);
 
 	const handleMenuOpen = React.useCallback(() => {
 		loadApps(searchText, value);
@@ -38,28 +44,31 @@ export const OcDropdownMultiApp: React.FC<DropdownMultiAppProps> = (props) => {
 
 	const handleMenuClose = React.useCallback(() => {
 		resetApps();
-	},[resetApps]);
+	}, [resetApps]);
 
-	const handleSearch = React.useCallback((request: string, {action}: InputActionMeta) => {
-		if (action === 'set-value' || action === 'input-change') {
-			if (action === 'input-change') {
-				loadApps(request, value);
+	const handleSearch = React.useCallback(
+		(request: string, { action }: InputActionMeta) => {
+			if (action === 'set-value' || action === 'input-change') {
+				if (action === 'input-change') {
+					loadApps(request, value);
+				}
+
+				setSearchText(request);
 			}
-
-			setSearchText(request);
-		}
-	}, [loadApps, setSearchText, value]);
+		},
+		[loadApps, setSearchText, value],
+	);
 
 	const handleOptionSelect = React.useCallback(
 		(option) => {
-			let newSelectedApps = selectedApps.filter(o => o.value.appId !== option.value.appId);
+			let newSelectedApps = selectedApps.filter((o) => o.value.appId !== option.value.appId);
 			if (selectedApps.length === newSelectedApps.length) {
 				newSelectedApps = [...selectedApps, option];
 			}
 
 			setSelectedApps(newSelectedApps);
 		},
-		[selectedApps, setSelectedApps, onChange]
+		[selectedApps, setSelectedApps, onChange],
 	);
 
 	return (
@@ -68,7 +77,7 @@ export const OcDropdownMultiApp: React.FC<DropdownMultiAppProps> = (props) => {
 				className="dropdown-multi-app__search"
 				classNamePrefix="dropdown-multi-app__search"
 				placeholder={placeholder}
-				components={{Option: AppOption}}
+				components={{ Option: AppOption }}
 				options={apps}
 				value={null}
 				inputValue={searchText}
@@ -86,7 +95,8 @@ export const OcDropdownMultiApp: React.FC<DropdownMultiAppProps> = (props) => {
 						key={app.value.appId}
 						customClass="dropdown-multi-app__tags-item"
 						title={app.label}
-						onIconClick={() => handleOptionSelect(app)}/>
+						onIconClick={() => handleOptionSelect(app)}
+					/>
 				))}
 			</div>
 		</div>

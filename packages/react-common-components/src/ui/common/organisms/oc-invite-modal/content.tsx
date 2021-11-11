@@ -5,8 +5,11 @@ import { OcForm } from '../../../form';
 
 import { OcInviteModalProps } from './types';
 
-export const InviteUserContent: React.FC<Omit<OcInviteModalProps, 'isOpened' | 'size'>> = (props) => {
-	const { onClose, onCancel, onSubmit, modalTitle, formConfig, successButtonText, buttonPosition } = props;
+export const InviteUserContent: React.FC<Omit<OcInviteModalProps, 'isOpened' | 'size'>> = (
+	props,
+) => {
+	const { onClose, onCancel, onSubmit, modalTitle, formConfig, successButtonText, buttonPosition } =
+		props;
 
 	return (
 		<>
@@ -24,7 +27,7 @@ export const InviteUserContent: React.FC<Omit<OcInviteModalProps, 'isOpened' | '
 					formJsonData={formConfig}
 					onCancel={onCancel || onClose}
 					onSubmit={onSubmit}
-					successButtonText={successButtonText}
+					submitButtonText={successButtonText}
 					buttonPosition={buttonPosition}
 				/>
 			</div>

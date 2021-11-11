@@ -1,33 +1,37 @@
 import * as React from 'react';
-import { FieldInputProps, useFormikContext } from 'formik';
 import moment from 'moment';
+import { isEmpty } from 'lodash-es';
+import { FieldInputProps, useFormikContext } from 'formik';
 
 import {
 	ColorProps,
 	DatepickerProps,
 	DropdownMultiAppProps,
 	OcSelectProps,
-	VideoUrlProps
+	VideoUrlProps,
 } from '../../../../common';
-import OcColorComponent from '../../../../common/atoms/oc-color/oc-color';
+
 import OcError from '../../../../common/atoms/oc-error/oc-error';
 import OcFileUpload from '../../../../common/atoms/oc-file-upload';
+import OcColorComponent from '../../../../common/atoms/oc-color/oc-color';
+import OcTooltipLabel from '../../../atoms/oc-tooltip-label/oc-tooltip-label';
 import OcRichTextEditorComponent from '../../../../common/atoms/oc-rich-text-editor/oc-rich-text-editor';
-import OcDatetimePicker from '../../../../common/molecules/oc-datetime-picker/oc-datetime';
+
+import { OcMultiSelectListProps, OcTagsProps } from '../../../molecules';
+import OcTags from '../../../molecules/oc-tags/oc-tags';
 import OcSelect from '../../../../common/molecules/oc-select/oc-select';
 import OcVideoUrlComponent from '../../../../common/molecules/oc-video-url/oc-video-url';
+import OcDatetimePicker from '../../../../common/molecules/oc-datetime-picker/oc-datetime';
 import OcDropdownMultiApp from '../../../../common/molecules/oc-dropdown-multi-app/dropdown';
-import OcTooltipLabel from '../../../atoms/oc-tooltip-label/oc-tooltip-label';
-import { FIELD_TYPE } from '../../../lib';
-import { OcMultiSelectListProps, OcTagsProps } from '../../../molecules';
 import OcMultiSelectList from '../../../molecules/oc-multi-select-list/oc-multi-select-list';
-import OcTags from '../../../molecules/oc-tags/oc-tags';
+
+import { FIELD_TYPE } from '../../../lib';
 
 import type { FCWP, FieldGroupProps } from '../types';
 import { customClassWithError } from '../utils/common';
 import { shouldFieldGroupUpdate, shouldFieldUpdate } from '../utils/memo';
 
-export const FieldGroup: React.FC<FieldGroupProps & { error?: string }> = React.memo((props) => {
+export const FieldGroup: React.FC<FieldGroupProps & { error: string | undefined }> = React.memo((props) => {
 	const { children, error, label, labelFor, description, required } = props;
 
 	return (
@@ -40,10 +44,12 @@ export const FieldGroup: React.FC<FieldGroupProps & { error?: string }> = React.
 				</div>
 			)}
 			<div className="form__field-input">
-				{React.Children.map(children, child => React.isValidElement(child)
-					// assign 'invalid' className to the customClass prop
-					? React.cloneElement(child, { customClass: customClassWithError(error, child) })
-					: child)}
+				{React.Children.map(children, (child) =>
+					React.isValidElement(child)
+						? // assign 'invalid' className to the customClass prop
+						  React.cloneElement(child, { customClass: customClassWithError(error, child) })
+						: child,
+				)}
 			</div>
 			{error && <OcError message={error} />}
 		</>
@@ -53,11 +59,12 @@ export const FieldGroup: React.FC<FieldGroupProps & { error?: string }> = React.
 export const FieldGroupWrapper: React.FC<FieldGroupProps> = (props) => {
 	const { name } = props;
 	const { getFieldMeta } = useFormikContext();
-	const { error, touched } = getFieldMeta(name);
+	const meta = getFieldMeta(name);
+	const error: string[] | undefined = (meta.error as any);
 
 	return (
 		<div className="form__field">
-			<FieldGroup {...props} error={(touched && !!error && error) || ''} />
+			<FieldGroup {...props} error={(meta.touched && !isEmpty(error) && error![0]) || ''} />
 		</div>
 	);
 };
@@ -254,11 +261,11 @@ export const FormikOcFileUploadWrapper: React.FC<any> = React.memo(({ acceptType
 
 export const FormikOcDropdownMultiAppWrapper: React.FC<
 	FCWP<DropdownMultiAppProps['value']> & {
-	service: DropdownMultiAppProps['service'];
-	defaultValue: DropdownMultiAppProps['defaultValue'];
-	placeholder: DropdownMultiAppProps['placeholder'];
-}
-	> = React.memo(({ field, form, customClass, service, defaultValue, placeholder }) => {
+		service: DropdownMultiAppProps['service'];
+		defaultValue: DropdownMultiAppProps['defaultValue'];
+		placeholder: DropdownMultiAppProps['placeholder'];
+	}
+> = React.memo(({ field, form, customClass, service, defaultValue, placeholder }) => {
 	const onChange = React.useCallback(
 		(value) => {
 			form.setFieldValue(field.name, value);

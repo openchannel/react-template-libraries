@@ -32,7 +32,7 @@ export interface OcTagElementProps {
 }
 
 export const OcTagElement: React.FC<OcTagElementProps> = React.memo((props) => {
-	const { customClass, title, id, deleteTagImgUrl, onIconClick } = props;
+	const { customClass = '', title, id, deleteTagImgUrl, onIconClick } = props;
 
 	const onClick = () => {
 		if (!onIconClick) return;
