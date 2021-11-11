@@ -255,8 +255,16 @@ export const FormikOcMultiSelectListWrapper: React.FC<
 	);
 }, shouldFieldUpdate(['options']));
 
-export const FormikOcFileUploadWrapper: React.FC<any> = React.memo(({ acceptType, fileType }, props) => {
-	return <OcFileUpload acceptType={acceptType} fileType={fileType} {...props} />;
+export const FormikOcFileUploadWrapper: React.FC<any> = React.memo(({ acceptType, fileType, fileService, ...rest }) => {
+
+	return (
+		<OcFileUpload
+			acceptType={acceptType}
+			fileType={fileType}
+			service={fileService}
+			{...rest}
+		/>
+	);
 });
 
 export const FormikOcDropdownMultiAppWrapper: React.FC<

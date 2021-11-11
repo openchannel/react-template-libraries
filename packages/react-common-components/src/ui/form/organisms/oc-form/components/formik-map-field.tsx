@@ -25,7 +25,9 @@ import {
 	FormikRichTextWrapper,
 } from './formik-components';
 
-export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, service, excludeRenderFields }) => {
+export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
+	const { fields, service, fileService, excludeRenderFields } = props;
+
 	if (!fields || fields.length === 0) {
 		return null;
 	}
@@ -303,6 +305,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 									component={FormikOcFileUploadWrapper}
 									fileType={type}
 									acceptType={attributes?.accept}
+									fileService={fileService}
 								/>
 							</FieldGroupWrapper>
 						);
@@ -323,6 +326,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 									component={FormikOcFileUploadWrapper}
 									fileType={type}
 									acceptType={attributes?.accept}
+									fileService={fileService}
 								/>
 							</FieldGroupWrapper>
 						);

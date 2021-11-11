@@ -26,6 +26,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		submitButtonText = 'Submit',
 		buttonPosition = 'left',
 		service,
+		fileService,
 		children,
 		excludeRenderFields,
 	} = props;
@@ -74,6 +75,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 				<FormikForm className="form" onSubmit={handleSubmit} noValidate>
 					<FormikMapFieldsWrapper
 						service={service}
+						fileService={fileService}
 						excludeRenderFields={excludeRenderFields}
 					/>
 					{children ? isFunction(children) ? children(formik, flattenFields) : children : null}
