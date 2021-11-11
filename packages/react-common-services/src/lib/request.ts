@@ -31,7 +31,14 @@ export interface Options<B = unknown> {
 }
 
 export interface CustomRequestConfigTweaks {
+	/**
+	 * if true - don't show global progress loading.
+	 */
 	ignoreNProgress?: boolean;
+	/**
+	 * if true - don't set x-csrf-token for Request Headers.
+	 */
+	noCsrfToken?: boolean;
 }
 
 export interface CustomRequestConfig extends AxiosRequestConfig {
@@ -76,12 +83,14 @@ const axiosRequest = (config: AxiosRequestConfig) => {
 /**
  * @param {{ body?: {}, headers: Headers }} options
  */
-const createBody = (options: Options): string | undefined => {
+const createBody = (options: Options): string | FormData | undefined => {
 	if (options.body) {
 		const contentType = options.headers && options.headers['Content-Type'];
 
 		if (contentType?.includes('json')) {
 			return JSON.stringify(options.body);
+		} else if (options.body instanceof FormData) {
+			return options.body;
 		}
 	}
 	return undefined;
