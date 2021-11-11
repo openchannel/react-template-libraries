@@ -11,7 +11,7 @@ import {
 } from '../../../../common';
 import OcColorComponent from '../../../../common/atoms/oc-color/oc-color';
 import OcError from '../../../../common/atoms/oc-error/oc-error';
-import OcFileUpload from '../../../../common/atoms/oc-file-upload/oc-file-upload';
+import OcFileUpload from '../../../../common/atoms/oc-file-upload';
 import OcRichTextEditorComponent from '../../../../common/atoms/oc-rich-text-editor/oc-rich-text-editor';
 import OcDatetimePicker from '../../../../common/molecules/oc-datetime-picker/oc-datetime';
 import OcSelect from '../../../../common/molecules/oc-select/oc-select';

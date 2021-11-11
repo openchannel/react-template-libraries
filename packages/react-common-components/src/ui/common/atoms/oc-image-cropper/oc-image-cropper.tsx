@@ -44,5 +44,3 @@ export const OcImageCropper: React.FC<CropperComponentProps> = (props: CropperCo
 		</div>
 	);
 };
-
-export default OcImageCropper;

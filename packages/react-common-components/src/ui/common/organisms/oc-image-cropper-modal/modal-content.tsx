@@ -3,7 +3,7 @@ import {ReactComponent as CloseIconSvg} from '../../../../assets/img/close-icon.
 import {ReactComponent as ZoomInImg} from '../../../../assets/img/zoom-in.svg';
 import {ReactComponent as ZoomOutImg} from '../../../../assets/img/zoom-out.svg';
 import OcButtonComponent from '../../atoms/oc-button/oc-button';
-import OcImageCropper from '../../atoms/oc-image-cropper/oc-image-cropper';
+import OcImageCropper from '../../atoms/oc-image-cropper';
 import {CropperModalProps} from './types';
 import {noop} from 'lodash-es';
 

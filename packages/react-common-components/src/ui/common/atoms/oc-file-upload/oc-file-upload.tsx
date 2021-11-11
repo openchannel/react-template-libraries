@@ -141,5 +141,3 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 		</div>
 	);
 };
-
-export default OcFileUpload;
