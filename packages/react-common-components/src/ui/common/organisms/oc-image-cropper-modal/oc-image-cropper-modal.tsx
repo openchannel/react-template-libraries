@@ -1,7 +1,5 @@
 //commit 48ea5cbd79e7ab31781a2417c39a1059f9c22739 Author: Vitaliy Samofal Date: 29.03.21, 12:05
 import * as React from 'react';
-
-import { ButtonVariants } from '../../atoms';
 import Modal  from '../modal/modal';
 
 import './style.scss';

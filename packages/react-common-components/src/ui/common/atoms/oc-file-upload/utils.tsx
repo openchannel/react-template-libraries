@@ -1,19 +1,40 @@
 import { IDropzoneProps } from 'react-dropzone-uploader';
+import { TypeCall, ExtendedFile } from './types';
+import { FileRejection} from 'react-dropzone';
 
 export const getUploadParams: IDropzoneProps['getUploadParams'] = () => ({
 	url: 'https://httpbin.org/post',
 });
 
-export const classNames = {
-	dropzone: 'file-container file-container_without-files',
-	dropzoneActive: '',
-	dropzoneReject: '',
-	dropzoneDisabled: '',
-	input: 'file-container__input',
-	inputLabel: 'file-container__placeholder',
-	inputLabelWithFiles: '',
-	preview: 'file-container__upload-item',
-	previewImage: 'file-container__upload-item-type',
-	submitButtonContainer: '',
-	submitButton: '',
-};
+export const getAcceptedMethod = (acceptedFiles:FileRejection[], fileType:string, acceptType: string | undefined, files:ExtendedFile[]) => {
+
+	let index = -1;
+	if (fileType === TypeCall.singleImage && files.length === 0) {
+		index = acceptedFiles.findIndex((item: { file: ExtendedFile }) => {
+			if (acceptType !== '' && acceptType) {
+				return acceptType.includes(item.file.type);
+			}else{
+				return item.file.type.toLowerCase().includes('image');
+			}
+		});
+		return {
+			res: 'callModal',
+			index,
+		}
+	} else if((fileType === TypeCall.singleFile || fileType === TypeCall.privateSingleFile)  && files.length === 0) {
+		if (acceptType !== '' && acceptType) {
+			index = acceptedFiles.findIndex((item: { file: ExtendedFile }) => acceptType.includes(item.file.type));
+		} else {
+			index = 0;
+		}
+		return {
+			res: 'addFile',
+			index,
+		}
+	}
+
+	return {
+		res: 'undefined',
+		index,
+	}
+} 

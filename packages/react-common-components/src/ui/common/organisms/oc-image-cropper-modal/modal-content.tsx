@@ -19,6 +19,8 @@ export const OcImageCropperModalContent: React.FC<CropperModalProps> = (props) =
 		rejectButtonType = 'secondary',
 		rejectButtonHide = false,
 		cropData,
+		maxWidth,
+		maxHeight,
 	} = props;
 
 	const [cropper, setCropper] = React.useState<any>();
@@ -38,7 +40,12 @@ export const OcImageCropperModalContent: React.FC<CropperModalProps> = (props) =
 	};
 
 	const handleSubmitAfterCrop = () => {
-		onImageCrop(b64toFile(cropper.getCroppedCanvas().toDataURL()));
+		const options = {
+			height:maxHeight, 
+			width:maxWidth, 
+		};
+		
+		onImageCrop(b64toFile(cropper.getCroppedCanvas(options).toDataURL()));
 		onClose();
 	};
 
@@ -57,7 +64,7 @@ export const OcImageCropperModalContent: React.FC<CropperModalProps> = (props) =
 				<div className="cropper__body">
 					<div className="cropper__body-container">
 						<div className="cropper__body-size">
-							<div className="cropper__body-resolution" />
+							<div className="cropper__body-resolution" >{(maxWidth && maxHeight) && maxWidth + 'px x ' + maxHeight + 'px'}</div>
 							<div className="cropper__body-zoom">
 								<span onClick={zoomIn}>
 									<ZoomInImg />
@@ -67,7 +74,7 @@ export const OcImageCropperModalContent: React.FC<CropperModalProps> = (props) =
 								</span>
 							</div>
 						</div>
-						<OcImageCropper setCropper={setCropper} image={cropData.image} />
+						<OcImageCropper setCropper={setCropper} image={cropData.image} maxWidth={maxWidth} maxHeight={maxHeight}/>
 						<div className="confirmation-modal__button-container">
 							{!rejectButtonHide && (
 								<OcButtonComponent

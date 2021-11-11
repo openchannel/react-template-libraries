@@ -28,4 +28,8 @@ export interface CropperModalProps extends Omit<ModalProps, 'children'> {
 	rejectButtonHide?: boolean;
 
 	cropData: CropperModalData;
+	/** Set maximum width of the image after cropping **/
+	maxWidth?: number;
+	/** Set maximum height of the image after cropping **/
+	maxHeight?: number;
 }
