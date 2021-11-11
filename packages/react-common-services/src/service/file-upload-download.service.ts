@@ -55,8 +55,13 @@ export const fileService = {
 
 		return api.post(`${marketUrl}/${FILES_URL}`, {
 			body: file,
-			headers: { 'Upload-Token': `${token}` },
+			headers: {
+				'upload-token': `${token}`,
+				'Content-Type': 'multipart/form-data',
+			},
 			params: httpParams,
+		}, {
+			noCsrfToken: true,
 		});
 	},
 
