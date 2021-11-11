@@ -1,10 +1,5 @@
-import { IDropzoneProps } from 'react-dropzone-uploader';
 import { TypeCall, ExtendedFile } from './types';
 import { FileRejection} from 'react-dropzone';
-
-export const getUploadParams: IDropzoneProps['getUploadParams'] = () => ({
-	url: 'https://httpbin.org/post',
-});
 
 export const getAcceptedMethod = (acceptedFiles:FileRejection[], fileType:string, acceptType: string | undefined, files:ExtendedFile[]) => {
 
