@@ -12,9 +12,9 @@ import {
 } from '../../../../common';
 
 import OcError from '../../../../common/atoms/oc-error/oc-error';
+import OcFileUpload from '../../../../common/atoms/oc-file-upload';
 import OcColorComponent from '../../../../common/atoms/oc-color/oc-color';
 import OcTooltipLabel from '../../../atoms/oc-tooltip-label/oc-tooltip-label';
-import OcFileUpload from '../../../../common/atoms/oc-file-upload/oc-file-upload';
 import OcRichTextEditorComponent from '../../../../common/atoms/oc-rich-text-editor/oc-rich-text-editor';
 
 import { OcMultiSelectListProps, OcTagsProps } from '../../../molecules';
@@ -255,8 +255,8 @@ export const FormikOcMultiSelectListWrapper: React.FC<
 	);
 }, shouldFieldUpdate(['options']));
 
-export const FormikOcFileUploadWrapper: React.FC<any> = React.memo(({ acceptType, fileType }) => {
-	return <OcFileUpload acceptType={acceptType} fileType={fileType} />;
+export const FormikOcFileUploadWrapper: React.FC<any> = React.memo(({ acceptType, fileType }, props) => {
+	return <OcFileUpload acceptType={acceptType} fileType={fileType} {...props} />;
 });
 
 export const FormikOcDropdownMultiAppWrapper: React.FC<

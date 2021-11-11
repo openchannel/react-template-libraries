@@ -8,10 +8,13 @@ export interface CropperComponentProps {
 	setCropper?: any;
 	cropper?: any;
 	image?: any;
+	maxWidth?: number;
+	maxHeight?: number;
 }
 
 export const OcImageCropper: React.FC<CropperComponentProps> = (props: CropperComponentProps) => {
-	const { image, setCropper } = props;
+	const { image, setCropper, maxWidth, maxHeight } = props;
+	const ratio = maxWidth && maxHeight ? maxWidth/maxHeight : NaN;
 
 	return (
 		<div className="cropper">
@@ -23,6 +26,7 @@ export const OcImageCropper: React.FC<CropperComponentProps> = (props: CropperCo
 						initialAspectRatio={1}
 						preview=".img-preview"
 						src={image}
+						aspectRatio={ratio}
 						viewMode={1}
 						minCropBoxHeight={10}
 						minCropBoxWidth={10}
@@ -40,5 +44,3 @@ export const OcImageCropper: React.FC<CropperComponentProps> = (props: CropperCo
 		</div>
 	);
 };
-
-export default OcImageCropper;
