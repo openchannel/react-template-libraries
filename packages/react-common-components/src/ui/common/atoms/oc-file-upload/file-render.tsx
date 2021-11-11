@@ -12,13 +12,14 @@ export const FileRender = ({ file, idx, removeFile, service, isPrivate }: any) =
 	}, [progress]);
 
 	React.useEffect(() => {
-        fileLoad();
+		fileLoad();
+
 		return function() {
 			clearTimeout(timerId.current!);
-		  };
-	  },[]);
+		};
+	},[]);
 
-    const updateProgress = (isFinish: boolean) => {
+	const updateProgress = (isFinish: boolean) => {
 		if (isFinish) {
 			setProgress(100);
 			setStatus('Completed');
@@ -34,32 +35,31 @@ export const FileRender = ({ file, idx, removeFile, service, isPrivate }: any) =
 		}
 	};
 
-    const fileLoad = async() => {
-        try {
-            updateProgress(false);
-            const formData = new FormData();
-            formData.append('file', file, file.name);
-        
-            await service.uploadNewFile(formData, isPrivate)
-            .then(()=> updateProgress(true));
+	const fileLoad = async () => {
+		try {
+			updateProgress(false);
+			const formData = new FormData();
+			formData.append('file', file, file.name);
 
-        } catch (error) {
-            throw new Error(error);
-        }
-    };
+			await service.fileUploadRequest(formData, isPrivate)
+				.then(() => updateProgress(true));
 
+		} catch (error) {
+			throw new Error(error);
+		}
+	};
 
 	return (
 		<div className="thumb">
 			<div className="thumb-inner">
 			{ typeof file.preview !== 'undefined' ? <img src={file.preview} className="img-thumb" /> : <UploadIcon className="img-thumb" /> }
 			<p className="file-name">{file.name}
-				<span className="status">{status}</span>	
+				<span className="status">{status}</span>
 			</p>
-			<span className="remove-item" onClick={() => removeFile(idx)}></span>
+			<span className="remove-item" onClick={() => removeFile(idx)} />
 			</div>
             <div className="meter">
-                <span style={{width:progress + '%'}}><span className="progress"></span></span>
+                <span style={{width:progress + '%'}}><span className="progress" /></span>
             </div>
 		</div>
 	)
