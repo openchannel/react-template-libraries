@@ -22,10 +22,10 @@ export const config = {
 	 * * ### Example:
 	 * `getMarketUrl();`
 	 */
-	getMarketUrl: () => {
+	getMarketUrl: (): Promise<string> => {
 		if (!config.marketUrl) {
 			return loadMarketUrl();
 		}
-		return config.marketUrl;
+		return Promise.resolve(config.marketUrl);
 	},
 };

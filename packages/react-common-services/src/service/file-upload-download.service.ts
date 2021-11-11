@@ -26,7 +26,7 @@ export const fileService = {
 	uploadToOpenChannel: <TResult = any>(file: FormData, isPrivate: boolean, hash?: string[]): Promise<AxiosResponse<TResult>> => {
 		return fileService
 			.getToken()
-			.then((res: any) => fileService.prepareUploadReq(res.token, file, isPrivate, hash));
+			.then((res: AxiosResponse) => fileService.prepareUploadReq(res.data.token, file, isPrivate, hash));
 	},
 
 	/**
@@ -42,7 +42,7 @@ export const fileService = {
 	 *
 	 * `prepareUploadReq('0a897shd0897ahs09d8has9d7',{file},true, ['na0s78hd09a8shd90ahsd'])`
 	 */
-	prepareUploadReq: (token: any, file: FormData, isPrivate: boolean, hash?: string[]) => {
+	prepareUploadReq: async (token: any, file: FormData, isPrivate: boolean, hash?: string[]) => {
 		const httpParams = new URLSearchParams();
 		if (isPrivate) {
 			httpParams.set('isPrivate', `${isPrivate}`);
@@ -50,7 +50,9 @@ export const fileService = {
 		if (hash && hash?.length > 0) {
 			httpParams.set('hash', hash.join(','));
 		}
-		const marketUrl = configService.getMarketUrl();
+
+		const marketUrl = await configService.getMarketUrl();
+
 		return api.post(`${marketUrl}/${FILES_URL}`, {
 			body: file,
 			headers: { 'Upload-Token': `${token}` },
