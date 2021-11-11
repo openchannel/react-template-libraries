@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import { AxiosResponse } from 'axios';
 
 export enum TypeCall {
   singleFile = 'singleFile',
@@ -28,8 +28,8 @@ export interface OcFileUploadProps {
 	isMultiFile: boolean;
 	maxWidth: number;
 	maxHeight: number;
-    service: FileUploadService;
-    isPrivate: boolean;
+	service: FileUploadService;
+	isPrivate: boolean;
 }
 
 export interface FoundVirus {
@@ -75,6 +75,6 @@ export interface VirusScanResult {
 }
 
 export interface FileUploadService {
-	fileUploadRequest(file: FormData, isPrivate: boolean, hash?: string[]): Promise<FileDetails> | Promise<AxiosResponse<FileDetails>>;
-	fileDetailsRequest(fileId: string): Promise<FileDetails> | Promise<AxiosResponse<FileDetails>>;
+	fileUploadRequest<T = FileDetails>(file: FormData, isPrivate: boolean, hash?: string[]): Promise<AxiosResponse<T>>;
+	fileDetailsRequest<T = FileDetails>(fileId: string): Promise<FileDetails> | Promise<AxiosResponse<T>>;
 }

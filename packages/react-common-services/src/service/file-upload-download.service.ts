@@ -1,6 +1,9 @@
+import { AxiosResponse } from 'axios';
+
 import { api } from '../lib/api';
 import { ReqHeaders } from '../lib/request';
 import { config as configService } from '../service/config.service';
+import { FileDetailsResponse } from '../model/api/file-details.model';
 
 const FILES_URL = 'v2/files';
 // {marketUrl}/v2/files}
@@ -20,7 +23,7 @@ export const fileService = {
 	 *
 	 * `uploadToOpenChannel({file},true, ['na0s78hd09a8shd90ahsd'])`
 	 */
-	uploadToOpenChannel: (file: FormData, isPrivate: boolean, hash?: string[]) => {
+	uploadToOpenChannel: <TResult = any>(file: FormData, isPrivate: boolean, hash?: string[]): Promise<AxiosResponse<TResult>> => {
 		return fileService
 			.getToken()
 			.then((res: any) => fileService.prepareUploadReq(res.token, file, isPrivate, hash));
@@ -73,13 +76,13 @@ export const fileService = {
 	 *
 	 * @param {string} fileId,
 	 * @param {ReqHeaders} headers
-	 * @returns {Observable<FileDetailsResponse>} `Observable<FileDetailsResponse>`
+	 * @returns {Promise<AxiosResponse<T = FileDetailsResponse>>} `Promise<AxiosResponse<T = FileDetailsResponse>>`
 	 *
 	 * ### Example:
 	 *
 	 * `downloadFileDetails('ha98s7dh8a7shd87');`
 	 */
-	downloadFileDetails: (fileId: string, headers: ReqHeaders) => {
+	downloadFileDetails: <T = FileDetailsResponse>(fileId: string, headers: ReqHeaders): Promise<AxiosResponse<T>> => {
 		return api.get(`${FILES_URL}/byIdOrUrl?fileIdOrUrl=${fileId}`, { headers });
 	},
 
