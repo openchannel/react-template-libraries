@@ -62,6 +62,7 @@ export const fileService = {
 			params: httpParams,
 		}, {
 			noCsrfToken: true,
+			ignoreNProgress: true,
 		});
 	},
 
