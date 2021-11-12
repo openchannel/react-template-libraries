@@ -21,7 +21,13 @@ export interface FeaturedAppsProps {
 	mainRouterLink: string;
 	/** custom card template in format of JSON string */
 	customFeaturedAppCardTemplate?: string;
-
+	/**
+	 * Key name of the App object which will be chosen like navigation parameter for the Router link.
+	 * Using only with the default app card template.
+	 * @type {string}.
+	 * @example.
+	 * 'appId'.
+	 */
 	navigationParam?: string;
 }
 
