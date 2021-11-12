@@ -43,7 +43,7 @@ export const OcFeaturedAppsComponent: React.FC<FeaturedAppsProps> = (props) => {
 						<div className="featured-apps__card-wrapper" key={label + index}>
 							<div className="featured-apps__card">
 								{!customFeaturedAppCardTemplate ? (
-									<Link to={mainRouterLink} className={`featured-apps__card-body ${customClass}`}>
+									<Link to={mainRouterLink + card.safeName[0]} className={`featured-apps__card-body ${customClass}`}>
 										<div className="featured-apps__card-img">
 											<img src={card.customData.icon} alt="card-icon" />
 										</div>
