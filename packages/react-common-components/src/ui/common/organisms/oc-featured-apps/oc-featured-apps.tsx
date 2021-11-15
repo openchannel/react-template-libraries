@@ -45,13 +45,13 @@ export const OcFeaturedAppsComponent: React.FC<FeaturedAppsProps> = (props) => {
 								{!customFeaturedAppCardTemplate ? (
 									<Link to={mainRouterLink} className={`featured-apps__card-body ${customClass}`}>
 										<div className="featured-apps__card-img">
-											<img src={card.customData.icon} alt="card-icon" />
+											<img src={card.icon} alt="card-icon" />
 										</div>
 										<h5 className="featured-apps__card-name">{card.name}</h5>
 										<span className="featured-apps__card-description">
 											{card && card.summary
-												? stripHtmlTags(card.customData.summary)
-												: stripHtmlTags(card.customData.description)}
+												? stripHtmlTags(card.summary)
+												: stripHtmlTags(card.description)}
 										</span>
 									</Link>
 								) : (
