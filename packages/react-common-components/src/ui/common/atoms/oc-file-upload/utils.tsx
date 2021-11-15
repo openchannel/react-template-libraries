@@ -1,14 +1,14 @@
 import { TypeCall, ExtendedFile } from './types';
-import { FileRejection} from 'react-dropzone';
+import { FileRejection } from 'react-dropzone';
 
-export const getAcceptedMethod = (acceptedFiles:FileRejection[], fileType:string, acceptType: string | undefined, files:ExtendedFile[]) => {
+export const getAcceptedMethod = (acceptedFiles: FileRejection[], fileType: string, acceptType: string | undefined, files: ExtendedFile[]) => {
 
 	let index = -1;
 	if (fileType === TypeCall.singleImage && files.length === 0) {
 		index = acceptedFiles.findIndex((item: { file: ExtendedFile }) => {
 			if (acceptType !== '' && acceptType) {
 				return acceptType.includes(item.file.type);
-			}else{
+			} else {
 				return item.file.type.toLowerCase().includes('image');
 			}
 		});
@@ -16,7 +16,7 @@ export const getAcceptedMethod = (acceptedFiles:FileRejection[], fileType:string
 			res: 'callModal',
 			index,
 		}
-	} else if((fileType === TypeCall.singleFile || fileType === TypeCall.privateSingleFile)  && files.length === 0) {
+	} else if ((fileType === TypeCall.singleFile || fileType === TypeCall.privateSingleFile) && files.length === 0) {
 		if (acceptType !== '' && acceptType) {
 			index = acceptedFiles.findIndex((item: { file: ExtendedFile }) => acceptType.includes(item.file.type));
 		} else {
@@ -32,4 +32,4 @@ export const getAcceptedMethod = (acceptedFiles:FileRejection[], fileType:string
 		res: 'undefined',
 		index,
 	}
-} 
+}

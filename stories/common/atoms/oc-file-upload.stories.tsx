@@ -3,6 +3,9 @@ import { Story, Meta } from '@storybook/react';
 
 import { fileService } from '../../../packages/react-common-services/src/index';
 import OcFileUpload from '../../../packages/react-common-components/src/ui/common/atoms/oc-file-upload';
+import { OcFileUploadProps } from '../../../packages/react-common-components/src/ui/common/atoms/oc-file-upload/types';
+
+
 
 
 export default {
@@ -10,26 +13,31 @@ export default {
 	component: OcFileUpload,
 } as Meta;
 
-const UploadComponent: Story<any> = (args) => <OcFileUpload {...args} />;
+const UploadComponent: Story<OcFileUploadProps> = (args) => <OcFileUpload {...args} />;
 
-const UploadOneFileComponent: Story<any> = (args) => <OcFileUpload {...args} maxFiles={1} />;
+// const UploadOneFileComponent: Story<OcFileUploadProps> = (args) => <OcFileUpload {...args} maxFiles={1} />;
 
-const mockFileService: any = {
-	uploadNewFile: (file: any, isPrivate: boolean, hash?: string[]) => {
-		return new Promise((resolve) => {
+const mockFileService = {
+	fileUploadRequest: (file: FormData, isPrivate: boolean, hash?: string[]) => {
+		return new Promise((resolve, reject) => {
 			setTimeout(async () => {
-				resolve(file);
+				let randBool = Math.random() < 0.5;
+				if (randBool) {
+					resolve(file);
+				} else {
+					reject("Uploading has been corrupted, try again...")
+				}
 			}, 4000);
-		  });
+		});
 	}
 }
 
 
-export const SingleImageFile = UploadOneFileComponent.bind({});
+export const SingleImageFile = UploadComponent.bind({});
 SingleImageFile.args = {
 	service: mockFileService,
 	fileType: 'singleImage',
-	acceptType: 'video/3gpp,video/3gpp2,application/vnd.kde.kchart,image/png,image/gif',
+	acceptType: 'image/png,image/gif',
 	isMultiFile: false,
 	maxWidth: 500,
 	maxHeight: 200,
@@ -62,6 +70,6 @@ MultipleFiles.args = {
 	fileType: 'multiFile',
 	isMultiFile: true,
 	service: mockFileService,
-	acceptType: 'video/3gpp,video/3gpp2,application/vnd.kde.kchart,image/*',
+	// acceptType: 'video/3gpp,video/3gpp2,application/vnd.kde.kchart,image/*',
 	isPrivate: false,
 };

@@ -257,11 +257,16 @@ export const FormikOcMultiSelectListWrapper: React.FC<
 
 export const FormikOcFileUploadWrapper: React.FC<any> = React.memo(({ acceptType, fileType, fileService, ...rest }) => {
 
+	const onChange = (value:string) => {
+			console.log(value);		
+	};
+	
 	return (
 		<OcFileUpload
 			acceptType={acceptType}
 			fileType={fileType}
 			service={fileService}
+			onChange={onChange}
 			{...rest}
 		/>
 	);
