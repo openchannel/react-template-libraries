@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { stripHtmlTags } from '../../../../lib';
 import { FullAppData } from '../../models';
+import { get } from 'lodash-es';
 
 import './style.scss';
 
@@ -20,6 +21,14 @@ export interface FeaturedAppsProps {
 	mainRouterLink: string;
 	/** custom card template in format of JSON string */
 	customFeaturedAppCardTemplate?: string;
+	/**
+	 * Key name of the App object which will be chosen like navigation parameter for the Router link.
+	 * Using only with the default app card template.
+	 * @type {string}.
+	 * @example.
+	 * 'appId'.
+	 */
+	navigationParam?: string;
 }
 
 export const OcFeaturedAppsComponent: React.FC<FeaturedAppsProps> = (props) => {
@@ -30,6 +39,7 @@ export const OcFeaturedAppsComponent: React.FC<FeaturedAppsProps> = (props) => {
 		customClass = '',
 		mainRouterLink,
 		customFeaturedAppCardTemplate = '',
+		navigationParam = ''
 	} = props;
 
 	return (
@@ -43,15 +53,15 @@ export const OcFeaturedAppsComponent: React.FC<FeaturedAppsProps> = (props) => {
 						<div className="featured-apps__card-wrapper" key={label + index}>
 							<div className="featured-apps__card">
 								{!customFeaturedAppCardTemplate ? (
-									<Link to={mainRouterLink} className={`featured-apps__card-body ${customClass}`}>
+									<Link to={`${mainRouterLink}${get(card, navigationParam)}`} className={`featured-apps__card-body ${customClass}`}>
 										<div className="featured-apps__card-img">
-											<img src={card.customData.icon} alt="card-icon" />
+											<img src={card.icon} alt="card-icon" />
 										</div>
 										<h5 className="featured-apps__card-name">{card.name}</h5>
 										<span className="featured-apps__card-description">
 											{card && card.summary
-												? stripHtmlTags(card.customData.summary)
-												: stripHtmlTags(card.customData.description)}
+												? stripHtmlTags(card.summary)
+												: stripHtmlTags(card.description)}
 										</span>
 									</Link>
 								) : (
