@@ -3,7 +3,7 @@ import * as React from 'react';
 import { OcEllipsisProps } from './types';
 
 export const OcEllipsis: React.FC<OcEllipsisProps> = (props) => {
-	const { tag, children, ...rest } = props;
+	const { tag, ...rest } = props;
 
 	const ref = React.useRef<HTMLElement>(null);
 
@@ -32,5 +32,5 @@ export const OcEllipsis: React.FC<OcEllipsisProps> = (props) => {
 		}
 	};
 
-	return React.createElement(tag, { ...rest, ref }, children);
+	return React.createElement(tag, { ...rest, ref });
 };
