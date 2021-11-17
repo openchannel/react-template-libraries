@@ -2,64 +2,21 @@ import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Story, Meta } from '@storybook/react';
 
-import { FeaturedAppsProps } from '../../../packages/react-common-components/src/ui/common';
-import OcFeaturedAppsComponent from '../../../packages/react-common-components/src/ui/common/organisms/oc-featured-apps';
+import {
+	OcFeaturedAppsComponent,
+	OcFeaturedAppsProps,
+} from '../../../packages/react-common-components/src/ui/common/organisms/oc-featured-apps';
+
+import { featuredApps } from './oc-featured-apps.mock';
+
+const appList = featuredApps();
 
 export default {
 	title: 'Featured Apps [BEM]',
 	component: OcFeaturedAppsComponent,
 } as Meta;
 
-const statElement = {
-	'90day': 20,
-	'30day': 10,
-	total: 20,
-};
-
-const featuredApp = {
-	appId: '34343-jjo-sgs-353-fgi-3423',
-	icon: './img/get-started.svg',
-	logo: './img/get-started.svg',
-	name: 'Test App 1',
-	model: [
-		{
-			type: 'recurring',
-			price: 5,
-			trial: 1,
-			license: 'single',
-			modelId: '23235hfg4',
-			currency: 'EUR',
-			billingPeriod: 'monthly',
-		},
-	],
-	rating: 4.2,
-	reviewCount: 20,
-	summary: '',
-	description: 'With this plugin you can collaborate with teammates at any time.',
-	lastUpdated: new Date(),
-	version: 1.1,
-	safeName: ['test-app'],
-	developerId: '44555-3232gvdfdf',
-	submittedDate: new Date(),
-	created: new Date().getMonth() - 2,
-	status: {
-		value: 'approved',
-		lastUpdated: 1.1,
-		modifiedBy: '',
-		reason: '',
-	},
-	statistics: {
-		views: statElement,
-		downloads: statElement,
-		developerSales: statElement,
-		totalSales: statElement,
-		ownerships: statElement,
-		reviews: statElement,
-	},
-	isLive: true,
-};
-
-const FeaturedApps: Story<FeaturedAppsProps> = (args) => {
+const FeaturedApps: Story<OcFeaturedAppsProps> = (args) => {
 	return (
 		<BrowserRouter>
 			<OcFeaturedAppsComponent
@@ -84,7 +41,7 @@ Empty.args = {
 export const SingleApp = FeaturedApps.bind({});
 
 SingleApp.args = {
-	data: [featuredApp],
+	data: [appList[0]],
 	label: 'Featured',
 	emptyDataMessage: 'No Featured App',
 };
@@ -92,7 +49,7 @@ SingleApp.args = {
 export const SomeApps = FeaturedApps.bind({});
 
 SomeApps.args = {
-	data: [featuredApp, featuredApp],
+	data: [appList[0], appList[1]],
 	label: 'Featured',
 	emptyDataMessage: 'No Featured App',
 };
@@ -100,7 +57,7 @@ SomeApps.args = {
 export const MaxApps = FeaturedApps.bind({});
 
 MaxApps.args = {
-	data: [featuredApp, featuredApp, featuredApp, featuredApp],
+	data: appList,
 	label: 'Featured',
 	emptyDataMessage: 'No Featured App',
 };
