@@ -17,18 +17,17 @@ const DateComponent: Story<any> = (args) => {
 
 export const DisabledDate = DateComponent.bind({});
 DisabledDate.args = {
-	// disabled: true,
-	type: 'datetime',
+	disabled: true,
 };
-// export const DefaultDate = DateComponent.bind({});
-// DefaultDate.args = {
-// 	type: 'date',
-// 	disabled: false,
-// 	settings: '',
-// };
-// export const DefaultDateTime = DateComponent.bind({});
-// DefaultDateTime.args = {
-// 	type: 'datetime',
-// 	disabled: false,
-// 	settings: '',
-// };
+export const DefaultDate = DateComponent.bind({});
+DefaultDate.args = {
+	type: 'date',
+	disabled: false,
+	settings: '',
+};
+export const DefaultDateTime = DateComponent.bind({});
+DefaultDateTime.args = {
+	type: 'datetime',
+	disabled: false,
+	settings: '',
+};

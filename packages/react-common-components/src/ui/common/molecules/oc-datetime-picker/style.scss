@@ -88,17 +88,25 @@ input.date-input:disabled {
 	cursor: pointer;
 	border-radius: 4px;
 }
+.rdtPicker .DayPicker-Day--selected,
+.DayPicker-Day--selected:hover {
+	color: #537cfd !important;
+	background-color: #f4f7fc !important;
+	border-radius: 4px;
+}
 .rdtPicker .DayPicker-Day--today,
 .DayPicker-Day--today:hover {
-	color: #537cfd;
-	background-color: #f4f7fc;
-	border-radius: 4px;
+	background: none;
+	color: #333333;
+	font-weight: 400 !important;
+	cursor: not-allowed;
 }
 .rdtPicker .DayPicker-Day--outside,
 .rdtPicker .DayPicker-Day--outside:hover {
 	background: none;
 	color: #999999;
-	cursor: not-allowed;
+	cursor: default;
+	pointer-events: none;
 }
 
 .rdtPicker .DayPicker-Weekday {
@@ -151,5 +159,6 @@ input.date-input:disabled {
 		top: 50%;
 		right: 2rem;
 		transform: translateY(-50%);
+		outline: none;
 	}
 }
