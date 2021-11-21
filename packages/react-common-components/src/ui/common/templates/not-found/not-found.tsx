@@ -15,7 +15,7 @@ export const NotFound: React.FC<NotFoundProps> = ({
 	buttonText = 'Go to home page',
 	buttonClassName = ''
 }) => (
-	<div className="main-container">
+	<div className="not-found main-container">
 		<div className="container mt-0 d-flex flex-column align-items-center">
 			{errorImgUrl && (
 				<img className="not-found-icon" src={errorImgUrl} alt="Not found 404" />
