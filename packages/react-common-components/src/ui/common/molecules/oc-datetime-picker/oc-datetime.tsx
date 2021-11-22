@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { NavbarElementProps, DayPickerProps } from 'react-day-picker';
-import DayPicker from 'react-day-picker/DayPicker';
+import DayPicker from 'react-day-picker';
 import MomentLocaleUtils from 'react-day-picker/moment';
 
 import { InputWithIcon } from './icon-input';
@@ -36,9 +36,6 @@ export interface DatepickerProps extends DayPickerProps {
 }
 
 export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
-	console.log('DATEPICK PROPS', props);
-	console.log('datepicker !!', DayPicker);
-	console.log('datepicker @@', <DayPicker />);
 	const { type = 'date', disabled, value = new Date(), onChange, settings = '' } = props;
 
 	const { formatDate } = MomentLocaleUtils;
@@ -88,7 +85,6 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 					'en',
 				)}`}
 				value={formatDate(value, type === 'date' ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm', 'en')}
-				// onChange={onChange}
 				onClick={handleToggleInput}
 				disabled={disabled}
 				className="date-input"
