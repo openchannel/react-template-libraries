@@ -2,9 +2,9 @@ import * as React from 'react';
 import { ReactComponent as UploadIcon } from '../../../../assets/img/file_icon.svg';
 import { Status, TypeFileRender } from './types';
 
+const randThirty = Math.floor(Math.random() * 30);
 
-export const FileRender = ({ file, idx, removeFile, service, isPrivate, onChange }: TypeFileRender) => {
-	const randThirty = Math.floor(Math.random() * 30);
+export const FileRender = ({ file, idx, removeFile, service, isPrivate, onChange, hash }: TypeFileRender) => {
 	const [progress, setProgress] = React.useState<number>(( 'failed' in file && file.failed ) ? 100 : randThirty);
 	const [status, setStatus] = React.useState<string>(Status.uploading);
 	const timerId = React.useRef<NodeJS.Timeout>();
@@ -13,14 +13,12 @@ export const FileRender = ({ file, idx, removeFile, service, isPrivate, onChange
 	React.useEffect(() => {
 		updateProgress(false);
 	}, [progress]);
-
+	
 	React.useLayoutEffect(() => {
 		if ('fileId' in file ) {
-			setProgress(100);
-			setStatus(Status.completed);
+			setNewStatus(Status.completed);
 		} else if (( 'failed' in file && file.failed )) {
-			setProgress(100);
-			setStatus(Status.failed);
+			setNewStatus(Status.failed);
 		} else {
 			fileLoad(Status.uploading);			
 		}
@@ -30,17 +28,20 @@ export const FileRender = ({ file, idx, removeFile, service, isPrivate, onChange
 		};
 	}, []);
 
-	const updateProgress = (isFinish: boolean) => {
+	const setNewStatus = (status: string) => {
+		setProgress(100);
+		setStatus(status);
+	}
+
+	const updateProgress = React.useCallback((isFinish: boolean) => {
 		if( 'fileId' in file || isFinish) {
-			setProgress(100);
-			setStatus(Status.completed);
+			setNewStatus(Status.completed);
 			clearTimeout(timerId.current!);
 			return;
 		}
 
 		if (( 'failed' in file && file.failed )) {
-			setProgress(100);
-			setStatus(Status.failed);
+			setNewStatus(Status.failed);
 			clearTimeout(timerId.current!);
 			return;
 		}
@@ -51,9 +52,9 @@ export const FileRender = ({ file, idx, removeFile, service, isPrivate, onChange
 				setProgress(prev => prev + randCounter);
 			}, 400);
 		}		
-	};
+	}, [progress, status]);
 
-	const fileLoad = async (loadStatus: string) => {
+	const fileLoad = React.useCallback(async (loadStatus: string) => {
 		if (loadStatus === Status.failed) {
 			setProgress(randThirty);
 			setStatus(Status.uploading);
@@ -70,17 +71,16 @@ export const FileRender = ({ file, idx, removeFile, service, isPrivate, onChange
 						onChange(isPrivate ? response.data.fileId : response.data.fileUrl);
 					}
 				});
-		} catch (error) {
+		} catch {
 			setStatus(Status.failed);
 			clearTimeout(timerId.current!);
-			throw new Error(error);
 		}
-	};
+	},[progress, status, file, isPrivate]);
 
 	return (
 		<div className={`thumb ${status.toLowerCase()}`}>
 			<div className="thumb-inner">
-				{typeof file.preview !== 'undefined' ? <img src={file.preview} className="img-thumb" /> : <UploadIcon className="img-thumb" />}
+				{typeof file.preview !== 'undefined' ? <img src={file.preview} className="img-thumb" alt={file.name} /> : <UploadIcon className="img-thumb" />}
 				<p className="file-name">{file.name}
 					<span className="status">{status}</span>
 				</p>

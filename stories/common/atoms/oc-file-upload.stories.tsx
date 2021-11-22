@@ -37,6 +37,7 @@ SingleImageFile.args = {
 	maxHeight: 200,
 	isPrivate: false,
 	isMultiFile: false,
+	hash: 'MD-5',
 };
 
 export const MultipleImageFiles = UploadComponent.bind({});

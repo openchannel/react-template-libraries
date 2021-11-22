@@ -8,14 +8,15 @@ import { FileRender } from './file-render';
 import { ReactComponent as UploadIcon } from '../../../../assets/img/upload_icon.svg';
 import OcCropperModalComponent from '../../organisms/oc-image-cropper-modal/oc-image-cropper-modal';
 import { CropperModalData } from '../../organisms/oc-image-cropper-modal/types';
+import { uniqueId } from 'lodash';
 
 export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
-	const { id, fileType, acceptType, service, maxWidth = 0, maxHeight = 0, isPrivate = false, onChange, inputValue, isMultiFile = false } = props;
+	const { id, fileType, acceptType, service, maxWidth = 0, maxHeight = 0, isPrivate = false, onChange, inputValue, isMultiFile = false, hash } = props;
 	const { isOpened, closeModal, openModal } = useModalState();
 	const [cropData, setCropData] = React.useState<CropperModalData>();
 	const [files, setFiles] = React.useState<Array<ExtendedFile>>([]);
 	const [border, setBorder] = React.useState<string>('');
-	const [stackFiles, setStackFiles] = React.useState<string[]>(() => Array.isArray(inputValue) ? inputValue : []);
+	const [_, setStackFiles] = React.useState<string[]>(() => Array.isArray(inputValue) ? inputValue : []);
 	const [isImage] = React.useState(fileType === TypeCall.singleImage || fileType === TypeCall.multiImage);
 
 	const onChangeHandler = (value:string) => {
@@ -40,16 +41,16 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 		}
 	}, []);
 
-	const fileDetails = async (links: string[]) => {
+	const fileDetails = React.useCallback(async (links: string[]) => {
 		const req = links.map((i) => service.fileDetailsRequest(i))
 		const responses = await Promise.allSettled(req);
 
 		const filteredFiles = responses.map((r) => {
 		if (r.status === 'fulfilled') {
 			if(isImage) { 
-				return {...r.value.data, preview: r.value.data.fileUrl};
+				return {...r.value.data, preview: r.value.data.fileUrl, lastModified: uniqueId()};
 			} else {
-				return {...r.value.data};
+				return {...r.value.data, lastModified: uniqueId()};
 			}
 		} else {
 			return { name : 'Error', failed: true };
@@ -57,7 +58,7 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 		}) as Array<ExtendedFile>;
 	
 		setFiles([...filteredFiles]);
-	};
+	}, [files]);
 
 	// Get accepted file types for uploading
 	const getAcceptFiles: string = React.useMemo(() => {
@@ -69,7 +70,7 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 	}, [acceptType, isImage]);
 
 	// Add new file (if filetype == image add preview image after cropping)
-	const addFile = (file: ExtendedFile) => {
+	const addFile = React.useCallback((file: ExtendedFile) => {
 		
 		if (isImage) {
 			Object.assign(file, {
@@ -77,10 +78,10 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 			})
 		}
 		setFiles([...files, file]);
-	};
+	},[files, isImage]);
 
 	// Remove specific file
-	const removeFile = (idx: number) => {
+	const removeFile = React.useCallback((idx: number) => {
 		setFiles(files.filter((_, i) => idx !== i));
 		if (isMultiFile && typeof inputValue !== 'undefined' ) {
 			const removedArr = inputValue.filter((_ : unknown, i:number) => idx !== i);
@@ -89,10 +90,10 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 		}else{
 			onChange('');
 		}
-	};
+	},[files, isMultiFile, inputValue]);
 
 	// open modal window with image for cropping 
-	const callModal = (file: ExtendedFile) => {
+	const callModal = React.useCallback((file: ExtendedFile) => {
 		const reader = new FileReader();
 		reader.onload = () => {
 			setCropData({ filename: file.name, image: reader.result as string });
@@ -103,10 +104,10 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 			}
 		}
 		reader.readAsDataURL(file);
-	};
+	},[files, isMultiFile]);
 
 	// call action when drag or insert new file 
-	const onDrop = (acceptedFiles: ExtendedFile[]) => {
+	const onDrop = React.useCallback((acceptedFiles: ExtendedFile[]) => {
 		setBorder('');
 		if (acceptedFiles.length > 0) {
 			if (isImage) {
@@ -118,7 +119,7 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 				inputRef.current!.value = '';
 			}
 		}
-	};
+	},[files, isImage, fileType]);
 
 	// Add green border while hover over box
 	const onDragOver = () => setBorder('active-border');
@@ -183,6 +184,7 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 							isPrivate={isPrivate}
 							onChange={onChangeHandler}
 							isMultiFile={isMultiFile}
+							hash={hash}
 						/>
 					))}
 				</aside>

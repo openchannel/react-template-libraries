@@ -256,7 +256,7 @@ export const FormikOcMultiSelectListWrapper: React.FC<
 }, shouldFieldUpdate(['options']));
 
 export const FormikOcFileUploadWrapper: React.FC<any> = (props) => {
-	const { acceptType, fileType, fileService, form, field, isPrivate, isMultiFile } = props;
+	const { acceptType, fileType, fileService, form, field, isPrivate, isMultiFile, hash } = props;
 	
 	const onChange = (value: any) => {
 			form.setFieldValue(field.name, value);
@@ -272,6 +272,7 @@ export const FormikOcFileUploadWrapper: React.FC<any> = (props) => {
 			inputValue={field.value}
 			isMultiFile={isMultiFile}
 			isPrivate={isPrivate}
+			hash={hash}
 		/>
 	);
 };

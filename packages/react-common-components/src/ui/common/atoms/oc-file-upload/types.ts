@@ -28,6 +28,7 @@ export interface ExtendedFile extends File {
     fileUrl?: string;
     fileId?: string;
     failed?: boolean;
+    
 
 }
 
@@ -39,6 +40,7 @@ export interface TypeFileRender {
     isPrivate: boolean;
     onChange(value:string | string[]):void;
     isMultiFile: boolean;
+    hash?: string;
 }
 
 export interface OcFileUploadProps {
@@ -53,6 +55,7 @@ export interface OcFileUploadProps {
     isPrivate?: boolean;
     onChange(value: string | string[]): void;
     inputValue?: any;
+    hash?: string;
 }
 
 export interface FoundVirus {
