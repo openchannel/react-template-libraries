@@ -27,7 +27,7 @@ export const OcFeaturedAppsComponent: React.FC<OcFeaturedAppsProps> = (props) =>
 				<h2 className="featured-apps__heading-text">{label}</h2>
 			</div>
 			{data && data.length ? (
-				<div className="featured-apps__container">
+				<div className={`featured-apps__container ${data.length < 4 ? 'featured-apps__container_justify-start' : '' }`}>
 					{data.slice(0, 4).map((card, index) => (
 						<div key={label + index} className="featured-apps__card-wrapper">
 							{!customFeaturedAppCardTemplate ? (

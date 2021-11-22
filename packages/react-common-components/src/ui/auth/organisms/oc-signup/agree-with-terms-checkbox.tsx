@@ -31,9 +31,9 @@ export const AgreeWithTermsCheckbox: React.FC<AgreeWithTermsCheckboxProps> = (pr
 
 	return (
 		<>
-			<div className="edit-user-form__content__checkbox">
+			<div className="content__checkbox">
 				{customTermsDescription && (
-					<div className="edit-user-form__content__label">
+					<div className="content__label">
 						{customTermsDescription}
 					</div>
 				)}
