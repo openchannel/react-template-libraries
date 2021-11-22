@@ -1,11 +1,8 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { fileService } from '../../../packages/react-common-services/src/index';
 import OcFileUpload from '../../../packages/react-common-components/src/ui/common/atoms/oc-file-upload';
 import { OcFileUploadProps } from '../../../packages/react-common-components/src/ui/common/atoms/oc-file-upload/types';
-
-
 
 
 export default {
@@ -14,8 +11,6 @@ export default {
 } as Meta;
 
 const UploadComponent: Story<OcFileUploadProps> = (args) => <OcFileUpload {...args} />;
-
-// const UploadOneFileComponent: Story<OcFileUploadProps> = (args) => <OcFileUpload {...args} maxFiles={1} />;
 
 const mockFileService = {
 	fileUploadRequest: (file: FormData, isPrivate: boolean, hash?: string[]) => {
@@ -38,28 +33,26 @@ SingleImageFile.args = {
 	service: mockFileService,
 	fileType: 'singleImage',
 	acceptType: 'image/png,image/gif',
-	isMultiFile: false,
 	maxWidth: 500,
 	maxHeight: 200,
 	isPrivate: false,
+	isMultiFile: false,
 };
 
 export const MultipleImageFiles = UploadComponent.bind({});
 MultipleImageFiles.args = {
 	service: mockFileService,
 	fileType: 'multiImage',
-	isMultiFile: true,
-	acceptType: '',
 	maxWidth: 500,
 	maxHeight: 200,
 	isPrivate: false,
+	isMultiFile: true,
 };
 
 
 export const SingleFile = UploadComponent.bind({});
 SingleFile.args = {
 	fileType: 'singleFile',
-	isMultiFile: false,
 	service: mockFileService,
 	acceptType: 'application/pdf',
 	isPrivate: false,
@@ -67,9 +60,9 @@ SingleFile.args = {
 
 export const MultipleFiles = UploadComponent.bind({});
 MultipleFiles.args = {
-	fileType: 'multiFile',
-	isMultiFile: true,
+	fileType: 'multiPrivateFile',
 	service: mockFileService,
 	// acceptType: 'video/3gpp,video/3gpp2,application/vnd.kde.kchart,image/*',
-	isPrivate: false,
+	isPrivate: true,
+	isMultiFile: true,
 };

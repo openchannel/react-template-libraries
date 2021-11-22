@@ -2,9 +2,10 @@ import * as React from 'react';
 import { ReactComponent as UploadIcon } from '../../../../assets/img/file_icon.svg';
 import { Status, TypeFileRender } from './types';
 
+
 export const FileRender = ({ file, idx, removeFile, service, isPrivate, onChange }: TypeFileRender) => {
 	const randThirty = Math.floor(Math.random() * 30);
-	const [progress, setProgress] = React.useState<number>(randThirty);
+	const [progress, setProgress] = React.useState<number>(( 'failed' in file && file.failed ) ? 100 : randThirty);
 	const [status, setStatus] = React.useState<string>(Status.uploading);
 	const timerId = React.useRef<NodeJS.Timeout>();
 	const randFinish = React.useRef<number>(Math.round(85 - 0.5 + Math.random() * (97 - 85 + 1)));
@@ -13,8 +14,16 @@ export const FileRender = ({ file, idx, removeFile, service, isPrivate, onChange
 		updateProgress(false);
 	}, [progress]);
 
-	React.useEffect(() => {
-		fileLoad(Status.uploading);
+	React.useLayoutEffect(() => {
+		if ('fileId' in file ) {
+			setProgress(100);
+			setStatus(Status.completed);
+		} else if (( 'failed' in file && file.failed )) {
+			setProgress(100);
+			setStatus(Status.failed);
+		} else {
+			fileLoad(Status.uploading);			
+		}
 
 		return function () {
 			clearTimeout(timerId.current!);
@@ -22,19 +31,26 @@ export const FileRender = ({ file, idx, removeFile, service, isPrivate, onChange
 	}, []);
 
 	const updateProgress = (isFinish: boolean) => {
-		if (isFinish) {
+		if( 'fileId' in file || isFinish) {
 			setProgress(100);
 			setStatus(Status.completed);
 			clearTimeout(timerId.current!);
 			return;
 		}
 
+		if (( 'failed' in file && file.failed )) {
+			setProgress(100);
+			setStatus(Status.failed);
+			clearTimeout(timerId.current!);
+			return;
+		}
+	
 		if (progress < randFinish.current) {
 			timerId.current = setTimeout(function () {
 				const randCounter = Math.floor(Math.random() * ((randFinish.current - progress) / 2));
 				setProgress(prev => prev + randCounter);
 			}, 400);
-		}
+		}		
 	};
 
 	const fileLoad = async (loadStatus: string) => {
@@ -42,16 +58,17 @@ export const FileRender = ({ file, idx, removeFile, service, isPrivate, onChange
 			setProgress(randThirty);
 			setStatus(Status.uploading);
 		}
-		
-		try {
-			onChange('Test');
 
+		try {
 			updateProgress(false);
 			const formData = new FormData();
-			formData.append('file', file, file.name)
-			await service.fileUploadRequest(formData, isPrivate = false)
-				.then(() => {
-					updateProgress(true)
+			formData.append('file', file, file.name);
+			await service.fileUploadRequest(formData, isPrivate)
+				.then((response) => {
+					updateProgress(true);
+					if( 'data' in response ) {
+						onChange(isPrivate ? response.data.fileId : response.data.fileUrl);
+					}
 				});
 		} catch (error) {
 			setStatus(Status.failed);

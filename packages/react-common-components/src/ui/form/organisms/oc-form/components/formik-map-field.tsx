@@ -27,7 +27,7 @@ import {
 
 export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 	const { fields, service, fileService, excludeRenderFields } = props;
-
+	
 	if (!fields || fields.length === 0) {
 		return null;
 	}
@@ -306,6 +306,8 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 									fileType={type}
 									acceptType={attributes?.accept}
 									fileService={fileService}
+									isPrivate={type === FIELD_TYPE.PRIVATE_SINGLE_FILE}
+									isMultiFile={false}
 								/>
 							</FieldGroupWrapper>
 						);
@@ -327,6 +329,8 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 									fileType={type}
 									acceptType={attributes?.accept}
 									fileService={fileService}
+									isPrivate={type === FIELD_TYPE.MULTI_PRIVATE_FILE}
+									isMultiFile={true}
 								/>
 							</FieldGroupWrapper>
 						);

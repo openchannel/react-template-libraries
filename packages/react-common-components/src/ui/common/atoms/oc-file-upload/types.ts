@@ -25,6 +25,10 @@ type FileType =
 
 export interface ExtendedFile extends File {
     preview?: string;
+    fileUrl?: string;
+    fileId?: string;
+    failed?: boolean;
+
 }
 
 export interface TypeFileRender {
@@ -32,11 +36,13 @@ export interface TypeFileRender {
     idx: number;
     removeFile(idx: number): void;
     service: FileUploadService;
-    isPrivate?: boolean;
-    onChange(value:string):void;
+    isPrivate: boolean;
+    onChange(value:string | string[]):void;
+    isMultiFile: boolean;
 }
 
 export interface OcFileUploadProps {
+    id: string;
     fileType: FileType;
     acceptType?: string;
     maxFiles?: number;
@@ -45,7 +51,8 @@ export interface OcFileUploadProps {
     maxHeight?: number;
     service: FileUploadService;
     isPrivate?: boolean;
-    onChange(value:string):void;
+    onChange(value: string | string[]): void;
+    inputValue?: any;
 }
 
 export interface FoundVirus {
@@ -88,6 +95,7 @@ export interface FileDetails {
     mimeCheck: 'PASSED' | 'FAILED';
     virusScan: VirusScanResult;
     isError: boolean;
+    data: any;
 }
 
 export interface FileUploadService {
