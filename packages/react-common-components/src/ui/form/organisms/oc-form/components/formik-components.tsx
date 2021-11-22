@@ -31,36 +31,39 @@ import type { FCWP, FieldGroupProps } from '../types';
 import { customClassWithError } from '../utils/common';
 import { shouldFieldGroupUpdate, shouldFieldUpdate } from '../utils/memo';
 
-export const FieldGroup: React.FC<FieldGroupProps & { error: string | undefined }> = React.memo((props) => {
-	const { children, error, label, labelFor, description, required } = props;
+export const FieldGroup: React.FC<FieldGroupProps & { error: string | undefined }> = React.memo(
+	(props) => {
+		const { children, error, label, labelFor, description, required } = props;
 
-	return (
-		<>
-			{label && (
-				<div className="form__field-label">
-					<OcTooltipLabel htmlFor={labelFor} required={required} description={description}>
-						{label}
-					</OcTooltipLabel>
-				</div>
-			)}
-			<div className="form__field-input">
-				{React.Children.map(children, (child) =>
-					React.isValidElement(child)
-						? // assign 'invalid' className to the customClass prop
-						  React.cloneElement(child, { customClass: customClassWithError(error, child) })
-						: child,
+		return (
+			<>
+				{label && (
+					<div className="form__field-label">
+						<OcTooltipLabel htmlFor={labelFor} required={required} description={description}>
+							{label}
+						</OcTooltipLabel>
+					</div>
 				)}
-			</div>
-			{error && <OcError message={error} />}
-		</>
-	);
-}, shouldFieldGroupUpdate);
+				<div className="form__field-input">
+					{React.Children.map(children, (child) =>
+						React.isValidElement(child)
+							? // assign 'invalid' className to the customClass prop
+							  React.cloneElement(child, { customClass: customClassWithError(error, child) })
+							: child,
+					)}
+				</div>
+				{error && <OcError message={error} />}
+			</>
+		);
+	},
+	shouldFieldGroupUpdate,
+);
 
 export const FieldGroupWrapper: React.FC<FieldGroupProps> = (props) => {
 	const { name } = props;
 	const { getFieldMeta } = useFormikContext();
 	const meta = getFieldMeta(name);
-	const error: string[] | undefined = (meta.error as any);
+	const error: string[] | undefined = meta.error as any;
 
 	return (
 		<div className="form__field">
@@ -197,7 +200,7 @@ export const FormikOcDatetimePickerWrapper: React.FC<
 		disabled?: DatepickerProps['disabled'];
 	}
 > = React.memo(
-	({ field, form, customClass, type, disabled }) => {
+	({ field, form, type, disabled }) => {
 		const onChange = React.useCallback(
 			(value) => {
 				form.setFieldValue(field.name, value);
@@ -207,7 +210,6 @@ export const FormikOcDatetimePickerWrapper: React.FC<
 
 		return (
 			<OcDatetimePicker
-				customClass={customClass}
 				type={type}
 				value={field.value}
 				onChange={onChange}
@@ -220,10 +222,10 @@ export const FormikOcDatetimePickerWrapper: React.FC<
 		['type', 'disabled'],
 		(
 			prevProps: Readonly<
-				React.PropsWithChildren<{ field: FieldInputProps<string | moment.Moment> }>
+				React.PropsWithChildren<{ field: FieldInputProps<string | moment.Moment | Date> }>
 			>,
 			nextProps: Readonly<
-				React.PropsWithChildren<{ field: FieldInputProps<string | moment.Moment> }>
+				React.PropsWithChildren<{ field: FieldInputProps<string | moment.Moment | Date> }>
 			>,
 		) => moment(prevProps.field.value).isSame(nextProps.field.value),
 	),
@@ -255,9 +257,11 @@ export const FormikOcMultiSelectListWrapper: React.FC<
 	);
 }, shouldFieldUpdate(['options']));
 
-export const FormikOcFileUploadWrapper: React.FC<any> = React.memo(({ acceptType, fileType }, props) => {
-	return <OcFileUpload acceptType={acceptType} fileType={fileType} {...props} />;
-});
+export const FormikOcFileUploadWrapper: React.FC<any> = React.memo(
+	({ acceptType, fileType }, props) => {
+		return <OcFileUpload acceptType={acceptType} fileType={fileType} {...props} />;
+	},
+);
 
 export const FormikOcDropdownMultiAppWrapper: React.FC<
 	FCWP<DropdownMultiAppProps['value']> & {
