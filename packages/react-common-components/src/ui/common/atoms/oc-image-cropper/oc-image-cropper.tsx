@@ -14,7 +14,7 @@ export interface CropperComponentProps {
 
 export const OcImageCropper: React.FC<CropperComponentProps> = (props: CropperComponentProps) => {
 	const { image, setCropper, maxWidth, maxHeight } = props;
-	const ratio = maxWidth && maxHeight ? maxWidth/maxHeight : NaN;
+	const ratio = maxWidth !== 0 && maxHeight !== 0 ? maxWidth! / maxHeight! : NaN;
 
 	return (
 		<div className="cropper">

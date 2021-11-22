@@ -1,35 +1,60 @@
 import { AxiosResponse } from 'axios';
 
 export enum TypeCall {
-  singleFile = 'singleFile',
-  singleImage = 'singleImage',
-  privateSingleFile = 'privateSingleFile',
-  multiFile = 'multiFile',
-  multiImage = 'multiImage',
-  multiPrivateFile = 'multiPrivateFile',
+    singleFile = 'singleFile',
+    singleImage = 'singleImage',
+    privateSingleFile = 'privateSingleFile',
+    multiFile = 'multiFile',
+    multiImage = 'multiImage',
+    multiPrivateFile = 'multiPrivateFile',
+}
+
+export enum Status {
+    failed = 'Failed',
+    completed = 'Completed',
+    uploading = 'Uploading',
 }
 
 type FileType =
-	| 'singleFile'
-	| 'singleImage'
-	| 'privateSingleFile'
-	| 'multiFile'
-	| 'multiImage'
-	| 'multiPrivateFile';
+    | 'singleFile'
+    | 'singleImage'
+    | 'privateSingleFile'
+    | 'multiFile'
+    | 'multiImage'
+    | 'multiPrivateFile';
 
 export interface ExtendedFile extends File {
-    preview?: string;
+	id?: string;
+	preview?: string;
+	fileUrl?: string;
+	fileId?: string;
+	failed?: boolean;
+}
+
+export interface TypeFileRender {
+    file: ExtendedFile;
+    idx: number;
+    removeFile(idx: number): void;
+    service: FileUploadService;
+    isPrivate: boolean;
+    onChange(value:string | string[]):void;
+    isMultiFile: boolean;
+    hash?: string;
 }
 
 export interface OcFileUploadProps {
-	fileType: FileType;
-	acceptType?: string;
-	maxFiles: number;
-	isMultiFile: boolean;
-	maxWidth: number;
-	maxHeight: number;
-	service: FileUploadService;
-	isPrivate: boolean;
+    id: string;
+    fileType: FileType;
+    acceptType?: string;
+    maxFiles?: number;
+    isMultiFile: boolean;
+    maxWidth?: number;
+    maxHeight?: number;
+    service: FileUploadService;
+    isPrivate?: boolean;
+    onChange(value: string | string[]): void;
+    inputValue?: any;
+    hash?: string;
 }
 
 export interface FoundVirus {
@@ -59,7 +84,7 @@ export interface VirusScanResult {
  *  @property {VirusScanResult} virusScan - Object that was returned after virus scan check
  *  @property {boolean} isError - Flag that shows up upload was with error or not
  */
- export interface FileDetails {
+export interface FileDetails {
     fileId: string;
     fileUrl: string;
     name: string;
@@ -72,9 +97,10 @@ export interface VirusScanResult {
     mimeCheck: 'PASSED' | 'FAILED';
     virusScan: VirusScanResult;
     isError: boolean;
+    data: any;
 }
 
 export interface FileUploadService {
-	fileUploadRequest<T = FileDetails>(file: FormData, isPrivate: boolean, hash?: string[]): Promise<AxiosResponse<T>>;
-	fileDetailsRequest<T = FileDetails>(fileId: string): Promise<FileDetails> | Promise<AxiosResponse<T>>;
+    fileUploadRequest<T = FileDetails>(file: FormData, isPrivate: boolean, hash?: string[]): Promise<AxiosResponse<T>>;
+    fileDetailsRequest<T = FileDetails>(fileId: string): Promise<FileDetails> | Promise<AxiosResponse<T>>;
 }
