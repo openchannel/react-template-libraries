@@ -48,12 +48,12 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 		const filteredFiles = responses.map((r) => {
 			if (r.status === 'fulfilled') {
 				if (isImage) {
-					return { ...r.value.data, preview: r.value.data.fileUrl, id: uniqueId() };
+					return { ...r.value.data, preview: r.value.data.fileUrl, lastModified: uniqueId() };
 				} else {
-					return { ...r.value.data, id: uniqueId() };
+					return { ...r.value.data, lastModified: uniqueId() };
 				}
 			}
-			return { name : 'Error', failed: true, id: uniqueId() };
+			return { name : 'Error', failed: true, lastModified: uniqueId() };
 		}) as Array<ExtendedFile>;
 
 		setFiles([...filteredFiles]);
@@ -75,7 +75,7 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 				preview: URL.createObjectURL(file)
 			})
 		}
-		setFiles(prev => [...prev, { ...file, id: uniqueId() }]);
+		setFiles(prev => [...prev, file]);
 	},[isImage]);
 
 	// Remove specific file
@@ -109,14 +109,12 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 		setBorder('');
 
 		if (acceptedFiles.length > 0) {
-			const modified = acceptedFiles.map((f) => ({ ...f, id: uniqueId() }));
-
 			if (isImage) {
-				callModal(modified[0]);
+				callModal(acceptedFiles[0]);
 			} else if ((fileType === TypeCall.singleFile || fileType === TypeCall.privateSingleFile) && files.length === 0) {
-				addFile(modified[0]);
+				addFile(acceptedFiles[0]);
 			} else if (fileType === TypeCall.multiFile || fileType === TypeCall.multiPrivateFile) {
-				setFiles([ ...files, ...modified ]);
+				setFiles([ ...files, ...acceptedFiles ]);
 				inputRef.current!.value = '';
 			}
 		}
@@ -133,9 +131,9 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 		const { res, index } = getAcceptedMethod(acceptedFiles, fileType, acceptType, files);
 
 		if (res === 'callModal' && index !== -1) {
-			callModal({ ...acceptedFiles[index].file, id: uniqueId() });
+			callModal(acceptedFiles[index].file);
 		} else if (res === 'addFile' && index !== -1) {
-			addFile({ ...acceptedFiles[index].file, id: uniqueId() });
+			addFile(acceptedFiles[index].file);
 		}
 	};
 
@@ -175,7 +173,7 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 				<aside className="thumbsContainer">
 					{files.map((file, idx) => (
 						<FileRender
-							key={file.id}
+							key={file.lastModified}
 							file={file}
 							idx={idx}
 							removeFile={removeFile}
