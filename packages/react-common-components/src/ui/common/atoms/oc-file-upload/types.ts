@@ -24,7 +24,6 @@ type FileType =
     | 'multiPrivateFile';
 
 export interface ExtendedFile extends File {
-	id?: string;
 	preview?: string;
 	fileUrl?: string;
 	fileId?: string;
