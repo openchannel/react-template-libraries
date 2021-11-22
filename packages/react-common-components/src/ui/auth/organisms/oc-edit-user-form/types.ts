@@ -4,6 +4,7 @@ import type { AppFormField } from '../../../form/models';
 import { OcFormFormikHelpers, OcFormValues } from '../../../form/organisms/oc-form';
 
 export interface TypeModel<T extends TypeFieldModel> {
+	formId?: string;
 	fields?: T[];
 }
 

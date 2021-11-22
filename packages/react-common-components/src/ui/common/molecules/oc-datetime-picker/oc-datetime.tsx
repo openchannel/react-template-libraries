@@ -1,5 +1,4 @@
 import * as React from 'react';
-import isNil from 'lodash';
 import { NavbarElementProps, DayPickerProps } from 'react-day-picker';
 import DayPicker from 'react-day-picker/DayPicker';
 import MomentLocaleUtils from 'react-day-picker/moment';
@@ -37,10 +36,13 @@ export interface DatepickerProps extends DayPickerProps {
 }
 
 export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
-	const { type = 'date', disabled, value, onChange, settings = '' } = props;
+	console.log('DATEPICK PROPS', props);
+	console.log('datepicker !!', DayPicker);
+	console.log('datepicker @@', <DayPicker />);
+	const { type = 'date', disabled, value = new Date(), onChange, settings = '' } = props;
+
 	const { formatDate } = MomentLocaleUtils;
 	const [timeVisible, setTimeVisible] = React.useState(false);
-	const dateValue = React.useMemo(() => (isNil(value) ? new Date() : value), [value]);
 	const handleToggleInput = () => setTimeVisible(!timeVisible);
 
 	const Navbar = ({ onPreviousClick, onNextClick, className }: NavbarElementProps) => {
@@ -81,11 +83,11 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 		<div ref={inputRef}>
 			<InputWithIcon
 				placeholder={`${formatDate(
-					dateValue,
+					value,
 					type === 'date' ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm',
 					'en',
 				)}`}
-				value={formatDate(dateValue, type === 'date' ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm', 'en')}
+				value={formatDate(value, type === 'date' ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm', 'en')}
 				// onChange={onChange}
 				onClick={handleToggleInput}
 				disabled={disabled}
@@ -101,12 +103,10 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 						months={MONTHS}
 						fixedWeeks
 						onDayClick={onChange}
-						selectedDays={dateValue}
+						selectedDays={value}
 						navbarElement={Navbar}
 					/>
-					{type === 'datetime' && timeVisible && (
-						<OcTimePicker value={dateValue} onChange={onChange} />
-					)}
+					{type === 'datetime' && timeVisible && <OcTimePicker value={value} onChange={onChange} />}
 				</div>
 			)}
 		</div>

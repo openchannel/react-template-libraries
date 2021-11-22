@@ -1,5 +1,4 @@
 import * as React from 'react';
-import moment from 'moment';
 import { isEmpty } from 'lodash-es';
 import { FieldInputProps, useFormikContext } from 'formik';
 
@@ -21,7 +20,7 @@ import { OcMultiSelectListProps, OcTagsProps } from '../../../molecules';
 import OcTags from '../../../molecules/oc-tags/oc-tags';
 import OcSelect from '../../../../common/molecules/oc-select/oc-select';
 import OcVideoUrlComponent from '../../../../common/molecules/oc-video-url/oc-video-url';
-import OcDatetimePicker from '../../../../common/molecules/oc-datetime-picker/oc-datetime';
+import { OcDatetimePicker } from '../../../../common/molecules/oc-datetime-picker/oc-datetime';
 import OcDropdownMultiApp from '../../../../common/molecules/oc-dropdown-multi-app/dropdown';
 import OcMultiSelectList from '../../../molecules/oc-multi-select-list/oc-multi-select-list';
 
@@ -207,27 +206,22 @@ export const FormikOcDatetimePickerWrapper: React.FC<
 			},
 			[field.name, form.setFieldValue],
 		);
-
 		return (
 			<OcDatetimePicker
 				type={type}
 				value={field.value}
 				onChange={onChange}
 				disabled={disabled}
-				{...(type === FIELD_TYPE.DATE ? { settings: 'DD/MM/yyyy' } : {})}
+				{...(type === FIELD_TYPE.DATE ? { settings: 'DD/MM/YYYY' } : { settings: '' })}
 			/>
 		);
 	},
 	shouldFieldUpdate(
 		['type', 'disabled'],
 		(
-			prevProps: Readonly<
-				React.PropsWithChildren<{ field: FieldInputProps<string | moment.Moment | Date> }>
-			>,
-			nextProps: Readonly<
-				React.PropsWithChildren<{ field: FieldInputProps<string | moment.Moment | Date> }>
-			>,
-		) => moment(prevProps.field.value).isSame(nextProps.field.value),
+			prevProps: Readonly<React.PropsWithChildren<{ field: FieldInputProps<string | Date> }>>,
+			nextProps: Readonly<React.PropsWithChildren<{ field: FieldInputProps<string | Date> }>>,
+		) => prevProps.field.value === nextProps.field.value,
 	),
 );
 

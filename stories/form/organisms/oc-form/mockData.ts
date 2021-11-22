@@ -855,7 +855,7 @@ export const formJsonData: any = {
 						required: true,
 					},
 					category: 'CUSTOM',
-					defaultValue: new Date(),
+					defaultValue: null,
 					description: null,
 					id: 'test-date-picker',
 					isOpen: false,

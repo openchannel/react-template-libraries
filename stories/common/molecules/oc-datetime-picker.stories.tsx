@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
-// import { DatepickerProps } from '../../../packages/react-common-components/src/ui/common';
 import OcDatetimePicker from '../../../packages/react-common-components/src/ui/common/molecules/oc-datetime-picker';
 
 export default {
