@@ -34,7 +34,7 @@ export interface DatepickerProps extends DayPickerProps {
 }
 
 export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
-	const { type = 'date', disabled, value = new Date(), onChange, settings = '' } = props;
+	const { type = 'date', disabled, value, onChange, settings = '' } = props;
 	const { formatDate } = MomentLocaleUtils;
 	const [timeVisible, setTimeVisible] = React.useState(false);
 	const handleToggleInput = () => setTimeVisible(!timeVisible);
@@ -52,16 +52,26 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
 	}, [inputRef]);
+	console.log('PROPS VALUE', value);
+	console.log('date VALUE', new Date(value));
 
 	return (
 		<div ref={inputRef}>
 			<InputWithIcon
-				placeholder={`${formatDate(
-					value,
-					type === 'date' ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm',
-					'en',
-				)}`}
-				value={formatDate(value, type === 'date' ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm', 'en')}
+				placeholder={`${
+					Boolean(value) === false
+						? type === 'date'
+							? 'DD/MM/YYYY'
+							: 'DD/MM/YYYY HH:mm'
+						: formatDate(value, type === 'date' ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm', 'en')
+				}`}
+				value={
+					Boolean(value) === false
+						? type === 'date'
+							? 'DD/MM/YYYY'
+							: 'DD/MM/YYYY HH:mm'
+						: formatDate(value, type === 'date' ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm', 'en')
+				}
 				onClick={handleToggleInput}
 				disabled={disabled}
 				className="date-input"
@@ -76,10 +86,12 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 						months={MONTHS}
 						fixedWeeks
 						onDayClick={onChange}
-						selectedDays={value}
+						selectedDays={new Date(value)}
 						navbarElement={Navbar}
 					/>
-					{type === 'datetime' && timeVisible && <OcTimePicker value={value} onChange={onChange} />}
+					{type === 'datetime' && timeVisible && (
+						<OcTimePicker value={new Date(value)} onChange={onChange} />
+					)}
 				</div>
 			)}
 		</div>
