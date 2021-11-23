@@ -64,7 +64,7 @@ export const OcImageCropperModalContent: React.FC<CropperModalProps> = (props) =
 				<div className="cropper__body">
 					<div className="cropper__body-container">
 						<div className="cropper__body-size">
-							<div className="cropper__body-resolution" >{(maxWidth && maxHeight) && maxWidth + 'px x ' + maxHeight + 'px'}</div>
+							<div className="cropper__body-resolution" >{(maxWidth !== 0 && maxHeight !== 0) && maxWidth + 'px x ' + maxHeight + 'px'}</div>
 							<div className="cropper__body-zoom">
 								<span onClick={zoomIn}>
 									<ZoomInImg />

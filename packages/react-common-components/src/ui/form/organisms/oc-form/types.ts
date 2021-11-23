@@ -1,10 +1,9 @@
 import * as React from 'react';
 import type { FieldInputProps, FormikHelpers, FormikProps, FormikValues } from 'formik';
-import { OcEditUserFormConfig } from '../../../auth/organisms/oc-edit-user-form';
 
-import type { Dataset } from '../../../common';
-import { FieldValidators } from '../../models';
-import type { AppFormModel, FormikField, FormikFieldsValues } from '../../models';
+import type { Dataset, FileUploadService } from '../../../common';
+import type { OcEditUserFormConfig } from '../../../auth/organisms/oc-edit-user-form';
+import type { FieldValidators, AppFormModel, FormikField, FormikFieldsValues } from '../../models';
 
 export type OcFormValues = Record<string, any>;
 export type OcFormFormikHelpers = FormikHelpers<Record<string, unknown>>;
@@ -16,6 +15,10 @@ export interface OcFormExtraProps {
 	 * Service to make API calls.
 	 */
 	service?: any;
+	/**
+	 * Service to make API calls.
+	 */
+	fileService?: FileUploadService;
 	/**
 	 * Don't render field by ID.
 	 */

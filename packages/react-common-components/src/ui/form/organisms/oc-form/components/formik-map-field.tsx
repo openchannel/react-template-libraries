@@ -25,7 +25,9 @@ import {
 	FormikRichTextWrapper,
 } from './formik-components';
 
-export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, service, excludeRenderFields }) => {
+export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
+	const { fields, service, fileService, excludeRenderFields } = props;
+	
 	if (!fields || fields.length === 0) {
 		return null;
 	}
@@ -35,7 +37,6 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 			{fields.map((field, index) => {
 				const { id, label, description, type, attributes, options, defaultValue, placeholder, name } =
 					field;
-
 				if (excludeRenderFields && excludeRenderFields.includes(id)) {
 					return null;
 				}
@@ -303,6 +304,10 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 									component={FormikOcFileUploadWrapper}
 									fileType={type}
 									acceptType={attributes?.accept}
+									fileService={fileService}
+									isPrivate={type === FIELD_TYPE.PRIVATE_SINGLE_FILE}
+									isMultiFile={false}
+									hash={attributes?.hash}
 								/>
 							</FieldGroupWrapper>
 						);
@@ -323,6 +328,10 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = ({ fields, servic
 									component={FormikOcFileUploadWrapper}
 									fileType={type}
 									acceptType={attributes?.accept}
+									fileService={fileService}
+									isPrivate={type === FIELD_TYPE.MULTI_PRIVATE_FILE}
+									isMultiFile={true}
+									hash={attributes?.hash}
 								/>
 							</FieldGroupWrapper>
 						);
