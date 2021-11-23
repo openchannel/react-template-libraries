@@ -16,3 +16,12 @@ export const MONTHS = [
 	'December,',
 ];
 export const WEEK = 1;
+
+export const styleLeft = {
+	float: 'left',
+	cursor: 'pointer',
+};
+export const styleRight = {
+	float: 'right',
+	cursor: 'pointer',
+};

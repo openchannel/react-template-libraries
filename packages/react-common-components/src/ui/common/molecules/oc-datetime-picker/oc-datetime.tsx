@@ -1,12 +1,10 @@
 import * as React from 'react';
-import { NavbarElementProps, DayPickerProps } from 'react-day-picker';
+import { DayPickerProps } from 'react-day-picker';
 import DayPicker from 'react-day-picker';
 import MomentLocaleUtils from 'react-day-picker/moment';
-
+import { Navbar } from './navbar';
 import { InputWithIcon } from './icon-input';
 import { OcTimePicker } from './oc-timepicker';
-import { ReactComponent as PrevIcon } from '../../../../assets/img/arrow-left-analog.svg';
-import { ReactComponent as NextIcon } from '../../../../assets/img/arrow-right-analog.svg';
 
 import { WEEK, WEEKDAYS_SHORT, WEEKDAYS_LONG, MONTHS } from './constants';
 import 'react-day-picker/lib/style.css';
@@ -37,44 +35,23 @@ export interface DatepickerProps extends DayPickerProps {
 
 export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 	const { type = 'date', disabled, value = new Date(), onChange, settings = '' } = props;
-
 	const { formatDate } = MomentLocaleUtils;
 	const [timeVisible, setTimeVisible] = React.useState(false);
 	const handleToggleInput = () => setTimeVisible(!timeVisible);
+	const inputRef: React.RefObject<HTMLDivElement> = React.useRef(null);
 
-	const Navbar = ({ onPreviousClick, onNextClick, className }: NavbarElementProps) => {
-		const styleLeft = {
-			float: 'left',
-			cursor: 'pointer',
+	React.useEffect(() => {
+		const handleClickOutside = (event: any) => {
+			if (inputRef?.current && !inputRef.current.contains(event.target)) {
+				setTimeVisible(false);
+			}
 		};
-		const styleRight = {
-			float: 'right',
-			cursor: 'pointer',
+
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
 		};
-		return (
-			<div className={className}>
-				<PrevIcon style={styleLeft} onClick={() => onPreviousClick()} />
-				<NextIcon style={styleRight} onClick={() => onNextClick()} />
-			</div>
-		);
-	};
-
-	const useOutsideClick = (ref: React.RefObject<HTMLDivElement>) => {
-		React.useEffect(() => {
-			const handleClickOutside = (event: any) => {
-				if (ref?.current && !ref.current.contains(event.target)) {
-					setTimeVisible(false);
-				}
-			};
-
-			document.addEventListener('mousedown', handleClickOutside);
-			return () => {
-				document.removeEventListener('mousedown', handleClickOutside);
-			};
-		}, [ref]);
-	};
-	const inputRef = React.useRef(null);
-	useOutsideClick(inputRef);
+	}, [inputRef]);
 
 	return (
 		<div ref={inputRef}>
