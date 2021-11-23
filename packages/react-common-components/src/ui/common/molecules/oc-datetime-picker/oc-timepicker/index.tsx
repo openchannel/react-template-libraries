@@ -10,16 +10,17 @@ export interface TimepickerProps {
 	/**
 	 * Date of datepicker
 	 */
-	value: string | Moment;
+	value: Date;
 	/**
 	 * Set Date of datepicker
 	 */
-	onChange: (value: string | Moment) => void;
+	onChange: (value: Date) => void;
 }
 
 export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
 	const { value, onChange } = props;
-	const [valueMoment, setValueMoment] = React.useState(moment(value));
+
+	const [valueMoment, setValueMoment] = React.useState<Moment>(moment(value));
 
 	React.useEffect(() => {
 		setValueMoment(moment(value));
@@ -31,16 +32,20 @@ export const OcTimePicker: React.FC<TimepickerProps> = (props) => {
 		measure: 'hours' | 'minutes',
 	) => {
 		return action === 'add'
-			? (setValueMoment(valueMoment.add(quantity, measure)), onChange(valueMoment))
-			: onChange(valueMoment.subtract(quantity, measure));
+			? (setValueMoment(valueMoment.add(quantity, measure)), onChange(valueMoment.toDate()))
+			: (setValueMoment(valueMoment.subtract(quantity, measure)), onChange(valueMoment.toDate()));
 	};
 	const handleHours = React.useCallback(
-		(e) => onChange(valueMoment.hours(Number(e.target.value || '0'))),
+		(e) => {
+			setValueMoment(valueMoment.hours(Number(e.target.value || '0')));
+			onChange(valueMoment.toDate());
+		},
 		[onChange, valueMoment],
 	);
 	const handleMinutes = React.useCallback(
 		(e) => {
-			onChange(valueMoment.minutes(Number(e.target.value || '0')));
+			setValueMoment(valueMoment.minutes(Number(e.target.value || '0')));
+			onChange(valueMoment.toDate());
 		},
 		[onChange, valueMoment],
 	);

@@ -45,18 +45,21 @@ export const Form: React.FC<OcFormProps> = (props) => {
 				return;
 			}
 
-			onSubmit(
-				formatOcFormValues(fieldsDefinition, values),
-				{ ...formikProps, setErrors: handleSetErrors },
-			);
+			onSubmit(formatOcFormValues(fieldsDefinition, values), {
+				...formikProps,
+				setErrors: handleSetErrors,
+			});
 		},
 	});
 
-	const handleSetErrors = React.useCallback((errors: FormikErrors<FormikValues>) => {
-		const ocFormErrors = formatOcFormErrors(fieldsDefinition, errors);
-		formik.setErrors(ocFormErrors);
-		formik.setSubmitting(false);
-	}, [formik.setErrors, formik.setSubmitting, fieldsDefinition]);
+	const handleSetErrors = React.useCallback(
+		(errors: FormikErrors<FormikValues>) => {
+			const ocFormErrors = formatOcFormErrors(fieldsDefinition, errors);
+			formik.setErrors(ocFormErrors);
+			formik.setSubmitting(false);
+		},
+		[formik.setErrors, formik.setSubmitting, fieldsDefinition],
+	);
 
 	const handleSubmit = React.useCallback(
 		(e) => {
@@ -78,7 +81,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 						fileService={fileService}
 						excludeRenderFields={excludeRenderFields}
 					/>
-					{children ? isFunction(children) ? children(formik, flattenFields) : children : null}
+					{children ? (isFunction(children) ? children(formik, flattenFields) : children) : null}
 					<div className={getOcFormButtonsClass(buttonPosition)}>
 						<div className={`form__button ${!onCancel ? 'full-width' : ''}`}>
 							<OcButtonComponent htmlType="submit" type="primary" process={formik.isSubmitting}>

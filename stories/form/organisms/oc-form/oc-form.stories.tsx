@@ -13,11 +13,7 @@ export default {
 } as Meta;
 
 const Component: Story<any> = (args) => {
-	return (
-		<OcForm
-			{...args}
-		/>
-	);
+	return <OcForm {...args} />;
 };
 
 export const Default = Component.bind({});
@@ -360,7 +356,7 @@ FormWithDateAndDateTime.args = {
 					required: true,
 				},
 				category: 'CUSTOM',
-				defaultValue: null,
+				defaultValue: new Date(),
 				description: null,
 				id: 'test-date-picker',
 				isOpen: false,
@@ -476,21 +472,27 @@ const mockApps: Partial<FullAppData>[] = [
 
 const mockService: AppsService = {
 	searchInitialMultiApps: (query: string): Promise<any> => {
-		const {appId: {$in: appIds}} = JSON.parse(query);
-		return new Promise(resolve => resolve({data: {list: mockApps.filter(app => appIds.includes(app.appId))}}));
+		const {
+			appId: { $in: appIds },
+		} = JSON.parse(query);
+		return new Promise((resolve) =>
+			resolve({ data: { list: mockApps.filter((app) => appIds.includes(app.appId)) } }),
+		);
 	},
 	searchMultiApps: (searchText: string, query?: string): Promise<any> => {
 		const lowerSearch = searchText.toLowerCase();
-		const appIds = query
-			? JSON.parse(query).appId.$nin
-			: [];
-		return new Promise(resolve => {
-			const apps = mockApps
-				.filter(app => !appIds.includes(app.appId) && (app.name?.toLowerCase().includes(lowerSearch) || app.appId?.toLowerCase().includes(lowerSearch)));
-			resolve({data: {list: apps}})
+		const appIds = query ? JSON.parse(query).appId.$nin : [];
+		return new Promise((resolve) => {
+			const apps = mockApps.filter(
+				(app) =>
+					!appIds.includes(app.appId) &&
+					(app.name?.toLowerCase().includes(lowerSearch) ||
+						app.appId?.toLowerCase().includes(lowerSearch)),
+			);
+			resolve({ data: { list: apps } });
 		});
-	}
-}
+	},
+};
 
 export const FormWithMultiAppDropdown = Component.bind({});
 FormWithMultiAppDropdown.args = {
@@ -519,7 +521,7 @@ FormWithMultiAppDropdown.args = {
 			},
 		],
 	},
-	service:  mockService
+	service: mockService,
 };
 
 export const FormWithDynamicFieldArray = Component.bind({});
