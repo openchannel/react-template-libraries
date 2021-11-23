@@ -41,8 +41,8 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 	const inputRef: React.RefObject<HTMLDivElement> = React.useRef(null);
 
 	React.useEffect(() => {
-		const handleClickOutside = (event: any) => {
-			if (inputRef?.current && !inputRef.current.contains(event.target)) {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (inputRef?.current && !inputRef.current.contains(event.target as Node)) {
 				setTimeVisible(false);
 			}
 		};

@@ -5,8 +5,8 @@ import { ReactComponent as PrevIcon } from '../../../../assets/img/arrow-left-an
 import { ReactComponent as NextIcon } from '../../../../assets/img/arrow-right-analog.svg';
 
 export const Navbar = ({ onPreviousClick, onNextClick, className }: NavbarElementProps) => {
-	const handlePrevClick = React.useMemo(() => onPreviousClick(), [onPreviousClick]);
-	const handleNextClick = React.useMemo(() => onNextClick(), [onNextClick]);
+	const handlePrevClick = () => onPreviousClick();
+	const handleNextClick = () => onNextClick();
 
 	return (
 		<div className={className}>
