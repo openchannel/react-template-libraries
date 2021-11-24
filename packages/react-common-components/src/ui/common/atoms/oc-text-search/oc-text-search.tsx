@@ -4,7 +4,10 @@ import { noop } from 'lodash';
 
 import { ReactComponent as TextSearchIcon } from '../../../../assets/img/text-search-icon.svg';
 import OcButtonComponent from '../oc-button/oc-button';
+import OcTagElement from '../oc-tag-element'
 import { InputProps } from '../oc-input';
+import { SidebarItem } from '../../molecules';
+
 
 import './style.scss';
 
@@ -49,7 +52,22 @@ export interface TextSearchProps extends InputProps {
 	 * text for clear button
 	 */
 	clearButtonText: string;
+
+
+	selectedFilters?: any;
+
+	handleDeleteAll?: any;
+
+	handleTagDelete?: any;
+
+	handleTagClick?:any;
+
+	clearAllText?: string;
 }
+
+export interface SelectedFilter extends SidebarItem {
+	id: string;
+  }
 
 export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 	const {
@@ -61,8 +79,14 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 		enterAction = noop,
 		searchButtonText = 'Search',
 		clearButtonText = 'Cancel',
+		selectedFilters,
+		handleDeleteAll,
+		handleTagDelete,
+		handleTagClick,
+		clearAllText="Clear All",
 	} = props;
-
+	console.log(selectedFilters);
+	
 	const handleChange = React.useCallback(
 		(e: any) => {
 			if (e.key === 'Enter') {
@@ -87,7 +111,7 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 		onChange('');
 	}, [onChange]);
 
-	return (
+	return (<>
 		<div className="text-search">
 			<div className="text-search__container">
 				<input
@@ -125,6 +149,25 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 				)}
 			</div>
 		</div>
+		{selectedFilters && (selectedFilters.filters.length > 0 || selectedFilters.searchStr.length) > 0 &&
+			<div className="search-tags">
+				{selectedFilters.filters.map((filter:SelectedFilter) => (
+					<OcTagElement
+						title={filter?.parent.label}
+						onIconClick={() => handleTagClick(filter.parent.label)}
+						key={filter.id + filter.parent.id}
+					/>
+				))}
+				{selectedFilters.searchStr && (
+					<OcTagElement 
+						title={selectedFilters.searchStr} 
+						onIconClick={handleTagDelete} 
+					/>
+				)}
+				{(selectedFilters.filters.length > 0 || selectedFilters.searchStr) && <button className="clear-all" onClick={handleDeleteAll}>{clearAllText}</button>}
+			</div>
+		}
+		</>
 	);
 };
 
