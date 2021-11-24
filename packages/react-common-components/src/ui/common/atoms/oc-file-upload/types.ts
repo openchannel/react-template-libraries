@@ -24,10 +24,10 @@ type FileType =
     | 'multiPrivateFile';
 
 export interface ExtendedFile extends File {
-    preview?: string;
-    fileUrl?: string;
-    fileId?: string;
-    failed?: boolean;
+	preview?: string;
+	fileUrl?: string;
+	fileId?: string;
+	failed?: boolean;
 }
 
 export interface TypeFileRender {

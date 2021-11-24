@@ -19,8 +19,8 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 	const [_, setStackFiles] = React.useState<string[]>(() => Array.isArray(inputValue) ? inputValue : []);
 	const [isImage] = React.useState(fileType === TypeCall.singleImage || fileType === TypeCall.multiImage);
 
-	const onChangeHandler = (value:string) => {
-		if(isMultiFile) {
+	const onChangeHandler = React.useCallback((value: string) => {
+		if (isMultiFile) {
 			setStackFiles(prev => {
 				const next = [...prev, value];
 				onChange(next);
@@ -29,7 +29,7 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 		} else {
 			onChange(value);
 		}
-	}
+	}, [onChange, isMultiFile]);
 
 	React.useEffect(() => {
 		if( typeof inputValue !== 'undefined' && inputValue.length !== 0 ){
@@ -42,23 +42,22 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 	}, []);
 
 	const fileDetails = React.useCallback(async (links: string[]) => {
-		const req = links.map((i) => service.fileDetailsRequest(i))
+		const req = links.map((i) => service.fileDetailsRequest(i));
 		const responses = await Promise.allSettled(req);
 
 		const filteredFiles = responses.map((r) => {
-		if (r.status === 'fulfilled') {
-			if(isImage) { 
-				return {...r.value.data, preview: r.value.data.fileUrl, lastModified: uniqueId()};
-			} else {
-				return {...r.value.data, lastModified: uniqueId()};
+			if (r.status === 'fulfilled') {
+				if (isImage) {
+					return { ...r.value.data, preview: r.value.data.fileUrl, lastModified: uniqueId() };
+				} else {
+					return { ...r.value.data, lastModified: uniqueId() };
+				}
 			}
-		} else {
-			return { name : 'Error', failed: true };
-		}
+			return { name : 'Error', failed: true, lastModified: uniqueId() };
 		}) as Array<ExtendedFile>;
-	
+
 		setFiles([...filteredFiles]);
-	}, [files]);
+	}, [files, isImage]);
 
 	// Get accepted file types for uploading
 	const getAcceptFiles: string = React.useMemo(() => {
@@ -71,28 +70,27 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 
 	// Add new file (if filetype == image add preview image after cropping)
 	const addFile = React.useCallback((file: ExtendedFile) => {
-		
 		if (isImage) {
 			Object.assign(file, {
 				preview: URL.createObjectURL(file)
 			})
 		}
-		setFiles([...files, file]);
-	},[files, isImage]);
+		setFiles(prev => [...prev, file]);
+	},[isImage]);
 
 	// Remove specific file
 	const removeFile = React.useCallback((idx: number) => {
 		setFiles(files.filter((_, i) => idx !== i));
-		if (isMultiFile && typeof inputValue !== 'undefined' ) {
-			const removedArr = inputValue.filter((_ : unknown, i:number) => idx !== i);
+		if (isMultiFile && typeof inputValue !== 'undefined') {
+			const removedArr = inputValue.filter((_: unknown, i: number) => idx !== i);
 			onChange(removedArr);
-			setStackFiles([...removedArr]);
+			setStackFiles(removedArr);
 		}else{
 			onChange('');
 		}
-	},[files, isMultiFile, inputValue]);
+	},[onChange, files, isMultiFile, inputValue]);
 
-	// open modal window with image for cropping 
+	// open modal window with image for cropping
 	const callModal = React.useCallback((file: ExtendedFile) => {
 		const reader = new FileReader();
 		reader.onload = () => {
@@ -104,32 +102,32 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 			}
 		}
 		reader.readAsDataURL(file);
-	},[files, isMultiFile]);
+	},[isMultiFile, openModal]);
 
-	// call action when drag or insert new file 
-	const onDrop = React.useCallback((acceptedFiles: ExtendedFile[]) => {
+	// call action when drag or insert new file
+	const onDrop = (acceptedFiles: ExtendedFile[]) => {
 		setBorder('');
+
 		if (acceptedFiles.length > 0) {
 			if (isImage) {
 				callModal(acceptedFiles[0]);
 			} else if ((fileType === TypeCall.singleFile || fileType === TypeCall.privateSingleFile) && files.length === 0) {
 				addFile(acceptedFiles[0]);
 			} else if (fileType === TypeCall.multiFile || fileType === TypeCall.multiPrivateFile) {
-				setFiles([...files, ...acceptedFiles]);
+				setFiles([ ...files, ...acceptedFiles ]);
 				inputRef.current!.value = '';
 			}
 		}
-	},[files, isImage, fileType]);
+	};
 
 	// Add green border while hover over box
-	const onDragOver = () => setBorder('active-border');
+	const onDragOver = React.useCallback(() => setBorder('active-border'), []);
 
 	// Show normal border while leaving box or adding item into uploader
-	const onDragLeave = () => setBorder('');
+	const onDragLeave = React.useCallback(() => setBorder(''), []);
 
-	// Add first accepted file if dragged more than one file  
+	// Add first accepted file if dragged more than one file
 	const onDropRejected = (acceptedFiles: FileRejection[]) => {
-		
 		const { res, index } = getAcceptedMethod(acceptedFiles, fileType, acceptType, files);
 
 		if (res === 'callModal' && index !== -1) {
@@ -160,7 +158,6 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 						<span> Browse File</span>
 						<input id={id} {...getInputProps()} />
 					</label>
-
 					<OcCropperModalComponent
 						maxWidth={maxWidth}
 						maxHeight={maxHeight}
@@ -172,7 +169,7 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 				</div>
 			</>}
 
-			{files.length >= 1 && <>
+			{files.length >= 1 && (
 				<aside className="thumbsContainer">
 					{files.map((file, idx) => (
 						<FileRender
@@ -188,8 +185,7 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 						/>
 					))}
 				</aside>
-			</>
-			}
+			)}
 		</div>
 	);
 };
