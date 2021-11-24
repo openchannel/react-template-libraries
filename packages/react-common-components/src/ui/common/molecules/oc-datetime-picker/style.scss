@@ -15,6 +15,9 @@
 	@include font-regular();
 	cursor: pointer;
 	caret-color: transparent;
+	&::placeholder {
+		color: $input-placeholder-color-dark;
+	}
 }
 .date-input:focus {
 	cursor: pointer;

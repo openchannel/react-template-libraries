@@ -53,23 +53,20 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 		};
 	}, [inputRef]);
 
+	const placeholderFormat = React.useMemo(
+		() => (type === 'date' ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm'),
+		[type],
+	);
+	const inputValue = React.useMemo(
+		() => (Boolean(value) === false ? '' : formatDate(value, placeholderFormat, 'en')),
+		[value, placeholderFormat],
+	);
+
 	return (
 		<div ref={inputRef}>
 			<InputWithIcon
-				placeholder={`${
-					Boolean(value) === false
-						? type === 'date'
-							? 'DD/MM/YYYY'
-							: 'DD/MM/YYYY HH:mm'
-						: formatDate(value, type === 'date' ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm', 'en')
-				}`}
-				value={
-					Boolean(value) === false
-						? type === 'date'
-							? 'DD/MM/YYYY'
-							: 'DD/MM/YYYY HH:mm'
-						: formatDate(value, type === 'date' ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm', 'en')
-				}
+				placeholder={placeholderFormat}
+				value={inputValue}
 				onClick={handleToggleInput}
 				disabled={disabled}
 				className="date-input"
