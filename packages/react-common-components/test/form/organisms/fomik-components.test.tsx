@@ -1,7 +1,6 @@
 import { Formik } from 'formik';
 import * as React from 'react';
 import { mount } from 'enzyme';
-import moment from 'moment';
 
 import {
 	FormikOcMultiSelectListWrapper,
@@ -113,7 +112,7 @@ describe('formik-components', () => {
 	});
 
 	it('FormikOcDatetimePickerWrapper should set value to formikState', () => {
-		const nextValue = moment('22/1/2021');
+		const nextValue = new Date();
 
 		const wrapper = setUpWithFormik(
 			<FormikOcDatetimePickerWrapper
