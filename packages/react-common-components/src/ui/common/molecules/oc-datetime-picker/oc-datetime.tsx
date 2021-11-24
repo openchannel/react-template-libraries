@@ -34,7 +34,7 @@ export interface DatepickerProps extends DayPickerProps {
 }
 
 export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
-	const { type = 'date', disabled, value = new Date(), onChange, settings = '' } = props;
+	const { type = 'date', disabled, value, onChange, settings = '' } = props;
 	const { formatDate } = MomentLocaleUtils;
 	const [timeVisible, setTimeVisible] = React.useState(false);
 	const handleToggleInput = () => setTimeVisible(!timeVisible);
@@ -53,15 +53,20 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 		};
 	}, [inputRef]);
 
+	const placeholderFormat = React.useMemo(
+		() => (type === 'date' ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm'),
+		[type],
+	);
+	const inputValue = React.useMemo(
+		() => (Boolean(value) === false ? '' : formatDate(value, placeholderFormat, 'en')),
+		[value, placeholderFormat],
+	);
+
 	return (
 		<div ref={inputRef}>
 			<InputWithIcon
-				placeholder={`${formatDate(
-					value,
-					type === 'date' ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm',
-					'en',
-				)}`}
-				value={formatDate(value, type === 'date' ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm', 'en')}
+				placeholder={placeholderFormat}
+				value={inputValue}
 				onClick={handleToggleInput}
 				disabled={disabled}
 				className="date-input"
@@ -76,10 +81,12 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 						months={MONTHS}
 						fixedWeeks
 						onDayClick={onChange}
-						selectedDays={value}
+						selectedDays={new Date(value)}
 						navbarElement={Navbar}
 					/>
-					{type === 'datetime' && timeVisible && <OcTimePicker value={value} onChange={onChange} />}
+					{type === 'datetime' && timeVisible && (
+						<OcTimePicker value={new Date(value)} onChange={onChange} />
+					)}
 				</div>
 			)}
 		</div>
