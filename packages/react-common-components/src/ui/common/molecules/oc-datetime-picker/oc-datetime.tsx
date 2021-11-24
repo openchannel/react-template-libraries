@@ -52,8 +52,6 @@ export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
 	}, [inputRef]);
-	console.log('PROPS VALUE', value);
-	console.log('date VALUE', new Date(value));
 
 	return (
 		<div ref={inputRef}>
