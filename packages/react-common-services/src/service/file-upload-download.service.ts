@@ -11,20 +11,21 @@ const FILES_URL = 'v2/files';
 // {fileUrl}
 
 export const fileService = {
+
 	/**
 	 *
 	 * Description: Get Token and upload file to open channel
 	 *
 	 * @param {FormData} file - File from formData
 	 * @param {boolean} isPrivate
-	 * @param {string[]} hash - (optional) file hash
+	 * @param {string} hash - (optional) file hash
 	 *
 	 * ### Example:
 	 *
-	 * `uploadToOpenChannel({file},true, ['na0s78hd09a8shd90ahsd'])`
+	 * `uploadToOpenChannel({file},true, 'MD5,SHA-1,SHA-256')`
 	 */
-	uploadToOpenChannel: <TResult = any>(file: FormData, isPrivate: boolean, hash?: string[]): Promise<AxiosResponse<TResult>> => {
-		return fileService
+	uploadToOpenChannel: <TResult = any>(file: FormData, isPrivate: boolean, hash?: string): Promise<AxiosResponse<TResult>> => {
+	return fileService
 			.getToken()
 			.then((res: AxiosResponse) => fileService.prepareUploadReq(res.data.token, file, isPrivate, hash));
 	},
@@ -36,19 +37,20 @@ export const fileService = {
 	 * @param {any} token - Token for channel
 	 * @param {FormData} file - File from formData
 	 * @param {boolean} isPrivate
-	 * @param {string[]} hash - (optional) file hash
+	 * @param {string} hash - (optional) file hash
 	 *
 	 * ### Example:
 	 *
-	 * `prepareUploadReq('0a897shd0897ahs09d8has9d7',{file},true, ['na0s78hd09a8shd90ahsd'])`
+	 * `prepareUploadReq('0a897shd0897ahs09d8has9d7',{file},true, 'MD5,SHA-1,SHA-256')`
 	 */
-	prepareUploadReq: async (token: any, file: FormData, isPrivate: boolean, hash?: string[]) => {
+	prepareUploadReq: async (token: any, file: FormData, isPrivate: boolean, hash?: string) => {
 		const httpParams = new URLSearchParams();
 		if (isPrivate) {
 			httpParams.set('isPrivate', `${isPrivate}`);
 		}
+
 		if (hash && hash?.length > 0) {
-			httpParams.set('hash', hash.join(','));
+			httpParams.set('hash', hash);
 		}
 
 		const marketUrl = await configService.getMarketUrl();
