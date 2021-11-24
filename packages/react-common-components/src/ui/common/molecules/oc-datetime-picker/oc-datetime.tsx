@@ -34,7 +34,7 @@ export interface DatepickerProps extends DayPickerProps {
 }
 
 export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
-	const { type = 'date', disabled, value, onChange, settings = '' } = props;
+	const { type = 'date', disabled, value, onChange } = props;
 	const { formatDate } = MomentLocaleUtils;
 	const [timeVisible, setTimeVisible] = React.useState(false);
 	const handleToggleInput = () => setTimeVisible(!timeVisible);
