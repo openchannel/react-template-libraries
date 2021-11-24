@@ -99,7 +99,9 @@ export interface FileDetails {
     data: any;
 }
 
+export type ReqHeaders = { [key: string]: string };
+
 export interface FileUploadService {
-    fileUploadRequest<T = FileDetails>(file: FormData, isPrivate: boolean, hash?: string[]): Promise<AxiosResponse<T>>;
-    fileDetailsRequest<T = FileDetails>(fileId: string): Promise<FileDetails> | Promise<AxiosResponse<T>>;
+    fileUploadRequest<T = FileDetails>(file: FormData, isPrivate: boolean, hash?: string): Promise<AxiosResponse<T>>;
+    fileDetailsRequest<T = FileDetails>(fileId: string, headers?: ReqHeaders): Promise<FileDetails> | Promise<AxiosResponse<T>>;
 }
