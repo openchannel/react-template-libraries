@@ -2,9 +2,8 @@
 @import '../../../styles/index';
 
 .gallery {
-	// @include media-breakpoint-md {
-		position: relative;
-	// }
+	position: relative;
+	
 	&__header {
 		&-top {
 			display: flex;
