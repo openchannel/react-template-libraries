@@ -31,7 +31,7 @@ export interface TextSearchProps extends InputProps {
 	/**
 	 * onChange handler
 	 */
-	onChange: any;
+	onChange(value:string): void;
 	/**
 	 * Magnifier image presence on input
 	 */
@@ -52,22 +52,36 @@ export interface TextSearchProps extends InputProps {
 	 * text for clear button
 	 */
 	clearButtonText: string;
-
-
-	selectedFilters?: any;
-
-	handleDeleteAll?: any;
-
-	handleTagDelete?: any;
-
-	handleTagClick?:any;
-
+	/**
+	 * array of searched tags
+	 */
+	selectedFilters?: SelectedFilters;
+	/**
+	 * handler for deleteing all tags
+	 */
+	handleDeleteAll?(): void;
+	/**
+	 * handler for deleteing specific tags
+	 */
+	handleTagDelete?(): void;
+	/**
+	 * click handler
+	 */
+	handleTagClick?(title:string, id?: string):void;
+	/**
+	 * text for clear All button
+	 */
 	clearAllText?: string;
 }
 
 export interface SelectedFilter extends SidebarItem {
 	id: string;
-  }
+}
+
+export interface SelectedFilters {
+	filters: SelectedFilter[];
+	searchStr: string;
+}
 
 export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 	const {
@@ -85,17 +99,16 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 		handleTagClick,
 		clearAllText="Clear All",
 	} = props;
-	console.log(selectedFilters);
 	
 	const handleChange = React.useCallback(
-		(e: any) => {
+		(e : React.ChangeEvent<HTMLInputElement> & React.KeyboardEvent<HTMLTextAreaElement>) => {
 			if (e.key === 'Enter') {
 				enterAction(e as unknown as React.MouseEvent);
 			} else {
-				onChange(e.target.value);
+				onChange(e.currentTarget.value);
 			}
 		},
-		[onChange],
+		[onChange, enterAction],
 	);
 
 	const handleKeyDown = React.useCallback(
@@ -154,7 +167,7 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 				{selectedFilters.filters.map((filter:SelectedFilter) => (
 					<OcTagElement
 						title={filter?.parent.label}
-						onIconClick={() => handleTagClick(filter.parent.label)}
+						onIconClick={!handleTagClick ? undefined : () => handleTagClick(filter.parent.label)}
 						key={filter.id + filter.parent.id}
 					/>
 				))}
