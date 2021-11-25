@@ -1,24 +1,16 @@
 import * as React from 'react';
-import Datetime, { DatetimepickerProps } from 'react-datetime';
-import moment, { Moment } from 'moment';
-
+import { DayPickerProps } from 'react-day-picker';
+import DayPicker from 'react-day-picker';
+import MomentLocaleUtils from 'react-day-picker/moment';
+import { Navbar } from './navbar';
 import { InputWithIcon } from './icon-input';
 import { OcTimePicker } from './oc-timepicker';
 
+import { WEEK, WEEKDAYS_SHORT, WEEKDAYS_LONG, MONTHS } from './constants';
+import 'react-day-picker/lib/style.css';
 import './style.scss';
 
-moment.updateLocale('en', {
-	weekdays: 'S_M_T_W_T_F_S'.split('_'),
-	weekdaysShort: 'S_M_T_W_T_F_S'.split('_'),
-	weekdaysMin: 'S_M_T_W_T_F_S'.split('_'),
-	week: { dow: 1 },
-});
-
-export interface DatepickerProps extends DatetimepickerProps {
-	/**
-	 * List of classes which can be attached to the current list
-	 */
-	customClass?: string;
+export interface DatepickerProps extends DayPickerProps {
 	/**
 	 * Type of picker input: "datetime" or "date"
 	 */
@@ -30,11 +22,11 @@ export interface DatepickerProps extends DatetimepickerProps {
 	/**
 	 * Date of datepicker
 	 */
-	value: string | Moment;
+	value: Date;
 	/**
 	 * Set Date of datepicker
 	 */
-	onChange: (value: string | Moment) => void;
+	onChange: (value: Date) => void;
 	/**
 	 * Custom date format to pass into component
 	 */
@@ -42,45 +34,62 @@ export interface DatepickerProps extends DatetimepickerProps {
 }
 
 export const OcDatetimePicker: React.FC<DatepickerProps> = (props) => {
-	const { customClass, type, disabled, value, onChange, settings } = props;
-
+	const { type = 'date', disabled, value, onChange } = props;
+	const { formatDate } = MomentLocaleUtils;
 	const [timeVisible, setTimeVisible] = React.useState(false);
+	const handleToggleInput = () => setTimeVisible(!timeVisible);
+	const inputRef: React.RefObject<HTMLDivElement> = React.useRef(null);
 
-	const handleOpen = React.useCallback(() => setTimeVisible(true), [setTimeVisible]);
-	const handleClose = React.useCallback(() => setTimeVisible(false), [setTimeVisible]);
+	React.useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (inputRef?.current && !inputRef.current.contains(event.target as Node)) {
+				setTimeVisible(false);
+			}
+		};
 
-	const renderWithTime = React.useCallback(
-		(mode: string, renderDefault: any) => {
-			if (mode !== 'days') return renderDefault();
-			return (
-				<>
-					{renderDefault()}
-					{type === 'datetime' && timeVisible && <OcTimePicker value={value} onChange={onChange} />}
-				</>
-			);
-		},
-		[type, timeVisible, onChange, value],
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [inputRef]);
+
+	const placeholderFormat = React.useMemo(
+		() => (type === 'date' ? 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm'),
+		[type],
+	);
+	const inputValue = React.useMemo(
+		() => (Boolean(value) === false ? '' : formatDate(value, placeholderFormat, 'en')),
+		[value, placeholderFormat],
 	);
 
-	if (true) {
-		return <div>Datetime component is broken. Will be fixed soon.</div>;
-	}
-
 	return (
-		<Datetime
-			className={customClass}
-			locale="en"
-			dateFormat={type === 'date' ? settings || 'DD/MM/YYYY' : 'DD/MM/YYYY HH:mm'}
-			value={value || 'DD/MM/YYYY'}
-			onChange={onChange}
-			initialViewMode="days"
-			timeFormat={false}
-			renderInput={InputWithIcon}
-			inputProps={{ disabled }}
-			renderView={renderWithTime}
-			onOpen={handleOpen}
-			onClose={handleClose}
-		/>
+		<div ref={inputRef}>
+			<InputWithIcon
+				placeholder={placeholderFormat}
+				value={inputValue}
+				onClick={handleToggleInput}
+				disabled={disabled}
+				className="date-input"
+			/>
+			{timeVisible && (
+				<div className="rdtPicker">
+					<DayPicker
+						showOutsideDays
+						firstDayOfWeek={WEEK}
+						weekdaysLong={WEEKDAYS_LONG}
+						weekdaysShort={WEEKDAYS_SHORT}
+						months={MONTHS}
+						fixedWeeks
+						onDayClick={onChange}
+						selectedDays={new Date(value)}
+						navbarElement={Navbar}
+					/>
+					{type === 'datetime' && timeVisible && (
+						<OcTimePicker value={new Date(value)} onChange={onChange} />
+					)}
+				</div>
+			)}
+		</div>
 	);
 };
 

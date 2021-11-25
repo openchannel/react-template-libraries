@@ -1,5 +1,4 @@
 import * as React from 'react';
-import moment from 'moment';
 import { isEmpty } from 'lodash-es';
 import { FieldInputProps, useFormikContext } from 'formik';
 
@@ -21,7 +20,7 @@ import { OcMultiSelectListProps, OcTagsProps } from '../../../molecules';
 import OcTags from '../../../molecules/oc-tags/oc-tags';
 import OcSelect from '../../../../common/molecules/oc-select/oc-select';
 import OcVideoUrlComponent from '../../../../common/molecules/oc-video-url/oc-video-url';
-import OcDatetimePicker from '../../../../common/molecules/oc-datetime-picker/oc-datetime';
+import { OcDatetimePicker } from '../../../../common/molecules/oc-datetime-picker/oc-datetime';
 import OcDropdownMultiApp from '../../../../common/molecules/oc-dropdown-multi-app/dropdown';
 import OcMultiSelectList from '../../../molecules/oc-multi-select-list/oc-multi-select-list';
 
@@ -31,36 +30,39 @@ import type { FCWP, FieldGroupProps } from '../types';
 import { customClassWithError } from '../utils/common';
 import { shouldFieldGroupUpdate, shouldFieldUpdate } from '../utils/memo';
 
-export const FieldGroup: React.FC<FieldGroupProps & { error: string | undefined }> = React.memo((props) => {
-	const { children, error, label, labelFor, description, required } = props;
+export const FieldGroup: React.FC<FieldGroupProps & { error: string | undefined }> = React.memo(
+	(props) => {
+		const { children, error, label, labelFor, description, required } = props;
 
-	return (
-		<>
-			{label && (
-				<div className="form__field-label">
-					<OcTooltipLabel htmlFor={labelFor} required={required} description={description}>
-						{label}
-					</OcTooltipLabel>
-				</div>
-			)}
-			<div className="form__field-input">
-				{React.Children.map(children, (child) =>
-					React.isValidElement(child)
-						? // assign 'invalid' className to the customClass prop
-						  React.cloneElement(child, { customClass: customClassWithError(error, child) })
-						: child,
+		return (
+			<>
+				{label && (
+					<div className="form__field-label">
+						<OcTooltipLabel htmlFor={labelFor} required={required} description={description}>
+							{label}
+						</OcTooltipLabel>
+					</div>
 				)}
-			</div>
-			{error && <OcError message={error} />}
-		</>
-	);
-}, shouldFieldGroupUpdate);
+				<div className="form__field-input">
+					{React.Children.map(children, (child) =>
+						React.isValidElement(child)
+							? // assign 'invalid' className to the customClass prop
+							  React.cloneElement(child, { customClass: customClassWithError(error, child) })
+							: child,
+					)}
+				</div>
+				{error && <OcError message={error} />}
+			</>
+		);
+	},
+	shouldFieldGroupUpdate,
+);
 
 export const FieldGroupWrapper: React.FC<FieldGroupProps> = (props) => {
 	const { name } = props;
 	const { getFieldMeta } = useFormikContext();
 	const meta = getFieldMeta(name);
-	const error: string[] | undefined = (meta.error as any);
+	const error: string[] | undefined = meta.error as any;
 
 	return (
 		<div className="form__field">
@@ -197,35 +199,29 @@ export const FormikOcDatetimePickerWrapper: React.FC<
 		disabled?: DatepickerProps['disabled'];
 	}
 > = React.memo(
-	({ field, form, customClass, type, disabled }) => {
+	({ field, form, type, disabled }) => {
 		const onChange = React.useCallback(
 			(value) => {
 				form.setFieldValue(field.name, value);
 			},
 			[field.name, form.setFieldValue],
 		);
-
 		return (
 			<OcDatetimePicker
-				customClass={customClass}
 				type={type}
 				value={field.value}
 				onChange={onChange}
 				disabled={disabled}
-				{...(type === FIELD_TYPE.DATE ? { settings: 'DD/MM/yyyy' } : {})}
+				{...(type === FIELD_TYPE.DATE ? { settings: 'DD/MM/YYYY' } : { settings: '' })}
 			/>
 		);
 	},
 	shouldFieldUpdate(
 		['type', 'disabled'],
 		(
-			prevProps: Readonly<
-				React.PropsWithChildren<{ field: FieldInputProps<string | moment.Moment> }>
-			>,
-			nextProps: Readonly<
-				React.PropsWithChildren<{ field: FieldInputProps<string | moment.Moment> }>
-			>,
-		) => moment(prevProps.field.value).isSame(nextProps.field.value),
+			prevProps: Readonly<React.PropsWithChildren<{ field: FieldInputProps<string | Date> }>>,
+			nextProps: Readonly<React.PropsWithChildren<{ field: FieldInputProps<string | Date> }>>,
+		) => prevProps.field.value === nextProps.field.value,
 	),
 );
 
@@ -257,11 +253,11 @@ export const FormikOcMultiSelectListWrapper: React.FC<
 
 export const FormikOcFileUploadWrapper: React.FC<any> = (props) => {
 	const { acceptType, fileType, fileService, form, field, isPrivate, isMultiFile, hash } = props;
-	
+
 	const onChange = (value: any) => {
-			form.setFieldValue(field.name, value);
-		}
-		
+		form.setFieldValue(field.name, value);
+	};
+
 	return (
 		<OcFileUpload
 			id={field.name}
