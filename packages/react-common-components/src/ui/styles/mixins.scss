@@ -38,8 +38,8 @@
 }
 
 // FONT MIXINS
-@mixin font-family($font-family: 'sans-serif') {
-	font-family: $font-family;
+@mixin font-family($font: 'Rubik', $font-family: 'sans-serif') {
+	font-family: $font, $font-family;
 }
 
 @mixin font-light() {
