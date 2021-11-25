@@ -13,6 +13,7 @@
 	padding: 10px 20px;
 	@include font-family();
 	@include font-regular();
+	font-size: 16px;
 	cursor: pointer;
 	caret-color: transparent;
 	&::placeholder {
