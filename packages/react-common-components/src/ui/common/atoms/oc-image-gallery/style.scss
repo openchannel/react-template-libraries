@@ -27,6 +27,8 @@
 		min-width: 0;
 		padding: 0 2rem;
 		text-align: center;
+		width: 100%;
+    	height: 192px;
 		&-title {
 			@include font-size-lg();;
 			@include font-medium();
@@ -35,6 +37,45 @@
 		}
 		&-description {
 			@include font-size-md();
+		}
+		&-image{
+			width: 100%;
+			height: 100%;
+			-o-object-fit: cover;
+			object-fit: cover;
+		}
+	}
+}
+
+.modal-dialog.modal-90w {
+	max-width: unset;
+	width: 90%;
+	button.close {
+		opacity: 1;
+		span {
+			font-size: 35px;
+			color: white;
+			font-weight: 100;
+		}
+	}
+	svg {
+		&.gallery-arrow-icon {
+			position: absolute;
+			top: 40%;
+			height: 22px;
+			width: 12px;
+			z-index: 100;
+	
+			&.prev-slide {
+				left: -3rem;
+			}
+			&.next-slide {
+				right: -3rem;
+				transform: rotate(180deg);
+			}
+			path{
+				fill: white;
+			}
 		}
 	}
 }
