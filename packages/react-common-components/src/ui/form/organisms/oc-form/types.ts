@@ -86,6 +86,8 @@ export interface OcFormProps extends FormProps {
 	enableTermsCheckboxField?: boolean;
 
 	children?: OcFormChildren;
+
+	cancelButtonText?: string;
 }
 
 export type FieldType =
