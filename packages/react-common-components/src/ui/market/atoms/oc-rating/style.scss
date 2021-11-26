@@ -13,8 +13,8 @@
     &__label {
       color: $secondary;
       margin-left: 1rem;
-      font-size: 14px;
-      font-weight: 500;
+      @include font-size-sm();
+      @include font-medium();
     }
   }
 
