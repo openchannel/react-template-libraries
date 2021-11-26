@@ -59,7 +59,7 @@ export interface FormProps extends OcFormExtraProps {
 
 	children?: OcFormChildren;
 
-	cancelText?: string;
+	cancelButtonText?: string;
 }
 
 export interface OcFormProps extends FormProps {
