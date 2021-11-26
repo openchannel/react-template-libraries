@@ -3,7 +3,7 @@
 
 .oc-rating {
   &-single {
-    align-items: center;
+    // align-items: center;
     display: flex;
     &__rating-star {
       height: 16px;
@@ -13,6 +13,8 @@
     &__label {
       color: $secondary;
       margin-left: 1rem;
+      font-size: 14px;
+      font-weight: 500;
     }
   }
 
