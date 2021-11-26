@@ -58,6 +58,8 @@ export interface FormProps extends OcFormExtraProps {
 	buttonPosition?: 'top' | 'left' | 'right' | 'between';
 
 	children?: OcFormChildren;
+
+	cancelButtonText?: string;
 }
 
 export interface OcFormProps extends FormProps {

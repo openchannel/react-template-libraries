@@ -68,13 +68,18 @@
 		flex-wrap: wrap;
 		margin: 1.5rem 0 1rem;
 
-		.form__button {
+		.form__button {			
 			&.full-width {
 				width: 100%;
 			}
 
 			& + .form__button {
 				margin-left: 1.5rem;
+			}
+
+			& .oc-button {
+				@include font-medium();
+				@include font-size-md();
 			}
 		}
 		@media screen and (max-width: 410px) {
