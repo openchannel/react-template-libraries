@@ -12,7 +12,7 @@
     &__label {
       color: $secondary;
       margin-left: 1rem;
-      @include font-size-sm();
+      @include font-size-md();
       @include font-medium();
     }
   }
