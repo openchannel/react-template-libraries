@@ -29,6 +29,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		fileService,
 		children,
 		excludeRenderFields,
+		cancelText = 'Cancel',
 	} = props;
 
 	const {
@@ -91,7 +92,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 						{onCancel && (
 							<div className="form__button">
 								<OcButtonComponent htmlType="button" type="secondary" onClick={onCancel}>
-									Cancel
+									{cancelText}
 								</OcButtonComponent>
 							</div>
 						)}
