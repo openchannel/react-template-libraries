@@ -4,7 +4,10 @@ import { noop } from 'lodash';
 
 import { ReactComponent as TextSearchIcon } from '../../../../assets/img/text-search-icon.svg';
 import OcButtonComponent from '../oc-button/oc-button';
+import OcTagElement from '../oc-tag-element'
 import { InputProps } from '../oc-input';
+import { SidebarItem } from '../../molecules';
+
 
 import './style.scss';
 
@@ -28,7 +31,7 @@ export interface TextSearchProps extends InputProps {
 	/**
 	 * onChange handler
 	 */
-	onChange: any;
+	onChange(value:string): void;
 	/**
 	 * Magnifier image presence on input
 	 */
@@ -49,6 +52,35 @@ export interface TextSearchProps extends InputProps {
 	 * text for clear button
 	 */
 	clearButtonText: string;
+	/**
+	 * array of searched tags
+	 */
+	selectedFilters?: SelectedFilters;
+	/**
+	 * handler for deleteing all tags
+	 */
+	handleDeleteAll?(): void;
+	/**
+	 * handler for deleteing specific tags
+	 */
+	handleTagDelete?(): void;
+	/**
+	 * click handler
+	 */
+	handleTagClick?(title:string, id?: string):void;
+	/**
+	 * text for clear All button
+	 */
+	clearAllText?: string;
+}
+
+export interface SelectedFilter extends SidebarItem {
+	id: string;
+}
+
+export interface SelectedFilters {
+	filters: SelectedFilter[];
+	searchStr: string;
 }
 
 export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
@@ -61,17 +93,22 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 		enterAction = noop,
 		searchButtonText = 'Search',
 		clearButtonText = 'Cancel',
+		selectedFilters,
+		handleDeleteAll,
+		handleTagDelete,
+		handleTagClick,
+		clearAllText="Clear All",
 	} = props;
-
+	
 	const handleChange = React.useCallback(
-		(e: any) => {
+		(e : React.ChangeEvent<HTMLInputElement> & React.KeyboardEvent<HTMLTextAreaElement>) => {
 			if (e.key === 'Enter') {
 				enterAction(e as unknown as React.MouseEvent);
 			} else {
-				onChange(e.target.value);
+				onChange(e.currentTarget.value);
 			}
 		},
-		[onChange],
+		[onChange, enterAction],
 	);
 
 	const handleKeyDown = React.useCallback(
@@ -87,7 +124,7 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 		onChange('');
 	}, [onChange]);
 
-	return (
+	return (<>
 		<div className="text-search">
 			<div className="text-search__container">
 				<input
@@ -125,6 +162,25 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 				)}
 			</div>
 		</div>
+		{selectedFilters && (selectedFilters.filters.length > 0 || selectedFilters.searchStr.length) > 0 &&
+			<div className="search-tags">
+				{selectedFilters.filters.map((filter:SelectedFilter) => (
+					<OcTagElement
+						title={filter?.parent.label}
+						onIconClick={!handleTagClick ? undefined : () => handleTagClick(filter.parent.label)}
+						key={filter.id + filter.parent.id}
+					/>
+				))}
+				{selectedFilters.searchStr && (
+					<OcTagElement 
+						title={selectedFilters.searchStr} 
+						onIconClick={handleTagDelete} 
+					/>
+				)}
+				{(selectedFilters.filters.length > 0 || selectedFilters.searchStr) && <button className="clear-all" onClick={handleDeleteAll}>{clearAllText}</button>}
+			</div>
+		}
+		</>
 	);
 };
 

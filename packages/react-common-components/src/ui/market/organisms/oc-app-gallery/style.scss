@@ -2,9 +2,8 @@
 @import '../../../styles/index';
 
 .gallery {
-	@include media-breakpoint-md {
-		position: relative;
-	}
+	position: relative;
+	
 	&__header {
 		&-top {
 			display: flex;
@@ -33,9 +32,11 @@
 	}
 
 	&__more {
+		position: absolute;
+		bottom: 0;
+		right: 0;
 		@include media-breakpoint-md {
-			bottom: 0;
-			position: absolute;
+			left: 0;
 		}
 		cursor: pointer;
 
@@ -46,7 +47,7 @@
 			color: $primary;
 		}
 
-		&-icon {
+		& svg {
 			height: 10px;
 			width: auto;
 			color: $primary;
