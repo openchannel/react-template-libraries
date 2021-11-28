@@ -18,31 +18,9 @@
 	"module": "dist/index.js",
 	"typings": "dist/index.d.ts",
 	"files": [
-		"dist"
+		"dist/**/*"
 	],
 	"type": "module",
-	"exports": {
-		".": "./index.js",
-		"./package.json": "./package.json",
-		"./ui/auth/organisms": "./dist/ui/auth/organisms/index.js",
-		"./ui/common/atoms": "./dist/ui/common/atoms/index.js",
-		"./ui/common/models": "./dist/ui/common/models/index.js",
-		"./ui/common/molecules": "./dist/ui/common/molecules/index.js",
-		"./ui/common/organisms": "./dist/ui/common/organisms/index.js",
-		"./ui/common/templates": "./dist/ui/common/templates/index.js",
-		"./ui/form/lib": "./dist/ui/form/lib/index.js",
-		"./ui/form/atoms": "./dist/ui/form/atoms/index.js",
-		"./ui/form/models": "./dist/ui/form/models/index.js",
-		"./ui/form/molecules": "./dist/ui/form/molecules/index.js",
-		"./ui/form/organisms": "./dist/ui/form/organisms/index.js",
-		"./ui/management/models": "./dist/ui/management/models/index.js",
-		"./ui/management/organisms": "./dist/ui/management/organisms/index.js",
-		"./ui/market/atoms": "./dist/ui/market/atoms/index.js",
-		"./ui/market/molecules": "./dist/ui/market/molecules/index.js",
-		"./ui/market/organisms": "./dist/ui/market/organisms/index.js",
-		"./ui/portal/models": "./dist/ui/portal/models/index.js",
-		"./ui/portal/organisms": "./dist/ui/portal/organisms/index.js"
-	},
 	"scripts": {
 		"build": "rm -rf dist & rollup -c",
 		"build:legacy": "npm ci && tsdx build --tsconfig tsconfig.json",
