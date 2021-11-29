@@ -30,7 +30,6 @@
 		"test:coverage:watch": "tsdx test --passWithNoTests --coverage --watch",
 		"lint": "tsdx lint src",
 		"lint:fix": "tsdx lint src --fix",
-		"prepare": "tsdx build",
 		"size": "size-limit",
 		"analyze": "size-limit --why"
 	},
