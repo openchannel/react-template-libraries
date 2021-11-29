@@ -1,12 +1,13 @@
-import {ModalProps} from '../modal';
 import * as React from 'react';
-import {ButtonVariants} from '../../atoms';
+
+import { ButtonVariants } from '../../atoms';
+import { ModalProps } from '../modal';
 
 export type CropperModalButtonVariants = Exclude<ButtonVariants, 'none'>;
 
 export interface CropperModalData {
-	filename: string,
-	image: string,
+	filename: string;
+	image: string;
 }
 
 export interface CropperModalProps extends Omit<ModalProps, 'children'> {

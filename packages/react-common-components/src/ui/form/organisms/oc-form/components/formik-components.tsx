@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { isEmpty } from 'lodash-es';
 import { FieldInputProps, useFormikContext } from 'formik';
+import { isEmpty } from 'lodash-es';
 
 import {
 	ColorProps,
@@ -9,23 +9,19 @@ import {
 	OcSelectProps,
 	VideoUrlProps,
 } from '../../../../common';
-
+import OcColorComponent from '../../../../common/atoms/oc-color/oc-color';
 import OcError from '../../../../common/atoms/oc-error/oc-error';
 import OcFileUpload from '../../../../common/atoms/oc-file-upload';
-import OcColorComponent from '../../../../common/atoms/oc-color/oc-color';
-import OcTooltipLabel from '../../../atoms/oc-tooltip-label/oc-tooltip-label';
 import OcRichTextEditorComponent from '../../../../common/atoms/oc-rich-text-editor/oc-rich-text-editor';
-
-import { OcMultiSelectListProps, OcTagsProps } from '../../../molecules';
-import OcTags from '../../../molecules/oc-tags/oc-tags';
-import OcSelect from '../../../../common/molecules/oc-select/oc-select';
-import OcVideoUrlComponent from '../../../../common/molecules/oc-video-url/oc-video-url';
 import { OcDatetimePicker } from '../../../../common/molecules/oc-datetime-picker/oc-datetime';
 import OcDropdownMultiApp from '../../../../common/molecules/oc-dropdown-multi-app/dropdown';
-import OcMultiSelectList from '../../../molecules/oc-multi-select-list/oc-multi-select-list';
-
+import OcSelect from '../../../../common/molecules/oc-select/oc-select';
+import OcVideoUrlComponent from '../../../../common/molecules/oc-video-url/oc-video-url';
+import OcTooltipLabel from '../../../atoms/oc-tooltip-label/oc-tooltip-label';
 import { FIELD_TYPE } from '../../../lib';
-
+import { OcMultiSelectListProps, OcTagsProps } from '../../../molecules';
+import OcMultiSelectList from '../../../molecules/oc-multi-select-list/oc-multi-select-list';
+import OcTags from '../../../molecules/oc-tags/oc-tags';
 import type { FCWP, FieldGroupProps } from '../types';
 import { customClassWithError } from '../utils/common';
 import { shouldFieldGroupUpdate, shouldFieldUpdate } from '../utils/memo';

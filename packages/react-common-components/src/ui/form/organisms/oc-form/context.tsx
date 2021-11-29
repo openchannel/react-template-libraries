@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useFormikContext } from 'formik';
-import { get, update, noop } from 'lodash-es';
+import { get, noop, update } from 'lodash-es';
 
 import { Dataset } from '../../../common/atoms/oc-button';
 import { FIELD_TYPE } from '../../lib';
@@ -98,11 +98,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 					const removeChildField =
 						fields.filter((f) => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1;
 
-					fields = elementUtils.removeChildOrCurrent(
-						fields,
-						existedElement,
-						removeChildField,
-					);
+					fields = elementUtils.removeChildOrCurrent(fields, existedElement, removeChildField);
 
 					return fields;
 				});
@@ -136,7 +132,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 		if (isFirstLevelDeep) {
 			if (existedElement.isNew) {
 				const removeChildField =
-					next.filter(f => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1;
+					next.filter((f) => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1;
 
 				next = elementUtils.removeChildOrCurrent(next, existedElement, removeChildField);
 			} else {
@@ -148,11 +144,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 					const removeChildField =
 						fields.filter((f) => f.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY).length === 1;
 
-					fields = elementUtils.removeChildOrCurrent(
-						fields,
-						existedElement,
-						removeChildField,
-					);
+					fields = elementUtils.removeChildOrCurrent(fields, existedElement, removeChildField);
 				} else {
 					fields = elementUtils.resetFieldValueToPreviousValue(fields, existedElement);
 				}
