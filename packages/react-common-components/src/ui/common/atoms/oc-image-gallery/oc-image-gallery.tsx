@@ -39,7 +39,7 @@ export const OcImageGalleryComponent: React.FC<ImageGalleryProps> = (props) => {
 	const handleClose = React.useCallback(() => {
 		setShow(false);
 		setModalId(-1)
-	},[modalId, show]);
+	},[]);
 
 	const prevSlider = () => {		
 		if(modalId === 0) {
