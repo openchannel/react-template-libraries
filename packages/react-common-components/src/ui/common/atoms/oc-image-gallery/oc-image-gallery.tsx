@@ -34,7 +34,7 @@ export const OcImageGalleryComponent: React.FC<ImageGalleryProps> = (props) => {
 	const openModalImage = React.useCallback((id:number) => {
 		setModalId(id);
 		setShow(true);
-	},[modalId, show]);
+	},[]);
 
 	const handleClose = React.useCallback(() => {
 		setShow(false);
