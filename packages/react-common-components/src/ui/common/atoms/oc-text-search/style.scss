@@ -25,7 +25,7 @@
 		@include form-control($info, $primary, $body-color);
 
 		&::placeholder {
-			color: #99999c;
+			color: $input-placeholder-color;
 		  }
 
 		&:not(:last-child) {
