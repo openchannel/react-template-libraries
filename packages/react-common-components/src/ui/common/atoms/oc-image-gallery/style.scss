@@ -15,7 +15,8 @@
 			max-width: 100%;
 		}
 		@include media-breakpoint-lg {
-			max-width: 50%;
+			flex-basis: calc(100% / 3);
+			padding: 0 2rem 2rem;
 		}
 		@include media-breakpoint-sm {
 			max-width: 100%;
@@ -47,15 +48,29 @@
 	}
 }
 
-.modal-dialog.modal-90w {
+.modal-dialog.modal-custom-w {
 	max-width: unset;
 	width: 90%;
-	button.close {
-		opacity: 1;
-		span {
-			font-size: 35px;
-			color: white;
-			font-weight: 100;
+	margin: 5rem auto;
+	@include media-breakpoint-sm {
+		width: 80%;
+		margin: auto;
+    }
+	.modal-body{
+		padding: 0;
+	}
+	img.img-fluid{
+		border-radius: 4px;
+	}
+	svg.close-modal {
+		cursor: pointer;
+		height: 16px;
+		position: absolute;
+		right: 0;
+		top: -3rem;
+		width: 16px;
+		[class$="fill-close-icon"] {
+			fill: #fff;
 		}
 	}
 	svg {
@@ -65,15 +80,16 @@
 			height: 22px;
 			width: 12px;
 			z-index: 100;
-	
+			@include media-breakpoint-sm {
+				top: 50%;
+			}
 			&.prev-slide {
 				left: -3rem;
 			}
 			&.next-slide {
 				right: -3rem;
-				transform: rotate(180deg);
 			}
-			path{
+			& [class$="icon-recolor"] {
 				fill: white;
 			}
 		}

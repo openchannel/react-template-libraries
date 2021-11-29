@@ -4,7 +4,10 @@ import { GalleryItem } from '../../models';
 
 import './style.scss';
 import { Modal } from 'react-bootstrap';
-import { ReactComponent as ArrowRight } from '../../../../assets/img/arrow-left.svg';
+import { ReactComponent as ArrowRight } from '../../../../assets/img/right.svg';
+import { ReactComponent as ArrowLeft } from '../../../../assets/img/left.svg';
+import { ReactComponent as Close } from '../../../../assets/img/close.svg';
+
 
 export interface ImageGalleryProps {
 	/**
@@ -33,11 +36,12 @@ export const OcImageGalleryComponent: React.FC<ImageGalleryProps> = (props) => {
 		setShow(true);
 	};
 
-	const handleClose = () => setShow(false);
+	const handleClose = () => {
+		setShow(false);
+		setModalId(-1)
+	};
 
-	const handleSlider = (action: string) => {
-		console.log(action);
-		
+	const handleSlider = (action: string) => {		
 		if(action === 'next') {
 			modalId === (processedGallery.length - 1) ? setModalId(0) : setModalId(prev => prev +1);
 		} else if (action === 'prev') {
@@ -45,17 +49,18 @@ export const OcImageGalleryComponent: React.FC<ImageGalleryProps> = (props) => {
 		} else {
 			setModalId(-1);
 		}
-	}
+	};
 
-	React.useEffect(() => {
-		window.addEventListener('keydown', (e) => {
-			if(e.key === 'ArrowRight') {
-				handleSlider('next');
-			} else if(e.key === 'ArrowLeft'){
-				handleSlider('prev');
+	React.useEffect(() => {	
+		const _listener = (e: KeyboardEvent) => {
+			if (modalId !== -1) {
+				e.key === 'ArrowRight' && handleSlider('next');
+				e.key === 'ArrowLeft' && handleSlider('prev');
 			}
-		});
-	}, []);
+		}
+		window.addEventListener('keyup', _listener);
+		return () => window.removeEventListener('keyup', _listener);
+	}, [handleSlider]);
 	
 
 	return (<>
@@ -76,14 +81,16 @@ export const OcImageGalleryComponent: React.FC<ImageGalleryProps> = (props) => {
 				onHide={handleClose}
 				centered
 				contentClassName="bg-transparent"
-				dialogClassName="modal-90w"
+				dialogClassName="modal-custom-w"
 				>
 				<ArrowRight className="gallery-arrow-icon prev-slide" onClick={() => handleSlider('prev')} />
-				<Modal.Header closeButton className="border-0 py-0 justify-content-end" />
+				<Modal.Header className="border-0 py-0 justify-content-end" >
+					<Close className="close-modal" onClick={handleClose}/>
+				</Modal.Header>
 				<Modal.Body className="text-center">
 					<img src={processedGallery[modalId].image} alt={processedGallery[modalId].title} className="img-fluid" />
 				</Modal.Body>
-				<ArrowRight className="gallery-arrow-icon next-slide" onClick={() => handleSlider('next')} />
+				<ArrowLeft className="gallery-arrow-icon next-slide" onClick={() => handleSlider('next')} />
 			</Modal>
 		}
 	</>
