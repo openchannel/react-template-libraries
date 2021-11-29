@@ -16,9 +16,6 @@
 		min-width: 0;
 		padding: 0 2rem 2rem;
 		text-align: center;
-		flex-grow: 1;
-		width: 100%;
-		height: 192px;
 		@include media-breakpoint-md {
 			margin-bottom: 2rem;
 			max-width: 100%;
