@@ -31,36 +31,45 @@ export const OcImageGalleryComponent: React.FC<ImageGalleryProps> = (props) => {
 		[gallery, maxItems],
 	);
 
-	const openModalImage = (id:number) => {
+	const openModalImage = React.useCallback((id:number) => {
 		setModalId(id);
 		setShow(true);
-	};
+	},[modalId, show]);
 
-	const handleClose = () => {
+	const handleClose = React.useCallback(() => {
 		setShow(false);
 		setModalId(-1)
+	},[modalId, show]);
+
+	const prevSlider = () => {		
+		if(modalId === 0) {
+			setModalId(processedGallery.length - 1)
+		} else {
+			setModalId(prev => prev -1)
+		}
 	};
 
-	const handleSlider = (action: string) => {		
-		if(action === 'next') {
-			modalId === (processedGallery.length - 1) ? setModalId(0) : setModalId(prev => prev +1);
-		} else if (action === 'prev') {
-			modalId === 0 ? setModalId(processedGallery.length - 1) : setModalId(prev => prev -1);
+	const nextSlider = () => {		
+		if(modalId === processedGallery.length - 1) {
+			setModalId(0)
 		} else {
-			setModalId(-1);
+			setModalId(prev => prev +1)
 		}
 	};
 
 	React.useEffect(() => {	
 		const _listener = (e: KeyboardEvent) => {
 			if (modalId !== -1) {
-				e.key === 'ArrowRight' && handleSlider('next');
-				e.key === 'ArrowLeft' && handleSlider('prev');
+				if(e.key === 'ArrowRight') {
+					nextSlider();
+				} else if (e.key === 'ArrowLeft') {
+					prevSlider();
+				}
 			}
 		}
 		window.addEventListener('keyup', _listener);
 		return () => window.removeEventListener('keyup', _listener);
-	}, [handleSlider]);
+	}, [nextSlider, prevSlider]);
 	
 
 	return (<>
@@ -83,14 +92,14 @@ export const OcImageGalleryComponent: React.FC<ImageGalleryProps> = (props) => {
 				contentClassName="bg-transparent"
 				dialogClassName="modal-custom-w"
 				>
-				<ArrowRight className="gallery-arrow-icon prev-slide" onClick={() => handleSlider('prev')} />
+				<ArrowRight className="gallery-arrow-icon prev-slide" onClick={prevSlider} />
 				<Modal.Header className="border-0 py-0 justify-content-end" >
 					<Close className="close-modal" onClick={handleClose}/>
 				</Modal.Header>
 				<Modal.Body className="text-center">
 					<img src={processedGallery[modalId].image} alt={processedGallery[modalId].title} className="img-fluid" />
 				</Modal.Body>
-				<ArrowLeft className="gallery-arrow-icon next-slide" onClick={() => handleSlider('next')} />
+				<ArrowLeft className="gallery-arrow-icon next-slide" onClick={nextSlider} />
 			</Modal>
 		}
 	</>
