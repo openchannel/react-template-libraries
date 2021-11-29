@@ -3,13 +3,9 @@ import * as React from 'react';
 import { AppFormField, AppFormModel } from '../../models';
 
 import { fieldsUtils, getInitialFieldsAndValues } from './utils/fields';
-
 import { OcFormState } from './types';
 
-const init = (
-	formId = '',
-	fields: AppFormField[] | undefined,
-): OcFormState => {
+const init = (formId = '', fields: AppFormField[] | undefined): OcFormState => {
 	const { initialFields, initialValues } = getInitialFieldsAndValues(fields);
 
 	return {
@@ -22,7 +18,9 @@ const init = (
 };
 
 export const useOcFormState = (formJsonData: AppFormModel) => {
-	const [state, setState] = React.useState<OcFormState>(() => init(formJsonData.formId, formJsonData.fields));
+	const [state, setState] = React.useState<OcFormState>(() =>
+		init(formJsonData.formId, formJsonData.fields),
+	);
 
 	React.useEffect(() => {
 		if (formJsonData.formId !== state.formId) {

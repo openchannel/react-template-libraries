@@ -2,13 +2,13 @@ import * as React from 'react';
 
 import OcSelect from '../../../../common/molecules/oc-select';
 import OcTooltipLabel from '../../../atoms/oc-tooltip-label';
-
+import { OcFormFormikHelpers, OcFormProps, OcFormValues, SelectedFormType } from '../types';
 import { getDefaultFormType } from '../utils/common';
 import { mapConfigsToFormConfigs, mapFormTypes } from '../utils/config-mapper';
-import { OcFormFormikHelpers, OcFormProps, OcFormValues, SelectedFormType } from '../types';
-import '../style.scss';
 
 import { Form } from './form';
+
+import '../style.scss';
 
 export const OcForm: React.FC<OcFormProps> = (props) => {
 	const {
@@ -24,8 +24,8 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		...formProps
 	} = props;
 
-	const [formType, setFormType] = React.useState<SelectedFormType>(
-		() => getDefaultFormType(mapFormTypes(formConfigs).options, defaultFormType)
+	const [formType, setFormType] = React.useState<SelectedFormType>(() =>
+		getDefaultFormType(mapFormTypes(formConfigs).options, defaultFormType),
 	);
 
 	const { configs, formTypes, formTypeOptions } = React.useMemo(() => {
@@ -39,7 +39,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	}, [formConfigs, enablePasswordField, enableTermsCheckboxField]);
 
 	const onChangeFormType = React.useCallback((formType: SelectedFormType) => {
-		setFormType((prev) => prev.label !== formType.label ? formType : prev);
+		setFormType((prev) => (prev.label !== formType.label ? formType : prev));
 	}, []);
 
 	const onFormSubmit = (values: OcFormValues, formikProps: OcFormFormikHelpers) => {
@@ -48,7 +48,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		}
 
 		// write additional data to submit payload
-		let info: { formType?: string; } = {};
+		const info: { formType?: string } = {};
 		if (formTypes.length > 0) {
 			// write selected formType
 			info.formType = formTypes.find((ft) => ft.label === formType.label)!.value;

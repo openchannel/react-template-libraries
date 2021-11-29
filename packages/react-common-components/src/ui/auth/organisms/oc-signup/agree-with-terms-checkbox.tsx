@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { FormikProps } from 'formik';
 
-import { OcError } from '../../../common/atoms/oc-error';
 import { OcCheckboxComponent } from '../../../common/atoms/oc-checkbox';
+import { OcError } from '../../../common/atoms/oc-error';
 import { FormikField } from '../../../form/models';
 
 interface AgreeWithTermsCheckboxProps {
@@ -14,9 +14,7 @@ interface AgreeWithTermsCheckboxProps {
 
 export const AgreeWithTermsCheckbox: React.FC<AgreeWithTermsCheckboxProps> = (props) => {
 	const {
-		formikProps: {
-			values, touched, errors, handleBlur, handleChange,
-		},
+		formikProps: { values, touched, errors, handleBlur, handleChange },
 		formFields,
 		customTermsDescription,
 		ordinaryTermsDescription,
@@ -25,18 +23,14 @@ export const AgreeWithTermsCheckbox: React.FC<AgreeWithTermsCheckboxProps> = (pr
 	const termsField = React.useMemo(() => formFields.find((f) => f.id === 'terms'), [formFields]);
 
 	if (!termsField) {
-		console.error('Not Found field with id "terms" to display checkbox')
+		console.error('Not Found field with id "terms" to display checkbox');
 		return null;
 	}
 
 	return (
 		<>
 			<div className="content__checkbox">
-				{customTermsDescription && (
-					<div className="content__label">
-						{customTermsDescription}
-					</div>
-				)}
+				{customTermsDescription && <div className="content__label">{customTermsDescription}</div>}
 				<OcCheckboxComponent
 					labelText={ordinaryTermsDescription}
 					name={termsField.name}

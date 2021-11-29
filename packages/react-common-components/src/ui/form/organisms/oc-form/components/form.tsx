@@ -1,18 +1,17 @@
 import * as React from 'react';
+import { Form as FormikForm, FormikContext, FormikErrors, FormikValues, useFormik } from 'formik';
 import { isFunction } from 'lodash-es';
-import { Form as FormikForm, FormikContext, FormikValues, useFormik, FormikErrors } from 'formik';
 
 import OcButtonComponent from '../../../../common/atoms/oc-button/oc-button';
-
+import { OcFormContextProvider } from '../context';
+import { useOcFormState } from '../hooks';
+import { OcFormProps } from '../types';
 import {
 	formatOcFormErrors,
 	formatOcFormValues,
 	getOcFormButtonsClass,
 	validateOcFormValues,
 } from '../utils/common';
-import { OcFormProps } from '../types';
-import { useOcFormState } from '../hooks';
-import { OcFormContextProvider } from '../context';
 
 import { FormikMapFieldsWrapper } from './formik-map-field';
 
@@ -92,7 +91,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 						{onCancel && (
 							<div className="form__button">
 								<OcButtonComponent htmlType="button" type="secondary" onClick={onCancel}>
-								   {cancelButtonText}
+									{cancelButtonText}
 								</OcButtonComponent>
 							</div>
 						)}
