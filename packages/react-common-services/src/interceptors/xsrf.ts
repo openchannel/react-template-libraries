@@ -5,7 +5,10 @@ import { requestInterceptor, responseInterceptor } from '../lib/interceptors';
 import { memoryStorage } from '../lib/memory-storage';
 
 requestInterceptor.use((config) => {
-	if (!get(config, 'customTweaks.noCsrfToken', false) && config.baseURL?.startsWith(instance.getUrl())) {
+	if (
+		!get(config, 'customTweaks.noCsrfToken', false) &&
+		config.baseURL?.startsWith(instance.getUrl())
+	) {
 		const token = memoryStorage.getXsrfToken();
 		const headerName = instance.getHeaderName();
 

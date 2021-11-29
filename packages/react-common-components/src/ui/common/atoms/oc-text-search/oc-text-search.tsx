@@ -3,11 +3,10 @@ import * as React from 'react';
 import { noop } from 'lodash';
 
 import { ReactComponent as TextSearchIcon } from '../../../../assets/img/text-search-icon.svg';
-import OcButtonComponent from '../oc-button/oc-button';
-import OcTagElement from '../oc-tag-element'
-import { InputProps } from '../oc-input';
 import { SidebarItem } from '../../molecules';
-
+import OcButtonComponent from '../oc-button/oc-button';
+import { InputProps } from '../oc-input';
+import OcTagElement from '../oc-tag-element';
 
 import './style.scss';
 
@@ -31,7 +30,7 @@ export interface TextSearchProps extends InputProps {
 	/**
 	 * onChange handler
 	 */
-	onChange(value:string): void;
+	onChange(value: string): void;
 	/**
 	 * Magnifier image presence on input
 	 */
@@ -67,7 +66,7 @@ export interface TextSearchProps extends InputProps {
 	/**
 	 * click handler
 	 */
-	handleTagClick?(title:string, id?: string):void;
+	handleTagClick?(title: string, id?: string): void;
 	/**
 	 * text for clear All button
 	 */
@@ -97,11 +96,11 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 		handleDeleteAll,
 		handleTagDelete,
 		handleTagClick,
-		clearAllText="Clear All",
+		clearAllText = 'Clear All',
 	} = props;
-	
+
 	const handleChange = React.useCallback(
-		(e : React.ChangeEvent<HTMLInputElement> & React.KeyboardEvent<HTMLTextAreaElement>) => {
+		(e: React.ChangeEvent<HTMLInputElement> & React.KeyboardEvent<HTMLTextAreaElement>) => {
 			if (e.key === 'Enter') {
 				enterAction(e as unknown as React.MouseEvent);
 			} else {
@@ -124,62 +123,71 @@ export const OcTextSearchComponent: React.FC<TextSearchProps> = (props) => {
 		onChange('');
 	}, [onChange]);
 
-	return (<>
-		<div className="text-search">
-			<div className="text-search__container">
-				<input
-					className="text-search__input"
-					placeholder={placeholder}
-					type="text"
-					value={value}
-					onChange={handleChange}
-					onKeyDown={handleKeyDown}
-				/>
-				{hasMagnifier && (
-					<TextSearchIcon viewBox="0 0 24 24" className="text-search__icon" onClick={enterAction} />
-				)}
-			</div>
-			<div className="text-search__controls">
-				{hasClearTextControl && (
-					<div className="clear-button">
-						<OcButtonComponent
-							text={clearButtonText}
-							type="secondary"
-							onClick={clearSearch}
-							customClass="oc-button_small-size "
-						/>
-					</div>
-				)}
-				{!hasMagnifier && (
-					<div className="search-button">
-						<OcButtonComponent
-							text={searchButtonText}
-							type="primary"
+	return (
+		<>
+			<div className="text-search">
+				<div className="text-search__container">
+					<input
+						className="text-search__input"
+						placeholder={placeholder}
+						type="text"
+						value={value}
+						onChange={handleChange}
+						onKeyDown={handleKeyDown}
+					/>
+					{hasMagnifier && (
+						<TextSearchIcon
+							viewBox="0 0 24 24"
+							className="text-search__icon"
 							onClick={enterAction}
-							customClass="oc-button_small-size"
 						/>
+					)}
+				</div>
+				<div className="text-search__controls">
+					{hasClearTextControl && (
+						<div className="clear-button">
+							<OcButtonComponent
+								text={clearButtonText}
+								type="secondary"
+								onClick={clearSearch}
+								customClass="oc-button_small-size "
+							/>
+						</div>
+					)}
+					{!hasMagnifier && (
+						<div className="search-button">
+							<OcButtonComponent
+								text={searchButtonText}
+								type="primary"
+								onClick={enterAction}
+								customClass="oc-button_small-size"
+							/>
+						</div>
+					)}
+				</div>
+			</div>
+			{selectedFilters &&
+				(selectedFilters.filters.length > 0 || selectedFilters.searchStr.length) > 0 && (
+					<div className="search-tags">
+						{selectedFilters.filters.map((filter: SelectedFilter) => (
+							<OcTagElement
+								title={filter?.parent.label}
+								onIconClick={
+									!handleTagClick ? undefined : () => handleTagClick(filter.parent.label)
+								}
+								key={filter.id + filter.parent.id}
+							/>
+						))}
+						{selectedFilters.searchStr && (
+							<OcTagElement title={selectedFilters.searchStr} onIconClick={handleTagDelete} />
+						)}
+						{(selectedFilters.filters.length > 0 || selectedFilters.searchStr) && (
+							<button className="clear-all" onClick={handleDeleteAll}>
+								{clearAllText}
+							</button>
+						)}
 					</div>
 				)}
-			</div>
-		</div>
-		{selectedFilters && (selectedFilters.filters.length > 0 || selectedFilters.searchStr.length) > 0 &&
-			<div className="search-tags">
-				{selectedFilters.filters.map((filter:SelectedFilter) => (
-					<OcTagElement
-						title={filter?.parent.label}
-						onIconClick={!handleTagClick ? undefined : () => handleTagClick(filter.parent.label)}
-						key={filter.id + filter.parent.id}
-					/>
-				))}
-				{selectedFilters.searchStr && (
-					<OcTagElement 
-						title={selectedFilters.searchStr} 
-						onIconClick={handleTagDelete} 
-					/>
-				)}
-				{(selectedFilters.filters.length > 0 || selectedFilters.searchStr) && <button className="clear-all" onClick={handleDeleteAll}>{clearAllText}</button>}
-			</div>
-		}
 		</>
 	);
 };

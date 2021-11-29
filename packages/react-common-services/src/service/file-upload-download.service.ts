@@ -2,8 +2,8 @@ import { AxiosResponse } from 'axios';
 
 import { api } from '../lib/api';
 import { ReqHeaders } from '../lib/request';
-import { config as configService } from '../service/config.service';
 import { FileDetailsResponse } from '../model/api/file-details.model';
+import { config as configService } from '../service/config.service';
 
 const FILES_URL = 'v2/files';
 // {marketUrl}/v2/files}
@@ -11,7 +11,6 @@ const FILES_URL = 'v2/files';
 // {fileUrl}
 
 export const fileService = {
-
 	/**
 	 *
 	 * Description: Get Token and upload file to open channel
@@ -24,10 +23,16 @@ export const fileService = {
 	 *
 	 * `uploadToOpenChannel({file},true, 'MD5,SHA-1,SHA-256')`
 	 */
-	uploadToOpenChannel: <TResult = any>(file: FormData, isPrivate: boolean, hash?: string): Promise<AxiosResponse<TResult>> => {
-	return fileService
+	uploadToOpenChannel: <TResult = any>(
+		file: FormData,
+		isPrivate: boolean,
+		hash?: string,
+	): Promise<AxiosResponse<TResult>> => {
+		return fileService
 			.getToken()
-			.then((res: AxiosResponse) => fileService.prepareUploadReq(res.data.token, file, isPrivate, hash));
+			.then((res: AxiosResponse) =>
+				fileService.prepareUploadReq(res.data.token, file, isPrivate, hash),
+			);
 	},
 
 	/**
@@ -55,17 +60,21 @@ export const fileService = {
 
 		const marketUrl = await configService.getMarketUrl();
 
-		return api.post(`${marketUrl}/${FILES_URL}`, {
-			body: file,
-			headers: {
-				'upload-token': `${token}`,
-				'Content-Type': 'multipart/form-data',
+		return api.post(
+			`${marketUrl}/${FILES_URL}`,
+			{
+				body: file,
+				headers: {
+					'upload-token': `${token}`,
+					'Content-Type': 'multipart/form-data',
+				},
+				params: httpParams,
 			},
-			params: httpParams,
-		}, {
-			noCsrfToken: true,
-			ignoreNProgress: true,
-		});
+			{
+				noCsrfToken: true,
+				ignoreNProgress: true,
+			},
+		);
 	},
 
 	/**
@@ -92,7 +101,10 @@ export const fileService = {
 	 *
 	 * `downloadFileDetails('ha98s7dh8a7shd87');`
 	 */
-	downloadFileDetails: <T = FileDetailsResponse>(fileId: string, headers: ReqHeaders): Promise<AxiosResponse<T>> => {
+	downloadFileDetails: <T = FileDetailsResponse>(
+		fileId: string,
+		headers: ReqHeaders,
+	): Promise<AxiosResponse<T>> => {
 		return api.get(`${FILES_URL}/byIdOrUrl?fileIdOrUrl=${fileId}`, { headers });
 	},
 

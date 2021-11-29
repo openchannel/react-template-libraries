@@ -1,27 +1,27 @@
 import { AxiosResponse } from 'axios';
 
 export enum TypeCall {
-    singleFile = 'singleFile',
-    singleImage = 'singleImage',
-    privateSingleFile = 'privateSingleFile',
-    multiFile = 'multiFile',
-    multiImage = 'multiImage',
-    multiPrivateFile = 'multiPrivateFile',
+	singleFile = 'singleFile',
+	singleImage = 'singleImage',
+	privateSingleFile = 'privateSingleFile',
+	multiFile = 'multiFile',
+	multiImage = 'multiImage',
+	multiPrivateFile = 'multiPrivateFile',
 }
 
 export enum Status {
-    failed = 'Failed',
-    completed = 'Completed',
-    uploading = 'Uploading',
+	failed = 'Failed',
+	completed = 'Completed',
+	uploading = 'Uploading',
 }
 
 type FileType =
-    | 'singleFile'
-    | 'singleImage'
-    | 'privateSingleFile'
-    | 'multiFile'
-    | 'multiImage'
-    | 'multiPrivateFile';
+	| 'singleFile'
+	| 'singleImage'
+	| 'privateSingleFile'
+	| 'multiFile'
+	| 'multiImage'
+	| 'multiPrivateFile';
 
 export interface ExtendedFile extends File {
 	preview?: string;
@@ -31,41 +31,41 @@ export interface ExtendedFile extends File {
 }
 
 export interface TypeFileRender {
-    file: ExtendedFile;
-    idx: number;
-    removeFile(idx: number): void;
-    service: FileUploadService;
-    isPrivate: boolean;
-    onChange(value:string | string[]):void;
-    isMultiFile: boolean;
-    hash?: string;
+	file: ExtendedFile;
+	idx: number;
+	removeFile(idx: number): void;
+	service: FileUploadService;
+	isPrivate: boolean;
+	onChange(value: string | string[]): void;
+	isMultiFile: boolean;
+	hash?: string;
 }
 
 export interface OcFileUploadProps {
-    id: string;
-    fileType: FileType;
-    acceptType?: string;
-    maxFiles?: number;
-    isMultiFile: boolean;
-    maxWidth?: number;
-    maxHeight?: number;
-    service: FileUploadService;
-    isPrivate?: boolean;
-    onChange(value: string | string[]): void;
-    inputValue?: any;
-    hash?: string;
+	id: string;
+	fileType: FileType;
+	acceptType?: string;
+	maxFiles?: number;
+	isMultiFile: boolean;
+	maxWidth?: number;
+	maxHeight?: number;
+	service: FileUploadService;
+	isPrivate?: boolean;
+	onChange(value: string | string[]): void;
+	inputValue?: any;
+	hash?: string;
 }
 
 export interface FoundVirus {
-    fileName: string;
-    virusName: string;
+	fileName: string;
+	virusName: string;
 }
 
 export interface VirusScanResult {
-    started: number;
-    finished: number;
-    status: 'CLEAN' | 'NOT_SCANNED' | 'DIRTY';
-    foundViruses: FoundVirus[];
+	started: number;
+	finished: number;
+	status: 'CLEAN' | 'NOT_SCANNED' | 'DIRTY';
+	foundViruses: FoundVirus[];
 }
 
 /**
@@ -84,24 +84,31 @@ export interface VirusScanResult {
  *  @property {boolean} isError - Flag that shows up upload was with error or not
  */
 export interface FileDetails {
-    fileId: string;
-    fileUrl: string;
-    name: string;
-    size: number;
-    uploadDate: number;
-    fileUploadProgress: number;
-    fileIconUrl: string;
-    contentType: string;
-    isPrivate: boolean;
-    mimeCheck: 'PASSED' | 'FAILED';
-    virusScan: VirusScanResult;
-    isError: boolean;
-    data: any;
+	fileId: string;
+	fileUrl: string;
+	name: string;
+	size: number;
+	uploadDate: number;
+	fileUploadProgress: number;
+	fileIconUrl: string;
+	contentType: string;
+	isPrivate: boolean;
+	mimeCheck: 'PASSED' | 'FAILED';
+	virusScan: VirusScanResult;
+	isError: boolean;
+	data: any;
 }
 
 export type ReqHeaders = { [key: string]: string };
 
 export interface FileUploadService {
-    fileUploadRequest<T = FileDetails>(file: FormData, isPrivate: boolean, hash?: string): Promise<AxiosResponse<T>>;
-    fileDetailsRequest<T = FileDetails>(fileId: string, headers?: ReqHeaders): Promise<FileDetails> | Promise<AxiosResponse<T>>;
+	fileUploadRequest<T = FileDetails>(
+		file: FormData,
+		isPrivate: boolean,
+		hash?: string,
+	): Promise<AxiosResponse<T>>;
+	fileDetailsRequest<T = FileDetails>(
+		fileId: string,
+		headers?: ReqHeaders,
+	): Promise<FileDetails> | Promise<AxiosResponse<T>>;
 }

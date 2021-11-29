@@ -7,7 +7,7 @@
 		"packages/*"
 	],
 	"scripts": {
-		"link": "lerna exec -- npm i && lerna link",
+		"link": "lerna exec -- npm i --package-lock-only && lerna link",
 		"build": "lerna run build --stream",
 		"build:components": "cd packages/react-common-components && yarn run build",
 		"build:services": "cd packages/react-common-services && yarn run build",
@@ -18,7 +18,8 @@
 		"copy-img-assets": "cp -r packages/react-common-components/src/assets/img/ storybook-static/",
 		"storybook": "start-storybook -s packages/react-common-components/src/assets/ -p 6006",
 		"storybook:build": "build-storybook && yarn run copy-img-assets",
-		"storybook:serve": "yarn run storybook:build && npx http-server storybook-static"
+		"storybook:serve": "yarn run storybook:build && npx http-server storybook-static",
+		"postinstall": "yarn run link"
 	},
 	"husky": {
 		"hooks": {
