@@ -10,6 +10,13 @@
 		flex-direction: column;
 	}
 	&__item {
+		flex-basis: calc(100% / 3);
+		flex-shrink: 2;
+		max-width: 100%;
+		min-width: 0;
+		padding: 0 2rem 2rem;
+		text-align: center;
+		flex-grow: 1;
 		@include media-breakpoint-md {
 			margin-bottom: 2rem;
 			max-width: 100%;
@@ -20,21 +27,19 @@
 		@include media-breakpoint-sm {
 			max-width: 100%;
 		}
-		flex-basis: auto;
-		flex-shrink: 2;
-		flex-grow: 1;
-		max-width: 100%;
-		min-width: 0;
-		padding: 0 2rem;
-		text-align: center;
 		&-title {
-			@include font-size-lg();;
+			@include font-size-lg();
 			@include font-medium();
 			margin-bottom: 1rem;
 			margin-top: 2rem;
 		}
 		&-description {
 			@include font-size-md();
+		}
+		&-image {
+			height: 192px;
+			width: 100%;
+			object-fit: cover;
 		}
 	}
 }
