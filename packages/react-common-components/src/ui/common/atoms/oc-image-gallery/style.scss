@@ -44,6 +44,7 @@
 			height: 100%;
 			-o-object-fit: cover;
 			object-fit: cover;
+			cursor: pointer;
 		}
 	}
 }
@@ -80,6 +81,7 @@
 			height: 22px;
 			width: 12px;
 			z-index: 100;
+			cursor: pointer;
 			@include media-breakpoint-sm {
 				top: 50%;
 			}
