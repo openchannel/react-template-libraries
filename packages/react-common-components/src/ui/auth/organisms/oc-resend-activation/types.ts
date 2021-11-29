@@ -1,5 +1,6 @@
+import * as React from 'react';
+
 import { InputProps } from '../../../common/atoms';
-import * as React from "react";
 
 export interface OcResendProps {
 	/**

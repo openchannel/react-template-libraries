@@ -114,7 +114,7 @@ export const customClassWithError = (error: string | undefined, child: React.Rea
  * @param options
  * @param defaultFormType
  */
-export const getDefaultFormType = (options: { label: string; }[], defaultFormType?: string) => {
+export const getDefaultFormType = (options: { label: string }[], defaultFormType?: string) => {
 	if (!defaultFormType) {
 		return options[0];
 	}

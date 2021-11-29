@@ -27,7 +27,7 @@ import {
 
 export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 	const { fields, service, fileService, excludeRenderFields } = props;
-	
+
 	if (!fields || fields.length === 0) {
 		return null;
 	}
@@ -35,8 +35,17 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 	return (
 		<>
 			{fields.map((field, index) => {
-				const { id, label, description, type, attributes, options, defaultValue, placeholder, name } =
-					field;
+				const {
+					id,
+					label,
+					description,
+					type,
+					attributes,
+					options,
+					defaultValue,
+					placeholder,
+					name,
+				} = field;
 				if (excludeRenderFields && excludeRenderFields.includes(id)) {
 					return null;
 				}
