@@ -6,6 +6,7 @@
 	width: 100%;
 	justify-content: space-between;
 	padding: 0;
+	min-height: unset;
 	&__page-title {
 		display: flex;
 		flex-direction: column;
@@ -23,7 +24,6 @@
 			cursor: pointer;
 			img {
 				margin-right: 8px;
-				margin-bottom: 1px;
 			}
 		}
 		&__title {
@@ -43,7 +43,6 @@
 
 	@include media-breakpoint-sm {
 		flex-direction: column;
-		padding: 16px 24px;
 		.main-container__custom-button {
 			width: 100%;
 			margin-top: 16px;
