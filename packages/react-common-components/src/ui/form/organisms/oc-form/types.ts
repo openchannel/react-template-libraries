@@ -92,6 +92,11 @@ export interface OcFormProps extends FormProps {
 	children?: OcFormChildren;
 
 	cancelButtonText?: string;
+
+	customSubmitClass?: string;
+
+	customCancelClass?: string;
+
 }
 
 export type FieldType =
