@@ -2,10 +2,12 @@
 
 .edit-user-form {
 	&__type-label {
-		margin-top: 2rem;
 		margin-bottom: 1rem;
 		display: flex;
 		flex-direction: column;
+	}
+	& .select-component__action{
+		margin-bottom: 3rem;
 	}
 	&__content {
 		&__checkbox {
