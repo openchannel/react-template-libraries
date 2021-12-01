@@ -29,6 +29,8 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		children,
 		excludeRenderFields,
 		cancelButtonText = 'Cancel',
+		customSubmitClass = '',
+		customCancelClass = '',
 	} = props;
 
 	const {
@@ -83,13 +85,13 @@ export const Form: React.FC<OcFormProps> = (props) => {
 					/>
 					{children ? (isFunction(children) ? children(formik, flattenFields) : children) : null}
 					<div className={getOcFormButtonsClass(buttonPosition)}>
-						<div className={`form__button ${!onCancel ? 'full-width' : ''}`}>
+						<div className={`form__button ${customSubmitClass}`}>
 							<OcButtonComponent htmlType="submit" type="primary" process={formik.isSubmitting}>
 								{submitButtonText}
 							</OcButtonComponent>
 						</div>
 						{onCancel && (
-							<div className="form__button">
+							<div className={`form__button ${customCancelClass}`}>
 								<OcButtonComponent htmlType="button" type="secondary" onClick={onCancel}>
 									{cancelButtonText}
 								</OcButtonComponent>
