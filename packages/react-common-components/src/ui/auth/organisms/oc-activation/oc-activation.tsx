@@ -31,16 +31,16 @@ export const OcActivation: React.FC<OcActivationProps> = (props) => {
 					<img src={companyLogoUrl} className="activation__logo-img company-logo" alt="logo" />
 				</div>
 				<div className="activation__header">
-					<h4 className="activation__header-heading">Activate Account</h4>
+					<h4 className="activation__header-heading">Activate account</h4>
 					<OcLabelComponent>Check your inbox for the activation code</OcLabelComponent>
 				</div>
 				<div className="activation__form-group">
 					<span className="activation__form-group-label">
-						<OcLabelComponent htmlFor={inputProps?.id}>Activation Code</OcLabelComponent>
+						<OcLabelComponent htmlFor={inputProps?.id}>Activation code</OcLabelComponent>
 					</span>
 					<OcInputComponent
 						inputType="text"
-						placeholder="Activation Code"
+						placeholder="Activation code"
 						customClass={`activation__form-group-input ${inputError ? 'invalid' : ''}`}
 						required
 						{...inputProps}
@@ -67,11 +67,11 @@ export const OcActivation: React.FC<OcActivationProps> = (props) => {
 				</div>
 				<div className="activation__sign-up">
 					<span className="activation__reactivation-label">
-						<OcLabelComponent>Dont have an account yet?</OcLabelComponent>
+						<OcLabelComponent>Don't have an account yet?</OcLabelComponent>
 					</span>
 					<Link to={signupUrl} className="activation__link">
 						{' '}
-						Sign Up
+						Sign up
 					</Link>
 				</div>
 			</div>

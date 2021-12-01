@@ -73,6 +73,6 @@ export const errorMessages: Record<string, any> = {
 	numberTags: ({ fieldTitle }: { fieldTitle: string }): string =>
 		`${fieldTitle} can only contain numeric values`,
 	password: (): string =>
-		'Password must contains 1 uppercase, 1 lowercase, 1 digit, 1 special char (one of @#$%!^&) and at least 8 character long',
+		'Password must contain 1 uppercase, 1 lowercase, 1 digit, 1 special char (one of @#$%!^&) and at least 8 characters long',
 	customError: (message: string): string => message,
 };
