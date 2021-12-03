@@ -23,7 +23,7 @@ export interface ChartStatisticModel {
 
 export interface ChartStatisticDataModel {
 	labelsY: number[];
-	labelsX: string[] | number[];
+	labelsX: Array<string | number>;
 	tabularLabels?: string[];
 }
 
