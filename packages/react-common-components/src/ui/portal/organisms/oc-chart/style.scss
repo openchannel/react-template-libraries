@@ -14,19 +14,65 @@
 		justify-content: space-between;
 		margin-bottom: 3rem;
 		padding: 1rem;
+
+		& .dropdown-button{
+			& .dropdown-toggle svg {
+				margin: auto 0 auto 8px;
+				& path{
+					fill: $info;
+				}
+			}
+		}
 	}
 
 	&__period-container {
+		@include media-breakpoint-lg {
+			margin-left: 16px;
+		}
 		@include media-breakpoint-md {
 			flex-direction: column;
+			margin-left: 0;
 		}
 		display: flex;
 		justify-content: flex-start;
+		margin-left: 5rem;
+    	margin-right: auto;
+	}
+
+	&__filter-buttons-container {
+		display: flex;
+		@include media-breakpoint-md {
+			display: block;
+		}
+		&-tabs{
+			display: flex;
+			flex-wrap: nowrap;
+			align-items: center;
+			@include media-breakpoint-md {
+				margin-bottom: 16px;
+			}
+		}
+	}
+
+	&__swap-type-button {
+		margin-right: 4rem;
 	}
 
 	&__period-item {
 		cursor: pointer;
 		display: flex;
+		border-radius: 4px;
+		padding: 2rem;
+		width: 152px;
+		justify-content: center;
+		@include media-breakpoint-lg {
+			padding: 16px 8px;
+   			width: 100px;
+		}
+		@include media-breakpoint-md {
+			padding: 0;
+			justify-content: flex-start;	
+		}
 
 		&-active {
 			.chart__period-item-checkmark {
@@ -50,6 +96,9 @@
 			display: flex;
 			line-height: 2rem;
 			margin-bottom: 0;
+			@include media-breakpoint-md {
+				margin-bottom: 16px;	
+			}
 		}
 
 		&-radio {
@@ -91,12 +140,12 @@
 			cursor: pointer;
 			display: flex;
 
-			.recolor-svg {
+			[class$="recolor-svg"] {
 				fill: $gray-600;
 			}
 
 			&_active {
-				.recolor-svg {
+				[class$="recolor-svg"] {
 					fill: $body-color;
 				}
 			}
@@ -104,20 +153,57 @@
 	}
 
 	&__type-section {
+		@include media-breakpoint-xl {
+			width: 216px;
+   			min-width: 216px;
+		}
+		@include media-breakpoint-lg {
+			width: 160px;
+			min-width: 160px;
+		}
 		@include media-breakpoint-md {
 			width: 100%;
+			margin-bottom: 16px;
 		}
+
 		border: 1px solid $info;
 		border-radius: 4px;
 		cursor: pointer;
+		height: 56px;
+		width: 248px;
+		padding: 0 16px;
 
+		&-dropdown {
+			margin-bottom: 0;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			width: 100%;
+		}
+
+		&.dropdown {
+			label {
+				margin-bottom: 0;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				width: 100%;
+			}
+
+			& .dropdown-button__menu.dropdown-menu {
+				transform: translate3d(0px, 62px, 0px) !important;
+				width: 100%;
+				& .dropdown-item {
+					text-overflow: ellipsis;
+					overflow: hidden;
+				}
+			}
+		}
 		&:focus,
 		&:active {
 			border-color: $primary;
 
 			&-dropdown {
 				&-icon {
-					.recolor-icon {
+					.recolor-icon{
 						fill: $primary;
 					}
 				}

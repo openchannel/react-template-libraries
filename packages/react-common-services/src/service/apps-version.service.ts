@@ -74,8 +74,8 @@ export const AppVersionService = {
 	 * getAppsVersions(1, 10, null, null);
 	 * ``
 	 */
-	getAppsVersions: (appId: string, pageNumber: number, limit: number, sort: any, query: string) => {
-		const mainUrl = `${APPS_URL}/${appId}/versions`;
+	getAppsVersions: (pageNumber: number, limit: number, sort: any, query: string) => {
+		const mainUrl = `${APPS_URL}/versions`;
 
 		const params = {
 			pageNumber: String(pageNumber),

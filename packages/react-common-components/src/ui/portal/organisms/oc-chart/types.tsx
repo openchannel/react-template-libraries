@@ -7,7 +7,7 @@ import { GRAPH_DATA_TYPE, TABULAR_DATA_TYPE } from './utils';
 
 export type DataType = string | typeof TABULAR_DATA_TYPE | typeof GRAPH_DATA_TYPE;
 
-export type ChangeChartOptions = ({ field, period }: ChartOptionsChange) => void;
+export type ChangeChartOptions = ({ field, period, app }: ChartOptionsChange) => void;
 
 export enum ChartLayoutTypeModel {
 	standard = 'standard',
@@ -18,6 +18,7 @@ export interface ChartStatisticModel {
 	data: ChartStatisticDataModel;
 	fields: ChartStatisticFiledModel[];
 	periods: ChartStatisticPeriodModel[];
+	apps?:ChartStatisticParameterModel[];
 }
 
 export interface ChartStatisticDataModel {
@@ -37,6 +38,7 @@ export interface ChartStatisticPeriodModel extends ChartStatisticParameterModel 
 export interface ChartOptionsChange {
 	field: ChartStatisticFiledModel;
 	period: ChartStatisticPeriodModel;
+	app?: ChartStatisticPeriodModel;
 }
 
 export interface ChartStatisticParameterModel {
@@ -107,6 +109,7 @@ export interface ChartAction {
 export interface ActionsProps {
 	fields: ChartStatisticFiledModel[];
 	periods: ChartStatisticPeriodModel[];
+	apps?:ChartStatisticParameterModel[];
 	activeDataType: DataType;
 	onChangeDataType: React.Dispatch<DataType>;
 	changeChartOptions: ChangeChartOptions;

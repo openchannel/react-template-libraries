@@ -35,6 +35,7 @@ export const OcChartComponent: React.FC<ChartProps> = (props) => {
 				fields={chartData.fields}
 				changeChartOptions={changeChartOptions}
 				minDropdownWidth={minDropdownWidth}
+				apps={chartData.apps}
 			/>
 			<div className="chart__data-container">
 				{activeDataType === GRAPH_DATA_TYPE && (

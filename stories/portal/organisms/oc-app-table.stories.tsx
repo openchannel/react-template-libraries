@@ -12,7 +12,7 @@ const statElement = {
 };
 
 const app1: FullAppData = {
-	appId: '5f22dd91b5ad376fff8431a7',
+	appId: '5f22dd91b5ad376fff8431a71',
 	safeName: ['firstapp'],
 	customData: {
 		summary: 'Some Test summary',
@@ -57,7 +57,7 @@ const app1: FullAppData = {
 	},
 	children: [
 		{
-			appId: '5f22dd91b5ad376fff8431a7',
+			appId: '5f22dd91b5ad376fff8431a72',
 			safeName: ['firstapp'],
 			customData: {
 				summary: 'New Test Summary',
@@ -342,7 +342,7 @@ const propsConfig = {
 		list: [app1, app2, app3, app4, app5],
 		count: 50,
 	},
-	options: ['EDIT', 'PREVIEW', 'PUBLISH', 'SUSPEND', 'DELETE'],
+	options: ['Edit', 'Preview', 'Submit', 'Delete'],
 };
 
 export default {

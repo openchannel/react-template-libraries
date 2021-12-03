@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import DefaultSortIcon from '../../../../../assets/img/dropdown.svg';
+import { ReactComponent as DefaultSortIcon } from '../../../../../assets/img/dropdown.svg';
 import { useChartReducer } from '../hooks';
 import { TableProps } from '../types';
 

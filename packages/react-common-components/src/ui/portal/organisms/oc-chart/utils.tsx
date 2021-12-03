@@ -56,8 +56,12 @@ export const defaultChartParams = {
 					color: '#727272',
 					maxRotation: 0,
 					autoSkipPadding: 20,
-					callback: (value) =>
-						typeof value !== 'number' && value.length >= 8 ? value.substring(0, 3) : value,
+					callback(rawValue) {
+						//@ts-ignore
+						const value = this.getLabelForValue(rawValue);
+						return typeof value !== 'number' && value.length >= 8 ? value.substring(0, 3) : value;
+						
+					}
 				} as Partial<TickOptions>,
 			},
 			y: {

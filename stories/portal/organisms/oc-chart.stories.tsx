@@ -149,12 +149,22 @@ const defaultProps = {
 				label: 'Views',
 			},
 		],
+		apps: [
+			{
+				id: 'allApps',
+				label: 'All apps',
+				active: true,
+			},
+			{
+				id: 'test',
+				label: 'Test',
+			},
+		],
 	},
 	count: month.labelsY.reduce((a, b) => a + b, 0),
 	countText: 'Total',
-	downloadUrl: './img/upload_icon.svg',
+	downloadUrl: './img/cloud-download.svg',
 	enablePoints: true,
-	minDropdownWidth: '247px',
 	activeDataType: 'graph',
 };
 
@@ -168,7 +178,8 @@ const Component: Story<ChartProps> = (args) => {
 	const [count, setCount] = React.useState(args.count);
 	const [countText, setCountText] = React.useState(args.countText);
 
-	const changeChartOptions = ({ period, field }: ChartOptionsChange) => {
+	const changeChartOptions = ({ period, field, app }: ChartOptionsChange) => {
+
 		const newChartDat = { ...chartData };
 
 		if (period.id === 'day') {
@@ -185,6 +196,12 @@ const Component: Story<ChartProps> = (args) => {
 			...item,
 			active: period.id === item.id,
 		}));
+
+		newChartDat.apps = chartData.apps.map((item) => ({
+			...item,
+			active: app.id === item.id,
+		}));
+
 
 		setChartData(newChartDat);
 		setCount(newChartDat.data.labelsY.reduce((a, b) => a + b, 0));
