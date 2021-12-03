@@ -15,15 +15,18 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 		defaultEmptyConfigsErrorTemplate,
 		defaultEmptyConfigsErrorMessage = 'There are no forms configured',
 		submitButtonText = 'Submit',
+		customSubmitClass = '',
+		customCancelClass = '',
 	} = props;
 
 	return (
 		<div className="edit-user-form">
-			{!formConfigs.length && (
-				defaultEmptyConfigsErrorTemplate
-					? defaultEmptyConfigsErrorTemplate
-					: <h6 className="edit-user-form__empty_form_configs">{defaultEmptyConfigsErrorMessage}</h6>
-			)}
+			{!formConfigs.length &&
+				(defaultEmptyConfigsErrorTemplate ? (
+					defaultEmptyConfigsErrorTemplate
+				) : (
+					<h6 className="edit-user-form__empty_form_configs">{defaultEmptyConfigsErrorMessage}</h6>
+				))}
 			{formConfigs?.length > 0 && (
 				<OcForm
 					formConfigs={formConfigs}
@@ -31,6 +34,8 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 					formTypeLabel={defaultTypeLabelText}
 					defaultFormType={defaultFormType}
 					submitButtonText={submitButtonText}
+					customSubmitClass={customSubmitClass}
+					customCancelClass={customCancelClass}
 				/>
 			)}
 		</div>

@@ -2,39 +2,39 @@
 @import '../../../styles/index';
 
 .oc-rating {
-  &-single {
-    display: flex;
-    &__rating-star {
-      height: 16px;
-      vertical-align: unset;
-      width: 16px;
-    }
-    &__label {
-      color: $secondary;
-      margin-left: 1rem;
-      @include font-size-sm();
-      @include font-medium();
-    }
-  }
+	&-single {
+		display: flex;
+		&__rating-star {
+			height: 16px;
+			vertical-align: unset;
+			width: 16px;
+		}
+		&__label {
+			color: $secondary;
+			margin-left: 1rem;
+			@include font-size-md(16px);
+			@include font-medium();
+		}
+	}
 
-  &-multi {
-    display: inline-block;
-    &__star {
-      color: $secondary;
-      position: relative;
+	&-multi {
+		display: inline-block;
+		&__star {
+			color: $secondary;
+			position: relative;
 			cursor: pointer;
 			&_disabled {
 				cursor: default;
 			}
-      &_filled {
-        color: $yellow;
-      }
-      &_half-color {
-        color: $yellow;
-        left: 0;
-        overflow: hidden;
-        position: absolute;
-      }
-    }
-  }
+			&_filled {
+				color: $yellow;
+			}
+			&_half-color {
+				color: $yellow;
+				left: 0;
+				overflow: hidden;
+				position: absolute;
+			}
+		}
+	}
 }

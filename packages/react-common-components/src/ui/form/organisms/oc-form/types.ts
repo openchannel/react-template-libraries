@@ -1,14 +1,16 @@
 import * as React from 'react';
 import type { FieldInputProps, FormikHelpers, FormikProps, FormikValues } from 'formik';
 
-import type { Dataset, FileUploadService } from '../../../common';
 import type { OcEditUserFormConfig } from '../../../auth/organisms/oc-edit-user-form';
-import type { FieldValidators, AppFormModel, FormikField, FormikFieldsValues } from '../../models';
+import type { Dataset, FileUploadService } from '../../../common';
+import type { AppFormModel, FieldValidators, FormikField, FormikFieldsValues } from '../../models';
 
 export type OcFormValues = Record<string, any>;
 export type OcFormFormikHelpers = FormikHelpers<Record<string, unknown>>;
-export type OcFormChildren = React.ReactNode | ((formik: FormikProps<any>, fields: FormikField[]) => React.ReactNode);
-export type SelectedFormType = { label: string; };
+export type OcFormChildren =
+	| React.ReactNode
+	| ((formik: FormikProps<any>, fields: FormikField[]) => React.ReactNode);
+export type SelectedFormType = { label: string };
 
 export interface OcFormExtraProps {
 	/**
@@ -88,6 +90,13 @@ export interface OcFormProps extends FormProps {
 	enableTermsCheckboxField?: boolean;
 
 	children?: OcFormChildren;
+
+	cancelButtonText?: string;
+
+	customSubmitClass?: string;
+
+	customCancelClass?: string;
+
 }
 
 export type FieldType =

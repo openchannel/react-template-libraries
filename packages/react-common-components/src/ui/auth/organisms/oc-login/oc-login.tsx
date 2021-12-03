@@ -20,7 +20,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 		handleSubmit,
 		companyLogoUrl = '../../../../assets/img/logo-company.png',
 		forgotPwdUrl,
-		loginButtonText = 'Log In',
+		loginButtonText = 'Log in',
 		signupUrl,
 		inputEmailValue,
 		inputPasswordValue,
@@ -51,7 +51,7 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 								<img alt="logo" className="img-fluid company-logo" src={companyLogoUrl || ''} />
 							</div>
 							<div className="login__header">
-								<h4 className="login__header-heading">Log In</h4>
+								<h4 className="login__header-heading">Log in</h4>
 								<OcLabelComponent
 									text="Log in into your account"
 									customClass="login__header-invitation"
@@ -169,9 +169,9 @@ export const OcLoginComponent: React.FC<LoginProps> = (props) => {
 							/>
 							{signupUrl && (
 								<div className="login__sign-up">
-									Dont have an account yet?{' '}
+									Don't have an account yet?{' '}
 									<Link className="login__sign-up-link" to={signupUrl || '/'}>
-										Sign Up
+										Sign up
 									</Link>
 								</div>
 							)}

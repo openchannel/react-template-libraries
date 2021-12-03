@@ -1,7 +1,8 @@
 import { nanoid } from 'nanoid';
+
 import {
 	OcEditUserFormConfig,
-	OcEditUserTypeConfig
+	OcEditUserTypeConfig,
 } from '../../../../auth/organisms/oc-edit-user-form';
 import { AppFormModel } from '../../../models';
 
@@ -81,15 +82,21 @@ export const mapConfigsToFormConfigs = (
 	enableTermsCheckbox: boolean,
 ): AppFormModel[] => {
 	return formConfigs.map((config) => mapConfig(config, enablePasswordField, enableTermsCheckbox));
-}
+};
 
 export const mapFormTypes = (formConfigs: OcEditUserFormConfig[]) => {
-	let result: { options: { label: string; }[]; types: { label: string; value: string | undefined; }[] } = { options: [], types: [] };
+	const result: {
+		options: { label: string }[];
+		types: { label: string; value: string | undefined }[];
+	} = { options: [], types: [] };
 
 	for (const config of formConfigs) {
 		result.options.push({ label: config.name });
-		result.types.push({ label: config.name, value: config?.account?.type || config?.organization?.type });
+		result.types.push({
+			label: config.name,
+			value: config?.account?.type || config?.organization?.type,
+		});
 	}
 
 	return result;
-}
+};

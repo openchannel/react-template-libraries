@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { DayPickerProps } from 'react-day-picker';
-import DayPicker from 'react-day-picker';
+import DayPicker, { DayPickerProps } from 'react-day-picker';
 import MomentLocaleUtils from 'react-day-picker/moment';
-import { Navbar } from './navbar';
+
+import { MONTHS, WEEK, WEEKDAYS_LONG, WEEKDAYS_SHORT } from './constants';
 import { InputWithIcon } from './icon-input';
+import { Navbar } from './navbar';
 import { OcTimePicker } from './oc-timepicker';
 
-import { WEEK, WEEKDAYS_SHORT, WEEKDAYS_LONG, MONTHS } from './constants';
 import 'react-day-picker/lib/style.css';
 import './style.scss';
 

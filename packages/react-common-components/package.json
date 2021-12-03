@@ -1,6 +1,6 @@
 {
 	"name": "@openchannel/react-common-components",
-	"version": "0.1.110",
+	"version": "0.1.117",
 	"description": "Includes components for portal and market.",
 	"license": "MIT",
 	"keywords": [
@@ -18,8 +18,9 @@
 	"module": "dist/index.js",
 	"typings": "dist/index.d.ts",
 	"files": [
-		"dist"
+		"dist/**/*"
 	],
+	"type": "module",
 	"scripts": {
 		"build": "rm -rf dist & rollup -c",
 		"build:legacy": "npm ci && tsdx build --tsconfig tsconfig.json",
@@ -29,7 +30,6 @@
 		"test:coverage:watch": "tsdx test --passWithNoTests --coverage --watch",
 		"lint": "tsdx lint src",
 		"lint:fix": "tsdx lint src --fix",
-		"prepare": "tsdx build",
 		"size": "size-limit",
 		"analyze": "size-limit --why"
 	},

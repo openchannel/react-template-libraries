@@ -83,4 +83,8 @@ export interface EditUserComponentProps {
 	defaultEmptyConfigsErrorMessage?: string;
 
 	submitButtonText?: string;
+
+	customSubmitClass?: string;
+
+	customCancelClass?: string;
 }

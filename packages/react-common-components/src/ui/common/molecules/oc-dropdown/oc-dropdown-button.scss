@@ -2,10 +2,10 @@
 @import '../../../styles/index';
 
 .dropdown-button {
-  height: 100%;
-  position: relative;
-  width: 100%;
-  &__placeholder-container {
+	height: 100%;
+	position: relative;
+	width: 100%;
+	&__placeholder-container {
 		@include font-size-md();
 		@include font-medium();
     align-items: center;

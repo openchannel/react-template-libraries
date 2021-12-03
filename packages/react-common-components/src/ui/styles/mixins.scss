@@ -1,6 +1,5 @@
 //commit bb6dec5596a1aecbda833107a86025ba1d7c8326 Author: Alex Tkachenko Date: 25.10.21, 13:36
 // BREAKPOINTS
-
 @mixin media-breakpoint-sm {
 	@media (max-width: 575.98px) {
 		@content;
@@ -149,6 +148,7 @@
 	}
 	&::placeholder {
 		color: $placeholder-color;
+		opacity: 0.5;
 	}
 }
 

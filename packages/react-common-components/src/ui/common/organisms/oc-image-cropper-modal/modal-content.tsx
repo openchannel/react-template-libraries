@@ -1,11 +1,13 @@
 import * as React from 'react';
-import {ReactComponent as CloseIconSvg} from '../../../../assets/img/close-icon.svg';
-import {ReactComponent as ZoomInImg} from '../../../../assets/img/zoom-in.svg';
-import {ReactComponent as ZoomOutImg} from '../../../../assets/img/zoom-out.svg';
+import { noop } from 'lodash-es';
+
+import { ReactComponent as CloseIconSvg } from '../../../../assets/img/close-icon.svg';
+import { ReactComponent as ZoomInImg } from '../../../../assets/img/zoom-in.svg';
+import { ReactComponent as ZoomOutImg } from '../../../../assets/img/zoom-out.svg';
 import OcButtonComponent from '../../atoms/oc-button/oc-button';
 import OcImageCropper from '../../atoms/oc-image-cropper';
-import {CropperModalProps} from './types';
-import {noop} from 'lodash-es';
+
+import { CropperModalProps } from './types';
 
 export const OcImageCropperModalContent: React.FC<CropperModalProps> = (props) => {
 	const {
@@ -33,7 +35,7 @@ export const OcImageCropperModalContent: React.FC<CropperModalProps> = (props) =
 		if (b64File !== undefined) {
 			const i = b64File.indexOf('base64,');
 			const buffer = Buffer.from(b64File.slice(i + 7), 'base64');
-			return new File([buffer], cropData.filename, {type: 'image/jpeg'});
+			return new File([buffer], cropData.filename, { type: 'image/jpeg' });
 		} else {
 			return b64File;
 		}
@@ -41,10 +43,10 @@ export const OcImageCropperModalContent: React.FC<CropperModalProps> = (props) =
 
 	const handleSubmitAfterCrop = () => {
 		const options = {
-			height:maxHeight, 
-			width:maxWidth, 
+			height: maxHeight,
+			width: maxWidth,
 		};
-		
+
 		onImageCrop(b64toFile(cropper.getCroppedCanvas(options).toDataURL()));
 		onClose();
 	};
@@ -64,7 +66,9 @@ export const OcImageCropperModalContent: React.FC<CropperModalProps> = (props) =
 				<div className="cropper__body">
 					<div className="cropper__body-container">
 						<div className="cropper__body-size">
-							<div className="cropper__body-resolution" >{(maxWidth !== 0 && maxHeight !== 0) && maxWidth + 'px x ' + maxHeight + 'px'}</div>
+							<div className="cropper__body-resolution">
+								{maxWidth !== 0 && maxHeight !== 0 && `${maxWidth}px x ${maxHeight}px`}
+							</div>
 							<div className="cropper__body-zoom">
 								<span onClick={zoomIn}>
 									<ZoomInImg />
@@ -74,7 +78,12 @@ export const OcImageCropperModalContent: React.FC<CropperModalProps> = (props) =
 								</span>
 							</div>
 						</div>
-						<OcImageCropper setCropper={setCropper} image={cropData.image} maxWidth={maxWidth} maxHeight={maxHeight}/>
+						<OcImageCropper
+							setCropper={setCropper}
+							image={cropData.image}
+							maxWidth={maxWidth}
+							maxHeight={maxHeight}
+						/>
 						<div className="confirmation-modal__button-container">
 							{!rejectButtonHide && (
 								<OcButtonComponent
