@@ -44,21 +44,21 @@ export const Actions: React.FC<ActionsProps> = (props) => {
 
 			changeChartOptions({ period, field: selectedChartType, app: selectedsortingApp });
 		},
-		[changeChartOptions, selectedChartType, periods],
+		[changeChartOptions, selectedChartType, selectedsortingApp],
 	);
 
 	const onSelectChartType = React.useCallback(
 		(value) => {
 			changeChartOptions({ field: value, period: selectedPeriod, app: selectedsortingApp });
 		},
-		[changeChartOptions, selectedPeriod],
+		[changeChartOptions, selectedPeriod, selectedsortingApp],
 	);
 
 	const onSelectSortingApp= React.useCallback(
 		(value) => {
 			changeChartOptions({ field: selectedChartType, period: selectedPeriod, app: value});
 		},
-		[changeChartOptions, selectedsortingApp],
+		[changeChartOptions,selectedChartType, selectedPeriod],
 	);
 
 	const onClickDataType = React.useCallback((e) => {
