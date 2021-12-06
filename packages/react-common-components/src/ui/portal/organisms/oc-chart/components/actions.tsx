@@ -14,6 +14,7 @@ export const Actions: React.FC<ActionsProps> = (props) => {
 	const {
 		periods,
 		fields,
+		apps = [],
 		activeDataType,
 		onChangeDataType,
 		changeChartOptions,
@@ -28,6 +29,10 @@ export const Actions: React.FC<ActionsProps> = (props) => {
 		() => fields.find(({ active }) => active) || defaultChartStatisticParameter,
 		[fields],
 	);
+	const selectedsortingApp = React.useMemo(
+		() => apps.find(({ active }) => active) || defaultChartStatisticParameter,
+		[apps],
+	);
 
 	const onChangePeriod = React.useCallback(
 		(e) => {
@@ -37,16 +42,23 @@ export const Actions: React.FC<ActionsProps> = (props) => {
 				return;
 			}
 
-			changeChartOptions({ period, field: selectedChartType });
+			changeChartOptions({ period, field: selectedChartType, app: selectedsortingApp });
 		},
-		[changeChartOptions, selectedChartType, periods],
+		[changeChartOptions, selectedChartType, selectedsortingApp],
 	);
 
 	const onSelectChartType = React.useCallback(
 		(value) => {
-			changeChartOptions({ field: value, period: selectedPeriod });
+			changeChartOptions({ field: value, period: selectedPeriod, app: selectedsortingApp });
 		},
-		[changeChartOptions, selectedPeriod],
+		[changeChartOptions, selectedPeriod, selectedsortingApp],
+	);
+
+	const onSelectSortingApp= React.useCallback(
+		(value) => {
+			changeChartOptions({ field: selectedChartType, period: selectedPeriod, app: value});
+		},
+		[changeChartOptions,selectedChartType, selectedPeriod],
 	);
 
 	const onClickDataType = React.useCallback((e) => {
@@ -55,6 +67,20 @@ export const Actions: React.FC<ActionsProps> = (props) => {
 
 	return (
 		<div className="chart__options-container">
+			{apps.length > 0 && <OcDropdownButton
+				options={apps}
+				onSelect={onSelectSortingApp}
+				selected={selectedsortingApp}
+				className="chart__type-section"
+				minDropdownWidth={minDropdownWidth}
+				defaultPlaceholderIcon={<SelectDownIcon className="chart__type-section-dropdown-icon" />}
+				activePlaceholderIcon={<SelectUpIcon className="chart__type-section-dropdown-icon" />}
+			>
+				<div className="chart__type-section-dropdown">
+					{/* eslint-disable-next-line jsx-a11y/label-has-for */}
+					<label className="chart__type-section-dropdown-label">{selectedsortingApp.label}</label>
+				</div>
+			</OcDropdownButton>}
 			<div className="chart__period-container">
 				{periods.map((obj, k) => (
 					<Radio

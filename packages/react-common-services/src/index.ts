@@ -66,6 +66,7 @@ export * from './service/user-account-types.service';
 export * from './service/user-invite.service';
 export * from './service/user-role.service';
 export * from './service/users.service';
+export * from './service/chart.service';
 
 /* Utils */
 export * from './util/query.util';
