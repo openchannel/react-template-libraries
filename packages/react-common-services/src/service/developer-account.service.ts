@@ -27,7 +27,7 @@ export const developerAccount = {
 	 *
 	 * Description: Get developer account data
 	 *
-	 * @returns {Observable<DeveloperAccount>} `Observable<DeveloperAccount>`
+	 * @returns {Promise<AxiosResponse<DeveloperAccount>>}
 	 *
 	 * ### Example
 	 *
@@ -45,7 +45,7 @@ export const developerAccount = {
 	 * @param {number} limit - (optional) Count Developer Accounts into response. Starts from >= 1.
 	 * @param {string} sort - (optional) Sort Developer Accounts by specific field.
 	 * @param {string} filter - (optional) Your specific search filter.
-	 * @returns {Observable<Page<DeveloperAccountModel>>} `Observable<Page<DeveloperAccountModel>>`
+	 * @returns {Promise<AxiosResponse<Page<DeveloperAccountModel>>>}
 	 *
 	 * ### Example
 	 *
@@ -69,8 +69,7 @@ export const developerAccount = {
 	 * @param {string} devAccountId
 	 * @param {string} skipTypeValidation
 	 * @param {Partial<DeveloperAccount>} body
-	 * @returns {Observable<DeveloperAccount>} `Observable<DeveloperAccount>`
-	 *
+	 * @returns {Promise<AxiosResponse<DeveloperAccount>>}
 	 * ### Example
 	 *
 	 * `updateAccountFieldsForAnotherUser('ga7s6dg7a6sgd876ags7d8', false, {name: 'Developer'});`
@@ -89,7 +88,7 @@ export const developerAccount = {
 	 * Description: Update developer account fields
 	 *
 	 * @param {Partial<DeveloperAccount>} body - Data to update
-	 * @returns {Observable<DeveloperAccount>} `Observable<DeveloperAccount>`
+	 * @returns {Promise<AxiosResponse<DeveloperAccount>>}
 	 *
 	 * ### Example
 	 *
@@ -117,7 +116,7 @@ export const developerAccount = {
 	 *
 	 * Description: Delete current developer account
 	 *
-	 * @returns {Observable<any>} `Observable<any>`
+	 * @returns {Promise<AxiosResponse<any>>}
 	 *
 	 * ### Example
 	 *
