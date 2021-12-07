@@ -23,7 +23,7 @@ export const formsService = {
 	 * Description: Returns list form by ID.
 	 * This is public API endpoint.
 	 * @param {string} formId - the id of the form.
-	 * @returns {AppFormModelResponse} Observable<AppFormModelResponse>
+	 * @returns {AppFormModelResponse}
 	 */
 	getForm: (formId: string) => {
 		const mainUrl = `${FORMS_URL}/${formId}`;
