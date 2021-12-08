@@ -66,5 +66,5 @@ export interface OcAppTableProps {
 	 *
 	 * `ascending` - `true` for ascending sort or `false` for descending sort.
 	 */
-	onSort: (v: string) => void;
+	onSort?: (v: string) => void;
 }

@@ -37,7 +37,7 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 			const element = e.currentTarget as HTMLElement;
 			const key = element.dataset.sortkey || '';
 			sortArray({ key });
-			onSort(key);
+			onSort && onSort(key);
 		},
 		[onSort, sortArray],
 	);
