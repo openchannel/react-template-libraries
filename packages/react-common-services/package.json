@@ -1,6 +1,6 @@
 {
 	"name": "@openchannel/react-common-services",
-	"version": "0.1.105",
+	"version": "0.1.106",
 	"main": "dist/index.js",
 	"module": "dist/react-common-services.esm.js",
 	"types": "dist/index.d.ts",
