@@ -206,7 +206,7 @@ const app3: FullAppData = {
 		'video-url': 'http://www.google.com',
 	},
 	status: {
-		value: 'inDevelopment',
+		value: 'pending',
 		lastUpdated: 1596122025252,
 		modifiedBy: 'developer',
 		reason: '',
@@ -342,7 +342,7 @@ const propsConfig = {
 		list: [app1, app2, app3, app4, app5],
 		count: 50,
 	},
-	options: ['Edit', 'Preview', 'Submit', 'Delete'],
+	options: ['EDIT', 'PREVIEW', 'SUBMIT', 'SUSPEND', 'DELETE'],
 };
 
 export default {

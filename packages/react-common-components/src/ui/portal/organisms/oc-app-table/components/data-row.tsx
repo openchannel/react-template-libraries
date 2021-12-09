@@ -121,7 +121,7 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 				app.children.length > 0 &&
 				app.children.map((childApp, index) => (
 					<DataRow
-						key={childApp.appId}
+						key={childApp.appId + childApp.version}
 						isChild
 						index={index}
 						app={childApp}
