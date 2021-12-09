@@ -15,7 +15,7 @@ import { api } from '../lib/api';
 
 const APPS_URL = 'v2/apps';
 
-export const AppVersionService = {
+export const appVersion = {
 	/**
 	 * Description: You can search for apps by specifying the text that you want to search for as well as a list of fields that you want to include in the search.
 	 *
