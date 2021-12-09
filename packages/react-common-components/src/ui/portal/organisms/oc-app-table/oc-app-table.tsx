@@ -17,6 +17,7 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 		onSort,
 		menuUrl,
 		onMenuClick,
+		noAppMessage,
 	} = props;
 
 	const {
@@ -100,7 +101,7 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 						</tr>
 					</thead>
 					<tbody>
-						{(!array || array.length == 0) && <EmptyDataRow />}
+						{(!array || array.length == 0) && <EmptyDataRow noAppMessage={noAppMessage}/>}
 						{array.map((app) => (
 							<DataRow
 								key={app.appId}
