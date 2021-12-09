@@ -85,12 +85,14 @@
 		padding: 2rem 0;
 		vertical-align: middle;
 		border-top: 1px solid rgba(201, 213, 234, 0.5);
-
 		&:last-child {
 			border-top: 1px solid $info;
 			height: 66px;
 		}
-
+		&.no-app-found{
+			text-align: center;
+			height: 192px;
+		}
 		&_blank {
 			@include media-breakpoint-md {
 				width: 1rem;
