@@ -27,7 +27,7 @@ export const filterOptions = (
 			}
 			switch (item) {
 				case 'PREVIEW':
-					return !!previewTemplate;
+					return !!previewTemplate || (status === 'pending' || status === 'inDevelopment' || status === 'approved' || status === 'suspended');
 				case 'PUBLISH':
 				case 'SUBMIT':
 					return status === 'inDevelopment';
