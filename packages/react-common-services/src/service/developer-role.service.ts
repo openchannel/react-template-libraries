@@ -8,7 +8,7 @@ import { api } from '../lib/api';
  * GET 'v2/developerRoles'<br>
  */
 
-const USER_ACCOUNT_TYPES_URL = 'v2/userAccountTypes';
+const USER_ACCOUNT_TYPES_URL = 'v2/developerRoles';
 
 export const developerRoleService = {
 	/**
