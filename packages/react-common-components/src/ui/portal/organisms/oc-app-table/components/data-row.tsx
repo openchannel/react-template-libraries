@@ -79,7 +79,7 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 						>
 							<h6 className="oc-table__app-name">{app.name}</h6>
 						</span>
-						<small className="co-table__app-version">v {app.version}</small>
+						<small className="oc-table__app-version">v. {app.version}</small>
 					</div>
 				</td>
 				<td className="oc-table__td">
@@ -121,7 +121,7 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 				app.children.length > 0 &&
 				app.children.map((childApp, index) => (
 					<DataRow
-						key={childApp.appId}
+						key={childApp.appId + childApp.version}
 						isChild
 						index={index}
 						app={childApp}

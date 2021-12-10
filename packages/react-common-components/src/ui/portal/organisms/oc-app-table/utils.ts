@@ -1,13 +1,22 @@
 import { titleCase } from '../../../../lib';
 import { AppListOptions } from '../../models';
 
+export enum appStatus {
+	inDevelopment = 'inDevelopment',
+	inReview = 'inReview',
+	pending = 'pending',
+	approved = 'approved',
+	suspended = 'suspended',
+	rejected = 'rejected',
+};
+
 export const statusColor = (status: string): string => {
 	if (!status) return '';
 
 	switch (status) {
-		case 'inDevelopment':
+		case appStatus.inDevelopment:
 			return 'in-development';
-		case 'inReview':
+		case appStatus.inReview:
 			return 'in-review';
 		default:
 			return status;
@@ -27,14 +36,14 @@ export const filterOptions = (
 			}
 			switch (item) {
 				case 'PREVIEW':
-					return !!previewTemplate;
+					return !!previewTemplate || (status === appStatus.pending || status === appStatus.inDevelopment || status === appStatus.approved || status === appStatus.suspended);
 				case 'PUBLISH':
 				case 'SUBMIT':
-					return status === 'inDevelopment';
+					return status === appStatus.inDevelopment;
 				case 'UNSUSPEND':
-					return status === 'suspended' && modifiedBy === 'developer';
+					return status === appStatus.suspended && modifiedBy === 'developer';
 				case 'SUSPEND':
-					return status === 'approved';
+					return status === appStatus.approved;
 				default:
 					return true;
 			}

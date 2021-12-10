@@ -1,9 +1,13 @@
 import * as React from 'react';
 
-export const EmptyDataRow = React.memo(() => (
+interface noAppMessageType {
+	noAppMessage?: string;
+};
+
+export const EmptyDataRow:React.FC<noAppMessageType> = React.memo(({noAppMessage = 'No Applications Found'}) => (
 	<tr>
-		<td className="oc-table__td oc-text-center" colSpan={7}>
-			<span className="oc-table__text-wrapper">No Applications Found</span>
+		<td className="oc-table__td oc-text-center no-app-found" colSpan={7}>
+			<span className="oc-table__text-wrapper">{noAppMessage}</span>
 		</td>
 	</tr>
 ));
