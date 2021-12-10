@@ -32,7 +32,9 @@ export const OcFooter: React.FC<OcFooterProps> = ({ cmsData, socialLinks }) => (
 					{socialLinks && <OcSocialLinks links={socialLinks} />}
 				</div>
 			</div>
-			<h6 className="bottom-info">&#169; 2020 Your company. All rights reserved.</h6>
+			<h6 className="bottom-info">
+				&#169; {new Date().getFullYear()} Your company. All rights reserved.
+			</h6>
 		</div>
 	</div>
 );
