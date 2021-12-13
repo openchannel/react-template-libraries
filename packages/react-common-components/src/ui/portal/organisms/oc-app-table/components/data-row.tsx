@@ -1,16 +1,20 @@
 import * as React from 'react';
-import { get } from 'lodash-es';
 
-import dotsMenuIcon from '../../../../../assets/img/dots-menu.svg';
-import lineArrowDownIcon from '../../../../../assets/img/line-arrow-down.svg';
-import { stripHtmlTags } from '../../../../../lib';
-import OcDropdownButton from '../../../../common/molecules/oc-dropdown/oc-dropdown-button';
 import { AppListMenuAction } from '../../../models';
 import { DataRowProps } from '../types';
 import { filterOptions } from '../utils';
 
-import { AppStatusPopover } from './app-status-popover';
 import { DropdownListItem } from './dropdown-list-item';
+
+import {
+	getCreateTD,
+	getDescriptionTD,
+	getNameTD,
+	getOptionTD,
+	getRewiewTD,
+	getStatusTD,
+	getSummaryTD,
+} from './data-row-item';
 
 export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 	const {
@@ -22,6 +26,7 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 		menuUrl,
 		menuOptions,
 		onMenuClick,
+		activeColumns,
 	} = props;
 
 	const handleMenuClick = React.useCallback(
@@ -50,72 +55,38 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 		previewTemplate,
 	);
 
+	const getBodyRow = (val: string) => {
+		switch (val) {
+			case 'left-placeholder':
+			case 'right-placeholder':
+				return;
+			case 'name':
+				return getNameTD(app, isChild, index, defaultAppIcon, handleAppNameClick);
+			case 'summary':
+				return getSummaryTD(app);
+			case 'create-date':
+				return getCreateTD(app);
+			case 'status':
+				return getStatusTD(app);
+			case 'app-options':
+				return getOptionTD(filteredMenuOptions, handleMenuClick, DropdownListItem, menuUrl);
+			case 'you-custom-review-column':
+				return getRewiewTD(app);
+			case 'you-custom-description-column':
+				return getDescriptionTD(app);
+
+			default:
+				return <td></td>;
+		}
+	};
 	return (
 		<>
-			<tr>
-				<td className="oc-table__td_blank" />
-				<td className="oc-table__td oc-table__td_flex">
-					{isChild && index === 0 && (
-						<img
-							className="oc-table__app-icon oc-table__app-icon_padded"
-							src={lineArrowDownIcon}
-							alt="child application"
-						/>
-					)}
-					{isChild && index > 0 && (
-						<span className="oc-table__text-wrapper oc-table__text-wrapper_blank" />
-					)}
-					<img
-						className="oc-table__app-icon"
-						src={get(app, 'customData.icon', defaultAppIcon)}
-						alt={app.name}
-					/>
-					<div className="oc-table__td-col">
-						<span
-							aria-label="Edit application"
-							role="button"
-							tabIndex={0}
-							onClick={handleAppNameClick}
-						>
-							<h6 className="oc-table__app-name">{app.name}</h6>
-						</span>
-						<small className="oc-table__app-version">v. {app.version}</small>
-					</div>
-				</td>
-				<td className="oc-table__td">
-					<span className="oc-table__text-wrapper oc-table__summary-text">
-						{stripHtmlTags(get(app, 'customData.summary', ''))}
-					</span>
-				</td>
-				<td className="oc-table__td">
-					<span className="oc-table__text-wrapper">
-						{new Intl.DateTimeFormat('en-US', {
-							year: 'numeric',
-							month: 'numeric',
-							day: 'numeric',
-						}).format(new Date(app.created))}
-					</span>
-				</td>
-				<td className="oc-table__td">
-					<AppStatusPopover id={app.appId} status={app.status} />
-				</td>
-				<td className="oc-table__td">
-					<div className="oc-table__dropdown">
-						<OcDropdownButton
-							options={filteredMenuOptions}
-							onSelect={handleMenuClick}
-							listItem={DropdownListItem}
-							listProps={{ alignRight: true }}
-						>
-							<img
-								alt="View more"
-								className="oc-table__dropdown-dots"
-								src={menuUrl || dotsMenuIcon}
-							/>
-						</OcDropdownButton>
-					</div>
-				</td>
-				<td className="oc-table__td_blank" />
+			<tr className="app-grid-table__row">
+				{activeColumns?.map((val) => (
+					<td key={val} className={`app-grid-table__row__cell app-grid-table__row__cell-${val}`}>
+						{getBodyRow(val)}
+					</td>
+				))}
 			</tr>
 			{app.children &&
 				app.children.length > 0 &&
@@ -130,6 +101,7 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 						menuUrl={menuUrl}
 						menuOptions={menuOptions}
 						onMenuClick={onMenuClick}
+						activeColumns={activeColumns}
 					/>
 				))}
 		</>

@@ -24,6 +24,7 @@ export interface DataRowProps {
 	menuUrl?: string;
 	menuOptions: AppListOptions[];
 	onMenuClick?: (v: AppListMenuAction) => void;
+	activeColumns?: string[];
 }
 
 export interface OcAppTableProps {
@@ -67,4 +68,11 @@ export interface OcAppTableProps {
 	 * `ascending` - `true` for ascending sort or `false` for descending sort.
 	 */
 	onSort?: (v: string) => void;
+
+	activeColumns?: string[];
+}
+
+export interface OptionsProps {
+	label: string;
+	value: string;
 }

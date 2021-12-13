@@ -18,6 +18,7 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 		menuUrl,
 		onMenuClick,
 		noAppMessage,
+		activeColumns,
 	} = props;
 
 	const {
@@ -43,65 +44,70 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 		[onSort, sortArray],
 	);
 
+	const getDefaultTH = (col: string, title: string | null) => {
+		return (
+			<th className={`app-grid-table__header__cell app-grid-table__header__cell-${col}`}>
+				<span className="app-grid-table__header__cell-status-content-text">{title}</span>
+			</th>
+		);
+	};
+
+	const getSortTH = (col: string, title: string, sortKey: string) => {
+		return (
+			<th
+				className={`app-grid-table__header__cell app-grid-table__header__cell-${col}`}
+				scope="col"
+				tabIndex={0}
+				data-sortkey={sortKey}
+				onClick={handleSortApps}
+			>
+				<span className="app-grid-table__header__cell-status-content-text">{title}&nbsp;</span>
+				<SortIcon
+					isAscending={key === sortKey && orderBy === 'asc'}
+					ascendingSortIcon={ascendingSortIcon}
+					descendingSortIcon={descendingSortIcon}
+				/>
+			</th>
+		);
+	};
+
+	const getHeaderRow = (col: string) => {
+		switch (col) {
+			case 'left-placeholder':
+			case 'right-placeholder':
+			case 'app-options':
+				return getDefaultTH(col, null);
+			case 'name':
+				return getSortTH(col, 'Name', 'name');
+			case 'summary':
+				return getDefaultTH(col, 'Summary');
+			case 'create-date':
+				return getSortTH(col, 'Created', 'created');
+			case 'status':
+				return getSortTH(col, 'Status', 'status.value');
+			case 'you-custom-review-column':
+				return getDefaultTH(col, 'Reviews');
+			case 'you-custom-description-column':
+				return getDefaultTH(col, 'Description');
+
+			default:
+				return <th></th>;
+		}
+	};
+
 	return (
-		<div className="oc-table-container">
-			<div className="oc-table-container__overlay" />
-			<div className="oc-table-wrapper">
-				<table className="oc-table" aria-describedby="App listing table">
-					<thead className="oc-table__head">
-						<tr>
-							<th className="oc-table__th oc-table__placeholder" scope="col" />
-							<th
-								className="oc-table__th oc-table__name"
-								scope="col"
-								tabIndex={0}
-								data-sortkey="name"
-								onClick={handleSortApps}
-							>
-								Name{' '}
-								<SortIcon
-									isAscending={key === 'name' && orderBy === 'asc'}
-									ascendingSortIcon={ascendingSortIcon}
-									descendingSortIcon={descendingSortIcon}
-								/>
-							</th>
-							<th className="oc-table__th oc-table__summary" scope="col">
-								Summary
-							</th>
-							<th
-								className="oc-table__th oc-table__data"
-								scope="col"
-								tabIndex={0}
-								data-sortkey="created"
-								onClick={handleSortApps}
-							>
-								Created{' '}
-								<SortIcon
-									isAscending={key === 'created' && orderBy === 'asc'}
-									ascendingSortIcon={ascendingSortIcon}
-									descendingSortIcon={descendingSortIcon}
-								/>
-							</th>
-							<th
-								className="oc-table__th oc-table__status"
-								scope="col"
-								tabIndex={0}
-								data-sortkey="status.value"
-								onClick={handleSortApps}
-							>
-								Status{' '}
-								<SortIcon
-									isAscending={key === 'status.value' && orderBy === 'asc'}
-									ascendingSortIcon={ascendingSortIcon}
-									descendingSortIcon={descendingSortIcon}
-								/>
-							</th>
-							<th className="oc-table__th oc-table__action" scope="col" />
-							<th className="oc-table__th oc-table__placeholder" scope="col" />
+		<div className="app-grid">
+			<div className="app-grid-scroller">
+				<table className="app-grid-table" aria-describedby="App listing table">
+					<thead>
+						<tr className="app-grid-table__header">
+							{activeColumns?.map((col) => (
+								<React.Fragment key={col}>{getHeaderRow(col)}</React.Fragment>
+							))}
 						</tr>
 					</thead>
 					<tbody>
-						{(!array || array.length == 0) && <EmptyDataRow noAppMessage={noAppMessage}/>}
+						{(!array || array.length == 0) && <EmptyDataRow noAppMessage={noAppMessage} />}
 						{array.map((app) => (
 							<DataRow
 								key={app.appId}
@@ -111,9 +117,18 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 								menuUrl={menuUrl}
 								menuOptions={properties.options}
 								onMenuClick={onMenuClick}
+								activeColumns={activeColumns}
 							/>
 						))}
-						{array.length > 0 && <BlankRow />}
+						{array.length > 0 && (
+							// <tr>
+							// 	<td
+							// 		className="app-grid-table__bottom-not-empty-list"
+							// 		colSpan={activeColumns?.length}
+							// 	></td>
+							// </tr>
+							<BlankRow amount={activeColumns?.length} />
+						)}
 					</tbody>
 				</table>
 			</div>

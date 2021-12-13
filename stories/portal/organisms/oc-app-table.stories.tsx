@@ -244,7 +244,8 @@ const app4: FullAppData = {
 	appId: '5f236dedec4ad046ff9e855e',
 	safeName: ['fourthapp'],
 	customData: {
-		summary: '',
+		summary:
+			'New Test Summary, new Test Summary, new Test Summary, new Test Summary, new Test Summary, new Test Summary, new Test Summary, new Test Summary, new Test Summary, new Test Summary, new Test Summary',
 		'website-url': 'http://www.google.com',
 		'product-images': null,
 		icon: '//d3grfap2l5ikgv.cloudfront.net/5f20f7ff579d1a20c527d847/public/5f255992b5ad376fff84b6a6.png',
@@ -352,7 +353,9 @@ export default {
 
 const Component: Story<any> = (args) => (
 	<BrowserRouter>
-		<OcAppTable {...args} />
+		<div style={{ maxWidth: '1110px' }}>
+			<OcAppTable {...args} />
+		</div>
 	</BrowserRouter>
 );
 
@@ -360,6 +363,15 @@ export const Default = Component.bind({});
 Default.args = {
 	properties: propsConfig,
 	noAppMessage: 'No Apps Has Been Added Yet',
+	activeColumns: [
+		'left-placeholder',
+		'name',
+		'summary',
+		'create-date',
+		'status',
+		'app-options',
+		'right-placeholder',
+	],
 };
 
 export const EmptyApplicationList = Component.bind({});
@@ -372,4 +384,29 @@ EmptyApplicationList.args = {
 		},
 	},
 	noAppMessage: 'No Apps Has Been Added Yet',
+	activeColumns: [
+		'left-placeholder',
+		'name',
+		'summary',
+		'create-date',
+		'status',
+		'app-options',
+		'right-placeholder',
+	],
+};
+
+export const CustomAppTable = Component.bind({});
+CustomAppTable.args = {
+	properties: propsConfig,
+	noAppMessage: 'No Apps Has Been Added Yet',
+	activeColumns: [
+		'left-placeholder',
+		'create-date',
+		'name',
+		'you-custom-review-column',
+		'you-custom-description-column',
+		'status',
+		'app-options',
+		'right-placeholder',
+	],
 };
