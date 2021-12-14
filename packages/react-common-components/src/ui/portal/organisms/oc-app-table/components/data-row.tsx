@@ -6,15 +6,7 @@ import { filterOptions } from '../utils';
 
 import { DropdownListItem } from './dropdown-list-item';
 
-import {
-	getCreateTD,
-	getDescriptionTD,
-	getNameTD,
-	getOptionTD,
-	getRewiewTD,
-	getStatusTD,
-	getSummaryTD,
-} from './data-row-item';
+import { getCreateTD, getNameTD, getOptionTD, getStatusTD, getSummaryTD } from './data-row-item';
 
 export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 	const {
@@ -27,6 +19,7 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 		menuOptions,
 		onMenuClick,
 		activeColumns,
+		modifyColumns,
 	} = props;
 
 	const handleMenuClick = React.useCallback(
@@ -56,6 +49,9 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 	);
 
 	const getBodyRow = (val: string) => {
+		if (modifyColumns?.[val]) {
+			return modifyColumns[val]?.rowCell(app);
+		}
 		switch (val) {
 			case 'left-placeholder':
 			case 'right-placeholder':
@@ -70,13 +66,9 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 				return getStatusTD(app);
 			case 'app-options':
 				return getOptionTD(filteredMenuOptions, handleMenuClick, DropdownListItem, menuUrl);
-			case 'you-custom-review-column':
-				return getRewiewTD(app);
-			case 'you-custom-description-column':
-				return getDescriptionTD(app);
 
 			default:
-				return <td></td>;
+				return modifyColumns?.[val]?.rowCell(app);
 		}
 	};
 	return (
@@ -102,6 +94,7 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 						menuOptions={menuOptions}
 						onMenuClick={onMenuClick}
 						activeColumns={activeColumns}
+						modifyColumns={modifyColumns}
 					/>
 				))}
 		</>

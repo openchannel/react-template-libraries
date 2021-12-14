@@ -8,6 +8,16 @@ import { OcAppTableProps } from './types';
 
 import './style.scss';
 
+const DEFAULT_COLUMNS = [
+	'left-placeholder',
+	'name',
+	'summary',
+	'create-date',
+	'status',
+	'app-options',
+	'right-placeholder',
+];
+
 export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 	const {
 		properties,
@@ -19,6 +29,7 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 		onMenuClick,
 		noAppMessage,
 		activeColumns,
+		modifyColumns,
 	} = props;
 
 	const {
@@ -29,6 +40,8 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 		setArray,
 		sortArray,
 	} = useSortingArray<FullAppData>('name');
+
+	const columns = activeColumns || DEFAULT_COLUMNS;
 
 	React.useEffect(() => {
 		setArray(properties.data.list);
@@ -47,7 +60,15 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 	const getDefaultTH = (col: string, title: string | null) => {
 		return (
 			<th className={`app-grid-table__header__cell app-grid-table__header__cell-${col}`}>
-				<span className="app-grid-table__header__cell-status-content-text">{title}</span>
+				{title && <span className="app-grid-table__header__cell-status-content-text">{title}</span>}
+			</th>
+		);
+	};
+
+	const getCustomTH = (col: string) => {
+		return (
+			<th className={`app-grid-table__header__cell app-grid-table__header__cell-${col}`}>
+				{modifyColumns?.[col].headerCell()}
 			</th>
 		);
 	};
@@ -85,13 +106,9 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 				return getSortTH(col, 'Created', 'created');
 			case 'status':
 				return getSortTH(col, 'Status', 'status.value');
-			case 'you-custom-review-column':
-				return getDefaultTH(col, 'Reviews');
-			case 'you-custom-description-column':
-				return getDefaultTH(col, 'Description');
 
 			default:
-				return <th></th>;
+				return getCustomTH(col);
 		}
 	};
 
@@ -101,7 +118,7 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 				<table className="app-grid-table" aria-describedby="App listing table">
 					<thead>
 						<tr className="app-grid-table__header">
-							{activeColumns?.map((col) => (
+							{columns?.map((col) => (
 								<React.Fragment key={col}>{getHeaderRow(col)}</React.Fragment>
 							))}
 						</tr>
@@ -117,18 +134,11 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 								menuUrl={menuUrl}
 								menuOptions={properties.options}
 								onMenuClick={onMenuClick}
-								activeColumns={activeColumns}
+								activeColumns={columns}
+								modifyColumns={modifyColumns}
 							/>
 						))}
-						{array.length > 0 && (
-							// <tr>
-							// 	<td
-							// 		className="app-grid-table__bottom-not-empty-list"
-							// 		colSpan={activeColumns?.length}
-							// 	></td>
-							// </tr>
-							<BlankRow amount={activeColumns?.length} />
-						)}
+						{array.length > 0 && <BlankRow amount={activeColumns?.length} />}
 					</tbody>
 				</table>
 			</div>

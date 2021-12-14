@@ -363,15 +363,6 @@ export const Default = Component.bind({});
 Default.args = {
 	properties: propsConfig,
 	noAppMessage: 'No Apps Has Been Added Yet',
-	activeColumns: [
-		'left-placeholder',
-		'name',
-		'summary',
-		'create-date',
-		'status',
-		'app-options',
-		'right-placeholder',
-	],
 };
 
 export const EmptyApplicationList = Component.bind({});
@@ -384,15 +375,39 @@ EmptyApplicationList.args = {
 		},
 	},
 	noAppMessage: 'No Apps Has Been Added Yet',
-	activeColumns: [
-		'left-placeholder',
-		'name',
-		'summary',
-		'create-date',
-		'status',
-		'app-options',
-		'right-placeholder',
-	],
+};
+
+const reviewHeaderCell = () => {
+	return <span style={{ display: 'block', minWidth: '100px' }}>Reviews</span>;
+};
+
+const reviewRowCell = (app: FullAppData) => <span>{app.reviewCount}</span>;
+
+const descriptionHeaderCell = () => <span>Description</span>;
+
+const descriptionRowCell = (app: FullAppData) => (
+	<span style={{ maxHeight: '48px', display: 'block', overflowY: 'hidden' }}>
+		{app.customData.summary}
+	</span>
+);
+
+const createDateRowCell = (app: FullAppData) => (
+	<span style={{ maxHeight: '48px', display: 'block', overflowY: 'hidden' }}>
+		{new Intl.DateTimeFormat('en-US', {
+			year: 'numeric',
+			month: 'numeric',
+			day: 'numeric',
+		}).format(new Date(app.created))}
+	</span>
+);
+
+const modifyColumns = {
+	'you-custom-review-column': { headerCell: reviewHeaderCell, rowCell: reviewRowCell },
+	'you-custom-description-column': {
+		headerCell: descriptionHeaderCell,
+		rowCell: descriptionRowCell,
+	},
+	'create-date': { rowCell: createDateRowCell },
 };
 
 export const CustomAppTable = Component.bind({});
@@ -409,4 +424,5 @@ CustomAppTable.args = {
 		'app-options',
 		'right-placeholder',
 	],
+	modifyColumns: modifyColumns,
 };

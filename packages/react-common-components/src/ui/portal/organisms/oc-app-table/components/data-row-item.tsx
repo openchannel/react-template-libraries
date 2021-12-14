@@ -105,15 +105,3 @@ export const getOptionTD = (
 		</div>
 	);
 };
-
-export const getRewiewTD = (app: FullAppData) => {
-	return <span>{app.reviewCount}</span>;
-};
-
-export const getDescriptionTD = (app: FullAppData) => {
-	return (
-		<span style={{ maxHeight: '48px', display: 'block', overflowY: 'hidden' }}>
-			{app.customData.summary}
-		</span>
-	);
-};

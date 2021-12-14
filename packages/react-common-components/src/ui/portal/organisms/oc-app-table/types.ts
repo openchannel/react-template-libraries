@@ -25,6 +25,7 @@ export interface DataRowProps {
 	menuOptions: AppListOptions[];
 	onMenuClick?: (v: AppListMenuAction) => void;
 	activeColumns?: string[];
+	modifyColumns?: any;
 }
 
 export interface OcAppTableProps {
@@ -70,6 +71,8 @@ export interface OcAppTableProps {
 	onSort?: (v: string) => void;
 
 	activeColumns?: string[];
+
+	modifyColumns?: any;
 }
 
 export interface OptionsProps {
