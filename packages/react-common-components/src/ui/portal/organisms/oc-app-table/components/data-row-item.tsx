@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { FullAppData } from '../../../../common/models';
-import lineArrowDownIcon from '../../../../../assets/img/line-arrow-down.svg';
 import { get } from 'lodash-es';
-import { stripHtmlTags } from '../../../../../lib';
-import { titleCase } from '../../../../../lib';
-import { statusColor } from '../utils';
+
+import { FullAppData } from '../../../../common/models';
+import { stripHtmlTags, titleCase } from '../../../../../lib';
 import OcDropdownButton from '../../../../common/molecules/oc-dropdown/oc-dropdown-button';
+
+import lineArrowDownIcon from '../../../../../assets/img/line-arrow-down.svg';
 import dotsMenuIcon from '../../../../../assets/img/dots-menu.svg';
+
+import { statusColor } from '../utils';
 import { OptionsProps, ActiveColumns, ModifyColumn } from '../types';
 
 export const getDefaultTH = (val: ActiveColumns, title: string | null) => {
@@ -18,10 +20,9 @@ export const getDefaultTH = (val: ActiveColumns, title: string | null) => {
 };
 
 export const getCustomTH = (val: ActiveColumns, modifyColumns: ModifyColumn | undefined) => {
-	if (!modifyColumns) return <th></th>;
 	return (
 		<th className={`app-grid-table__header__cell app-grid-table__header__cell-${val}`}>
-			{modifyColumns?.[val].headerCell()}
+			{modifyColumns?.[val].headerCell?.()}
 		</th>
 	);
 };
@@ -74,7 +75,7 @@ export const getCreateTD = (app: FullAppData) => {
 				year: 'numeric',
 				month: 'numeric',
 				day: 'numeric',
-			}).format(new Date(app.created))}
+			}).format(app.created instanceof Date ? app.created : new Date(app.created))}
 		</span>
 	);
 };
@@ -90,9 +91,10 @@ export const getSummaryTD = (app: FullAppData) => {
 export const getStatusTD = (app: FullAppData) => {
 	const color = statusColor(app.status.value);
 	const value = app.status.value === 'inDevelopment' ? 'Draft' : titleCase(app.status.value);
+
 	return (
 		<div className="app-grid-table__row__cell-status-content">
-			<div className={`app-grid-table__row__cell-status-content-marker-${color}`}></div>
+			<div className={`app-grid-table__row__cell-status-content-marker-${color}`} />
 			<span className="app-grid-table__row__cell-status-content-text">{value}</span>
 		</div>
 	);

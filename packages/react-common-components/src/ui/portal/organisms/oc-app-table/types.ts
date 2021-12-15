@@ -82,8 +82,8 @@ export interface OptionsProps {
 
 export type ModifyColumn = {
 	[key in ActiveColumns]: {
-		headerCell?: ReactNode;
-		rowCell?: ReactNode;
+		headerCell?: () => ReactNode;
+		rowCell?: (app: FullAppData) => ReactNode;
 	};
 };
 
