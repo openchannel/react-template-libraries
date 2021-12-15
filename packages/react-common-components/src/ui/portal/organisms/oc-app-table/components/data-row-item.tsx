@@ -7,8 +7,24 @@ import { titleCase } from '../../../../../lib';
 import { statusColor } from '../utils';
 import OcDropdownButton from '../../../../common/molecules/oc-dropdown/oc-dropdown-button';
 import dotsMenuIcon from '../../../../../assets/img/dots-menu.svg';
-import { OptionsProps } from '../types';
+import { OptionsProps, ActiveColumns, ModifyColumn } from '../types';
 
+export const getDefaultTH = (val: ActiveColumns, title: string | null) => {
+	return (
+		<th className={`app-grid-table__header__cell app-grid-table__header__cell-${val}`}>
+			{title && <span className="app-grid-table__header__cell-status-content-text">{title}</span>}
+		</th>
+	);
+};
+
+export const getCustomTH = (val: ActiveColumns, modifyColumns: ModifyColumn | undefined) => {
+	if (!modifyColumns) return <th></th>;
+	return (
+		<th className={`app-grid-table__header__cell app-grid-table__header__cell-${val}`}>
+			{modifyColumns?.[val].headerCell()}
+		</th>
+	);
+};
 export const getNameTD = (
 	app: FullAppData,
 	isChild: boolean,
@@ -104,4 +120,13 @@ export const getOptionTD = (
 			</OcDropdownButton>
 		</div>
 	);
+};
+
+export const getCustomTD = (
+	val: ActiveColumns,
+	app: FullAppData,
+	modifyColumns: ModifyColumn | undefined,
+) => {
+	if (!modifyColumns) return;
+	return modifyColumns[val].rowCell(app);
 };

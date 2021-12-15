@@ -4,7 +4,8 @@ import { useSortingArray } from '../../../../lib/hooks';
 import { FullAppData } from '../../../common/models';
 
 import { BlankRow, DataRow, EmptyDataRow, SortIcon } from './components';
-import { OcAppTableProps } from './types';
+import { OcAppTableProps, ActiveColumns } from './types';
+import { getCustomTH, getDefaultTH } from './components/data-row-item';
 
 import './style.scss';
 
@@ -57,26 +58,10 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 		[onSort, sortArray],
 	);
 
-	const getDefaultTH = (col: string, title: string | null) => {
-		return (
-			<th className={`app-grid-table__header__cell app-grid-table__header__cell-${col}`}>
-				{title && <span className="app-grid-table__header__cell-status-content-text">{title}</span>}
-			</th>
-		);
-	};
-
-	const getCustomTH = (col: string) => {
-		return (
-			<th className={`app-grid-table__header__cell app-grid-table__header__cell-${col}`}>
-				{modifyColumns?.[col].headerCell()}
-			</th>
-		);
-	};
-
-	const getSortTH = (col: string, title: string, sortKey: string) => {
+	const getSortTH = (val: ActiveColumns, title: string, sortKey: string) => {
 		return (
 			<th
-				className={`app-grid-table__header__cell app-grid-table__header__cell-${col}`}
+				className={`app-grid-table__header__cell app-grid-table__header__cell-${val}`}
 				scope="col"
 				tabIndex={0}
 				data-sortkey={sortKey}
@@ -92,23 +77,23 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 		);
 	};
 
-	const getHeaderRow = (col: string) => {
-		switch (col) {
+	const getHeaderCell = (val: ActiveColumns) => {
+		switch (val) {
 			case 'left-placeholder':
 			case 'right-placeholder':
 			case 'app-options':
-				return getDefaultTH(col, null);
+				return getDefaultTH(val, null);
 			case 'name':
-				return getSortTH(col, 'Name', 'name');
+				return getSortTH(val, 'Name', 'name');
 			case 'summary':
-				return getDefaultTH(col, 'Summary');
+				return getDefaultTH(val, 'Summary');
 			case 'create-date':
-				return getSortTH(col, 'Created', 'created');
+				return getSortTH(val, 'Created', 'created');
 			case 'status':
-				return getSortTH(col, 'Status', 'status.value');
+				return getSortTH(val, 'Status', 'status.value');
 
 			default:
-				return getCustomTH(col);
+				return getCustomTH(val, modifyColumns);
 		}
 	};
 
@@ -119,7 +104,7 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 					<thead>
 						<tr className="app-grid-table__header">
 							{columns?.map((col) => (
-								<React.Fragment key={col}>{getHeaderRow(col)}</React.Fragment>
+								<React.Fragment key={col}>{getHeaderCell(col)}</React.Fragment>
 							))}
 						</tr>
 					</thead>

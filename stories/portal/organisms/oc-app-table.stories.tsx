@@ -407,7 +407,7 @@ const modifyColumns = {
 		headerCell: descriptionHeaderCell,
 		rowCell: descriptionRowCell,
 	},
-	'create-date': { rowCell: createDateRowCell },
+	'create-date': { rowCell: createDateRowCell, headerCell: reviewRowCell },
 };
 
 export const CustomAppTable = Component.bind({});

@@ -1,12 +1,19 @@
 import * as React from 'react';
 
 import { AppListMenuAction } from '../../../models';
-import { DataRowProps } from '../types';
+import { DataRowProps, ActiveColumns } from '../types';
 import { filterOptions } from '../utils';
 
 import { DropdownListItem } from './dropdown-list-item';
 
-import { getCreateTD, getNameTD, getOptionTD, getStatusTD, getSummaryTD } from './data-row-item';
+import {
+	getCreateTD,
+	getCustomTD,
+	getNameTD,
+	getOptionTD,
+	getStatusTD,
+	getSummaryTD,
+} from './data-row-item';
 
 export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 	const {
@@ -48,9 +55,9 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 		previewTemplate,
 	);
 
-	const getBodyRow = (val: string) => {
+	const getBodyCell = (val: ActiveColumns) => {
 		if (modifyColumns?.[val]) {
-			return modifyColumns[val]?.rowCell(app);
+			return getCustomTD(val, app, modifyColumns);
 		}
 		switch (val) {
 			case 'left-placeholder':
@@ -68,7 +75,7 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 				return getOptionTD(filteredMenuOptions, handleMenuClick, DropdownListItem, menuUrl);
 
 			default:
-				return modifyColumns?.[val]?.rowCell(app);
+				return getCustomTD(val, app, modifyColumns);
 		}
 	};
 	return (
@@ -76,7 +83,7 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 			<tr className="app-grid-table__row">
 				{activeColumns?.map((val) => (
 					<td key={val} className={`app-grid-table__row__cell app-grid-table__row__cell-${val}`}>
-						{getBodyRow(val)}
+						{getBodyCell(val)}
 					</td>
 				))}
 			</tr>
