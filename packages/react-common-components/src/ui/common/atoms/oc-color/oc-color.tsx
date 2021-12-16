@@ -37,13 +37,13 @@ export const OcColorComponent: React.FC<ColorProps> = (props) => {
 		disabled,
 		customClass = '',
 		placeholder,
-		colorValue,
+		colorValue = '#ced4da',
 		onValueChange,
 		name,
 		onBlur,
 	} = props;
-
-	const [inputColorValue, setInputColorValue] = React.useState('#ced4da');
+	
+	const [inputColorValue, setInputColorValue] = React.useState(colorValue);
 	const colorInput: React.RefObject<HTMLInputElement> = React.createRef();
 
 	const dummyClick = () => {
