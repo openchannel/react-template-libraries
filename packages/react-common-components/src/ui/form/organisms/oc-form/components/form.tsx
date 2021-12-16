@@ -22,6 +22,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		formJsonData,
 		onSubmit,
 		onCancel,
+		onSave,
 		submitButtonText = 'Submit',
 		buttonPosition = 'left',
 		service,
@@ -31,8 +32,11 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		cancelButtonText = 'Cancel',
 		customSubmitClass = '',
 		customCancelClass = '',
+		showSaveBtn = false,
+		showSubmitBtn = true,
+		saveButtonText = 'Save',
 	} = props;
-
+	
 	const {
 		state: { initialValues, validators, flattenFields, fieldsDefinition },
 		updateState,
@@ -85,11 +89,20 @@ export const Form: React.FC<OcFormProps> = (props) => {
 					/>
 					{children ? (isFunction(children) ? children(formik, flattenFields) : children) : null}
 					<div className={getOcFormButtonsClass(buttonPosition)}>
-						<div className={`form__button ${customSubmitClass}`}>
-							<OcButtonComponent htmlType="submit" type="primary" process={formik.isSubmitting}>
-								{submitButtonText}
-							</OcButtonComponent>
-						</div>
+						{showSubmitBtn && (
+							<div className={`form__button ${customSubmitClass}`}>
+								<OcButtonComponent htmlType="submit" type="primary" process={formik.isSubmitting}>
+									{submitButtonText}
+								</OcButtonComponent>
+							</div>
+						)}
+						{(onSave && showSaveBtn) && (
+							<div className="form__button save-draft">
+								<OcButtonComponent htmlType="button" type="secondary" onClick={() => onSave(formatOcFormValues(fieldsDefinition, formik.values), formik)}>
+									{saveButtonText}
+								</OcButtonComponent>
+							</div>
+						)}
 						{onCancel && (
 							<div className={`form__button ${customCancelClass}`}>
 								<OcButtonComponent htmlType="button" type="secondary" onClick={onCancel}>

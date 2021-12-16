@@ -63,6 +63,7 @@ export interface UpdateAppVersionModel {
 	safeName?: string[];
 	approvalRequired?: boolean;
 	customData: any;
+	type?:string;
 }
 
 export interface CreateAppModel {
