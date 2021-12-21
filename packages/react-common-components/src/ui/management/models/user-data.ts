@@ -32,7 +32,6 @@ export interface ComponentsUserGridActionModel {
 	userId: string;
 	userAccountId?: string;
 	inviteId?: string;
-
 	inviteToken?: string;
 }
 
