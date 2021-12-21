@@ -45,7 +45,7 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 							<img alt="logo" className="sign-up__logo-img company-logo" src={companyLogoUrl} />
 						</div>
 						<div className="sign-up__header">
-							<h4 className="sign-up__header-heading">Sign Up</h4>
+							<h4 className="sign-up__header-heading">Sign up</h4>
 							<OcLabelComponent
 								text="Enter your personal details below"
 								customClass="sign-up__header-invitation"
@@ -58,7 +58,7 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 								formTypeLabel={defaultTypeLabelText}
 								enablePasswordField={enablePasswordField}
 								enableTermsCheckboxField={enableTermsCheckbox}
-								submitButtonText="Sign Up"
+								submitButtonText="Sign up"
 								excludeRenderFields={ExcludeRenderFields}
 							>
 								{enableTermsCheckbox &&

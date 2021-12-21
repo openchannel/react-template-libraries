@@ -6,17 +6,8 @@ import { Status, TypeFileRender } from './types';
 
 const randThirty = Math.floor(Math.random() * 30);
 
-export const FileRender = ({
-	file,
-	idx,
-	removeFile,
-	service,
-	isPrivate,
-	onChange,
-}: TypeFileRender) => {
-	const [progress, setProgress] = React.useState<number>(
-		'failed' in file && file.failed ? 100 : randThirty,
-	);
+export const FileRender = ({ file, idx, removeFile, service, isPrivate, onChange }: TypeFileRender) => {
+	const [progress, setProgress] = React.useState<number>(( 'failed' in file && file.failed ) ? 100 : randThirty);
 	const [status, setStatus] = React.useState<string>(Status.uploading);
 	const timerId = React.useRef<NodeJS.Timeout>();
 	const randFinish = React.useRef<number>(Math.round(85 - 0.5 + Math.random() * (97 - 85 + 1)));
@@ -78,12 +69,16 @@ export const FileRender = ({
 			updateProgress(false);
 			const formData = new FormData();
 			formData.append('file', file, file.name);
-			await service.fileUploadRequest(formData, isPrivate).then((response) => {
-				updateProgress(true);
-				if ('data' in response) {
-					onChange(isPrivate ? response.data.fileId : response.data.fileUrl);
-				}
-			});
+			if(service.fileUploadRequest) {
+				await service.fileUploadRequest(formData, isPrivate).then((response) => {
+					updateProgress(true);
+					if ('data' in response) {
+						onChange(isPrivate ? response.data.fileId : response.data.fileUrl);
+					}
+				});
+			} else {
+				console.error('Service fileDetailsRequest is not exist.')
+			}
 		} catch {
 			setFinishStatus(Status.failed);
 			clearTimeout(timerId.current!);
