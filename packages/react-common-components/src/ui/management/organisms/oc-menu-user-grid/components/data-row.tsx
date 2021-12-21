@@ -18,10 +18,11 @@ interface DataRowProps {
 	dropdownOptions: UserGridOptionType[];
 	menuUrl?: string;
 	onMenuClick?(action: ComponentsUserGridActionModel): void;
+	mode?: 'developer' | 'user';
 }
 
 export const DataRow: React.FC<DataRowProps> = (props) => {
-	const { user, menuUrl, dropdownOptions, onMenuClick } = props;
+	const { user, menuUrl, dropdownOptions, onMenuClick, mode = 'user' } = props;
 
 	const handleMenuClick = React.useCallback(
 		({ value }) => {
@@ -29,13 +30,22 @@ export const DataRow: React.FC<DataRowProps> = (props) => {
 				return;
 			}
 
-			const action: ComponentsUserGridActionModel = {
-				action: value,
-				userId: user.userId,
-				userAccountId: user.userAccountId,
-				inviteId: user?.inviteId,
-				inviteToken: user?.inviteToken,
-			};
+			const action: ComponentsUserGridActionModel =
+				mode === 'user'
+					? {
+							action: value,
+							userId: user.userId!,
+							userAccountId: user.userAccountId!,
+							inviteId: user?.inviteId!,
+							inviteToken: user?.inviteToken!,
+					  }
+					: {
+							action: value,
+							userId: user.developerId!,
+							userAccountId: user.userAccountId!,
+							inviteId: user?.developerInviteId!,
+							inviteToken: user?.inviteToken!,
+					  };
 			onMenuClick(action);
 		},
 		[onMenuClick, user],

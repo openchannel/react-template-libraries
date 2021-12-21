@@ -22,4 +22,8 @@ export interface OcMenuUserGridProps {
 	 * Returns clicked sorting type. Can be 'name', 'email', 'date' or 'role'.
 	 */
 	onSort?(v: string): void;
+	/**
+	 * 'user' mode for market & 'developer' mode is for portal
+	 */
+	mode?: 'user' | 'developer';
 }
