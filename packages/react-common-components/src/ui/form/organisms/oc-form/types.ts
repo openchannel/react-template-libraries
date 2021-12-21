@@ -97,6 +97,14 @@ export interface OcFormProps extends FormProps {
 
 	customCancelClass?: string;
 
+	showSaveBtn?: boolean;
+
+	showSubmitBtn?: boolean;
+
+	saveButtonText?: string;
+
+	onSave?(values: OcFormValues, formikHelpers: OcFormFormikHelpers): void;
+
 }
 
 export type FieldType =

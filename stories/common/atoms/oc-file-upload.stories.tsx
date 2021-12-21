@@ -37,7 +37,7 @@ SingleImageFile.args = {
 	maxHeight: 200,
 	isPrivate: false,
 	isMultiFile: false,
-	hash: 'MD-5',
+	hash: 'MD5,SHA-1,SHA-256',
 };
 
 export const MultipleImageFiles = UploadComponent.bind({});
@@ -48,6 +48,7 @@ MultipleImageFiles.args = {
 	maxHeight: 200,
 	isPrivate: false,
 	isMultiFile: true,
+	inputValue: [ "dev1-cdn.openchannel.io/601ab0a3d0c0c60baf654207/public/61b7417f577a180a15a8968e.jpeg","dev1-cdn.openchannel.io/601ab0a3d0c0c60baf654207/public/61b74185577a180a15a89693.jpg"],
 };
 
 
