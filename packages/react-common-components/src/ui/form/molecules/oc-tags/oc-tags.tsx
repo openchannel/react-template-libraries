@@ -57,7 +57,13 @@ const OcTags: React.FC<OcTagsProps> = (props) => {
 	}, [setNormalizedValues, value, inputValue]);
 
 	const dropboxOptions = React.useMemo(() => {
-		return orderBy(difference(availableTags, value)).map(String);
+		const mergedArr = availableTags!.map((item) => {
+			if('value' in item) {
+				return item.value;
+			}
+			return item;
+		});
+		return orderBy(difference(mergedArr, value)).map(String);
 	}, [availableTags, value]);
 
 	return (
