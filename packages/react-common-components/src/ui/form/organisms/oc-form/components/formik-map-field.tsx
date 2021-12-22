@@ -317,6 +317,8 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 									isPrivate={type === FIELD_TYPE.PRIVATE_SINGLE_FILE}
 									isMultiFile={false}
 									hash={attributes?.hash}
+									maxHeight={attributes?.height}
+									maxWidth={attributes?.width}
 								/>
 							</FieldGroupWrapper>
 						);
@@ -341,6 +343,8 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 									isPrivate={type === FIELD_TYPE.MULTI_PRIVATE_FILE}
 									isMultiFile={true}
 									hash={attributes?.hash}
+									maxHeight={attributes?.height}
+									maxWidth={attributes?.width}
 								/>
 							</FieldGroupWrapper>
 						);
