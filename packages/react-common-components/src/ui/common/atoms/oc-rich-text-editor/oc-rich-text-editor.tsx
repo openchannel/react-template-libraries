@@ -37,7 +37,7 @@ export const OcRichTextEditorComponent = (props: OcRtfProps) => {
 			editorRef.current = editor;
 
 			if (onBlur) {
-				editor.on('blur', (event: any) => {
+				editor.on('blur change', (event: any) => {
 					onBlur(event, editor);
 				});
 			}

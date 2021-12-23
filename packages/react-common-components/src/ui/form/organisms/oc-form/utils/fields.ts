@@ -39,7 +39,9 @@ export const updateElementKeys = (
 });
 
 // eslint-disable-next-line
-export const normalizeFieldsForFormik = (todo: Function) => (fields: Array<AppFormField | FormikField>, deepPath?: string): FormikField[] => {
+export const normalizeFieldsForFormik =
+	(todo: Function) =>
+	(fields: Array<AppFormField | FormikField>, deepPath?: string): FormikField[] => {
 		return fields.map((field: AppFormField | FormikField, index: number) => {
 			const path: string = deepPath ? `${deepPath}.fields.${index}` : `${index}`;
 

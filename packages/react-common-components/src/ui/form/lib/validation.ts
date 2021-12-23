@@ -65,7 +65,8 @@ export const email = () => (value: string) => {
 
 export const url = () => (value: string) => {
 	// eslint-disable-next-line
-	const URL_REGEX = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
+	const URL_REGEX =
+		/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
 
 	if (URL_REGEX.test(value) || value === '') {
 		return null;

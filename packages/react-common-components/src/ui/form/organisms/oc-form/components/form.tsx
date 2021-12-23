@@ -36,7 +36,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		showSubmitBtn = true,
 		saveButtonText = 'Save',
 	} = props;
-	
+
 	const {
 		state: { initialValues, validators, flattenFields, fieldsDefinition },
 		updateState,
@@ -58,30 +58,26 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		},
 	});
 
-	const handleSetErrors = React.useCallback(
-		(errors: FormikErrors<FormikValues>) => {
-			const ocFormErrors = formatOcFormErrors(fieldsDefinition, errors);
-			formik.setErrors(ocFormErrors);
-			formik.setSubmitting(false);
-		},
-		[formik.setErrors, formik.setSubmitting, fieldsDefinition],
-	);
+	const handleSetErrors = (errors: FormikErrors<FormikValues>) => {
+		const ocFormErrors = formatOcFormErrors(fieldsDefinition, errors);
+		formik.setErrors(ocFormErrors);
+		formik.setSubmitting(false);
+	};
+	// [formik.setErrors, formik.setSubmitting, fieldsDefinition],
 
-	const handleSubmit = React.useCallback(
-		(e) => {
-			if (formik.isSubmitting) {
-				e.preventDefault();
-			} else {
-				formik.handleSubmit(e);
-			}
-		},
-		[formik.isSubmitting, formik.handleSubmit],
-	);
+	const handleSubmit = (e: any) => {
+		if (formik.isSubmitting) {
+			e.preventDefault();
+		} else {
+			formik.handleSubmit(e);
+		}
+	};
+	// [formik.isSubmitting, formik.handleSubmit],
 
 	return (
 		<FormikContext.Provider value={formik}>
 			<OcFormContextProvider initialValue={{ flattenFields, fieldsDefinition, updateState }}>
-				<FormikForm className="form" onSubmit={handleSubmit} noValidate>
+				<FormikForm className="form" onSubmit={handleSubmit}>
 					<FormikMapFieldsWrapper
 						service={service}
 						fileService={fileService}
@@ -96,9 +92,15 @@ export const Form: React.FC<OcFormProps> = (props) => {
 								</OcButtonComponent>
 							</div>
 						)}
-						{(onSave && showSaveBtn) && (
+						{onSave && showSaveBtn && (
 							<div className="form__button save-draft">
-								<OcButtonComponent htmlType="button" type="secondary" onClick={() => onSave(formatOcFormValues(fieldsDefinition, formik.values), formik)}>
+								<OcButtonComponent
+									htmlType="button"
+									type="secondary"
+									onClick={() =>
+										onSave(formatOcFormValues(fieldsDefinition, formik.values), formik)
+									}
+								>
 									{saveButtonText}
 								</OcButtonComponent>
 							</div>
