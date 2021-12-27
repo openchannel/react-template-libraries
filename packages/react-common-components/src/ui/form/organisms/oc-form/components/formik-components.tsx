@@ -6,12 +6,12 @@ import {
 	ColorProps,
 	DatepickerProps,
 	DropdownMultiAppProps,
+	OcFileUpload,
 	OcSelectProps,
 	VideoUrlProps,
 } from '../../../../common';
 import OcColorComponent from '../../../../common/atoms/oc-color/oc-color';
 import OcError from '../../../../common/atoms/oc-error/oc-error';
-import OcFileUpload from '../../../../common/atoms/oc-file-upload';
 import OcRichTextEditorComponent from '../../../../common/atoms/oc-rich-text-editor/oc-rich-text-editor';
 import { OcDatetimePicker } from '../../../../common/molecules/oc-datetime-picker/oc-datetime';
 import OcDropdownMultiApp from '../../../../common/molecules/oc-dropdown-multi-app/dropdown';
@@ -22,7 +22,7 @@ import { FIELD_TYPE } from '../../../lib';
 import { OcMultiSelectListProps, OcTagsProps } from '../../../molecules';
 import OcMultiSelectList from '../../../molecules/oc-multi-select-list/oc-multi-select-list';
 import OcTags from '../../../molecules/oc-tags/oc-tags';
-import type { FCWP, FieldGroupProps } from '../types';
+import type { FCWP, FieldGroupProps, FormikFileUploadProps } from '../types';
 import { customClassWithError } from '../utils/common';
 import { shouldFieldGroupUpdate, shouldFieldUpdate } from '../utils/memo';
 
@@ -247,12 +247,15 @@ export const FormikOcMultiSelectListWrapper: React.FC<
 	);
 }, shouldFieldUpdate(['options']));
 
-export const FormikOcFileUploadWrapper: React.FC<any> = (props) => {
+export const FormikOcFileUploadWrapper: React.FC<FormikFileUploadProps> = (props) => {
 	const { acceptType, fileType, fileService, form, field, isPrivate, isMultiFile, hash, maxHeight, maxWidth } = props;
 
-	const onChange = (value: any) => {
-		form.setFieldValue(field.name, value);
-	};
+	const onChange = React.useCallback(
+		(value) => {
+			form.setFieldValue(field.name, value);
+		},
+		[field.name, form.setFieldValue],
+	);
 
 	return (
 		<OcFileUpload

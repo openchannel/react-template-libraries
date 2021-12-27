@@ -177,3 +177,24 @@ export interface OcFormState {
 	fieldsDefinition: FormikField[];
 	initialValues: FormikValues;
 }
+
+export interface FormikFileUploadProps {
+	fileType: FileType;
+	acceptType?: string;
+	isMultiFile: boolean;
+	maxWidth: string;
+	maxHeight: string;
+	fileService: FileUploadService;
+	isPrivate?: boolean;
+	hash?: string;
+	form: FormikProps<FormikFieldsValues>;
+	field: FormikField;
+}
+
+type FileType =
+	| 'singleFile'
+	| 'singleImage'
+	| 'privateSingleFile'
+	| 'multiFile'
+	| 'multiImage'
+	| 'multiPrivateFile';
