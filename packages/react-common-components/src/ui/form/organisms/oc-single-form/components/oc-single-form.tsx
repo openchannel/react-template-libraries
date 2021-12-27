@@ -10,7 +10,7 @@ import { Form } from './form';
 
 import '../style.scss';
 
-export const OcForm: React.FC<OcFormProps> = (props) => {
+export const OcSingleForm: React.FC<OcFormProps> = (props) => {
 	const {
 		formJsonData,
 		formConfigs = [],
