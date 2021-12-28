@@ -27,7 +27,11 @@ export const getOcFormButtonsClass = (buttonPosition: string): string => {
  * @param validators array of functions
  */
 export const validateOcFormValues = (
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	prevValues: FormikValues,
+	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+	// @ts-ignore
 	prevErrors: FormikErrors<FormikValues>,
 	values: FormikFieldsValues,
 	validators: FieldValidators,
