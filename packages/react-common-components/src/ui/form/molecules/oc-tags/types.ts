@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type OcTagsValue = Array<string | number | boolean>;
+export type OcTagsValue = Array<string | number | boolean | any>;
 
 export interface OcTagsProps {
 	name?: string;

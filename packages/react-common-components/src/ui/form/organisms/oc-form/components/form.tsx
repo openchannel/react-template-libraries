@@ -22,7 +22,6 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		formJsonData,
 		onSubmit,
 		onCancel,
-		onSave,
 		submitButtonText = 'Submit',
 		buttonPosition = 'left',
 		service,
@@ -37,6 +36,8 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		saveButtonText = 'Save',
 	} = props;
 	
+	const [submitType, setSubmitType] = React.useState<string>('submit');
+	
 	const {
 		state: { initialValues, validators, flattenFields, fieldsDefinition },
 		updateState,
@@ -50,11 +51,15 @@ export const Form: React.FC<OcFormProps> = (props) => {
 			if (!onSubmit) {
 				return;
 			}
-
-			onSubmit(formatOcFormValues(fieldsDefinition, values), {
-				...formikProps,
-				setErrors: handleSetErrors,
-			});
+			
+			onSubmit(
+				formatOcFormValues(fieldsDefinition, values),
+				{
+					...formikProps,
+					setErrors: handleSetErrors,
+				},
+				submitType,
+			);
 		},
 	});
 
@@ -72,6 +77,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 			if (formik.isSubmitting) {
 				e.preventDefault();
 			} else {
+				setSubmitType(e.target.dataset.submittype);
 				formik.handleSubmit(e);
 			}
 		},
@@ -81,7 +87,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 	return (
 		<FormikContext.Provider value={formik}>
 			<OcFormContextProvider initialValue={{ flattenFields, fieldsDefinition, updateState }}>
-				<FormikForm className="form" onSubmit={handleSubmit} noValidate>
+				<FormikForm className="form" onSubmit={handleSubmit} noValidate data-submittype="submit">
 					<FormikMapFieldsWrapper
 						service={service}
 						fileService={fileService}
@@ -96,9 +102,9 @@ export const Form: React.FC<OcFormProps> = (props) => {
 								</OcButtonComponent>
 							</div>
 						)}
-						{(onSave && showSaveBtn) && (
+						{showSaveBtn && (
 							<div className="form__button save-draft">
-								<OcButtonComponent htmlType="button" type="secondary" onClick={() => onSave(formatOcFormValues(fieldsDefinition, formik.values), formik)}>
+								<OcButtonComponent type="secondary" process={formik.isSubmitting} data-submittype="save" onClick={handleSubmit}>
 									{saveButtonText}
 								</OcButtonComponent>
 							</div>
