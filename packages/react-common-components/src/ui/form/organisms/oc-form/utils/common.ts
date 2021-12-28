@@ -37,10 +37,14 @@ export const validateOcFormValues = (
 	}
 
 	return Object.entries(values).reduce((acc, [name, value]) => {
+		/**
+		 * TODO: uncomment if will get some bugs with displaying server errors
+		 * TODO: fix render errors with oc-file-upload input when code below is necessary
+		 *  */
 		// value wasn't changed, set old error if present
-		if (value === prevValues[name] && prevErrors[name] != null) {
-			return { ...acc, [name]: prevErrors[name] };
-		}
+		// if (value === prevValues[name] && prevErrors[name] != null) {
+		// 	return { ...acc, [name]: prevErrors[name] };
+		// }
 
 		// no validator
 		if (!validators[name] || validators[name]?.length === 0) {

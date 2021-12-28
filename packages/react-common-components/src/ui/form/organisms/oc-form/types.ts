@@ -38,7 +38,7 @@ export interface FormProps extends OcFormExtraProps {
 	 * @param values
 	 * @param formikHelpers
 	 */
-	onSubmit?(values: OcFormValues, formikHelpers: OcFormFormikHelpers): void;
+	onSubmit?(values: OcFormValues, formikHelpers: OcFormFormikHelpers, action?: string): void;
 	/**
 	 * Callback on Cancel button click
 	 */
@@ -102,9 +102,6 @@ export interface OcFormProps extends FormProps {
 	showSubmitBtn?: boolean;
 
 	saveButtonText?: string;
-
-	onSave?(values: OcFormValues, formikHelpers: OcFormFormikHelpers): void;
-
 }
 
 export type FieldType =
@@ -178,7 +175,7 @@ export interface OcFormState {
 	initialValues: FormikValues;
 }
 
-export interface FormikFileUploadProps {
+export interface FormikFileUploadProps<Value> {
 	fileType: FileType;
 	acceptType?: string;
 	isMultiFile: boolean;
@@ -188,7 +185,7 @@ export interface FormikFileUploadProps {
 	isPrivate?: boolean;
 	hash?: string;
 	form: FormikProps<FormikFieldsValues>;
-	field: FormikField;
+	field: FieldInputProps<Value>;
 }
 
 type FileType =
