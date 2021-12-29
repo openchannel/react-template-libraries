@@ -1,3 +1,4 @@
+//@ts-nocheck
 import * as React from 'react';
 
 import { ReactComponent as ContentStatusIcon } from '../../../../../assets/img/icon-check.svg';
@@ -17,7 +18,7 @@ export interface FormProgressbarStep {
 	state: 'pristine' | 'finished' | 'invalid';
 }
 
-export const OcSingleFormProgressBar: React.FC<OcSingleFormProgressBarProps> = (props) => {
+export const OcFormProgressBar: React.FC<OcSingleFormProgressBarProps> = (props) => {
 	const {
 		progressbarData = [],
 		currentStep = 1,
@@ -25,16 +26,14 @@ export const OcSingleFormProgressBar: React.FC<OcSingleFormProgressBarProps> = (
 		jumpToStep,
 		// staticOffsetValue,
 		// currentOffsetValue,
-		enableTextTruncation = false,
+		// enableTextTruncation = false,
 	} = props;
-	console.log('progressbarData', progressbarData);
 
 	const [staticOffsetValue, setStaticOffsetValue] = React.useState(0);
 	const [currentOffsetValue, setCurrentOffsetValue] = React.useState(0);
 	const stepsContainerRef = React.useRef<HTMLDivElement>(null);
 
 	const getNextStep = (currentStep: number) => progressbarData[currentStep];
-
 	const getStaticOffsetValue = (): void => {
 		const stepsList: NodeListOf<HTMLElement> | undefined =
 			stepsContainerRef.current?.querySelectorAll('form-progressbar__item');

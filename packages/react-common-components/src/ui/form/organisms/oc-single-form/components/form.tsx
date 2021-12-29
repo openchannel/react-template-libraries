@@ -36,7 +36,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		showSubmitBtn = true,
 		saveButtonText = 'Save',
 	} = props;
-	
+
 	const {
 		state: { initialValues, validators, flattenFields, fieldsDefinition },
 		updateState,
@@ -96,9 +96,15 @@ export const Form: React.FC<OcFormProps> = (props) => {
 								</OcButtonComponent>
 							</div>
 						)}
-						{(onSave && showSaveBtn) && (
+						{onSave && showSaveBtn && (
 							<div className="form__button save-draft">
-								<OcButtonComponent htmlType="button" type="secondary" onClick={() => onSave(formatOcFormValues(fieldsDefinition, formik.values), formik)}>
+								<OcButtonComponent
+									htmlType="button"
+									type="secondary"
+									onClick={() =>
+										onSave(formatOcFormValues(fieldsDefinition, formik.values), formik)
+									}
+								>
 									{saveButtonText}
 								</OcButtonComponent>
 							</div>

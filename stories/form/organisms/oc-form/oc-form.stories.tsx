@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Meta, Story } from '@storybook/react';
-
+import { mockFileService, mockService } from './mockData';
 import { OcForm } from '../../../../packages/react-common-components/src/ui/form/organisms/oc-form';
 
 export default {
@@ -139,4 +139,6 @@ WizardForm.args = {
 	buttonPosition: 'between',
 	maxStepsToShow: 3,
 	enableTextTruncation: true,
+	service: mockService,
+	fileService: mockFileService,
 };

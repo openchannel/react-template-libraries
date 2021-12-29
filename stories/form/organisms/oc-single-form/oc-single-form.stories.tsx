@@ -2,15 +2,13 @@ import { action } from '@storybook/addon-actions';
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import {
-	/*AppFormModel,*/ OcSingleForm,
-} from '../../../../packages/react-common-components/src/ui/form';
+import { OcSingleForm } from '../../../../packages/react-common-components/src/ui/form';
 import { AppsService, FullAppData } from '@openchannel/react-common-components';
 
 import { formJsonData, mockFormConfigs } from './mockData';
 
 export default {
-	title: 'Form group component',
+	title: 'Form group single form',
 	component: OcSingleForm,
 } as Meta;
 

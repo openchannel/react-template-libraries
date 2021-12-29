@@ -1,107 +1,33 @@
 import * as React from 'react';
-import { FormikValues } from 'formik';
+import { Formik } from 'formik';
+//----------------------------------------------------------------
+import { Form as FormikForm, FormikErrors, FormikValues, useFormik } from 'formik';
+import { isFunction } from 'lodash-es';
+import { OcFormContextProvider } from '../oc-single-form/context';
+import { useOcFormState } from '../oc-single-form/hooks';
+import {
+	formatOcFormErrors,
+	formatOcFormValues,
+	// getOcFormButtonsClass,
+	validateOcFormValues,
+} from '../oc-single-form/utils/common';
 
+import { FormikMapFields } from '../oc-single-form/components/formik-map-field';
+//----------------------------------------------------------------
 import { OcButtonComponent } from '../../../common/atoms/oc-button/oc-button';
 import OcTooltipLabel from '../../atoms/oc-tooltip-label';
-import { AppFormField, AppFormModel } from '../../models/app-form';
+// import { AppFormModel } from '../../models/app-form';
 import { OcSingleForm } from '../oc-single-form/index';
-
-import {
-	FormProgressbarStep,
-	OcSingleFormProgressBar,
-} from './oc-form-progress-bar/oc-form-progress-bar';
+import { OcFormProgressBar } from './oc-form-progress-bar/oc-form-progress-bar';
+import { OcFormProps, FieldStep } from './types';
+import { createStepsFromJSON } from './utils';
 
 import './style.scss';
-
-export interface FieldStep {
-	label?: AppFormField;
-	items?: AppFormField[];
-}
-
-export type FormType = 'wizard' | 'page';
-
-export interface OcFormProps {
-	/**
-	 * Form config
-	 */
-	formJsonData?: AppFormModel;
-	/**
-	 * form type: wizard or ordinary(page)
-	 */
-	displayType: FormType;
-	/**
-	 * Set position of the field label.
-	 * @default left
-	 */
-	buttonPosition?: 'top' | 'left' | 'right' | 'between';
-	/**
-	 * You can set the number of steps to show. If set to 0, this option is turned off and all the steps will be visible.
-	 */
-	maxStepsToShow: number;
-	/**
-	 * Custom template for the Save button to show.
-	 */
-	additionalButton?: React.ReactElement | React.ReactNode;
-	/**
-	 * Set position of the field label.
-	 * @param {('top'|'left'|'right')} position
-	 * @default top
-	 */
-	labelPosition?: 'top' | 'left' | 'right';
-	/**
-	 * Submitting process. The true option will lock for click and start the spinner in the submit button.
-	 */
-	process?: boolean;
-	/**
-	 * flag to show buttons on form
-	 */
-	showButton?: boolean;
-	/**
-	 * Flag to show group description.
-	 */
-	showGroupDescription?: boolean;
-	/**
-	 * Flag to show group heading.
-	 */
-	showGroupHeading?: boolean;
-	/**
-	 * Flag to show progressbar.
-	 */
-	showProgressBar?: boolean;
-	/**
-	 * flag to show submit button on form
-	 */
-	showSubmitButton?: boolean;
-	/**
-	 * Set custom text to success button.
-	 */
-	successButtonText?: string;
-	/**
-	 * Progressbar steps array to be passed to progress
-	 */
-	progressBarSteps?: FormProgressbarStep[];
-	/**
-	 * handler to submit form
-	 */
-	onSubmit: (values: FormikValues) => void;
-	/**
-	 * hasFieldGroups boolean flag
-	 */
-	hasFieldGroups?: boolean;
-	/**
-	 * Current wizard step.
-	 */
-	currentStep?: number;
-	/**
-	 * setCurrentStep is setter function for current form step
-	 */
-	setCurrentStep?: React.Dispatch<React.SetStateAction<number>>;
-}
 
 export const OcForm: React.FC<OcFormProps> = (props) => {
 	const {
 		formJsonData,
-		showSubmitButton,
+		showSubmitButton = false,
 		showProgressBar,
 		showGroupHeading,
 		showGroupDescription,
@@ -115,6 +41,9 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		onSubmit,
 		additionalButton,
 		displayType,
+		children,
+		service,
+		fileService,
 	} = props;
 
 	//eslint-disable-next-line
@@ -126,38 +55,6 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		() => !customForm || currentStep === customForm?.length,
 		[currentStep],
 	);
-
-	const createStepsFromJSON = (data: AppFormModel | undefined): FieldStep[] => {
-		const formsArray: FieldStep[] = [];
-		const currentFreeFieldsStep: FieldStep = {
-			items: [],
-		};
-		data?.fields?.forEach((field, index) => {
-			if (field.type === 'fieldGroup') {
-				if (currentFreeFieldsStep.items && currentFreeFieldsStep.items.length > 0) {
-					formsArray.push({ ...currentFreeFieldsStep });
-					currentFreeFieldsStep.items = [];
-				}
-				const step: FieldStep = {
-					label: field,
-					items: data.fields?.filter(
-						(item) => item.attributes?.group === field.id.replace('customData.', ''),
-					),
-				};
-				if (step.items?.length) {
-					formsArray.push(step);
-				}
-			} else {
-				if (!field.attributes?.group) {
-					currentFreeFieldsStep.items?.push(field);
-					if (data.fields && index === data.fields?.length - 1) {
-						formsArray.push(currentFreeFieldsStep);
-					}
-				}
-			}
-		});
-		return formsArray;
-	};
 
 	React.useEffect(() => {
 		if (displayType === 'wizard') {
@@ -205,27 +102,58 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 				: [];
 		setProgressBarSteps(progressBarSteps);
 	};
-
 	const singleStepsFormConfig = React.useMemo(
-		() =>
-			customForm !== null
-				? {
-						...formJsonData,
-						// formId: formJsonData?.formId || '',
-						fields: customForm[currentStep - 1]?.items,
-				  }
-				: {},
+		() => (customForm !== null ? customForm[currentStep - 1]?.items : []),
 		[currentStep, customForm],
 	);
-	console.log('singleStepsFormConfig', singleStepsFormConfig);
 
+	const {
+		state: { initialValues, validators, flattenFields, fieldsDefinition },
+		updateState,
+	} = useOcFormState(formJsonData!);
+
+	const formik: any = useFormik({
+		initialValues,
+		enableReinitialize: true,
+		validate: (values) => validateOcFormValues(formik.values, formik.errors, values, validators),
+		onSubmit: (values, formikProps) => {
+			if (!onSubmit) {
+				return;
+			}
+
+			onSubmit(formatOcFormValues(fieldsDefinition, values), {
+				...formikProps,
+				setErrors: handleSetErrors,
+			});
+		},
+	});
+
+	const handleSetErrors = React.useCallback(
+		(errors: FormikErrors<FormikValues>) => {
+			const ocFormErrors = formatOcFormErrors(fieldsDefinition, errors);
+			formik.setErrors(ocFormErrors);
+			formik.setSubmitting(false);
+		},
+		[formik.setErrors, formik.setSubmitting, fieldsDefinition],
+	);
+
+	const handleSubmit = React.useCallback(
+		(e) => {
+			if (formik.isSubmitting) {
+				e.preventDefault();
+			} else {
+				formik.handleSubmit(e);
+			}
+		},
+		[formik.isSubmitting, formik.handleSubmit],
+	);
 	return (
 		<div className="form-steps">
 			{hasFieldGroups ? (
 				<div className="form-steps__content">
 					<div className="form-steps__content-progressbar">
 						{showProgressBar && (
-							<OcSingleFormProgressBar
+							<OcFormProgressBar
 								jumpToStep={navigateToStep}
 								maxStepsToShow={maxStepsToShow}
 								progressbarData={progressBarSteps}
@@ -245,18 +173,36 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 						{showGroupDescription && (
 							<p className="form-steps__content-body-description">{stepDescription}</p>
 						)}
-						<OcSingleForm
+						<Formik initialValues={singleStepsFormConfig} onSubmit={handleSubmit}>
+							{({ isSubmitting, errors, values, touched }) => (
+								<FormikMapFields
+									fields={singleStepsFormConfig}
+									service={service}
+									fileService={fileService}
+
+									// excludeRenderFields={excludeRenderFields}
+								/>
+								// {children
+								// 	? isFunction(children)
+								// 		? children(formik, flattenFields)
+								// 		: children
+								// 	: null}
+							)}
+						</Formik>
+
+						{/* <OcSingleForm
 							formJsonData={singleStepsFormConfig as AppFormModel}
-							// generatedForm={currentForm}
+							generatedForm={currentForm}
 							labelPosition={labelPosition}
-						/>
+							showSubmitBtn={showSubmitButton && isLastStep}
+						/> */}
 					</div>
 				</div>
 			) : (
 				<OcSingleForm
 					formJsonData={formJsonData}
-					// [generatedForm]="generatedForm"
 					labelPosition={labelPosition}
+					showSubmitBtn={showSubmitButton && isLastStep}
 				/>
 			)}
 			{showButton && (
@@ -280,7 +226,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 					{additionalButton && <div>{additionalButton}</div>}
 					{currentStep && currentStep < customForm?.length && (
 						<OcButtonComponent
-							onClick={() => navigateToStep(currentStep - 1)}
+							onClick={() => navigateToStep(currentStep + 1)}
 							customClass="form__button"
 							type="primary"
 							text="Next step"
@@ -288,7 +234,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 					)}
 					{showSubmitButton && isLastStep && (
 						<OcButtonComponent
-							onClick={onSubmit}
+							onClick={onSubmit as any}
 							process={process}
 							customClass="form__button"
 							type="primary"

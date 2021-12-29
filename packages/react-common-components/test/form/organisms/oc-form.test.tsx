@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { OcForm, AppFormModel, OcFormProps } from '@openchannel/react-common-components/src/ui';
+import {
+	OcSingleForm,
+	AppFormModel,
+	OcFormProps,
+} from '@openchannel/react-common-components/src/ui';
 
 const formJsonData: AppFormModel = {
 	// fields: [
@@ -98,7 +102,7 @@ const formJsonData: AppFormModel = {
 	],
 };
 
-const setUp = (props: OcFormProps) => mount(<OcForm {...props} />);
+const setUp = (props: OcFormProps) => mount(<OcSingleForm {...props} />);
 
 describe('OcForm', () => {
 	let wrapper: any;
@@ -123,19 +127,32 @@ describe('OcForm', () => {
 	});
 
 	it('render button group by buttonPosition', () => {
-		expect(wrapper.find('.form__button').at(0).parent().is('.form__buttons.form__buttons_justify_start')).toBeTruthy();
+		expect(
+			wrapper.find('.form__button').at(0).parent().is('.form__buttons.form__buttons_justify_start'),
+		).toBeTruthy();
 
 		wrapper.setProps({ buttonPosition: 'center' });
-		expect(wrapper.find('.form__button').at(0).parent().is('.form__buttons.form__buttons_justify_center')).toBeTruthy();
+		expect(
+			wrapper
+				.find('.form__button')
+				.at(0)
+				.parent()
+				.is('.form__buttons.form__buttons_justify_center'),
+		).toBeTruthy();
 
 		// instead of undefined. 'left' if default
 		wrapper.setProps({ buttonPosition: 'not-valid-value' });
-		expect(wrapper.find('.form__button').at(0).parent().is('.form__buttons.form__buttons_justify_start.form__buttons_direction_row_reverse')).toBeTruthy();
+		expect(
+			wrapper
+				.find('.form__button')
+				.at(0)
+				.parent()
+				.is('.form__buttons.form__buttons_justify_start.form__buttons_direction_row_reverse'),
+		).toBeTruthy();
 	});
 
 	it('should click cancel button', () => {
 		wrapper.find('.form__button').find('button[type="button"]').simulate('click');
 		expect(onCancelMock).toHaveBeenCalled();
 	});
-
 });
