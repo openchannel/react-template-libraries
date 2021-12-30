@@ -26,8 +26,8 @@ import {
 } from './formik-components';
 
 export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
-	const { fields, service, fileService, excludeRenderFields } = props;
-
+	const { fields, excludeRenderFields, fieldProps } = props;
+	
 	if (!fields || fields.length === 0) {
 		return null;
 	}
@@ -46,6 +46,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					placeholder,
 					name,
 				} = field;
+
 				if (excludeRenderFields && excludeRenderFields.includes(id)) {
 					return null;
 				}
@@ -56,7 +57,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.RICH_TEXT:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -313,7 +314,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 									component={FormikOcFileUploadWrapper}
 									fileType={type}
 									acceptType={attributes?.accept}
-									fileService={fileService}
+									fileService={fieldProps.fileService}
 									isPrivate={type === FIELD_TYPE.PRIVATE_SINGLE_FILE}
 									isMultiFile={false}
 									hash={attributes?.hash}
@@ -339,7 +340,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 									component={FormikOcFileUploadWrapper}
 									fileType={type}
 									acceptType={attributes?.accept}
-									fileService={fileService}
+									fileService={fieldProps.fileService}
 									isPrivate={type === FIELD_TYPE.MULTI_PRIVATE_FILE}
 									isMultiFile={true}
 									hash={attributes?.hash}
@@ -362,7 +363,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 									name={name}
 									component={FormikOcDropdownMultiAppWrapper}
 									fileType={type}
-									service={service}
+									service={fieldProps.service}
 									defaultValue={defaultValue}
 									placeholder={placeholder}
 								/>
@@ -394,6 +395,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 										field={field}
 										groupFieldIndex={groupFieldIndex}
 										showAddButton={isLastOfGroup}
+										fieldProps={fieldProps}
 									/>
 								</FieldGroupWrapper>
 							);
@@ -404,6 +406,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								field={field}
 								groupFieldIndex={groupFieldIndex}
 								showAddButton={isLastOfGroup}
+								fieldProps={fieldProps}
 							/>
 						);
 					}

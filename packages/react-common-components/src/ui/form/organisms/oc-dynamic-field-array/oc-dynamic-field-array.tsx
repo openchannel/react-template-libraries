@@ -15,8 +15,8 @@ import { getFieldLabel } from './utils';
 import './style.scss';
 
 export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) => {
-	const { field, showAddButton, groupFieldIndex } = props;
-
+	const { field, showAddButton, groupFieldIndex, fieldProps } = props;
+	
 	const { values } = useFormikContext<FormikFieldsValues>();
 	const context = useOcFormContext();
 
@@ -70,7 +70,7 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 						) : (
 							<>
 								<div className="cards-interface__preview-content">
-									<FormikMapFields fields={field.fields} />
+									<FormikMapFields fields={field.fields} fieldProps={fieldProps} />
 								</div>
 								<div className="cards-interface__preview-buttons">
 									<div className="cards-interface__preview-buttons-cancel">

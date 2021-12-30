@@ -89,8 +89,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 			<OcFormContextProvider initialValue={{ flattenFields, fieldsDefinition, updateState }}>
 				<FormikForm className="form" onSubmit={handleSubmit} noValidate data-submittype="submit">
 					<FormikMapFieldsWrapper
-						service={service}
-						fileService={fileService}
+						fieldProps={{ service, fileService }}
 						excludeRenderFields={excludeRenderFields}
 					/>
 					{children ? (isFunction(children) ? children(formik, flattenFields) : children) : null}

@@ -32,6 +32,52 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 	children,
 	initialValue: { flattenFields, fieldsDefinition, updateState },
 }) => {
+
+	React.useEffect(() => {
+		const arrHasValuesNew = flattenFields.filter((field) => {
+			if(field.type === 'dynamicFieldArray' && field.fields && field.fields.length > 0 ) {
+				let hasValue = false;
+				field.fields.forEach((child) => {
+					if(child.defaultValue && child.defaultValue !== '' && child.defaultValue !== null) {
+						hasValue = true;
+						return;
+					}
+				});
+
+				if(hasValue) {
+					return {
+						...field,
+						isEditing: false,
+					};
+				}
+			}
+			return;
+		});
+		// const res = flattenFields.reduce((acc, field) => {
+		// 	if(field.type === 'dynamicFieldArray' && field.fields && field.fields.length > 0 ) {
+		// 		let hasValue = false;
+		// 		field.fields.forEach((child) => {
+		// 			if(child.defaultValue && child.defaultValue !== '' && child.defaultValue !== null) {
+		// 				hasValue = true;
+		// 				return;
+		// 			}
+		// 		});
+
+		// 		if(hasValue) {
+
+		// 			return {
+		// 				...acc,
+		// 				isEditing: false,
+		// 			};
+		// 		}
+		// 	}
+		// 	return acc;
+		// });
+		
+		normalizeFieldsAndUpdateDefinition(arrHasValuesNew);
+
+	}, []);
+
 	const { values, setValues } = useFormikContext<FormikFieldsValues>();
 
 	const normalizeFieldsAndUpdateDefinition = React.useCallback(
@@ -45,11 +91,10 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 	);
 
 	const onAddDynamicField = React.useCallback(
-		(event: React.MouseEvent) => {
+		(event: React.MouseEvent) => {	
 			const button = event.target as HTMLButtonElement;
 			const elementStaticId = button.dataset.staticid || '';
 			const elementPath = button.dataset.path || '';
-
 			const instance = flattenFields.find((item) => item.staticId === elementStaticId);
 			if (!instance) return;
 
