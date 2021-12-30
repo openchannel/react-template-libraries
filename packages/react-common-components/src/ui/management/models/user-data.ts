@@ -16,6 +16,9 @@ export interface ComponentsUserAccount extends ComponentsUser {
 }
 
 export interface ComponentsUserAccountGridModel extends ComponentsUserAccount {
+	developerId?: string;
+	developerAccountId?: string;
+	developerInviteId?: string;
 	inviteStatus?: UserAccountInviteStatusType;
 	inviteId?: string;
 	inviteToken?: string;

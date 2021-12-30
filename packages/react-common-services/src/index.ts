@@ -44,14 +44,17 @@ export * from './model/components/frontend.model';
  * Services
  */
 export * from './service/app-form.service';
+export * from './service/app-type.service';
 export * from './service/apps.service';
 export * from './service/apps-version.service';
 export * from './service/authentication.service';
+export * from './service/chart.service';
 export * from './service/cms-site-content.service';
 export * from './service/config.service';
 export * from './service/developer.service';
 export * from './service/developer-account.service';
 export * from './service/developer-account-types.service';
+export * from './service/developer-role.service';
 export * from './service/developer-type.service';
 export * from './service/file-upload-download.service';
 export * from './service/frontend.service';
@@ -66,7 +69,6 @@ export * from './service/user-account-types.service';
 export * from './service/user-invite.service';
 export * from './service/user-role.service';
 export * from './service/users.service';
-export * from './service/chart.service';
 
 /* Utils */
 export * from './util/query.util';

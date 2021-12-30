@@ -10,7 +10,7 @@ import { api } from '../lib/api';
  * GET 'v2/developerTypes/{developerTypeId}'<br>
  */
 
-const DEV_ACCOUNT_TYPES_URL = 'v2/developers/this';
+const DEV_ACCOUNT_TYPES_URL = 'v2/developerTypes';
 
 export const DeveloperTypeService = {
 	/**
