@@ -9,10 +9,96 @@ import lineArrowDownIcon from '../../../../../assets/img/line-arrow-down.svg';
 import dotsMenuIcon from '../../../../../assets/img/dots-menu.svg';
 
 import { filterOptions, statusColor } from '../utils';
-import { OptionsProps, ActiveColumns, ModifyColumn, DataRowProps } from '../types';
+import { OptionsProps, ActiveColumns, ModifyColumn, DataRowProps, OcAppTableProps } from '../types';
 import { DropdownListItem } from './dropdown-list-item';
+import { SortIcon } from './';
 
-export const getDefaultTH = (val: ActiveColumns, title: string | null) => {
+// head
+
+export const getHeaderCell = (
+	val: ActiveColumns,
+	props: OcAppTableProps,
+	handleSortApps: (e: any) => void,
+	key: string,
+	orderBy: string,
+) => {
+	const { modifyColumns, ascendingSortIcon, descendingSortIcon } = props;
+
+	switch (val) {
+		case 'left-placeholder':
+		case 'right-placeholder':
+		case 'app-options':
+			return getDefaultTH(val, null);
+		case 'name':
+			return getSortTH(
+				val,
+				'Name',
+				'name',
+				handleSortApps,
+				ascendingSortIcon,
+				descendingSortIcon,
+				key,
+				orderBy,
+			);
+		case 'summary':
+			return getDefaultTH(val, 'Summary');
+		case 'create-date':
+			return getSortTH(
+				val,
+				'Created',
+				'created',
+				handleSortApps,
+				ascendingSortIcon,
+				descendingSortIcon,
+				key,
+				orderBy,
+			);
+		case 'status':
+			return getSortTH(
+				val,
+				'Status',
+				'status.value',
+				handleSortApps,
+				ascendingSortIcon,
+				descendingSortIcon,
+				key,
+				orderBy,
+			);
+
+		default:
+			return getCustomTH(val, modifyColumns);
+	}
+};
+
+const getSortTH = (
+	val: ActiveColumns,
+	title: string,
+	sortKey: string,
+	handleSortApps: (e: any) => void,
+	ascendingSortIcon?: string | React.ReactElement,
+	descendingSortIcon?: string | React.ReactElement,
+	key?: string,
+	orderBy?: string,
+) => {
+	return (
+		<th
+			className={`app-grid-table__header__cell app-grid-table__header__cell-${val}`}
+			scope="col"
+			tabIndex={0}
+			data-sortkey={sortKey}
+			onClick={handleSortApps}
+		>
+			<span className="app-grid-table__header__cell-status-content-text">{title}&nbsp;</span>
+			<SortIcon
+				isAscending={key === sortKey && orderBy === 'asc'}
+				ascendingSortIcon={ascendingSortIcon}
+				descendingSortIcon={descendingSortIcon}
+			/>
+		</th>
+	);
+};
+
+const getDefaultTH = (val: ActiveColumns, title: string | null) => {
 	return (
 		<th className={`app-grid-table__header__cell app-grid-table__header__cell-${val}`}>
 			{title && <span className="app-grid-table__header__cell-status-content-text">{title}</span>}
@@ -20,7 +106,7 @@ export const getDefaultTH = (val: ActiveColumns, title: string | null) => {
 	);
 };
 
-export const getCustomTH = (val: ActiveColumns, modifyColumns: ModifyColumn | undefined) => {
+const getCustomTH = (val: ActiveColumns, modifyColumns: ModifyColumn | undefined) => {
 	return (
 		<th className={`app-grid-table__header__cell app-grid-table__header__cell-${val}`}>
 			{modifyColumns?.[val].headerCell?.()}
@@ -75,7 +161,7 @@ export const getBodyCell = (
 	}
 };
 
-export const getNameTD = (
+const getNameTD = (
 	app: FullAppData,
 	isChild?: boolean,
 	index?: number,
@@ -117,7 +203,7 @@ export const getNameTD = (
 	);
 };
 
-export const getCreateTD = (app: FullAppData) => {
+const getCreateTD = (app: FullAppData) => {
 	return (
 		<span className="app-grid-table__row__cell-create-date-text">
 			{new Intl.DateTimeFormat('en-US', {
@@ -129,7 +215,7 @@ export const getCreateTD = (app: FullAppData) => {
 	);
 };
 
-export const getSummaryTD = (app: FullAppData) => {
+const getSummaryTD = (app: FullAppData) => {
 	return (
 		<span className="app-grid-table__row__cell-summary-text">
 			{stripHtmlTags(get(app, 'customData.summary', ''))}
@@ -137,7 +223,7 @@ export const getSummaryTD = (app: FullAppData) => {
 	);
 };
 
-export const getStatusTD = (app: FullAppData) => {
+const getStatusTD = (app: FullAppData) => {
 	const color = statusColor(app.status.value);
 	const value = app.status.value === 'inDevelopment' ? 'Draft' : titleCase(app.status.value);
 
@@ -149,7 +235,7 @@ export const getStatusTD = (app: FullAppData) => {
 	);
 };
 
-export const getOptionTD = (
+const getOptionTD = (
 	filteredMenuOptions: OptionsProps[],
 	handleMenuClick: ({ value }: any) => void,
 	DropdownListItem: any,
@@ -173,7 +259,7 @@ export const getOptionTD = (
 	);
 };
 
-export const getCustomTD = (
+const getCustomTD = (
 	val: ActiveColumns,
 	app: FullAppData,
 	modifyColumns: ModifyColumn | undefined,
