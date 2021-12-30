@@ -8,8 +8,9 @@ import OcDropdownButton from '../../../../common/molecules/oc-dropdown/oc-dropdo
 import lineArrowDownIcon from '../../../../../assets/img/line-arrow-down.svg';
 import dotsMenuIcon from '../../../../../assets/img/dots-menu.svg';
 
-import { statusColor } from '../utils';
-import { OptionsProps, ActiveColumns, ModifyColumn } from '../types';
+import { filterOptions, statusColor } from '../utils';
+import { OptionsProps, ActiveColumns, ModifyColumn, DataRowProps } from '../types';
+import { DropdownListItem } from './dropdown-list-item';
 
 export const getDefaultTH = (val: ActiveColumns, title: string | null) => {
 	return (
@@ -26,10 +27,58 @@ export const getCustomTH = (val: ActiveColumns, modifyColumns: ModifyColumn | un
 		</th>
 	);
 };
+
+// body
+export const getBodyCell = (
+	val: ActiveColumns,
+	props: DataRowProps,
+	handleAppNameClick: () => void,
+	handleMenuClick: (value: string) => void,
+) => {
+	const {
+		modifyColumns,
+		app,
+		isChild,
+		index,
+		defaultAppIcon,
+		menuOptions,
+		previewTemplate,
+		menuUrl,
+	} = props;
+
+	const filteredMenuOptions = filterOptions(
+		menuOptions,
+		app.status.value,
+		app.status.modifiedBy,
+		previewTemplate,
+	);
+	if (modifyColumns?.[val]) {
+		return getCustomTD(val, app, modifyColumns);
+	}
+	switch (val) {
+		case 'left-placeholder':
+		case 'right-placeholder':
+			return;
+		case 'name':
+			return getNameTD(app, isChild, index, defaultAppIcon, handleAppNameClick);
+		case 'summary':
+			return getSummaryTD(app);
+		case 'create-date':
+			return getCreateTD(app);
+		case 'status':
+			return getStatusTD(app);
+		case 'app-options':
+			return getOptionTD(filteredMenuOptions, handleMenuClick, DropdownListItem, menuUrl);
+
+		default:
+			return getCustomTD(val, app, modifyColumns);
+	}
+};
+
 export const getNameTD = (
 	app: FullAppData,
-	isChild: boolean,
-	index: number,
+	isChild?: boolean,
+	index?: number,
 	defaultAppIcon?: string,
 	handleAppNameClick?: () => void,
 ) => {
@@ -38,7 +87,7 @@ export const getNameTD = (
 			{isChild && (
 				<img
 					className={`app-grid-table__row__cell-name-content-app-child-icon ${
-						index > 0 ? 'app-grid-table__row__cell-name-content-hidden' : ''
+						index && index > 0 ? 'app-grid-table__row__cell-name-content-hidden' : ''
 					}`}
 					src={lineArrowDownIcon}
 					alt="child application"

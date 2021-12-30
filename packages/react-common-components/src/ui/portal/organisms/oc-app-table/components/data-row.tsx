@@ -1,24 +1,13 @@
 import * as React from 'react';
 
 import { AppListMenuAction } from '../../../models';
-import { DataRowProps, ActiveColumns } from '../types';
-import { filterOptions } from '../utils';
+import { DataRowProps } from '../types';
 
-import { DropdownListItem } from './dropdown-list-item';
-
-import {
-	getCreateTD,
-	getCustomTD,
-	getNameTD,
-	getOptionTD,
-	getStatusTD,
-	getSummaryTD,
-} from './data-row-item';
+import { getBodyCell } from './data-row-item';
 
 export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 	const {
 		app,
-		index = 0,
 		isChild = false,
 		defaultAppIcon,
 		previewTemplate,
@@ -48,42 +37,12 @@ export const DataRow: React.FC<DataRowProps> = React.memo((props) => {
 		handleMenuClick({ value: 'EDIT' });
 	};
 
-	const filteredMenuOptions = filterOptions(
-		menuOptions,
-		app.status.value,
-		app.status.modifiedBy,
-		previewTemplate,
-	);
-
-	const getBodyCell = (val: ActiveColumns) => {
-		if (modifyColumns?.[val]) {
-			return getCustomTD(val, app, modifyColumns);
-		}
-		switch (val) {
-			case 'left-placeholder':
-			case 'right-placeholder':
-				return;
-			case 'name':
-				return getNameTD(app, isChild, index, defaultAppIcon, handleAppNameClick);
-			case 'summary':
-				return getSummaryTD(app);
-			case 'create-date':
-				return getCreateTD(app);
-			case 'status':
-				return getStatusTD(app);
-			case 'app-options':
-				return getOptionTD(filteredMenuOptions, handleMenuClick, DropdownListItem, menuUrl);
-
-			default:
-				return getCustomTD(val, app, modifyColumns);
-		}
-	};
 	return (
 		<>
 			<tr className="app-grid-table__row">
 				{activeColumns?.map((val) => (
 					<td key={val} className={`app-grid-table__row__cell app-grid-table__row__cell-${val}`}>
-						{getBodyCell(val)}
+						{getBodyCell(val, props, handleAppNameClick, handleMenuClick)}
 					</td>
 				))}
 			</tr>
