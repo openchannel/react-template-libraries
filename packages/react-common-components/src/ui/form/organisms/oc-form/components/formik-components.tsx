@@ -94,7 +94,7 @@ export const FormikRichTextWrapper: React.FC<
 		placeholder?: string;
 	}
 > = React.memo(({ field, form, customClass, placeholder }) => {
-	const onChange = (value: any) => {
+	const onChange = (value: string) => {
 		form.setFieldValue(field.name, value);
 		form.validateForm(form.values);
 	};
