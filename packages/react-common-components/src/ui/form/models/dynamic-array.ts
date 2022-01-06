@@ -1,3 +1,4 @@
+import { FileUploadService } from 'src';
 import { FormikField } from './app-form';
 
 export interface FieldValueModel {
@@ -10,4 +11,5 @@ export interface PreviewFieldModel extends FormikField {
 	fieldValue: any;
 	formArrayDFA: any;
 	groupFieldIndex: number;
+	fieldProps?: FileUploadService;
 }

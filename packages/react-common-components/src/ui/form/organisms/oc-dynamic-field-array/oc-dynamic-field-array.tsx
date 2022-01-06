@@ -63,6 +63,7 @@ export const OcDynamicFieldArray: React.FC<OcDynamicFieldArrayProps> = (props) =
 								<OcDynamicArrayPreview
 									// elementName={element.name}
 									fields={field.fields}
+									fieldProps={fieldProps}
 									// fieldLabel={getFieldLabel(element, formik.values) || `Item ${0 + 1}`}
 									// onDelete={removeDynamicFieldFromFormikValues}
 								/>

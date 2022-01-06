@@ -199,7 +199,7 @@ export const elementUtils = {
 		field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields
 			? { fields: field.fields.map((el) => ({ ...elementUtils.cloneAndUpdate(el) })) }
 			: {},
-	cloneAndUpdate: (element: FormikField, isNew = false) => ({
+	cloneAndUpdate: (element: FormikField, isNew = false, args?: Record<string, any>) => ({
 		...element,
 		...elementUtils.updateNestedFields(element),
 		name: getNewName(element),
@@ -207,6 +207,7 @@ export const elementUtils = {
 		previousValue: element.defaultValue || '',
 		isEditing: true,
 		isNew,
+		...args,
 	}),
 	removeChildOrCurrent: (arr: FormikField[], field: FormikField, isChildren = false) => {
 		const updatedArr = [...arr];

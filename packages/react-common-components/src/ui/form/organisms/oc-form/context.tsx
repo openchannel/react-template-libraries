@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useFormikContext } from 'formik';
-import { get, noop, update } from 'lodash-es';
+import { get, noop, update, isEmpty } from 'lodash-es';
 
 import { Dataset } from '../../../common/atoms/oc-button';
 import { FIELD_TYPE } from '../../lib';
@@ -33,49 +33,75 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 	initialValue: { flattenFields, fieldsDefinition, updateState },
 }) => {
 
-	React.useEffect(() => {
-		const arrHasValuesNew = flattenFields.filter((field) => {
-			if(field.type === 'dynamicFieldArray' && field.fields && field.fields.length > 0 ) {
-				let hasValue = false;
-				field.fields.forEach((child) => {
-					if(child.defaultValue && child.defaultValue !== '' && child.defaultValue !== null) {
-						hasValue = true;
-						return;
-					}
+	const setFormChildes = (childInstance: FormikField, value: any) => {
+			const childDefValues = value[childInstance.id];
+			return (childDefValues && childDefValues.map((elem: any) => {
+
+				const fieldsWithDefValuesChild = childInstance.fields!.map((child: FormikField) => {
+					const nextChild = flattenFields.find((item) => item.id === child.id && item.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY);
+					
+					return elementUtils.cloneAndUpdate(
+						child,
+						false,
+						{ 
+							previousValue: elem[child.id] ? elem[child.id] : '', 
+							value: elem[child.id] ? elem[child.id] : '', 
+							isEditing: false,
+							fields: nextChild ? setFormChildes(nextChild, elem) : [],
+						},
+					);
 				});
 
-				if(hasValue) {
-					return {
-						...field,
-						isEditing: false,
-					};
-				}
-			}
-			return;
-		});
-		// const res = flattenFields.reduce((acc, field) => {
-		// 	if(field.type === 'dynamicFieldArray' && field.fields && field.fields.length > 0 ) {
-		// 		let hasValue = false;
-		// 		field.fields.forEach((child) => {
-		// 			if(child.defaultValue && child.defaultValue !== '' && child.defaultValue !== null) {
-		// 				hasValue = true;
-		// 				return;
-		// 			}
-		// 		});
+				return elementUtils.cloneAndUpdate(
+					childInstance,
+					false,
+					{ fields: fieldsWithDefValuesChild.flat(), isEditing: false },
+				);
+			}));
+	}
 
-		// 		if(hasValue) {
-
-		// 			return {
-		// 				...acc,
-		// 				isEditing: false,
-		// 			};
-		// 		}
-		// 	}
-		// 	return acc;
-		// });
+	React.useEffect(() => {
+		const next = elementUtils.updateFieldsValues(fieldsDefinition, values);
 		
-		normalizeFieldsAndUpdateDefinition(arrHasValuesNew);
+		flattenFields.forEach((field:FormikField) => {
+			if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && !isEmpty(field.fields)) {
 
+					const instance = flattenFields.find((item) => item.staticId === field.staticId);
+					if (!instance) return;
+					
+					const existedElement = get(next, field.path);
+
+					if (Array.isArray(instance.defaultValue) && !isEmpty(instance.defaultValue)) {
+						instance.defaultValue.forEach((value, parentIndex) => {
+							const fieldsWithDefValues = instance.fields!.map((item) => {
+
+								/* Display child components Start */
+								const childInstance = flattenFields.find((child) => child.id === item.id && child.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY);
+								
+								if (childInstance) {
+									const childrens = setFormChildes(childInstance, value);
+									return childrens;
+								}
+								/* Display child components End */
+								
+								return elementUtils.cloneAndUpdate(
+									item,
+									false,
+									{ value: value[item.id], previousValue: value[item.id], isEditing: false },
+								);
+							});
+							
+							next[existedElement.index + parentIndex] = elementUtils.cloneAndUpdate(
+								instance,
+								false,
+								{ fields: fieldsWithDefValues.flat(), isEditing: false },
+							);
+						});
+					}
+			}
+		});
+		
+		normalizeFieldsAndUpdateDefinition(next);
 	}, []);
 
 	const { values, setValues } = useFormikContext<FormikFieldsValues>();
@@ -91,7 +117,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 	);
 
 	const onAddDynamicField = React.useCallback(
-		(event: React.MouseEvent) => {	
+		(event: React.MouseEvent) => {
 			const button = event.target as HTMLButtonElement;
 			const elementStaticId = button.dataset.staticid || '';
 			const elementPath = button.dataset.path || '';

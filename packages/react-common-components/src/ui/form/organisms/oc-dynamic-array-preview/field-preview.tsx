@@ -10,7 +10,7 @@ import { PreviewFieldModel } from '../../models';
 import { OcDynamicFieldArray } from '../oc-dynamic-field-array';
 
 export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
-	const { type, groupFieldIndex, value } = field;
+	const { type, groupFieldIndex, value, fieldProps } = field;
 
 	// if (!isValidField) {
 	// 	return (
@@ -25,6 +25,7 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 					field={field}
 					showAddButton={false}
 					groupFieldIndex={groupFieldIndex}
+					fieldProps={fieldProps}
 				/>
 			);
 		}
@@ -50,6 +51,9 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 			return <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(value) }} />;
 		}
 		case FIELD_TYPE.SINGLE_IMAGE: {
+			if (!value || value === null) {	
+				return <FileIconSvg className="array-preview__field-content__file-single-icon" /> 
+			}
 			return (
 				<div className="array-preview__field-content__image-mono">
 					<img
@@ -122,7 +126,7 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 						{/*	alt="file image"*/}
 						{/*/>*/}
 						<FileIconSvg className="array-preview__field-content__file-single-icon" />
-						<span className="array-preview__field-content__file-single-title">{value.name}</span>
+						<span className="array-preview__field-content__file-single-title">{value !== null && typeof value !== 'undefined' ?  value.name : ''}</span>
 					</div>
 				</div>
 			);
@@ -131,7 +135,7 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 		case FIELD_TYPE.MULTI_FILE: {
 			return (
 				<div className="array-preview__field-content__file-multi">
-					{value.map((item: any) => (
+					{value && value.map((item: any) => (
 						<div key={item.name} className="array-preview__field-content__file-single">
 							{/*<img*/}
 							{/*	className="array-preview__field-content__file-single-icon"*/}
