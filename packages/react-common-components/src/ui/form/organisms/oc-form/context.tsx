@@ -12,6 +12,7 @@ import {
 	normalizeFieldsForFormik,
 	updateElementKeys,
 	updateFieldsDefinition,
+	setFormChildes,
 } from './utils/fields';
 import { OcFormContextProps, OcFormContextProviderProps } from './types';
 
@@ -31,34 +32,7 @@ export const useOcFormContext = () => {
 export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 	children,
 	initialValue: { flattenFields, fieldsDefinition, updateState },
-}) => {
-
-	const setFormChildes = (childInstance: FormikField, value: any) => {
-			const childDefValues = value[childInstance.id];
-			return (childDefValues && childDefValues.map((elem: any) => {
-
-				const fieldsWithDefValuesChild = childInstance.fields!.map((child: FormikField) => {
-					const nextChild = flattenFields.find((item) => item.id === child.id && item.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY);
-					
-					return elementUtils.cloneAndUpdate(
-						child,
-						false,
-						{ 
-							previousValue: elem[child.id] ? elem[child.id] : '', 
-							value: elem[child.id] ? elem[child.id] : '', 
-							isEditing: false,
-							fields: nextChild ? setFormChildes(nextChild, elem) : [],
-						},
-					);
-				});
-
-				return elementUtils.cloneAndUpdate(
-					childInstance,
-					false,
-					{ fields: fieldsWithDefValuesChild.flat(), isEditing: false },
-				);
-			}));
-	}
+}) => {	
 
 	React.useEffect(() => {
 		const next = elementUtils.updateFieldsValues(fieldsDefinition, values);
@@ -79,7 +53,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 								const childInstance = flattenFields.find((child) => child.id === item.id && child.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY);
 								
 								if (childInstance) {
-									const childrens = setFormChildes(childInstance, value);
+									const childrens = setFormChildes(flattenFields, childInstance, value);
 									return childrens;
 								}
 								/* Display child components End */
