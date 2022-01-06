@@ -51,7 +51,7 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 			return <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(value) }} />;
 		}
 		case FIELD_TYPE.SINGLE_IMAGE: {
-			if (!value || value === null) {	
+			if (!value) {	
 				return <FileIconSvg className="array-preview__field-content__file-single-icon" /> 
 			}
 			return (
@@ -126,7 +126,7 @@ export const FieldPreview: React.FC<PreviewFieldModel> = (field) => {
 						{/*	alt="file image"*/}
 						{/*/>*/}
 						<FileIconSvg className="array-preview__field-content__file-single-icon" />
-						<span className="array-preview__field-content__file-single-title">{value !== null && typeof value !== 'undefined' ?  value.name : ''}</span>
+						<span className="array-preview__field-content__file-single-title">{value?.name || ''}</span>
 					</div>
 				</div>
 			);

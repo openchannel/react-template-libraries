@@ -22,7 +22,7 @@ export interface OcFormExtraProps {
 	 */
 	fileService?: FileUploadService;
 	/**
-	 * Service to make API calls.
+	 * Service which contains both service and fileService API calls
 	 */
 	 fieldProps?: any;
 	/**

@@ -51,8 +51,6 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					return null;
 				}
 
-				const uniqKey = name;
-
 				switch (type) {
 					case FIELD_TYPE.RICH_TEXT:
 						return (
@@ -70,7 +68,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.TEXT:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -89,7 +87,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.LONG_TEXT:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -102,7 +100,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.DROPDOWN_LIST:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -120,7 +118,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.NUMBER:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -133,7 +131,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.CHECKBOX:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -151,7 +149,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.EMAIL_ADDRESS:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -170,7 +168,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.WEBSITE_URL:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -189,7 +187,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.COLOR:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -210,7 +208,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.NUMBER_TAGS:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -236,7 +234,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.VIDEO_URL:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -255,7 +253,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.DATE_TIME:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -268,7 +266,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.MULTISELECT_LIST:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -287,7 +285,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.PASSWORD:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -302,7 +300,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.SINGLE_IMAGE:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -328,7 +326,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.MULTI_IMAGE:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -352,7 +350,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					case FIELD_TYPE.MULTI_APP:
 						return (
 							<FieldGroupWrapper
-								key={uniqKey}
+								key={name}
 								name={name}
 								label={label}
 								labelFor={id}
@@ -384,7 +382,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 						if (isFirst) {
 							return (
 								<FieldGroupWrapper
-									key={uniqKey}
+									key={name}
 									name={name}
 									label={label}
 									labelFor={id}
@@ -402,7 +400,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 						}
 						return (
 							<OcDynamicFieldArray
-								key={uniqKey}
+								key={name}
 								field={field}
 								groupFieldIndex={groupFieldIndex}
 								showAddButton={isLastOfGroup}
