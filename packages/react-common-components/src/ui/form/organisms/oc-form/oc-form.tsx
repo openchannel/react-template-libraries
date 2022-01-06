@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Formik } from 'formik';
+import { Formik, FormikContext } from 'formik';
 //----------------------------------------------------------------
 import { Form as FormikForm, FormikErrors, FormikValues, useFormik } from 'formik';
 import { isFunction } from 'lodash-es';
@@ -12,7 +12,10 @@ import {
 	validateOcFormValues,
 } from '../oc-single-form/utils/common';
 
-import { FormikMapFields } from '../oc-single-form/components/formik-map-field';
+import {
+	FormikMapFields,
+	FormikMapFieldsWrapper,
+} from '../oc-single-form/components/formik-map-field';
 //----------------------------------------------------------------
 import { OcButtonComponent } from '../../../common/atoms/oc-button/oc-button';
 import OcTooltipLabel from '../../atoms/oc-tooltip-label';
@@ -23,6 +26,8 @@ import { OcFormProps, FieldStep } from './types';
 import { createStepsFromJSON } from './utils';
 
 import './style.scss';
+import { AppFormModel, FormikField } from '../../models/app-form';
+import { invalid } from 'moment';
 
 export const OcForm: React.FC<OcFormProps> = (props) => {
 	const {
@@ -48,17 +53,37 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 
 	//eslint-disable-next-line
 	const [customForm, setCustomForm] = React.useState<FieldStep[] | any>(null);
-	const [progressBarSteps, setProgressBarSteps] = React.useState([]);
+	const [progressBarSteps, setProgressBarSteps] = React.useState<any>([]);
 	const [hasFieldGroups, setHasFieldGroups] = React.useState(false);
 	const isFirstStep = React.useMemo(() => !customForm || currentStep === 1, [currentStep]);
 	const isLastStep = React.useMemo(
 		() => !customForm || currentStep === customForm?.length,
 		[currentStep],
 	);
+	const {
+		state: { initialValues, validators, flattenFields, fieldsDefinition },
+		updateState,
+	} = useOcFormState(formJsonData!);
 
+	const formik: any = useFormik({
+		initialValues,
+		enableReinitialize: true,
+		validate: (values) => validateOcFormValues(formik.values, formik.errors, values, validators),
+		onSubmit: (values, formikProps) => {
+			if (!onSubmit) {
+				return;
+			}
+
+			onSubmit(formatOcFormValues(fieldsDefinition, values), {
+				...formikProps,
+				setErrors: handleSetErrors,
+			});
+		},
+	});
 	React.useEffect(() => {
 		if (displayType === 'wizard') {
-			setCustomForm(createStepsFromJSON(formJsonData));
+			const JsonWithNames: any = { ...formJsonData, fields: fieldsDefinition };
+			setCustomForm(createStepsFromJSON(JsonWithNames));
 
 			if (createStepsFromJSON(formJsonData).length > 1) {
 				setHasFieldGroups(true);
@@ -68,6 +93,10 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 			setHasFieldGroups(false);
 		}
 	}, [hasFieldGroups]);
+
+	React.useEffect(() => {
+		generateProgressbar();
+	}, [formik.errors, currentStep]);
 
 	const navigateToStep = (step: number) => {
 		if (displayType === 'wizard' && setCurrentStep) {
@@ -93,40 +122,36 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	);
 
 	const generateProgressbar = (): void => {
+		let stepErrors = [];
 		const progressBarSteps =
 			customForm?.length > 1
-				? customForm?.map((step: FieldStep, index: number) => ({
-						title: step.label ? step.label.label : `Step ${index + 1}`,
-						state: 'pristine',
-				  }))
+				? customForm?.map((step: FieldStep, index: number) => {
+						if (index === currentStep - 1) {
+							customForm[currentStep - 1].items.map((field: any) =>
+								formik.errors[field.name] && formik.errors[field.name]?.length > 0
+									? stepErrors.push(formik.errors[field.name])
+									: undefined,
+							);
+						}
+						return stepErrors.length > 0
+							? {
+									title: step.label ? step.label.label : `Step ${currentStep}`,
+									state: 'invalid',
+							  }
+							: {
+									title: step.label ? step.label.label : `Step ${currentStep}`,
+									state: 'pristine',
+							  };
+				  })
 				: [];
+
 		setProgressBarSteps(progressBarSteps);
 	};
-	const singleStepsFormConfig = React.useMemo(
+
+	const singleStepsFormConfig: FormikField[] = React.useMemo(
 		() => (customForm !== null ? customForm[currentStep - 1]?.items : []),
 		[currentStep, customForm],
 	);
-
-	const {
-		state: { initialValues, validators, flattenFields, fieldsDefinition },
-		updateState,
-	} = useOcFormState(formJsonData!);
-
-	const formik: any = useFormik({
-		initialValues,
-		enableReinitialize: true,
-		validate: (values) => validateOcFormValues(formik.values, formik.errors, values, validators),
-		onSubmit: (values, formikProps) => {
-			if (!onSubmit) {
-				return;
-			}
-
-			onSubmit(formatOcFormValues(fieldsDefinition, values), {
-				...formikProps,
-				setErrors: handleSetErrors,
-			});
-		},
-	});
 
 	const handleSetErrors = React.useCallback(
 		(errors: FormikErrors<FormikValues>) => {
@@ -158,6 +183,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 								maxStepsToShow={maxStepsToShow}
 								progressbarData={progressBarSteps}
 								currentStep={currentStep}
+								errors={formik.errors}
 							/>
 						)}
 					</div>
@@ -173,29 +199,28 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 						{showGroupDescription && (
 							<p className="form-steps__content-body-description">{stepDescription}</p>
 						)}
-						<Formik initialValues={singleStepsFormConfig} onSubmit={handleSubmit}>
-							{({ isSubmitting, errors, values, touched }) => (
-								<FormikMapFields
-									fields={singleStepsFormConfig}
-									service={service}
-									fileService={fileService}
-
-									// excludeRenderFields={excludeRenderFields}
-								/>
-								// {children
-								// 	? isFunction(children)
-								// 		? children(formik, flattenFields)
-								// 		: children
-								// 	: null}
-							)}
-						</Formik>
-
-						{/* <OcSingleForm
-							formJsonData={singleStepsFormConfig as AppFormModel}
-							generatedForm={currentForm}
-							labelPosition={labelPosition}
-							showSubmitBtn={showSubmitButton && isLastStep}
-						/> */}
+						<FormikContext.Provider value={formik}>
+							<OcFormContextProvider
+								initialValue={{
+									flattenFields,
+									fieldsDefinition: singleStepsFormConfig,
+									updateState,
+								}}
+							>
+								<FormikForm className="form" onSubmit={handleSubmit} noValidate>
+									<FormikMapFieldsWrapper
+										service={service}
+										fileService={fileService}
+										// excludeRenderFields={excludeRenderFields}
+									/>
+									{children
+										? isFunction(children)
+											? children(formik, flattenFields)
+											: children
+										: null}
+								</FormikForm>
+							</OcFormContextProvider>
+						</FormikContext.Provider>
 					</div>
 				</div>
 			) : (

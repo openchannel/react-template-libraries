@@ -19,6 +19,7 @@ export interface AppFormField {
 	description?: string;
 	defaultValue: any;
 	type: string;
+	name?: any;
 	required?: any;
 	attributes?: AppFormFieldAttributes;
 	options?: any;
