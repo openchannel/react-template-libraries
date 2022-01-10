@@ -53,8 +53,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 								const childInstance = flattenFields.find((child) => child.id === item.id && child.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY);
 								
 								if (childInstance) {
-									const childrens = setFormChildes(flattenFields, childInstance, value);
-									return childrens;
+									return setFormChildes(flattenFields, childInstance, value);
 								}
 								/* Display child components End */
 								
