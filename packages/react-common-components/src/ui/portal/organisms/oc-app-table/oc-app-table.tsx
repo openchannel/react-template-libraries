@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useSortingArray } from '../../../../lib/hooks';
 import { FullAppData } from '../../../common/models';
 
-import { BlankRow, DataRow, EmptyDataRow, SortIcon } from './components';
+import { BlankRow, DataRow, EmptyDataRow } from './components';
 import { OcAppTableProps } from './types';
 import { getHeaderCell } from './components/data-row-item';
 
