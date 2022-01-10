@@ -124,18 +124,23 @@ export const updateElement = (params: {
 	element: FormikField;
 	formikValues?: FormikFieldsValues;
 	isEditing: boolean;
-}) => ({
-	...params.element,
-	isNew: false,
-	...setFieldEditable(params),
-	...setFieldValueByName(params),
-});
+	withChilds: boolean;
+}) => {
+	return ({
+		...params.element,
+		isNew: false,
+		...setFieldEditable(params),
+		...setFieldValueByName(params),
+		...(params.withChilds && updateNestedFields(params)),
+	})
+};
 
 export const updateFieldsDefinition = (params: {
 	fields: FormikField[];
 	formikValues?: FormikFieldsValues;
 	fieldName: string;
 	isEditing: boolean;
+	withChilds: boolean;
 }): FormikField[] => {
 	return params.fields.map((element) => {
 		if (element.name === params.fieldName) {
@@ -143,6 +148,7 @@ export const updateFieldsDefinition = (params: {
 				element,
 				formikValues: params.formikValues,
 				isEditing: params.isEditing,
+				withChilds: params.withChilds,
 			});
 		}
 
