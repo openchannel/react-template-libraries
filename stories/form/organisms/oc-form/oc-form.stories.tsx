@@ -834,9 +834,9 @@ FormWithUpdatedRichTextEditor.args = {
 				id: 'rich-text-editor',
 				label: 'Rich Text Editor',
 				description: '',
-				defaultValue: null,
+				defaultValue: '',
 				type: 'richText',
-				required: null,
+				required: true,
 				attributes: {
 					maxChars: 100,
 					required: true,

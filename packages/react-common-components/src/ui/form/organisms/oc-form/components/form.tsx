@@ -35,9 +35,9 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		showSubmitBtn = true,
 		saveButtonText = 'Save',
 	} = props;
-	
+
 	const [submitType, setSubmitType] = React.useState<string>('submit');
-	
+
 	const {
 		state: { initialValues, validators, flattenFields, fieldsDefinition },
 		updateState,
@@ -51,7 +51,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 			if (!onSubmit) {
 				return;
 			}
-			
+
 			onSubmit(
 				formatOcFormValues(fieldsDefinition, values),
 				{
@@ -63,14 +63,12 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		},
 	});
 
-	const handleSetErrors = React.useCallback(
-		(errors: FormikErrors<FormikValues>) => {
-			const ocFormErrors = formatOcFormErrors(fieldsDefinition, errors);
-			formik.setErrors(ocFormErrors);
-			formik.setSubmitting(false);
-		},
-		[formik.setErrors, formik.setSubmitting, fieldsDefinition],
-	);
+	const handleSetErrors = (errors: FormikErrors<FormikValues>) => {
+		const ocFormErrors = formatOcFormErrors(fieldsDefinition, errors);
+		formik.setErrors(ocFormErrors);
+		formik.setSubmitting(false);
+	};
+	// [formik.setErrors, formik.setSubmitting, fieldsDefinition],
 
 	const handleSubmit = React.useCallback(
 		(e) => {
@@ -104,7 +102,12 @@ export const Form: React.FC<OcFormProps> = (props) => {
 						)}
 						{showSaveBtn && (
 							<div className="form__button save-draft">
-								<OcButtonComponent type="secondary" process={formik.isSubmitting} data-submittype="save" onClick={handleSubmit}>
+								<OcButtonComponent
+									type="secondary"
+									process={formik.isSubmitting}
+									data-submittype="save"
+									onClick={handleSubmit}
+								>
 									{saveButtonText}
 								</OcButtonComponent>
 							</div>

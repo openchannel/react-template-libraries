@@ -94,12 +94,10 @@ export const FormikRichTextWrapper: React.FC<
 		placeholder?: string;
 	}
 > = React.memo(({ field, form, customClass, placeholder }) => {
-	const onChange = React.useCallback(
-		(value) => {
-			form.setFieldValue(field.name, value);
-		},
-		[field.name, form.setFieldValue],
-	);
+	const onChange = (value: string) => {
+		form.setFieldValue(field.name, value);
+		form.validateForm(form.values);
+	};
 
 	return (
 		<OcRichTextEditorComponent
@@ -111,7 +109,7 @@ export const FormikRichTextWrapper: React.FC<
 			onBlur={field.onBlur}
 		/>
 	);
-}, shouldFieldUpdate(['placeholder']));
+}, shouldFieldUpdate(['field.placeholder', 'field.errors']));
 
 export const FormikOcSelectWrapper: React.FC<
 	FCWP<OcSelectProps['value'] | undefined> & {
