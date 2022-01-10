@@ -597,6 +597,15 @@ FormWithDynamicFieldArraySecondLvl.args = {
 		fields: [
 			{
 				attributes: {
+					required: true
+				},
+				defaultValue: "Test name app",
+				id: "name",
+				label: "Name",
+				type: "text",
+			},
+			{
+				attributes: {
 					maxCount: null,
 					minCount: null,
 					ordering: 'append',
@@ -606,7 +615,22 @@ FormWithDynamicFieldArraySecondLvl.args = {
 				required: null,
 				rowLabel: null,
 				category: 'CUSTOM',
-				defaultValue: null,
+				defaultValue: [
+					{
+						'field1': 'test1',
+						'long-text-example': 'Long text',
+						'test-dynamic-field-array-2': [
+							{
+								'field_child_1': 'one',
+								'field_child_2': 'three',
+							},
+							{
+								'field_child_1': 'two',
+								'field_child_2': 'two 2',
+							},
+						],
+					},
+				],
 				description: '',
 				id: 'test-dynamic-field-array',
 				isOpen: false,
@@ -654,7 +678,6 @@ FormWithDynamicFieldArraySecondLvl.args = {
 						required: null,
 						rowLabel: null,
 						category: 'CUSTOM',
-						defaultValue: null,
 						description: '',
 						id: 'test-dynamic-field-array-2',
 						isOpen: false,
@@ -671,10 +694,26 @@ FormWithDynamicFieldArraySecondLvl.args = {
 								category: 'CUSTOM',
 								defaultValue: null,
 								description: 'some description',
-								id: 'field1',
+								id: 'field_child_1',
 								isOpen: false,
 								isValid: true,
-								label: 'field1',
+								label: 'field_child_1',
+								placeholder: 'write some text',
+								type: 'text',
+							},
+							{
+								attributes: {
+									maxChars: null,
+									minChars: null,
+									required: null,
+								},
+								category: 'CUSTOM',
+								defaultValue: null,
+								description: 'some description',
+								id: 'field_child_2',
+								isOpen: false,
+								isValid: true,
+								label: 'field_child_2',
 								placeholder: 'write some text',
 								type: 'text',
 							},

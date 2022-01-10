@@ -201,7 +201,7 @@ export const elementUtils = {
 		field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields
 			? { fields: field.fields.map((el) => ({ ...elementUtils.cloneAndUpdate(el) })) }
 			: {},
-	cloneAndUpdate: (element: FormikField, isNew = false) => ({
+	cloneAndUpdate: (element: FormikField, isNew = false, args?: Record<string, any>) => ({
 		...element,
 		...elementUtils.updateNestedFields(element),
 		name: getNewName(element),
@@ -209,6 +209,7 @@ export const elementUtils = {
 		previousValue: element.defaultValue || '',
 		isEditing: true,
 		isNew,
+		...args,
 	}),
 	removeChildOrCurrent: (arr: FormikField[], field: FormikField, isChildren = false) => {
 		const updatedArr = [...arr];
@@ -260,4 +261,32 @@ export const elementUtils = {
 			return element;
 		});
 	},
+};
+
+
+export const setFormChildes = (flattenFields: FormikField[], childInstance: FormikField, value: any) => {
+	const childDefValues = value[childInstance.id];
+	return (childDefValues && childDefValues.map((elem: any) => {
+
+		const fieldsWithDefValuesChild = childInstance.fields!.map((child: FormikField) => {
+			const nextChild = flattenFields.find((item) => item.id === child.id && item.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY);
+			
+			return elementUtils.cloneAndUpdate(
+				child,
+				false,
+				{ 
+					previousValue: elem[child.id] ? elem[child.id] : '', 
+					value: elem[child.id] ? elem[child.id] : '', 
+					isEditing: false,
+					fields: nextChild ? setFormChildes(flattenFields, nextChild, elem) : [],
+				},
+			);
+		});
+
+		return elementUtils.cloneAndUpdate(
+			childInstance,
+			false,
+			{ fields: fieldsWithDefValuesChild.flat(), isEditing: false },
+		);
+	}));
 };

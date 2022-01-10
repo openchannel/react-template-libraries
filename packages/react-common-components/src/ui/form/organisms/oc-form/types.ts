@@ -22,6 +22,10 @@ export interface OcFormExtraProps {
 	 */
 	fileService?: FileUploadService;
 	/**
+	 * Service which contains both service and fileService API calls
+	 */
+	 fieldProps?: any;
+	/**
 	 * Don't render field by ID.
 	 */
 	excludeRenderFields?: string[];

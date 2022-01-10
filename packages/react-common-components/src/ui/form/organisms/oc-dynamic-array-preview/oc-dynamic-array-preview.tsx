@@ -11,7 +11,7 @@ import { OcDynamicArrayPreviewProps } from './types';
 import './style.scss';
 
 export const OcDynamicArrayPreview: React.FC<OcDynamicArrayPreviewProps> = (props) => {
-	const { fields, hideLabel = false } = props;
+	const { fields, hideLabel = false, fieldProps } = props;
 
 	const previewFields = React.useMemo(() => {
 		if (!fields || fields.length === 0) {
@@ -50,7 +50,7 @@ export const OcDynamicArrayPreview: React.FC<OcDynamicArrayPreviewProps> = (prop
 						{!hideLabel && <OcLabelComponent>{field.label}</OcLabelComponent>}
 					</span>
 					<div className="array-preview__field-content">
-						<FieldPreview {...field} />
+						<FieldPreview {...field} fieldProps={fieldProps}/>
 					</div>
 				</div>
 			))}

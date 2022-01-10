@@ -58,7 +58,7 @@ const OcTags: React.FC<OcTagsProps> = (props) => {
 
 	const dropboxOptions = React.useMemo(() => {
 		const mergedArr = availableTags!.map((item) => {
-			if('value' in item) {
+			if(typeof item === 'object' && 'value' in item) {
 				return item.value;
 			}
 			return item;
