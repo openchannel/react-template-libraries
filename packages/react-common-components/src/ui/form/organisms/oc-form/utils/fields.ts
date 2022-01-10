@@ -45,7 +45,7 @@ export const normalizeFieldsForFormik =
 		return fields.map((field: AppFormField | FormikField, index: number) => {
 			const path: string = deepPath ? `${deepPath}.fields.${index}` : `${index}`;
 
-			if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields) {
+			if (field && field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && field.fields) {
 				return {
 					...todo(field, { path, index }),
 					fields: normalizeFieldsForFormik(todo)(field.fields, path),
@@ -129,7 +129,6 @@ export const updateElement = (params: {
 	isNew: false,
 	...setFieldEditable(params),
 	...setFieldValueByName(params),
-	...updateNestedFields(params),
 });
 
 export const updateFieldsDefinition = (params: {
