@@ -264,6 +264,6 @@ const getCustomTD = (
 	app: FullAppData,
 	modifyColumns: ModifyColumn | undefined,
 ) => {
-	if (!modifyColumns) return;
-	return modifyColumns[val].rowCell(app);
+	if (!modifyColumns || !app) return;
+	return modifyColumns[val].rowCell!(app);
 };
