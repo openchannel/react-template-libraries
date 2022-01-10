@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 import { FullAppData } from '../../../common/models';
 import { AppListing, AppListMenuAction, AppListOptions } from '../../models';
@@ -24,6 +24,8 @@ export interface DataRowProps {
 	menuUrl?: string;
 	menuOptions: AppListOptions[];
 	onMenuClick?: (v: AppListMenuAction) => void;
+	activeColumns?: ActiveColumns[];
+	modifyColumns?: ModifyColumn;
 }
 
 export interface OcAppTableProps {
@@ -67,4 +69,30 @@ export interface OcAppTableProps {
 	 * `ascending` - `true` for ascending sort or `false` for descending sort.
 	 */
 	onSort?: (v: string) => void;
+
+	activeColumns?: ActiveColumns[];
+
+	modifyColumns?: ModifyColumn;
 }
+
+export interface OptionsProps {
+	label: string;
+	value: string;
+}
+
+export type ModifyColumn = {
+	[key in ActiveColumns]: {
+		headerCell?: () => ReactNode;
+		rowCell?: (app: FullAppData) => ReactNode;
+	};
+};
+
+export type ActiveColumns =
+	| 'left-placeholder'
+	| 'name'
+	| 'summary'
+	| 'create-date'
+	| 'status'
+	| 'app-options'
+	| 'right-placeholder'
+	| string;
