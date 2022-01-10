@@ -37,8 +37,8 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 	React.useEffect(() => {
 		const next = elementUtils.updateFieldsValues(fieldsDefinition, values);
 		
-		flattenFields.forEach((field:FormikField) => {
-			if (field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && !isEmpty(field.fields)) {
+		flattenFields.forEach((field:FormikField) => {	
+			if (field && field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && !isEmpty(field.fields)) {
 
 					const instance = flattenFields.find((item) => item.staticId === field.staticId);
 					if (!instance) return;
@@ -51,9 +51,13 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 
 								/* Display child components Start */
 								const childInstance = flattenFields.find((child) => child.id === item.id && child.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY);
-								
-								if (childInstance) {
+								if (childInstance && !isEmpty(value[childInstance.id])) {
 									return setFormChildes(flattenFields, childInstance, value);
+								} else if (childInstance && isEmpty(value[childInstance.id])) {
+									return elementUtils.cloneAndUpdate(childInstance,
+										 false,
+										{ fields:[], isEditing: false },
+									);
 								}
 								/* Display child components End */
 								
