@@ -165,6 +165,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 				fields: fieldsDefinition,
 				fieldName,
 				isEditing: true,
+				withChilds: false,
 			}),
 		);
 	};
@@ -214,6 +215,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 				fieldName,
 				formikValues: values,
 				isEditing: false,
+				withChilds: true,
 			}),
 		);
 	};
