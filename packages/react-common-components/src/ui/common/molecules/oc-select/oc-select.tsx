@@ -34,7 +34,10 @@ export interface OcSelectProps {
 	 * Set object field name using as label. The value must match the key in the array object.
 	 */
 	labelField?: string;
-
+	/**
+	 * Set object field name using as identificator. The value must match the id in the array object.
+	 */
+	idField?: string;
 	/**
 	 * Disable select for user input
 	 * @default false
@@ -57,6 +60,7 @@ export const OcSelect: React.FC<Partial<OcSelectProps>> = (props) => {
 		customClass,
 		selectValArr = [],
 		labelField = '',
+		idField = 'id',
 		disabled = false,
 		value = '',
 		placeholder = '',
@@ -65,7 +69,7 @@ export const OcSelect: React.FC<Partial<OcSelectProps>> = (props) => {
 	} = props;
 
 	const options = React.useMemo(
-		() => transformToValidOptions(selectValArr, labelField),
+		() => transformToValidOptions(selectValArr, labelField, idField),
 		[selectValArr, labelField],
 	);
 
@@ -79,7 +83,7 @@ export const OcSelect: React.FC<Partial<OcSelectProps>> = (props) => {
 	) as SelectCallback;
 
 	const toggleValue = value ? (typeof value === 'object' ? value[labelField] : value) : placeholder;
-
+	
 	return (
 		<Dropdown className="select-component">
 			<Dropdown.Toggle as={Toggle} disabled={disabled} className={customClass}>
@@ -92,7 +96,7 @@ export const OcSelect: React.FC<Partial<OcSelectProps>> = (props) => {
 						<Dropdown.Item
 							key={item[labelField]}
 							name={String(item[labelField])}
-							eventKey={String(item[labelField])}
+							eventKey={String(item[idField])}
 							as={ListItem}
 							onSelect={onSelect}
 						>
