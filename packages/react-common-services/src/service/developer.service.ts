@@ -33,6 +33,6 @@ export const developerService = {
 	 *
 	 */
 	updateDeveloper(updateDeveloperRequest: DeveloperUpdateModel) {
-		return api.patch(`${DEV_ACCOUNT_TYPES_URL}`, updateDeveloperRequest as any);
+		return api.patch(`${DEV_ACCOUNT_TYPES_URL}`, { body: updateDeveloperRequest });
 	},
 };
