@@ -9,6 +9,13 @@ export const defaultChartStatisticParameter = {
 	id: Math.random().toString(36).substr(2, 9),
 };
 
+    /**
+     * Calculates visible indexes for axis according to skip ratio and including first and
+     * last ticks.
+     * @param {number} tickCount number of ticks on the axis
+     * @param {number} skipRatio interval according to which ticks should be skipped
+     * @return {number[]} Array of ticks indexes that should be rendered
+     */
 export const calculateVisibleIndexes = (tickCount: number, skipRatio: number): number[] => {
 	//@ts-ignore
 	return Array.from(Array(tickCount).keys()).filter(i => {
@@ -21,6 +28,12 @@ export const calculateVisibleIndexes = (tickCount: number, skipRatio: number): n
 	});
 };
 
+    /**
+     * Determines whether to increase skip ratio based on visible ticks and skip ratio.
+     * @param {number} skipRatio interval according to which ticks should be skipped
+     * @param {number[]} visibleTicksIndexes Array of ticks indexes that should be rendered
+     * @return {boolean} Whether to increase skip ratio
+     */
 export const shouldIncreaseSkipRatio = (skipRatio: number, visibleTicksIndexes: number[]): boolean => {
 	const distanceBetweenLastTicks =
 		visibleTicksIndexes[visibleTicksIndexes.length - 1] - visibleTicksIndexes[visibleTicksIndexes.length - 2];
