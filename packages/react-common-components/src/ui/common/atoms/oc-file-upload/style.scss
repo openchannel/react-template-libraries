@@ -172,18 +172,20 @@
 			.img-thumb {
 				display: inline-block;
 				object-fit: contain;
-				width: 55px;
-				height: 55px;	
+				width: 32px;
+				height: 40px;
+				-o-object-fit: cover;
+				object-fit: cover;
 			}
 		
 			.file-name {
 				display: inline-block;
-				color: #333333;;
+				color: var(--primary);
 				margin-left: 10px;
 				margin-bottom: 0px;
 				vertical-align: middle;
 				font-size: 14px;
-				font-weight: 700;
+				@include font-medium();
 			}
 		
 			.status {
@@ -200,9 +202,12 @@
 					font-size: 35px;
 					color: #000;
 					float: right;
-					line-height: 55px;
-					height: 55px;
-					z-index: 100;	
+					line-height: 40px;
+					height: 40px;
+					z-index: 100;
+					@include font-light();
+					padding-right: 15px;
+					padding-left: 15px;
 				}
 			}
 
@@ -228,7 +233,7 @@
 
 				.meter { 
 					span {
-						height: 1px;
+						height: 4px;
 					}
 	
 					.progress {
