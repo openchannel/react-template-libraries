@@ -38,7 +38,7 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 		},
 		setArray,
 		sortArray,
-	} = useSortingArray<FullAppData>('name');
+	} = useSortingArray<FullAppData>('');
 
 	const columns = activeColumns || DEFAULT_COLUMNS;
 
