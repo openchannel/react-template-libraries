@@ -20,7 +20,7 @@ const initialState = <T>(initialSortKey: string): AppState<T> => ({
 	array: [],
 	sort: {
 		key: initialSortKey,
-		orderBy: 'asc',
+		orderBy: 'desc',
 	},
 });
 
@@ -34,8 +34,11 @@ const reducer = <T>(state: AppState<T>, action: Action<T>): AppState<T> => {
 		}
 		case SORT_ARRAY: {
 			const key = action.payload.key || state.sort.key;
-			const orderBy = action.payload.orderBy || (state.sort.orderBy === 'asc' ? 'desc' : 'asc');
-
+			let orderBy = action.payload.orderBy || (state.sort.orderBy === 'asc' ? 'desc' : 'asc');
+			if (state.sort.key !== action.payload.key) {
+				orderBy = 'asc';
+			}
+			
 			return {
 				array: _orderBy<T>(state.array, [key], [orderBy]),
 				sort: { key, orderBy },
