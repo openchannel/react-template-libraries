@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
 import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
-import { OcSingleForm } from '../../../form/organisms/oc-single-form';
+import { OcSingleForm } from '../../../form/organisms/oc-form';
 
 import { AgreeWithTermsCheckbox } from './agree-with-terms-checkbox';
 import { SignupProps } from './types';

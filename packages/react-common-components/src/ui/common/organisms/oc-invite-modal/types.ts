@@ -1,5 +1,5 @@
 import { AppFormModel } from '../../../form/models';
-import { OcFormFormikHelpers, OcFormValues } from '../../../form/organisms/oc-single-form';
+import { OcFormFormikHelpers, OcFormValues } from '../../../form/organisms/oc-form';
 import { ExtendedModalSizeVariants } from '../modal';
 
 export interface OcInviteModalProps {

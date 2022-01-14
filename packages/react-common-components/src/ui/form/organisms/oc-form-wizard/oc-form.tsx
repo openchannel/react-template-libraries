@@ -3,23 +3,20 @@ import { Formik, FormikContext, setNestedObjectValues } from 'formik';
 //----------------------------------------------------------------
 import { Form as FormikForm, FormikErrors, FormikValues, useFormik } from 'formik';
 import { isFunction, noop } from 'lodash-es';
-import { OcFormContextProvider } from '../oc-single-form/context';
-import { useOcFormState } from '../oc-single-form/hooks';
+import { OcFormContextProvider } from '../oc-form/context';
+import { useOcFormState } from '../oc-form/hooks';
 import {
 	formatOcFormErrors,
 	formatOcFormValues,
 	// getOcFormButtonsClass,
 	validateOcFormValues,
-} from '../oc-single-form/utils/common';
+} from '../oc-form/utils/common';
 
-import {
-	FormikMapFields,
-	FormikMapFieldsWrapper,
-} from '../oc-single-form/components/formik-map-field';
+import { FormikMapFields, FormikMapFieldsWrapper } from '../oc-form/components/formik-map-field';
 //----------------------------------------------------------------
 import { OcButtonComponent } from '../../../common/atoms/oc-button/oc-button';
 import OcTooltipLabel from '../../atoms/oc-tooltip-label';
-import { OcSingleForm } from '../oc-single-form/index';
+import { OcSingleForm } from '../oc-form/index';
 import { OcFormProgressBar } from './oc-form-progress-bar/oc-form-progress-bar';
 import { OcFormProps, FieldStep } from './types';
 import { createStepsFromJSON, reGenerateProgressbar } from './utils';

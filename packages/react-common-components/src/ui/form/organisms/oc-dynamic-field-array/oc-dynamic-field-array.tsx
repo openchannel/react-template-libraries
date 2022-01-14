@@ -6,8 +6,8 @@ import { ReactComponent as TrashIconSvg } from '../../../../assets/img/trash-ico
 import OcButtonComponent from '../../../common/atoms/oc-button';
 import { FormikFieldsValues } from '../../models';
 import { OcDynamicArrayPreview } from '../oc-dynamic-array-preview';
-import { FormikMapFields } from '../oc-single-form';
-import { useOcFormContext } from '../oc-single-form/context';
+import { FormikMapFields } from '../oc-form';
+import { useOcFormContext } from '../oc-form/context';
 
 import { OcDynamicFieldArrayProps } from './types';
 import { getFieldLabel } from './utils';
