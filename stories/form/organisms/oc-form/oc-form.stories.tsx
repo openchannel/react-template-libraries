@@ -10,8 +10,16 @@ export default {
 
 const Component: Story<any> = (args) => {
 	const [currentStep, setCurrentStep] = React.useState(1);
-
-	return <OcForm {...args} currentStep={currentStep} setCurrentStep={setCurrentStep} />;
+	const [maxStepsToShow, setMaxStepsToShow] = React.useState<number>(args.maxStepsToShow);
+	return (
+		<OcForm
+			{...args}
+			currentStep={currentStep}
+			setCurrentStep={setCurrentStep}
+			maxStepsToShow={maxStepsToShow}
+			setMaxStepsToShow={setMaxStepsToShow}
+		/>
+	);
 };
 
 export const WizardForm = Component.bind({});

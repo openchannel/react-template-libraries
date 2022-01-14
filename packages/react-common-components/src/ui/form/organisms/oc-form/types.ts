@@ -32,6 +32,10 @@ export interface OcFormProps extends FormProps {
 	 */
 	maxStepsToShow: number;
 	/**
+	 * Max shown steps setter
+	 */
+	setMaxStepsToShow: React.Dispatch<React.SetStateAction<number>>;
+	/**
 	 * Custom template for the Save button to show.
 	 */
 	additionalButton?: React.ReactElement | React.ReactNode;

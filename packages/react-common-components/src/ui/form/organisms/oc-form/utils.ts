@@ -1,4 +1,4 @@
-import { AppFormModel } from '../../models/app-form';
+import { AppFormField, AppFormModel } from '../../models/app-form';
 import { FieldStep } from './types';
 
 export const createStepsFromJSON = (data: AppFormModel | undefined): FieldStep[] => {
@@ -30,5 +30,58 @@ export const createStepsFromJSON = (data: AppFormModel | undefined): FieldStep[]
 			}
 		}
 	});
-	return formsArray;
+	return formsArray.map((form: FieldStep, index: number) => ({
+		...form,
+		items: form?.items?.map((item: AppFormField) => ({ ...item, step: index })),
+	}));
+};
+
+export const reGenerateProgressbar = (
+	customForm: FieldStep[] | any,
+	formik: any,
+	setProgressBarSteps: React.Dispatch<any>,
+	currentStep: number,
+	createInitialProgressBar: () => any,
+): void => {
+	const stepErrors: any = [];
+	const stepFinished: any = {};
+	customForm?.length > 0 &&
+		customForm?.map((step: FieldStep, index: number) => {
+			customForm[index].items.map((field: any) => {
+				formik.errors[field.name] &&
+					formik.touched[field.name] &&
+					formik.errors[field.name]?.length > 0 &&
+					stepErrors.push({ name: field.name, step: currentStep });
+				if (!formik.errors[field.name] && formik.touched[field.name]) {
+					stepFinished[index + 1] = {
+						fields: [
+							...(stepFinished[index + 1]?.fields ? stepFinished[index + 1]?.fields : []),
+							field?.name,
+						],
+					};
+				}
+			});
+		});
+
+	const copy = createInitialProgressBar();
+
+	customForm?.forEach((form: FieldStep, index: number) => {
+		loop1: for (const field of form?.items!) {
+			for (const err of stepErrors) {
+				if (field.name === err.name) {
+					copy[field?.step].state = 'invalid';
+					break loop1;
+				} else {
+					copy[field.step].state = 'pristine';
+				}
+			}
+			const isStepFinished = form?.items?.every((field: AppFormField) =>
+				stepFinished[index + 1]?.fields?.includes(field?.name),
+			);
+			if (isStepFinished) {
+				copy[field.step].state = 'finished';
+			}
+		}
+	});
+	setProgressBarSteps(copy);
 };
