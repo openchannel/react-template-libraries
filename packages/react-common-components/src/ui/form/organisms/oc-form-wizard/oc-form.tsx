@@ -16,14 +16,14 @@ import { FormikMapFields, FormikMapFieldsWrapper } from '../oc-form/components/f
 //----------------------------------------------------------------
 import { OcButtonComponent } from '../../../common/atoms/oc-button/oc-button';
 import OcTooltipLabel from '../../atoms/oc-tooltip-label';
-import { OcSingleForm } from '../oc-form/index';
+import { OcForm } from '../oc-form/index';
 import { OcFormProgressBar } from './oc-form-progress-bar/oc-form-progress-bar';
 import { OcFormProps, FieldStep } from './types';
 import { createStepsFromJSON, reGenerateProgressbar } from './utils';
 import { AppFormModel, FormikField } from '../../models/app-form';
 import './style.scss';
 
-export const OcForm: React.FC<OcFormProps> = (props) => {
+export const OcFormWizard: React.FC<OcFormProps> = (props) => {
 	const {
 		formJsonData,
 		showSubmitButton = false,
@@ -221,7 +221,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 					</div>
 				</div>
 			) : (
-				<OcSingleForm
+				<OcForm
 					formJsonData={formJsonData}
 					labelPosition={labelPosition}
 					showSubmitBtn={showSubmitButton && isLastStep}

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import OcButtonComponent from '../../../common/atoms/oc-button/oc-button';
 import OcLabelComponent from '../../../common/atoms/oc-label/oc-label';
-import { OcSingleForm } from '../../../form/organisms/oc-form';
+import { OcForm } from '../../../form/organisms/oc-form';
 
 import { AgreeWithTermsCheckbox } from './agree-with-terms-checkbox';
 import { SignupProps } from './types';
@@ -52,7 +52,7 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 							/>
 						</div>
 						{formConfigs !== null && (
-							<OcSingleForm
+							<OcForm
 								formConfigs={formConfigs}
 								onSubmit={onSubmit}
 								formTypeLabel={defaultTypeLabelText}
@@ -70,7 +70,7 @@ export const OcSignupComponent: React.FC<SignupProps> = (props) => {
 											ordinaryTermsDescription={ordinaryTermsDescription}
 										/>
 									))}
-							</OcSingleForm>
+							</OcForm>
 						)}
 						{loginUrl && (
 							<div className="sign-up__login">

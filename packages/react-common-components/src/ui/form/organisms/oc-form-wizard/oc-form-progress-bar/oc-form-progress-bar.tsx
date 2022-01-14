@@ -4,7 +4,7 @@ import { ReactComponent as ContentStatusIcon } from '../../../../../assets/img/i
 
 import './style.scss';
 
-export interface OcSingleFormProgressBarProps {
+export interface OcFormProgressBarProps {
 	progressbarData: FormProgressbarStep[];
 	jumpToStep: (step: number) => void;
 	maxStepsToShow?: number;
@@ -18,7 +18,7 @@ export interface FormProgressbarStep {
 	state: 'pristine' | 'finished' | 'invalid';
 }
 
-export const OcFormProgressBar: React.FC<OcSingleFormProgressBarProps> = (props) => {
+export const OcFormProgressBar: React.FC<OcFormProgressBarProps> = (props) => {
 	const {
 		progressbarData = [],
 		currentStep = 1,
