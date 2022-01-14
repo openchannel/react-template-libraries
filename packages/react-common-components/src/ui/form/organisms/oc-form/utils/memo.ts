@@ -8,13 +8,16 @@ const addictedGet = (object: Record<string, any>, key: string, defaultValue: any
 
 const checkIsEqualByKey =
 	<P>(prevProps: Readonly<PropsWithChildren<P>>, nextProps: Readonly<PropsWithChildren<P>>) =>
-	(key: string) =>
+	(key: string) => {
 		isEqual(get(prevProps, key), get(nextProps, key));
+	};
 
 export const shouldFieldGroupUpdate = <P>(
 	prevProps: Readonly<PropsWithChildren<P>>,
 	nextProps: Readonly<PropsWithChildren<P>>,
-) => ['error', 'children', 'name'].every(checkIsEqualByKey<P>(prevProps, nextProps));
+) => {
+	return ['error', 'children', 'name'].some(checkIsEqualByKey<P>(prevProps, nextProps));
+};
 
 export const shouldFieldUpdate =
 	<P>(check: Array<CheckFn<P> | string> = [], checkValue: CheckFn<P> | string = 'field.value') =>

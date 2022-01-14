@@ -54,7 +54,7 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 	);
 
 	React.useEffect(() => {
-		if (typeof inputValue !== 'undefined' && inputValue.length !== 0) {
+		if (typeof inputValue !== 'undefined' && inputValue && inputValue.length !== 0) {
 			if (Array.isArray(inputValue)) {
 				fileDetails(inputValue);
 			} else {

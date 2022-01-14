@@ -42,7 +42,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		setFormType((prev) => (prev.label !== formType.label ? formType : prev));
 	}, []);
 
-	const onFormSubmit = (values: OcFormValues, formikProps: OcFormFormikHelpers) => {
+	const onFormSubmit = (values: OcFormValues, formikProps: OcFormFormikHelpers, action: string) => {
 		if (!onSubmit) {
 			return;
 		}
@@ -54,7 +54,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 			info.formType = formTypes.find((ft) => ft.label === formType.label)!.value;
 		}
 
-		onSubmit({ ...values, info }, formikProps);
+		onSubmit({ ...values, info }, formikProps, action);
 	};
 
 	// use formJsonData if it was passed in props or display selected form config

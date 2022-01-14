@@ -3,21 +3,32 @@ import * as React from 'react';
 import { useSortingArray } from '../../../../lib/hooks';
 import { FullAppData } from '../../../common/models';
 
-import { BlankRow, DataRow, EmptyDataRow, SortIcon } from './components';
+import { BlankRow, DataRow, EmptyDataRow } from './components';
 import { OcAppTableProps } from './types';
+import { getHeaderCell } from './components/data-row-item';
 
 import './style.scss';
+
+const DEFAULT_COLUMNS = [
+	'left-placeholder',
+	'name',
+	'summary',
+	'create-date',
+	'status',
+	'app-options',
+	'right-placeholder',
+];
 
 export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 	const {
 		properties,
 		defaultAppIcon,
-		ascendingSortIcon,
-		descendingSortIcon,
 		onSort,
 		menuUrl,
 		onMenuClick,
 		noAppMessage,
+		activeColumns,
+		modifyColumns,
 	} = props;
 
 	const {
@@ -27,7 +38,9 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 		},
 		setArray,
 		sortArray,
-	} = useSortingArray<FullAppData>('name');
+	} = useSortingArray<FullAppData>('');
+
+	const columns = activeColumns || DEFAULT_COLUMNS;
 
 	React.useEffect(() => {
 		setArray(properties.data.list);
@@ -44,64 +57,20 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 	);
 
 	return (
-		<div className="oc-table-container">
-			<div className="oc-table-container__overlay" />
-			<div className="oc-table-wrapper">
-				<table className="oc-table" aria-describedby="App listing table">
-					<thead className="oc-table__head">
-						<tr>
-							<th className="oc-table__th oc-table__placeholder" scope="col" />
-							<th
-								className="oc-table__th oc-table__name"
-								scope="col"
-								tabIndex={0}
-								data-sortkey="name"
-								onClick={handleSortApps}
-							>
-								Name{' '}
-								<SortIcon
-									isAscending={key === 'name' && orderBy === 'asc'}
-									ascendingSortIcon={ascendingSortIcon}
-									descendingSortIcon={descendingSortIcon}
-								/>
-							</th>
-							<th className="oc-table__th oc-table__summary" scope="col">
-								Summary
-							</th>
-							<th
-								className="oc-table__th oc-table__data"
-								scope="col"
-								tabIndex={0}
-								data-sortkey="created"
-								onClick={handleSortApps}
-							>
-								Created{' '}
-								<SortIcon
-									isAscending={key === 'created' && orderBy === 'asc'}
-									ascendingSortIcon={ascendingSortIcon}
-									descendingSortIcon={descendingSortIcon}
-								/>
-							</th>
-							<th
-								className="oc-table__th oc-table__status"
-								scope="col"
-								tabIndex={0}
-								data-sortkey="status.value"
-								onClick={handleSortApps}
-							>
-								Status{' '}
-								<SortIcon
-									isAscending={key === 'status.value' && orderBy === 'asc'}
-									ascendingSortIcon={ascendingSortIcon}
-									descendingSortIcon={descendingSortIcon}
-								/>
-							</th>
-							<th className="oc-table__th oc-table__action" scope="col" />
-							<th className="oc-table__th oc-table__placeholder" scope="col" />
+		<div className="app-grid">
+			<div className="app-grid-scroller">
+				<table className="app-grid-table" aria-describedby="App listing table">
+					<thead>
+						<tr className="app-grid-table__header">
+							{columns?.map((col) => (
+								<React.Fragment key={col}>
+									{getHeaderCell(col, props, handleSortApps, key, orderBy)}
+								</React.Fragment>
+							))}
 						</tr>
 					</thead>
 					<tbody>
-						{(!array || array.length == 0) && <EmptyDataRow noAppMessage={noAppMessage}/>}
+						{(!array || array.length == 0) && <EmptyDataRow noAppMessage={noAppMessage} />}
 						{array.map((app) => (
 							<DataRow
 								key={app.appId}
@@ -111,9 +80,11 @@ export const OcAppTable: React.FC<OcAppTableProps> = (props) => {
 								menuUrl={menuUrl}
 								menuOptions={properties.options}
 								onMenuClick={onMenuClick}
+								activeColumns={columns}
+								modifyColumns={modifyColumns}
 							/>
 						))}
-						{array.length > 0 && <BlankRow />}
+						{array.length > 0 && <BlankRow amount={activeColumns?.length} />}
 					</tbody>
 				</table>
 			</div>

@@ -14,7 +14,7 @@
     height: 100%;
     width: 100%;
     &:after {
-      display: none;
+      display: none !important;
     }
 	svg {
 		margin-left: 0.255em;

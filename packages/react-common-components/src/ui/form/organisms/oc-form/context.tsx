@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useFormikContext } from 'formik';
-import { get, noop, update } from 'lodash-es';
+import { get, noop, update, isEmpty } from 'lodash-es';
 
 import { Dataset } from '../../../common/atoms/oc-button';
 import { FIELD_TYPE } from '../../lib';
@@ -12,6 +12,7 @@ import {
 	normalizeFieldsForFormik,
 	updateElementKeys,
 	updateFieldsDefinition,
+	setFormChildes,
 } from './utils/fields';
 import { OcFormContextProps, OcFormContextProviderProps } from './types';
 
@@ -31,7 +32,55 @@ export const useOcFormContext = () => {
 export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 	children,
 	initialValue: { flattenFields, fieldsDefinition, updateState },
-}) => {
+}) => {	
+
+	React.useEffect(() => {
+		const next = elementUtils.updateFieldsValues(fieldsDefinition, values);
+		
+		flattenFields.forEach((field:FormikField) => {	
+			if (field && field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && !isEmpty(field.fields)) {
+
+					const instance = flattenFields.find((item) => item.staticId === field.staticId);
+					if (!instance) return;
+					
+					const existedElement = get(next, field.path);
+
+					if (Array.isArray(instance.defaultValue) && !isEmpty(instance.defaultValue)) {
+						instance.defaultValue.forEach((value, parentIndex) => {
+							const fieldsWithDefValues = instance.fields!.map((item) => {
+
+								/* Display child components Start */
+								const childInstance = flattenFields.find((child) => child.id === item.id && child.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY);
+								if (childInstance && !isEmpty(value[childInstance.id])) {
+									return setFormChildes(flattenFields, childInstance, value);
+								} else if (childInstance && isEmpty(value[childInstance.id])) {
+									return elementUtils.cloneAndUpdate(childInstance,
+										 false,
+										{ fields:[], isEditing: false },
+									);
+								}
+								/* Display child components End */
+								
+								return elementUtils.cloneAndUpdate(
+									item,
+									false,
+									{ value: value[item.id], previousValue: value[item.id], isEditing: false },
+								);
+							});
+							
+							next[existedElement.index + parentIndex] = elementUtils.cloneAndUpdate(
+								instance,
+								false,
+								{ fields: fieldsWithDefValues.flat(), isEditing: false },
+							);
+						});
+					}
+			}
+		});
+		
+		normalizeFieldsAndUpdateDefinition(next);
+	}, []);
+
 	const { values, setValues } = useFormikContext<FormikFieldsValues>();
 
 	const normalizeFieldsAndUpdateDefinition = React.useCallback(
@@ -49,7 +98,6 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 			const button = event.target as HTMLButtonElement;
 			const elementStaticId = button.dataset.staticid || '';
 			const elementPath = button.dataset.path || '';
-
 			const instance = flattenFields.find((item) => item.staticId === elementStaticId);
 			if (!instance) return;
 
@@ -117,6 +165,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 				fields: fieldsDefinition,
 				fieldName,
 				isEditing: true,
+				withChilds: false,
 			}),
 		);
 	};
@@ -166,6 +215,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 				fieldName,
 				formikValues: values,
 				isEditing: false,
+				withChilds: true,
 			}),
 		);
 	};

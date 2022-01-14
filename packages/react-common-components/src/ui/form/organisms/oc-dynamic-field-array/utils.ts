@@ -1,3 +1,4 @@
+import { isEmpty } from 'lodash';
 import { AppFormField, FormikFieldsValues } from '../../models';
 
 export const getFieldLabel = (
@@ -9,13 +10,12 @@ export const getFieldLabel = (
 
 	const rowLabel = element.fields.find((f) => f.id === element.attributes?.rowLabel);
 	if (!rowLabel) return `Item ${index + 1}`;
-
-	const item: string[] | undefined = Object.entries(formikValues).find(([key, value]) => {
+	
+	const item = Object.entries(formikValues).filter(([key, value]) => {
 		if (element?.attributes?.rowLabel && key.includes(element.attributes.rowLabel)) {
 			return value;
 		}
-		return null;
 	});
 
-	return item ? item[1] : `Item ${index + 1}`;
+	return !isEmpty(item[index]) ? item[index][1] : `Item ${index + 1}`;
 };

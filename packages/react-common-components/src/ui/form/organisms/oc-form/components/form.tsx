@@ -22,7 +22,6 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		formJsonData,
 		onSubmit,
 		onCancel,
-		onSave,
 		submitButtonText = 'Submit',
 		buttonPosition = 'left',
 		service,
@@ -36,6 +35,8 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		showSubmitBtn = true,
 		saveButtonText = 'Save',
 	} = props;
+
+	const [submitType, setSubmitType] = React.useState<string>('submit');
 
 	const {
 		state: { initialValues, validators, flattenFields, fieldsDefinition },
@@ -51,27 +52,30 @@ export const Form: React.FC<OcFormProps> = (props) => {
 				return;
 			}
 
-			onSubmit(formatOcFormValues(fieldsDefinition, values), {
-				...formikProps,
-				setErrors: handleSetErrors,
-			});
+			onSubmit(
+				formatOcFormValues(fieldsDefinition, values),
+				{
+					...formikProps,
+					setErrors: handleSetErrors,
+				},
+				submitType,
+			);
 		},
 	});
 
-	const handleSetErrors = React.useCallback(
-		(errors: FormikErrors<FormikValues>) => {
-			const ocFormErrors = formatOcFormErrors(fieldsDefinition, errors);
-			formik.setErrors(ocFormErrors);
-			formik.setSubmitting(false);
-		},
-		[formik.setErrors, formik.setSubmitting, fieldsDefinition],
-	);
+	const handleSetErrors = (errors: FormikErrors<FormikValues>) => {
+		const ocFormErrors = formatOcFormErrors(fieldsDefinition, errors);
+		formik.setErrors(ocFormErrors);
+		formik.setSubmitting(false);
+	};
+	// [formik.setErrors, formik.setSubmitting, fieldsDefinition],
 
 	const handleSubmit = React.useCallback(
 		(e) => {
 			if (formik.isSubmitting) {
 				e.preventDefault();
 			} else {
+				setSubmitType(e.target.dataset.submittype);
 				formik.handleSubmit(e);
 			}
 		},
@@ -81,10 +85,9 @@ export const Form: React.FC<OcFormProps> = (props) => {
 	return (
 		<FormikContext.Provider value={formik}>
 			<OcFormContextProvider initialValue={{ flattenFields, fieldsDefinition, updateState }}>
-				<FormikForm className="form" onSubmit={handleSubmit} noValidate>
+				<FormikForm className="form" onSubmit={handleSubmit} noValidate data-submittype="submit">
 					<FormikMapFieldsWrapper
-						service={service}
-						fileService={fileService}
+						fieldProps={{ service, fileService }}
 						excludeRenderFields={excludeRenderFields}
 					/>
 					{children ? (isFunction(children) ? children(formik, flattenFields) : children) : null}
@@ -96,14 +99,13 @@ export const Form: React.FC<OcFormProps> = (props) => {
 								</OcButtonComponent>
 							</div>
 						)}
-						{onSave && showSaveBtn && (
+						{showSaveBtn && (
 							<div className="form__button save-draft">
 								<OcButtonComponent
-									htmlType="button"
 									type="secondary"
-									onClick={() =>
-										onSave(formatOcFormValues(fieldsDefinition, formik.values), formik)
-									}
+									process={formik.isSubmitting}
+									data-submittype="save"
+									onClick={handleSubmit}
 								>
 									{saveButtonText}
 								</OcButtonComponent>
