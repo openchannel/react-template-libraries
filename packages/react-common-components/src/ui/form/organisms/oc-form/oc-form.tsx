@@ -3,24 +3,24 @@ import { FormikContext } from 'formik';
 import { Form as FormikForm, FormikErrors, FormikValues, useFormik } from 'formik';
 import { isFunction, noop } from 'lodash-es';
 import { OcWizardFormContextProvider } from './context';
-import { useOcFormState } from '../oc-form/hooks';
+import { useOcFormState } from '../oc-single-form/hooks';
 import {
 	formatOcFormErrors,
 	formatOcFormValues,
 	validateOcFormValues,
-} from '../oc-form/utils/common';
+} from '../oc-single-form/utils/common';
 
-import { FormikMapFieldsWrapper } from '../oc-form/components/formik-map-field';
+import { FormikMapFieldsWrapper } from '../oc-single-form/components/formik-map-field';
 import { OcButtonComponent } from '../../../common/atoms/oc-button/oc-button';
 import OcTooltipLabel from '../../atoms/oc-tooltip-label';
-import { OcForm } from '../oc-form';
+import { OcSingleForm } from '../oc-single-form';
 import { OcFormProgressBar } from './oc-form-progress-bar/oc-form-progress-bar';
 import { OcFormProps, FieldStep } from './types';
 import { createStepsFromJSON, reGenerateProgressbar } from './utils';
 import { AppFormModel, FormikField } from '../../models/app-form';
 import './style.scss';
 
-export const OcFormWizard: React.FC<OcFormProps> = (props) => {
+export const OcForm: React.FC<OcFormProps> = (props) => {
 	const {
 		formJsonData,
 		showSubmitButton = false,
@@ -220,7 +220,7 @@ export const OcFormWizard: React.FC<OcFormProps> = (props) => {
 					</div>
 				</div>
 			) : (
-				<OcForm
+				<OcSingleForm
 					formJsonData={formJsonData}
 					labelPosition={labelPosition}
 					showSubmitBtn={showSubmitButton && isLastStep}

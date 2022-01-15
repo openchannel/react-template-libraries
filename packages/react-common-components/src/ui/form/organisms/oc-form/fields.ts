@@ -1,5 +1,9 @@
 import { FormikField, FormikFieldsValues } from '../../models';
-import { setFieldEditable, setFieldValueByName, updateNestedFields } from '../oc-form/utils/fields';
+import {
+	setFieldEditable,
+	setFieldValueByName,
+	updateNestedFields,
+} from '../oc-single-form/utils/fields';
 
 export const updateElement = (params: {
 	element: FormikField;

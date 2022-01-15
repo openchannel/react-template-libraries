@@ -10,7 +10,7 @@ import OcTextarea from '../../../atoms/oc-textarea/oc-textarea';
 import { FIELD_TYPE } from '../../../lib';
 import { OcDynamicFieldArray } from '../../oc-dynamic-field-array';
 import { useOcFormContext } from '../context';
-import { useOcWizardFormContext } from '../../oc-form-wizard/context';
+import { useOcWizardFormContext } from '../../oc-form/context';
 import { FormikMapFieldsProps, OcFormExtraProps } from '../types';
 
 import {

@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import { OcForm, AppFormModel, OcFormProps } from '@openchannel/react-common-components/src/ui';
+import {
+	OcSingleForm,
+	AppFormModel,
+	OcFormProps,
+} from '@openchannel/react-common-components/src/ui';
 
 const formJsonData: AppFormModel = {
 	// fields: [
@@ -98,9 +102,9 @@ const formJsonData: AppFormModel = {
 	],
 };
 
-const setUp = (props: OcFormProps) => mount(<OcForm {...props} />);
+const setUp = (props: OcFormProps) => mount(<OcSingleForm {...props} />);
 
-describe('OcForm', () => {
+describe('OcSingleForm', () => {
 	let wrapper: any;
 
 	const onSubmitMock = jest.fn();
