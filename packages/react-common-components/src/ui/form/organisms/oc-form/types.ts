@@ -24,11 +24,16 @@ export interface OcFormExtraProps {
 	/**
 	 * Service which contains both service and fileService API calls
 	 */
-	 fieldProps?: any;
+	fieldProps?: any;
 	/**
 	 * Don't render field by ID.
 	 */
 	excludeRenderFields?: string[];
+	/**
+	 * Check if formType is wizard or single
+	 * 'single' is usual form, and 'wizard' -> wizard form
+	 */
+	displayType?: 'wizard' | 'page';
 }
 
 export interface FormProps extends OcFormExtraProps {

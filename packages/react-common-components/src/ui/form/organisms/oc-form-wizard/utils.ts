@@ -46,7 +46,7 @@ export const reGenerateProgressbar = (
 	const stepErrors: any = [];
 	const stepFinished: any = {};
 	customForm?.length > 0 &&
-		customForm?.map((step: FieldStep, index: number) => {
+		customForm?.map((_step: FieldStep, index: number) => {
 			customForm[index].items.map((field: any) => {
 				formik.errors[field.name] &&
 					formik.touched[field.name] &&
@@ -65,7 +65,7 @@ export const reGenerateProgressbar = (
 
 	const copy = createInitialProgressBar();
 
-	customForm?.forEach((form: FieldStep, index: number) => {
+	customForm?.forEach((form: any, index: number) => {
 		loop1: for (const field of form?.items!) {
 			for (const err of stepErrors) {
 				if (field.name === err.name) {

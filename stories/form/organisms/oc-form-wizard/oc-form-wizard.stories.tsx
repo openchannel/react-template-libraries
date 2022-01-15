@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { mockFileService, mockService } from './mockData';
-import { OcForm } from '@openchannel/react-common-components/src/ui/form/organisms/oc-form';
+import { OcFormWizard } from '@openchannel/react-common-components/src/ui/form/organisms/oc-form-wizard/oc-form';
 
 export default {
-	title: 'Form group component',
-	component: OcForm,
+	title: 'OcFormWizard component',
+	component: OcFormWizard,
 } as Meta;
 
 const Component: Story<any> = (args) => {
 	const [currentStep, setCurrentStep] = React.useState(1);
 	const [maxStepsToShow, setMaxStepsToShow] = React.useState<number>(args.maxStepsToShow);
 	return (
-		<OcForm
+		<OcFormWizard
 			{...args}
 			currentStep={currentStep}
 			setCurrentStep={setCurrentStep}

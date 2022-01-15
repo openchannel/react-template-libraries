@@ -27,7 +27,6 @@ export interface AppFormField {
 	fields?: FormikField[];
 	placeholder?: string;
 	category?: string;
-	step: number;
 }
 
 export interface AppFormModel {

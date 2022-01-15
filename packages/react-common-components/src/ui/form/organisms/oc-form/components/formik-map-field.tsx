@@ -10,6 +10,7 @@ import OcTextarea from '../../../atoms/oc-textarea/oc-textarea';
 import { FIELD_TYPE } from '../../../lib';
 import { OcDynamicFieldArray } from '../../oc-dynamic-field-array';
 import { useOcFormContext } from '../context';
+import { useOcWizardFormContext } from '../../oc-form-wizard/context';
 import { FormikMapFieldsProps, OcFormExtraProps } from '../types';
 
 import {
@@ -27,7 +28,7 @@ import {
 
 export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 	const { fields, excludeRenderFields, fieldProps } = props;
-	
+
 	if (!fields || fields.length === 0) {
 		return null;
 	}
@@ -312,7 +313,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 									component={FormikOcFileUploadWrapper}
 									fileType={type}
 									acceptType={attributes?.accept}
-									fileService={fieldProps.fileService}
+									fileService={fieldProps?.fileService}
 									isPrivate={type === FIELD_TYPE.PRIVATE_SINGLE_FILE}
 									isMultiFile={false}
 									hash={attributes?.hash}
@@ -338,7 +339,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 									component={FormikOcFileUploadWrapper}
 									fileType={type}
 									acceptType={attributes?.accept}
-									fileService={fieldProps.fileService}
+									fileService={fieldProps?.fileService}
 									isPrivate={type === FIELD_TYPE.MULTI_PRIVATE_FILE}
 									isMultiFile={true}
 									hash={attributes?.hash}
@@ -416,8 +417,13 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 	);
 };
 
-export const FormikMapFieldsWrapper: React.FC<OcFormExtraProps> = ({ children, ...props }) => {
-	const context = useOcFormContext();
+export const FormikMapFieldsWrapper: React.FC<OcFormExtraProps> = ({
+	children,
+	displayType,
+	...props
+}) => {
+	const context =
+		displayType && displayType === 'wizard' ? useOcWizardFormContext() : useOcFormContext();
 
 	return <FormikMapFields fields={context.fields} {...props} />;
 };

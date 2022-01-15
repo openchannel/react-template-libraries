@@ -3,14 +3,7 @@ import { AppsService, FullAppData } from '@openchannel/react-common-components';
 export const mockFileService = {
 	fileUploadRequest: (file: FormData, isPrivate: boolean, hash?: string[]) => {
 		return new Promise((resolve, reject) => {
-			setTimeout(async () => {
-				let randBool = Math.random() < 0.5;
-				if (randBool) {
-					resolve(file);
-				} else {
-					reject('Uploading has been corrupted, try again...');
-				}
-			}, 4000);
+			resolve(file);
 		});
 	},
 };

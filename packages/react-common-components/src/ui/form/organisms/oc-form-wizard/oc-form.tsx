@@ -1,22 +1,19 @@
 import * as React from 'react';
-import { Formik, FormikContext, setNestedObjectValues } from 'formik';
-//----------------------------------------------------------------
+import { FormikContext } from 'formik';
 import { Form as FormikForm, FormikErrors, FormikValues, useFormik } from 'formik';
 import { isFunction, noop } from 'lodash-es';
-import { OcFormContextProvider } from '../oc-form/context';
+import { OcWizardFormContextProvider } from './context';
 import { useOcFormState } from '../oc-form/hooks';
 import {
 	formatOcFormErrors,
 	formatOcFormValues,
-	// getOcFormButtonsClass,
 	validateOcFormValues,
 } from '../oc-form/utils/common';
 
-import { FormikMapFields, FormikMapFieldsWrapper } from '../oc-form/components/formik-map-field';
-//----------------------------------------------------------------
+import { FormikMapFieldsWrapper } from '../oc-form/components/formik-map-field';
 import { OcButtonComponent } from '../../../common/atoms/oc-button/oc-button';
 import OcTooltipLabel from '../../atoms/oc-tooltip-label';
-import { OcForm } from '../oc-form/index';
+import { OcForm } from '../oc-form';
 import { OcFormProgressBar } from './oc-form-progress-bar/oc-form-progress-bar';
 import { OcFormProps, FieldStep } from './types';
 import { createStepsFromJSON, reGenerateProgressbar } from './utils';
@@ -42,7 +39,7 @@ export const OcFormWizard: React.FC<OcFormProps> = (props) => {
 		additionalButton,
 		displayType,
 		children,
-		service,
+		service = {},
 		fileService,
 	} = props;
 
@@ -119,12 +116,14 @@ export const OcFormWizard: React.FC<OcFormProps> = (props) => {
 		}
 	};
 	// const cancelSubmit = () => {};
-	const stepDescription = (): string => {
-		if (customForm && customForm.label) {
-			return customForm.label.label;
-		}
-		return 'Please fill the information below';
-	};
+	const stepDescription = React.useMemo((): string => {
+		if (customForm !== null) {
+			return customForm[currentStep - 1].label &&
+				customForm[currentStep - 1].label?.description.length > 0
+				? customForm[currentStep - 1].label?.description
+				: 'Please fill the information below';
+		} else return 'Please fill the information below';
+	}, [customForm, currentStep]);
 
 	const stepLabel = React.useMemo(
 		() =>
@@ -180,7 +179,6 @@ export const OcFormWizard: React.FC<OcFormProps> = (props) => {
 								maxStepsToShow={maxStepsToShow}
 								progressbarData={progressBarSteps}
 								currentStep={currentStep}
-								errors={formik.errors}
 							/>
 						)}
 					</div>
@@ -189,15 +187,15 @@ export const OcFormWizard: React.FC<OcFormProps> = (props) => {
 							<OcTooltipLabel
 								text={stepLabel}
 								labelClass="form-steps__content-body-label"
-								required={customForm.label?.attributes?.required}
-								description={customForm.label?.description}
+								required={customForm[currentStep - 1].label?.attributes?.required || false}
+								description={customForm[currentStep - 1]?.label?.description || ''}
 							/>
 						)}
 						{showGroupDescription && (
 							<p className="form-steps__content-body-description">{stepDescription}</p>
 						)}
 						<FormikContext.Provider value={formik}>
-							<OcFormContextProvider
+							<OcWizardFormContextProvider
 								initialValue={{
 									flattenFields,
 									fieldsDefinition: singleStepsFormConfig,
@@ -208,6 +206,7 @@ export const OcFormWizard: React.FC<OcFormProps> = (props) => {
 									<FormikMapFieldsWrapper
 										service={service}
 										fileService={fileService}
+										displayType={displayType}
 										// excludeRenderFields={excludeRenderFields}
 									/>
 									{children
@@ -216,7 +215,7 @@ export const OcFormWizard: React.FC<OcFormProps> = (props) => {
 											: children
 										: null}
 								</FormikForm>
-							</OcFormContextProvider>
+							</OcWizardFormContextProvider>
 						</FormikContext.Provider>
 					</div>
 				</div>

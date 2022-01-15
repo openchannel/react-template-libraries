@@ -10,7 +10,6 @@ export interface OcFormProgressBarProps {
 	maxStepsToShow?: number;
 	currentStep: number | undefined;
 	enableTextTruncation?: boolean;
-	errors: any;
 }
 
 export interface FormProgressbarStep {
@@ -24,7 +23,6 @@ export const OcFormProgressBar: React.FC<OcFormProgressBarProps> = (props) => {
 		currentStep = 1,
 		maxStepsToShow = 0,
 		jumpToStep,
-		errors,
 		// staticOffsetValue,
 		// currentOffsetValue,
 		// enableTextTruncation = false,
