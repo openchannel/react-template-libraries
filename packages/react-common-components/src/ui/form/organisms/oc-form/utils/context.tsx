@@ -2,18 +2,18 @@ import * as React from 'react';
 import { useFormikContext } from 'formik';
 import { get, noop, update } from 'lodash-es';
 
-import { Dataset } from '../../../common/atoms/oc-button';
-import { FIELD_TYPE } from '../../lib';
-import { FormikField, FormikFieldsValues } from '../../models';
+import { Dataset } from '../../../../common/atoms/oc-button';
+import { FIELD_TYPE } from '../../../lib';
+import { FormikField, FormikFieldsValues } from '../../../models';
 
 import { updateFieldsDefinition } from './fields';
-import { OcFormContextProps, OcFormContextProviderProps } from '../oc-single-form/types';
+import { OcFormContextProps, OcFormContextProviderProps } from '../../oc-single-form/types';
 import {
 	elementUtils,
 	getInitialValuesFromFields,
 	normalizeFieldsForFormik,
 	updateElementKeys,
-} from '../oc-single-form/utils/fields';
+} from '../../oc-single-form/utils/fields';
 
 export const OcWizardFormContext = React.createContext<OcFormContextProps>({
 	fields: [],

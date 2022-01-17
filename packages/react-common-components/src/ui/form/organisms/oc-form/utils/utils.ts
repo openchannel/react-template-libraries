@@ -1,5 +1,5 @@
-import { AppFormField, AppFormModel } from '../../models/app-form';
-import { FieldStep } from './types';
+import { AppFormField, AppFormModel } from '../../../models/app-form';
+import { FieldStep } from '../types';
 
 export const createStepsFromJSON = (data: AppFormModel | undefined): FieldStep[] => {
 	const formsArray: FieldStep[] = [];

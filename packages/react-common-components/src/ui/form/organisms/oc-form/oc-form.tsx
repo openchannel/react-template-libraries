@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FormikContext } from 'formik';
 import { Form as FormikForm, FormikErrors, FormikValues, useFormik } from 'formik';
 import { isFunction, noop } from 'lodash-es';
-import { OcWizardFormContextProvider } from './context';
+import { OcWizardFormContextProvider } from './utils/context';
 import { useOcFormState } from '../oc-single-form/hooks';
 import {
 	formatOcFormErrors,
@@ -16,7 +16,7 @@ import OcTooltipLabel from '../../atoms/oc-tooltip-label';
 import { OcSingleForm } from '../oc-single-form';
 import { OcFormProgressBar } from './oc-form-progress-bar/oc-form-progress-bar';
 import { OcFormProps, FieldStep } from './types';
-import { createStepsFromJSON, reGenerateProgressbar } from './utils';
+import { createStepsFromJSON, reGenerateProgressbar } from './utils/utils';
 import { AppFormModel, FormikField } from '../../models/app-form';
 import './style.scss';
 
