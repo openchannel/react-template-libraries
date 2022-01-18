@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { CustomRequestConfigTweaks, Options, request } from './request';
 
 export const api = {
@@ -25,5 +26,6 @@ export const api = {
 		customTweaks?: CustomRequestConfigTweaks,
 	) => request<B, R>('PATCH', url, options, customTweaks),
 
-	delete: <B = unknown, R = any>(url: string) => request<B, R>('DELETE', url),
+	delete: <B = unknown, R = any>(url: string, options?: any) =>
+		request<B, R>('DELETE', url, options),
 };

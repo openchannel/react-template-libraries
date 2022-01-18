@@ -4,16 +4,10 @@
 // import { HttpRequestService } from './http-request-services';
 // import { OcApiPaths } from '../oc-ng-common-service.module';
 // import { HttpHeaders } from '@angular/common/http';
+import { ReqHeaders } from 'packages/react-common-components/src/ui/common/atoms/oc-file-upload/types';
+
 import { api } from '../lib/api';
-import {
-	ChangeableCreditCardFields,
-	ConnectStripeAccountResponse,
-	GetMarketplaceStripeSettingsResponse,
-	PaymentTaxesResponse,
-	Purchase,
-	StripeAccountsResponse,
-	UserCreditCardsResponse,
-} from '../model/api/stripe.model';
+import { ChangeableCreditCardFields, Purchase } from '../model/api/stripe.model';
 
 const STRIPE_URL = 'v2/stripe-gateway/';
 
@@ -80,15 +74,13 @@ export const StripeService = {
 	 *
 	 * `addUserCreditCard('some-token');`
 	 */
-	addUserCreditCard(token: string, isDefault = true, headers: any) {
+	addUserCreditCard(token: string, isDefault = true, headers: ReqHeaders) {
 		const body = {
 			token,
 			isDefault,
 		};
 
-		return api.post(`${STRIPE_URL}/user/this/cards`, body, {
-			headers,
-		});
+		return api.post(`${STRIPE_URL}/user/this/cards`, { body, headers });
 	},
 
 	/**
@@ -102,9 +94,14 @@ export const StripeService = {
 	 *
 	 * `updateUserCreditCard('card-id-123', { address_city: 'New city', address_country: 'New country' });`
 	 */
-	updateUserCreditCard(cardId: string, body: Partial<ChangeableCreditCardFields>, headers: any) {
-		return api.post(`${STRIPE_URL}/user/this/cards/${cardId}`, body, {
+	updateUserCreditCard(
+		cardId: string,
+		body: Partial<ChangeableCreditCardFields>,
+		headers: ReqHeaders,
+	) {
+		return api.post(`${STRIPE_URL}/user/this/cards/${cardId}`, {
 			headers,
+			body,
 		});
 	},
 
@@ -117,7 +114,7 @@ export const StripeService = {
 	 *
 	 * `deleteUserCreditCard('card-id-123');`
 	 */
-	deleteUserCreditCard(cardId: string, headers: any) {
+	deleteUserCreditCard(cardId: string, headers: ReqHeaders) {
 		return api.delete(`${STRIPE_URL}/user/this/cards/${cardId}`, {
 			headers,
 		});
@@ -147,11 +144,12 @@ export const StripeService = {
 	 *
 	 * `connectAccount('https://my-market.com/land-here');`
 	 */
-	connectAccount(redirectUrl: string, headers: any) {
+	connectAccount(redirectUrl: string, headers: ReqHeaders) {
 		const body = { redirectUrl };
 
-		return api.post(`${STRIPE_URL}/developer/this/accounts`, body, {
+		return api.post(`${STRIPE_URL}/developer/this/accounts`, {
 			headers,
+			body,
 		});
 	},
 
@@ -165,7 +163,7 @@ export const StripeService = {
 	 *
 	 * `disconnectAccount('stripe-id');`
 	 */
-	disconnectAccount(stripeId: string, headers: any) {
+	disconnectAccount(stripeId: string, headers: ReqHeaders) {
 		return api.delete(`${STRIPE_URL}/developer/this/accounts/${stripeId}`, { headers });
 	},
 	/**
@@ -191,7 +189,7 @@ export const StripeService = {
 		modelId: string,
 		zipCode: string,
 		city: string,
-		headers?: any,
+		headers?: ReqHeaders,
 	) {
 		const query = `country=${country}&state=${state}&appId=${appId}&modelId=${modelId}&zipCode=${zipCode}&city=${city}`;
 		return api.get(`${STRIPE_URL}/preview?${query}`, { headers });
@@ -208,6 +206,6 @@ export const StripeService = {
 	 * `makePurchase({ models: [{ appId: '5463cee5e4b042e3e26f1e41', modelId: '7349cew5e4b041e3c26y1e49' }]});`
 	 */
 	makePurchase(purchaseBody: Purchase): Promise<any> {
-		return api.post(`${STRIPE_URL}/purchase`, purchaseBody);
+		return api.post(`${STRIPE_URL}/purchase`, { body: purchaseBody });
 	},
 };
