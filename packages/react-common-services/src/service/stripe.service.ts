@@ -1,9 +1,4 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-// import { Injectable } from '@angular/core';
-// import { Observable } from 'rxjs';
-// import { HttpRequestService } from './http-request-services';
-// import { OcApiPaths } from '../oc-ng-common-service.module';
-// import { HttpHeaders } from '@angular/common/http';
 import { ReqHeaders } from 'packages/react-common-components/src/ui/common/atoms/oc-file-upload/types';
 
 import { api } from '../lib/api';
