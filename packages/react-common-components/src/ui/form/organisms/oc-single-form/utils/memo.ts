@@ -16,7 +16,7 @@ export const shouldFieldGroupUpdate = <P>(
 	prevProps: Readonly<PropsWithChildren<P>>,
 	nextProps: Readonly<PropsWithChildren<P>>,
 ) => {
-	return ['error', 'children', 'name'].some(checkIsEqualByKey<P>(prevProps, nextProps));
+	return ['error', 'children', 'name'].every(checkIsEqualByKey<P>(prevProps, nextProps));
 };
 
 export const shouldFieldUpdate =
