@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { ReqHeaders } from 'packages/react-common-components/src/ui/common/atoms/oc-file-upload/types';
-
 import { api } from '../lib/api';
+import { ReqHeaders } from '../lib/request';
 import { ChangeableCreditCardFields, Purchase } from '../model/api/stripe.model';
 
 const STRIPE_URL = 'v2/stripe-gateway/';
