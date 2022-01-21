@@ -68,7 +68,6 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		formik.setErrors(ocFormErrors);
 		formik.setSubmitting(false);
 	};
-	// [formik.setErrors, formik.setSubmitting, fieldsDefinition],
 
 	const handleSubmit = React.useCallback(
 		(e) => {

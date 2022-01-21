@@ -39,7 +39,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		additionalButton,
 		displayType,
 		children,
-		service = {},
+		service,
 		fileService,
 	} = props;
 

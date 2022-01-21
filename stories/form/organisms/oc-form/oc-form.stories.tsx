@@ -11,6 +11,7 @@ export default {
 const Component: Story<any> = (args) => {
 	const [currentStep, setCurrentStep] = React.useState(1);
 	const [maxStepsToShow, setMaxStepsToShow] = React.useState<number>(args.maxStepsToShow);
+
 	return (
 		<OcForm
 			{...args}
@@ -18,6 +19,7 @@ const Component: Story<any> = (args) => {
 			setCurrentStep={setCurrentStep}
 			maxStepsToShow={maxStepsToShow}
 			setMaxStepsToShow={setMaxStepsToShow}
+			onSubmit={(e) => console.log(e)}
 		/>
 	);
 };
