@@ -89,9 +89,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 	initialValue: { flattenFields, fieldsDefinition, updateState },
 }) => {
 	React.useEffect(() => {
-		if (displayType === 'wizard') {
-			//do nothing
-		} else if (displayType === 'page') {
+		if (displayType === 'page') {
 			useModifyDFA(fieldsDefinition, values, flattenFields, normalizeFieldsAndUpdateDefinition);
 		}
 	}, []);
