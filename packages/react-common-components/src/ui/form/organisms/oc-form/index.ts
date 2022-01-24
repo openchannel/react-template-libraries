@@ -1,4 +1,2 @@
-export * from './components/formik-components';
-export * from './components/formik-map-field';
-export { OcForm } from './components/oc-form';
-export * from './types';
+export { OcForm } from './oc-form';
+export * from './oc-form-progress-bar/oc-form-progress-bar';

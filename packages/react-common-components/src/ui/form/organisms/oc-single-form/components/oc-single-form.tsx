@@ -10,7 +10,7 @@ import { Form } from './form';
 
 import '../style.scss';
 
-export const OcForm: React.FC<OcFormProps> = (props) => {
+export const OcSingleForm: React.FC<OcFormProps> = (props) => {
 	const {
 		formJsonData,
 		formConfigs = [],
@@ -21,6 +21,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		enablePasswordField = false,
 		enableTermsCheckboxField = false,
 		excludeRenderFields,
+		displayType,
 		...formProps
 	} = props;
 
@@ -79,6 +80,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 					excludeRenderFields={excludeRenderFields}
 					formJsonData={selectedFormConfig}
 					onSubmit={onFormSubmit}
+					displayType={displayType}
 				>
 					{children}
 				</Form>

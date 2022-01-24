@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { ReactComponent as CloseIconSvg } from '../../../../assets/img/close-icon.svg';
-import { OcForm } from '../../../form';
+import { OcSingleForm } from '../../../form';
 
 import { OcInviteModalProps } from './types';
 
@@ -23,7 +23,7 @@ export const InviteUserContent: React.FC<Omit<OcInviteModalProps, 'isOpened' | '
 				/>
 			</div>
 			<div className="invite-modal__modal-body">
-				<OcForm
+				<OcSingleForm
 					formJsonData={formConfig}
 					onCancel={onCancel || onClose}
 					onSubmit={onSubmit}

@@ -29,57 +29,72 @@ export const useOcFormContext = () => {
 	return React.useContext(OcFormContext);
 };
 
+const useModifyDFA = (
+	fieldsDefinition: FormikField[],
+	values: FormikFieldsValues,
+	flattenFields: FormikField[],
+	normalizeFieldsAndUpdateDefinition: (arg0: FormikField[]) => void,
+) => {
+	const next = elementUtils.updateFieldsValues(fieldsDefinition, values);
+
+	flattenFields.forEach((field: FormikField) => {
+		if (field && field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && !isEmpty(field.fields)) {
+			const instance = flattenFields.find(
+				(item: { staticId: string }) => item.staticId === field.staticId,
+			);
+			if (!instance) return;
+
+			const existedElement = get(next, field.path);
+
+			if (Array.isArray(instance.defaultValue) && !isEmpty(instance.defaultValue)) {
+				instance.defaultValue.forEach((value: { [x: string]: any }, parentIndex: any) => {
+					const fieldsWithDefValues = instance.fields!.map((item: FormikField) => {
+						/* Display child components Start */
+						const childInstance = flattenFields.find(
+							(child: { id: any; type: string }) =>
+								child.id === item.id && child.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY,
+						);
+						if (childInstance && !isEmpty(value[childInstance.id])) {
+							return setFormChildes(flattenFields, childInstance, value);
+						} else if (childInstance && isEmpty(value[childInstance.id])) {
+							return elementUtils.cloneAndUpdate(childInstance, false, {
+								fields: [],
+								isEditing: false,
+							});
+						}
+						/* Display child components End */
+
+						return elementUtils.cloneAndUpdate(item, false, {
+							value: value[item.id],
+							previousValue: value[item.id],
+							isEditing: false,
+						});
+					});
+
+					next[existedElement.index + parentIndex] = elementUtils.cloneAndUpdate(instance, false, {
+						fields: fieldsWithDefValues.flat(),
+						isEditing: false,
+					});
+				});
+			}
+		}
+	});
+
+	normalizeFieldsAndUpdateDefinition(next);
+};
+
 export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 	children,
+	displayType,
 	initialValue: { flattenFields, fieldsDefinition, updateState },
-}) => {	
-
-	React.useEffect(() => {
-		const next = elementUtils.updateFieldsValues(fieldsDefinition, values);
-		
-		flattenFields.forEach((field:FormikField) => {	
-			if (field && field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && !isEmpty(field.fields)) {
-
-					const instance = flattenFields.find((item) => item.staticId === field.staticId);
-					if (!instance) return;
-					
-					const existedElement = get(next, field.path);
-
-					if (Array.isArray(instance.defaultValue) && !isEmpty(instance.defaultValue)) {
-						instance.defaultValue.forEach((value, parentIndex) => {
-							const fieldsWithDefValues = instance.fields!.map((item) => {
-
-								/* Display child components Start */
-								const childInstance = flattenFields.find((child) => child.id === item.id && child.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY);
-								if (childInstance && !isEmpty(value[childInstance.id])) {
-									return setFormChildes(flattenFields, childInstance, value);
-								} else if (childInstance && isEmpty(value[childInstance.id])) {
-									return elementUtils.cloneAndUpdate(childInstance,
-										 false,
-										{ fields:[], isEditing: false },
-									);
-								}
-								/* Display child components End */
-								
-								return elementUtils.cloneAndUpdate(
-									item,
-									false,
-									{ value: value[item.id], previousValue: value[item.id], isEditing: false },
-								);
-							});
-							
-							next[existedElement.index + parentIndex] = elementUtils.cloneAndUpdate(
-								instance,
-								false,
-								{ fields: fieldsWithDefValues.flat(), isEditing: false },
-							);
-						});
-					}
-			}
-		});
-		
-		normalizeFieldsAndUpdateDefinition(next);
-	}, []);
+}) => {
+	if (displayType === 'wizard') {
+		//do nothing
+	} else if (displayType === 'page') {
+		React.useEffect(() => {
+			useModifyDFA(fieldsDefinition, values, flattenFields, normalizeFieldsAndUpdateDefinition);
+		}, []);
+	}
 
 	const { values, setValues } = useFormikContext<FormikFieldsValues>();
 
