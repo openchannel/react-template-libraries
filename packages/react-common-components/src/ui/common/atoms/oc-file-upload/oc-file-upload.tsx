@@ -61,7 +61,7 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 				fileDetails([inputValue]);
 			}
 		}
-	}, []);
+	}, [inputValue]);
 
 	const fileDetails = React.useCallback(
 		async (links: string[]) => {
