@@ -1,5 +1,5 @@
-import { AppFormField, AppFormModel } from '../../../models/app-form';
-import { FieldStep } from '../types';
+import { AppFormField, AppFormModel } from '../../models/app-form';
+import { FieldStep } from './types';
 
 export const createStepsFromJSON = (data: AppFormModel | undefined): FieldStep[] => {
 	const formsArray: FieldStep[] = [];
@@ -46,8 +46,8 @@ export const reGenerateProgressbar = (
 	const stepErrors: any = [];
 	const stepFinished: any = {};
 	customForm?.length > 0 &&
-		customForm?.map((_step: FieldStep, index: number) => {
-			customForm[index].items.map((field: any) => {
+		customForm?.forEach((_step: FieldStep, index: number) => {
+			customForm[index].items.forEach((field: any) => {
 				formik.errors[field.name] &&
 					formik.touched[field.name] &&
 					formik.errors[field.name]?.length > 0 &&

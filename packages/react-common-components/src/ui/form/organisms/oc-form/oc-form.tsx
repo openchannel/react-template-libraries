@@ -2,7 +2,6 @@ import * as React from 'react';
 import { FormikContext } from 'formik';
 import { Form as FormikForm, FormikErrors, FormikValues, useFormik } from 'formik';
 import { isFunction, noop } from 'lodash-es';
-import { OcWizardFormContextProvider } from './utils/context';
 import { useOcFormState } from '../oc-single-form/hooks';
 import {
 	formatOcFormErrors,
@@ -14,11 +13,15 @@ import { FormikMapFieldsWrapper } from '../oc-single-form/components/formik-map-
 import { OcButtonComponent } from '../../../common/atoms/oc-button/oc-button';
 import OcTooltipLabel from '../../atoms/oc-tooltip-label';
 import { OcSingleForm } from '../oc-single-form';
-import { OcFormProgressBar } from './oc-form-progress-bar/oc-form-progress-bar';
+import {
+	FormProgressbarStep,
+	OcFormProgressBar,
+} from './oc-form-progress-bar/oc-form-progress-bar';
 import { OcFormProps, FieldStep } from './types';
-import { createStepsFromJSON, reGenerateProgressbar } from './utils/utils';
+import { createStepsFromJSON, reGenerateProgressbar } from './utils';
 import { AppFormModel, FormikField } from '../../models/app-form';
 import './style.scss';
+import { OcFormContextProvider } from '../oc-single-form/context';
 
 export const OcForm: React.FC<OcFormProps> = (props) => {
 	const {
@@ -45,7 +48,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 
 	//eslint-disable-next-line
 	const [customForm, setCustomForm] = React.useState<FieldStep[] | any>(null);
-	const [progressBarSteps, setProgressBarSteps] = React.useState<any>([]);
+	const [progressBarSteps, setProgressBarSteps] = React.useState<FormProgressbarStep[]>([]);
 	const [hasFieldGroups, setHasFieldGroups] = React.useState(false);
 	const isFirstStep = React.useMemo(() => !customForm || currentStep === 1, [currentStep]);
 	const isLastStep = React.useMemo(() => currentStep === customForm?.length, [currentStep]);
@@ -136,7 +139,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	);
 
 	const createInitialProgressBar = React.useCallback(
-		(): FieldStep[] =>
+		() =>
 			customForm?.length > 1
 				? customForm?.map((step: FieldStep, index: number) => ({
 						title: step.label ? step.label.label : `Step ${index + 1}`,
@@ -195,12 +198,13 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 							<p className="form-steps__content-body-description">{stepDescription}</p>
 						)}
 						<FormikContext.Provider value={formik}>
-							<OcWizardFormContextProvider
+							<OcFormContextProvider
 								initialValue={{
 									flattenFields,
 									fieldsDefinition: singleStepsFormConfig,
 									updateState,
 								}}
+								displayType={displayType}
 							>
 								<FormikForm className="form" onSubmit={handleSubmit} noValidate>
 									<FormikMapFieldsWrapper
@@ -215,7 +219,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 											: children
 										: null}
 								</FormikForm>
-							</OcWizardFormContextProvider>
+							</OcFormContextProvider>
 						</FormikContext.Provider>
 					</div>
 				</div>

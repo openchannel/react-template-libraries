@@ -10,7 +10,6 @@ import OcTextarea from '../../../atoms/oc-textarea/oc-textarea';
 import { FIELD_TYPE } from '../../../lib';
 import { OcDynamicFieldArray } from '../../oc-dynamic-field-array';
 import { useOcFormContext } from '../context';
-import { useOcWizardFormContext } from '../../oc-form/utils/context';
 import { FormikMapFieldsProps, OcFormExtraProps } from '../types';
 
 import {
@@ -422,8 +421,7 @@ export const FormikMapFieldsWrapper: React.FC<OcFormExtraProps> = ({
 	displayType,
 	...props
 }) => {
-	const context =
-		displayType && displayType === 'wizard' ? useOcWizardFormContext() : useOcFormContext();
+	const context = useOcFormContext();
 
 	return <FormikMapFields fields={context.fields} {...props} />;
 };
