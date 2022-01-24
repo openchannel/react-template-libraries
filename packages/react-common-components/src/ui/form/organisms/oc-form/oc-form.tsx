@@ -208,8 +208,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 							>
 								<FormikForm className="form" onSubmit={handleSubmit} noValidate>
 									<FormikMapFieldsWrapper
-										service={service}
-										fileService={fileService}
+										fieldProps={{ service, fileService }}
 										displayType={displayType}
 										// excludeRenderFields={excludeRenderFields}
 									/>
