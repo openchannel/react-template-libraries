@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { ReactComponent as ContentStatusIcon } from '../../../../../assets/img/icon-check.svg';
 
+import { calcProgressBarItemStyles, getCurrentOffsetValue } from './utils';
 import './style.scss';
 
 export interface OcFormProgressBarProps {
@@ -38,7 +39,13 @@ export const OcFormProgressBar: React.FC<OcFormProgressBarProps> = (props) => {
 		getStaticOffsetValue();
 	}, [progressbarData]);
 	React.useEffect(() => {
-		getCurrentOffsetValue();
+		getCurrentOffsetValue(
+			currentStep,
+			maxStepsToShow,
+			progressbarData,
+			staticOffsetValue,
+			setCurrentOffsetValue,
+		);
 	}, [currentStep]);
 
 	const getStaticOffsetValue = (): void => {
@@ -47,29 +54,16 @@ export const OcFormProgressBar: React.FC<OcFormProgressBarProps> = (props) => {
 			setStaticOffsetValue(firstBarStep.offsetWidth);
 		}
 	};
-	const getCurrentOffsetValue = (): void => {
-		if (currentStep <= Math.ceil(maxStepsToShow / 2)) {
-			setCurrentOffsetValue(0);
-		} else if (currentStep > progressbarData.length - Math.floor(maxStepsToShow / 2)) {
-			setCurrentOffsetValue(
-				(staticOffsetValue * (progressbarData.length - maxStepsToShow - 1) + 80) * -1,
-			);
-		} else {
-			if (currentStep - (progressbarData.length - Math.floor(maxStepsToShow / 2)) === 0) {
-				setCurrentOffsetValue(
-					(staticOffsetValue * (currentStep - Math.ceil(maxStepsToShow / 2) - 1) + 80) * -1,
-				);
-			} else {
-				setCurrentOffsetValue(
-					staticOffsetValue * (currentStep - Math.ceil(maxStepsToShow / 2)) * -1,
-				);
-			}
-		}
-	};
 
 	const stepClicked = (step: number): void => {
 		jumpToStep(step);
-		getCurrentOffsetValue();
+		getCurrentOffsetValue(
+			currentStep,
+			maxStepsToShow,
+			progressbarData,
+			staticOffsetValue,
+			setCurrentOffsetValue,
+		);
 	};
 
 	return (
@@ -88,11 +82,7 @@ export const OcFormProgressBar: React.FC<OcFormProgressBarProps> = (props) => {
                         ${step.state === 'finished' && 'form-progressbar__item_finished'}
                         ${step.state === 'invalid' && 'form-progressbar__item_invalid'}`}
 							style={{
-								width: `${
-									progressbarData.length > maxStepsToShow && maxStepsToShow > 0
-										? 'calc(100% / ' + maxStepsToShow + ')'
-										: 'calc((100% - 80px) / ' + (progressbarData.length - 1) + ')'
-								}`,
+								width: `${calcProgressBarItemStyles(progressbarData, maxStepsToShow)}`,
 							}}
 							key={i}
 						>

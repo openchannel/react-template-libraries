@@ -145,6 +145,7 @@ export interface OcFormContextProviderProps {
 		fieldsDefinition: FormikField[];
 		updateState: (normalizedFields: FormikField[]) => void;
 	};
+	displayType: 'page' | 'wizard';
 }
 
 export interface OcFormContextProps {

@@ -19,6 +19,7 @@ const Component: Story<any> = (args) => {
 export const Default = Component.bind({});
 Default.args = {
 	formJsonData,
+	displayType: 'page',
 };
 
 export const FormWithTestData = Component.bind({});
