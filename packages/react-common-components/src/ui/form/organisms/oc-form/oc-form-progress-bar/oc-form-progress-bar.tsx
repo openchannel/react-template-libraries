@@ -19,15 +19,7 @@ export interface FormProgressbarStep {
 }
 
 export const OcFormProgressBar: React.FC<OcFormProgressBarProps> = (props) => {
-	const {
-		progressbarData = [],
-		currentStep = 1,
-		maxStepsToShow = 0,
-		jumpToStep,
-		// staticOffsetValue,
-		// currentOffsetValue,
-		// enableTextTruncation = false,
-	} = props;
+	const { progressbarData = [], currentStep = 1, maxStepsToShow = 0, jumpToStep } = props;
 
 	const [staticOffsetValue, setStaticOffsetValue] = React.useState(0);
 	const [currentOffsetValue, setCurrentOffsetValue] = React.useState(0);

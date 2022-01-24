@@ -88,13 +88,11 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 	displayType,
 	initialValue: { flattenFields, fieldsDefinition, updateState },
 }) => {
-	if (displayType === 'wizard') {
-		//do nothing
-	} else if (displayType === 'page') {
-		React.useEffect(() => {
+	React.useEffect(() => {
+		if (displayType === 'page') {
 			useModifyDFA(fieldsDefinition, values, flattenFields, normalizeFieldsAndUpdateDefinition);
-		}, []);
-	}
+		}
+	}, []);
 
 	const { values, setValues } = useFormikContext<FormikFieldsValues>();
 
