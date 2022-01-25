@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { OcForm } from '../../../form';
+import { OcSingleForm } from '../../../form';
 
 import { EditUserComponentProps } from './types';
 
@@ -28,7 +28,7 @@ export const OcEditUserFormComponent: React.FC<EditUserComponentProps> = (props)
 					<h6 className="edit-user-form__empty_form_configs">{defaultEmptyConfigsErrorMessage}</h6>
 				))}
 			{formConfigs?.length > 0 && (
-				<OcForm
+				<OcSingleForm
 					formConfigs={formConfigs}
 					onSubmit={onSubmit}
 					formTypeLabel={defaultTypeLabelText}

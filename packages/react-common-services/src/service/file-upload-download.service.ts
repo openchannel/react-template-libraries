@@ -6,9 +6,6 @@ import { FileDetailsResponse } from '../model/api/file-details.model';
 import { config as configService } from '../service/config.service';
 
 const FILES_URL = 'v2/files';
-// {marketUrl}/v2/files}
-// v2/userAccounts/this
-// {fileUrl}
 
 export const fileService = {
 	/**

@@ -66,7 +66,7 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 	const fileDetails = React.useCallback(
 		async (links: string[]) => {
 			if (service.fileDetailsRequest) {
-				const req = links.map((i) => service.fileDetailsRequest(i, {'x-handle-error': '404'}));
+				const req = links.map((i) => service.fileDetailsRequest(i, { 'x-handle-error': '404' }));
 				const responses = await Promise.allSettled(req);
 
 				const filteredFiles = responses.map((r, index) => {
@@ -77,13 +77,18 @@ export const OcFileUpload: React.FC<OcFileUploadProps> = (props) => {
 							return { ...r.value.data, lastModified: uniqueId() };
 						}
 					} else if (r.status === 'rejected') {
-						return { name: links[index],fileId:links[index], preview: links[index], lastModified: uniqueId() };
+						return {
+							name: links[index],
+							fileId: links[index],
+							preview: links[index],
+							lastModified: uniqueId(),
+						};
 					}
 					return { name: 'Error', failed: true, lastModified: uniqueId() };
-				}) as Array<ExtendedFile>;	
+				}) as Array<ExtendedFile>;
 				setFiles([...filteredFiles]);
 			} else {
-				console.error('Service fileDetailsRequest is not exist.')
+				console.error('Service fileDetailsRequest is not exist.');
 			}
 		},
 		[files, isImage],

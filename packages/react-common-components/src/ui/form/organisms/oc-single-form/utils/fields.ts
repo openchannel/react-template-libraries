@@ -268,30 +268,32 @@ export const elementUtils = {
 	},
 };
 
-
-export const setFormChildes = (flattenFields: FormikField[], childInstance: FormikField, value: any) => {
+export const setFormChildes = (
+	flattenFields: FormikField[],
+	childInstance: FormikField,
+	value: any,
+) => {
 	const childDefValues = value[childInstance.id];
-	return (childDefValues && childDefValues.map((elem: any) => {
+	return (
+		childDefValues &&
+		childDefValues.map((elem: any) => {
+			const fieldsWithDefValuesChild = childInstance.fields!.map((child: FormikField) => {
+				const nextChild = flattenFields.find(
+					(item) => item.id === child.id && item.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY,
+				);
 
-		const fieldsWithDefValuesChild = childInstance.fields!.map((child: FormikField) => {
-			const nextChild = flattenFields.find((item) => item.id === child.id && item.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY);
-			
-			return elementUtils.cloneAndUpdate(
-				child,
-				false,
-				{ 
-					previousValue: elem[child.id] ? elem[child.id] : '', 
-					value: elem[child.id] ? elem[child.id] : '', 
+				return elementUtils.cloneAndUpdate(child, false, {
+					previousValue: elem[child.id] ? elem[child.id] : '',
+					value: elem[child.id] ? elem[child.id] : '',
 					isEditing: false,
 					fields: nextChild ? setFormChildes(flattenFields, nextChild, elem) : [],
-				},
-			);
-		});
+				});
+			});
 
-		return elementUtils.cloneAndUpdate(
-			childInstance,
-			false,
-			{ fields: fieldsWithDefValuesChild.flat(), isEditing: false },
-		);
-	}));
+			return elementUtils.cloneAndUpdate(childInstance, false, {
+				fields: fieldsWithDefValuesChild.flat(),
+				isEditing: false,
+			});
+		})
+	);
 };

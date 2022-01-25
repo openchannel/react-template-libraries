@@ -130,7 +130,7 @@ export const getDefaultFormType = (options: { label: string }[], defaultFormType
 	const defaultOption = options.find((item) => item.label === defaultFormType);
 
 	if (!defaultOption) {
-		console.error(`OcForm Error. ${defaultFormType} is wrong config name!`);
+		console.error(`OcSingleForm Error. ${defaultFormType} is wrong config name!`);
 		return options[0];
 	}
 

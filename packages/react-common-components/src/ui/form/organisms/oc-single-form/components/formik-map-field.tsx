@@ -27,7 +27,7 @@ import {
 
 export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 	const { fields, excludeRenderFields, fieldProps } = props;
-	
+
 	if (!fields || fields.length === 0) {
 		return null;
 	}
@@ -312,7 +312,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 									component={FormikOcFileUploadWrapper}
 									fileType={type}
 									acceptType={attributes?.accept}
-									fileService={fieldProps.fileService}
+									fileService={fieldProps?.fileService}
 									isPrivate={type === FIELD_TYPE.PRIVATE_SINGLE_FILE}
 									isMultiFile={false}
 									hash={attributes?.hash}
@@ -338,7 +338,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 									component={FormikOcFileUploadWrapper}
 									fileType={type}
 									acceptType={attributes?.accept}
-									fileService={fieldProps.fileService}
+									fileService={fieldProps?.fileService}
 									isPrivate={type === FIELD_TYPE.MULTI_PRIVATE_FILE}
 									isMultiFile={true}
 									hash={attributes?.hash}
@@ -416,7 +416,11 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 	);
 };
 
-export const FormikMapFieldsWrapper: React.FC<OcFormExtraProps> = ({ children, ...props }) => {
+export const FormikMapFieldsWrapper: React.FC<OcFormExtraProps> = ({
+	children,
+	displayType,
+	...props
+}) => {
 	const context = useOcFormContext();
 
 	return <FormikMapFields fields={context.fields} {...props} />;

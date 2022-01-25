@@ -1,52 +1,44 @@
-import * as React from 'react';
-import type { FieldInputProps, FormikHelpers, FormikProps, FormikValues } from 'formik';
+import { AppFormField, AppFormModel } from '../../models/app-form';
+import { FormProps } from '../oc-single-form/types';
 
-import type { OcEditUserFormConfig } from '../../../auth/organisms/oc-edit-user-form';
-import type { Dataset, FileUploadService } from '../../../common';
-import type { AppFormModel, FieldValidators, FormikField, FormikFieldsValues } from '../../models';
+import { FormikHelpers } from 'formik';
+import { FormProgressbarStep } from './oc-form-progress-bar/oc-form-progress-bar';
 
+export interface FieldStep {
+	label?: AppFormField;
+	items?: AppFormField[];
+}
 export type OcFormValues = Record<string, any>;
 export type OcFormFormikHelpers = FormikHelpers<Record<string, unknown>>;
-export type OcFormChildren =
-	| React.ReactNode
-	| ((formik: FormikProps<any>, fields: FormikField[]) => React.ReactNode);
-export type SelectedFormType = { label: string };
 
-export interface OcFormExtraProps {
-	/**
-	 * Service to make API calls.
-	 */
-	service?: any;
-	/**
-	 * Service to make API calls.
-	 */
-	fileService?: FileUploadService;
-	/**
-	 * Service which contains both service and fileService API calls
-	 */
-	 fieldProps?: any;
-	/**
-	 * Don't render field by ID.
-	 */
-	excludeRenderFields?: string[];
-}
+export type FormType = 'wizard' | 'page';
 
-export interface FormProps extends OcFormExtraProps {
+export interface OcFormProps extends FormProps {
 	/**
 	 * Form config
 	 */
 	formJsonData?: AppFormModel;
 	/**
-	 * Callback with values and formProps on button click
-	 *
-	 * @param values
-	 * @param formikHelpers
+	 * form type: wizard or ordinary(page)
 	 */
-	onSubmit?(values: OcFormValues, formikHelpers: OcFormFormikHelpers, action?: string): void;
+	displayType: FormType;
 	/**
-	 * Callback on Cancel button click
+	 * Set position of the field label.
+	 * @default left
 	 */
-	onCancel?(): void;
+	buttonPosition?: 'top' | 'left' | 'right' | 'between';
+	/**
+	 * You can set the number of steps to show. If set to 0, this option is turned off and all the steps will be visible.
+	 */
+	maxStepsToShow: number;
+	/**
+	 * Max shown steps setter
+	 */
+	setMaxStepsToShow: React.Dispatch<React.SetStateAction<number>>;
+	/**
+	 * Custom template for the Save button to show.
+	 */
+	additionalButton?: React.ReactElement | React.ReactNode;
 	/**
 	 * Set position of the field label.
 	 * @param {('top'|'left'|'right')} position
@@ -54,148 +46,54 @@ export interface FormProps extends OcFormExtraProps {
 	 */
 	labelPosition?: 'top' | 'left' | 'right';
 	/**
-	 * @default Submit
+	 * Submitting process. The true option will lock for click and start the spinner in the submit button.
 	 */
-	submitButtonText?: string;
+	process?: boolean;
 	/**
-	 * Set position of the field label.
-	 * @default left
+	 * flag to show buttons on form
 	 */
-	buttonPosition?: 'top' | 'left' | 'right' | 'between';
-
-	children?: OcFormChildren;
-
-	cancelButtonText?: string;
-}
-
-export interface OcFormProps extends FormProps {
+	showButton?: boolean;
 	/**
-	 * Form configs
+	 * Flag to show group description.
 	 */
-	formConfigs?: OcEditUserFormConfig[];
+	showGroupDescription?: boolean;
 	/**
-	 * Form type select label
-	 * @default Type
+	 * Flag to show group heading.
 	 */
-	formTypeLabel?: string;
+	showGroupHeading?: boolean;
 	/**
-	 * Default FormType (config name)
+	 * Flag to show progressbar.
 	 */
-	defaultFormType?: string;
+	showProgressBar?: boolean;
 	/**
-	 * Enable required password field. //todo: Set True to include field to form state.
-	 * @default false
+	 * flag to show submit button on form
 	 */
-	enablePasswordField?: boolean;
+	showSubmitButton?: boolean;
 	/**
-	 * Enable required Terms checkbox field. //todo: Set True to include field to form state.
-	 * @default false
+	 * Set custom text to success button.
 	 */
-	enableTermsCheckboxField?: boolean;
-
-	children?: OcFormChildren;
-
-	cancelButtonText?: string;
-
-	customSubmitClass?: string;
-
-	customCancelClass?: string;
-
-	showSaveBtn?: boolean;
-
-	showSubmitBtn?: boolean;
-
-	saveButtonText?: string;
+	successButtonText?: string;
+	/**
+	 * Progressbar steps array to be passed to progress
+	 */
+	progressBarSteps?: FormProgressbarStep[];
+	/**
+	 * Callback with values and formProps on button click
+	 *
+	 * @param values
+	 * @param formikHelpers
+	 */
+	onSubmit?(values: OcFormValues, formikHelpers: OcFormFormikHelpers): void;
+	/**
+	 * hasFieldGroups boolean flag
+	 */
+	hasFieldGroups?: boolean;
+	/**
+	 * Current wizard step.
+	 */
+	currentStep?: number;
+	/**
+	 * setCurrentStep is setter function for current form step
+	 */
+	setCurrentStep?: React.Dispatch<React.SetStateAction<number>>;
 }
-
-export type FieldType =
-	| 'richText'
-	| 'text'
-	| 'longText'
-	| 'dropdownList'
-	| 'tags'
-	| 'singleFile'
-	| 'multiple'
-	| 'multiImage'
-	| 'singleImage'
-	| 'privateSingleFile'
-	| 'multiPrivateFile'
-	| 'number'
-	| 'checkbox'
-	| 'emailAddress'
-	| 'websiteUrl'
-	| 'color'
-	| 'booleanTags'
-	| 'numberTags'
-	| 'videoUrl'
-	| 'date'
-	| 'datetime'
-	| 'multiselectList'
-	| 'dynamicFieldArray'
-	| 'password';
-
-export interface OcFormContextProviderProps {
-	initialValue: {
-		flattenFields: FormikField[];
-		fieldsDefinition: FormikField[];
-		updateState: (normalizedFields: FormikField[]) => void;
-	};
-}
-
-export interface OcFormContextProps {
-	fields: FormikField[];
-	onAddDynamicField: React.MouseEventHandler;
-	onRemoveDynamicField: (event: React.SyntheticEvent<Dataset>) => void;
-	onStartEditingField: (event: React.SyntheticEvent<Dataset>) => void;
-	onCancelEditingField: React.MouseEventHandler;
-	onSaveField: React.MouseEventHandler;
-}
-
-export interface FormikMapFieldsProps extends OcFormExtraProps {
-	fields: FormikField[];
-}
-
-export interface FormikComponentWrapperProps<Value> {
-	field: FieldInputProps<Value>;
-	form: FormikProps<FormikFieldsValues>;
-	customClass?: string;
-}
-
-export type FCWP<Value> = FormikComponentWrapperProps<Value>;
-
-export interface FieldGroupProps {
-	description?: string;
-	label?: string;
-	labelFor?: string;
-	name: string;
-	required?: boolean;
-}
-
-export interface OcFormState {
-	formId: string;
-	validators: FieldValidators;
-	flattenFields: FormikField[];
-	fieldsDefinition: FormikField[];
-	initialValues: FormikValues;
-}
-
-export interface FormikFileUploadProps<Value> {
-	fileType: FileType;
-	acceptType?: string;
-	isMultiFile: boolean;
-	maxWidth: string;
-	maxHeight: string;
-	fileService: FileUploadService;
-	isPrivate?: boolean;
-	hash?: string;
-	form: FormikProps<FormikFieldsValues>;
-	field: FieldInputProps<Value>;
-}
-
-type FileType =
-	| 'singleFile'
-	| 'singleImage'
-	| 'privateSingleFile'
-	| 'multiFile'
-	| 'multiImage'
-	| 'multiPrivateFile';

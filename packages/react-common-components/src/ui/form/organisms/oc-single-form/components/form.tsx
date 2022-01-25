@@ -34,6 +34,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		showSaveBtn = false,
 		showSubmitBtn = true,
 		saveButtonText = 'Save',
+		displayType = 'page',
 	} = props;
 
 	const [submitType, setSubmitType] = React.useState<string>('submit');
@@ -68,7 +69,6 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		formik.setErrors(ocFormErrors);
 		formik.setSubmitting(false);
 	};
-	// [formik.setErrors, formik.setSubmitting, fieldsDefinition],
 
 	const handleSubmit = React.useCallback(
 		(e) => {
@@ -84,7 +84,10 @@ export const Form: React.FC<OcFormProps> = (props) => {
 
 	return (
 		<FormikContext.Provider value={formik}>
-			<OcFormContextProvider initialValue={{ flattenFields, fieldsDefinition, updateState }}>
+			<OcFormContextProvider
+				initialValue={{ flattenFields, fieldsDefinition, updateState }}
+				displayType={displayType}
+			>
 				<FormikForm className="form" onSubmit={handleSubmit} noValidate data-submittype="submit">
 					<FormikMapFieldsWrapper
 						fieldProps={{ service, fileService }}
