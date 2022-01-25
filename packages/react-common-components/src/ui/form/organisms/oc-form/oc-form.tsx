@@ -31,6 +31,8 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		showGroupHeading,
 		showGroupDescription,
 		showButton,
+		showSaveBtn,
+		saveButtonText = 'Save',
 		currentStep = 1,
 		setCurrentStep = noop,
 		maxStepsToShow,
@@ -52,6 +54,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	const [hasFieldGroups, setHasFieldGroups] = React.useState(false);
 	const isFirstStep = React.useMemo(() => !customForm || currentStep === 1, [currentStep]);
 	const isLastStep = React.useMemo(() => currentStep === customForm?.length, [currentStep]);
+	const [submitType, setSubmitType] = React.useState<string>('submit');
 	const {
 		state: { initialValues, validators, flattenFields, fieldsDefinition },
 		updateState,
@@ -71,14 +74,18 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 				return;
 			}
 
-			onSubmit(formatOcFormValues(fieldsDefinition, values), {
-				...formikProps,
-				setErrors: (errors: FormikErrors<FormikValues>) => {
-					const ocFormErrors = formatOcFormErrors(fieldsDefinition, errors);
-					formikProps.setErrors(ocFormErrors);
-					formikProps.setSubmitting(false);
+			onSubmit(
+				formatOcFormValues(fieldsDefinition, values),
+				{
+					...formikProps,
+					setErrors: (errors: FormikErrors<FormikValues>) => {
+						const ocFormErrors = formatOcFormErrors(fieldsDefinition, errors);
+						formikProps.setErrors(ocFormErrors);
+						formikProps.setSubmitting(false);
+					},
 				},
-			});
+				submitType,
+			);
 		},
 	});
 	React.useEffect(() => {
@@ -122,7 +129,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	const stepDescription = React.useMemo((): string => {
 		if (customForm !== null) {
 			return customForm[currentStep - 1].label &&
-				customForm[currentStep - 1].label?.description.length > 0
+				customForm[currentStep - 1].label?.description?.length > 0
 				? customForm[currentStep - 1].label?.description
 				: 'Please fill the information below';
 		} else return 'Please fill the information below';
@@ -158,6 +165,8 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 			} else {
 				const index = progressBarSteps.findIndex((step: any) => step.state === 'invalid');
 				if (index === -1) {
+					setSubmitType(e.target.dataset.submittype);
+
 					return formik.handleSubmit(e);
 				}
 				return setCurrentStep(index + 1);
@@ -206,7 +215,12 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 								}}
 								displayType={displayType}
 							>
-								<FormikForm className="form" onSubmit={handleSubmit} noValidate>
+								<FormikForm
+									className="form"
+									onSubmit={handleSubmit}
+									noValidate
+									data-submittype="submit"
+								>
 									<FormikMapFieldsWrapper
 										fieldProps={{ service, fileService }}
 										displayType={displayType}
@@ -248,6 +262,18 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 						/>
 					)}
 					{additionalButton && <div>{additionalButton}</div>}
+					{showSaveBtn && (
+						<div className="form__button save-draft">
+							<OcButtonComponent
+								type="secondary"
+								process={formik.isSubmitting}
+								data-submittype="save"
+								onClick={handleSubmit}
+							>
+								{saveButtonText}
+							</OcButtonComponent>
+						</div>
+					)}
 					{currentStep && currentStep < customForm?.length && (
 						<OcButtonComponent
 							onClick={() => navigateToStep(currentStep + 1)}

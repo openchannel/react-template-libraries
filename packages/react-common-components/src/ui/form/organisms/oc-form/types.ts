@@ -83,7 +83,7 @@ export interface OcFormProps extends FormProps {
 	 * @param values
 	 * @param formikHelpers
 	 */
-	onSubmit?(values: OcFormValues, formikHelpers: OcFormFormikHelpers): void;
+	onSubmit?(values: OcFormValues, formikHelpers: OcFormFormikHelpers, action?: string): void;
 	/**
 	 * hasFieldGroups boolean flag
 	 */
@@ -96,4 +96,6 @@ export interface OcFormProps extends FormProps {
 	 * setCurrentStep is setter function for current form step
 	 */
 	setCurrentStep?: React.Dispatch<React.SetStateAction<number>>;
+	showSaveBtn?: boolean;
+	saveButtonText?: string;
 }
