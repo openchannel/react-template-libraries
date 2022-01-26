@@ -46,6 +46,7 @@ export interface FormProps extends OcFormExtraProps {
 	 *
 	 * @param values
 	 * @param formikHelpers
+	 * @param action
 	 */
 	onSubmit?(values: OcFormValues, formikHelpers: OcFormFormikHelpers, action?: string): void;
 	/**

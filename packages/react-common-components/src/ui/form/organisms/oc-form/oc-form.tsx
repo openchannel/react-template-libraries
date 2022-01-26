@@ -49,7 +49,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	} = props;
 
 	//eslint-disable-next-line
-	const [customForm, setCustomForm] = React.useState<FieldStep[] | any>(null);
+	const [customForm, setCustomForm] = React.useState<FieldStep[] | null>(null);
 	const [progressBarSteps, setProgressBarSteps] = React.useState<FormProgressbarStep[]>([]);
 	const [hasFieldGroups, setHasFieldGroups] = React.useState(false);
 	const isFirstStep = React.useMemo(() => !customForm || currentStep === 1, [currentStep]);
@@ -63,7 +63,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	const singleStepsFormConfig: FormikField[] = React.useMemo(
 		() => (customForm !== null ? customForm[currentStep - 1]?.items : []),
 		[currentStep, customForm],
-	);
+	) as FormikField[];
 
 	const formik: any = useFormik({
 		initialValues,
@@ -83,7 +83,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 						formikProps.setErrors(ocFormErrors);
 						formikProps.setSubmitting(false);
 					},
-				},
+				} as OcFormFormikHelpers,
 				submitType,
 			);
 		},
@@ -100,7 +100,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		} else {
 			setHasFieldGroups(false);
 		}
-	}, [hasFieldGroups]);
+	}, [hasFieldGroups, fieldsDefinition]);
 
 	React.useEffect(() => {
 		reGenerateProgressbar(
@@ -111,6 +111,12 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 			createInitialProgressBar,
 		);
 	}, [formik.errors, formik.touched, currentStep]);
+
+	React.useEffect(() => {
+		if (window.innerWidth <= 768) {
+			setMaxStepsToShow(3);
+		}
+	}, [window.innerWidth]);
 
 	const navigateToStep = (step: number) => {
 		if (displayType === 'wizard' && setCurrentStep) {
@@ -125,14 +131,15 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 			});
 		}
 	};
-	// const cancelSubmit = () => {};
-	const stepDescription = React.useMemo((): string => {
+
+	const stepDescription = React.useMemo(() => {
 		if (customForm !== null) {
 			return customForm[currentStep - 1].label &&
 				customForm[currentStep - 1].label?.description?.length > 0
 				? customForm[currentStep - 1].label?.description
 				: 'Please fill the information below';
-		} else return 'Please fill the information below';
+		}
+		return 'Please fill the information below';
 	}, [customForm, currentStep]);
 
 	const stepLabel = React.useMemo(
@@ -163,7 +170,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 			if (formik.isSubmitting) {
 				e.preventDefault();
 			} else {
-				const index = progressBarSteps.findIndex((step: any) => step.state === 'invalid');
+				const index = progressBarSteps.findIndex((step) => step.state === 'invalid');
 				if (index === -1) {
 					setSubmitType(e.target.dataset.submittype);
 
@@ -174,11 +181,6 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		},
 		[formik.isSubmitting, formik.handleSubmit, progressBarSteps],
 	);
-	React.useEffect(() => {
-		if (window.innerWidth <= 768) {
-			setMaxStepsToShow(3);
-		}
-	}, [window.innerWidth]);
 
 	return (
 		<div className="form-steps">
@@ -224,7 +226,6 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 									<FormikMapFieldsWrapper
 										fieldProps={{ service, fileService }}
 										displayType={displayType}
-										// excludeRenderFields={excludeRenderFields}
 									/>
 									{children
 										? isFunction(children)
@@ -250,7 +251,6 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 							customClass="form__button"
 							type="secondary"
 							text="Cancel"
-							// onClick={cancelSubmit}
 						/>
 					)}
 					{currentStep && currentStep > 1 && (
@@ -284,7 +284,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 					)}
 					{showButton && isLastStep && (
 						<OcButtonComponent
-							onClick={handleSubmit as any}
+							onClick={handleSubmit}
 							process={process}
 							customClass="form__button"
 							type="primary"

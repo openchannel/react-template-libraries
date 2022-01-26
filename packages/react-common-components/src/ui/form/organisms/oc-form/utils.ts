@@ -1,4 +1,8 @@
-import { AppFormField, AppFormModel } from '../../models/app-form';
+import * as React from 'react';
+
+import { FIELD_TYPE } from '../../lib';
+import { AppFormField, AppFormModel } from '../../models';
+
 import { FieldStep } from './types';
 
 export const createStepsFromJSON = (data: AppFormModel | undefined): FieldStep[] => {
@@ -6,31 +10,36 @@ export const createStepsFromJSON = (data: AppFormModel | undefined): FieldStep[]
 	const currentFreeFieldsStep: FieldStep = {
 		items: [],
 	};
-	data?.fields?.forEach((field, index) => {
-		if (field.type === 'fieldGroup') {
+
+	(data?.fields || []).forEach((field, index) => {
+		if (field.type === FIELD_TYPE.FIELD_GROUP) {
 			if (currentFreeFieldsStep.items && currentFreeFieldsStep.items.length > 0) {
 				formsArray.push({ ...currentFreeFieldsStep });
 				currentFreeFieldsStep.items = [];
 			}
+
 			const step: FieldStep = {
 				label: field,
-				items: data.fields?.filter(
+				items: (data?.fields || []).filter(
 					(item) => item.attributes?.group === field.id.replace('customData.', ''),
 				),
 			};
+
 			if (step.items?.length) {
 				formsArray.push(step);
 			}
 		} else {
 			if (!field.attributes?.group) {
 				currentFreeFieldsStep.items?.push(field);
+
 				if (data.fields && index === data.fields?.length - 1) {
 					formsArray.push(currentFreeFieldsStep);
 				}
 			}
 		}
 	});
-	return formsArray.map((form: FieldStep, index: number) => ({
+
+	return formsArray.map((form, index) => ({
 		...form,
 		items: form?.items?.map((item: AppFormField) => ({ ...item, step: index })),
 	}));

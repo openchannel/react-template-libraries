@@ -40,18 +40,18 @@ const useModifyDFA = (
 	flattenFields.forEach((field: FormikField) => {
 		if (field && field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && !isEmpty(field.fields)) {
 			const instance = flattenFields.find(
-				(item: { staticId: string }) => item.staticId === field.staticId,
+				(item) => item.staticId === field.staticId,
 			);
 			if (!instance) return;
 
-			const existedElement = get(next, field.path);
+			const existedElement: FormikField = get(next, field.path);
 
 			if (Array.isArray(instance.defaultValue) && !isEmpty(instance.defaultValue)) {
-				instance.defaultValue.forEach((value: { [x: string]: any }, parentIndex: any) => {
-					const fieldsWithDefValues = instance.fields!.map((item: FormikField) => {
+				(instance.defaultValue as unknown[]).forEach((value, parentIndex) => {
+					const fieldsWithDefValues = instance.fields!.map((item) => {
 						/* Display child components Start */
 						const childInstance = flattenFields.find(
-							(child: { id: any; type: string }) =>
+							(child) =>
 								child.id === item.id && child.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY,
 						);
 						if (childInstance && !isEmpty(value[childInstance.id])) {
@@ -147,7 +147,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 
 			let next = elementUtils.updateFieldsValues(fieldsDefinition, values);
 			const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
-			const existedElement = get(next, elementPath);
+			const existedElement: FormikField = get(next, elementPath);
 
 			if (isFirstLevelDeep) {
 				const removeChildField =
@@ -188,7 +188,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 		const elementPath = button.dataset.path || '';
 
 		let next = elementUtils.updateFieldsValues(fieldsDefinition, values);
-		const existedElement = get(next, elementPath);
+		const existedElement: FormikField = get(next, elementPath);
 		const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
 
 		if (isFirstLevelDeep) {

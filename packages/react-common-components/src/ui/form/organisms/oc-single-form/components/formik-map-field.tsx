@@ -40,7 +40,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 					label,
 					description,
 					type,
-					attributes,
+					attributes = {},
 					options,
 					defaultValue,
 					placeholder,
@@ -60,7 +60,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field name={name} component={FormikRichTextWrapper} placeholder={placeholder} />
 							</FieldGroupWrapper>
@@ -73,7 +73,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field
 									name={name}
@@ -92,7 +92,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field name={name} as={OcTextarea} id={id} placeholder={placeholder} />
 							</FieldGroupWrapper>
@@ -105,7 +105,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field
 									name={name}
@@ -123,7 +123,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field name={name} as={OcNumberComponent} placeholder={placeholder} id={id} />
 							</FieldGroupWrapper>
@@ -136,12 +136,12 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field
 									name={name}
 									as={OcCheckboxComponent}
-									required={attributes!.required}
+									required={attributes?.required}
 									labelText={label}
 								/>
 							</FieldGroupWrapper>
@@ -154,7 +154,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field
 									name={name}
@@ -173,7 +173,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field
 									name={name}
@@ -192,7 +192,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field
 									name={name}
@@ -213,7 +213,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field
 									id={id}
@@ -239,7 +239,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field
 									id={id}
@@ -258,7 +258,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field id={id} name={name} component={FormikOcDatetimePickerWrapper} type={type} />
 							</FieldGroupWrapper>
@@ -271,7 +271,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field
 									id={id}
@@ -290,7 +290,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field name={name} as={OcPasswordComponent} />
 							</FieldGroupWrapper>
@@ -305,7 +305,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field
 									name={name}
@@ -331,7 +331,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field
 									name={name}
@@ -355,7 +355,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 								label={label}
 								labelFor={id}
 								description={description}
-								required={attributes!.required}
+								required={attributes?.required}
 							>
 								<Field
 									name={name}
@@ -387,7 +387,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 									label={label}
 									labelFor={id}
 									description={description}
-									required={attributes!.required}
+									required={attributes?.required}
 								>
 									<OcDynamicFieldArray
 										field={field}
