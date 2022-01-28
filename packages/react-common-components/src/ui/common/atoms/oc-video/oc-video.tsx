@@ -27,8 +27,7 @@ export const OcVideoComponent: React.FC<VideoProps> = (props) => {
 							className={`oc-video_frame-video ${customClass}`}
 							playing={false}
 							controls
-							width={300}
-							height={150}
+							width={'100%'}
 						/>
 					</div>
 				</div>
