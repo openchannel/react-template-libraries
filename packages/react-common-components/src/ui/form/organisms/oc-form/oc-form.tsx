@@ -163,10 +163,9 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 			if (formik.isSubmitting) {
 				e.preventDefault();
 			} else {
-				const index = progressBarSteps.findIndex((step: any) => step.state === 'invalid');
+				const index = progressBarSteps.findIndex((step) => step.state === 'invalid');
 				if (index === -1) {
-					setSubmitType(e.target.dataset.submittype);
-
+					setSubmitType(e.target.dataset.submittype ? e.target.dataset.submittype : 'submit');
 					return formik.handleSubmit(e);
 				}
 				return setCurrentStep(index + 1);
@@ -231,6 +230,57 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 											? children(formik, flattenFields)
 											: children
 										: null}
+										{showButton && (
+											<div className={`form-steps__options form-steps__options--${buttonPosition}`}>
+												{isFirstStep && (
+													<OcButtonComponent
+														customClass="form__button"
+														type="secondary"
+														text="Cancel"
+														// onClick={cancelSubmit}
+													/>
+												)}
+												{currentStep && currentStep > 1 && (
+													<OcButtonComponent
+														onClick={() => navigateToStep(currentStep - 1)}
+														customClass="form__button"
+														type="secondary"
+														text="Previous step"
+													/>
+												)}
+												{additionalButton && <div>{additionalButton}</div>}
+												{showSaveBtn && (
+													<div className="form__button save-draft">
+														<OcButtonComponent
+															type="secondary"
+															process={formik.isSubmitting}
+															data-submittype="save"
+															onClick={handleSubmit}
+														>
+															{saveButtonText}
+														</OcButtonComponent>
+													</div>
+												)}
+												{currentStep && currentStep < customForm?.length && (
+													<OcButtonComponent
+														onClick={() => navigateToStep(currentStep + 1)}
+														customClass="form__button"
+														type="primary"
+														text="Next step"
+													/>
+												)}
+												{showButton && isLastStep && (
+													<OcButtonComponent
+														onClick={handleSubmit}
+														process={process}
+														customClass="form__button"
+														type="primary"
+														text="Submit"
+														data-submittype="submit"
+													/>
+												)}
+											</div>
+										)}
 								</FormikForm>
 							</OcFormContextProvider>
 						</FormikContext.Provider>
@@ -243,56 +293,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 					showSubmitBtn={showSubmitButton && isLastStep}
 				/>
 			)}
-			{showButton && (
-				<div className={`form-steps__options form-steps__options--${buttonPosition}`}>
-					{isFirstStep && (
-						<OcButtonComponent
-							customClass="form__button"
-							type="secondary"
-							text="Cancel"
-							// onClick={cancelSubmit}
-						/>
-					)}
-					{currentStep && currentStep > 1 && (
-						<OcButtonComponent
-							onClick={() => navigateToStep(currentStep - 1)}
-							customClass="form__button"
-							type="secondary"
-							text="Previous step"
-						/>
-					)}
-					{additionalButton && <div>{additionalButton}</div>}
-					{showSaveBtn && (
-						<div className="form__button save-draft">
-							<OcButtonComponent
-								type="secondary"
-								process={formik.isSubmitting}
-								data-submittype="save"
-								onClick={handleSubmit}
-							>
-								{saveButtonText}
-							</OcButtonComponent>
-						</div>
-					)}
-					{currentStep && currentStep < customForm?.length && (
-						<OcButtonComponent
-							onClick={() => navigateToStep(currentStep + 1)}
-							customClass="form__button"
-							type="primary"
-							text="Next step"
-						/>
-					)}
-					{showButton && isLastStep && (
-						<OcButtonComponent
-							onClick={handleSubmit as any}
-							process={process}
-							customClass="form__button"
-							type="primary"
-							text="Submit"
-						/>
-					)}
-				</div>
-			)}
+			
 		</div>
 	);
 };
