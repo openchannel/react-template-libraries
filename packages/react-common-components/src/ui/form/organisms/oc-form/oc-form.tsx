@@ -54,7 +54,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	const [hasFieldGroups, setHasFieldGroups] = React.useState(false);
 	const isFirstStep = React.useMemo(() => !customForm || currentStep === 1, [currentStep]);
 	const isLastStep = React.useMemo(() => currentStep === customForm?.length, [currentStep]);
-	const [submitType, setSubmitType] = React.useState<string>('submit');
+	const submitType = React.useRef('submit');
 	const {
 		state: { initialValues, validators, flattenFields, fieldsDefinition },
 		updateState,
@@ -68,7 +68,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	const formik: any = useFormik({
 		initialValues,
 		enableReinitialize: true,
-		validate: (values) => validateOcFormValues(formik.values, formik.errors, values, validators),
+		validate: (values) => validateOcFormValues(formik.values, formik.errors, values, validators, submitType.current),
 		onSubmit: (values, formikProps) => {
 			if (!onSubmit) {
 				return;
@@ -84,7 +84,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 						formikProps.setSubmitting(false);
 					},
 				},
-				submitType,
+				submitType.current,
 			);
 		},
 	});
@@ -165,7 +165,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 			} else {
 				const index = progressBarSteps.findIndex((step) => step.state === 'invalid');
 				if (index === -1) {
-					setSubmitType(e.target.dataset.submittype ? e.target.dataset.submittype : 'submit');
+					submitType.current = e.target.dataset.submittype ? e.target.dataset.submittype : 'submit';
 					return formik.handleSubmit(e);
 				}
 				return setCurrentStep(index + 1);
