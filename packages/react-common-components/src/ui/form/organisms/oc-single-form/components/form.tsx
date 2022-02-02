@@ -38,7 +38,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		pullFieldsDefinition,
 	} = props;
 
-	const [submitType, setSubmitType] = React.useState<string>('submit');
+	const submitType = React.useRef('submit');
 
 	const {
 		state: { initialValues, validators, flattenFields, fieldsDefinition },
@@ -48,7 +48,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 	const formik: any = useFormik({
 		initialValues,
 		enableReinitialize: true,
-		validate: (values) => validateOcFormValues(formik.values, formik.errors, values, validators),
+		validate: (values) => validateOcFormValues(formik.values, formik.errors, values, validators, submitType.current),
 		onSubmit: (values, formikProps) => {
 			if (!onSubmit) {
 				return;
@@ -60,7 +60,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 					...formikProps,
 					setErrors: handleSetErrors,
 				},
-				submitType,
+				submitType.current,
 			);
 		},
 	});
@@ -82,7 +82,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 			if (formik.isSubmitting) {
 				e.preventDefault();
 			} else {
-				setSubmitType(e.target.dataset.submittype);
+				submitType.current = e.target.dataset.submittype;
 				formik.handleSubmit(e);
 			}
 		},

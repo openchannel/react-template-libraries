@@ -42,13 +42,17 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	const [hasFieldGroups, setHasFieldGroups] = React.useState(false);
 	const isFirstStep = React.useMemo(() => !customForm || currentStep === 1, [currentStep]);
 	const isLastStep = React.useMemo(() => currentStep === customForm?.length, [currentStep]);
-	const [submitType, setSubmitType] = React.useState<string>('submit');
 	const [formik, pullFormik] = React.useState<any>({
 		errors: {},
 		touched: {},
 		isSubmitting: false,
 	});
 	const [fieldsDefinition, pullFieldsDefinition] = React.useState<any>();
+	const submitType = React.useRef('submit');
+	// const {
+	// 	state: { initialValues, validators, flattenFields, fieldsDefinition },
+	// 	updateState,
+	// } = useOcFormState(formJsonData!);
 
 	const singleStepsFormId: string[] | undefined = React.useMemo(
 		() => (customForm !== null ? customForm[currentStep - 1]?.items?.map((i) => i.id) : []),
@@ -131,7 +135,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 				const index = progressBarSteps.findIndex((step) => step.state === 'invalid');
 				if (index === -1) {
 					onSubmit(formik.values);
-					setSubmitType(e.target.dataset.submittype);
+					submitType.current = e.target.dataset.submittype ? e.target.dataset.submittype : 'submit';
 					formik.handleSubmit(formik.values);
 				} else setCurrentStep(index + 1);
 			}

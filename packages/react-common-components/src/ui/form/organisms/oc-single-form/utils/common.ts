@@ -36,8 +36,9 @@ export const validateOcFormValues = (
 	prevErrors: FormikErrors<FormikValues>,
 	values: FormikFieldsValues,
 	validators: FieldValidators,
+	submitType?: string,
 ) => {
-	if (!values || isEmpty(validators)) {
+	if (!values || isEmpty(validators) || submitType === 'save') {
 		return {};
 	}
 
