@@ -46,9 +46,7 @@ WizardForm.args = {
 					required: null,
 					group: '',
 				},
-				fields: [
-					{ id: 'text', label: 'Text', type: 'text' }
-				],
+				fields: [{ id: 'text', label: 'Text', type: 'text', attributes: { required: true } }],
 				id: 'customData.dfa1',
 				label: 'DFA1',
 				type: 'dynamicFieldArray',

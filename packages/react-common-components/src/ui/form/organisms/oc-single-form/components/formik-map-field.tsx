@@ -416,11 +416,7 @@ export const FormikMapFields: React.FC<FormikMapFieldsProps> = (props) => {
 	);
 };
 
-export const FormikMapFieldsWrapper: React.FC<OcFormExtraProps> = ({
-	children,
-	displayType,
-	...props
-}) => {
+export const FormikMapFieldsWrapper: React.FC<OcFormExtraProps> = ({ children, ...props }) => {
 	const context = useOcFormContext();
 
 	return <FormikMapFields fields={context.fields} {...props} />;

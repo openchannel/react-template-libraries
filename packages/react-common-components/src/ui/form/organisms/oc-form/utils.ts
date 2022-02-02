@@ -32,7 +32,7 @@ export const createStepsFromJSON = (data: AppFormModel | undefined): FieldStep[]
 			if (!field.attributes?.group) {
 				currentFreeFieldsStep.items?.push(field);
 
-				if (data.fields && index === data.fields?.length - 1) {
+				if (data?.fields && index === data?.fields?.length - 1) {
 					formsArray.push(currentFreeFieldsStep);
 				}
 			}
@@ -61,6 +61,7 @@ export const reGenerateProgressbar = (
 					formik.touched[field.name] &&
 					formik.errors[field.name]?.length > 0 &&
 					stepErrors.push({ name: field.name, step: currentStep });
+
 				if (!formik.errors[field.name] && formik.touched[field.name]) {
 					stepFinished[index + 1] = {
 						fields: [
@@ -71,7 +72,6 @@ export const reGenerateProgressbar = (
 				}
 			});
 		});
-
 	const copy = createInitialProgressBar();
 
 	customForm?.forEach((form: any, index: number) => {
@@ -92,5 +92,6 @@ export const reGenerateProgressbar = (
 			}
 		}
 	});
+
 	setProgressBarSteps(copy);
 };
