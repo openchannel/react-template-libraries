@@ -28,11 +28,9 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		setMaxStepsToShow,
 		labelPosition,
 		buttonPosition,
-		process,
 		onSubmit = noop,
 		additionalButton,
 		displayType,
-		// children,
 		service,
 		fileService,
 	} = props;
@@ -49,10 +47,6 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	});
 	const [fieldsDefinition, pullFieldsDefinition] = React.useState<any>();
 	const submitType = React.useRef('submit');
-	// const {
-	// 	state: { initialValues, validators, flattenFields, fieldsDefinition },
-	// 	updateState,
-	// } = useOcFormState(formJsonData!);
 
 	const singleStepsFormId: string[] | undefined = React.useMemo(
 		() => (customForm !== null ? customForm[currentStep - 1]?.items?.map((i) => i.id) : []),
