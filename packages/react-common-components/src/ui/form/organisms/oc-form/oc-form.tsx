@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FormikProps, FormikValues } from 'formik';
 import { noop } from 'lodash-es';
 import { OcButtonComponent } from '../../../common/atoms/oc-button/oc-button';
 import OcTooltipLabel from '../../atoms/oc-tooltip-label';
@@ -8,7 +9,7 @@ import {
 	OcFormProgressBar,
 } from './oc-form-progress-bar/oc-form-progress-bar';
 import { OcFormProps, FieldStep } from './types';
-import { createStepsFromJSON, reGenerateProgressbar } from './utils';
+import { createInitialProgressBar, createStepsFromJSON, reGenerateProgressbar } from './utils';
 import { AppFormModel } from '../../models/app-form';
 import './style.scss';
 
@@ -40,10 +41,13 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	const [hasFieldGroups, setHasFieldGroups] = React.useState(false);
 	const isFirstStep = React.useMemo(() => !customForm || currentStep === 1, [currentStep]);
 	const isLastStep = React.useMemo(() => currentStep === customForm?.length, [currentStep]);
-	const [formik, pullFormik] = React.useState<any>({
+	const [formik, pullFormik] = React.useState<Partial<FormikProps<FormikValues>>>({
 		errors: {},
 		touched: {},
 		isSubmitting: false,
+		values: {},
+		isValidating: false,
+		submitCount: 0,
 	});
 	const [fieldsDefinition, pullFieldsDefinition] = React.useState<any>();
 	const submitType = React.useRef('submit');
@@ -53,7 +57,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		[currentStep, customForm],
 	);
 	const initializeProgressBar = (): void =>
-		setProgressBarSteps(createInitialProgressBar() as FormProgressbarStep[]);
+		setProgressBarSteps(createInitialProgressBar(customForm));
 
 	React.useEffect(() => {
 		if (displayType === 'wizard') {
@@ -101,25 +105,14 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 			setCurrentStep(step);
 			customForm?.forEach((stepForm: FieldStep | any) => {
 				stepForm?.items.forEach((field: any) => {
-					if (field.step < step - 1) {
+					if (field.step < step - 1 && formik.setTouched) {
 						formik.touched = { ...formik.touched, [field.name]: true };
-						formik.setTouched({ ...formik.touched, [field.name]: true });
+						formik?.setTouched({ ...formik.touched, [field.name]: true });
 					}
 				});
 			});
 		}
 	};
-
-	const createInitialProgressBar = React.useCallback(
-		() =>
-			customForm !== null && customForm.length > 1
-				? customForm?.map((step: FieldStep, index: number) => ({
-						title: step.label ? step.label.label : `Step ${index + 1}`,
-						state: 'pristine',
-				  }))
-				: [],
-		[customForm],
-	);
 
 	const handleSubmit = React.useCallback(
 		(e) => {
@@ -127,10 +120,10 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 				e.preventDefault();
 			} else {
 				const index = progressBarSteps.findIndex((step) => step.state === 'invalid');
-				if (index === -1) {
+				if (index === -1 && formik.handleSubmit) {
 					onSubmit(formik.values);
 					submitType.current = e.target.dataset.submittype ? e.target.dataset.submittype : 'submit';
-					formik.handleSubmit(formik.values);
+					formik.handleSubmit(formik.values as React.FormEvent<HTMLFormElement>);
 				} else setCurrentStep(index + 1);
 			}
 		},
@@ -160,8 +153,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 								text={stepLabel}
 								labelClass="form-steps__content-body-label"
 								required={
-									false ||
-									(customForm !== null && customForm[currentStep - 1]?.label?.attributes?.required)
+									customForm !== null && customForm[currentStep - 1]?.label?.attributes?.required
 								}
 								description={labelPosition}
 							/>

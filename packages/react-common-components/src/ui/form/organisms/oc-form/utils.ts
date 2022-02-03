@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { FIELD_TYPE } from '../../lib';
 import { AppFormField, AppFormModel } from '../../models';
+import { FormProgressbarStep } from './oc-form-progress-bar/oc-form-progress-bar';
 
 import { FieldStep } from './types';
 
@@ -50,7 +51,7 @@ export const reGenerateProgressbar = (
 	formik: any,
 	setProgressBarSteps: React.Dispatch<any>,
 	currentStep: number,
-	createInitialProgressBar: () => any,
+	createInitialProgressBar: (customForm: FieldStep[] | null) => FormProgressbarStep[],
 ): void => {
 	const stepErrors: any = [];
 	const stepFinished: any = {};
@@ -72,7 +73,7 @@ export const reGenerateProgressbar = (
 				}
 			});
 		});
-	const copy = createInitialProgressBar();
+	const copy = createInitialProgressBar(customForm);
 
 	customForm?.forEach((form: any, index: number) => {
 		loop1: for (const field of form?.items!) {
@@ -95,3 +96,11 @@ export const reGenerateProgressbar = (
 
 	setProgressBarSteps(copy);
 };
+
+export const createInitialProgressBar = (customForm: FieldStep[] | null): FormProgressbarStep[] =>
+	customForm !== null && customForm.length > 1
+		? customForm?.map((step: FieldStep, index: number) => ({
+				title: step.label ? step.label.label : `Step ${index + 1}`,
+				state: 'pristine',
+		  }))
+		: [];
