@@ -1,5 +1,8 @@
 image: node:12.13.0
 
+clone:
+  depth: full              # SonarCloud scanner needs the full history to assign issues properly
+
 definitions:
   caches:
     sonar: ~/.sonar/cache  # Caching SonarCloud artifacts will speed up your build
@@ -14,6 +17,8 @@ definitions:
           #- unset NPM_CONFIG_USER # solving the problem with installing the cypress - https://github.com/cypress-io/cypress/issues/15025
           - yarn install
           - yarn run storybook:build
+          - pipe: sonarsource/sonarcloud-scan:1.2.1
+          - pipe: sonarsource/sonarcloud-quality-gate:0.1.4
         artifacts:
           - storybook-static/**
 
