@@ -121,7 +121,11 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 			} else {
 				const index = progressBarSteps.findIndex((step) => step.state === 'invalid');
 				if (index === -1 && formik.handleSubmit) {
-					onSubmit(formik.values);
+					onSubmit(
+						formik.values,
+						formik,
+						e.target.dataset.submittype ? e.target.dataset.submittype : 'submit',
+					);
 					submitType.current = e.target.dataset.submittype ? e.target.dataset.submittype : 'submit';
 					formik.handleSubmit(formik.values as React.FormEvent<HTMLFormElement>);
 				} else setCurrentStep(index + 1);
