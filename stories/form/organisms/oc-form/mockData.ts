@@ -4,8 +4,6 @@ export const mockFileService = {
 	fileUploadRequest: (file: FormData, isPrivate: boolean, hash?: string[]) => {
 		return new Promise((resolve, reject) => {
 			setTimeout(async () => {
-				// let randBool = Math.random() < 0.5;
-				// if (randBool) {
 				const response = {
 					data: {
 						contentType: 'image/png',
@@ -20,9 +18,6 @@ export const mockFileService = {
 					},
 				};
 				resolve(response);
-				// } else {
-				// 	reject('Uploading has been corrupted, try again...');
-				// }
 			}, 4000);
 		});
 	},
