@@ -39,20 +39,17 @@ const useModifyDFA = (
 
 	flattenFields.forEach((field: FormikField) => {
 		if (field && field.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY && !isEmpty(field.fields)) {
-			const instance = flattenFields.find(
-				(item: { staticId: string }) => item.staticId === field.staticId,
-			);
+			const instance = flattenFields.find((item) => item.staticId === field.staticId);
 			if (!instance) return;
 
-			const existedElement = get(next, field.path);
+			const existedElement: FormikField = get(next, field.path);
 
 			if (Array.isArray(instance.defaultValue) && !isEmpty(instance.defaultValue)) {
-				instance.defaultValue.forEach((value: { [x: string]: any }, parentIndex: any) => {
-					const fieldsWithDefValues = instance.fields!.map((item: FormikField) => {
+				(instance.defaultValue as unknown[]).forEach((value: any, parentIndex: number) => {
+					const fieldsWithDefValues = instance.fields!.map((item) => {
 						/* Display child components Start */
 						const childInstance = flattenFields.find(
-							(child: { id: any; type: string }) =>
-								child.id === item.id && child.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY,
+							(child) => child.id === item.id && child.type === FIELD_TYPE.DYNAMIC_FIELD_ARRAY,
 						);
 						if (childInstance && !isEmpty(value[childInstance.id])) {
 							return setFormChildes(flattenFields, childInstance, value);
@@ -85,21 +82,22 @@ const useModifyDFA = (
 
 export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 	children,
-	displayType,
+	pullFieldsDefinition,
 	initialValue: { flattenFields, fieldsDefinition, updateState },
 }) => {
 	React.useEffect(() => {
-		if (displayType === 'page') {
-			useModifyDFA(fieldsDefinition, values, flattenFields, normalizeFieldsAndUpdateDefinition);
-		}
+		useModifyDFA(fieldsDefinition, values, flattenFields, normalizeFieldsAndUpdateDefinition);
 	}, []);
-
+	React.useEffect(() => {
+		if (pullFieldsDefinition !== undefined) {
+			pullFieldsDefinition(fieldsDefinition);
+		}
+	});
 	const { values, setValues } = useFormikContext<FormikFieldsValues>();
 
 	const normalizeFieldsAndUpdateDefinition = React.useCallback(
 		(array) => {
 			const newArray = normalizeFieldsForFormik(updateElementKeys)(array);
-
 			updateState(newArray);
 			setValues(getInitialValuesFromFields(newArray));
 		},
@@ -113,7 +111,6 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 			const elementPath = button.dataset.path || '';
 			const instance = flattenFields.find((item) => item.staticId === elementStaticId);
 			if (!instance) return;
-
 			const next = elementUtils.updateFieldsValues(fieldsDefinition, values);
 			const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
 			const existedElement = get(next, elementPath);
@@ -147,7 +144,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 
 			let next = elementUtils.updateFieldsValues(fieldsDefinition, values);
 			const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
-			const existedElement = get(next, elementPath);
+			const existedElement: FormikField = get(next, elementPath);
 
 			if (isFirstLevelDeep) {
 				const removeChildField =
@@ -188,7 +185,7 @@ export const OcFormContextProvider: React.FC<OcFormContextProviderProps> = ({
 		const elementPath = button.dataset.path || '';
 
 		let next = elementUtils.updateFieldsValues(fieldsDefinition, values);
-		const existedElement = get(next, elementPath);
+		const existedElement: FormikField = get(next, elementPath);
 		const { path, isFirstLevelDeep } = elementUtils.getParentPath(elementPath);
 
 		if (isFirstLevelDeep) {

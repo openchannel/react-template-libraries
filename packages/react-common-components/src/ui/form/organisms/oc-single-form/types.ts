@@ -29,11 +29,6 @@ export interface OcFormExtraProps {
 	 * Don't render field by ID.
 	 */
 	excludeRenderFields?: string[];
-	/**
-	 * Check if formType is wizard or single
-	 * 'single' is usual form, and 'wizard' -> wizard form
-	 */
-	displayType?: 'wizard' | 'page';
 }
 
 export interface FormProps extends OcFormExtraProps {
@@ -46,6 +41,7 @@ export interface FormProps extends OcFormExtraProps {
 	 *
 	 * @param values
 	 * @param formikHelpers
+	 * @param action
 	 */
 	onSubmit?(values: OcFormValues, formikHelpers: OcFormFormikHelpers, action?: string): void;
 	/**
@@ -111,6 +107,9 @@ export interface OcFormProps extends FormProps {
 	showSubmitBtn?: boolean;
 
 	saveButtonText?: string;
+
+	pullFormik?: React.Dispatch<any>;
+	pullFieldsDefinition?: React.Dispatch<any>;
 }
 
 export type FieldType =
@@ -145,7 +144,7 @@ export interface OcFormContextProviderProps {
 		fieldsDefinition: FormikField[];
 		updateState: (normalizedFields: FormikField[]) => void;
 	};
-	displayType: 'page' | 'wizard';
+	pullFieldsDefinition?: React.Dispatch<any>;
 }
 
 export interface OcFormContextProps {

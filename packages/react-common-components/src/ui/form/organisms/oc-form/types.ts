@@ -1,7 +1,10 @@
-import { AppFormField, AppFormModel } from '../../models/app-form';
-import { FormProps } from '../oc-single-form/types';
-
+import * as React from 'react';
 import { FormikHelpers } from 'formik';
+
+import { AppFormField, AppFormModel } from '../../models';
+
+import { FormProps } from '../oc-single-form';
+
 import { FormProgressbarStep } from './oc-form-progress-bar/oc-form-progress-bar';
 
 export interface FieldStep {
@@ -77,13 +80,6 @@ export interface OcFormProps extends FormProps {
 	 * Progressbar steps array to be passed to progress
 	 */
 	progressBarSteps?: FormProgressbarStep[];
-	/**
-	 * Callback with values and formProps on button click
-	 *
-	 * @param values
-	 * @param formikHelpers
-	 */
-	onSubmit?(values: OcFormValues, formikHelpers: OcFormFormikHelpers, action?: string): void;
 	/**
 	 * hasFieldGroups boolean flag
 	 */

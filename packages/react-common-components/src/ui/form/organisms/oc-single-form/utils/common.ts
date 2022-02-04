@@ -1,7 +1,8 @@
 import * as React from 'react';
-import type { FormikErrors, FormikValues } from 'formik';
 import { isEmpty } from 'lodash-es';
+import type { FormikErrors, FormikValues } from 'formik';
 
+import type { OcFormValues } from '../types';
 import { errorMessages, FIELD_TYPE } from '../../../lib';
 import type { FieldValidators, FormikField, FormikFieldsValues } from '../../../models';
 
@@ -68,7 +69,7 @@ export const validateOcFormValues = (
 	}, {});
 };
 
-export const formatOcFormValues = (arr: FormikField[], values: FormikValues): Record<string, any> =>
+export const formatOcFormValues = (arr: FormikField[], values: FormikValues): OcFormValues =>
 	formatOcFormFields(arr, values, ['name', 'id']);
 
 export const formatOcFormErrors = (

@@ -34,7 +34,8 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		showSaveBtn = false,
 		showSubmitBtn = true,
 		saveButtonText = 'Save',
-		displayType = 'page',
+		pullFormik,
+		pullFieldsDefinition,
 	} = props;
 
 	const submitType = React.useRef('submit');
@@ -70,6 +71,12 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		formik.setSubmitting(false);
 	};
 
+	React.useEffect(() => {
+		if (pullFormik !== undefined && formik !== undefined) {
+			pullFormik(formik);
+		}
+	}, [formik.errors, formik.touched, formik.values]);
+
 	const handleSubmit = React.useCallback(
 		(e) => {
 			if (formik.isSubmitting) {
@@ -86,7 +93,7 @@ export const Form: React.FC<OcFormProps> = (props) => {
 		<FormikContext.Provider value={formik}>
 			<OcFormContextProvider
 				initialValue={{ flattenFields, fieldsDefinition, updateState }}
-				displayType={displayType}
+				pullFieldsDefinition={pullFieldsDefinition}
 			>
 				<FormikForm className="form" onSubmit={handleSubmit} noValidate data-submittype="submit">
 					<FormikMapFieldsWrapper

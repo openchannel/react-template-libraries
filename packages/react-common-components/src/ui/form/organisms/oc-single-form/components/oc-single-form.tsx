@@ -21,7 +21,8 @@ export const OcSingleForm: React.FC<OcFormProps> = (props) => {
 		enablePasswordField = false,
 		enableTermsCheckboxField = false,
 		excludeRenderFields,
-		displayType,
+		pullFormik,
+		pullFieldsDefinition,
 		...formProps
 	} = props;
 
@@ -80,7 +81,8 @@ export const OcSingleForm: React.FC<OcFormProps> = (props) => {
 					excludeRenderFields={excludeRenderFields}
 					formJsonData={selectedFormConfig}
 					onSubmit={onFormSubmit}
-					displayType={displayType}
+					pullFormik={pullFormik}
+					pullFieldsDefinition={pullFieldsDefinition}
 				>
 					{children}
 				</Form>
