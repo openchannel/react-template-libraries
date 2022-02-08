@@ -35,6 +35,7 @@ export * from './model/api/user-activation.model';
 export * from './model/api/user-login.model';
 export * from './model/api/user-registration.model';
 export * from './model/api/user-type.model';
+export * from './model/api/transaction.model'
 
 /**
  * Component models
@@ -71,6 +72,7 @@ export * from './service/user-account-types.service';
 export * from './service/user-invite.service';
 export * from './service/user-role.service';
 export * from './service/users.service';
+export * from './service/transactions.service';
 
 /* Utils */
 export * from './util/query.util';

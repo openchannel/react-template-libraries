@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import { ReqHeaders } from 'packages/react-common-components/src/ui/common/atoms/oc-file-upload/types';
+import { ReqHeaders } from '../lib/request';
 
 import { api } from '../lib/api';
 
@@ -37,10 +37,10 @@ export const TransactionsService = {
 	 */
 	getTransactionsList(pageNumber = 1, limit = 100, sort: any = {}, query: any = {}) {
 		const params = {
-			pageNumber,
-			limit,
-			sort,
-			query,
+			pageNumber:String(pageNumber),
+			limit: String(limit),
+			sort:JSON.stringify(sort),
+			query:JSON.stringify(query),
 		};
 
 		return api.get(`${TRANSACTIONS_URL}`, { params });
