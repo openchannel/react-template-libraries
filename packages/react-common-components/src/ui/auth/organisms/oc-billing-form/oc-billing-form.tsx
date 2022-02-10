@@ -27,13 +27,16 @@ export const BillingForm: React.FC<BillingFormProps> = (props) => {
 	const billingCountries = CountryRegionData.map((ctr) => ctr[0]);
 	const [selectedCountry, setSelectedCountry] = React.useState('');
 
-	const billingStates =
-		selectedCountry.length > 0
-			? CountryRegionData.filter((ctr) => ctr[0] === selectedCountry)
-					.flat()[2]
-					.split('|')
-					.map((st) => st.replace(/(~[a-zA-Z\d]+$)/gm, ''))
-			: [];
+	const billingStates = React.useMemo(
+		() =>
+			selectedCountry.length > 0
+				? CountryRegionData.filter((ctr) => ctr[0] === selectedCountry)
+						.flat()[2]
+						.split('|')
+						.map((st) => st.replace(/(~[a-zA-Z\d]+$)/gm, ''))
+				: [],
+		[selectedCountry],
+	);
 	const [selectedState, setSelectedState] = React.useState('');
 
 	const formikCard = useFormik({
@@ -44,7 +47,7 @@ export const BillingForm: React.FC<BillingFormProps> = (props) => {
 			cvc: '',
 		},
 		validate: validateCreditCard,
-		onSubmit: (values) => console.log(values),
+		onSubmit: noop,
 	});
 	const formikAddress = useFormik({
 		initialValues: {
@@ -56,10 +59,10 @@ export const BillingForm: React.FC<BillingFormProps> = (props) => {
 			address_zip: '',
 		},
 		validate: validateAddress,
-		onSubmit: (values) => console.log(values),
+		onSubmit: noop,
 	});
 
-	const finalHandleSubmit = (e: any) => {
+	const finalHandleSubmit = (e: any): void => {
 		formikCard.handleSubmit(e);
 		formikAddress.handleSubmit(e);
 		handleSubmit(e);
@@ -284,7 +287,7 @@ export const BillingForm: React.FC<BillingFormProps> = (props) => {
 						<div className="billing__address-form-field">
 							<OcLabelComponent text="Postal code" className="billing__address-form-label" />
 							<OcInputComponent
-								//   formControlName="address_zip"
+								name="address_zip"
 								placeholder="Postal code"
 								required
 								value={formikAddress.values.address_zip}
