@@ -1,9 +1,9 @@
+import React from 'react';
+import { FormikValues } from 'formik';
+
 export interface BillingFormProps {
-	hideCardFormElements: any;
-	showStripeForm: any;
-	cardForm: any;
-	handleSubmit: any;
+	hideCardFormElements: boolean;
+	showStripeForm: React.Dispatch<React.SetStateAction<boolean>>;
+	handleSubmit: (e: FormikValues) => void;
 	successButtonText: string;
-	billingAction: any;
-	clearChanges: any;
 }
