@@ -2,23 +2,12 @@ import { FormikValues } from 'formik';
 
 import { errorMessages } from '../../../form';
 
-const notADigit = /\D*/;
-
 export const validateCreditCard = (values: FormikValues) => {
 	const errors: any = {};
 
 	if (!values.name) {
 		errors.name = errorMessages.required();
 	}
-	// if (!values.card_number) {
-	// 	errors.card_number = errorMessages.required();
-	// }
-	// if (!values.expiration) {
-	// 	errors.expiration = errorMessages.required();
-	// }
-	// if (!values.cvc) {
-	// 	errors.cvc = errorMessages.required();
-	// }
 
 	return errors;
 };
