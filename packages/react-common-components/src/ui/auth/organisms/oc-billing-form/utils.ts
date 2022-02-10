@@ -2,7 +2,7 @@ import { FormikValues } from 'formik';
 
 import { errorMessages } from '../../../form';
 
-const notADigit = /^[-]?\d*\.?\d*$/;
+const notADigit = /\D*/;
 
 export const validateCreditCard = (values: FormikValues) => {
 	const errors: any = {};
@@ -44,34 +44,3 @@ export const validateAddress = (values: FormikValues) => {
 
 	return errors;
 };
-
-export const handleCardNumberChange = (e: any, handleChange: any) => {
-	if (e.target.value.match(notADigit) === null) {
-		e.preventDefault();
-	} else {
-		insertMask(e, handleChange);
-	}
-};
-const insertMask = (e: any, handleChange: any) => {
-	if (e.target.value.length % 4 == 0) {
-		console.log('%%% 4', e);
-
-		const copyEvent = e;
-		copyEvent.target.value = copyEvent.target.value.concat(' ');
-		handleChange(copyEvent);
-	}
-	if (e.target.value.length === 19) {
-		console.log('length 19', e);
-
-		const copyEvent = e;
-		const maskedValue = e.target.value.replace(/(\d{4}\s)/g, '•••• •••• ••••');
-		copyEvent.target.value = maskedValue;
-		handleChange(copyEvent);
-	}
-};
-
-/* 
-1. check to have only numbers
-2. check only 4th digit, and place spaces 
-3. after 16 digits + 3 spaces reached replace digits with mask
- */

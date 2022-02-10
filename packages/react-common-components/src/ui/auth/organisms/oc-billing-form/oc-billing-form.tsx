@@ -30,7 +30,6 @@ export const BillingForm: React.FC<BillingFormProps> = (props) => {
 
 	const billingCountries = CountryRegionData.map((ctr) => ctr[0]);
 	const [selectedCountry, setSelectedCountry] = React.useState('');
-	console.log('333', selectedCountry);
 
 	const billingStates =
 		selectedCountry.length > 0
@@ -39,9 +38,7 @@ export const BillingForm: React.FC<BillingFormProps> = (props) => {
 					.split('|')
 					.map((st) => st.replace(/(~[a-zA-Z\d]+$)/gm, ''))
 			: [];
-	console.log('444', billingStates);
 	const [selectedState, setSelectedState] = React.useState('');
-	console.log('555', selectedState);
 
 	const formikCard = useFormik({
 		initialValues: {
@@ -260,15 +257,13 @@ export const BillingForm: React.FC<BillingFormProps> = (props) => {
 								name="address_state"
 								value={selectedState}
 								onSelectionChange={(e: any) => {
-									console.log('!!!!!!!!!!!!!1e', e);
-
 									setSelectedState(e);
 									formikAddress.setFieldValue('address_state', e);
 								}}
 								onBlur={formikAddress.handleBlur}
 								placeholder="Select state"
 								customClass="form-control billing__address-form-input select-component"
-								// disabled
+								disabled={selectedCountry === ''}
 							/>
 							{formikAddress.errors.address_state && (
 								<OcError message={formikAddress.errors.address_state} />
