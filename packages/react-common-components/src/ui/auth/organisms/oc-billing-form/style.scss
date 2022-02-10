@@ -93,6 +93,26 @@
 				& + .billing__address-form-field {
 					margin-top: 2rem;
 				}
+				.select-component {
+					background-position: 25% 75%;
+					option {
+						padding: 16px;
+						border-bottom: 1px;
+						&:hover {
+							color: $body-color;
+							background-color: $light;
+						}
+						&:active {
+							color: $primary;
+							background-color: $light;
+							border-color: unset;
+						}
+						&:focus {
+							outline: none;
+							background-color: $light;
+						}
+					}
+				}
 			}
 		}
 	}

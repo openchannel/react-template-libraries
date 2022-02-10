@@ -53,6 +53,15 @@ export interface OcSelectProps {
 	 * A callback fired when a menu item is selected.
 	 */
 	onSelectionChange(eventKey: string | Option, e: React.SyntheticEvent<unknown>): void;
+
+	/**
+	 * Name prop in case of usage inside formik
+	 */
+	name?: string;
+	/**
+	 * OnBlur handler prop in case of usage inside formik
+	 */
+	onBlur?: React.FocusEventHandler<HTMLInputElement> | undefined;
 }
 
 export const OcSelect: React.FC<Partial<OcSelectProps>> = (props) => {
@@ -83,7 +92,7 @@ export const OcSelect: React.FC<Partial<OcSelectProps>> = (props) => {
 	) as SelectCallback;
 
 	const toggleValue = value ? (typeof value === 'object' ? value[labelField] : value) : placeholder;
-	
+
 	return (
 		<Dropdown className="select-component">
 			<Dropdown.Toggle as={Toggle} disabled={disabled} className={customClass}>

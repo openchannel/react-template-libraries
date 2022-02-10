@@ -8,7 +8,11 @@ export default {
 } as Meta;
 
 const Component: Story<any> = (args) => {
-	return <BillingForm {...args} onSubmit={(e) => console.log(e)} />;
+	return (
+		<div className="col-md-12 col-lg-5 col-xxl-6 mt-3 mt-lg-1">
+			<BillingForm {...args} onSubmit={(e) => console.log(e)} />
+		</div>
+	);
 };
 
 export const MarketBillingForm = Component.bind({});
