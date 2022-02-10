@@ -25,6 +25,7 @@ export const FIELD_TYPE = {
 	DROPDOWN_LIST: 'dropdownList',
 	DYNAMIC_FIELD_ARRAY: 'dynamicFieldArray',
 	MULTI_APP: 'multiApp',
+	FIELD_GROUP: 'fieldGroup',
 };
 
 export const errorMessages: Record<string, any> = {

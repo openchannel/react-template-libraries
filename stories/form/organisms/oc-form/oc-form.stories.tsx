@@ -23,7 +23,6 @@ const Component: Story<any> = (args) => {
 		/>
 	);
 };
-
 export const WizardForm = Component.bind({});
 WizardForm.args = {
 	formJsonData: {
@@ -37,6 +36,20 @@ WizardForm.args = {
 				label: 'Name',
 				type: 'text',
 				attributes: { maxChars: null, required: true, minChars: null },
+			},
+			{
+				attributes: {
+					ordering: 'append',
+					minCount: null,
+					rowLabel: null,
+					maxCount: null,
+					required: null,
+					group: '',
+				},
+				fields: [{ id: 'text', label: 'Text', type: 'text', attributes: { required: true } }],
+				id: 'customData.dfa1',
+				label: 'DFA1',
+				type: 'dynamicFieldArray',
 			},
 			{
 				id: 'customData.description',
