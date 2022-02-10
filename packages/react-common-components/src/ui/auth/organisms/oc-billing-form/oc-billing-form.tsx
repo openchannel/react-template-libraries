@@ -7,13 +7,12 @@ import {
 	OcLabelComponent,
 	OcSelect,
 } from '@openchannel/react-common-components/src/ui/index';
-import { Form, FormikValues, useFormik, FormikContext } from 'formik';
+import { Form, useFormik, FormikContext } from 'formik';
 import { noop } from 'lodash-es';
-import { Option } from '../../../common/index';
 import { ReactComponent as CalendarIcon } from '../../../../assets/img/calendar-icon.svg';
 
 import { BillingFormProps } from './types';
-import { handleCardNumberChange, validateAddress, validateCreditCard } from './utils';
+import { validateAddress, validateCreditCard } from './utils';
 
 import './style.scss';
 
@@ -21,11 +20,8 @@ export const BillingForm: React.FC<BillingFormProps> = (props) => {
 	const {
 		hideCardFormElements = false,
 		showStripeForm = noop,
-		// cardForm,
 		handleSubmit = noop,
 		successButtonText = 'Save',
-		// billingAction = noop,
-		// clearChanges = noop,
 	} = props;
 
 	const billingCountries = CountryRegionData.map((ctr) => ctr[0]);
@@ -110,10 +106,9 @@ export const BillingForm: React.FC<BillingFormProps> = (props) => {
 									placeholder="1234 1234 1234 1234"
 									name="card_number"
 									required={false}
-									onChange={(e: any) => handleCardNumberChange(e, formikCard.handleChange)}
+									onChange={formikCard.handleChange}
 									value={formikCard.values.card_number}
 									onBlur={formikCard.handleBlur}
-									// [ngModel]="'••• ••• ••• ' + cardData.last4"
 									customClass={`billing__credit-card-form-input ${
 										formikCard.errors.card_number ? 'invalid' : ''
 									}`}
@@ -135,10 +130,10 @@ export const BillingForm: React.FC<BillingFormProps> = (props) => {
 											<OcInputComponent
 												name="expiration"
 												placeholder="MM/YY"
+												maxLength={5}
 												id="expiration-element"
 												onChange={formikCard.handleChange}
 												onBlur={formikCard.handleBlur}
-												// [ngModel]="cardData.exp_month + '/' + cardData.exp_year.toString().slice(-2)"
 												customClass={`billing__credit-card-form-input ${
 													formikCard.errors.expiration ? 'invalid' : ''
 												}`}
