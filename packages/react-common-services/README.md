@@ -28,22 +28,7 @@ Store models and services for creating a marketplace instance:
 
 ## Services Installation
 
-1. Install dependencies
-Run in the root:
-
-```
-yarn add _package_ -W
-```
-
-Go to the package directory and write the new dependencies in its own package.json.
-
-Go to the root directory and link the dependency versions to the child package:
-
-```
-yarn run link
-```
-
-2. Install services `npm i @openchannel/react-common-services`
+Install services `npm i @openchannel/react-common-services`
 
 ### Import Applications Versions
 Note: Listing app versions returns App Pages based on query and sort criteria.

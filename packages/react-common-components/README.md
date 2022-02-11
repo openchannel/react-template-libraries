@@ -71,55 +71,11 @@ Includes components for portal and market (form builder, form components, file u
 
 Before installation please check **required libs** [README.md](../../README.md#required-libs)
 
-1. Install dependencies
-Run in the root:
+1. Install library `npm i @openchannel/react-common-components`
 
-```
-yarn add _package_ -W
-```
+2. To load TinyMCE when the page or application is loaded, open react.json and add TinyMCE to the global scripts tag.
 
-Go to the package directory and write the new dependencies in its own package.json.
-
-Go to the root directory and link the dependency versions to the child package:
-
-```
-yarn run link
-```
-2. Install library `npm i @openchannel/react-common-components`
-
-3. Connect library styles by import in styles `@import "~@openchannel/react-common-components/assets/styles/styles.scss";`
-   or add it to react json
-```sh
-  "build": {
-    ...
-    "styles": [
-      ...
-      "node_modules/@openchannel/react-common-components/assets/styles/styles.scss"
-    ],
-  }
-```
-3. Connect library assets
-```sh
-  "assets": [
-    {
-      "glob": "**/*", "input": "node_modules/@openchannel/react-common-components/assets/img",
-      "output": "/assets/react-common-components",
-    },
-  ]
- ```
-4. Including TinyMCE within the Application, open react.json and add TinyMCE to the assets property.
-```sh
-  "assets": [
-     { "glob": "**/*", "input": "node_modules/tinymce", "output": "/tinymce/" }
-  ]
- ```
-5. To load TinyMCE when the page or application is loaded, open react.json and add TinyMCE to the global scripts tag.
-```sh
-  "scripts": [
-    "node_modules/tinymce/tinymce.min.js"
-  ]
-```
-6. For the File Uploader component should be created a service which extends `FileUploaderService`.
+3. For the File Uploader component should be created a service which extends `FileUploaderService`.
 Service must consist two function `fileUploadRequest` and `fileDetailsRequest` which  should return your requests to CAP
    Example of service:
 ```sh
@@ -159,7 +115,7 @@ Service must consist two function `fileUploadRequest` and `fileDetailsRequest` w
 
 ```
 
-7. Error messages for all forms. Have default implementation errorMessages.
+4. Error messages for all forms. Have default implementation errorMessages.
 ```
 errorMessages.required();
 errorMessages.email();
@@ -209,10 +165,6 @@ Run `cd ./dist/react-common-components && npm publish`
 * Build Project
 
   ``npm run build react-common-components --watch``
-
-* Create doc for storybook
-
-  ``npm run docs:json``
 
 * Run Storybook
 
