@@ -1,3 +1,6 @@
 dist
 coverage
 node_modules
+README.md
+packages/react-common-components/README.md
+packages/react-common-services/README.md
