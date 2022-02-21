@@ -9,7 +9,7 @@ export const getCurrentOffsetValue = (
 		(arg0: number): void;
 	},
 ): void => {
-	if (currentStep <= Math.ceil(maxStepsToShow / 2)) {
+	if (currentStep <= Math.ceil(maxStepsToShow / 2) || maxStepsToShow === progressbarData.length) {
 		setCurrentOffsetValue(0);
 	} else if (currentStep > progressbarData.length - Math.floor(maxStepsToShow / 2)) {
 		setCurrentOffsetValue(

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { FormikProps, FormikValues } from 'formik';
 import { noop } from 'lodash-es';
 import { OcButtonComponent } from '../../../common/atoms/oc-button/oc-button';
 import OcTooltipLabel from '../../atoms/oc-tooltip-label';
@@ -10,7 +9,7 @@ import {
 } from './oc-form-progress-bar/oc-form-progress-bar';
 import { OcFormProps, FieldStep } from './types';
 import { createInitialProgressBar, createStepsFromJSON, reGenerateProgressbar } from './utils';
-import { AppFormModel } from '../../models/app-form';
+import { AppFormModel, FormikField } from '../../models/app-form';
 import './style.scss';
 
 export const OcForm: React.FC<OcFormProps> = (props) => {
@@ -34,6 +33,10 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 		displayType,
 		service,
 		fileService,
+		formik,
+		pullFormik,
+		excludeRenderFields,
+		children,
 	} = props;
 
 	const [customForm, setCustomForm] = React.useState<FieldStep[] | null>(null);
@@ -41,15 +44,8 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	const [hasFieldGroups, setHasFieldGroups] = React.useState(false);
 	const isFirstStep = React.useMemo(() => !customForm || currentStep === 1, [currentStep]);
 	const isLastStep = React.useMemo(() => currentStep === customForm?.length, [currentStep]);
-	const [formik, pullFormik] = React.useState<Partial<FormikProps<FormikValues>>>({
-		errors: {},
-		touched: {},
-		isSubmitting: false,
-		values: {},
-		isValidating: false,
-		submitCount: 0,
-	});
-	const [fieldsDefinition, pullFieldsDefinition] = React.useState<any>();
+
+	const [fieldsDefinition, pullFieldsDefinition] = React.useState<FormikField[]>();
 	const submitType = React.useRef('submit');
 
 	const singleStepsFormId: string[] | undefined = React.useMemo(
@@ -135,7 +131,8 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 	);
 	const excludeOtherIds = formJsonData?.fields
 		?.map((i) => i.id)
-		.filter((field) => !singleStepsFormId?.includes(field));
+		.filter((field) => !singleStepsFormId?.includes(field))
+		.concat(excludeRenderFields && excludeRenderFields.length > 0 ? excludeRenderFields : []);
 
 	return (
 		<div className="form-steps">
@@ -175,6 +172,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 							fileService={fileService}
 							showSubmitBtn={false}
 						>
+							{children}
 							{showButton && (
 								<div className={`form-steps__options form-steps__options--${buttonPosition}`}>
 									{isFirstStep && (
@@ -229,6 +227,7 @@ export const OcForm: React.FC<OcFormProps> = (props) => {
 					formJsonData={formJsonData}
 					labelPosition={labelPosition}
 					showSubmitBtn={showSubmitButton && isLastStep}
+					excludeRenderFields={excludeRenderFields}
 				/>
 			)}
 		</div>
