@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FormikHelpers } from 'formik';
+import { FormikHelpers, FormikProps, FormikValues } from 'formik';
 
 import { AppFormField, AppFormModel } from '../../models';
 
@@ -94,4 +94,6 @@ export interface OcFormProps extends FormProps {
 	setCurrentStep?: React.Dispatch<React.SetStateAction<number>>;
 	showSaveBtn?: boolean;
 	saveButtonText?: string;
+	formik: Partial<FormikProps<FormikValues>>;
+	pullFormik: React.Dispatch<React.SetStateAction<Partial<FormikProps<FormikValues>>>>;
 }

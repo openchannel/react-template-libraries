@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { mockFileService, mockService } from './mockData';
 import { OcForm } from '@openchannel/react-common-components/src/ui/form/organisms/oc-form/oc-form';
+import { FormikProps, FormikValues } from 'formik';
 
 export default {
 	title: 'Wizard form component',
@@ -11,7 +12,14 @@ export default {
 const Component: Story<any> = (args) => {
 	const [currentStep, setCurrentStep] = React.useState(1);
 	const [maxStepsToShow, setMaxStepsToShow] = React.useState<number>(args.maxStepsToShow);
-
+	const [formik, pullFormik] = React.useState<Partial<FormikProps<FormikValues>>>({
+		errors: {},
+		touched: {},
+		isSubmitting: false,
+		values: {},
+		isValidating: false,
+		submitCount: 0,
+	});
 	return (
 		<OcForm
 			{...args}
@@ -20,6 +28,8 @@ const Component: Story<any> = (args) => {
 			maxStepsToShow={maxStepsToShow}
 			setMaxStepsToShow={setMaxStepsToShow}
 			onSubmit={(e) => console.log(e)}
+			formik={formik}
+			pullFormik={pullFormik}
 		/>
 	);
 };
