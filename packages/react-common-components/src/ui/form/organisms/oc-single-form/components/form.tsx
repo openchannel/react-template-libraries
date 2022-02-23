@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Form as FormikForm, FormikContext, FormikErrors, FormikValues, useFormik } from 'formik';
-import { isFunction } from 'lodash-es';
+import { isFunction, isArray } from 'lodash-es';
 
 import OcButtonComponent from '../../../../common/atoms/oc-button/oc-button';
 import { OcFormContextProvider } from '../context';
@@ -100,7 +100,10 @@ export const Form: React.FC<OcFormProps> = (props) => {
 						fieldProps={{ service, fileService }}
 						excludeRenderFields={excludeRenderFields}
 					/>
-					{children ? (isFunction(children) ? children(formik, flattenFields) : children) : null}
+					{isArray(children) ? children.map((child, key) => {
+						return child && (isFunction(child) ? <React.Fragment key={key}>{child(formik, flattenFields)}</React.Fragment>: child ) 
+						}) : children && (isFunction(children) ? children(formik, flattenFields) : children)
+					}
 					<div className={getOcFormButtonsClass(buttonPosition)}>
 						{showSubmitBtn && (
 							<div className={`form__button ${customSubmitClass}`}>

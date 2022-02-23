@@ -7,7 +7,7 @@ import { AppFormField, FormikField, FormikFieldsValues } from '../../../models';
 
 // replace dot to prevent nesting path in names
 const getNewName = (element: AppFormField): string =>
-	`${element.id.replaceAll('.', '#')}-${nanoid()}`;
+	`${element.id.replaceAll('.', '#')}_${nanoid()}`;
 const toBoolean = (value?: any) => (value === 'false' ? false : Boolean(value));
 
 export const extendElementWithRequiredKeys = (
