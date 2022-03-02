@@ -19,10 +19,14 @@ definitions:
           #- unset NPM_CONFIG_USER # solving the problem with installing the cypress - https://github.com/cypress-io/cypress/issues/15025
           - yarn install
           - yarn run storybook:build
-          - pipe: sonarsource/sonarcloud-scan:1.2.1
-          - pipe: sonarsource/sonarcloud-quality-gate:0.1.4
         artifacts:
           - storybook-static/**
+
+    - step: &sonarcloud
+        name: "Sonarcloud"
+        script:
+          - pipe: sonarsource/sonarcloud-scan:1.2.1
+          - pipe: sonarsource/sonarcloud-quality-gate:0.1.4
 
     - step: &deploy-app
         name: "Deploy to Environment"
@@ -86,3 +90,5 @@ pipelines:
       - step:
           <<: *deploy-app
           deployment: us1
+    Analyze sonarcloud:
+      - step: *sonarcloud
