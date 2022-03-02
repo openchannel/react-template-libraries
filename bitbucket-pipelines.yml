@@ -2,7 +2,9 @@ image: node:12.13.0
 
 clone:
   depth: full              # SonarCloud scanner needs the full history to assign issues properly
-
+options:
+  size: 2x
+  docker: true
 definitions:
   caches:
     sonar: ~/.sonar/cache  # Caching SonarCloud artifacts will speed up your build
