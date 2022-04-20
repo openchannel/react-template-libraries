@@ -1,0 +1,136 @@
+@import '../../../styles/index';
+
+.dropdown-multi-app {
+	&__search {
+		&__control {
+			@include form-control($info, $primary, $body-color);
+
+			padding: 0 16px;
+			box-shadow: none !important;
+			cursor: text !important;
+			transition: none !important;
+			border-color: $info !important;
+
+			&.dropdown-multi-app__search__control--is-focused {
+				border-color: $primary !important;
+			}
+
+			&.dropdown-multi-app__search__control--menu-is-open {
+				.dropdown-multi-app__search__dropdown-indicator {
+					&:after {
+						content: url(../../../../assets/img/select-up.svg);
+						cursor: pointer;
+					}
+				}
+			}
+		}
+
+		&__value-container {
+			padding: 0;
+		}
+
+		&__indicator-separator {
+			display: none;
+		}
+
+		&__dropdown-indicator {
+			&:after {
+				content: url(../../../../assets/img/select-down.svg);
+				position: absolute;
+				right: 2rem;
+				top: 1rem;
+				border: none;
+				display: inline-block;
+				margin-left: 0.255em;
+				vertical-align: 0.255em;
+				cursor: pointer;
+			}
+
+			& > svg {
+				display: none;
+			}
+		}
+
+		&__menu {
+			&-item {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+
+				&-initials {
+					margin-left: 16px;
+					margin-right: 16px;
+				}
+
+				&-app {
+					display: flex;
+					flex-direction: column;
+
+					&-name {
+						display: flex;
+						flex-direction: row;
+						flex-wrap: nowrap;
+
+						&-preview {
+							color: $gray-600;
+							margin-right: 4px;
+						}
+					}
+
+					&-data {
+						display: flex;
+						flex-direction: row;
+						flex-wrap: nowrap;
+						@include media-breakpoint-sm {
+							flex-direction: column;
+						}
+
+						&-id {
+							margin-right: 8px;
+
+							&-preview {
+								color: $gray-600;
+								margin-right: 4px;
+							}
+						}
+
+						&-version {
+							&-preview {
+								color: $gray-600;
+								margin-right: 4px;
+							}
+						}
+					}
+				}
+
+				&:hover {
+					color: $primary;
+					background-color: $light;
+					cursor: pointer;
+				}
+
+				&:active {
+					color: $primary;
+					background-color: $light;
+					border-color: unset;
+				}
+
+				&:focus {
+					outline: none;
+					background-color: $light;
+				}
+			}
+		}
+	}
+
+	&__tags {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+
+		&-item {
+			margin-top: 16px;
+			margin-right: 16px;
+		}
+	}
+}

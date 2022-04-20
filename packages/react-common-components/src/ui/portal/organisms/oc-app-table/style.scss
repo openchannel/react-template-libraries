@@ -1,0 +1,246 @@
+@import '../../../styles/index';
+
+.app-grid {
+	width: auto;
+	border: 1px solid $info;
+	border-radius: 4px;
+	position: relative;
+	&-scroller {
+		overflow-x: auto;
+	}
+
+	// white table overlay on the right side
+	&::before {
+		content: '';
+		position: absolute;
+		right: 0;
+		width: 32px;
+		height: 100%;
+		border-radius: 4px;
+		background-image: linear-gradient(to right, rgba($white, 0), $white);
+	}
+
+	&-table {
+		width: 100%;
+		min-width: 928px;
+		&__header {
+			border-bottom: 1px solid $info;
+			&__sort-icon {
+				cursor: pointer;
+				margin-left: 8px;
+			}
+			&__cell {
+				height: 68px;
+				padding: 0 0 0 8px;
+				&-left-placeholder {
+					padding: 0;
+					width: 40px;
+				}
+				&-name {
+					width: 256px;
+				}
+				&-summary {
+					width: 352px;
+				}
+				&-create-date {
+					width: 152px;
+				}
+				&-status {
+					width: 152px;
+				}
+				&-app-options {
+					width: 60px;
+				}
+				&-right-placeholder {
+					padding: 0;
+					width: 40px;
+				}
+				&-name-content,
+				&-create-date-content,
+				&-status-content {
+					display: flex;
+					flex-wrap: nowrap;
+					align-items: center;
+					cursor: pointer;
+					width: 100%;
+					height: 100%;
+				}
+				&-name-content-text,
+				&-create-date-content-text,
+				&-status-content-text,
+				&-summary-text {
+					@include font-size-md();
+					color: $heading-color;
+					cursor: pointer;
+				}
+			}
+		}
+		&__row {
+			height: 80px;
+			// .hidden {
+			// 	visibility: hidden;
+			// }
+			&__cell {
+				padding: 0 0 0 8px;
+				border-bottom: 1px solid $info;
+				&-left-placeholder {
+					padding: 0;
+					border-bottom: none;
+				}
+				&-name {
+					&-content {
+						max-height: 80px;
+						display: flex;
+						flex-wrap: nowrap;
+						&-app-child-icon {
+							margin: auto 24px auto 16px;
+						}
+						&-hidden {
+							visibility: hidden;
+						}
+						&-icon {
+							margin: auto 16px auto 0;
+							max-width: 40px;
+							max-height: 40px;
+						}
+						&-text {
+							display: flex;
+							flex-direction: column;
+							margin: auto auto auto 0;
+
+							&-title {
+								@include font-size-md();
+								@include font-medium();
+								white-space: nowrap;
+								max-width: 180px;
+								text-overflow: ellipsis;
+								overflow: hidden;
+								margin-bottom: 8px;
+								cursor: pointer;
+							}
+
+							&-version {
+								@include font-regular();
+								@include font-size-sm();
+								margin-bottom: 0;
+								color: $secondary;
+							}
+						}
+					}
+				}
+
+				&-summary-text {
+					color: $secondary;
+					@include font-size-md();
+					@include font-regular();
+					overflow: hidden;
+					max-height: 40px;
+					word-break: break-word;
+					display: -webkit-box;
+				}
+
+				&-create-date-text {
+					@include font-size-md();
+					@include font-regular();
+					color: $secondary;
+				}
+
+				&-status {
+					&-content {
+						display: flex;
+						flex-wrap: nowrap;
+						align-items: center;
+						:first-child {
+							width: 8px;
+							height: 8px;
+							padding-right: 8px;
+							margin-right: 16px;
+							border-radius: 50%;
+						}
+						&-marker {
+							&-in-development {
+								background-color: $draft;
+							}
+							&-in-review {
+								background-color: $review;
+							}
+							&-pending {
+								background-color: $pending;
+							}
+							&-approved {
+								background-color: $approved;
+							}
+							&-rejected {
+								background-color: $rejected;
+							}
+							&-suspended {
+								background-color: $suspended;
+							}
+						}
+						&-text {
+							@include font-size-md();
+							@include font-medium();
+						}
+					}
+				}
+				&-app-options {
+					&-dropdown {
+						float: right;
+						cursor: pointer;
+
+						&-dots {
+							padding: 19px;
+							border: 1px solid $info;
+							border-radius: 4px;
+						}
+
+						.dropdown {
+							position: static;
+						}
+
+						.dropdown-menu {
+							padding: 0;
+							min-width: 136px;
+							border: 1px solid $info;
+
+							.dropdown-item {
+								@include font-size-md();
+								padding: 14px 42px;
+								border-bottom: 1px solid $info;
+							}
+
+							.dropdown-item:hover,
+							.dropdown-item:focus {
+								background-color: rgba(201, 213, 234, 0.1);
+								color: $primary;
+								outline: none;
+							}
+
+							.dropdown-item:active {
+								color: $primary;
+								box-shadow: 0 1px 0 $info;
+							}
+						}
+					}
+				}
+				&-right-placeholder {
+					padding: 0;
+					border-bottom: none;
+				}
+			}
+		}
+		&__bottom {
+			&-empty-list {
+				text-align: center;
+				height: 192px;
+				color: $secondary;
+				@include font-size-md();
+				@include font-regular();
+			}
+			&-not-empty-list {
+				border-top: 1px solid $info;
+				height: 68px;
+			}
+		}
+	}
+}

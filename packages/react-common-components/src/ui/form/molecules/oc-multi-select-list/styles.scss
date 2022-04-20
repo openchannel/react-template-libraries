@@ -1,0 +1,32 @@
+//commit a143998e54ff94883f98f92bac7f9dd30e35a48a Author: Julia Date: 08.04.21, 15:36
+.multiselect {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  &__tag {
+    margin-right: 1rem;
+    margin-top: 1rem;
+  }
+
+  &__dropbox {
+    width: 100%;
+
+    &-element {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    /* important for React */
+    .oc-dropbox__option {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      padding: calc(16px + 1rem);
+    }
+  }
+}

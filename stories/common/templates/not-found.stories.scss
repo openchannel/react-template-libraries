@@ -1,0 +1,13 @@
+// reset conflicting styles for the story
+.main-container {
+	padding: 0;
+	justify-content: unset;
+}
+
+.button-255 {
+	width: 255px;
+
+	& button {
+		width: 100%;
+	}
+}
