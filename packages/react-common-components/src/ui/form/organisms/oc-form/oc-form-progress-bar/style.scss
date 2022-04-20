@@ -1,0 +1,150 @@
+@import '../../../../styles/index';
+
+.form-progressbar {
+	margin-top: 6rem;
+	margin-bottom: 6rem;
+	overflow: hidden;
+	@include media-breakpoint-md {
+		margin-top: 0;
+		margin-bottom: 4rem;
+	}
+
+	&__slidebox {
+		display: flex;
+		justify-content: space-between;
+		transition: transform 0.4s ease;
+	}
+
+	&__item {
+		display: flex;
+		align-items: flex-start;
+		flex-shrink: 0;
+
+		&:last-child {
+			max-width: 10rem;
+		}
+
+		&_current {
+			.form-progressbar__item-content-status {
+				opacity: 0.5;
+				color: $white;
+				background: $primary;
+			}
+
+			.form-progressbar__item-content-animation {
+				animation: step-blast 0.7s ease-out 3 forwards;
+			}
+
+			@keyframes step-blast {
+				from {
+					width: 5.5rem;
+					height: 5.5rem;
+					opacity: 1;
+				}
+				to {
+					width: 9rem;
+					height: 9rem;
+					opacity: 0;
+				}
+			}
+
+			.form-progressbar__item-content-title {
+				@include font-medium();
+			}
+		}
+
+		&_finished {
+			.form-progressbar__item-content-status {
+				background: $primary;
+
+				&-icon {
+					width: 2rem;
+					height: 2rem;
+				}
+			}
+		}
+
+		&_invalid {
+			.form-progressbar__item-content-status {
+				background: $danger;
+				color: $white;
+			}
+
+			.form-progressbar__item-content-animation {
+				border: 2px solid $danger-light;
+				@include media-breakpoint-md {
+					border: 1px solid $danger-light;
+				}
+			}
+
+			.form-progressbar__item-content-title {
+				color: $danger;
+				@include font-medium();
+			}
+		}
+
+		&-content {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			position: relative;
+			cursor: pointer;
+
+			&-shape {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 10rem;
+				height: 8.75rem;
+			}
+
+			&-animation {
+				position: absolute;
+				border: 2px solid $focus-border;
+				z-index: 1;
+				width: 5.75rem;
+				height: 5.75rem;
+				border-radius: 50%;
+			}
+
+			&-status {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background: $light;
+				width: 6rem;
+				height: 6rem;
+				border-radius: 50%;
+				color: $primary;
+				z-index: 2;
+				@include font-medium();
+				@include font-size-md();
+
+				&-icon {
+					svg {
+						display: block;
+					}
+				}
+			}
+
+			&-title {
+				max-width: 10rem;
+				@include font-size-md();
+				text-align: center;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		}
+
+		&-divider {
+			margin-top: 4.5rem;
+			border-top: 1px dashed $info;
+			flex-grow: 1;
+
+			&_straight {
+				border-top: 1px solid $info;
+			}
+		}
+	}
+}

@@ -1,0 +1,10 @@
+@import '../../../styles/index';
+
+.error {
+	&__feedback {
+		@include font-size-sm();
+		color: $danger;
+		display: block;
+		margin-top: 6px;
+	}
+}

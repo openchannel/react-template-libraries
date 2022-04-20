@@ -1,0 +1,25 @@
+// commit b98e1a3683be7483aa6a9252859bc1d2d99b8ccc Author: Julia Date: 05.03.21, 18:18
+@import '../../../styles/index';
+
+.tooltip-label {
+	 align-items: center;
+	 display: flex;
+
+	 &__text {
+		 @include font-size-md();
+		 margin-bottom: 0;
+	 }
+
+	 &__required {
+		 color: $danger;
+	 }
+
+	 &__description {
+		 margin-left: 1rem;
+
+		 &-icon {
+			 display: block;
+			 width: 14px;
+		 }
+	 }
+ }

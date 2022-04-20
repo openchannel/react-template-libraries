@@ -8,7 +8,7 @@ module.exports = {
         'style-loader',
         'css-loader',
         'sass-loader',
-      ],
+			],
       include: path.resolve(__dirname, '../'),
     });
 
@@ -29,18 +29,26 @@ module.exports = {
       issuer: {
         test: /\.tsx?$/
       },
-      loader: require.resolve('@svgr/webpack'),
-      options: {
-        svgoConfig: {
-          plugins: [
-            {
-              prefixIds: {
-                prefixClassNames: false,
-              },
-            },
-          ],
-        },
-      }
+			use: [
+				'babel-loader',
+				{
+					loader: '@svgr/webpack',
+					options: {
+					  svgoConfig: {
+					    plugins: [
+					      {
+					        prefixIds: {
+					          prefixClassNames: false,
+					        },
+					        removeDimensions: false,
+					        removeViewBox: false,
+					      },
+					    ],
+					  },
+					},
+				},
+				'url-loader',
+			],
     });
 
     return config;

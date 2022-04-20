@@ -1,0 +1,78 @@
+@import '../../../styles/index';
+@import '../oc-single-form/style.scss';
+
+.form-steps {
+	@include media-breakpoint-md() {
+		margin-top: 4rem;
+	}
+	@include media-breakpoint-sm() {
+		margin-top: 3rem;
+	}
+
+	&__content {
+		&-body {
+			&-label {
+				.tooltip-label__text {
+					@include font-size-lg();
+					@include font-medium();
+				}
+			}
+
+			&-description {
+				font-size: 14px;
+				margin-top: 1rem;
+			}
+		}
+
+		&-input {
+			width: 100%;
+		}
+		&-custom-error {
+			@include font-size-sm();
+			color: $danger;
+			margin-top: 6px;
+		}
+	}
+
+	&__options {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		margin: 40px 0 80px 0;
+		@include media-breakpoint-lg {
+			margin: 32px 0 64px 0;
+		}
+		@include media-breakpoint-sm {
+			flex-direction: column;
+			margin: 24px 0 40px 0;
+		}
+
+		oc-button {
+			margin-bottom: 2rem;
+		}
+
+		&--left {
+			justify-content: flex-start;
+		}
+
+		&--right {
+			justify-content: flex-end;
+		}
+
+		&--center {
+			justify-content: center;
+		}
+
+		.form__button {
+			width: auto;
+			& + .form__button {
+				margin-left: 1.5rem;
+				margin-right: 0;
+
+				@include media-breakpoint-sm {
+					margin-left: 0;
+				}
+			}
+		}
+	}
+}

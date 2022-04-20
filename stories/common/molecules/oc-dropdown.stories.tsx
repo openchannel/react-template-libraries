@@ -1,24 +1,21 @@
 import * as React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { OcDropdown, OcDropdownProps } from '../../../src/ui/common';
-
+import { OcDropdownProps } from '../../../packages/react-common-components/src/ui/common';
+import OcDropdown from '../../../packages/react-common-components/src/ui/common/molecules/oc-dropdown/oc-dropdown';
 
 export default {
-	title: 'Common/Molecules/Dropdown',
+	title: 'Dropdown',
 	component: OcDropdown,
 } as Meta;
-
 
 const DropdownComponent: Story<OcDropdownProps> = (args) => {
 	const [selected, setSelected] = React.useState<any>({
 		label: 'newest',
 		value: 'string',
-	})
+	});
 
-	return (
-		<OcDropdown {...args} onSelect={setSelected} selected={selected} />
-	)
+	return <OcDropdown {...args} onSelect={setSelected} selected={selected} />;
 };
 
 export const SimpleDropdown = DropdownComponent.bind({});
@@ -36,7 +33,7 @@ SimpleDropdown.args = {
 		{
 			label: 'featured',
 			value: 'featured',
-		}
+		},
 	],
 };
 SimpleDropdown.storyName = 'Dropdown';

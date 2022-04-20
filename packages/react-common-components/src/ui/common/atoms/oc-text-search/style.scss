@@ -1,0 +1,68 @@
+@import '../../../styles/index';
+
+.text-search {
+	&__container {
+		align-items: stretch;
+		display: flex;
+		flex-wrap: wrap;
+		position: relative;
+		width: 100%;
+	}
+
+	&__icon {
+		cursor: pointer;
+		position: absolute;
+		right: 16px;
+		top: 10px;
+		z-index: 10;
+		fill: $body-color;
+		height: 26px;
+		vertical-align: middle;
+		width: 16px;
+	}
+
+	&__input {
+		@include form-control($info, $primary, $body-color);
+
+		&::placeholder {
+			color: $input-placeholder-color;
+		  }
+
+		&:not(:last-child) {
+			border-bottom-right-radius: 4px;
+			border-top-right-radius: 4px;
+			padding-right: 4rem;
+		}
+	}
+
+	&__controls {
+		display: flex;
+		flex-wrap: wrap;
+
+		.clear-button {
+			margin-right: 2rem;
+			margin-top: 2rem;
+		}
+
+		.search-button {
+			margin-top: 2rem;
+		}
+	}
+}
+
+.search-tags {
+	& .clear-all{
+		margin: 0 8px 8px 0;
+		align-items: center;
+		background-color: transparent;
+		border-radius: 4px;
+		color: #537cfd;
+		display: flex;
+		flex-wrap: nowrap;
+		height: 100%;
+		justify-content: space-between;
+		padding: 1rem 2rem;
+		border: none;
+		font-weight: 500;
+	}
+}
