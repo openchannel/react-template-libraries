@@ -1,10 +1,5 @@
-image: node:12.13.0
+image: node:10.15.3
 
-clone:
-  depth: full              # SonarCloud scanner needs the full history to assign issues properly
-options:
-  size: 2x
-  docker: true
 definitions:
   caches:
     sonar: ~/.sonar/cache  # Caching SonarCloud artifacts will speed up your build
@@ -16,17 +11,11 @@ definitions:
         name: "Build"
         image: node:14.15.4-alpine3.12
         script:
-          #- unset NPM_CONFIG_USER # solving the problem with installing the cypress - https://github.com/cypress-io/cypress/issues/15025
-          - yarn install
-          - yarn run storybook:build
+          - unset NPM_CONFIG_USER # solving the problem with installing the cypress - https://github.com/cypress-io/cypress/issues/15025
+          - npm install
+          - npm run build-storybook
         artifacts:
           - storybook-static/**
-
-    - step: &sonarcloud
-        name: "Sonarcloud"
-        script:
-          - pipe: sonarsource/sonarcloud-scan:1.2.1
-          - pipe: sonarsource/sonarcloud-quality-gate:0.1.4
 
     - step: &deploy-app
         name: "Deploy to Environment"
@@ -43,38 +32,17 @@ definitions:
           - export DISTRIBUTION_ID=`aws ssm get-parameter --region $REGION --with-decryption --name /ECS-CLUSTER/${CLUSTER_NAME}/${APP_NAME}/DISTRIBUTION_ID --output text --query Parameter.Value`
           - export AWS_S3="`aws ssm get-parameter --region $REGION --with-decryption --name /ECS-CLUSTER/${CLUSTER_NAME}/${APP_NAME}/AWS_S3 --output text --query Parameter.Value`"
           - aws s3 sync --delete storybook-static/ s3://$AWS_S3
-          - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths /*
-
-    - step: &build-and-push-new-version-of-services
-        name: Push services to npm
+          - aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths /index.html "/static"
+    - step: &push-to-github
+        name: Push to GitHub
         script:
-          - yarn install
-          - yarn run build:services
-          - yarn run pack:services
-          - pipe: atlassian/npm-publish:0.3.2
-            variables:
-              NPM_TOKEN: $NPM_TOKEN
-              FOLDER: 'packages/react-common-services'
-              EXTRA_ARGS: '--access public'
-
-    - step: &build-and-push-new-version-of-components
-        name: Push components to npm
-        script:
-          - yarn install
-          - yarn run build:components
-          - yarn run pack:components
-          - pipe: atlassian/npm-publish:0.3.2
-            variables:
-              NPM_TOKEN: $NPM_TOKEN
-              FOLDER: 'packages/react-common-components'
-              EXTRA_ARGS: '--access public'
+          - git remote set-url origin git@github.com:openchannel/react-template-libraries.git
+          - git remote -v
+          - git push origin master:main
+          - git push origin --force --tags
 
 pipelines:
   custom:
-    publish-services:
-      - step: *build-and-push-new-version-of-services
-    publish-components:
-      - step: *build-and-push-new-version-of-components
     Deploy to dev1:
       - step: *build-app
       - step:
@@ -90,5 +58,6 @@ pipelines:
       - step:
           <<: *deploy-app
           deployment: us1
-    Analyze sonarcloud:
-      - step: *sonarcloud
+  branches:
+    master:
+      - step: *push-to-github
