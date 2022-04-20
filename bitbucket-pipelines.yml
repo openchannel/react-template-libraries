@@ -36,6 +36,7 @@ definitions:
     - step: &push-to-github
         name: Push to GitHub
         script:
+          - git fetch --unshallow origin
           - git remote set-url origin git@github.com:openchannel/react-template-libraries.git
           - git remote -v
           - git push origin master:main
